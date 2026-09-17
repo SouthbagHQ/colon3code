@@ -11,7 +11,7 @@
  *
  * @module provider/Drivers/CursorDriver
  */
-import { CursorSettings, ProviderDriverKind } from "@t3tools/contracts";
+import { CursorSettings, ProviderDriverKind, providerDisplayName } from "@t3tools/contracts";
 import * as Crypto from "effect/Crypto";
 import * as Effect from "effect/Effect";
 import * as FileSystem from "effect/FileSystem";
@@ -92,7 +92,7 @@ export type CursorDriverEnv =
 export const CursorDriver: ProviderDriver<CursorSettings, CursorDriverEnv> = {
   driverKind: DRIVER_KIND,
   metadata: {
-    displayName: "Cursor",
+    displayName: providerDisplayName(ProviderDriverKind.make("cursor")),
     supportsMultipleInstances: true,
   },
   configSchema: CursorSettings,

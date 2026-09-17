@@ -12,7 +12,7 @@
  *
  * @module provider/Drivers/ClaudeDriver
  */
-import { ClaudeSettings, ProviderDriverKind } from "@t3tools/contracts";
+import { ClaudeSettings, ProviderDriverKind, providerDisplayName } from "@t3tools/contracts";
 import * as Cache from "effect/Cache";
 import * as Duration from "effect/Duration";
 import * as Crypto from "effect/Crypto";
@@ -99,7 +99,7 @@ export type ClaudeDriverEnv =
 export const ClaudeDriver: ProviderDriver<ClaudeSettings, ClaudeDriverEnv> = {
   driverKind: DRIVER_KIND,
   metadata: {
-    displayName: "Claude",
+    displayName: providerDisplayName(ProviderDriverKind.make("claudeAgent")),
     supportsMultipleInstances: true,
   },
   configSchema: ClaudeSettings,

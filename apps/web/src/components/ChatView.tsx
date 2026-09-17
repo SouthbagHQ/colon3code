@@ -7361,7 +7361,7 @@ export default function ChatView(props: ChatViewProps) {
         toastManager.add(
           stackedThreadToast({
             type: "warning",
-            title: "let's start a Codex thread first 3:",
+            title: "let's start a jippity thread first 3:",
             description: "send a message first, then you can submit feedback ;3",
           }),
         );

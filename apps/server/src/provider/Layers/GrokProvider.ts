@@ -5,6 +5,8 @@ import {
   type ServerProvider,
   type ServerProviderAuth,
   type ServerProviderModel,
+  providerDisplayName,
+  ProviderDriverKind,
 } from "@t3tools/contracts";
 import type * as EffectAcpSchema from "effect-acp/schema";
 import { causeErrorTag } from "@t3tools/shared/observability";
@@ -43,7 +45,7 @@ import { sessionModelStateFromInitialize } from "../acp/AcpRuntimeModel.ts";
 import { discoverGrokSkills } from "../Drivers/GrokSkills.ts";
 
 const GROK_PRESENTATION = {
-  displayName: "Grok",
+  displayName: providerDisplayName(ProviderDriverKind.make("grok")),
   supportsConversationRollback: false,
   badgeLabel: "Early Access",
   showInteractionModeToggle: false,

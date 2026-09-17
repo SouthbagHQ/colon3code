@@ -1,4 +1,5 @@
 import { ProviderDriverKind, SOUTHBAG_CODE_DRIVER_KIND } from "@t3tools/contracts";
+import { cuteModelName } from "@t3tools/shared/cuteModelName";
 import {
   AntigravityIcon,
   ClaudeAI,
@@ -51,7 +52,7 @@ export function getDisplayModelName(
   options?: { preferShortName?: boolean },
 ): string {
   const name = options?.preferShortName && model.shortName ? model.shortName : model.name;
-  return stripLeadingQualifier(name, model.subProvider);
+  return cuteModelName(stripLeadingQualifier(name, model.subProvider), model.slug);
 }
 
 export function getTriggerDisplayModelName(model: ModelEsque): string {

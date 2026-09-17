@@ -8,9 +8,9 @@ import { useAppearancePreferences } from "../settings/appearance/AppearancePrefe
 export const PROVIDER_ORDER: readonly UsageProviderKind[] = ["codex", "claude", "grok"];
 
 export const PROVIDER_LABEL: Record<UsageProviderKind, string> = {
-  claude: "Claude Code",
-  codex: "Codex",
-  grok: "Grok Build",
+  claude: "clod ^w^",
+  codex: "jippity :3",
+  grok: "gork build >:3",
 };
 
 /**

@@ -1,13 +1,15 @@
 import {
-  SOUTHBAG_CODE_DRIVER_KIND,
   type ModelCapabilities,
   type ModelSelection,
   type ServerConfig as T3ServerConfig,
+  PROVIDER_DISPLAY_NAME_BY_DRIVER_KIND,
+  ProviderDriverKind,
 } from "@t3tools/contracts";
 import {
   buildExplicitProviderOptionSelectionsFromDescriptors,
   getProviderOptionDescriptors,
 } from "@t3tools/shared/model";
+import { cuteModelName } from "@t3tools/shared/cuteModelName";
 
 export type ModelOption = {
   readonly key: string;
@@ -35,10 +37,8 @@ function providerDisplayLabel(provider: {
   readonly instanceId: string;
 }): string {
   if (provider.displayName) return provider.displayName;
-  if (provider.driver === "codex") return "Codex";
-  if (provider.driver === "claudeAgent") return "Claude";
-  if (provider.driver === SOUTHBAG_CODE_DRIVER_KIND) return "Southbag Code";
-  return provider.instanceId;
+  const known = PROVIDER_DISPLAY_NAME_BY_DRIVER_KIND[ProviderDriverKind.make(provider.driver)];
+  return known ?? provider.instanceId;
 }
 
 function normalizeSelectionOptions(
@@ -170,7 +170,7 @@ export function buildModelOptions(
       const key = `${provider.instanceId}:${model.slug}`;
       options.set(key, {
         key,
-        label: model.name,
+        label: cuteModelName(model.name, model.slug),
         subtitle: model.subProvider ?? "",
         providerKey: provider.instanceId,
         providerLabel,
@@ -217,7 +217,10 @@ export function buildModelOptions(
       });
       options.set(key, {
         key,
-        label: model?.name ?? fallbackModelSelection.model,
+        label: cuteModelName(
+          model?.name ?? fallbackModelSelection.model,
+          fallbackModelSelection.model,
+        ),
         subtitle: model?.subProvider ?? "",
         providerKey: fallbackModelSelection.instanceId,
         providerLabel,

@@ -7,6 +7,10 @@
       "types": "./src/legacyCliLauncher.ts",
       "import": "./src/legacyCliLauncher.ts"
     },
+    "./cuteModelName": {
+      "types": "./src/cuteModelName.ts",
+      "import": "./src/cuteModelName.ts"
+    },
     "./delimitedPreview": {
       "types": "./src/delimitedPreview.ts",
       "import": "./src/delimitedPreview.ts"

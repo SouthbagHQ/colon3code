@@ -1397,21 +1397,21 @@ describe("resolveComposerProviderSelection", () => {
     expect(selection.selectedProviderEntry?.instanceId).toBe(signedOutEntry.instanceId);
     expect(
       getAntigravitySendBlockReason(selection.selectedProviderEntry?.snapshot, "gemini-pro"),
-    ).toBe("sign in to Antigravity in provider settings before sending.");
+    ).toBe("sign in to antigravity in provider settings before sending.");
   });
 
-  it("blocks sends until the selected Antigravity profile is installed", () => {
+  it("blocks sends until the selected antigravity profile is installed", () => {
     const provider = entry("antigravity", "google_work", {
       installed: false,
       models: catalogModels,
     }).snapshot;
 
     expect(getAntigravitySendBlockReason(provider, "gemini-pro")).toBe(
-      "install Antigravity in provider settings before sending.",
+      "install antigravity in provider settings before sending.",
     );
   });
 
-  it("lets Antigravity check saved credentials when resuming after a restart", () => {
+  it("lets antigravity check saved credentials when resuming after a restart", () => {
     const provider = entry("antigravity", "google_work", {
       status: "warning",
       auth: { status: "unknown" },
@@ -1424,21 +1424,21 @@ describe("resolveComposerProviderSelection", () => {
       getAntigravitySendBlockReason({ ...provider, models: catalogModels }, "gemini-pro"),
     ).toBeNull();
     expect(getAntigravitySendBlockReason(provider, "")).toBe(
-      "choose an Antigravity model before sending.",
+      "choose an antigravity model before sending.",
     );
   });
 
-  it("blocks saved model sends until Antigravity loads its account catalog", () => {
+  it("blocks saved model sends until antigravity loads its account catalog", () => {
     expect(getAntigravitySendBlockReason(entry("antigravity").snapshot, "gemini-pro")).toBe(
-      "refresh Antigravity models in provider settings before sending.",
+      "refresh antigravity models in provider settings before sending.",
     );
   });
 
-  it("blocks an empty Antigravity selection after the catalog has loaded", () => {
+  it("blocks an empty antigravity selection after the catalog has loaded", () => {
     const provider = entry("antigravity", "google_work", { models: catalogModels }).snapshot;
 
     expect(getAntigravitySendBlockReason(provider, "")).toBe(
-      "choose an Antigravity model before sending.",
+      "choose an antigravity model before sending.",
     );
   });
 
@@ -1449,7 +1449,7 @@ describe("resolveComposerProviderSelection", () => {
     }).snapshot;
 
     expect(getAntigravitySendBlockReason(provider, "saved-model-not-in-current-catalog")).toBe(
-      "that Antigravity model is no longer available. choose another model.",
+      "that antigravity model is no longer available. choose another model.",
     );
     expect(getAntigravitySendBlockReason(provider, "gemini-pro")).toBeNull();
   });
@@ -1475,7 +1475,7 @@ describe("resolveComposerProviderSelection", () => {
     expect(getAntigravitySendBlockReason(provider, "gpt-model")).toBeNull();
   });
 
-  it("does not continue an existing Antigravity thread in another profile after deletion", () => {
+  it("does not continue an existing antigravity thread in another profile after deletion", () => {
     const missingInstanceId = ProviderInstanceId.make("google_work");
     const selection = resolveComposerProviderSelection({
       entries: [entry("antigravity")],

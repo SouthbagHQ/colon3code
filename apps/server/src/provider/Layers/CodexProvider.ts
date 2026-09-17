@@ -23,7 +23,12 @@ import type {
   ServerProviderModel,
   ServerProviderSkill,
 } from "@t3tools/contracts";
-import { PREFERRED_DEFAULT_CODEX_MODELS, ServerSettingsError } from "@t3tools/contracts";
+import {
+  PREFERRED_DEFAULT_CODEX_MODELS,
+  ServerSettingsError,
+  providerDisplayName,
+  ProviderDriverKind,
+} from "@t3tools/contracts";
 
 import {
   codexModelFamily,
@@ -64,7 +69,7 @@ type CodexRateLimitsProbe =
 const CODEX_APP_SERVER_PROBE_FORCE_KILL_AFTER = "2 seconds" as const;
 
 const CODEX_PRESENTATION = {
-  displayName: "Codex",
+  displayName: providerDisplayName(ProviderDriverKind.make("codex")),
   showInteractionModeToggle: true,
   reportsContextWindow: true,
 } as const;

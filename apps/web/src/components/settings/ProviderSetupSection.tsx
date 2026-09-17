@@ -72,7 +72,7 @@ export function readAntigravityAuthMethod(config: unknown): AntigravityAuthMetho
 export function ProviderSetupSection(props: ProviderSetupSectionProps) {
   return (
     <section
-      aria-label="Antigravity setup"
+      aria-label="antigravity setup"
       className="@container/setup divide-y divide-border/50 text-xs"
     >
       <SettingsRow
@@ -86,7 +86,7 @@ export function ProviderSetupSection(props: ProviderSetupSectionProps) {
             </span>
             {!props.enabled && !props.readOnly ? (
               <Button size="sm" variant="outline" onClick={props.onEnable}>
-                enable Antigravity
+                enable antigravity
               </Button>
             ) : null}
           </div>
@@ -97,7 +97,7 @@ export function ProviderSetupSection(props: ProviderSetupSectionProps) {
       ) : props.provider?.setup === undefined ? (
         <SettingsRow
           title="update required"
-          description="update this environment and we can manage Antigravity ^w^"
+          description="update this environment and we can manage antigravity ^w^"
         />
       ) : (
         <ProviderSetupActions
@@ -186,15 +186,15 @@ function ProviderSetupActions({
     installation?.phase === "downloading"
       ? `downloading ${(installation.downloadedBytes / 1_000_000).toFixed(1)} MB${installation.totalBytes === null ? "" : ` of ${(installation.totalBytes / 1_000_000).toFixed(1)} MB`}.`
       : installation?.phase === "extracting"
-        ? "extracting Antigravity."
+        ? "extracting antigravity."
         : installation?.phase === "verifying"
           ? "checking the downloaded runtime."
           : installed
             ? "installed :3"
             : usesCustomBinary
               ? enabled
-                ? "hmm, the configured Antigravity runtime isn't available 3:"
-                : "the configured Antigravity runtime has not been checked."
+                ? "hmm, the configured antigravity runtime isn't available 3:"
+                : "the configured antigravity runtime has not been checked."
               : installation?.totalBytes
                 ? `${Math.ceil(installation.totalBytes / 1_000_000)} MB download.`
                 : "not installed ;3";
@@ -262,7 +262,7 @@ function ProviderSetupActions({
 
   async function signOut() {
     const confirmed = await ensureLocalApi().dialogs.confirm(
-      `${usesBrowser ? "sign out of Google" : "disconnect"} for ${provider.displayName ?? "Antigravity"} on ${environmentLabel}? this stops its running threads, but thread history stays safe ^w^`,
+      `${usesBrowser ? "sign out of Google" : "disconnect"} for ${provider.displayName ?? "antigravity"} on ${environmentLabel}? this stops its running threads, but thread history stays safe ^w^`,
     );
     if (confirmed) {
       await runCommand("signing out", () => logoutAuth(target));
@@ -271,7 +271,7 @@ function ProviderSetupActions({
 
   async function removeRuntime() {
     const confirmed = await ensureLocalApi().dialogs.confirm(
-      `remove the downloaded Antigravity runtime from ${environmentLabel}? Google sign-in and thread history stay put ^w^`,
+      `remove the downloaded antigravity runtime from ${environmentLabel}? Google sign-in and thread history stay put ^w^`,
     );
     if (confirmed) {
       await runCommand("removing runtime", () => removeInstall(target));
@@ -283,7 +283,7 @@ function ProviderSetupActions({
       <SettingsRow
         title="runtime"
         className="@max-lg/setup:[&>div:first-child]:flex @max-lg/setup:[&>div:first-child]:items-stretch @max-lg/setup:[&>div:first-child]:gap-3"
-        description="install and look after Antigravity uwu"
+        description="install and look after antigravity uwu"
         status={
           <div className="space-y-2">
             {usesCustomBinary ? (
@@ -311,7 +311,7 @@ function ProviderSetupActions({
               installation.totalBytes !== null &&
               installation.totalBytes > 0 ? (
                 <progress
-                  aria-label="Antigravity download"
+                  aria-label="antigravity download"
                   className="block h-1 w-full accent-foreground"
                   value={installation.downloadedBytes}
                   max={installation.totalBytes}
@@ -354,13 +354,13 @@ function ProviderSetupActions({
                     {installation?.installedVersion
                       ? installation.version &&
                         installation.version !== installation.installedVersion
-                        ? "update Antigravity"
-                        : "reinstall Antigravity"
+                        ? "update antigravity"
+                        : "reinstall antigravity"
                       : installation?.phase === "failed" || installation?.phase === "cancelled"
                         ? "retry installation"
                         : installed
                           ? "install managed runtime"
-                          : "install Antigravity"}
+                          : "install antigravity"}
                   </Button>
                 ) : null}
               </div>

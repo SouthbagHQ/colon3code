@@ -3,6 +3,8 @@ import {
   type OpenCodeSettings,
   type ServerProviderModel,
   type ServerProviderSkill,
+  providerDisplayName,
+  ProviderDriverKind,
 } from "@t3tools/contracts";
 import * as Cause from "effect/Cause";
 import * as Data from "effect/Data";
@@ -29,7 +31,7 @@ import type { Agent, ProviderListResponse } from "@opencode-ai/sdk/v2";
 import * as OpenCodeServerOwner from "../OpenCodeServerOwner.ts";
 
 const OPENCODE_PRESENTATION = {
-  displayName: "OpenCode",
+  displayName: providerDisplayName(ProviderDriverKind.make("opencode")),
   showInteractionModeToggle: false,
 } as const;
 const OPENCODE_VERSION_PROBE_TIMEOUT = "4 seconds";

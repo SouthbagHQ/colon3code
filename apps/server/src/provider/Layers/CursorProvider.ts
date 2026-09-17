@@ -1,3 +1,4 @@
+import { providerDisplayName, ProviderDriverKind } from "@t3tools/contracts";
 import * as NodeOS from "node:os";
 import type {
   CursorSettings,
@@ -54,7 +55,7 @@ const decodeCursorListAvailableModelsResponse = Schema.decodeUnknownEffect(
   CursorListAvailableModelsResponse,
 );
 const CURSOR_PRESENTATION = {
-  displayName: "Cursor",
+  displayName: providerDisplayName(ProviderDriverKind.make("cursor")),
   supportsConversationRollback: false,
   badgeLabel: "Early Access",
   showInteractionModeToggle: true,

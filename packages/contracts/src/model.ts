@@ -153,6 +153,25 @@ export const SOUTHBAG_CODE_DRIVER_KIND = ProviderDriverKind.make("southbag-code"
 /** The one model Southbag Code ships, as `provider/modelId` from its RPC. */
 export const SOUTHBAG_CODE_DEFAULT_MODEL = "southbag-agent/southbag-agent";
 
+/**
+ * Display names for the built-in drivers, shared by the server's provider
+ * presentation and both clients so the cute names never drift. Southbag Code
+ * keeps its real name.
+ */
+export const PROVIDER_DISPLAY_NAME_BY_DRIVER_KIND: Partial<Record<ProviderDriverKind, string>> = {
+  [CODEX_DRIVER_KIND]: "jippity :3",
+  [CLAUDE_DRIVER_KIND]: "clod ^w^",
+  [CURSOR_DRIVER_KIND]: "cursor ;3",
+  [GROK_DRIVER_KIND]: "gork >:3",
+  [OPENCODE_DRIVER_KIND]: "opencode owo",
+  [ProviderDriverKind.make("antigravity")]: "antigravity >w<",
+  [SOUTHBAG_CODE_DRIVER_KIND]: "Southbag Code",
+};
+
+export function providerDisplayName(driverKind: ProviderDriverKind): string {
+  return PROVIDER_DISPLAY_NAME_BY_DRIVER_KIND[driverKind] ?? driverKind;
+}
+
 export const DEFAULT_MODEL = "gpt-6-astra";
 
 /**

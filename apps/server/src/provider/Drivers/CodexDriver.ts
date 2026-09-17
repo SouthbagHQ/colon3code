@@ -21,7 +21,7 @@
  *
  * @module provider/Drivers/CodexDriver
  */
-import { CodexSettings, ProviderDriverKind } from "@t3tools/contracts";
+import { CodexSettings, ProviderDriverKind, providerDisplayName } from "@t3tools/contracts";
 import * as Crypto from "effect/Crypto";
 import * as Effect from "effect/Effect";
 import * as FileSystem from "effect/FileSystem";
@@ -119,7 +119,7 @@ export type CodexDriverEnv =
 export const CodexDriver: ProviderDriver<CodexSettings, CodexDriverEnv> = {
   driverKind: DRIVER_KIND,
   metadata: {
-    displayName: "Codex",
+    displayName: providerDisplayName(ProviderDriverKind.make("codex")),
     supportsMultipleInstances: true,
   },
   configSchema: CodexSettings,

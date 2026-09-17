@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vite-plus/test";
 
 import { ProviderInstanceId, type ModelSelection, type ServerConfig } from "@t3tools/contracts";
+import { cuteModelName } from "@t3tools/shared/cuteModelName";
 
 import {
   buildModelOptions,
@@ -47,8 +48,13 @@ describe("mobile model options", () => {
         providerKey: "codex",
         providerLabel: "Codex",
         models: [
-          { key: "codex:gpt-5.6-sol", label: "GPT-5.6 Sol", subtitle: "", isLegacy: false },
-          { key: "codex:gpt-5.4", label: "GPT-5.4", isLegacy: true },
+          {
+            key: "codex:gpt-5.6-sol",
+            label: cuteModelName("GPT-5.6 Sol", "gpt-5.6-sol"),
+            subtitle: "",
+            isLegacy: false,
+          },
+          { key: "codex:gpt-5.4", label: cuteModelName("GPT-5.4", "gpt-5.4"), isLegacy: true },
         ],
       },
     ]);
@@ -89,7 +95,7 @@ describe("mobile model options", () => {
     expect(options).toMatchObject(
       sources.map((source) => ({
         key: `opencode_work:${source.id}/claude-fable-5`,
-        label: "Claude Fable 5",
+        label: cuteModelName("Claude Fable 5", `${source.id}/claude-fable-5`),
         subtitle: source.label,
         providerLabel: "OpenCode Work",
         selection: {
@@ -125,7 +131,7 @@ describe("mobile model options", () => {
 
     expect(option).toMatchObject({
       key: "southbag-code:southbag-agent/southbag-agent",
-      label: "southbag-agent/southbag-agent",
+      label: cuteModelName("southbag-agent/southbag-agent", "southbag-agent/southbag-agent"),
       providerLabel: "Southbag Code",
       providerDriver: "southbag-code",
     });
@@ -281,7 +287,7 @@ describe("mobile model options", () => {
       const [option] = buildModelOptions(unavailableConfig, selection);
       expect(option).toMatchObject({
         key: `google_work:${selection.model}`,
-        label: model.name,
+        label: cuteModelName(model.name, model.slug),
         subtitle: "Google",
         providerKey: "google_work",
         providerLabel: "Google Work",
@@ -308,7 +314,7 @@ describe("mobile model options", () => {
       const options = buildModelOptions(changedConfig, selection);
       const missing = options.find((option) => option.selection.model === selection.model);
       expect(missing).toMatchObject({
-        label: selection.model,
+        label: cuteModelName(selection.model, selection.model),
         providerLabel: "Google Work",
         providerDriver: "antigravity",
         isUnavailable: true,

@@ -1,6 +1,6 @@
 import { useAtomValue } from "@effect/atom-react";
 import { useNavigation, type StaticScreenProps } from "@react-navigation/native";
-import { EnvironmentId } from "@t3tools/contracts";
+import { EnvironmentId, providerDisplayName, ProviderDriverKind } from "@t3tools/contracts";
 import {
   collectLimitAccounts,
   collectLimitNotices,
@@ -25,7 +25,10 @@ import { environmentPresentations } from "../../state/presentation";
 import { ResetCredits } from "./UsageLimitsSection";
 import { useProviderColors } from "./usageProviders";
 
-const DRIVER_LABEL: Partial<Record<string, string>> = { codex: "Codex", claudeAgent: "Claude" };
+const DRIVER_LABEL: Partial<Record<string, string>> = {
+  codex: providerDisplayName(ProviderDriverKind.make("codex")),
+  claudeAgent: providerDisplayName(ProviderDriverKind.make("claudeAgent")),
+};
 const PACE_LABEL = { ahead: "Ahead of pace", on: "On pace", under: "Under pace" } as const;
 
 function accountName(account: LimitAccount) {

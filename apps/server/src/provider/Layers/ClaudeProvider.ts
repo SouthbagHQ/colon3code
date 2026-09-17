@@ -2,6 +2,8 @@ import {
   type ClaudeSettings,
   type ModelCapabilities,
   type ServerProviderSlashCommand,
+  providerDisplayName,
+  ProviderDriverKind,
 } from "@t3tools/contracts";
 import * as DateTime from "effect/DateTime";
 import * as Effect from "effect/Effect";
@@ -53,7 +55,7 @@ const DEFAULT_CLAUDE_MODEL_CAPABILITIES: ModelCapabilities = createModelCapabili
 });
 
 const CLAUDE_PRESENTATION = {
-  displayName: "Claude",
+  displayName: providerDisplayName(ProviderDriverKind.make("claudeAgent")),
   showInteractionModeToggle: true,
   reportsContextWindow: true,
 } as const;

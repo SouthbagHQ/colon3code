@@ -8,6 +8,7 @@ import {
   ProviderDriverKind,
   SOUTHBAG_CODE_DRIVER_KIND,
   SouthbagCodeSettings,
+  providerDisplayName,
 } from "@t3tools/contracts";
 import type * as Schema from "effect/Schema";
 import {
@@ -67,39 +68,39 @@ const PROVIDER_CLIENT_DEFINITIONS: readonly ProviderClientDefinition[] = [
   },
   {
     value: ProviderDriverKind.make("codex"),
-    label: "Codex",
+    label: providerDisplayName(ProviderDriverKind.make("codex")),
     icon: OpenAI,
     settingsSchema: CodexSettings,
   },
   {
     value: ProviderDriverKind.make("claudeAgent"),
-    label: "Claude",
+    label: providerDisplayName(ProviderDriverKind.make("claudeAgent")),
     icon: ClaudeAI,
     settingsSchema: ClaudeSettings,
   },
   {
     value: ProviderDriverKind.make("cursor"),
-    label: "Cursor",
+    label: providerDisplayName(ProviderDriverKind.make("cursor")),
     icon: CursorIcon,
     badgeLabel: "early access",
     settingsSchema: CursorSettings,
   },
   {
     value: ProviderDriverKind.make("grok"),
-    label: "Grok",
+    label: providerDisplayName(ProviderDriverKind.make("grok")),
     icon: GrokIcon,
     badgeLabel: "early access",
     settingsSchema: GrokSettings,
   },
   {
     value: ProviderDriverKind.make("opencode"),
-    label: "OpenCode",
+    label: providerDisplayName(ProviderDriverKind.make("opencode")),
     icon: OpenCodeIcon,
     settingsSchema: OpenCodeSettings,
   },
   {
     value: ProviderDriverKind.make("antigravity"),
-    label: "Antigravity",
+    label: providerDisplayName(ProviderDriverKind.make("antigravity")),
     icon: AntigravityIcon,
     settingsSchema: AntigravitySettings,
   },

@@ -1,4 +1,4 @@
-import { GrokSettings, ProviderDriverKind } from "@t3tools/contracts";
+import { GrokSettings, ProviderDriverKind, providerDisplayName } from "@t3tools/contracts";
 import * as Crypto from "effect/Crypto";
 import * as Effect from "effect/Effect";
 import * as FileSystem from "effect/FileSystem";
@@ -56,7 +56,7 @@ export type GrokDriverEnv =
 export const GrokDriver: ProviderDriver<GrokSettings, GrokDriverEnv> = {
   driverKind: DRIVER_KIND,
   metadata: {
-    displayName: "Grok",
+    displayName: providerDisplayName(ProviderDriverKind.make("grok")),
     supportsMultipleInstances: true,
   },
   configSchema: GrokSettings,

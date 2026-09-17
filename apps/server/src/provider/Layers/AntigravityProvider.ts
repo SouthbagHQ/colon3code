@@ -6,6 +6,7 @@ import {
   type ServerProvider,
   type ServerProviderModel,
   type ServerProviderSlashCommand,
+  providerDisplayName,
 } from "@t3tools/contracts";
 import { createModelCapabilities } from "@t3tools/shared/model";
 import * as DateTime from "effect/DateTime";
@@ -136,7 +137,10 @@ export const makeAntigravityProvider = Effect.fn("makeAntigravityProvider")(func
   const checkedAt = DateTime.formatIso(yield* DateTime.now);
   const initialDraft = {
     ...buildServerProvider({
-      presentation: { displayName: "Antigravity", showInteractionModeToggle: false },
+      presentation: {
+        displayName: providerDisplayName(ProviderDriverKind.make("antigravity")),
+        showInteractionModeToggle: false,
+      },
       enabled: settings.enabled,
       checkedAt,
       models: [],

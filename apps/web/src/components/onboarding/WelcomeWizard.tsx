@@ -764,7 +764,7 @@ function AgentCard({
 }) {
   const meta = getDriverOption(ProviderDriverKind.make(driver));
   const Icon = meta?.icon;
-  const displayName = driver === "claudeAgent" ? "Claude Code" : (meta?.label ?? driver);
+  const displayName = meta?.label ?? driver;
   const summary = getProviderSummary(provider);
   const providerState = getOnboardingProviderState(provider);
 
@@ -1504,11 +1504,11 @@ function ImportRowMeta({
     <span className="ml-auto grid shrink-0 grid-cols-[1rem_1rem_2.5rem_2.25rem] items-center gap-x-1 text-xs text-muted-foreground tabular-nums">
       <span className="flex size-4 items-center justify-center">
         {sources?.includes("claudeAgent") ? (
-          <ClaudeAI className="size-3" aria-label="Claude Code" />
+          <ClaudeAI className="size-3" aria-label="clod" />
         ) : null}
       </span>
       <span className="flex size-4 items-center justify-center">
-        {sources?.includes("codex") ? <OpenAI className="size-3" aria-label="Codex" /> : null}
+        {sources?.includes("codex") ? <OpenAI className="size-3" aria-label="jippity" /> : null}
       </span>
       <span className="text-right">{threadCount}</span>
       <span className="text-right whitespace-nowrap">{age}</span>

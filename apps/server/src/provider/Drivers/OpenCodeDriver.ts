@@ -12,7 +12,7 @@
  *
  * @module provider/Drivers/OpenCodeDriver
  */
-import { OpenCodeSettings, ProviderDriverKind } from "@t3tools/contracts";
+import { OpenCodeSettings, ProviderDriverKind, providerDisplayName } from "@t3tools/contracts";
 import * as Crypto from "effect/Crypto";
 import * as Effect from "effect/Effect";
 import * as FileSystem from "effect/FileSystem";
@@ -91,7 +91,7 @@ export type OpenCodeDriverEnv =
 export const OpenCodeDriver: ProviderDriver<OpenCodeSettings, OpenCodeDriverEnv> = {
   driverKind: DRIVER_KIND,
   metadata: {
-    displayName: "OpenCode",
+    displayName: providerDisplayName(ProviderDriverKind.make("opencode")),
     supportsMultipleInstances: true,
   },
   configSchema: OpenCodeSettings,

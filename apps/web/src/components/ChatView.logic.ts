@@ -690,18 +690,18 @@ export function getAntigravitySendBlockReason(
 ): string | null {
   if (provider?.driver !== "antigravity") return null;
   if (!provider.installed) {
-    return "install Antigravity in provider settings before sending.";
+    return "install antigravity in provider settings before sending.";
   }
   if (provider.auth.status === "unauthenticated") {
-    return "sign in to Antigravity in provider settings before sending.";
+    return "sign in to antigravity in provider settings before sending.";
   }
   const slug = model.trim();
-  if (slug.length === 0) return "choose an Antigravity model before sending.";
+  if (slug.length === 0) return "choose an antigravity model before sending.";
   // A restart clears the account status and catalog. Session startup checks
   // saved credentials and validates the model before sending the prompt.
   if (provider.auth.status === "unknown") return null;
   if (provider.models.length === 0) {
-    return "refresh Antigravity models in provider settings before sending.";
+    return "refresh antigravity models in provider settings before sending.";
   }
   // A saved model that left the catalog is kept in the picker as unavailable
   // so the user sees what the thread used. The server rejects it at turn
@@ -712,7 +712,7 @@ export function getAntigravitySendBlockReason(
     slug !== ANTIGRAVITY_DEFAULT_MODEL &&
     !provider.models.some((entry) => entry.slug === slug || entry.aliases?.includes(slug))
   ) {
-    return "that Antigravity model is no longer available. choose another model.";
+    return "that antigravity model is no longer available. choose another model.";
   }
   return null;
 }

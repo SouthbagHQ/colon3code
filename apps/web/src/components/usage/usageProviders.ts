@@ -15,17 +15,17 @@ type UsageProviderPresentation = {
  */
 export const PROVIDER_PRESENTATION = {
   codex: {
-    label: "Codex",
+    label: "jippity :3",
     color: "var(--contrast-foreground)",
     mark: OpenAI,
   },
   claude: {
-    label: "Claude Code",
+    label: "clod ^w^",
     color: "#d97757",
     mark: ClaudeAI,
   },
   grok: {
-    label: "Grok Build",
+    label: "gork build >:3",
     // Contrast-aware neutral between the Codex series and muted chart chrome.
     color: "color-mix(in oklab, var(--contrast-foreground) 72%, var(--background))",
     mark: GrokIcon,
