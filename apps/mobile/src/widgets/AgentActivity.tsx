@@ -234,7 +234,7 @@ export function AgentActivity(
   // the glyph's aspect ratio so it never distorts.
   const renderLogo = (height: number, color: Foreground) => (
     <HStack modifiers={[frame({ width: height * 1.5, height }), foregroundStyle(color)]}>
-      <Image assetName="T3Mark" modifiers={[resizable()]} />
+      <Image assetName="Colon3Mark" modifiers={[resizable()]} />
     </HStack>
   );
 
