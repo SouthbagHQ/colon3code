@@ -92,10 +92,10 @@ export function AddUsageLimitSourceDialog({
     >
       <DialogPopup className="max-w-md">
         <DialogHeader>
-          <DialogTitle>add a CLIProxyAPI hub</DialogTitle>
+          <DialogTitle>add a CLIProxyAPI hub, meow</DialogTitle>
           <DialogDescription>
-            show the quota of every account the hub pools, next to the providers on{" "}
-            {environmentLabel}. the key stays on that server.
+            mrrp, show the quota of every account the hub pools, next to the providers on{" "}
+            {environmentLabel}. the key stays on that server, purr.
           </DialogDescription>
         </DialogHeader>
         <DialogPanel>

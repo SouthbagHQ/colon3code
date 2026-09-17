@@ -254,7 +254,7 @@ function ProviderEnvironmentSection(props: {
   return (
     <SettingsRow
       title="variables"
-      description="API keys, base URLs, and other per-instance CLI settings."
+      description="API keys, base URLs, and other per-instance CLI settings, meow."
       control={
         <Button type="button" size="sm" variant="outline" onClick={addVariable}>
           <PlusIcon className="size-3" />
@@ -339,7 +339,7 @@ function ProviderEnvironmentSection(props: {
             </div>
           ))}
           <p className="text-xs text-muted-foreground">
-            sensitive values are stored separately and never returned to the app.
+            sensitive values are stored separately and never returned to the app, purr.
           </p>
         </div>
       ) : null}
@@ -451,15 +451,15 @@ export function ProviderInstanceCard({
     onCopy: ({ providerName }) => {
       toastManager.add({
         type: "success",
-        title: `${providerName} update command copied :3`,
-        description: "run it in a terminal when you are ready to update.",
+        title: `${providerName} update command copied :3 purr`,
+        description: "run it in a terminal when you are ready to update, nya~",
       });
     },
     onError: (error, { providerName }) => {
       toastManager.add(
         stackedThreadToast({
           type: "error",
-          title: `could not copy ${providerName} update command 3:`,
+          title: `could not copy ${providerName} update command 3: mrrp`,
           description: error.message,
         }),
       );
@@ -723,7 +723,7 @@ export function ProviderInstanceCard({
               <div className="grid min-w-0 gap-3">
                 <div className="grid gap-0.5">
                   <p className="text-[13px] font-semibold leading-tight text-foreground">
-                    update available
+                    update available, meow
                   </p>
                   <p
                     className={cn(
@@ -865,7 +865,7 @@ export function ProviderInstanceCard({
               <span>
                 this instance uses{" "}
                 <code className="text-foreground">{String(instance.driver)}</code>, which is not
-                available in this build. its configuration is preserved.
+                available in this build 3: its configuration is preserved.
               </span>
             }
           />
@@ -893,8 +893,8 @@ export function ProviderInstanceCard({
         >
           <div className="px-3 py-3 sm:px-4">
             <p className="mb-3 text-xs text-muted-foreground">
-              favorites, visibility, and ordering are saved on this device. custom models are saved
-              on the selected environment.
+              mrrp, favorites, visibility, and ordering are saved on this device. custom models are
+              saved on the selected environment.
             </p>
             <ProviderModelsSection
               instanceId={instanceId}

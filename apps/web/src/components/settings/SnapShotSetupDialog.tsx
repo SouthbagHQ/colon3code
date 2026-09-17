@@ -29,34 +29,35 @@ const GNOME_ACCESS_COPY = {
   "not-installed": {
     title: "install the extension",
     description:
-      "the :3 Code GNOME extension lets you capture other windows and bring them into your draft. sign out once after installing.",
+      "the :3 Code GNOME extension lets you capture other windows and bring them into your draft, meow. sign out once after installing.",
   },
   "restart-required": {
     title: "extension installed",
-    description: "save your work, then sign out and back in. your setup will be waiting here.",
+    description:
+      "save your work, then sign out and back in. your setup will be waiting here, purr.",
   },
   "update-required": {
     title: "update the extension",
-    description: "install the update, then sign out and back in.",
+    description: "install the update, then sign out and back in, nya~",
   },
   "extensions-disabled": {
     title: "allow GNOME extensions",
-    description: "open GNOME extensions and turn on extensions, then check again.",
+    description: "mrrp, open GNOME extensions and turn on extensions, then check again.",
   },
   disabled: {
     title: "enable the extension",
-    description: "enable :3 Code SnapShots to start capturing windows.",
+    description: "enable :3 Code SnapShots to start capturing windows, meow.",
   },
   enabled: {
-    title: "capture is ready",
-    description: "next, choose your shortcut.",
+    title: "capture is ready :3",
+    description: "next, choose your shortcut, purr.",
   },
   unsupported: {
-    title: "automatic capture isn't available",
-    description: "use take snapshot from the command palette to choose a window.",
+    title: "automatic capture isn't available 3:",
+    description: "use take snapshot from the command palette to choose a window, nya~",
   },
   error: {
-    title: "couldn't set up the extension 3:",
+    title: "couldn't set up the extension 3: mrrp",
     description: "check :3 Code SnapShots in GNOME extensions, then try again.",
   },
 };
@@ -212,26 +213,26 @@ export function SnapShotSetupDialog({
   const accessCopy =
     state.message && !macPermissions
       ? {
-          title: "let's try that again",
-          description: "couldn't check snapshots. try again to continue.",
+          title: "let's try that again, mrrp",
+          description: "couldn't check snapshots 3: try again to continue.",
         }
       : backend === "gnome" && extension
         ? extension.status === "enabled" && !accessReady
           ? {
               title: "check capture access",
-              description: "the extension isn't ready yet. try again in a moment.",
+              description: "the extension isn't ready yet, mrrp. try again in a moment.",
             }
           : GNOME_ACCESS_COPY[extension.status]
         : helperBackend
           ? helper?.status === "ready"
             ? {
-                title: "capture is ready",
-                description: "next, choose your shortcut.",
+                title: "capture is ready :3",
+                description: "next, choose your shortcut, purr.",
               }
             : helper?.status === "error"
               ? {
-                  title: "let's fix capture access",
-                  description: "try reinstalling the capture helper, then check again.",
+                  title: "let's fix capture access, mrrp",
+                  description: "try reinstalling the capture helper, then check again, nya~",
                 }
               : {
                   title:
@@ -239,39 +240,39 @@ export function SnapShotSetupDialog({
                       ? "update the capture helper"
                       : "allow snapshots",
                   description:
-                    ":3 Code's capture helper lets you capture other apps and return to your draft. it's included with :3 Code.",
+                    ":3 Code's capture helper lets you capture other apps and return to your draft, meow. it's included with :3 Code.",
                 }
           : backend === "niri"
             ? {
-                title: "capture is ready",
-                description: "next, choose your shortcut.",
+                title: "capture is ready :3",
+                description: "next, choose your shortcut, purr.",
               }
             : backend === "picker"
               ? {
                   title: "choose a window each time",
                   description:
-                    "your desktop doesn't support automatic capture. you'll choose the window to capture instead.",
+                    "mrrp, your desktop doesn't support automatic capture. you'll choose the window to capture instead.",
                 }
               : {
                   title: "allow snapshots",
                   description:
                     backend === "portal"
-                      ? "your desktop may ask for permission when you first capture."
+                      ? "your desktop may ask for permission when you first capture, nya~"
                       : macPermissions
                         ? macPermissionsReady
-                          ? "test a snapshot of the current window. if macOS asks to bypass its window picker, choose Allow. the test image is discarded."
-                          : "allow each permission, then continue."
-                        : "allow access when prompted to start capturing windows.",
+                          ? "meow, test a snapshot of the current window. if macOS asks to bypass its window picker, choose Allow. the test image is discarded."
+                          : "allow each permission, then continue, purr."
+                        : "allow access when prompted to start capturing windows, meow.",
                 };
-  const title = step === "access" ? accessCopy.title : "choose your shortcut";
+  const title = step === "access" ? accessCopy.title : "choose your shortcut ^w^";
   const description =
     step === "access"
       ? accessCopy.description
       : configShortcut
-        ? "click the shortcut, then press the keys you want."
+        ? "click the shortcut, then press the keys you want, meow."
         : state.mode === "portal"
-          ? "choose your keys, then approve the permission prompt if asked."
-          : "use both Shift keys, or record a different shortcut.";
+          ? "choose your keys, then approve the permission prompt if asked, nya~"
+          : "use both Shift keys, or record a different shortcut, purr.";
   const stepIndex = SETUP_STEPS.findIndex(({ id }) => id === step);
   const details = [
     ...new Set(
@@ -335,7 +336,7 @@ export function SnapShotSetupDialog({
                         id: "screenRecording",
                         icon: <ScreenRecordingIcon />,
                         title: "Screen Recording",
-                        description: "capture the window you're using.",
+                        description: "capture the window you're using, meow.",
                         granted: macPermissions.screenRecording,
                         onAllow: () => void onAction("allow-screen-recording"),
                       },
@@ -344,8 +345,8 @@ export function SnapShotSetupDialog({
                         icon: <AccessibilityPermissionIcon />,
                         title: "Accessibility",
                         description: includeAccessibility
-                          ? "include text and controls from the captured app."
-                          : "optional. include text and controls from the captured app.",
+                          ? "include text and controls from the captured app, nya~"
+                          : "optional, nya~ include text and controls from the captured app.",
                         granted: macPermissions.accessibility,
                         onAllow: () => void onAction("allow-accessibility"),
                       },
@@ -402,12 +403,12 @@ export function SnapShotSetupDialog({
             )}
             {step === "shortcut" && !accessReady ? (
               <p role="alert" className="text-destructive">
-                capture needs attention. go back to check access.
+                capture needs attention 3: go back to check access.
               </p>
             ) : null}
             {error ? (
               <p role="alert" className="text-destructive">
-                couldn't finish this step. try again or check advanced for help.
+                mrrp, couldn't finish this step. try again or check advanced for help.
               </p>
             ) : null}
             {details.length > 0 || (step === "access" && (backend === "gnome" || helperBackend)) ? (
@@ -420,7 +421,7 @@ export function SnapShotSetupDialog({
                     </p>
                   ))}
                   {step === "access" && (backend === "gnome" || helperBackend) ? (
-                    <p>included with :3 Code. no download needed.</p>
+                    <p>included with :3 Code. no download needed, purr.</p>
                   ) : null}
                   {step === "access" && backend === "gnome" && extension?.status === "enabled" ? (
                     <Button

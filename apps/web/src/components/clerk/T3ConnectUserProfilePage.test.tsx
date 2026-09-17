@@ -50,7 +50,7 @@ describe("T3 Connect environment row", () => {
     expect(markup).toContain("deregister server");
     expect(markup).toContain("“Studio Mac” will be removed from this account.");
     expect(markup).toContain("confirm deregistration of Studio Mac");
-    expect(markup).toContain("local connections on your devices are not changed.");
+    expect(markup).toContain("local connections on your devices are not changed, mrrp.");
     expect(markup).toContain("cancel");
   });
 

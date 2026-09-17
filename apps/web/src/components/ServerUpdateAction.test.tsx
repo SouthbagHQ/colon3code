@@ -83,7 +83,7 @@ describe("ServerUpdateAction", () => {
     });
     expect(testState.toast).toHaveBeenCalledWith({
       type: "success",
-      title: "Test server updated :3",
+      title: "Test server updated :3 purr",
       description: "reconnected on t3@0.0.31.",
     });
   });
@@ -157,7 +157,7 @@ describe("ServerUpdateAction", () => {
     });
     expect(testState.toast).toHaveBeenCalledWith({
       type: "success",
-      title: "Test server updated :3",
+      title: "Test server updated :3 purr",
       description: "desktop app relaunched on 0.0.34.",
     });
   });
@@ -271,8 +271,8 @@ describe("ServerUpdatesAction", () => {
       { environmentId: "batch-b", input: { targetVersion: "0.0.31" } },
     ]);
     expect(testState.toast.mock.calls.map(([toast]) => toast.title)).toEqual([
-      "Laptop updated :3",
-      "Office updated :3",
+      "Laptop updated :3 purr",
+      "Office updated :3 purr",
     ]);
   });
 
@@ -292,7 +292,7 @@ describe("ServerUpdatesAction", () => {
       description: "Download failed",
     });
     expect(testState.toast).toHaveBeenCalledWith(
-      expect.objectContaining({ type: "success", title: "Office updated :3" }),
+      expect.objectContaining({ type: "success", title: "Office updated :3 purr" }),
     );
     expect(button.props.disabled).toBe(false);
   });

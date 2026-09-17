@@ -38,10 +38,10 @@ export function PreviewEmptyState({
         <EmptyMedia variant="icon">
           <Globe className="size-4.5 text-muted-foreground" />
         </EmptyMedia>
-        <EmptyTitle>no preview yet :3</EmptyTitle>
+        <EmptyTitle>no preview yet :3 nya~</EmptyTitle>
         <EmptyDescription>
-          type a URL above, or run a dev script. browser-ready localhost servers will show up here
-          automatically
+          type a URL above, or run a dev script, meow. browser-ready localhost servers will show up
+          here automatically
         </EmptyDescription>
       </Empty>
     );
@@ -86,7 +86,7 @@ export function PreviewEmptyState({
               ))}
             </DiscoveryList>
             <p className="px-1 text-xs text-muted-foreground">
-              select a live local server to open it in this browser tab.
+              select a live local server to open it in this browser tab, purr
             </p>
           </div>
         ) : null}

@@ -408,7 +408,7 @@ function buildAddProjectRemoteSourceReadiness(
         ready: false,
         hint:
           Option.getOrNull(provider.auth.detail) ??
-          `${provider.label} is not authenticated. open settings -> source control for setup guidance.`,
+          `mrrp, ${provider.label} is not authenticated. open settings -> source control for setup guidance.`,
       };
       continue;
     }
@@ -422,7 +422,7 @@ function errorMessage(error: unknown): string {
   if (error instanceof Error && error.message.trim().length > 0) {
     return error.message;
   }
-  return "an error occurred.";
+  return "an error occurred, mrrp";
 }
 
 const OVERLAY_MODE_BY_COMMAND = {
@@ -1410,7 +1410,7 @@ function OpenCommandPaletteDialog(props: {
           value: `action:add-project:${environmentId}:local`,
           searchTerms: ["local", "folder", "directory", "browse"],
           title: "local folder",
-          description: "browse a folder on disk",
+          description: "browse a folder on disk, nya~",
           icon: <FolderPlusIcon className={ITEM_ICON_CLASS} />,
           keepOpen: true,
           run: async () => {
@@ -1452,7 +1452,7 @@ function OpenCommandPaletteDialog(props: {
                 }
               />
               <TooltipPopup align="end" side="left">
-                {disabledHint ?? "open settings -> source control to configure this provider."}
+                {disabledHint ?? "open settings -> source control to configure this provider, nya~"}
               </TooltipPopup>
             </Tooltip>
           </span>
@@ -1503,7 +1503,7 @@ function OpenCommandPaletteDialog(props: {
           stackedThreadToast({
             type: "error",
             title: "environment unavailable 3:",
-            description: `${environment?.label ?? "the selected environment"} is not connected.`,
+            description: `${environment?.label ?? "the selected environment"} is not connected, mrrp`,
           }),
         );
         return;
@@ -1937,7 +1937,7 @@ function OpenCommandPaletteDialog(props: {
           stackedThreadToast({
             type: "error",
             title: "environment unavailable 3:",
-            description: `${environment?.label ?? "the selected environment"} is not connected.`,
+            description: `${environment?.label ?? "the selected environment"} is not connected, mrrp`,
           }),
         );
         return;
@@ -1960,7 +1960,7 @@ function OpenCommandPaletteDialog(props: {
           stackedThreadToast({
             type: "error",
             title: "failed to add project 3:",
-            description: "relative paths require an active project.",
+            description: "relative paths require an active project, mrrp",
           }),
         );
         return;
@@ -2092,7 +2092,7 @@ function OpenCommandPaletteDialog(props: {
         stackedThreadToast({
           type: "error",
           title: "environment unavailable 3:",
-          description: `${browseEnvironment?.label ?? "the selected environment"} is not connected.`,
+          description: `${browseEnvironment?.label ?? "the selected environment"} is not connected, mrrp`,
         }),
       );
       return;
@@ -2140,7 +2140,7 @@ function OpenCommandPaletteDialog(props: {
           toastManager.add(
             stackedThreadToast({
               type: "error",
-              title: "repository lookup failed 3:",
+              title: "repository lookup failed 3: mrrp",
               description: errorMessage(squashAtomCommandFailure(lookupResult)),
             }),
           );
@@ -2187,7 +2187,7 @@ function OpenCommandPaletteDialog(props: {
         stackedThreadToast({
           type: "error",
           title: "clone failed 3:",
-          description: "relative paths require an active project.",
+          description: "relative paths require an active project, mrrp",
         }),
       );
       return;
@@ -2519,7 +2519,7 @@ function OpenCommandPaletteDialog(props: {
       toastManager.add(
         stackedThreadToast({
           type: "error",
-          title: "unable to run command 3:",
+          title: "unable to run command 3: mrow",
           description: error instanceof Error ? error.message : "An unexpected error occurred.",
         }),
       );
@@ -2608,7 +2608,7 @@ function OpenCommandPaletteDialog(props: {
         toastManager.add(
           stackedThreadToast({
             type: "error",
-            title: "could not add WSL project 3:",
+            title: "could not add WSL project 3: mrrp",
             description: "start the matching WSL backend, then choose the folder again.",
           }),
         );
@@ -2805,19 +2805,20 @@ function OpenCommandPaletteDialog(props: {
           ? {
               emptyStateMessage:
                 addProjectCloneFlow.source === "url"
-                  ? "enter a Git clone URL and press Enter to continue."
-                  : "enter a repository path and press Enter to look it up.",
+                  ? "enter a Git clone URL and press Enter to continue, nya~"
+                  : "enter a repository path and press Enter to look it up, nya~",
             }
           : addProjectCloneFlow?.step === "confirm"
-            ? { emptyStateMessage: "choose a destination path and press Enter to clone." }
+            ? { emptyStateMessage: "choose a destination path and press Enter to clone uwu" }
             : relativePathNeedsActiveProject
-              ? { emptyStateMessage: "relative paths require an active project." }
+              ? { emptyStateMessage: "relative paths require an active project, mrrp" }
               : willCreateProjectPath
                 ? {
-                    emptyStateMessage: "press Enter to create this folder and add it as a project.",
+                    emptyStateMessage:
+                      "press Enter to create this folder and add it as a project, meow",
                   }
                 : threadSearch.isPending
-                  ? { emptyStateMessage: "searching thread messages…" }
+                  ? { emptyStateMessage: "searching thread messages… purr" }
                   : {})}
       />
     </CommandPaletteContent>

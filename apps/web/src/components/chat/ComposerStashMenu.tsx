@@ -136,9 +136,9 @@ export const ComposerStashMenu = memo(function ComposerStashMenu(props: {
             <ComposerBanner.Row render={<li />}>
               <ComposerBanner.Icon />
               <ComposerBanner.Content className="text-muted-foreground">
-                nothing stashed yet.
+                nothing stashed yet :3
                 {stashShortcutLabel
-                  ? ` Press ${stashShortcutLabel} with a prompt in the composer to stash it.`
+                  ? ` press ${stashShortcutLabel} with a prompt in the composer to stash it, nya~`
                   : null}
               </ComposerBanner.Content>
             </ComposerBanner.Row>

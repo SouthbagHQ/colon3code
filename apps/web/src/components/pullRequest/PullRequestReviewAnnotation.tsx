@@ -73,7 +73,7 @@ export function PendingReviewCommentCard({
     >
       <div className="flex items-center gap-2 text-xs text-muted-foreground">
         <MessageSquareIcon className="size-3.5" />
-        <span>pending — sent when you submit the review</span>
+        <span>pending — sent when you submit the review, purr</span>
         <Button
           size="icon-xs"
           variant="ghost"
@@ -333,7 +333,7 @@ export function ReviewThreadCard({
                   autoFocus
                   size="sm"
                   value={reply}
-                  placeholder="reply"
+                  placeholder="reply, meow"
                   aria-label="reply to this conversation"
                   onChange={(event) => setReply(event.target.value)}
                   onKeyDown={submitKeys({

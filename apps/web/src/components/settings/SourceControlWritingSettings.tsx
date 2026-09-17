@@ -44,16 +44,17 @@ const MODE_OPTIONS: Record<SourceControlWritingStyleMode, { label: string; descr
   {
     repo_conventions: {
       label: "repository conventions",
-      description: "in each project, matches recent change descriptions and change request titles.",
+      description:
+        "in each project, matches recent change descriptions and change request titles, meow.",
     },
     conventional_commits: {
       label: "Conventional Commits",
-      description: "use conventional commit prefixes and keep change request text concise.",
+      description: "use conventional commit prefixes and keep change request text concise, nya~",
     },
     custom: {
       label: "custom instructions",
       description:
-        "use your instructions for change descriptions and change requests in every project.",
+        "use your instructions for change descriptions and change requests in every project, purr.",
     },
   };
 
@@ -190,7 +191,7 @@ export function SourceControlWritingSettingsSection() {
                   onChange={(event) => setAllInstructions(event.target.value)}
                   rows={4}
                   aria-label="custom source control instructions for all selected environments"
-                  placeholder="write the instructions each selected environment should use."
+                  placeholder="write the instructions each selected environment should use, meow."
                 />
                 <Button
                   size="sm"
@@ -248,7 +249,7 @@ export function SourceControlWritingSettingsSection() {
         settingKeys={["sourceControlWritingStyle"]}
         mixed={templatesMixed}
         {...searchableSetting("follow-change-request-templates")}
-        description="use the repository's template for change request descriptions when available."
+        description="use the repository's template for change request descriptions when available, nya~"
         resetAction={
           templatesMixed ||
           style.followChangeRequestTemplates !== defaults.followChangeRequestTemplates ? (
@@ -284,17 +285,17 @@ export function SourceControlWritingSettingsSection() {
         serverScoped
         settingKeys={["sourceControlWriterModelSelection"]}
         {...searchableSetting("source-control-writer-model")}
-        description="model for source control text and branch or bookmark names. off uses the environment's text generation model."
+        description="mrrp, model for source control text and branch or bookmark names. off uses the environment's text generation model."
         control={
           !hasServerTargets ? (
             <span className="text-sm text-muted-foreground">
-              connect an environment to choose its source control writer model.
+              connect an environment to choose its source control writer model, meow.
             </span>
           ) : (
             <div className="flex flex-wrap items-center justify-end gap-2">
               {usesDedicatedModel && !canEnableDedicatedModel ? (
                 <span className="text-sm text-muted-foreground">
-                  no text generation providers available.
+                  no text generation providers available, nya~
                 </span>
               ) : null}
               {usesDedicatedModel && canEnableDedicatedModel ? (
@@ -324,7 +325,7 @@ export function SourceControlWritingSettingsSection() {
                     if (reason) {
                       toastManager.add({
                         type: "error",
-                        title: "source control writer model not saved 3:",
+                        title: "source control writer model not saved 3: mrrp",
                         description: reason,
                       });
                       return;

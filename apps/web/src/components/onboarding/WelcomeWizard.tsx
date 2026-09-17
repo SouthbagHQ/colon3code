@@ -91,7 +91,8 @@ const NO_ENVIRONMENTS: readonly EnvironmentId[] = [];
 
 const AGENT_ONBOARDING_THREAD_ID = ThreadId.make("onboarding-agent-setup");
 const ONBOARDING_STAGES = ["connect", "agents", "projects"] as const;
-const SCAN_LIMIT_MESSAGE = "scan limit reached. some projects or conversations may be missing.";
+const SCAN_LIMIT_MESSAGE =
+  "scan limit reached, mrrp. some projects or conversations may be missing.";
 
 export function WelcomeWizard({
   localAvailable,
@@ -160,7 +161,7 @@ export function WelcomeWizard({
         .catch(() => {
           const errorToast = {
             type: "error",
-            title: "could not finish setup 3:",
+            title: "could not finish setup 3: mrrp",
             description: "your settings could not be saved. try again.",
           } as const;
           if (completionErrorToastIdRef.current === null) {
@@ -189,7 +190,7 @@ export function WelcomeWizard({
         initialFocus={() => document.getElementById("onboarding-pairing-url") ?? true}
       >
         <WizardHeader
-          title="welcome to :3 Code"
+          title="meow, welcome to :3 Code"
           identity={
             <div className="flex items-baseline gap-1.5" role="img" aria-label=":3 Code">
               <Colon3Wordmark className="h-4 w-auto shrink-0" aria-hidden />
@@ -298,10 +299,12 @@ function ConnectionStep({
   }, [ready]);
   return (
     <>
-      <h1 className="text-2xl font-semibold tracking-tight text-foreground">welcome to :3 Code</h1>
+      <h1 className="text-2xl font-semibold tracking-tight text-foreground">
+        meow, welcome to :3 Code
+      </h1>
       <p className="mt-2.5 text-sm leading-relaxed text-muted-foreground">
         pick one or more computers and we’ll set up agents and projects on each. let’s get you going
-        :3
+        nya~ :3
       </p>
       {directEnvironments.length > 0 ? (
         <fieldset className="mt-5 space-y-2">
@@ -327,7 +330,9 @@ function ConnectionStep({
                     {environment.label}
                   </span>
                   <span className="shrink-0 text-xs text-muted-foreground">
-                    {environment.connection.phase === "connected" ? "connected" : "connecting…"}
+                    {environment.connection.phase === "connected"
+                      ? "connected :3"
+                      : "connecting… purr"}
                   </span>
                 </span>
                 {environment.displayUrl ? (
@@ -466,17 +471,19 @@ function ConnectAccountOption({
                 selection={{ selectedIds, onChange: onToggleEnvironment, autoSelectedComputers }}
                 refreshWhileEmpty
                 empty={
-                  <p className="py-3 text-sm text-muted-foreground">no computers linked yet</p>
+                  <p className="py-3 text-sm text-muted-foreground">
+                    no computers linked yet, mrrp
+                  </p>
                 }
               />
             ) : null}
           </div>
           <p className="text-sm text-muted-foreground">
-            run this on each computer you want to connect.
+            run this on each computer you want to connect, nya~
           </p>
           <CommandBlock command="npx t3 connect" className="mt-3" />
           <p className="mt-3 text-xs text-muted-foreground">
-            keep :3 Code running. select the computers you want to set up above.
+            keep :3 Code running, purr. select the computers you want to set up above.
           </p>
         </div>
       </CollapsiblePanel>
@@ -523,7 +530,7 @@ function PairingForm({
     }
     if (isAtomCommandInterrupted(result)) return;
     const cause = squashAtomCommandFailure(result);
-    setErrorMessage(cause instanceof Error ? cause.message : "pairing failed.");
+    setErrorMessage(cause instanceof Error ? cause.message : "pairing failed 3: mrrp");
   };
 
   return (
@@ -581,7 +588,7 @@ function PairingForm({
               className="group flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground"
             >
               <ChevronRightIcon className="size-3.5 group-data-panel-open:rotate-90" />
-              need a pairing link?
+              need a pairing link? nya~
             </CollapsibleTrigger>
             <Button type="submit" disabled={isPairing || pairingUrl.trim().length === 0}>
               {isPairing ? "pairing..." : "pair"}
@@ -589,7 +596,7 @@ function PairingForm({
           </div>
           <CollapsiblePanel className="pt-3">
             <p className="text-sm text-muted-foreground">
-              run this on the computer with your code.
+              run this on the computer with your code, meow.
             </p>
             <CommandBlock command="npx t3 pair" className="mt-2" />
             <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
@@ -634,7 +641,10 @@ function AgentsStep({
 }) {
   const { environments } = useEnvironments();
   return (
-    <StepShell title="your agents" description="agents available on your selected computers.">
+    <StepShell
+      title="your agents ^w^"
+      description="agents available on your selected computers, purr."
+    >
       <ScrollArea
         scrollFade
         className="mt-5 h-auto max-h-96 [&_[data-slot=scroll-area-scrollbar]]:opacity-100"
@@ -774,7 +784,7 @@ function AgentCard({
             ready
           </span>
         ) : providerState === "checking" ? (
-          <span className="text-xs text-muted-foreground">checking...</span>
+          <span className="text-xs text-muted-foreground">checking… mrrp</span>
         ) : providerState === "disabled" ? (
           <span className="text-xs text-muted-foreground">disabled</span>
         ) : providerState === "attention" ? (
@@ -904,11 +914,11 @@ function AgentInstallTerminal({
               terminal.
             </>
           ) : setupState === "ready" ? (
-            "review the command, then press Enter to run it."
+            "review the command, then press Enter to run it. nya~"
           ) : setupState === "openFailed" ? (
-            "could not open the setup terminal 3:"
+            "could not open the setup terminal 3: mrow"
           ) : (
-            "preparing command..."
+            "preparing command… purr"
           )}
         </span>
         <div className="flex items-center gap-1">
@@ -1146,10 +1156,10 @@ function ImportStep({
         );
       } else if (importedThreadCount > 0) {
         setImportError(
-          `imported ${importedThreadCount} ${importedThreadCount === 1 ? "thread" : "threads"}. some thread history could not be imported.`,
+          `imported ${importedThreadCount} ${importedThreadCount === 1 ? "thread" : "threads"}. some thread history could not be imported, mrrp.`,
         );
       } else {
-        setImportError("could not import thread history 3:");
+        setImportError("could not import thread history 3: mrrp");
       }
       return;
     }
@@ -1163,7 +1173,7 @@ function ImportStep({
         <div className="flex flex-1 flex-col items-center justify-center gap-3 py-6">
           <Spinner className="size-5 text-muted-foreground" />
           <p className="text-center text-sm text-muted-foreground">
-            looking for projects from Claude Code and Codex…
+            sniffing around for projects from Claude Code and Codex… mrrp
           </p>
         </div>
         <div className="flex justify-end">
@@ -1177,8 +1187,8 @@ function ImportStep({
 
   return (
     <StepShell
-      title="choose your projects"
-      description="import projects and conversations from your selected computers."
+      title="choose your projects :3"
+      description="import projects and conversations from your selected computers, meow."
     >
       {candidates.length > 0 ? (
         <div className="mt-5 flex items-center justify-between gap-3 text-xs text-muted-foreground">
@@ -1229,21 +1239,21 @@ function ImportStep({
                 {scan.isPending && scan.data === null ? (
                   <div className="flex items-center gap-2 py-3 text-sm text-muted-foreground">
                     <Spinner className="size-4" />
-                    looking for projects…
+                    sniffing around for projects… purr
                   </div>
                 ) : scan.error !== null ? (
                   <div
                     role="alert"
                     className="flex items-center justify-between gap-3 text-sm text-muted-foreground"
                   >
-                    <span>could not check projects. {scan.error}</span>
+                    <span>could not check projects 3: {scan.error}</span>
                     <Button variant="ghost" size="sm" onClick={scan.refresh}>
                       retry
                     </Button>
                   </div>
                 ) : scanCandidates.length === 0 ? (
                   <p className="py-2 text-sm text-muted-foreground">
-                    no existing Claude Code or Codex projects found.
+                    no existing Claude Code or Codex projects found, mrow.
                   </p>
                 ) : null}
                 {scan.data?.truncated ? (

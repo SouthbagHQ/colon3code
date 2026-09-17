@@ -99,12 +99,12 @@ const COMING_SOON_DRIVER_OPTIONS: readonly ComingSoonDriverOption[] = [
  * Returns a user-facing error string, or `null` if valid.
  */
 function validateInstanceId(id: string, existing: ReadonlySet<string>): string | null {
-  if (id.length === 0) return "instance ID is required.";
+  if (id.length === 0) return "mrrp, instance ID is required.";
   if (id.length > 64) return "instance ID must be 64 characters or fewer.";
   if (!INSTANCE_ID_PATTERN.test(id)) {
     return "instance ID must start with a letter and use only letters, digits, '-', or '_'.";
   }
-  if (existing.has(id)) return `an instance named '${id}' already exists.`;
+  if (existing.has(id)) return `an instance named '${id}' already exists, mrow.`;
   return null;
 }
 
@@ -208,14 +208,14 @@ export function AddProviderInstanceDialog({
       updateSettings({ providerInstances: nextMap });
       toastManager.add({
         type: "success",
-        title: "provider instance added :3",
+        title: "provider instance added :3 purr",
         description: `${driverOption.label} instance '${instanceId}' was added.`,
       });
       onOpenChange(false);
     } catch (error) {
       toastManager.add({
         type: "error",
-        title: "could not add provider instance 3:",
+        title: "could not add provider instance 3: mrrp",
         description: error instanceof Error ? error.message : "update failed.",
       });
     }
@@ -225,10 +225,10 @@ export function AddProviderInstanceDialog({
     <Dialog open={open} onOpenChange={onOpenChange}>
       <WizardPopup>
         <WizardHeader
-          title="add provider instance"
+          title="add provider instance ^w^"
           description={
             <>
-              configure an additional provider instance on {environmentLabel} — for example, a
+              mrrp, configure an additional provider instance on {environmentLabel} — for example, a
               second Codex install pointed at a different workspace.
             </>
           }
@@ -311,7 +311,7 @@ export function AddProviderInstanceDialog({
               onChange={(event) => setLabel(event.target.value)}
             />
             <span className="text-[11px] text-muted-foreground">
-              shown in the provider list. optional.
+              shown in the provider list. optional, nya~
             </span>
           </label>
 
@@ -330,7 +330,7 @@ export function AddProviderInstanceDialog({
               <span className="text-[11px] text-destructive">{instanceIdError}</span>
             ) : (
               <span className="text-[11px] text-muted-foreground">
-                routing key used by threads and sessions. letters, digits, '-', or '_'.
+                routing key used by threads and sessions. letters, digits, '-', or '_', meow.
               </span>
             )}
           </label>
@@ -378,7 +378,7 @@ export function AddProviderInstanceDialog({
               ) : null}
             </div>
             <span className="text-[11px] text-muted-foreground">
-              optional marker shown in the picker.
+              optional marker shown in the picker, uwu.
             </span>
           </div>
 
@@ -395,7 +395,7 @@ export function AddProviderInstanceDialog({
           ) : wizardStep === 2 ? (
             <div className="grid gap-2">
               <p className="text-sm text-muted-foreground">
-                this driver has no required configuration. you can add the instance now.
+                purr, this driver has no required configuration. you can add the instance now :3
               </p>
             </div>
           ) : null}
@@ -417,7 +417,7 @@ export function AddProviderInstanceDialog({
           {wizardStep < ADD_PROVIDER_WIZARD_STEPS.length - 1 ? (
             <Button onClick={() => navigateToStep(wizardStep + 1)}>next</Button>
           ) : (
-            <Button onClick={handleSave}>add instance</Button>
+            <Button onClick={handleSave}>add instance uwu</Button>
           )}
         </WizardFooter>
       </WizardPopup>

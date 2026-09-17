@@ -104,7 +104,9 @@ export function BrowserImportWizard({
     if (importInFlight.current) return;
     const chosen = resolveWizardTarget(target, newProfileId.current, targetProfiles);
     if (chosen === undefined) {
-      setTargetError("that profile is no longer available. choose where to import these cookies.");
+      setTargetError(
+        "mrrp, that profile is no longer available. choose where to import these cookies.",
+      );
       setStep({ step: "configure" });
       return;
     }
@@ -215,7 +217,8 @@ function QuitStep({
       <DialogHeader>
         <DialogTitle>quit {source.name} to import</DialogTitle>
         <DialogDescription>
-          {source.name} is open, so its cookies can&rsquo;t be read yet. quit it, then continue.
+          mrrp, {source.name} is open, so its cookies can&rsquo;t be read yet. quit it, then
+          continue uwu.
         </DialogDescription>
       </DialogHeader>
       <DialogFooter>
@@ -279,7 +282,7 @@ function FullDiskAccessStep({
     setOpeningError(null);
     void Promise.resolve()
       .then(onOpenSettings)
-      .catch(() => setOpeningError("could not open System Settings. try allow again."))
+      .catch(() => setOpeningError("could not open System Settings 3: mrrp. try allow again."))
       .finally(() => setOpening(false));
   };
   return (
@@ -287,9 +290,9 @@ function FullDiskAccessStep({
       <DialogHeader>
         <DialogTitle>let :3 Code read {source.name}&rsquo;s cookies</DialogTitle>
         <DialogDescription>
-          to import cookies from {source.name}, :3 Code needs Full Disk Access. turn it on in System
-          Settings, then come back to finish the import — you can revoke it again once the import is
-          done.
+          meow, to import cookies from {source.name}, :3 Code needs Full Disk Access. turn it on in
+          System Settings, then come back to finish the import — you can revoke it again once the
+          import is done, nya~
         </DialogDescription>
       </DialogHeader>
       <DialogPanel>
@@ -319,8 +322,8 @@ function FullDiskAccessStep({
         {!permission.isReady(["fullDiskAccess"]) ? (
           <p className="mt-3 text-xs text-muted-foreground">
             {stillRequired
-              ? "access is still required. quit and reopen :3 Code if you just allowed it, then retry the import."
-              : "if access doesn't update after you allow it, quit and reopen :3 Code, then retry the import."}
+              ? "mrrp, access is still required. quit and reopen :3 Code if you just allowed it, then retry the import."
+              : "if access doesn't update after you allow it, quit and reopen :3 Code, then retry the import, nya~"}
           </p>
         ) : null}
       </DialogPanel>
@@ -362,16 +365,16 @@ function ConfigureStep({
   const targetFeedback =
     targetError ??
     (targetMissing
-      ? "that profile is no longer available. choose where to import these cookies."
+      ? "mrrp, that profile is no longer available. choose where to import these cookies."
       : targetUncreatable
-        ? "you've reached the profile limit. choose an existing profile to import into."
+        ? "mrow, you've reached the profile limit. choose an existing profile to import into."
         : undefined);
   return (
     <>
       <DialogHeader>
-        <DialogTitle>import from {source.name}</DialogTitle>
+        <DialogTitle>import from {source.name}, meow</DialogTitle>
         <DialogDescription>
-          choose which cookies to import for {destinationEnvironmentName}.
+          purr, choose which cookies to import for {destinationEnvironmentName}.
         </DialogDescription>
       </DialogHeader>
       <DialogPanel>
@@ -487,8 +490,8 @@ function ImportingStep() {
   return (
     <>
       <DialogHeader>
-        <DialogTitle>importing cookies</DialogTitle>
-        <DialogDescription>this may take a moment.</DialogDescription>
+        <DialogTitle>importing cookies ^w^</DialogTitle>
+        <DialogDescription>this may take a moment, purr.</DialogDescription>
       </DialogHeader>
       <DialogPanel className="flex items-center gap-3 py-6">
         <Spinner className="size-4 text-muted-foreground" />
@@ -511,8 +514,8 @@ function CheckingStep({
         <DialogTitle>checking {sourceName}</DialogTitle>
         <DialogDescription>
           {check === "fullDiskAccess"
-            ? "checking Full Disk Access."
-            : "checking whether the browser has closed."}
+            ? "checking Full Disk Access, mrrp."
+            : "checking whether the browser has closed, nya~"}
         </DialogDescription>
       </DialogHeader>
       <DialogPanel className="flex items-center gap-3 py-6">
@@ -548,14 +551,14 @@ function DoneStep({
             ? `imported ${cookieResultCount(imported)}`
             : skipped > 0
               ? `skipped ${cookieResultCount(skipped)}`
-              : "no cookies found"}
+              : "no cookies found 3:"}
         </DialogTitle>
         <DialogDescription>
           {imported > 0
-            ? `added to ${targetName} for ${destinationEnvironmentName}.${skipped > 0 ? ` ${cookieResultCount(skipped)} skipped.` : ""}`
+            ? `purr, added to ${targetName} for ${destinationEnvironmentName} :3${skipped > 0 ? ` ${cookieResultCount(skipped)} skipped.` : ""}`
             : skipped > 0
-              ? `no cookies were imported for ${destinationEnvironmentName}.`
-              : `there were no cookies to import for ${destinationEnvironmentName}.`}
+              ? `mrrp, no cookies were imported for ${destinationEnvironmentName}.`
+              : `there were no cookies to import for ${destinationEnvironmentName}, mrow.`}
         </DialogDescription>
       </DialogHeader>
       {skippedDomains.length > 0 ? (
@@ -589,7 +592,7 @@ function BlockedStep({
   return (
     <>
       <DialogHeader>
-        <DialogTitle>couldn&rsquo;t import from {source.name}</DialogTitle>
+        <DialogTitle>couldn&rsquo;t import from {source.name} 3: mrrp</DialogTitle>
         <DialogDescription>{BROWSER_IMPORT_FAILURE_COPY[reason]}</DialogDescription>
       </DialogHeader>
       <DialogFooter>

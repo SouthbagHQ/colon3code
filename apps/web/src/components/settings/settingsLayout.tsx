@@ -388,11 +388,11 @@ export function SettingsRow({
     unavailable && control
       ? inertControl(
           context
-            ? "reconnect the selected environment to change this setting."
+            ? "mrrp, reconnect the selected environment to change this setting."
             : PRIMARY_SETTINGS_UNAVAILABLE_MESSAGE,
         )
       : environmentWide && control
-        ? inertControl("environment-wide setting. select an environment to change it.")
+        ? inertControl("environment-wide setting. select an environment to change it, meow.")
         : control;
   // Server rows get an indicator beside the title that opens the resolution
   // chain per target at every scope; client rows keep a plain status only.
@@ -408,14 +408,14 @@ export function SettingsRow({
       }),
     );
   const inheritance: { state: SettingInheritanceState; summary: string } = mixed
-    ? { state: "mixed", summary: "mixed across selected environments" }
+    ? { state: "mixed", summary: "mixed across selected environments, mrrp" }
     : source === "project"
       ? { state: "overridden", summary: "overridden for this project" }
       : source === "environment" && scopedKeys.length > 0
         ? { state: "inherited", summary: `inherited from ${inheritedFrom}` }
         : customized
           ? { state: "environment", summary: "set on the environment" }
-          : { state: "default", summary: "built-in default" };
+          : { state: "default", summary: "built-in default, nya~" };
   const renderedInheritance =
     context && serverScoped && settingKeys.length > 0 ? (
       <SettingInheritance

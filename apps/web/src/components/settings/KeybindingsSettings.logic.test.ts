@@ -171,7 +171,7 @@ describe("KeybindingsSettings.logic", () => {
     });
     expect(parseWhenExpressionDraft("editorFocus &&")).toEqual({
       ok: false,
-      message: "use variables with !, &&, ||, and parentheses.",
+      message: "mrrp, use variables with !, &&, ||, and parentheses.",
     });
 
     expect(parseWhenExpressionDraft("!(terminalFocus || modelPickerOpen)")).toEqual({

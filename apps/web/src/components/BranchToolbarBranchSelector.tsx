@@ -95,7 +95,7 @@ interface BranchToolbarBranchSelectorProps {
 }
 
 function toBranchActionErrorMessage(error: unknown): string {
-  return error instanceof Error ? error.message : "an error occurred.";
+  return error instanceof Error ? error.message : "an error occurred, mrrp";
 }
 
 export function BranchToolbarBranchSelector({
@@ -365,7 +365,7 @@ export function BranchToolbarBranchSelector({
         if (!didCopy) return;
         toastManager.add({
           type: "success",
-          title: "branch name copied :3",
+          title: "branch name copied :3 purr",
           description: branchName,
         });
       },
@@ -459,7 +459,7 @@ export function BranchToolbarBranchSelector({
         toastManager.add(
           stackedThreadToast({
             type: "error",
-            title: "failed to switch ref 3:",
+            title: "failed to switch ref 3: mrrp",
             description: toBranchActionErrorMessage(squashAtomCommandFailure(checkoutResult)),
           }),
         );
@@ -839,7 +839,7 @@ export function BranchToolbarBranchSelector({
           </div>
         </div>
         <div className="flex min-h-0 flex-1 flex-col overflow-hidden">
-          <ComboboxEmpty>no refs found</ComboboxEmpty>
+          <ComboboxEmpty>no refs found 3:</ComboboxEmpty>
           <div className="relative min-h-0 w-full max-h-56 flex-1 overflow-hidden">
             <ComboboxListVirtualized className="size-full min-w-0 p-0">
               <LegendList<string>
@@ -900,7 +900,7 @@ export function BranchToolbarBranchSelector({
               />
               <TooltipPopup side="top" className="max-w-72 whitespace-normal leading-tight">
                 creates the worktree from the latest matching branch on origin instead of your local
-                branch.
+                branch, nya~
               </TooltipPopup>
             </Tooltip>
           ) : null}

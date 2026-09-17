@@ -12,7 +12,7 @@ import {
 } from "../ui/empty";
 
 export function PullRequestsUnavailableState({
-  title = "could not load pull requests 3:",
+  title = "could not load pull requests 3: mrrp",
   error,
   onRetry,
   refreshing = false,

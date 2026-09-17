@@ -44,7 +44,7 @@ function LazyChecksBody({
   if (detailQuery.data === null) {
     return (
       <p className="text-muted-foreground text-xs">
-        {detailQuery.isPending ? "loading checks…" : "no checks reported"}
+        {detailQuery.isPending ? "loading checks… purr" : "no checks reported, mrrp"}
       </p>
     );
   }
@@ -86,7 +86,10 @@ function ChecksBody({
                 if (!check.url) return;
                 void openLink(check.url).catch((error: unknown) => {
                   console.error(error);
-                  toastManager.add({ type: "error", title: "unable to open check details 3:" });
+                  toastManager.add({
+                    type: "error",
+                    title: "unable to open check details 3: mrow",
+                  });
                 });
               }}
             >

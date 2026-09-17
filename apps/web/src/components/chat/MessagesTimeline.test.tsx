@@ -497,7 +497,7 @@ describe("MessagesTimeline", () => {
       />,
     );
 
-    expect(markup).toContain("worked for 8.0s");
+    expect(markup).toContain("worked for 8.0s ^w^");
   });
 
   it("keeps assistant changed-files headers sticky below the thread header", () => {
@@ -1665,7 +1665,7 @@ describe("MessagesTimeline", () => {
       />,
     );
 
-    expect(markup).toContain("thinking…");
+    expect(markup).toContain("thinking… purr");
     expect(markup).toContain("lucide-brain");
     expect(markup).toContain('data-timeline-row-id="live-activity-row"');
   });
@@ -1708,7 +1708,7 @@ describe("MessagesTimeline", () => {
     expect(markup).toContain("running pnpm");
     expect(markup).toContain("lucide-terminal");
     expect(markup).not.toContain("Ran pnpm");
-    expect(markup).not.toContain("thinking…");
+    expect(markup).not.toContain("thinking… purr");
     expect(markup).not.toContain('data-timeline-row-kind="thinking"');
   });
 

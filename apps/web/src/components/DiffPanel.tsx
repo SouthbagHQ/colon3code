@@ -687,7 +687,7 @@ export default function DiffPanel({
                     <span className="text-right">Remote</span>
                   </div>
                 </div>
-                <ComboboxEmpty>no matching refs</ComboboxEmpty>
+                <ComboboxEmpty>no matching refs 3:</ComboboxEmpty>
                 <ComboboxList className="max-h-64 min-w-0 overflow-x-hidden">
                   <ComboboxItem
                     className="h-8 w-full min-w-0 grid-cols-[1rem_minmax(0,1fr)] py-0"
@@ -895,15 +895,15 @@ export default function DiffPanel({
     <DiffPanelShell mode={mode} header={headerRow}>
       {!activeThread ? (
         <div className="flex flex-1 items-center justify-center px-5 text-center text-xs text-muted-foreground/70">
-          select a thread to inspect turn diffs.
+          meow, select a thread to inspect turn diffs.
         </div>
       ) : !isGitRepo ? (
         <div className="flex flex-1 items-center justify-center px-5 text-center text-xs text-muted-foreground/70">
-          turn diffs are unavailable because this project is not a git repository.
+          turn diffs are unavailable because this project is not a git repository, mrrp
         </div>
       ) : selectedTurnId !== null && orderedTurnDiffSummaries.length === 0 ? (
         <div className="flex flex-1 items-center justify-center px-5 text-center text-xs text-muted-foreground/70">
-          no completed turns yet.
+          no completed turns yet, nya~
         </div>
       ) : (
         <>
@@ -911,7 +911,7 @@ export default function DiffPanel({
             {isSelectedPatchTruncated && (
               <p className="shrink-0 border-b border-border/70 bg-muted/40 px-3 py-1.5 text-[11px] text-muted-foreground">
                 this diff was truncated because it exceeded the preview limit. the changes shown are
-                incomplete.
+                incomplete 3:
               </p>
             )}
             {selectedPatchError && !renderablePatch && (
@@ -934,8 +934,8 @@ export default function DiffPanel({
                 <div className="flex h-full items-center justify-center px-3 py-2 text-xs text-muted-foreground/70">
                   <p>
                     {hasNoNetChanges
-                      ? "no net changes in this selection"
-                      : "no patch available for this selection"}
+                      ? "no net changes in this selection, purr"
+                      : "mrrp, no patch available for this selection"}
                   </p>
                 </div>
               )

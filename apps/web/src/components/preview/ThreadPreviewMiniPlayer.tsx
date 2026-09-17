@@ -182,7 +182,7 @@ function BrowserMiniPlayer({
     void operation(runtimeTabId).catch((error) => {
       toastManager.add({
         type: "error",
-        title: "unable to update popped-out preview 3:",
+        title: "unable to update popped-out preview 3: mrrp",
         description: error instanceof Error ? error.message : "an error occurred.",
       });
     });

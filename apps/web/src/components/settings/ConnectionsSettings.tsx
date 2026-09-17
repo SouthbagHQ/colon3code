@@ -212,42 +212,42 @@ const PAIRING_SCOPE_OPTIONS: ReadonlyArray<{
   {
     scope: AuthOrchestrationReadScope,
     title: "view environment",
-    description: "read threads, status, diffs, and configuration.",
+    description: "read threads, status, diffs, and configuration, meow.",
   },
   {
     scope: AuthOrchestrationOperateScope,
     title: "operate tasks",
-    description: "start tasks and perform changes in the environment.",
+    description: "start tasks and perform changes in the environment, purr.",
   },
   {
     scope: AuthTerminalOperateScope,
     title: "use terminals",
-    description: "create terminals and send input to running shells.",
+    description: "create terminals and send input to running shells, nya~",
   },
   {
     scope: AuthReviewWriteScope,
     title: "write reviews",
-    description: "create comments while reviewing changes.",
+    description: "create comments while reviewing changes, meow.",
   },
   {
     scope: AuthAccessReadScope,
     title: "view access",
-    description: "inspect pairing links and authorized clients.",
+    description: "inspect pairing links and authorized clients, purr.",
   },
   {
     scope: AuthAccessWriteScope,
     title: "manage access",
-    description: "issue and revoke credentials for other clients.",
+    description: "issue and revoke credentials for other clients, mrrp.",
   },
   {
     scope: AuthRelayReadScope,
     title: "view relay",
-    description: "inspect managed relay connectivity.",
+    description: "inspect managed relay connectivity, nya~",
   },
   {
     scope: AuthRelayWriteScope,
     title: "manage relay",
-    description: "change managed tunnel connectivity.",
+    description: "change managed tunnel connectivity, meow.",
   },
 ];
 
@@ -562,7 +562,7 @@ function isHostedAppPairingUrl(value: string): boolean {
 
 function endpointShareHint(endpoint: AdvertisedEndpoint, url: string): string {
   if (isHostedAppPairingUrl(url)) {
-    return "opens the hosted app, no install needed";
+    return "opens the hosted app, no install needed, nya~";
   }
   switch (endpoint.reachability) {
     case "lan":
@@ -570,7 +570,7 @@ function endpointShareHint(endpoint: AdvertisedEndpoint, url: string): string {
     case "private-network":
       return "devices on your private network";
     case "public":
-      return "reachable from anywhere";
+      return "reachable from anywhere, meow";
     case "loopback":
       return "clients on this machine";
   }
@@ -682,16 +682,16 @@ const PairingLinkListRow = memo(function PairingLinkListRow({
         type: "success",
         title:
           kind === "hosted-link"
-            ? "hosted app link copied :3"
+            ? "hosted app link copied :3 purr"
             : kind === "link"
-              ? "pairing URL copied :3"
+              ? "pairing URL copied :3 purr"
               : "pairing code copied :3",
         description:
           kind === "hosted-link"
-            ? "open it in the browser on the device you want to connect."
+            ? "open it in the browser on the device you want to connect, meow."
             : kind === "link"
-              ? "open it in the client you want to pair to this environment."
-              : "paste it into another client to finish pairing.",
+              ? "open it in the client you want to pair to this environment, nya~"
+              : "paste it into another client to finish pairing, purr.",
       });
     },
     onError: (error, { value, kind }) => {
@@ -704,12 +704,12 @@ const PairingLinkListRow = memo(function PairingLinkListRow({
           type: "error",
           title: canCopyToClipboard
             ? kind === "hosted-link"
-              ? "could not copy hosted app link 3:"
+              ? "could not copy hosted app link 3: mrrp"
               : kind === "link"
-                ? "could not copy pairing URL 3:"
-                : "could not copy pairing code 3:"
+                ? "could not copy pairing URL 3: mrrp"
+                : "could not copy pairing code 3: mrrp"
             : "clipboard copy unavailable 3:",
-          description: canCopyToClipboard ? error.message : "showing the full value instead.",
+          description: canCopyToClipboard ? error.message : "showing the full value instead, mrrp.",
         }),
       );
     },
@@ -771,11 +771,12 @@ const PairingLinkListRow = memo(function PairingLinkListRow({
           </p>
           {!credential ? (
             <p className="text-[11px] text-muted-foreground/70">
-              create a new link to share from this client.
+              create a new link to share from this client, meow.
             </p>
           ) : shareablePairingUrl === null ? (
             <p className="text-[11px] text-muted-foreground/70">
-              copy the token and pair from another client using this backend&apos;s reachable host.
+              copy the token and pair from another client using this backend&apos;s reachable host,
+              nya~
             </p>
           ) : null}
         </div>
@@ -822,9 +823,9 @@ const PairingLinkListRow = memo(function PairingLinkListRow({
                 <DialogDescription>
                   {isRevealValueUrl
                     ? isRevealValueHostedAppPairingUrl
-                      ? "clipboard copy is unavailable here. open or manually copy this hosted app link on the device you want to connect."
-                      : "clipboard copy is unavailable here. open or manually copy this full pairing URL on the device you want to connect."
-                    : "clipboard copy is unavailable here. manually copy this code into another client."}
+                      ? "mrrp, clipboard copy is unavailable here. open or manually copy this hosted app link on the device you want to connect."
+                      : "mrrp, clipboard copy is unavailable here. open or manually copy this full pairing URL on the device you want to connect."
+                    : "mrrp, clipboard copy is unavailable here. manually copy this code into another client."}
                 </DialogDescription>
               </DialogHeader>
               <DialogPanel className="space-y-4">
@@ -954,8 +955,8 @@ const PairingLinkListRow = memo(function PairingLinkListRow({
           ) : (
             <div className="flex size-[192px] shrink-0 items-center justify-center self-center rounded-xl border border-border/50 p-4 sm:self-start">
               <p className="text-center text-[11px] text-muted-foreground/70">
-                no QR for this endpoint. another device scanning a loopback link would dial itself;
-                copy the URL for use on this machine instead.
+                no QR for this endpoint, mrrp. another device scanning a loopback link would dial
+                itself; copy the URL for use on this machine instead.
               </p>
             </div>
           )}
@@ -987,7 +988,7 @@ const ConnectedClientListRow = memo(function ConnectedClientListRow({
       : "connected"
     : lastConnectedAt
       ? `last connected at ${formatAccessTimestamp(lastConnectedAt)}`
-      : "not connected yet.";
+      : "not connected yet, nya~";
   const deviceInfoBits = [
     clientSession.client.deviceType !== "unknown"
       ? clientSession.client.deviceType[0]?.toUpperCase() + clientSession.client.deviceType.slice(1)
@@ -1077,11 +1078,11 @@ const AuthorizedClientsHeaderAction = memo(function AuthorizedClientsHeaderActio
       setPairingScopes([...AuthStandardClientScopes]);
       setDialogOpen(false);
     } catch (error) {
-      const message = error instanceof Error ? error.message : "failed to create pairing URL.";
+      const message = error instanceof Error ? error.message : "failed to create pairing URL 3:";
       toastManager.add(
         stackedThreadToast({
           type: "error",
-          title: "could not create pairing URL 3:",
+          title: "could not create pairing URL 3: mrrp",
           description: message,
         }),
       );
@@ -1128,10 +1129,10 @@ const AuthorizedClientsHeaderAction = memo(function AuthorizedClientsHeaderActio
         />
         <DialogPopup className="max-w-md">
           <DialogHeader>
-            <DialogTitle>create pairing link</DialogTitle>
+            <DialogTitle>create pairing link ^w^</DialogTitle>
             <DialogDescription>
-              generate a one-time link that another device can use to pair with this backend as an
-              authorized client.
+              meow, generate a one-time link that another device can use to pair with this backend
+              as an authorized client.
             </DialogDescription>
           </DialogHeader>
           <DialogPanel className="space-y-5">
@@ -1152,7 +1153,7 @@ const AuthorizedClientsHeaderAction = memo(function AuthorizedClientsHeaderActio
                 <div>
                   <h3 className="text-xs font-medium text-foreground">permissions</h3>
                   <p className="text-xs text-muted-foreground">
-                    limit what the paired client can do.
+                    limit what the paired client can do, purr.
                   </p>
                 </div>
                 <div className="flex gap-1">
@@ -1196,10 +1197,10 @@ const AuthorizedClientsHeaderAction = memo(function AuthorizedClientsHeaderActio
                 ))}
               </div>
               {pairingScopes.length === 0 ? (
-                <p className="text-xs text-destructive">select at least one permission.</p>
+                <p className="text-xs text-destructive">select at least one permission 3:</p>
               ) : pairingScopes.includes(AuthAccessWriteScope) ? (
                 <p className="text-xs text-warning">
-                  this client can create or revoke access for other devices.
+                  this client can create or revoke access for other devices, mrrp.
                 </p>
               ) : null}
             </section>
@@ -1489,7 +1490,7 @@ function SavedBackendListRow({
     onCopy: ({ traceId }) => {
       toastManager.add({
         type: "success",
-        title: "trace ID copied :3",
+        title: "trace ID copied :3 purr",
         description: traceId,
       });
     },
@@ -1497,7 +1498,7 @@ function SavedBackendListRow({
       toastManager.add(
         stackedThreadToast({
           type: "error",
-          title: "could not copy trace ID 3:",
+          title: "could not copy trace ID 3: mrrp",
           description: error.message,
         }),
       );
@@ -1669,9 +1670,9 @@ function ConfiguredCloudLinkRow({ canManageRelay }: { readonly canManageRelay: b
   const [isUpdatingPreference, setIsUpdatingPreference] = useState(false);
 
   const disabledReason = !isSignedIn
-    ? "sign in to T3 Connect to manage this environment."
+    ? "sign in to T3 Connect to manage this environment, meow."
     : !canManageRelay
-      ? "your session does not have permission to manage T3 Connect access."
+      ? "your session does not have permission to manage T3 Connect access 3:"
       : null;
   const isBusy = isUpdating || isUpdatingPreference;
 
@@ -1684,15 +1685,15 @@ function ConfiguredCloudLinkRow({ canManageRelay }: { readonly canManageRelay: b
       toastManager.add({
         type: "success",
         title: enabled
-          ? "T3 Connect linked :3"
+          ? "T3 Connect linked :3 purr"
           : publishAgentActivity
             ? "T3 Connect tunnel disabled"
             : "T3 Connect unlinked",
         description: enabled
-          ? "this environment is available through T3 Connect."
+          ? "this environment is available through T3 Connect, nya~"
           : publishAgentActivity
-            ? "the managed tunnel was removed. agent activity publishing stays on."
-            : "this environment is no longer available through T3 Connect.",
+            ? "the managed tunnel was removed. agent activity publishing stays on, meow."
+            : "this environment is no longer available through T3 Connect, mrrp.",
       });
     }
     setIsUpdating(false);
@@ -1704,10 +1705,10 @@ function ConfiguredCloudLinkRow({ canManageRelay }: { readonly canManageRelay: b
     if (ok) {
       toastManager.add({
         type: "success",
-        title: enabled ? "agent activity enabled :3" : "agent activity disabled :3",
+        title: enabled ? "agent activity enabled :3 purr" : "agent activity disabled :3",
         description: enabled
-          ? "this environment publishes agent activity to your mobile clients."
-          : "this environment will stop publishing agent activity.",
+          ? "this environment publishes agent activity to your mobile clients, nya~"
+          : "this environment will stop publishing agent activity, meow.",
       });
     }
     setIsUpdatingPreference(false);
@@ -1720,8 +1721,8 @@ function ConfiguredCloudLinkRow({ canManageRelay }: { readonly canManageRelay: b
           title={searchableSetting("t3-connect").title}
           description={
             managedTunnelActive
-              ? "this environment is available to your other devices through T3 Connect."
-              : "make this environment available to your other devices through T3 Connect."
+              ? "this environment is available to your other devices through T3 Connect, purr."
+              : "make this environment available to your other devices through T3 Connect, meow."
           }
           status={operationError ?? primaryCloudLinkState.error}
           control={
@@ -1736,7 +1737,7 @@ function ConfiguredCloudLinkRow({ canManageRelay }: { readonly canManageRelay: b
       ) : null}
       <SettingsRow
         title={searchableSetting("publish-agent-activity").title}
-        description="send activity to mobile notifications and live activities without T3 Connect."
+        description="send activity to mobile notifications and live activities without T3 Connect, nya~"
         control={
           <CloudLinkSwitch
             ariaLabel="publish agent activity to mobile clients"
@@ -1762,11 +1763,11 @@ function EmptyRemoteEnvironments({ cloudEnabled = true }: { readonly cloudEnable
         <ChevronsLeftRightEllipsisIcon />
       </EmptyMedia>
       <EmptyHeader>
-        <EmptyTitle>no saved remote environments</EmptyTitle>
+        <EmptyTitle>no saved remote environments, nya~</EmptyTitle>
         <EmptyDescription>
           {cloudEnabled
-            ? "click “add environment” to pair another environment, or connect one from T3 Connect."
-            : "click “add environment” to pair another environment."}
+            ? "meow, click “add environment” to pair another environment, or connect one from T3 Connect."
+            : "meow, click “add environment” to pair another environment."}
         </EmptyDescription>
       </EmptyHeader>
     </Empty>
@@ -2111,7 +2112,7 @@ export function ConnectionsSettings() {
         toastManager.add(
           stackedThreadToast({
             type: "error",
-            title: "could not update network access 3:",
+            title: "could not update network access 3: mrrp",
             description: message,
           }),
         );
@@ -2146,7 +2147,7 @@ export function ConnectionsSettings() {
       toastManager.add(
         stackedThreadToast({
           type: "error",
-          title: "could not set up Tailscale HTTPS 3:",
+          title: "could not set up Tailscale HTTPS 3: mrow",
           description: message,
         }),
       );
@@ -2182,7 +2183,7 @@ export function ConnectionsSettings() {
       toastManager.add(
         stackedThreadToast({
           type: "error",
-          title: "could not disable Tailscale HTTPS 3:",
+          title: "could not disable Tailscale HTTPS 3: mrrp",
           description: message,
         }),
       );
@@ -2206,7 +2207,7 @@ export function ConnectionsSettings() {
       toastManager.add(
         stackedThreadToast({
           type: "error",
-          title: "could not revoke pairing link 3:",
+          title: "could not revoke pairing link 3: mrow",
           description: message,
         }),
       );
@@ -2227,7 +2228,7 @@ export function ConnectionsSettings() {
         toastManager.add(
           stackedThreadToast({
             type: "error",
-            title: "could not revoke client access 3:",
+            title: "could not revoke client access 3: mrrp",
             description: message,
           }),
         );
@@ -2246,8 +2247,10 @@ export function ConnectionsSettings() {
       toastManager.add({
         type: "success",
         title:
-          revokedCount === 1 ? "revoked 1 other client :3" : `revoked ${revokedCount} clients :3`,
-        description: "other paired clients will need a new pairing link before reconnecting.",
+          revokedCount === 1
+            ? "revoked 1 other client :3 purr"
+            : `revoked ${revokedCount} clients :3 purr`,
+        description: "other paired clients will need a new pairing link before reconnecting, meow.",
       });
     } catch (error) {
       const message = error instanceof Error ? error.message : "failed to revoke other clients.";
@@ -2255,7 +2258,7 @@ export function ConnectionsSettings() {
       toastManager.add(
         stackedThreadToast({
           type: "error",
-          title: "could not revoke other clients 3:",
+          title: "could not revoke other clients 3: mrow",
           description: message,
         }),
       );
@@ -2286,8 +2289,8 @@ export function ConnectionsSettings() {
       setAddBackendDialogOpen(false);
       toastManager.add({
         type: "success",
-        title: "environment connected :3",
-        description: `${target.alias} is ready over an SSH-managed tunnel.`,
+        title: "environment connected :3 purr",
+        description: `${target.alias} is ready over an SSH-managed tunnel, nya~`,
       });
       setIsAddingSavedBackend(false);
     },
@@ -2326,7 +2329,7 @@ export function ConnectionsSettings() {
       toastManager.add(
         stackedThreadToast({
           type: "error",
-          title: "could not add backend 3:",
+          title: "could not add backend 3: mrrp",
           description: message,
         }),
       );
@@ -2343,7 +2346,7 @@ export function ConnectionsSettings() {
         toastManager.add(
           stackedThreadToast({
             type: "error",
-            title: "could not add backend 3:",
+            title: "could not add backend 3: mrrp",
             description: message,
           }),
         );
@@ -2360,8 +2363,8 @@ export function ConnectionsSettings() {
     setAddBackendDialogOpen(false);
     toastManager.add({
       type: "success",
-      title: "backend added :3",
-      description: "the environment is saved and will reconnect on app startup.",
+      title: "backend added :3 purr",
+      description: "the environment is saved and will reconnect on app startup, meow.",
     });
     setIsAddingSavedBackend(false);
   }, [
@@ -2475,7 +2478,7 @@ export function ConnectionsSettings() {
         toastManager.add(
           stackedThreadToast({
             type: "error",
-            title: `could not switch backend ${enabled ? "on" : "off"} 3:`,
+            title: `could not switch backend ${enabled ? "on" : "off"} 3: mrrp`,
             description: message,
           }),
         );
@@ -2490,7 +2493,7 @@ export function ConnectionsSettings() {
     async (environment: EnvironmentPresentation) => {
       // Fail closed: no mounted confirm host means no removal.
       const confirmed = await requestConfirmDialog(
-        `remove ${environment.label} from this device?\nthis forgets its pairing, credentials, and cached threads here. switch it off instead to keep it saved.`,
+        `remove ${environment.label} from this device?\nmrrp, this forgets its pairing, credentials, and cached threads here. switch it off instead to keep it saved.`,
         { variant: "destructive" },
       );
       if (confirmed !== true) {
@@ -2508,7 +2511,7 @@ export function ConnectionsSettings() {
         toastManager.add(
           stackedThreadToast({
             type: "error",
-            title: "could not remove backend 3:",
+            title: "could not remove backend 3: mrow",
             description: message,
           }),
         );
@@ -2639,7 +2642,7 @@ export function ConnectionsSettings() {
       </div>
       <div>
         <span className="mt-1 block text-[11px] text-muted-foreground">
-          paste a full pairing URL here to fill both fields automatically.
+          paste a full pairing URL here to fill both fields automatically, nya~
         </span>
       </div>
     </div>
@@ -2834,7 +2837,7 @@ export function ConnectionsSettings() {
         toastManager.add(
           stackedThreadToast({
             type: "error",
-            title: "could not change WSL backend 3:",
+            title: "could not change WSL backend 3: mrrp",
             description: message,
           }),
         );
@@ -2990,7 +2993,7 @@ export function ConnectionsSettings() {
         return (
           <SettingsRow
             {...searchableSetting("wsl-backend")}
-            description="couldn't load the WSL backend state."
+            description="couldn't load the WSL backend state 3: mrrp"
             status={<span className="block text-destructive">{desktopWslError}</span>}
             control={
               <Button
@@ -3021,7 +3024,7 @@ export function ConnectionsSettings() {
       return (
         <SettingsRow
           {...searchableSetting("wsl-backend")}
-          description="WSL is unavailable, so Windows is running instead. turn WSL off to clear this preference."
+          description="mrrp, WSL is unavailable, so Windows is running instead. turn WSL off to clear this preference."
           status={
             desktopWslError ? (
               <span className="block text-destructive">{desktopWslError}</span>
@@ -3059,7 +3062,7 @@ export function ConnectionsSettings() {
       <>
         <SettingsRow
           {...searchableSetting("wsl-backend")}
-          description="run the selected WSL distro alongside Windows. projects remain on their current filesystem."
+          description="run the selected WSL distro alongside Windows, meow. projects remain on their current filesystem."
           status={
             desktopWslError ? (
               <span className="block text-destructive">{desktopWslError}</span>
@@ -3108,7 +3111,7 @@ export function ConnectionsSettings() {
         {desktopWslState.enabled ? (
           <SettingsRow
             title="WSL only"
-            description="run only the WSL backend. :3 Code restarts when this changes."
+            description="run only the WSL backend, nya~ :3 Code restarts when this changes."
             className="bg-muted/20 pl-7 sm:pl-8"
             control={
               <Switch
@@ -3131,8 +3134,8 @@ export function ConnectionsSettings() {
         tailscaleHttpsEndpoint
           ? tailscaleHttpsEndpoint.status === "available"
             ? tailscaleHttpsEndpoint.httpBaseUrl
-            : "use Tailscale Serve to expose this backend through a MagicDNS HTTPS URL."
-          : "start Tailscale to set up HTTPS access through MagicDNS."
+            : "use Tailscale Serve to expose this backend through a MagicDNS HTTPS URL, meow."
+          : "start Tailscale to set up HTTPS access through MagicDNS, purr."
       }
       control={
         tailscaleHttpsEndpoint ? (
@@ -3190,11 +3193,11 @@ export function ConnectionsSettings() {
                 ? `reachable at ${desktopServerExposureState.endpointUrl}`
                 : desktopServerExposureState?.advertisedHost
                   ? `exposed on all interfaces. pairing links use ${desktopServerExposureState.advertisedHost}.`
-                  : "exposed on all interfaces."
+                  : "exposed on all interfaces, meow."
             }
           />
         ) : desktopServerExposureState ? (
-          "limited to this machine."
+          "limited to this machine, nya~"
         ) : (
           "loading…"
         )
@@ -3212,8 +3215,8 @@ export function ConnectionsSettings() {
       title={searchableSetting("network-access").title}
       description={
         currentAuthPolicy === "remote-reachable"
-          ? "remote access is already configured. change network exposure where the server starts."
-          : "only this machine can connect. restart with a non-loopback host for remote pairing."
+          ? "remote access is already configured, purr. change network exposure where the server starts."
+          : "mrrp, only this machine can connect. restart with a non-loopback host for remote pairing."
       }
       control={
         <Tooltip>
@@ -3230,7 +3233,7 @@ export function ConnectionsSettings() {
           />
           <TooltipPopup side="top">
             network exposure changes restart the backend and must be controlled where the server
-            process is launched.
+            process is launched, meow.
           </TooltipPopup>
         </Tooltip>
       }
@@ -3346,7 +3349,7 @@ export function ConnectionsSettings() {
           {isLocalBackendRemotelyReachable ? (
             <FoldedSettingsSection
               id="authorized-clients"
-              title="authorized clients"
+              title="authorized clients ^w^"
               summary={summarizeAuthorizedClients(
                 desktopClientSessions,
                 visibleDesktopPairingLinks,
@@ -3384,13 +3387,13 @@ export function ConnectionsSettings() {
               <AlertDialogHeader>
                 <AlertDialogTitle>
                   {pendingDesktopServerExposureMode === "network-accessible"
-                    ? "enable network access?"
+                    ? "enable network access, meow?"
                     : "disable network access?"}
                 </AlertDialogTitle>
                 <AlertDialogDescription>
                   {pendingDesktopServerExposureMode === "network-accessible"
-                    ? ":3 Code will restart to expose this environment over the network."
-                    : ":3 Code will restart and limit this environment back to this machine."}
+                    ? "mrrp, :3 Code will restart to expose this environment over the network."
+                    : "mrrp, :3 Code will restart and limit this environment back to this machine."}
                 </AlertDialogDescription>
               </AlertDialogHeader>
               <AlertDialogFooter>
@@ -3448,15 +3451,15 @@ export function ConnectionsSettings() {
                 <AlertDialogDescription>
                   {pendingWslChange?.kind === "disable"
                     ? pendingWslChange.wasWslOnly
-                      ? ":3 Code will restart on the Windows backend. threads and projects opened against WSL stay safe inside the distro and become available again when you re-enable WSL."
-                      : "the WSL backend will stop. threads and projects opened against WSL stay safe inside the distro, but they'll be unavailable in :3 Code until you re-enable WSL."
+                      ? ":3 Code will restart on the Windows backend, meow. threads and projects opened against WSL stay safe inside the distro and become available again when you re-enable WSL."
+                      : "mrrp, the WSL backend will stop. threads and projects opened against WSL stay safe inside the distro, but they'll be unavailable in :3 Code until you re-enable WSL."
                     : pendingWslChange?.kind === "distro"
-                      ? ":3 Code will restart the WSL backend on the new distro. sessions still running on the current distro will be interrupted."
+                      ? ":3 Code will restart the WSL backend on the new distro, nya~ sessions still running on the current distro will be interrupted."
                       : pendingWslChange?.kind === "enable"
-                        ? "run the WSL backend alongside the Windows one, or stop the Windows backend and use only WSL? you can change this later from settings."
+                        ? "run the WSL backend alongside the Windows one, or stop the Windows backend and use only WSL? you can change this later from settings, purr."
                         : pendingWslChange?.nextValue
-                          ? ":3 Code will restart and start only the WSL backend. your Windows-side projects won't be accessible until you turn this off again."
-                          : ":3 Code will restart and bring the Windows backend back up alongside WSL."}
+                          ? "mrrp, :3 Code will restart and start only the WSL backend. your Windows-side projects won't be accessible until you turn this off again."
+                          : ":3 Code will restart and bring the Windows backend back up alongside WSL, meow."}
                 </AlertDialogDescription>
               </AlertDialogHeader>
               <AlertDialogFooter>
@@ -3542,7 +3545,7 @@ export function ConnectionsSettings() {
               <AlertDialogHeader>
                 <AlertDialogTitle>disable Tailscale HTTPS?</AlertDialogTitle>
                 <AlertDialogDescription>
-                  :3 Code will restart the local backend without Tailscale Serve.
+                  :3 Code will restart the local backend without Tailscale Serve, mrrp.
                 </AlertDialogDescription>
               </AlertDialogHeader>
               <AlertDialogFooter>
@@ -3578,9 +3581,9 @@ export function ConnectionsSettings() {
           >
             <DialogPopup className="max-w-md">
               <DialogHeader>
-                <DialogTitle>set up Tailscale HTTPS?</DialogTitle>
+                <DialogTitle>set up Tailscale HTTPS, meow?</DialogTitle>
                 <DialogDescription>
-                  :3 Code will restart the local backend with Tailscale Serve enabled and ask
+                  mrrp, :3 Code will restart the local backend with Tailscale Serve enabled and ask
                   Tailscale to proxy HTTPS traffic to this backend.
                 </DialogDescription>
               </DialogHeader>
@@ -3648,7 +3651,7 @@ export function ConnectionsSettings() {
         <SettingsSection {...searchableSetting("connections-environment")}>
           <SettingsRow
             title="administrative access"
-            description="pairing links and client-session management require the access:write scope for this backend."
+            description="mrrp, pairing links and client-session management require the access:write scope for this backend."
           />
           <CloudLinkRow canManageRelay={canManageRelay} />
         </SettingsSection>
@@ -3661,7 +3664,7 @@ export function ConnectionsSettings() {
       {primarySettings}
       <SettingsSection
         {...searchableSetting("remote-environments")}
-        title="environments"
+        title="environments nya"
         headerAction={
           <div className="flex items-center gap-1">
             {savedServerUpdateTargets.length > 0 ? (
@@ -3702,8 +3705,10 @@ export function ConnectionsSettings() {
               </Tooltip>
               <DialogPopup className="max-h-[80dvh] sm:max-w-3xl">
                 <DialogHeader>
-                  <DialogTitle>add environment</DialogTitle>
-                  <DialogDescription>pair another environment to this client.</DialogDescription>
+                  <DialogTitle>add environment ^w^</DialogTitle>
+                  <DialogDescription>
+                    meow, pair another environment to this client.
+                  </DialogDescription>
                 </DialogHeader>
                 <DialogPanel>
                   <div className="space-y-4">
@@ -3711,7 +3716,7 @@ export function ConnectionsSettings() {
                       {renderConnectionModeCard({
                         mode: "remote",
                         title: "remote link",
-                        description: "enter a backend host and pairing code.",
+                        description: "enter a backend host and pairing code, nya~",
                         icon: <ChevronsLeftRightEllipsisIcon aria-hidden className="size-4" />,
                       })}
                       {desktopBridge
@@ -3719,7 +3724,7 @@ export function ConnectionsSettings() {
                             mode: "ssh",
                             title: "SSH",
                             description:
-                              "use local SSH config, agent, and tunnels for the backend.",
+                              "use local SSH config, agent, and tunnels for the backend, purr.",
                             icon: <TerminalIcon aria-hidden className="size-4" />,
                           })
                         : null}

@@ -195,10 +195,10 @@ export function LimitWindows({
 }
 
 const OUTCOME_TEXT: Record<ProviderConsumeResetCreditOutcome, string> = {
-  reset: "reset applied. your windows have cleared.",
-  nothingToReset: "nothing to reset right now",
-  noCredit: "no reset credit left",
-  alreadyRedeemed: "that credit was already redeemed.",
+  reset: "reset applied. your windows have cleared :3 purr",
+  nothingToReset: "nothing to reset right now, nya~",
+  noCredit: "no reset credit left, mrrp",
+  alreadyRedeemed: "that credit was already redeemed, mrow",
 };
 
 /** Everything a redeem needs: where to send it and what to say afterwards. */
@@ -224,7 +224,7 @@ export function useResetCredit(
     setStatus(
       "error" in result.cause && result.cause.error instanceof Error
         ? result.cause.error.message
-        : "could not use the reset credit 3:",
+        : "could not use the reset credit 3: mrrp",
     );
   };
 
@@ -250,10 +250,10 @@ export function ResetCreditDialog({
     <AlertDialog open={open} onOpenChange={onOpenChange}>
       <AlertDialogPopup>
         <AlertDialogHeader>
-          <AlertDialogTitle>use a reset credit?</AlertDialogTitle>
+          <AlertDialogTitle>use a reset credit? :3</AlertDialogTitle>
           <AlertDialogDescription>
             this redeems one credit on your account and clears the current rate-limit windows. it
-            cannot be undone.
+            cannot be undone, meow
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
@@ -274,7 +274,7 @@ export function resetCreditsSummary(
   const expiresIn = credits.nextExpiresAt
     ? formatDuration(Date.parse(credits.nextExpiresAt) - now)
     : null;
-  if (credits.availableCount === 0) return "no reset credits banked";
+  if (credits.availableCount === 0) return "no reset credits banked, mrrp";
   if (compact)
     return `${credits.availableCount} banked${expiresIn ? ` · expires in ${expiresIn}` : ""}`;
   return `${credits.availableCount} ${credits.availableCount === 1 ? "reset credit" : "reset credits"} banked${

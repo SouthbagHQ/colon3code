@@ -81,8 +81,8 @@ function CustomSnoozeDialog() {
             if (!snoozedUntil) {
               setError(
                 mode === "date"
-                  ? "choose a valid date and time in the future."
-                  : "enter a positive duration.",
+                  ? "choose a valid date and time in the future, mrrp"
+                  : "enter a positive duration, nya~",
               );
               return;
             }
@@ -91,7 +91,9 @@ function CustomSnoozeDialog() {
         >
           <DialogHeader>
             <DialogTitle>custom snooze</DialogTitle>
-            <DialogDescription>choose when snoozed threads return to your inbox.</DialogDescription>
+            <DialogDescription>
+              choose when snoozed threads return to your inbox uwu
+            </DialogDescription>
           </DialogHeader>
           <DialogPanel className="flex flex-col gap-4 text-base sm:text-sm">
             <Tabs.Root

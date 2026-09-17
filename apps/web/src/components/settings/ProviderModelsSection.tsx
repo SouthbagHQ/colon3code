@@ -226,11 +226,11 @@ export function ProviderModelsSection({
     if (driverKind === "antigravity") return;
     const normalized = normalizeCustomModelSlug(input);
     if (!normalized) {
-      setError("enter a model slug.");
+      setError("mrrp, enter a model slug.");
       return;
     }
     if (models.some((model) => !model.isCustom && model.slug === normalized)) {
-      setError("that model is already built in.");
+      setError("that model is already built in, meow.");
       return;
     }
     if (normalized.length > MAX_CUSTOM_MODEL_LENGTH) {
@@ -238,7 +238,7 @@ export function ProviderModelsSection({
       return;
     }
     if (customModels.some((entry) => entry.slug === normalized)) {
-      setError("that custom model is already saved.");
+      setError("that custom model is already saved, purr.");
       return;
     }
 
@@ -422,7 +422,7 @@ export function ProviderModelsSection({
 
   const pickerTooltip = (model: DisplayModel, isHidden: boolean) =>
     model.isCustom
-      ? "custom models are always shown in the picker"
+      ? "custom models are always shown in the picker, nya~"
       : isHidden
         ? "hidden from picker"
         : "shown in picker";
@@ -512,7 +512,7 @@ export function ProviderModelsSection({
           <Input
             value={filter}
             onChange={(event) => setFilter(event.target.value)}
-            placeholder="filter models"
+            placeholder="filter models, meow"
             size="sm"
             className="w-56 max-w-full"
             spellCheck={false}
@@ -559,7 +559,9 @@ export function ProviderModelsSection({
       >
         {visibleModels.length === 0 ? (
           <p className="px-2 py-2 text-xs text-muted-foreground">
-            {isFiltering ? "no models match" : "no models reported for this provider yet"}
+            {isFiltering
+              ? "no models match, mrow"
+              : "no models reported for this provider yet, nya~"}
           </p>
         ) : null}
         {visibleModels.map((model, index) => {

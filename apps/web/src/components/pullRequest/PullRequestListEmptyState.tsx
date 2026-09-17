@@ -103,9 +103,9 @@ export function PullRequestListEmptyState({
       <Empty className="py-16">
         <BranchMark joined={false} />
         <EmptyHeader>
-          <EmptyTitle>no projects in this workspace</EmptyTitle>
+          <EmptyTitle>no projects in this workspace, mrrp</EmptyTitle>
           <EmptyDescription>
-            add a project, and the pull requests from its repository appear here
+            add a project, and the pull requests from its repository appear here, nya~
           </EmptyDescription>
         </EmptyHeader>
         <EmptyContent>
@@ -139,7 +139,8 @@ export function PullRequestListEmptyState({
             nothing matches “{query.length > 48 ? `${query.slice(0, 48)}…` : query}”
           </EmptyTitle>
           <EmptyDescription>
-            the hosts were searched for it. try fewer words, or search by number, author or branch
+            the hosts were searched for it, mrow. try fewer words, or search by number, author or
+            branch
           </EmptyDescription>
         </EmptyHeader>
         <EmptyContent className="flex-row flex-wrap justify-center gap-2">
@@ -163,12 +164,12 @@ export function PullRequestListEmptyState({
       <BranchMark joined={false} />
       <EmptyHeader>
         <EmptyTitle>
-          {filtered ? "nothing under these filters" : "no pull requests yet :3"}
+          {filtered ? "nothing under these filters, mrrp" : "no pull requests yet :3 nya~"}
         </EmptyTitle>
         <EmptyDescription>
           {filtered
-            ? "widen the state, involvement or project filter to see more."
-            : "pull requests from every project in this workspace appear here."}
+            ? "widen the state, involvement or project filter to see more, meow"
+            : "pull requests from every project in this workspace appear here, purr"}
         </EmptyDescription>
       </EmptyHeader>
       <EmptyContent className="flex-row flex-wrap justify-center gap-2">

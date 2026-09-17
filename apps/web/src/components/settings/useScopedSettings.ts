@@ -58,7 +58,7 @@ function useRunScopedPlan() {
       if (plan.unavailableReason) {
         toastManager.add({
           type: "warning",
-          title: "setting not saved 3:",
+          title: "setting not saved 3: mrrp",
           description: plan.unavailableReason,
         });
         return;
@@ -70,9 +70,9 @@ function useRunScopedPlan() {
             type: "error",
             title:
               savedEnvironmentCount > 0
-                ? "setting saved on some environments 3:"
-                : "setting not saved 3:",
-            description: `could not update ${failedEnvironments.map((environment) => environment.label).join(", ")}.${savedEnvironmentCount > 0 ? " the other selected environments saved the change." : ""}`,
+                ? "setting saved on some environments 3: mrrp"
+                : "setting not saved 3: mrow",
+            description: `could not update ${failedEnvironments.map((environment) => environment.label).join(", ")}.${savedEnvironmentCount > 0 ? " the other selected environments saved the change, purr." : ""}`,
           });
         },
       );

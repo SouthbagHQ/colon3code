@@ -38,7 +38,7 @@ function reportScriptFailure(result: AtomCommandResult<unknown, unknown>) {
     const error = squashAtomCommandFailure(result);
     toastManager.add({
       type: "error",
-      title: "failed to save project actions 3:",
+      title: "failed to save project actions 3: mrrp",
       description: error instanceof Error ? error.message : "an error occurred.",
     });
   }
@@ -76,8 +76,8 @@ export function useProjectScriptSettings(
     keybinding?: string | null,
   ): Promise<AtomCommandResult<void, unknown>> {
     if (savingRef.current || targets.length === 0) {
-      const message = "no available machine, or another action change is saving";
-      toastManager.add({ type: "error", title: "actions not saved 3:", description: message });
+      const message = "no available machine, or another action change is saving, mrrp";
+      toastManager.add({ type: "error", title: "actions not saved 3: mrow", description: message });
       return AsyncResult.failure(Cause.fail(new Error(message)));
     }
     savingRef.current = true;

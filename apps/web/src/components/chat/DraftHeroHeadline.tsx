@@ -236,11 +236,11 @@ export function DraftHeroHeadline({
   return (
     <h1 className="mx-auto w-full max-w-5xl text-center font-normal text-2xl text-foreground tracking-tight sm:text-3xl">
       {hasResolvedProject ? (
-        <>what should we make in {projectSelector}? :3</>
+        <>what should we make in {projectSelector}? meow :3</>
       ) : canChooseProject ? (
-        <>{projectSelector} to start</>
+        <>{projectSelector} to start, nya~</>
       ) : (
-        <>add a project to start :3</>
+        <>add a project to start, meow :3</>
       )}
     </h1>
   );

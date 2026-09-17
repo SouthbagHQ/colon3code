@@ -220,7 +220,7 @@ export function ThemeSearchSection({
       try {
         installedCollection = getStoredCustomThemeCollection(extension.collectionId);
       } catch (cause) {
-        setError(cause instanceof Error ? cause.message : "installed themes could not be read.");
+        setError(cause instanceof Error ? cause.message : "installed themes could not be read 3:");
         return;
       }
       const updated = installedCollection.length > 0;
@@ -244,7 +244,7 @@ export function ThemeSearchSection({
         }
       } catch (cause) {
         if (!controller.signal.aborted) {
-          setError(cause instanceof Error ? cause.message : "that theme could not be added.");
+          setError(cause instanceof Error ? cause.message : "that theme could not be added 3:");
         }
       }
       if (requestRef.current === controller) {
@@ -259,10 +259,10 @@ export function ThemeSearchSection({
     <section className="space-y-3" aria-labelledby="theme-search-heading">
       <div>
         <h3 className="text-sm font-medium" id="theme-search-heading">
-          search community themes
+          search community themes ^w^
         </h3>
         <p className="mt-0.5 text-muted-foreground text-xs">
-          find open-source themes from Open VSX.
+          find open-source themes from Open VSX, meow.
         </p>
       </div>
       <InputGroup>
@@ -278,7 +278,7 @@ export function ThemeSearchSection({
             if (event.key === "Enter" && !isSearching && installingId === null)
               void runSearch(query.trim());
           }}
-          placeholder="search themes..."
+          placeholder="search themes, nya..."
           size="lg"
           type="search"
           value={query}
@@ -337,7 +337,7 @@ export function ThemeSearchSection({
         {isSearching
           ? "searching themes..."
           : results
-            ? `${results.length} supported ${results.length === 1 ? "theme" : "themes"} found.`
+            ? `${results.length} supported ${results.length === 1 ? "theme" : "themes"} found :3`
             : ""}
       </div>
 
@@ -436,8 +436,8 @@ export function ThemeSearchSection({
           <AlertDialogHeader>
             <AlertDialogTitle>update “{pendingUpdate?.name}”?</AlertDialogTitle>
             <AlertDialogDescription>
-              this replaces its installed variants, including any local edits. variants no longer in
-              the extension will be removed.
+              mrrp, this replaces its installed variants, including any local edits. variants no
+              longer in the extension will be removed.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>

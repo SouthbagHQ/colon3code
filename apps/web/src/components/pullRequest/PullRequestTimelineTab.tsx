@@ -208,7 +208,7 @@ function ConversationCard({
     });
     setSaving(false);
     if (result._tag === "Failure") {
-      toastManager.add({ type: "error", title: "could not save the comment 3:" });
+      toastManager.add({ type: "error", title: "could not save the comment 3: mrow" });
       return;
     }
     setEditing(false);
@@ -629,7 +629,7 @@ export function PullRequestTimelineTab({
         {events.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-16 text-center text-muted-foreground">
             <GitPullRequestIcon className="mb-2 size-5" />
-            <p className="text-xs">no activity yet</p>
+            <p className="text-xs">no activity yet :3 purr</p>
           </div>
         ) : null}
       </div>

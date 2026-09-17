@@ -117,7 +117,7 @@ export function ProjectDefaultsSettings({ category }: { category: ProjectSetting
         entry.driverKind !== sourceEntry?.driverKind ||
         !options?.some((option) => option.slug === model && !option.isUnavailable)
       ) {
-        return `this model is unavailable on ${environment?.label ?? "a selected environment"}. select that environment to choose its model separately.`;
+        return `this model is unavailable on ${environment?.label ?? "a selected environment"}. select that environment to choose its model separately, mrrp.`;
       }
     }
     return null;
@@ -126,7 +126,11 @@ export function ProjectDefaultsSettings({ category }: { category: ProjectSetting
   const setModel = (value: ModelSelection | null) => {
     const reason = value ? modelDisabledReason(value.instanceId, value.model) : null;
     if (reason) {
-      toastManager.add({ type: "error", title: "default model not saved 3:", description: reason });
+      toastManager.add({
+        type: "error",
+        title: "default model not saved 3: mrrp",
+        description: reason,
+      });
       return;
     }
     updateSettings({ defaultModelSelection: value });
@@ -159,8 +163,8 @@ export function ProjectDefaultsSettings({ category }: { category: ProjectSetting
             title="model"
             description={
               isProjectScope
-                ? "model for new threads in this project."
-                : "default model for new threads. projects can override it."
+                ? "meow, model for new threads in this project."
+                : "meow, default model for new threads. projects can override it."
             }
             status={
               unavailable || mixedModel || modelSource === "project"
@@ -230,8 +234,8 @@ export function ProjectDefaultsSettings({ category }: { category: ProjectSetting
             {...searchableSetting("default-permissions")}
             description={
               isProjectScope
-                ? "permissions for new threads in this project."
-                : "default permissions for new threads. projects can override them."
+                ? "permissions for new threads in this project, nya~"
+                : "default permissions for new threads. projects can override them, nya~"
             }
             resetAction={
               settings.defaultRuntimeMode !== DEFAULT_SERVER_SETTINGS.defaultRuntimeMode ? (
@@ -292,8 +296,8 @@ export function ProjectDefaultsSettings({ category }: { category: ProjectSetting
             title="workspace"
             description={
               isProjectScope
-                ? "where new threads in this project start. a t3.json preference applies when the project has no override."
-                : "where new threads start, unless overridden by the project or t3.json."
+                ? "where new threads in this project start, purr. a t3.json preference applies when the project has no override."
+                : "where new threads start, unless overridden by the project or t3.json, purr."
             }
             status={
               inheritedEnvModeLabel ? `repository default: ${inheritedEnvModeLabel}` : undefined
@@ -344,11 +348,11 @@ export function ProjectDefaultsSettings({ category }: { category: ProjectSetting
             settingKeys={["defaultAutoPull"]}
             mixed={mixedAutoPull}
             id="automatic-pull"
-            title="automatically pull"
+            title="automatically pull ^w^"
             description={
               isProjectScope
-                ? "keeps this project's default branch current when the checkout has no local changes or commits."
-                : "keeps the default branch current when the checkout has no local changes or commits. projects can override it."
+                ? "keeps this project's default branch current when the checkout has no local changes or commits, meow."
+                : "keeps the default branch current when the checkout has no local changes or commits. projects can override it, meow."
             }
             resetAction={
               settings.defaultAutoPull ? (
@@ -375,8 +379,8 @@ export function ProjectDefaultsSettings({ category }: { category: ProjectSetting
             {...searchableSetting("pull-request-merge-method")}
             description={
               isProjectScope
-                ? "pull requests in this project start with this method."
-                : "pull requests start with this method. last selected reuses whatever you chose most recently on this device."
+                ? "pull requests in this project start with this method, nya~"
+                : "pull requests start with this method. last selected reuses whatever you chose most recently on this device, nya~"
             }
             resetAction={
               settings.pullRequestMergeMethod !== null ? (
@@ -427,8 +431,8 @@ export function ProjectDefaultsSettings({ category }: { category: ProjectSetting
             title="agent browser access"
             description={
               isProjectScope
-                ? "allow agents in this project to use the shared browser. applies when the agent session next starts."
-                : "allow agents to use the shared browser. projects can override it."
+                ? "mrrp, allow agents in this project to use the shared browser. applies when the agent session next starts."
+                : "mrrp, allow agents to use the shared browser. projects can override it."
             }
             resetAction={
               settings.enableAgentBrowserAccess !==

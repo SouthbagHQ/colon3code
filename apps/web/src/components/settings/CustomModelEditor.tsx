@@ -338,7 +338,7 @@ export function CustomModelEditor({
         </div>
         {draft.descriptors.length === 0 ? (
           <p className="text-xs text-muted-foreground/70">
-            no custom options. the composer uses the provider's default options.
+            no custom options yet, nya~ the composer uses the provider's default options.
           </p>
         ) : null}
         {draft.descriptors.map(renderDescriptor)}

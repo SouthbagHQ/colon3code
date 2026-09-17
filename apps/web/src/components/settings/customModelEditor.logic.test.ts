@@ -241,7 +241,7 @@ describe("customModelEditor.logic", () => {
     });
 
     expect(validateDraft(draft({ descriptors: [select("", [{ id: "a" }])] }))).toBe(
-      "option 1 needs an id.",
+      "mrrp, option 1 needs an id.",
     );
     expect(
       validateDraft(
@@ -249,7 +249,7 @@ describe("customModelEditor.logic", () => {
       ),
     ).toBe('option 2: id "effort" is used twice.');
     expect(validateDraft(draft({ descriptors: [select("effort", [])] }))).toBe(
-      "option 1 needs at least one choice.",
+      "option 1 needs at least one choice, mrow.",
     );
     expect(
       validateDraft(draft({ descriptors: [select("effort", [{ id: "a" }, { id: "a" }])] })),

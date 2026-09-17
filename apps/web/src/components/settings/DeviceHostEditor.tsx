@@ -64,12 +64,12 @@ export function DeviceHostEditor({
         }
       >
         <DialogHeader>
-          <DialogTitle>{isNew ? "add device host" : "edit device host"}</DialogTitle>
+          <DialogTitle>{isNew ? "add device host ^w^" : "edit device host"}</DialogTitle>
           <DialogDescription>
             {targets.length === 1
               ? `connect from ${targets[0]?.label}.`
               : `connect from ${targets.length} selected environments.`}{" "}
-            hosts on the same machine are skipped.
+            hosts on the same machine are skipped, meow.
           </DialogDescription>
         </DialogHeader>
         <DialogPanel className="space-y-4">
@@ -133,7 +133,7 @@ export function DeviceHostEditor({
               </label>
             </div>
             <p className="mt-2 text-xs text-muted-foreground">
-              optional. resolved separately on each environment.
+              optional, nya~ resolved separately on each environment.
             </p>
           </details>
           <div className="rounded-lg border border-border/60">
@@ -144,8 +144,8 @@ export function DeviceHostEditor({
                   : results
                     ? failed
                       ? `${failed} of ${targets.length} failed`
-                      : "connection checks passed"
-                    : "check access before saving"}
+                      : "connection checks passed :3"
+                    : "check access before saving, meow"}
               </p>
               <Button
                 type="button"

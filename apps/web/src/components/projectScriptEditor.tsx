@@ -226,11 +226,11 @@ export function ProjectScriptEditorDialog({
     const trimmedName = name.trim();
     const trimmedCommand = command.trim();
     if (trimmedName.length === 0) {
-      setValidationError("name is required.");
+      setValidationError("name is required, mrrp");
       return;
     }
     if (trimmedCommand.length === 0) {
-      setValidationError("command is required.");
+      setValidationError("command is required, mrrp");
       return;
     }
 
@@ -304,7 +304,7 @@ export function ProjectScriptEditorDialog({
           <DialogHeader>
             <DialogTitle>{isEditing ? "edit action" : "add action"}</DialogTitle>
             <DialogDescription>
-              actions are project-scoped commands you can run from the top bar or keybindings.
+              actions are project-scoped commands you can run from the top bar or keybindings, nya~
             </DialogDescription>
           </DialogHeader>
           <DialogPanel>
@@ -372,7 +372,7 @@ export function ProjectScriptEditorDialog({
                   />
                   <p className="text-xs text-muted-foreground">
                     press a shortcut. use <code>Backspace</code> to clear. shortcuts are
-                    environment-wide. projects using the same action share its shortcut.
+                    environment-wide. projects using the same action share its shortcut, meow
                   </p>
                 </div>
                 <div className="space-y-1.5">
@@ -393,7 +393,7 @@ export function ProjectScriptEditorDialog({
                     onChange={(event) => setPreviewUrl(event.target.value)}
                   />
                   <p className="text-xs text-muted-foreground">
-                    open this URL in the in-app preview when this action runs.
+                    open this URL in the in-app preview when this action runs, purr
                   </p>
                 </div>
                 <label className="flex items-center justify-between gap-3 rounded-md border border-border/70 px-3 py-2 text-sm dark:border-transparent dark:bg-white/[0.035]">
@@ -457,7 +457,7 @@ export function ProjectScriptEditorDialog({
         <AlertDialogPopup>
           <AlertDialogHeader>
             <AlertDialogTitle>delete action "{name}"?</AlertDialogTitle>
-            <AlertDialogDescription>this action cannot be undone.</AlertDialogDescription>
+            <AlertDialogDescription>mrrp, this action cannot be undone.</AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogClose render={<Button variant="outline" />}>cancel</AlertDialogClose>

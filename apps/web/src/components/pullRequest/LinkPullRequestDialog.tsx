@@ -95,7 +95,9 @@ export function resolveLinkPullRequestInput(input: {
   const url = parseChangeRequestUrl(parsed);
   if (url !== null) {
     if (!input.hasProject({ ...url, url: parsed })) {
-      return { error: `no project in this environment can read ${url.host}/${url.repository}.` };
+      return {
+        error: `no project in this environment can read ${url.host}/${url.repository}, mrrp`,
+      };
     }
     return {
       link: { host: url.host, repository: url.repository, number: url.number, url: parsed },
@@ -180,7 +182,9 @@ function LinkPullRequestDialog({
     try {
       await linking.changeLink(threadRef, resolved.link.url, true);
     } catch (error) {
-      setSubmitError(error instanceof Error ? error.message : "could not link the pull request.");
+      setSubmitError(
+        error instanceof Error ? error.message : "could not link the pull request 3: mrow",
+      );
       return;
     } finally {
       setPending(false);
@@ -193,7 +197,7 @@ function LinkPullRequestDialog({
     : reference.trim().length === 0
       ? "paste a pull request URL or enter 123 / #123."
       : resolved === null
-        ? "use a pull request URL, 123, or #123."
+        ? "use a pull request URL, 123, or #123, nya~"
         : "error" in resolved
           ? resolved.error
           : null;
@@ -202,10 +206,10 @@ function LinkPullRequestDialog({
     <Dialog open={open} onOpenChange={(next) => (pending ? undefined : onOpenChange(next))}>
       <DialogPopup className="max-w-xl">
         <DialogHeader>
-          <DialogTitle>link pull request</DialogTitle>
+          <DialogTitle>link pull request :3</DialogTitle>
           <DialogDescription>
-            attach a pull request to this thread. A full URL can point at any repository on a host
-            this environment has a project for.
+            attach a pull request to this thread, meow. A full URL can point at any repository on a
+            host this environment has a project for.
           </DialogDescription>
         </DialogHeader>
         <DialogPanel className="space-y-3">

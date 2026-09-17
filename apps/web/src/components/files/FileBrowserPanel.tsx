@@ -187,13 +187,13 @@ export default function FileBrowserPanel({
           await writeTextToClipboard(mention);
           toastManager.add({
             type: "success",
-            title: "mention copied :3",
+            title: "mention copied :3 purr",
             description: relativePath,
           });
         } catch (error) {
           toastManager.add({
             type: "error",
-            title: "failed to copy mention 3:",
+            title: "failed to copy mention 3: mrrp",
             description: error instanceof Error ? error.message : "an error occurred.",
           });
         }
@@ -205,7 +205,7 @@ export default function FileBrowserPanel({
           toastManager.add({
             type: "error",
             title: "unable to add to chat 3:",
-            description: "open a chat for this project and try again.",
+            description: "open a chat for this project and try again, meow",
           });
           return;
         }
@@ -214,7 +214,7 @@ export default function FileBrowserPanel({
           toastManager.add({
             type: "error",
             title: "unable to add to chat 3:",
-            description: "the chat isn't ready to accept input right now.",
+            description: "the chat isn't ready to accept input right now, mrow",
           });
         }
       }
@@ -514,12 +514,12 @@ export default function FileBrowserPanel({
           onClick={handleRefresh}
           className="p-4 text-left text-xs leading-relaxed text-destructive"
         >
-          {error ?? pathSearch.error} click to retry.
+          {error ?? pathSearch.error} click to retry, mrrp
         </button>
       ) : null}
       {query.trim() && pathSearch.truncated && !pathSearch.isPending ? (
         <div className="px-3 py-1 text-xs text-muted-foreground">
-          more matches available. refine your search.
+          more matches available. refine your search, nya~
         </div>
       ) : null}
       {(isPending || pathSearch.isPending) && (

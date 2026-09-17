@@ -67,11 +67,11 @@ export function PullRequestLabelPicker({
       toastManager.add({
         type: "error",
         title: candidate.isApplied
-          ? `could not take ${candidate.name} off 3:`
+          ? `could not take ${candidate.name} off 3: mrrp`
           : `could not put ${candidate.name} on 3:`,
         description: readableFailure(
           squashAtomCommandFailure(result),
-          "the host refused it. check that you have triage access on this repository.",
+          "the host refused it, mrow. check that you have triage access on this repository.",
         ),
       });
       return;
@@ -83,7 +83,7 @@ export function PullRequestLabelPicker({
       icon={<TagIcon className="size-3.5" />}
       label="change labels"
       allowed={allowed}
-      disabledReason="changing labels needs triage access on this repository"
+      disabledReason="changing labels needs triage access on this repository, mrrp"
       open={open}
       onOpenChange={setOpen}
       query={query}
@@ -92,11 +92,11 @@ export function PullRequestLabelPicker({
       isPending={candidatesQuery.isPending && candidatesQuery.data === null}
       error={candidatesQuery.data === null ? candidatesQuery.error : null}
       candidates={candidates}
-      emptyLabel="this repository has no labels."
-      noMatchLabel="no label matches that."
-      errorLabel="the labels could not be read."
+      emptyLabel="this repository has no labels, nya~"
+      noMatchLabel="no label matches that, mrow"
+      errorLabel="the labels could not be read 3: mrrp"
       truncated={candidatesQuery.data?.truncated === true}
-      truncatedLabel="this repository has more labels than are listed here. apply the rest on the host."
+      truncatedLabel="this repository has more labels than are listed here. apply the rest on the host, meow"
       candidateKey={(candidate) => candidate.name}
       disabled={pending !== null}
       onSelect={(candidate) => void toggle(candidate)}

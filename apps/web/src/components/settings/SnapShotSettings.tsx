@@ -120,7 +120,7 @@ export function SnapShotSettings() {
       }
     } catch (error) {
       if (requestId === stateRequestIdRef.current)
-        setSetupError(captureSettingsError("couldn't check capture setup 3:", error));
+        setSetupError(captureSettingsError("couldn't check capture setup 3: mrrp", error));
     }
   }, [bridge]);
 
@@ -144,7 +144,7 @@ export function SnapShotSettings() {
         setSetupError(
           captureSettingsError(
             action === "retry-shortcut"
-              ? "couldn't open shortcut permissions 3:"
+              ? "couldn't open shortcut permissions 3: mrow"
               : "couldn't complete capture setup 3:",
             error,
           ),
@@ -202,7 +202,7 @@ export function SnapShotSettings() {
         await updateSettings(patch);
         return await refreshState();
       } catch (error) {
-        setSetupError(captureSettingsError("couldn't save capture settings 3:", error));
+        setSetupError(captureSettingsError("couldn't save capture settings 3: mrrp", error));
       }
     },
     [refreshState, updateSettings],
@@ -215,7 +215,7 @@ export function SnapShotSettings() {
           await bridge?.requestSnapShotPermissions(true);
         await save({ snapShotIncludeAccessibility: includeAccessibility });
       } catch (error) {
-        setSetupError(captureSettingsError("couldn't allow app text capture 3:", error));
+        setSetupError(captureSettingsError("couldn't allow app text capture 3: mrow", error));
       }
     },
     [bridge, save, settings.snapShotEnabled],
@@ -239,7 +239,7 @@ export function SnapShotSettings() {
           status: "checked",
           availability: {
             available: false,
-            message: error instanceof Error ? error.message : "could not check this shortcut.",
+            message: error instanceof Error ? error.message : "could not check this shortcut 3:",
           },
         });
       }
@@ -266,19 +266,19 @@ export function SnapShotSettings() {
   });
 
   const shortcutStatus = recording
-    ? "press your shortcut. Esc cancels."
+    ? "press your shortcut, meow. Esc cancels."
     : candidateConflict
       ? `:3 Code already uses this for "${commandLabel(candidateConflict)}".`
       : shortcutCheck.status === "checking"
         ? "checking shortcut…"
         : shortcutCheck.availability
           ? shortcutCheck.availability.available
-            ? "ready to save."
+            ? "ready to save :3"
             : shortcutCheck.availability.message
           : state?.mode === "portal" &&
               !state.shortcutLabel &&
               isModifierPairShortcut(displayShortcut)
-            ? "try a shortcut such as Ctrl+Shift+2."
+            ? "try a shortcut such as Ctrl+Shift+2, nya~"
             : snapShotShortcutStatus(state);
 
   const openSetup = async (requested: CaptureSetupStep | "resume" = "resume") => {
@@ -331,7 +331,7 @@ export function SnapShotSettings() {
           : await save({ snapShotEnabled: true });
       return nextState !== undefined && captureSetupAccessReady(nextState);
     } catch (error) {
-      setSetupError(captureSettingsError("couldn't verify capture access 3:", error));
+      setSetupError(captureSettingsError("couldn't verify capture access 3: mrrp", error));
       return false;
     } finally {
       setSetupBusy(false);
@@ -353,7 +353,7 @@ export function SnapShotSettings() {
       clearSnapShotSetupResume();
       setWizard(null);
     } catch (error) {
-      setSetupError(captureSettingsError("couldn't close capture setup 3:", error));
+      setSetupError(captureSettingsError("couldn't close capture setup 3: mrow", error));
     } finally {
       setSetupBusy(false);
     }
@@ -414,7 +414,7 @@ export function SnapShotSettings() {
             <>
               <SettingsRow
                 {...searchableSetting("snap-shot-accessibility")}
-                description="include text and controls when the app makes them available."
+                description="include text and controls when the app makes them available, purr."
                 status={snapShotAccessibilityUnavailableMessage(state)}
                 control={
                   <Switch
@@ -434,8 +434,8 @@ export function SnapShotSettings() {
                 {...searchableSetting("snap-shot-shortcut")}
                 description={
                   state?.linuxBackend === "picker"
-                    ? "choose a window to capture from any app."
-                    : "capture the window you're using without switching apps."
+                    ? "choose a window to capture from any app, meow."
+                    : "capture the window you're using without switching apps, nya~"
                 }
                 status={managedShortcut ? undefined : shortcutStatus}
                 control={
@@ -492,7 +492,7 @@ export function SnapShotSettings() {
               />
               <SettingsRow
                 {...searchableSetting("snap-shot-sound")}
-                description="choose the sound played when capture starts."
+                description="choose the sound played when capture starts ^w^"
                 control={
                   <Menu>
                     <MenuTrigger
@@ -564,7 +564,7 @@ export function SnapShotSettings() {
               />
               <SettingsRow
                 {...searchableSetting("snap-shot-flash")}
-                description="show a gentle cue on the captured window."
+                description="show a gentle cue on the captured window, purr."
                 status={feedbackUnavailable}
                 control={
                   <Switch
@@ -577,7 +577,7 @@ export function SnapShotSettings() {
               />
               <SettingsRow
                 {...searchableSetting("snap-shot-animations")}
-                description="animate captured windows into your draft."
+                description="animate captured windows into your draft, mrrp."
                 status={feedbackUnavailable}
                 control={
                   <Switch

@@ -128,15 +128,15 @@ export function ProjectSettingsPanel({
     return (
       <div className="flex flex-1 items-center justify-center p-8 text-sm text-muted-foreground">
         {groups.length === 0
-          ? "add a project from the sidebar to configure it here."
-          : "this project is no longer available."}
+          ? "add a project from the sidebar to configure it here, nya~"
+          : "this project is no longer available 3:"}
       </div>
     );
   }
   if (members.length === 0)
     return (
       <p className="p-8 text-sm text-muted-foreground">
-        this checkout is no longer available in the selected project and environment.
+        this checkout is no longer available in the selected project and environment, mrrp.
       </p>
     );
   const scopedGroup = {
@@ -195,7 +195,7 @@ function ProjectDetail({
     toastManager.add(
       stackedThreadToast({
         type: "error",
-        title: `${title} 3:`,
+        title: `${title} 3: mrrp`,
         description: error instanceof Error ? error.message : "an error occurred.",
       }),
     );
@@ -253,7 +253,7 @@ function ProjectDetail({
     async (nextTitle: string, wasEdited: boolean) => {
       const title = nextTitle.trim();
       if (!title) {
-        toastManager.add({ type: "warning", title: "project title cannot be empty 3:" });
+        toastManager.add({ type: "warning", title: "project title cannot be empty 3: mrow" });
         return;
       }
       if (
@@ -321,13 +321,13 @@ function ProjectDetail({
               : [`this removes ${members.length} grouped project entries.`]),
             ...(projectThreads.length > 0
               ? [
-                  "this permanently clears conversation history for those threads and any archived threads.",
+                  "this permanently clears conversation history for those threads and any archived threads, mrrp.",
                 ]
-              : ["this permanently clears any archived conversation history."]),
+              : ["this permanently clears any archived conversation history, mrrp."]),
             isWholeGroup && !hasOtherMembers
               ? "this removes only the project entries, not the files on disk."
               : "other entries in this grouped project are unaffected.",
-            "this action cannot be undone.",
+            "this action cannot be undone 3:",
           ].join("\n"),
           { variant: "destructive" },
         ),
@@ -409,7 +409,7 @@ function ProjectDetail({
         <SettingsSection id="project-overview" title="project" hideTitle>
           <SettingsRow
             title="name"
-            description="the shared name for this project group in the sidebar and thread lists."
+            description="the shared name for this project group in the sidebar and thread lists, meow."
             control={
               <Input
                 key={`${group.projectKey}:${group.displayName}`}
@@ -491,10 +491,10 @@ function ProjectDetail({
             }
             description={
               hasOtherMembers
-                ? "deletes the selected machine's checkout entries and their threads. other machines and files on disk are not touched."
+                ? "mrrp, deletes the selected machine's checkout entries and their threads. other machines and files on disk are not touched."
                 : group.memberProjects.length > 1
-                  ? `deletes all ${group.memberProjects.length} checkout entries and their threads on every machine. files on disk are not touched.`
-                  : "deletes the project entry and its threads. files on disk are not touched."
+                  ? `mrrp, deletes all ${group.memberProjects.length} checkout entries and their threads on every machine. files on disk are not touched.`
+                  : "mrrp, deletes the project entry and its threads. files on disk are not touched."
             }
             control={
               <Button

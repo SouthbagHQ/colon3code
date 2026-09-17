@@ -405,7 +405,7 @@ export function PullRequestSummaryTab({
   const openCheck = (url: string) => {
     void openLink(url).catch((error: unknown) => {
       console.error(error);
-      toastManager.add({ type: "error", title: "unable to open check details 3:" });
+      toastManager.add({ type: "error", title: "unable to open check details 3: mrow" });
     });
   };
 
@@ -434,7 +434,7 @@ export function PullRequestSummaryTab({
     const result = await update({ environmentId, input: { ...reference, body } });
     setBodySaving(false);
     if (result._tag === "Failure") {
-      toastManager.add({ type: "error", title: "could not save the description 3:" });
+      toastManager.add({ type: "error", title: "could not save the description 3: mrrp" });
       return;
     }
     setBodyScope(null);
@@ -611,7 +611,7 @@ export function PullRequestSummaryTab({
               environmentId={environmentId}
               threadRef={threadRef}
               label="pull request description"
-              placeholder="describe this pull request"
+              placeholder="describe this pull request, meow"
               saving={bodySaving}
               onSave={(body) => void saveBody(body)}
               onCancel={() => setBodyScope(null)}
@@ -643,7 +643,7 @@ export function PullRequestSummaryTab({
 
       <Section key={`checks:${detail.url}`} title="checks" defaultOpen={false}>
         {detail.checks.length === 0 ? (
-          <p className="text-xs text-muted-foreground">no checks reported</p>
+          <p className="text-xs text-muted-foreground">no checks reported, mrrp</p>
         ) : (
           detail.checks.map((check, index) => {
             const finding = { kind: "check", check } as const;
@@ -724,7 +724,7 @@ export function PullRequestSummaryTab({
               </p>
             ) : null}
             {detail.comments.length === 0 ? (
-              <p className="py-2 text-xs text-muted-foreground">no comments yet</p>
+              <p className="py-2 text-xs text-muted-foreground">no comments yet :3 nya~</p>
             ) : (
               <div className="space-y-3">
                 {commentOrder === "oldest" ? showOldestCommentsButton : null}

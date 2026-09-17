@@ -129,7 +129,7 @@ describe("model price writes", () => {
     expect(write).toHaveBeenCalledTimes(1);
     expect(onResult).toHaveBeenCalledWith("lost", {
       status: "failed",
-      error: "could not save. try again.",
+      error: "could not save 3: try again, mrrp",
     });
     expect(onResult).toHaveBeenCalledWith("denied", {
       status: "failed",

@@ -94,10 +94,10 @@ function DraftStartError({ onRetry }: { readonly onRetry: () => void }) {
       <Empty className="flex-1">
         <EmptyHeader className="max-w-md">
           <EmptyTitle className="text-foreground text-xl">
-            couldn’t start a new thread 3:
+            couldn’t start a new thread 3: mrrp
           </EmptyTitle>
           <EmptyDescription className="mt-2 text-sm text-muted-foreground/78">
-            the project is still available. try opening the draft again
+            the project is still available, purr. try opening the draft again
           </EmptyDescription>
           <div className="mt-5 flex justify-center">
             <Button size="sm" onClick={onRetry}>
@@ -119,10 +119,10 @@ function HostedStaticOnboardingState() {
   const cloudEnabled = hasCloudPublicConfig();
   const localEnvironmentOff = isLocalEnvironmentDisabled();
   const description = localEnvironmentOff
-    ? "the local environment is turned off. connect a remote environment, or turn the local environment back on in connections."
+    ? "the local environment is turned off, mrrp. connect a remote environment, or turn the local environment back on in connections."
     : cloudEnabled
       ? "enable T3 Connect on that machine, then open connections here to sign in with the same account. you can also add the machine using a pairing link."
-      : "open connections and add that machine using its pairing link. this app must be able to reach it.";
+      : "open connections and add that machine using its pairing link. this app must be able to reach it, nya~";
 
   return (
     <SidebarInset className="h-dvh min-h-0 overflow-hidden overscroll-y-none bg-background text-foreground">
@@ -142,11 +142,11 @@ function HostedStaticOnboardingState() {
                 <LinkIcon className="size-5" />
               </div>
               <EmptyTitle className="text-foreground text-xl">
-                connect to a computer running :3 Code
+                meow, connect to a computer running :3 Code
               </EmptyTitle>
               <EmptyDescription className="mt-2 text-sm leading-relaxed text-muted-foreground/78">
                 this app connects to :3 Code running on your computer or a server. start the :3 Code
-                desktop app or command-line server on that machine and keep it running.
+                desktop app or command-line server on that machine and keep it running, purr.
               </EmptyDescription>
               <EmptyDescription className="mt-2 text-sm leading-relaxed text-muted-foreground/78">
                 {description}

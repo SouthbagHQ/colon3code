@@ -106,7 +106,7 @@ export const ChangedFilesCard = memo(function ChangedFilesCard(props: {
               <FileDiffIcon className="size-3" />
               <span className="hidden @[24rem]/changed-files:inline">Open diff</span>
             </TooltipTrigger>
-            <TooltipPopup side="top">open the full diff</TooltipPopup>
+            <TooltipPopup side="top">open the full diff :3</TooltipPopup>
           </Tooltip>
         </div>
       </div>

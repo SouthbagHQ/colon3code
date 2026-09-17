@@ -23,10 +23,10 @@ export function NoActiveThreadState() {
           <div className="w-full max-w-lg px-8 py-12">
             <EmptyHeader className="max-w-none">
               <EmptyTitle className="text-foreground text-xl">
-                pick a thread to continue :3
+                meow, pick a thread to continue :3
               </EmptyTitle>
               <EmptyDescription className="mt-2 text-sm text-muted-foreground/78">
-                select an existing thread or create a new one to get started
+                select an existing thread or create a new one to get started, purr
               </EmptyDescription>
             </EmptyHeader>
           </div>

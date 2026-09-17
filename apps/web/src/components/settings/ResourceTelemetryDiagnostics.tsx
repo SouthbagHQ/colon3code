@@ -323,9 +323,9 @@ function HealthSource({ label, health }: { label: string; health: ResourceTeleme
         <div className="text-[13px] font-medium text-foreground">{label}</div>
         <div className="mt-1 text-[11px] leading-relaxed text-muted-foreground/65">
           {expectedInBrowser
-            ? "available when this page runs inside the desktop app."
+            ? "available when this page runs inside the desktop app, nya~"
             : Option.match(health.lastError, {
-                onNone: () => "no reported errors",
+                onNone: () => "no reported errors :3",
                 onSome: (error) => error,
               })}
         </div>
@@ -623,7 +623,7 @@ function ProcessTable({
           {visible.length === 0 ? (
             <tr>
               <td colSpan={11} className="px-4 py-5 text-xs text-muted-foreground sm:px-5">
-                waiting for the native process monitor.
+                waiting for the native process monitor, purr.
               </td>
             </tr>
           ) : null}
@@ -722,7 +722,7 @@ function HistoryProcessTable({
           {processes.length === 0 ? (
             <tr>
               <td colSpan={9} className="px-4 py-5 text-xs text-muted-foreground sm:px-5">
-                no retained process samples in this window.
+                no retained process samples in this window, mrow.
               </td>
             </tr>
           ) : null}
@@ -884,14 +884,14 @@ export function ResourceTelemetryDiagnostics({
         let confirmed = false;
         try {
           confirmed = await ensureLocalApi().dialogs.confirm(
-            `send SIGKILL to process ${process.identity.pid}? this cannot be handled by the process.`,
+            `mrrp, send SIGKILL to process ${process.identity.pid}? this cannot be handled by the process.`,
             { variant: "destructive" },
           );
         } catch (error) {
           clearSignaling();
           toastManager.add({
             type: "error",
-            title: "could not confirm signal 3:",
+            title: "could not confirm signal 3: mrrp",
             description: error instanceof Error ? error.message : `failed to send ${signal}.`,
           });
           return;
@@ -948,7 +948,7 @@ export function ResourceTelemetryDiagnostics({
       .catch((error: unknown) => {
         toastManager.add({
           type: "error",
-          title: "could not restart resource monitor 3:",
+          title: "could not restart resource monitor 3: mrow",
           description:
             error instanceof Error ? error.message : "the resource monitor retry failed.",
         });
@@ -974,7 +974,7 @@ export function ResourceTelemetryDiagnostics({
   return (
     <>
       <SettingsSection
-        title="resource monitor"
+        title="resource monitor ^w^"
         icon={<ActivityIcon className="size-4 text-muted-foreground" />}
         headerAction={
           <div className="flex items-center gap-2">
@@ -1008,8 +1008,8 @@ export function ResourceTelemetryDiagnostics({
                 T3 system footprint
               </div>
               <p className="mt-1 max-w-xl text-xs leading-relaxed text-muted-foreground">
-                live native counters for the server, providers, terminals, desktop processes, and
-                the monitor itself.
+                meow, live native counters for the server, providers, terminals, desktop processes,
+                and the monitor itself.
               </p>
             </div>
             <div className="flex items-center gap-2 text-[10px] text-muted-foreground/65">
@@ -1169,11 +1169,11 @@ export function ResourceTelemetryDiagnostics({
             ) : (
               <div className="rounded-xl border border-dashed border-border/70 bg-muted/20 px-4 py-5">
                 <div className="text-[13px] font-medium text-foreground">
-                  desktop host signals not connected
+                  desktop host signals not connected, mrrp
                 </div>
                 <p className="mt-1.5 max-w-sm text-[11px] leading-relaxed text-muted-foreground/70">
                   power, idle, lock, and thermal state are supplied by the desktop host. process
-                  telemetry remains fully active in this browser session.
+                  telemetry remains fully active in this browser session, nya~
                 </p>
               </div>
             )}
@@ -1221,7 +1221,7 @@ export function ResourceTelemetryDiagnostics({
               </>
             ) : (
               <div className="py-4 text-xs text-muted-foreground">
-                waiting for collector health.
+                waiting for collector health, purr.
               </div>
             )}
           </div>
@@ -1259,7 +1259,7 @@ export function ResourceTelemetryDiagnostics({
       </SettingsSection>
 
       <SettingsSection
-        title="live process tree"
+        title="live process tree, meow"
         icon={<CpuIcon className="size-4 text-muted-foreground" />}
         headerAction={
           snapshot ? (
@@ -1287,9 +1287,9 @@ export function ResourceTelemetryDiagnostics({
       >
         <div className="overflow-hidden rounded-2xl border border-border/70 bg-card shadow-[0_1px_1px_rgb(0_0_0/0.03)]">
           <div className="bg-muted/15 px-4 py-3 text-[11px] leading-relaxed text-muted-foreground sm:px-5">
-            native counters identify which process is reading or writing. these application-level
-            counters identify known T3 operations so process spikes can be correlated with specific
-            persistence and logging paths.
+            mrrp, native counters identify which process is reading or writing. these
+            application-level counters identify known T3 operations so process spikes can be
+            correlated with specific persistence and logging paths uwu
           </div>
           <AttributionTable entries={snapshot?.attribution.entries ?? []} />
         </div>

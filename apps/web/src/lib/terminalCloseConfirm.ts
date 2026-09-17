@@ -24,11 +24,11 @@ export async function confirmTerminalClose(
       labels.length === 1
         ? [
             `close terminal "${labels[0]}"?`,
-            "this stops the running process and clears its history.",
+            "this stops the running process and clears its history, mrrp.",
           ].join("\n")
         : [
             `close ${labels.length} terminals?`,
-            `this stops their running processes and clears their histories: ${labels
+            `this stops their running processes and clears their histories, mrow: ${labels
               .map((label) => `"${label}"`)
               .join(", ")}.`,
           ].join("\n"),

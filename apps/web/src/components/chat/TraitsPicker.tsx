@@ -401,8 +401,8 @@ export const TraitsMenuContent = memo(function TraitsMenuContentImpl({
               </div>
               {ultrathinkInBodyText && descriptor.id === primarySelectDescriptor?.id ? (
                 <div className="px-2 pb-1.5 text-muted-foreground/80 text-xs">
-                  Your prompt contains &quot;ultrathink&quot; in the text. Remove it to change this
-                  option.
+                  your prompt contains &quot;ultrathink&quot; in the text. remove it to change this
+                  option, mrrp.
                 </div>
               ) : null}
               <MenuRadioGroup

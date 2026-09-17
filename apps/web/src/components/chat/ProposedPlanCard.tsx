@@ -59,8 +59,8 @@ export const ProposedPlanCard = memo(function ProposedPlanCard({
       toastManager.add(
         stackedThreadToast({
           type: "error",
-          title: "could not copy plan 3:",
-          description: error instanceof Error ? error.message : "An error occurred while copying.",
+          title: "could not copy plan, mrow 3:",
+          description: error instanceof Error ? error.message : "an error occurred while copying.",
         }),
       );
     },
@@ -89,7 +89,7 @@ export const ProposedPlanCard = memo(function ProposedPlanCard({
       toastManager.add(
         stackedThreadToast({
           type: "error",
-          title: "workspace path is unavailable 3:",
+          title: "workspace path is unavailable, mrrp 3:",
           description: "this thread does not have a workspace path to save into.",
         }),
       );
@@ -127,7 +127,7 @@ export const ProposedPlanCard = memo(function ProposedPlanCard({
         setIsSaveDialogOpen(false);
         toastManager.add({
           type: "success",
-          title: "plan saved to workspace :3",
+          title: "plan saved to workspace, purr :3",
           description: result.value.relativePath,
         });
         return;
@@ -138,7 +138,7 @@ export const ProposedPlanCard = memo(function ProposedPlanCard({
           stackedThreadToast({
             type: "error",
             title: "could not save plan 3:",
-            description: error instanceof Error ? error.message : "An error occurred while saving.",
+            description: error instanceof Error ? error.message : "an error occurred while saving.",
           }),
         );
       }
@@ -162,7 +162,7 @@ export const ProposedPlanCard = memo(function ProposedPlanCard({
           </MenuTrigger>
           <MenuPopup align="end">
             <MenuItem onClick={handleCopyPlan}>
-              {isCopied ? "copied!" : "copy to clipboard"}
+              {isCopied ? "copied! :3" : "copy to clipboard"}
             </MenuItem>
             <MenuItem onClick={handleDownload}>download as markdown</MenuItem>
             <MenuItem onClick={openSaveDialog} disabled={!workspaceRoot || isSavingToWorkspace}>
@@ -218,9 +218,9 @@ export const ProposedPlanCard = memo(function ProposedPlanCard({
       >
         <DialogPopup className="max-w-xl">
           <DialogHeader>
-            <DialogTitle>save plan to workspace</DialogTitle>
+            <DialogTitle>save plan to workspace :3</DialogTitle>
             <DialogDescription>
-              enter a path relative to <code>{workspaceRoot ?? "the workspace"}</code>.
+              enter a path relative to <code>{workspaceRoot ?? "the workspace"}</code>, nya~
             </DialogDescription>
           </DialogHeader>
           <DialogPanel className="space-y-3">

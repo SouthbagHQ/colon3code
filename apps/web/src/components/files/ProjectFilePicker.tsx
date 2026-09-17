@@ -47,7 +47,7 @@ function getEmptyStateMessage(query: string, error: string | null, isPending: bo
   if (error) return error;
   const isSearching = query.trim().length > 0;
   if (isPending) return isSearching ? "searching workspace files…" : "indexing workspace files…";
-  return isSearching ? "no matching files" : "no files found";
+  return isSearching ? "no matching files, mrrp" : "no files found, mrow";
 }
 
 function EmptyProjectFilePicker() {
@@ -62,7 +62,7 @@ function EmptyProjectFilePicker() {
       value=""
     >
       <div className="py-10 text-center text-sm text-muted-foreground">
-        open a project to search its files.
+        open a project to search its files, meow
       </div>
     </CommandPaletteContent>
   );

@@ -47,7 +47,7 @@ export function UsageProviderSettings({
         }
       >
         {entries.length === 0 ? (
-          <SettingsRow title="no usage providers configured" />
+          <SettingsRow title="no usage providers configured yet, nya~" />
         ) : (
           entries.map(([id, source]) => {
             const label = source.label?.trim() || source.url;
@@ -103,11 +103,11 @@ function RemoveUsageProviderButton({
       <AlertDialog open={open} onOpenChange={setOpen}>
         <AlertDialogPopup>
           <AlertDialogHeader>
-            <AlertDialogTitle>remove {label}?</AlertDialogTitle>
+            <AlertDialogTitle>remove {label}? mrrp</AlertDialogTitle>
             <AlertDialogDescription>
-              the hub's management key is deleted from this server. its accounts leave the limits
-              view; the hub itself is untouched. add it again with the URL and key to bring them
-              back.
+              mrow, the hub's management key is deleted from this server. its accounts leave the
+              limits view; the hub itself is untouched. add it again with the URL and key to bring
+              them back.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>

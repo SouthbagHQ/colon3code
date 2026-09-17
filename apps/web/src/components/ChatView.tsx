@@ -1418,7 +1418,7 @@ type LocalThreadErrorEntry = {
 };
 
 function chatActionErrorMessage(error: unknown): string {
-  return error instanceof Error ? error.message : "an error occurred.";
+  return error instanceof Error ? error.message : "an error occurred, mrrp";
 }
 
 const ENVIRONMENT_UNAVAILABLE_SEND_TOAST_TRAIL_SIZE = 3;
@@ -1644,9 +1644,9 @@ export default function ChatView(props: ChatViewProps) {
       if (!inserted) {
         toastManager.add({
           type: "warning",
-          title: "the composer is not ready 3:",
+          title: "the composer is not ready 3: mrrp",
           description:
-            "try citing the selection after the connection or pending input is resolved.",
+            "try citing the selection after the connection or pending input is resolved, nya~",
         });
       }
       return inserted;
@@ -2179,8 +2179,8 @@ export default function ChatView(props: ChatViewProps) {
       id: `project-clone:${projectId}`,
       variant: cancelled ? "warning" : "error",
       icon: <DownloadIcon />,
-      title: cancelled ? `cancelled cloning ${name}` : `failed to clone ${name} 3:`,
-      description: cancelled ? "retry to bring in the repository." : activeProjectClone.error,
+      title: cancelled ? `cancelled cloning ${name}, mrrp` : `failed to clone ${name} 3:`,
+      description: cancelled ? "retry to bring in the repository, nya~" : activeProjectClone.error,
       actions: (
         <>
           <Button
@@ -2346,7 +2346,7 @@ export default function ChatView(props: ChatViewProps) {
         toastManager.add(
           stackedThreadToast({
             type: "error",
-            title: "could not reconnect environment 3:",
+            title: "could not reconnect environment 3: mrrp",
             description: error instanceof Error ? error.message : "failed to reconnect.",
           }),
         );
@@ -2374,7 +2374,7 @@ export default function ChatView(props: ChatViewProps) {
           toastManager.add(
             stackedThreadToast({
               type: "error",
-              title: "could not disconnect server 3:",
+              title: "could not disconnect server 3: mrow",
               description: error instanceof Error ? error.message : "failed to disconnect.",
             }),
           );
@@ -2631,7 +2631,7 @@ export default function ChatView(props: ChatViewProps) {
           size="xs"
           variant="ghost"
           disabled={disconnectingEnvironment}
-          title="hide this server's threads. switch it on again in connections."
+          title="hide this server's threads. switch it on again in connections, nya~"
           onClick={() =>
             void handleDisconnectActiveEnvironment(activeEnvironmentUnavailableState.environmentId)
           }
@@ -3126,7 +3126,10 @@ export default function ChatView(props: ChatViewProps) {
       return true;
     }
     setUsageLimitsPanel(null);
-    toastManager.add({ type: "info", title: "usage limits are unavailable for this provider" });
+    toastManager.add({
+      type: "info",
+      title: "usage limits are unavailable for this provider, mrrp",
+    });
     return false;
   }, [
     activeProviderInstanceId,
@@ -3281,7 +3284,7 @@ export default function ChatView(props: ChatViewProps) {
     async (attachment: ChatFileAttachment) => {
       const connection = readPreparedConnection(environmentId);
       if (!connection) {
-        toastManager.add({ type: "error", title: "the environment is not connected 3:" });
+        toastManager.add({ type: "error", title: "the environment is not connected 3: mrrp" });
         return;
       }
 
@@ -3300,7 +3303,8 @@ export default function ChatView(props: ChatViewProps) {
         toastManager.add({
           type: "error",
           title: "could not download " + attachment.name + " 3:",
-          description: error instanceof Error ? error.message : "the attachment is unavailable.",
+          description:
+            error instanceof Error ? error.message : "the attachment is unavailable, mrrp",
         });
       }
     },
@@ -3816,7 +3820,7 @@ export default function ChatView(props: ChatViewProps) {
         id: "load-balancing-attachments",
         title: "keep attachments on this machine 3:",
         description:
-          "remove attachments before choosing automatic routing, then attach them on the selected machine.",
+          "remove attachments before choosing automatic routing, then attach them on the selected machine, nya~",
       });
       return;
     }
@@ -3961,8 +3965,8 @@ export default function ChatView(props: ChatViewProps) {
       if (prompt !== null && !composer.insertTextAtEnd(prompt, { ensureLeadingBoundary: true })) {
         toastManager.add({
           type: "error",
-          title: "unable to add to chat 3:",
-          description: "the composer is busy; try again once it is ready.",
+          title: "unable to add to chat 3: mrrp",
+          description: "the composer is busy, mrrp. try again once it is ready.",
         });
         return;
       }
@@ -4405,7 +4409,7 @@ export default function ChatView(props: ChatViewProps) {
       if (result._tag === "Success") {
         toastManager.add({
           type: "success",
-          title: `deleted action "${deletedName ?? "unknown"}" :3`,
+          title: `deleted action "${deletedName ?? "unknown"}" :3 purr`,
         });
       } else if (!isAtomCommandInterrupted(result)) {
         const error = squashAtomCommandFailure(result);
@@ -4488,7 +4492,7 @@ export default function ChatView(props: ChatViewProps) {
           toastManager.add(
             stackedThreadToast({
               type: "error",
-              title: "unable to open browser 3:",
+              title: "unable to open browser 3: mrrp",
               description: error.message,
             }),
           );
@@ -5104,7 +5108,7 @@ export default function ChatView(props: ChatViewProps) {
       () => {
         toastManager.add({
           type: "success",
-          title: "path copied :3",
+          title: "path copied :3 purr",
           description: relativePath,
         });
       },
@@ -6027,7 +6031,7 @@ export default function ChatView(props: ChatViewProps) {
         toastManager.add(
           stackedThreadToast({
             type: "error",
-            title: "failed to wake thread 3:",
+            title: "failed to wake thread 3: mrow",
             description: error instanceof Error ? error.message : "an error occurred.",
           }),
         );
@@ -6088,7 +6092,7 @@ export default function ChatView(props: ChatViewProps) {
         toastManager.add(
           stackedThreadToast({
             type: "error",
-            title: "failed to switch checkout 3:",
+            title: "failed to switch checkout 3: mrrp",
             description: chatActionErrorMessage(squashAtomCommandFailure(checkoutResult)),
           }),
         );
@@ -6108,7 +6112,7 @@ export default function ChatView(props: ChatViewProps) {
           toastManager.add(
             stackedThreadToast({
               type: "error",
-              title: "checkout switched, but the thread could not be updated 3:",
+              title: "checkout switched, but the thread could not be updated 3: mrrp",
               description: chatActionErrorMessage(squashAtomCommandFailure(updateResult)),
             }),
           );
@@ -6222,8 +6226,8 @@ export default function ChatView(props: ChatViewProps) {
       id: `thread-woke:${activeThread?.id ?? "unknown"}`,
       variant: "info",
       icon: <AlarmClockIcon />,
-      title: "thread woke from snooze",
-      description: "send a message to continue",
+      title: "thread woke from snooze, mrow",
+      description: "send a message to continue, nya~",
       dismissLabel: "dismiss woke notification",
       onDismiss: acknowledgeActiveThreadWoke,
     };
@@ -6238,7 +6242,7 @@ export default function ChatView(props: ChatViewProps) {
       variant: "info",
       icon: isSnoozed ? <AlarmClockIcon /> : <CheckCircle2Icon />,
       title: `this thread is ${isSnoozed ? "snoozed" : "settled"}`,
-      description: `send a message to ${isSnoozed ? "wake" : "unsettle"}`,
+      description: `send a message to ${isSnoozed ? "wake" : "unsettle"}, purr`,
       actions: (
         <Button
           size="xs"
@@ -6909,14 +6913,14 @@ export default function ChatView(props: ChatViewProps) {
       if (!supportsConversationRollback) {
         setThreadError(
           activeThread.id,
-          "this provider does not support reverting conversation history. start a new thread instead.",
+          "mrrp, this provider does not support reverting conversation history. start a new thread instead.",
         );
         return;
       }
       if (activeEnvironmentUnavailable && activeEnvironmentUnavailableLabel) {
         setThreadError(
           activeThread.id,
-          `reconnect ${activeEnvironmentUnavailableLabel} before reverting checkpoints.`,
+          `reconnect ${activeEnvironmentUnavailableLabel} before reverting checkpoints, nya~`,
         );
         return;
       }
@@ -7151,7 +7155,7 @@ export default function ChatView(props: ChatViewProps) {
         stackedThreadToast({
           type: "info",
           title: "some attachments stayed queued",
-          description: `a message holds at most ${PROVIDER_SEND_TURN_MAX_ATTACHMENTS} attachments. use send now on the queued row when you want the rest to go.`,
+          description: `a message holds at most ${PROVIDER_SEND_TURN_MAX_ATTACHMENTS} attachments. use send now on the queued row when you want the rest to go, nya~`,
         }),
       );
     }
@@ -7212,7 +7216,8 @@ export default function ChatView(props: ChatViewProps) {
         stackedThreadToast({
           type: "info",
           title: "annotation attached to draft",
-          description: "sending is unavailable right now. finish the current action, then send.",
+          description:
+            "sending is unavailable right now, mrrp. finish the current action, then send.",
         }),
       );
     };
@@ -7236,8 +7241,8 @@ export default function ChatView(props: ChatViewProps) {
           ? "checking machine resources 3:"
           : "choose a machine to continue 3:",
         description: loadBalancing.pending
-          ? "resource checks are still running. you can choose a machine in the composer."
-          : "no eligible machine has available resources. choose a machine in the composer to override.",
+          ? "resource checks are still running, mrrp. you can choose a machine in the composer."
+          : "no eligible machine has available resources, mrrp. choose a machine in the composer to override.",
       });
       return;
     }
@@ -7248,8 +7253,8 @@ export default function ChatView(props: ChatViewProps) {
       toastManager.add({
         ...stackedThreadToast({
           type: "warning",
-          title: "not connected: message not sent 3:",
-          description: "reconnecting to the environment. try again once it is connected.",
+          title: "not connected: message not sent 3: mrrp",
+          description: "reconnecting to the environment. try again once it is connected, nya~",
         }),
         id: `chat-send-environment-unavailable:${toastSlot}`,
       });
@@ -7353,7 +7358,7 @@ export default function ChatView(props: ChatViewProps) {
           stackedThreadToast({
             type: "warning",
             title: "start a Codex thread first 3:",
-            description: "send a message before you submit feedback.",
+            description: "send a message before you submit feedback, nya~",
           }),
         );
         return;
@@ -7504,7 +7509,7 @@ export default function ChatView(props: ChatViewProps) {
         stackedThreadToast({
           type: "warning",
           title: "choose a project first 3:",
-          description: "this draft no longer points to an available project.",
+          description: "this draft no longer points to an available project, mrrp",
         }),
       );
       return;
@@ -8009,7 +8014,7 @@ export default function ChatView(props: ChatViewProps) {
           toastManager.add(
             stackedThreadToast({
               type: "warning",
-              title: "could not open a fresh composer 3:",
+              title: "could not open a fresh composer 3: mrrp",
               description: error instanceof Error ? error.message : undefined,
             }),
           );
@@ -8038,7 +8043,7 @@ export default function ChatView(props: ChatViewProps) {
             toastManager.add(
               stackedThreadToast({
                 type: "success",
-                title: "started in background :3",
+                title: "started in background :3 purr",
                 timeout: 5_000,
                 actionProps: {
                   children: "open",
@@ -8152,7 +8157,7 @@ export default function ChatView(props: ChatViewProps) {
           toastManager.add(
             stackedThreadToast({
               type: "error",
-              title: "background task failed 3:",
+              title: "background task failed 3: mrow",
               description: error instanceof Error ? error.message : "failed to send message.",
               actionProps: {
                 children: "open draft",
@@ -8295,7 +8300,7 @@ export default function ChatView(props: ChatViewProps) {
         if (!uploaded) {
           setThreadError(
             activeThreadId,
-            "wait for attachments to finish uploading, or remove failed uploads.",
+            "wait for attachments to finish uploading, or remove failed uploads, nya~",
           );
           return;
         }
@@ -8788,11 +8793,11 @@ export default function ChatView(props: ChatViewProps) {
         toastManager.add(
           stackedThreadToast({
             type: "error",
-            title: "could not start implementation thread 3:",
+            title: "could not start implementation thread 3: mrrp",
             description:
               error instanceof Error
                 ? error.message
-                : "an error occurred while creating the new thread.",
+                : "an error occurred while creating the new thread, mrrp",
           }),
         );
       }
@@ -9189,7 +9194,7 @@ export default function ChatView(props: ChatViewProps) {
     ) : renderedRightPanelSurface?.kind === "pull-request" && !supportsPullRequests ? (
       <PullRequestsUnavailableState
         title="pull requests unavailable 3:"
-        error="update this environment's :3 Code server to browse pull requests."
+        error="update this environment's :3 Code server to browse pull requests, nya~"
       />
     ) : renderedRightPanelSurface?.kind === "pull-request" ? (
       // No onClose: the surface tab's own X owns closing here, and a second X in the header
@@ -9806,8 +9811,8 @@ export default function ChatView(props: ChatViewProps) {
                     ?
                   </AlertDialogTitle>
                   <AlertDialogDescription>
-                    you have uncommitted changes. they'll carry over to the other branch, or block
-                    the switch if they conflict.
+                    mrrp, you have uncommitted changes. they'll carry over to the other branch, or
+                    block the switch if they conflict.
                   </AlertDialogDescription>
                 </AlertDialogHeader>
                 <AlertDialogFooter>
@@ -9982,7 +9987,7 @@ export default function ChatView(props: ChatViewProps) {
           <AlertDialogHeader>
             <AlertDialogTitle>edit from here?</AlertDialogTitle>
             <AlertDialogDescription>
-              rewind chat to before this message. your prompt and attachments return to the
+              rewind chat to before this message, meow. your prompt and attachments return to the
               composer.
             </AlertDialogDescription>
           </AlertDialogHeader>

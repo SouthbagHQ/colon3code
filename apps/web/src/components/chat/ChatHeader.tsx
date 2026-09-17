@@ -194,7 +194,7 @@ export const ChatHeader = memo(function ChatHeader({
       setRenaming(null);
       const resolution = resolveRenameCommit({ title, originalTitle: activeThreadTitle });
       if (resolution.action === "reject-empty") {
-        toastManager.add({ type: "warning", title: "thread title cannot be empty 3:" });
+        toastManager.add({ type: "warning", title: "thread title cannot be empty, mrrp 3:" });
         return;
       }
       if (resolution.action === "noop") return;
@@ -207,7 +207,7 @@ export const ChatHeader = memo(function ChatHeader({
           toastManager.add({
             type: "error",
             title: "failed to rename thread 3:",
-            description: error instanceof Error ? error.message : "An error occurred.",
+            description: error instanceof Error ? error.message : "an error occurred.",
           });
         }
       });

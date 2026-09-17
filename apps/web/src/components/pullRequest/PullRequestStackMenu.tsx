@@ -103,16 +103,17 @@ export function PullRequestStackMenu({
     if (result._tag === "Failure") {
       toastManager.add({
         type: "error",
-        title: "stack operation did not complete 3:",
+        title: "stack operation did not complete 3: mrow",
         description: String(squashAtomCommandFailure(result)),
       });
     } else {
       toastManager.add({
         type: "success",
-        title: action === "merge" ? "stack merge request completed :3" : "stack rebased :3",
+        title:
+          action === "merge" ? "stack merge request completed :3 purr" : "stack rebased :3 meow",
         description:
           action === "merge"
-            ? "GitHub merged the stack or added it to its merge queue."
+            ? "GitHub merged the stack or added it to its merge queue, nya~"
             : undefined,
       });
     }
@@ -181,7 +182,7 @@ export function PullRequestStackMenu({
               ) : null}
               {mergeHasClosed || mergeLayers.some((layer) => layer.isDraft) ? (
                 <p className="px-2 py-1 text-xs text-muted-foreground">
-                  every layer being merged must be open and ready for review.
+                  every layer being merged must be open and ready for review, mrrp
                 </p>
               ) : null}
             </>
@@ -221,13 +222,13 @@ export function PullRequestStackMenu({
           <DialogHeader>
             <DialogTitle>
               {confirmation === "merge"
-                ? `merge ${mergeLayers.length} pull requests?`
+                ? `merge ${mergeLayers.length} pull requests? :3`
                 : `rebase ${unmerged.length} pull requests?`}
             </DialogTitle>
             <DialogDescription>
               {confirmation === "merge"
-                ? `merge #${reference.number} and its unmerged layers below into ${stack.base} using ${mergeMethod}. GitHub checks their rules before merging or queueing them and rebases the remaining stack after merging.`
-                : `rebase the remote branches from bottom to top onto ${stack.base}. this rewrites branch history and may restart checks. if a layer fails, earlier updates remain.`}
+                ? `merge #${reference.number} and its unmerged layers below into ${stack.base} using ${mergeMethod}. GitHub checks their rules before merging or queueing them and rebases the remaining stack after merging, purr`
+                : `rebase the remote branches from bottom to top onto ${stack.base}. this rewrites branch history and may restart checks. if a layer fails, earlier updates remain, meow`}
             </DialogDescription>
           </DialogHeader>
           <DialogPanel>

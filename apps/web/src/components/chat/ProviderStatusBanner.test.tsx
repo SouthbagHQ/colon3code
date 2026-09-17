@@ -115,7 +115,7 @@ describe("getProviderStatusMessage", () => {
         auth: { status: "unauthenticated" },
         message: "",
       }),
-    ).toBe("open provider setup to sign in with Google.");
+    ).toBe("open provider setup to sign in with Google, nya~");
   });
 
   it("requires installation on the environment before sign-in", () => {
@@ -129,7 +129,7 @@ describe("getProviderStatusMessage", () => {
         auth: { status: "unauthenticated" },
         message: "",
       }),
-    ).toBe("open provider setup to install Antigravity on this environment.");
+    ).toBe("open provider setup to install Antigravity on this environment, meow.");
   });
 
   it("keeps CLI sign-in advice for a provider without integrated setup", () => {
@@ -140,6 +140,6 @@ describe("getProviderStatusMessage", () => {
         auth: { status: "unauthenticated" },
         message: "",
       }),
-    ).toBe("sign in via the CLI to authenticate again.");
+    ).toBe("sign in via the CLI to authenticate again, mrrp.");
   });
 });

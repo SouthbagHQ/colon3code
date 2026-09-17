@@ -93,7 +93,7 @@ function EmptyContentSearchDialog() {
       testId="project-content-search"
       value=""
     >
-      open a project to search its files.
+      open a project to search its files, meow
     </CommandPaletteContent>
   );
 }
@@ -192,7 +192,7 @@ function OpenContentSearchDialog(props: {
       }
       inputProps={{
         className: "pe-30",
-        placeholder: `search in ${target.projectName}`,
+        placeholder: `search in ${target.projectName}, purr`,
         onKeyDown: (event) => {
           if (event.key === "ArrowDown" && matches.length > 0) {
             event.preventDefault();
@@ -241,8 +241,8 @@ function OpenContentSearchDialog(props: {
       {matches.length === 0 ? (
         <div className="flex flex-1 items-center justify-center px-6 text-center text-sm text-muted-foreground">
           {search.hasQuery && !search.isPending && !search.error
-            ? "no results found"
-            : "type to search across your project."}
+            ? "no results found, mrrp"
+            : "type to search across your project, nya~"}
         </div>
       ) : (
         <ScrollArea className="min-h-0 flex-1" scrollFade>

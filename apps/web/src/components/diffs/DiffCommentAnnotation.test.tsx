@@ -22,7 +22,7 @@ describe("DiffCommentAnnotation", () => {
     expect(markup).not.toContain("Local comment");
     expect(markup).not.toContain("on +78");
     expect(markup).toContain("⌘/Ctrl Enter to send");
-    expect(markup).toContain("add a comment…");
+    expect(markup).toContain("add a comment… meow");
     expect(markup).toContain(">comment</button>");
     expect(markup).toContain("autofocus");
     const textareaControl = markup.match(/<span[^>]*data-slot="textarea-control"[^>]*>/)?.[0];
@@ -46,7 +46,7 @@ describe("DiffCommentAnnotation", () => {
       />,
     );
 
-    expect(markup).toContain("add a comment…");
+    expect(markup).toContain("add a comment… meow");
     expect(markup).toContain(">add to review</button>");
     expect(markup.match(/<button[^>]*disabled[^>]*>add to review<\/button>/)).not.toBeNull();
     expect(markup.match(/<button[^>]*disabled[^>]*>add to agent<\/button>/)).not.toBeNull();

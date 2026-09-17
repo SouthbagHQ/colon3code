@@ -108,7 +108,7 @@ export function useThreadActionMenu(input: {
   const { copyToClipboard: copyBranchToClipboard } = useCopyToClipboard<{ branch: string }>({
     target: "branch name",
     onCopy: ({ branch }) => {
-      toastManager.add({ type: "success", title: "branch copied :3", description: branch });
+      toastManager.add({ type: "success", title: "branch copied, purr :3", description: branch });
     },
     onError: (error) => failureToast("failed to copy branch 3:", error),
   });
@@ -161,14 +161,14 @@ export function useThreadActionMenu(input: {
           const result = await snoozeThread(threadRef, preset.snoozedUntil);
           if (result._tag === "Failure") {
             if (!isAtomCommandInterrupted(result)) {
-              failureToast("failed to snooze thread 3:", squashAtomCommandFailure(result));
+              failureToast("failed to snooze thread 3: mrrp", squashAtomCommandFailure(result));
             }
             return;
           }
           toastManager.add(
             stackedThreadToast({
               type: "success",
-              title: `snoozed until ${snoozeWakeDescription(preset.snoozedUntil, new Date(), timestampFormat)} :3`,
+              title: `snoozed until ${snoozeWakeDescription(preset.snoozedUntil, new Date(), timestampFormat)}, purr :3`,
               timeout: 5_000,
               actionProps: {
                 children: "undo",
@@ -222,7 +222,7 @@ export function useThreadActionMenu(input: {
               }),
             );
             if (result._tag === "Failure") {
-              failureToast("could not create thread 3:", squashAtomCommandFailure(result));
+              failureToast("could not create thread 3: mrow", squashAtomCommandFailure(result));
             }
             return;
           }
@@ -236,7 +236,7 @@ export function useThreadActionMenu(input: {
             await reportFailure("failed to wake thread 3:", () => unsnoozeThread(threadRef));
             return;
           case "pin":
-            await reportFailure("failed to pin thread 3:", () => pinThread(threadRef));
+            await reportFailure("failed to pin thread 3: mrow", () => pinThread(threadRef));
             return;
           case "unpin": {
             await reportFailure("failed to unpin thread 3:", () =>
@@ -249,7 +249,7 @@ export function useThreadActionMenu(input: {
             return;
           case "regenerate-title":
             if (isRegeneratingTitle) return;
-            await reportFailure("failed to regenerate thread title 3:", () =>
+            await reportFailure("failed to regenerate thread title 3: mrrp", () =>
               updateThreadMetadata({
                 environmentId: threadRef.environmentId,
                 input: { threadId: threadRef.threadId, regenerateTitle: true },
@@ -265,8 +265,8 @@ export function useThreadActionMenu(input: {
               toastManager.add(
                 stackedThreadToast({
                   type: "error",
-                  title: "path unavailable 3:",
-                  description: "this thread does not have a workspace path to copy.",
+                  title: "path unavailable 3: mrrp",
+                  description: "this thread does not have a workspace path to copy, mrow.",
                 }),
               );
               return;
@@ -299,7 +299,7 @@ export function useThreadActionMenu(input: {
               failureToast(
                 didArchive
                   ? "thread archived, but navigation failed 3:"
-                  : "failed to archive thread 3:",
+                  : "failed to archive thread 3: mrow",
                 squashAtomCommandFailure(result),
               );
             }
@@ -311,7 +311,7 @@ export function useThreadActionMenu(input: {
                 api.dialogs.confirm(
                   [
                     `delete thread "${thread.title}"?`,
-                    "this permanently clears conversation history for this thread.",
+                    "this permanently clears conversation history for this thread, mrow.",
                   ].join("\n"),
                   { variant: "destructive" },
                 ),
@@ -327,7 +327,7 @@ export function useThreadActionMenu(input: {
               // that itself, and "failed to delete thread 3:" would be a lie.
               readThreadShell(threadRef) !== null
             ) {
-              failureToast("failed to delete thread 3:", squashAtomCommandFailure(deleted));
+              failureToast("failed to delete thread 3: mrrp", squashAtomCommandFailure(deleted));
             }
             return;
           }

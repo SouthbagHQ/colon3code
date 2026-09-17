@@ -35,13 +35,13 @@ export function resolveEnvironmentIconPickerLock(input: {
   readonly operateAccess: "granted" | "denied" | "pending";
 }): string | null {
   if (input.serverConfig === null) {
-    return "connect to this environment to change its icon.";
+    return "connect to this environment to change its icon, meow.";
   }
   if (input.serverConfig.environment.capabilities.environmentIcon !== true) {
-    return "this environment's server is too old to keep an icon. update it to choose one.";
+    return "mrrp, this environment's server is too old to keep an icon. update it to choose one.";
   }
   if (input.operateAccess === "denied") {
-    return "your session on this environment cannot change its settings.";
+    return "your session on this environment cannot change its settings 3:";
   }
   return null;
 }

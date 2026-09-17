@@ -20,7 +20,7 @@ export function ProjectActionsList({
   if (scripts.length === 0)
     return (
       <p className="px-3 py-2 text-base text-muted-foreground sm:px-4 sm:text-sm">
-        no actions configured.
+        no actions configured yet, nya~
       </p>
     );
   return scripts.map((script) => {

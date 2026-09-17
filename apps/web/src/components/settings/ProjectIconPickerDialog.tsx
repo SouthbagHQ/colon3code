@@ -108,8 +108,8 @@ export function ProjectIconPickerDialog({
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogPopup className="w-full sm:w-[32rem]">
         <DialogHeader>
-          <DialogTitle>choose project icon</DialogTitle>
-          <DialogDescription>choose an icon, emoji, or monogram.</DialogDescription>
+          <DialogTitle>choose project icon ^w^</DialogTitle>
+          <DialogDescription>meow, choose an icon, emoji, or monogram.</DialogDescription>
         </DialogHeader>
         <DialogPanel className="flex min-h-0 flex-col gap-4">
           <ToggleGroup
@@ -202,7 +202,7 @@ export function ProjectIconPickerDialog({
                   autoComplete="off"
                 />
                 <p id="project-monogram-hint" className="text-xs text-muted-foreground">
-                  one or two letters or numbers.
+                  one or two letters or numbers, nya~
                 </p>
               </div>
             </div>
@@ -229,7 +229,7 @@ export function ProjectIconPickerDialog({
               </ScrollArea>
               <div>
                 <div className="mb-2 text-xs font-medium text-muted-foreground">
-                  or paste any emoji
+                  or paste any emoji, purr
                 </div>
                 <Input
                   value={customEmoji}

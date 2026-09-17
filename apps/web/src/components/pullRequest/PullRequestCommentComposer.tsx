@@ -72,7 +72,7 @@ export function PullRequestCommentComposer({
     });
     if (result._tag === "Failure") {
       setSubmitting(null);
-      toastManager.add({ type: "error", title: "could not post the comment 3:" });
+      toastManager.add({ type: "error", title: "could not post the comment 3: mrrp" });
       return;
     }
     setBody("");
@@ -120,7 +120,7 @@ export function PullRequestCommentComposer({
             disabled={submitting !== null || actionPending}
             value={body}
             rows={3}
-            placeholder="leave a comment"
+            placeholder="leave a comment, nya~"
             aria-label="comment on this pull request"
             onChange={(event) => setBody(event.target.value)}
           />

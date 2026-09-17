@@ -897,7 +897,7 @@ describe("resolveDefaultBranchActionDialogCopy", () => {
     assert.deepEqual(copy, {
       title: "push to default ref?",
       description:
-        'this action will push local commits on "main". you can continue on this ref or create a feature ref and run the same action there.',
+        'this action will push local commits on "main". you can continue on this ref or create a feature ref and run the same action there, nya~',
       continueLabel: "push to main",
     });
   });
@@ -912,7 +912,7 @@ describe("resolveDefaultBranchActionDialogCopy", () => {
     assert.deepEqual(copy, {
       title: "push & create PR from default ref?",
       description:
-        'this action will push local commits and create a pull request on "main". you can continue on this ref or create a feature ref and run the same action there.',
+        'this action will push local commits and create a pull request on "main". you can continue on this ref or create a feature ref and run the same action there, nya~',
       continueLabel: "push & create PR",
     });
   });
@@ -927,7 +927,7 @@ describe("resolveDefaultBranchActionDialogCopy", () => {
     assert.deepEqual(copy, {
       title: "commit, push & create PR from default ref?",
       description:
-        'this action will commit, push, and create a pull request on "main". you can continue on this ref or create a feature ref and run the same action there.',
+        'this action will commit, push, and create a pull request on "main". you can continue on this ref or create a feature ref and run the same action there, nya~',
       continueLabel: "commit, push & create PR",
     });
   });

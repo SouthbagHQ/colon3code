@@ -160,7 +160,7 @@ function ExpandableHeaderSearch({
             onOpenChange(false);
           }
         }}
-        placeholder="search keybindings"
+        placeholder="search keybindings, meow"
         aria-label="search keybindings"
         className="w-44 [&_[data-slot=input]]:pl-7"
         size="sm"
@@ -282,8 +282,8 @@ function UnknownWhenVariableWarning({
 
   return (
     <WarningTooltipIcon label={label} focusable={focusable} className="size-4.5">
-      :3 Code does not recognize this condition yet. it can still be saved, but it may not match
-      unless the runtime provides it.
+      mrrp, :3 Code does not recognize this condition yet. it can still be saved, but it may not
+      match unless the runtime provides it.
     </WarningTooltipIcon>
   );
 }
@@ -297,7 +297,7 @@ function KeybindingConflictWarning({ labels }: { labels: ReadonlyArray<string> }
 
   return (
     <WarningTooltipIcon label={description}>
-      {description} the most recent matching binding wins when both conditions can apply.
+      {description} the most recent matching binding wins when both conditions can apply, nya~
     </WarningTooltipIcon>
   );
 }
@@ -719,7 +719,7 @@ function WhenExpressionBuilder({
         )}
         {parseError ? (
           <div className="pointer-events-none absolute inset-0 flex items-center justify-center rounded-lg border border-destructive/30 bg-background/75 p-4 text-center text-xs text-destructive backdrop-blur-[1px]">
-            fix the expression above to continue editing visually.
+            mrrp, fix the expression above to continue editing visually.
           </div>
         ) : null}
       </div>
@@ -1250,7 +1250,7 @@ function NewKeybindingSettingsRow(props: NewKeybindingProps) {
   return (
     <SettingsRow
       className="rounded-none bg-muted/15"
-      title="new keybinding"
+      title="new keybinding ^w^"
       description={
         <span className="flex h-6 items-center gap-1.5">
           <span className="text-[12px] leading-none text-muted-foreground/70">when</span>
@@ -1309,7 +1309,7 @@ function KeybindingsList(props: KeybindingsListProps) {
       ))}
       {rows.length === 0 && !isAddingBinding ? (
         <div className="px-4 py-12 text-center text-sm text-muted-foreground">
-          no keybindings match your search.
+          no keybindings match your search, mrow.
         </div>
       ) : null}
     </div>
@@ -1322,8 +1322,8 @@ function BrowserKeybindingNotice() {
     <div className="flex items-center gap-2 px-3 py-2.5 text-[12px] leading-[1.45] text-muted-foreground sm:px-4">
       <TriangleAlertIcon className="size-3.5 shrink-0 text-warning" aria-hidden />
       <span>
-        some shortcuts may be claimed by the browser before :3 Code sees them. use the desktop app
-        for better keybinding support.
+        mrrp, some shortcuts may be claimed by the browser before :3 Code sees them. use the desktop
+        app for better keybinding support, nya~
       </span>
     </div>
   );
@@ -1394,7 +1394,7 @@ export function KeybindingsSettingsPanel() {
       }
       const error = squashAtomCommandFailure(result);
       toastManager.add({
-        title: "unable to open keybindings file 3:",
+        title: "unable to open keybindings file 3: mrrp",
         description:
           error instanceof Error ? error.message : "the keybindings file was not opened.",
         type: "error",
@@ -1455,7 +1455,7 @@ export function KeybindingsSettingsPanel() {
         if (result?._tag === "Failure" && !isAtomCommandInterrupted(result)) {
           const error = squashAtomCommandFailure(result);
           toastManager.add({
-            title: "unable to remove keybinding 3:",
+            title: "unable to remove keybinding 3: mrow",
             description: error instanceof Error ? error.message : "the keybinding was not removed.",
             type: "error",
           });

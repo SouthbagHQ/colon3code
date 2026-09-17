@@ -44,7 +44,7 @@ function formatByteSize(bytes: number): string {
 /** Returns the error to show for a file too large to be a theme, else null. */
 export function describeOversizedThemeFile(bytes: number): string | null {
   if (bytes <= MAX_THEME_FILE_BYTES) return null;
-  return `that file is ${formatByteSize(bytes)}. theme files are only a few KB, so this one was not read (limit ${formatByteSize(MAX_THEME_FILE_BYTES)}).`;
+  return `mrrp, that file is ${formatByteSize(bytes)}. theme files are only a few KB, so this one was not read (limit ${formatByteSize(MAX_THEME_FILE_BYTES)}).`;
 }
 
 function escapeJsonHtml(value: string): string {
@@ -198,7 +198,7 @@ export function ThemeImportDialog({
       setError(null);
     } catch {
       if (requestId !== importRequestRef.current) return;
-      setError("could not read that file. paste the JSON below instead.");
+      setError("could not read that file 3: mrrp. paste the JSON below instead.");
     } finally {
       if (requestId === importRequestRef.current) setIsReading(false);
     }
@@ -406,12 +406,12 @@ export function ThemeImportDialog({
         } catch {
           // Storage is failing wholesale; the error below covers it.
         }
-        setError("theme added, but it could not be selected. try again.");
+        setError("theme added, but it could not be selected 3: mrow. try again.");
         return;
       }
       onOpenChange(false);
     } catch (cause) {
-      setError(cause instanceof Error ? cause.message : "that theme file is invalid.");
+      setError(cause instanceof Error ? cause.message : "that theme file is invalid 3: mrrp");
     }
   }, [json, onImported, onOpenChange]);
 
@@ -425,7 +425,7 @@ export function ThemeImportDialog({
     >
       <DialogPopup className="max-w-3xl overflow-hidden">
         <DialogHeader>
-          <DialogTitle>add a theme</DialogTitle>
+          <DialogTitle>add a theme ^w^</DialogTitle>
         </DialogHeader>
         <DialogPanel className="space-y-5">
           <ThemeSearchSection
@@ -525,7 +525,7 @@ export function ThemeImportDialog({
                   <div className="min-w-0">
                     <p className="text-sm font-medium">theme file</p>
                     <p className="truncate text-xs text-muted-foreground">
-                      {fileName ?? "drop :3 Code or VS Code .json files"}
+                      {fileName ?? "drop :3 Code or VS Code .json files here, meow"}
                     </p>
                   </div>
                   {chooseButton()}

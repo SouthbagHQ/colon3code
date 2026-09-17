@@ -71,7 +71,7 @@ export function useSnapShotShortcutRecorder({
     } catch (error) {
       if (!requests.owns(request)) return;
       requests.clear();
-      onError(error instanceof Error ? error.message : "could not start shortcut recording.");
+      onError(error instanceof Error ? error.message : "could not start shortcut recording 3:");
     }
   };
   useEffect(
@@ -96,7 +96,7 @@ export function useSnapShotShortcutRecorder({
       const [left, right] = MODIFIER_CODES[modifier];
       if (held.has(left) && held.has(right)) {
         if (!allowModifierPairs) {
-          onError("add a letter, number, or function key to your shortcut.");
+          onError("mrrp, add a letter, number, or function key to your shortcut.");
           return;
         }
         stopRecording();

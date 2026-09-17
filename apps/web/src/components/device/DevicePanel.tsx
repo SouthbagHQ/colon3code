@@ -316,11 +316,11 @@ export function DevicePanel(props: {
             message={
               pendingDevice
                 ? pendingDevice.booted
-                  ? "opening device…"
+                  ? "opening device… purr"
                   : "starting device…"
                 : state.hostStatus === "installing"
                   ? "installing device support…"
-                  : "finding devices…"
+                  : "sniffing around for devices…"
             }
           />
         ) : (
@@ -336,8 +336,8 @@ export function DevicePanel(props: {
                   <Smartphone className="size-6 opacity-60" />
                   <p className="max-w-sm">
                     {state.hostStatus === "failed"
-                      ? (state.hostStatusDetail ?? "the device hub failed to start.")
-                      : "no simulators or emulators were found on this environment"}
+                      ? (state.hostStatusDetail ?? "the device hub failed to start, mrow.")
+                      : "no simulators or emulators were found on this environment, mrrp"}
                   </p>
                 </>
               ) : null}
@@ -383,8 +383,8 @@ export function DevicePanel(props: {
               !state.devices.some((device) => device.platform === "android") &&
               !unavailablePlatforms.some((platform) => platform.platform === "android") ? (
                 <p className="max-w-sm text-xs">
-                  no Android virtual devices found. create one in Android Studio's Device Manager,
-                  then refresh.
+                  no Android virtual devices found, mrrp. create one in Android Studio's Device
+                  Manager, then refresh.
                 </p>
               ) : null}
               {loaded && !hostBusy ? (

@@ -129,7 +129,7 @@ export function CloudEnvironmentConnectRows({
     if (result._tag === "Success") {
       toastManager.add({
         type: "success",
-        title: "environment added :3",
+        title: "environment added, purr :3",
         description: `connecting to ${environment.label} through T3 Connect.`,
       });
       return true;
@@ -139,12 +139,14 @@ export function CloudEnvironmentConnectRows({
     }
     const cause = squashAtomCommandFailure(result);
     const message =
-      cause instanceof Error ? cause.message : "could not connect the T3 Connect environment.";
+      cause instanceof Error
+        ? cause.message
+        : "could not connect the T3 Connect environment, mrow.";
     const traceId = findErrorTraceId(cause);
     console.error("[t3-connect] Could not connect environment", { message, traceId, cause });
     toastManager.add({
       type: "error",
-      title: "could not connect environment 3:",
+      title: "could not connect environment 3: mrrp",
       description: message,
       data: traceId
         ? {
@@ -242,13 +244,13 @@ export function CloudEnvironmentConnectRows({
     // A failed or offline discovery is not "no environments" — misreporting it
     // as empty would read as the user's devices having disappeared.
     const discoveryProblem = environmentsState.offline
-      ? "you appear to be offline."
+      ? "you appear to be offline, mrrp."
       : (Option.getOrNull(environmentsState.error)?.message ?? null);
     if (discoveryProblem !== null && !environmentsState.refreshing) {
       return (
         <div className={ITEM_ROW_CLASSNAME}>
           <p className="text-sm font-medium text-destructive">
-            could not load T3 Connect environments
+            could not load T3 Connect environments 3:
           </p>
           <p className="mt-1 text-xs text-muted-foreground">{discoveryProblem}</p>
           <Button

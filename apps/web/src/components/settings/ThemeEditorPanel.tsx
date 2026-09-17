@@ -769,7 +769,7 @@ export function ThemeEditorPanel({
 
   const handleSubmit = () => {
     if (!name.trim()) {
-      setError("name your theme first.");
+      setError("mrrp, name your theme first.");
       return;
     }
 
@@ -909,7 +909,7 @@ export function ThemeEditorPanel({
             // Storage is failing wholesale; the error below covers it.
           }
         }
-        setError("theme saved, but it could not be made active. try again.");
+        setError("theme saved, but it could not be made active 3: mrow. try again.");
         return;
       }
       onOpenChange(false);
@@ -918,8 +918,8 @@ export function ThemeEditorPanel({
         cause instanceof Error
           ? cause.message
           : isEditing
-            ? "could not save the theme."
-            : "could not create the theme.",
+            ? "could not save the theme 3: mrrp"
+            : "could not create the theme 3: mrrp",
       );
     }
   };
@@ -936,7 +936,7 @@ export function ThemeEditorPanel({
           // the stale message goes with the old name.
           setError(null);
         }}
-        placeholder={isEditing ? "theme name" : "e.g. Aurora"}
+        placeholder={isEditing ? "theme name, meow" : "e.g. Aurora"}
         value={name}
       />
     </label>
@@ -1190,7 +1190,7 @@ export function ThemeEditorPanel({
                 ? "select an element · Esc to cancel"
                 : selectedRole
                   ? `${isAdvanced ? (getThemeEditorColorFamily(selectedRole)?.label ?? getThemeRoleLabel(selectedRole)) : getThemeRoleLabel(selectedRole)} · ${usageCount ?? 0} ${usageCount === 1 ? "use" : "uses"}`
-                  : "select a color below"}
+                  : "select a color below, nya~"}
             </p>
           )}
         </div>

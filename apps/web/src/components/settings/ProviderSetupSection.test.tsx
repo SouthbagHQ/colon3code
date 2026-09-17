@@ -233,7 +233,7 @@ describe("Antigravity setup", () => {
     });
     let view = renderSetup();
     expect(
-      visitElements(view, (element) => element.props.children === "signed in with Google."),
+      visitElements(view, (element) => element.props.children === "signed in with Google :3"),
     ).toBeNull();
     expect(
       visitElements(view, (element) => element.props.id === `provider-callback-${instanceId}`)
@@ -244,7 +244,7 @@ describe("Antigravity setup", () => {
     expect(
       visitElements(
         renderSetup(),
-        (element) => element.props.children === "signed in with Google.",
+        (element) => element.props.children === "signed in with Google :3",
       ),
     ).toBeNull();
     setup.auth = authState({ phase: "succeeded", authorizationUrl: null });
@@ -252,7 +252,7 @@ describe("Antigravity setup", () => {
       provider: { ...provider, status: "ready", auth: { status: "authenticated" } },
     });
     expect(
-      visitElements(view, (element) => element.props.children === "signed in with Google."),
+      visitElements(view, (element) => element.props.children === "signed in with Google :3"),
     ).not.toBeNull();
   });
 
@@ -268,7 +268,7 @@ describe("Antigravity setup", () => {
     const expired = renderSetup();
     expect(button(expired, "sign in with Google")).not.toBeNull();
     expect(
-      visitElements(expired, (element) => element.props.children === "signed in with Google."),
+      visitElements(expired, (element) => element.props.children === "signed in with Google :3"),
     ).toBeNull();
     expect(
       visitElements(expired, (element) => element.props.children === "Google sign-in complete."),

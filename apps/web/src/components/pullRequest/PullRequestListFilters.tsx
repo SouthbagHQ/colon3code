@@ -114,7 +114,7 @@ export function PullRequestSearchInput({
         type="search"
         value={value}
         onChange={(event) => onChange(event.currentTarget.value)}
-        placeholder="search pull requests, or label:bug"
+        placeholder="search pull requests, or label:bug, meow"
         aria-label="search pull requests"
       />
     </InputGroup>
@@ -316,7 +316,7 @@ function PullRequestAuthorFilter({
               </span>
             </MenuRadioItem>
           ))}
-          {visible.length === 0 ? <MenuItem disabled>no authors found</MenuItem> : null}
+          {visible.length === 0 ? <MenuItem disabled>no authors found, mrrp</MenuItem> : null}
         </MenuRadioGroup>
       </MenuSubPopup>
     </MenuSub>
@@ -350,7 +350,7 @@ function PullRequestLabelFilter({
       </MenuSubTrigger>
       <MenuSubPopup className="w-72">
         {visible.length === 0 ? (
-          <MenuItem disabled>no labels in this view</MenuItem>
+          <MenuItem disabled>no labels in this view, mrow</MenuItem>
         ) : (
           visible.map((option) => {
             const key = option.name.toLowerCase();

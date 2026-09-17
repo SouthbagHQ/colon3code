@@ -215,7 +215,7 @@ function itemSummary({
   }
 
   if (item.status !== "available") {
-    return <span>not available on this server: {item.installHint}</span>;
+    return <span>mrrp, not available on this server: {item.installHint}</span>;
   }
 
   if (auth) {
@@ -240,16 +240,17 @@ function itemSummary({
     if (auth.status === "unauthenticated") {
       return (
         <span>
-          {item.label} is not authenticated on this server. sign in or configure credentials using
-          the <code className="rounded bg-muted px-1 py-px text-[11px]">{item.executable}</code>{" "}
-          tool on the server host to enable change request features.
+          mrrp, {item.label} is not authenticated on this server. sign in or configure credentials
+          using the{" "}
+          <code className="rounded bg-muted px-1 py-px text-[11px]">{item.executable}</code> tool on
+          the server host to enable change request features.
         </span>
       );
     }
     const authDetail = optionLabel(auth.detail);
     return (
       <span>
-        could not verify {item.label}. {authDetail ?? item.installHint}
+        could not verify {item.label} 3: {authDetail ?? item.installHint}
       </span>
     );
   }
@@ -369,7 +370,7 @@ function GitFetchIntervalSettings() {
             <PolicyTooltip>
               this interval is configured for Git only. the shared background activity policy still
               decides whether Git refreshes may run when the timer fires. custom intervals appear as
-              advanced in general settings.
+              advanced in general settings, nya~
             </PolicyTooltip>
             <span
               className={cn(
@@ -480,12 +481,14 @@ function EmptySourceControlDiscovery({
         </EmptyMedia>
         <EmptyHeader>
           <EmptyTitle>
-            {hasError ? "could not scan the server environment 3:" : "nothing detected yet"}
+            {hasError
+              ? "could not scan the server environment 3: mrrp"
+              : "nothing detected yet, nya~"}
           </EmptyTitle>
           <EmptyDescription>
             {hasError
               ? error
-              : "install Git on the server, add optional hosting integrations or credentials your workspace needs, then rescan."}
+              : "meow, install Git on the server, add optional hosting integrations or credentials your workspace needs, then rescan."}
           </EmptyDescription>
         </EmptyHeader>
         <EmptyContent>
@@ -548,7 +551,8 @@ export function SourceControlSettingsPanel() {
       {environmentId === null ? (
         <SettingsSection id={searchableSetting("source-control").id} title="server environment">
           <p className="px-4 py-3 text-sm text-muted-foreground">
-            connect an environment to inspect its version control tools and hosting integrations.
+            mrrp, connect an environment to inspect its version control tools and hosting
+            integrations.
           </p>
         </SettingsSection>
       ) : isInitialScanPending ? (

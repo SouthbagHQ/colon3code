@@ -231,14 +231,14 @@ function EnvironmentUnavailablePlaceholder({
   const title = isLoading
     ? "loading provider settings"
     : access.kind === "error"
-      ? "could not connect to this device 3:"
-      : "provider settings are unavailable 3:";
+      ? "could not connect to this device 3: mrrp"
+      : "provider settings are unavailable 3: mrow";
   // Keep the description to a short status; the raw failure can be a
   // multi-paragraph CLI dump, so it goes below, clamped and expandable.
   const description = isLoading
     ? access.reason === "permissions"
-      ? "checking what this session is allowed to change."
-      : `waiting for ${environment.label}'s configuration.`
+      ? "checking what this session is allowed to change, meow."
+      : `waiting for ${environment.label}'s configuration, purr.`
     : connectionStatusTitle(environment.connection);
   const error = isLoading ? null : environment.connection.error;
   // No spinner: this state can persist indefinitely for a wedged device, and a
@@ -391,7 +391,7 @@ function ProviderSettingsPanelContent(target: ProviderSettingsTarget) {
           deviceTabs={deviceTabs}
           icon={<EnvironmentMachineIcon kind={resolveEnvironmentMachineKind(null)} />}
           title="device unavailable 3:"
-          description="reconnect this device to set up its provider, or select another device."
+          description="mrrp, reconnect this device to set up its provider, or select another device."
         />
       ) : null}
       {options.length === 0 && !targetEnvironmentMissing ? (
@@ -400,8 +400,8 @@ function ProviderSettingsPanelContent(target: ProviderSettingsTarget) {
           title={isReady ? "no connected devices" : "loading devices"}
           description={
             isReady
-              ? "connect an execution environment before configuring providers."
-              : "reading connected execution environments."
+              ? "connect an execution environment before configuring providers, meow."
+              : "reading connected execution environments, purr."
           }
         />
       ) : null}
@@ -672,7 +672,7 @@ export function EnvironmentProviderSettings({
         toastManager.add(
           stackedThreadToast({
             type: "error",
-            title: `could not update ${PROVIDER_DISPLAY_NAMES[candidate.driver] ?? candidate.driver} 3:`,
+            title: `could not update ${PROVIDER_DISPLAY_NAMES[candidate.driver] ?? candidate.driver} 3: mrrp`,
             description:
               error instanceof Error
                 ? error.message
@@ -1046,7 +1046,7 @@ export function EnvironmentProviderSettings({
           <div className={cn(providerCardClassName, "overflow-hidden")}>
             <SettingsRow
               title="limited permissions"
-              description={`this session can view ${environmentLabel}'s providers but can't change their settings.`}
+              description={`mrrp, this session can view ${environmentLabel}'s providers but can't change their settings.`}
             />
           </div>
         ) : null}
@@ -1073,8 +1073,8 @@ export function EnvironmentProviderSettings({
             ) : (
               <div className="p-6 text-sm text-muted-foreground">
                 {targetInstanceMissing
-                  ? "this provider instance is no longer available on this device."
-                  : "no providers configured"}
+                  ? "this provider instance is no longer available on this device 3:"
+                  : "no providers configured yet, nya~"}
               </div>
             )}
           </div>
@@ -1098,11 +1098,11 @@ export function EnvironmentProviderSettings({
               <PolicyTooltip>
                 this interval is configured here, then the shared background activity policy decides
                 whether provider probes may run when the timer fires. custom intervals appear as
-                advanced in general settings.
+                advanced in general settings, meow.
               </PolicyTooltip>
             </span>
           }
-          description="refresh provider status, versions, and models in the background. set to 0 to disable."
+          description="refresh provider status, versions, and models in the background, purr. set to 0 to disable."
           resetAction={
             providerHealthRefreshIntervalSeconds !== defaultProviderHealthRefreshIntervalSeconds ? (
               <span inert={readOnly} className={readOnly ? "opacity-50" : undefined}>
