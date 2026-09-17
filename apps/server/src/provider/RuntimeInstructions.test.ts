@@ -31,8 +31,11 @@ describe("voice instructions", () => {
   it("asks for the app's cute voice in chat prose only", () => {
     const instructions = buildRuntimeInstructions({ harness: "Claude Code" });
     expect(instructions).toContain("<voice>");
-    expect(instructions).toMatch(/"meow", "mrrp", "nya", or "uwu"/);
-    expect(instructions).toContain('":3" when something worked, "3:" when something went wrong');
+    expect(instructions).toMatch(/"meow", "mrrp", "nya", "purr", "uwu", "mrow"/);
+    expect(instructions).toContain("Meow generously; there is no cap.");
+    expect(instructions).toContain(
+      '":3" whenever something worked, "3:" whenever something went wrong',
+    );
     expect(instructions).toContain("Do not apply it to code, comments, commit messages");
     // Runtime info stays first so harness-level parsing of the header is unchanged.
     expect(instructions.indexOf("<runtime_info>")).toBeLessThan(instructions.indexOf("<voice>"));
