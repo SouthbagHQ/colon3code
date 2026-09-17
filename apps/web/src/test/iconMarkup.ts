@@ -4,8 +4,7 @@ import type { IconComponent } from "~/icons";
 
 /**
  * The glyph's first path, so a test can assert which icon rendered without
- * depending on the class or size the call site added. Render the component
- * under test without an IconContext so both sides use the same weight.
+ * depending on the class or size the call site added.
  */
 export function iconPath(Icon: IconComponent): string {
   const match = /d="([^"]+)"/.exec(renderToStaticMarkup(createElement(Icon)));

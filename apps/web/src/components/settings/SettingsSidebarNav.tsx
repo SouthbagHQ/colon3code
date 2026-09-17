@@ -62,9 +62,9 @@ const SnapShotGlyph = createLucideIcon("snap-shot", [
   ["circle", { cx: "12", cy: "12", r: "1.5", key: "lens" }],
 ]);
 
-/** Custom lucide glyph; the heavier stroke matches the bold Phosphor set around it. */
+/** Custom lucide glyph; the lighter stroke matches the Hugeicons set around it. */
 function SnapShotIcon(props: ComponentProps<typeof SnapShotGlyph>) {
-  return <SnapShotGlyph strokeWidth={2.25} {...props} />;
+  return <SnapShotGlyph strokeWidth={1.5} {...props} />;
 }
 
 const T3ConnectSidebarSignIn = lazy(() =>
