@@ -38,11 +38,11 @@ export function usagePriceCell(
     modelPrice(target, model) ? usagePriceForm(model, modelPrice(target, model))[field] : null,
   );
   if (targets.some((target) => target.prices === null))
-    return { value: "", placeholder: "Unavailable" };
-  if (values.some((value) => value !== values[0])) return { value: "", placeholder: "Mixed" };
+    return { value: "", placeholder: "unavailable" };
+  if (values.some((value) => value !== values[0])) return { value: "", placeholder: "mixed" };
   return {
     value: values[0] ?? "",
-    placeholder: values[0] === null ? "Automatic" : optional ? "Input rate" : "0.00",
+    placeholder: values[0] === null ? "automatic" : optional ? "input rate" : "0.00",
   };
 }
 
@@ -70,10 +70,10 @@ export function usagePriceTableChanges(
       errors.set(
         draft.id,
         model === ""
-          ? "Enter a model ID."
+          ? "enter a model ID."
           : missing
             ? `${missing.label} is required on ${target.label}.`
-            : "Use non-negative numbers for prices.",
+            : "use non-negative numbers for prices.",
       );
       continue;
     }

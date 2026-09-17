@@ -85,7 +85,7 @@ export function useAutoBalanceUpdateBanner(
   );
   const count = running || failed || machines.length;
   const status = running ? "running" : failed ? "failed" : "idle";
-  const prefix = running ? "Updating" : failed ? "Could not update" : "Update available for";
+  const prefix = running ? "updating" : failed ? "could not update" : "update available for";
   const title = `${prefix} ${count} ${count === 1 ? "machine" : "machines"}`;
   return {
     id: `auto-balance-server-updates-${dismissedNotices.size}`,
@@ -115,8 +115,8 @@ export function useAutoBalanceUpdateBanner(
                 ) : (
                   <div className="text-muted-foreground">
                     {machine.connected
-                      ? `Ready to update to ${machine.targetVersion}`
-                      : "Reconnect this machine to update"}
+                      ? `ready to update to ${machine.targetVersion}`
+                      : "reconnect this machine to update"}
                   </div>
                 )}
               </div>
@@ -134,14 +134,14 @@ export function useAutoBalanceUpdateBanner(
           variant="ghost"
           label={
             failed > 0
-              ? "Retry"
+              ? "retry"
               : targets.length === machines.length
-                ? "Update all"
-                : `Update ${targets.length} ${targets.length === 1 ? "machine" : "machines"}`
+                ? "update all"
+                : `update ${targets.length} ${targets.length === 1 ? "machine" : "machines"}`
           }
         />
       ) : undefined,
-    dismissLabel: "Dismiss update notice",
+    dismissLabel: "dismiss update notice",
     ...(running
       ? {}
       : {

@@ -31,19 +31,19 @@ describe("price table edits", () => {
     expect(usagePriceCell(targets, "example", "inputCostPerMillionTokens").value).toBe("2");
     expect(usagePriceCell(targets, "example", "outputCostPerMillionTokens")).toEqual({
       value: "",
-      placeholder: "Mixed",
+      placeholder: "mixed",
     });
     expect(usagePriceCell(targets, "example", "cacheReadCostPerMillionTokens")).toEqual({
       value: "",
-      placeholder: "Input rate",
+      placeholder: "input rate",
     });
     expect(
       usagePriceCell([target("a", {})], "example", "inputCostPerMillionTokens").placeholder,
-    ).toBe("Automatic");
+    ).toBe("automatic");
     expect(
       usagePriceCell([targets[0]!, target("b", null)], "example", "inputCostPerMillionTokens")
         .placeholder,
-    ).toBe("Unavailable");
+    ).toBe("unavailable");
   });
 
   it.each(["constructor", "toString", "__proto__"])(
@@ -52,7 +52,7 @@ describe("price table edits", () => {
       const environment = target("a", {});
       expect(usagePriceCell([environment], model, "inputCostPerMillionTokens")).toEqual({
         value: "",
-        placeholder: "Automatic",
+        placeholder: "automatic",
       });
       const result = usagePriceTableChanges(environment, [
         {
@@ -140,10 +140,10 @@ describe("price table edits", () => {
       usagePriceTableChanges(environment, [
         { ...empty, values: { inputCostPerMillionTokens: "0" } },
       ]).errors.get(empty.id),
-    ).toBe("Enter a model ID.");
+    ).toBe("enter a model ID.");
   });
 
-  it.each(["Offline", "Read-only access", "Update server to edit prices"])(
+  it.each(["offline", "read-only access", "update server to edit prices"])(
     "does not let %s destinations block a valid edit elsewhere",
     (unavailable) => {
       const edits = [draft({ inputCostPerMillionTokens: "3" })];

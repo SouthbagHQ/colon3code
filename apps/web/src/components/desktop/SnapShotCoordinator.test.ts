@@ -167,7 +167,7 @@ describe("window capture delivery", () => {
           source: {
             kind: "snap-shot" as const,
             capturedAt: "2026-09-01T00:00:00.000Z",
-            appName: "Editor",
+            appName: "editor",
             windowTitle: "main.ts",
             ...(accessibleText ? { accessibleText } : {}),
           },
@@ -185,7 +185,7 @@ describe("window capture delivery", () => {
         source: {
           kind: "snap-shot",
           capturedAt: "2026-09-01T00:00:00.000Z",
-          appName: "Editor",
+          appName: "editor",
           windowTitle: "main.ts",
           ...(accessibleText ? { accessibleText } : {}),
         },
@@ -305,7 +305,7 @@ describe("durable snapshot delivery", () => {
         source: {
           kind: "snap-shot" as const,
           capturedAt: "2026-09-01T00:00:00.000Z",
-          appName: "Editor",
+          appName: "editor",
           windowTitle: "main.ts",
         },
       };

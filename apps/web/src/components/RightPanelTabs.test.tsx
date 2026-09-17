@@ -164,8 +164,8 @@ describe("RightPanelTabs preview favicon", () => {
 
 describe("surface shortcuts", () => {
   const actions = [
-    { shortcut: "B", available: true, label: "Browser" },
-    { shortcut: "D", available: false, label: "Diff" },
+    { shortcut: "B", available: true, label: "browser" },
+    { shortcut: "D", available: false, label: "diff" },
   ] as const;
 
   it("matches available surface shortcuts case-insensitively", () => {
@@ -222,15 +222,15 @@ describe("RightPanelTabs audio indicator", () => {
   const cases = [
     { audible: false, audioMuted: false, label: null },
     { audible: false, audioMuted: true, label: null },
-    { audible: true, audioMuted: false, label: "Mute Local site" },
-    { audible: true, audioMuted: true, label: "Unmute Local site" },
+    { audible: true, audioMuted: false, label: "mute Local site" },
+    { audible: true, audioMuted: true, label: "unmute Local site" },
   ] as const;
 
   it.each(cases)("audible=$audible muted=$audioMuted", ({ audible, audioMuted, label }) => {
     const html = renderTabs(null, undefined, { audible, audioMuted });
     if (label === null) {
-      expect(html).not.toContain("Mute Local site");
-      expect(html).not.toContain("Unmute Local site");
+      expect(html).not.toContain("mute Local site");
+      expect(html).not.toContain("unmute Local site");
     } else {
       expect(html).toContain(`aria-label="${label}"`);
     }
@@ -249,7 +249,7 @@ describe("RightPanelTabs audio indicator", () => {
 
   it("hides the toggle when no runtime tab id can be resolved", () => {
     const html = renderTabs(null, undefined, { audible: true }, null);
-    expect(html).not.toContain("Mute Local site");
+    expect(html).not.toContain("mute Local site");
   });
 });
 
@@ -261,25 +261,25 @@ describe("tabMuteMenuItem", () => {
     // The server session id resolves before the preview manager finishes
     // createTab. Muting in that window fails with an error nobody surfaces.
     expect(tabMuteMenuItem({ overlay: null, canResolveRuntimeTabId: true })).toEqual({
-      label: "Mute tab",
+      label: "mute tab",
       disabled: true,
     });
   });
 
   it("stays disabled when no runtime tab id can be resolved", () => {
     expect(tabMuteMenuItem({ overlay: overlay(false), canResolveRuntimeTabId: false })).toEqual({
-      label: "Mute tab",
+      label: "mute tab",
       disabled: true,
     });
   });
 
   it("offers mute and unmute once the tab is addressable", () => {
     expect(tabMuteMenuItem({ overlay: overlay(false), canResolveRuntimeTabId: true })).toEqual({
-      label: "Mute tab",
+      label: "mute tab",
       disabled: false,
     });
     expect(tabMuteMenuItem({ overlay: overlay(true), canResolveRuntimeTabId: true })).toEqual({
-      label: "Unmute tab",
+      label: "unmute tab",
       disabled: false,
     });
   });

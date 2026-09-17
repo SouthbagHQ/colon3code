@@ -82,7 +82,7 @@ export function PullRequestReviewerPicker({
           : `could not ask ${candidate.login} for a review 3:`,
         description: readableFailure(
           squashAtomCommandFailure(result),
-          "The host refused it. Check that you have write access on this repository, and that they still have access to it.",
+          "the host refused it. check that you have write access on this repository, and that they still have access to it.",
         ),
       });
       return;
@@ -98,22 +98,22 @@ export function PullRequestReviewerPicker({
   return (
     <PullRequestCandidatePicker
       icon={<UserPlusIcon className="size-3.5" />}
-      label="Request a review"
+      label="request a review"
       allowed={allowed}
-      disabledReason="Asking someone to review needs write access on this repository"
+      disabledReason="asking someone to review needs write access on this repository"
       open={open}
       onOpenChange={setOpen}
       query={query}
       onQueryChange={setQuery}
-      searchLabel="Search people with access"
+      searchLabel="search people with access"
       isPending={candidatesQuery.isPending && candidatesQuery.data === null}
       error={candidatesQuery.data === null ? candidatesQuery.error : null}
       candidates={candidates}
-      emptyLabel="Nobody else has access to this repository."
-      noMatchLabel="Nobody with access matches that."
-      errorLabel="The people with access could not be read."
+      emptyLabel="nobody else has access to this repository."
+      noMatchLabel="nobody with access matches that."
+      errorLabel="the people with access could not be read."
       truncated={candidatesQuery.data?.truncated === true}
-      truncatedLabel="This repository has more people with access than are listed here. Ask for the rest on the host."
+      truncatedLabel="this repository has more people with access than are listed here. ask for the rest on the host."
       candidateKey={(candidate) => `${candidate.kind}:${candidate.id}`}
       disabled={pending !== null}
       onSelect={(candidate) => void toggle(candidate)}
@@ -125,7 +125,7 @@ export function PullRequestReviewerPicker({
             <span className="shrink-0 text-muted-foreground">team</span>
           ) : null}
           {candidate.isRequested ? (
-            <CheckIcon aria-label="Already asked" className="size-3.5 shrink-0" />
+            <CheckIcon aria-label="already asked" className="size-3.5 shrink-0" />
           ) : null}
         </>
       )}

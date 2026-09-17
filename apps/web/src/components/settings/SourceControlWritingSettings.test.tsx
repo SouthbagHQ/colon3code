@@ -79,7 +79,7 @@ function button(label: string) {
 }
 
 function openEditor() {
-  act(() => button("Write custom instructions for all").props.onClick());
+  act(() => button("write custom instructions for all").props.onClick());
 }
 
 function editInstructions(value: string) {
@@ -87,7 +87,7 @@ function editInstructions(value: string) {
 }
 
 function applyInstructions() {
-  act(() => button("Apply instructions to all").props.onClick());
+  act(() => button("apply instructions to all").props.onClick());
 }
 
 beforeEach(() => {
@@ -171,7 +171,7 @@ describe("mixed source control instructions", () => {
     const initialStyles = state.styles;
     openEditor();
     expect(renderer!.root.findByType("textarea").props.value).toBe("");
-    expect(button("Apply instructions to all").props.disabled).toBe(true);
+    expect(button("apply instructions to all").props.disabled).toBe(true);
 
     applyInstructions();
     expect(state.updateSettings).not.toHaveBeenCalled();
@@ -181,7 +181,7 @@ describe("mixed source control instructions", () => {
   it("applies edited instructions to every selected environment", () => {
     openEditor();
     editInstructions("  Keep titles concise.  ");
-    expect(button("Apply instructions to all").props.disabled).toBe(false);
+    expect(button("apply instructions to all").props.disabled).toBe(false);
     applyInstructions();
 
     expect(state.updateSettings).toHaveBeenCalledTimes(1);
@@ -196,7 +196,7 @@ describe("mixed source control instructions", () => {
     openEditor();
     editInstructions("Temporary instructions");
     editInstructions("");
-    expect(button("Apply instructions to all").props.disabled).toBe(false);
+    expect(button("apply instructions to all").props.disabled).toBe(false);
     applyInstructions();
 
     expect(state.updateSettings).toHaveBeenCalledTimes(1);
@@ -215,7 +215,7 @@ describe("mixed source control instructions", () => {
     ]);
     // Template preferences still differ, but that is the templates row's
     // concern: the instructions editor is no longer a bulk draft.
-    expect(button("Write custom instructions for all")).toBeUndefined();
+    expect(button("write custom instructions for all")).toBeUndefined();
     expect(renderer!.root.findByType("textarea").props.defaultValue).toBe("Shared instructions");
   });
 });

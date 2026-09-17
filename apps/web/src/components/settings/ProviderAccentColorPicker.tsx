@@ -163,7 +163,7 @@ function ProviderCustomColorPanel(props: {
           }}
           onBlur={() => setHexDraft(null)}
           className="h-8 rounded-md border border-input bg-background px-2 font-mono text-xs text-foreground outline-none transition-colors focus:border-ring"
-          aria-label="Custom hex accent color"
+          aria-label="custom hex accent color"
           spellCheck={false}
         />
       </div>
@@ -190,7 +190,7 @@ function ProviderCustomColorPicker(props: {
               "hover:scale-105 hover:border-ring/60",
             )}
             style={{ backgroundColor: normalized }}
-            aria-label={`Choose accent color for ${props.displayName}`}
+            aria-label={`choose accent color for ${props.displayName}`}
           >
             <PipetteIcon className="size-3 text-white/70 drop-shadow-sm" aria-hidden />
           </button>
@@ -214,7 +214,7 @@ function ProviderCustomColorPicker(props: {
               disabled={!props.value}
             >
               <XIcon className="size-3.5" aria-hidden />
-              Clear color
+              clear color
             </Button>
           }
         />
@@ -313,7 +313,7 @@ export function ProviderAccentColorPicker(props: {
 
   return (
     <div className="grid gap-2">
-      <span className="text-xs font-medium text-foreground">Accent color</span>
+      <span className="text-xs font-medium text-foreground">accent color</span>
       {picker}
       {description ? <span className="text-xs text-muted-foreground">{description}</span> : null}
     </div>

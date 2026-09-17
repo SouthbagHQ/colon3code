@@ -209,7 +209,7 @@ describe("UsagePage model breakdown", () => {
     const body = markup.match(/<tbody>(.*?)<\/tbody>/)?.[1] ?? "";
     const unpricedRow = body.split("<tr").find((row) => row.includes("unpriced-model")) ?? "";
 
-    expect(unpricedRow).toContain("Unpriced");
+    expect(unpricedRow).toContain("unpriced");
     expect(unpricedRow).not.toContain("$0.00");
   });
 

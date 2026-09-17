@@ -32,7 +32,7 @@ export function LocalEnvironmentSetting() {
     try {
       await setEnabled(!enabled);
     } catch (cause) {
-      setError(cause instanceof Error ? cause.message : "Couldn't change this setting.");
+      setError(cause instanceof Error ? cause.message : "couldn't change this setting.");
       setIsUpdating(false);
     }
   };
@@ -43,15 +43,15 @@ export function LocalEnvironmentSetting() {
         {...searchableSetting("local-environment")}
         description={
           enabled
-            ? "Run agents on this computer. Turn off to use :3 Code only with remote environments."
-            : "Turned off. Agents only run in remote environments."
+            ? "run agents on this computer. turn off to use :3 Code only with remote environments."
+            : "turned off. agents only run in remote environments."
         }
         control={
           <Switch
             checked={enabled}
             disabled={isUpdating}
             onCheckedChange={() => setConfirmOpen(true)}
-            aria-label="Local environment"
+            aria-label="local environment"
           />
         }
       />
@@ -66,18 +66,18 @@ export function LocalEnvironmentSetting() {
         <AlertDialogPopup>
           <AlertDialogHeader>
             <AlertDialogTitle>
-              {enabled ? "Turn off local environment?" : "Turn on local environment?"}
+              {enabled ? "turn off local environment?" : "turn on local environment?"}
             </AlertDialogTitle>
             <AlertDialogDescription>
               {enabled
-                ? ":3 Code will restart without running a server on this computer. Any agents and terminals running here will stop, and other devices will no longer be able to connect to this computer. Your projects, history, and remote environments are unaffected."
+                ? ":3 Code will restart without running a server on this computer. any agents and terminals running here will stop, and other devices will no longer be able to connect to this computer. your projects, history, and remote environments are unaffected."
                 : ":3 Code will restart and start running a server on this computer again."}
             </AlertDialogDescription>
           </AlertDialogHeader>
           {error ? <p className="px-6 pb-4 text-sm text-destructive">{error}</p> : null}
           <AlertDialogFooter>
             <AlertDialogClose disabled={isUpdating} render={<Button variant="outline" />}>
-              Cancel
+              cancel
             </AlertDialogClose>
             <Button
               variant={enabled ? "destructive" : "default"}
@@ -87,12 +87,12 @@ export function LocalEnvironmentSetting() {
               {isUpdating ? (
                 <>
                   <Spinner className="size-3.5" />
-                  Restarting…
+                  restarting…
                 </>
               ) : enabled ? (
-                "Restart and turn off"
+                "restart and turn off"
               ) : (
-                "Restart and turn on"
+                "restart and turn on"
               )}
             </Button>
           </AlertDialogFooter>

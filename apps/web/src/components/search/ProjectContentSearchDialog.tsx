@@ -84,16 +84,16 @@ function SearchOptionButton(props: {
 function EmptyContentSearchDialog() {
   return (
     <CommandPaletteContent
-      aria-label="Search project contents"
-      escapeLabel="Back"
-      footerActionLabel="Open file"
-      inputProps={{ disabled: true, placeholder: "Search project contents…" }}
+      aria-label="search project contents"
+      escapeLabel="back"
+      footerActionLabel="open file"
+      inputProps={{ disabled: true, placeholder: "search project contents…" }}
       mode="none"
       panelClassName="flex min-h-0 flex-1 items-center justify-center px-6 text-center text-sm text-muted-foreground"
       testId="project-content-search"
       value=""
     >
-      Open a project to search its files.
+      open a project to search its files.
     </CommandPaletteContent>
   );
 }
@@ -162,28 +162,28 @@ function OpenContentSearchDialog(props: {
 
   return (
     <CommandPaletteContent
-      aria-label={`Search file contents in ${target.projectName}`}
-      escapeLabel="Back"
-      footerActionLabel="Open file"
+      aria-label={`search file contents in ${target.projectName}`}
+      escapeLabel="back"
+      footerActionLabel="open file"
       inputAccessory={
         <div className="absolute inset-e-2.5 top-1/2 flex shrink-0 -translate-y-1/2 items-center gap-0.5 rounded-md border bg-muted/30 p-0.5">
           <SearchOptionButton
             active={caseSensitive}
-            label="Match case"
+            label="match case"
             onClick={() => setCaseSensitive((current) => !current)}
           >
             Aa
           </SearchOptionButton>
           <SearchOptionButton
             active={wholeWord}
-            label="Match whole word"
+            label="match whole word"
             onClick={() => setWholeWord((current) => !current)}
           >
             <span className="underline decoration-2 underline-offset-2">ab</span>
           </SearchOptionButton>
           <SearchOptionButton
             active={useRegex}
-            label="Use regular expression"
+            label="use regular expression"
             onClick={() => setUseRegex((current) => !current)}
           >
             .*
@@ -192,7 +192,7 @@ function OpenContentSearchDialog(props: {
       }
       inputProps={{
         className: "pe-30",
-        placeholder: `Search in ${target.projectName}`,
+        placeholder: `search in ${target.projectName}`,
         onKeyDown: (event) => {
           if (event.key === "ArrowDown" && matches.length > 0) {
             event.preventDefault();
@@ -231,7 +231,7 @@ function OpenContentSearchDialog(props: {
           ) : search.error ? (
             <span className="text-destructive">{search.error}</span>
           ) : search.invalidRegex ? (
-            <span className="text-destructive">Invalid regular expression</span>
+            <span className="text-destructive">invalid regular expression</span>
           ) : (
             `${matches.length.toLocaleString()}${search.truncated ? "+" : ""} results in ${fileCount.toLocaleString()} files`
           )}
@@ -242,7 +242,7 @@ function OpenContentSearchDialog(props: {
         <div className="flex flex-1 items-center justify-center px-6 text-center text-sm text-muted-foreground">
           {search.hasQuery && !search.isPending && !search.error
             ? "no results found"
-            : "Type to search across your project."}
+            : "type to search across your project."}
         </div>
       ) : (
         <ScrollArea className="min-h-0 flex-1" scrollFade>

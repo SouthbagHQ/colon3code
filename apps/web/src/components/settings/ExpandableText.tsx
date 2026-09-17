@@ -10,7 +10,7 @@ export function ExpandableText({
   text,
   className,
   collapsedClassName = "line-clamp-3",
-  expandLabel = "Show full error",
+  expandLabel = "show full error",
 }: {
   text: string;
   className?: string;
@@ -40,7 +40,7 @@ export function ExpandableText({
           className="cursor-pointer mt-1 text-[11px] font-medium text-foreground/70 underline-offset-2 hover:text-foreground hover:underline"
           onClick={() => setExpanded((value) => !value)}
         >
-          {expanded ? "Show less" : expandLabel}
+          {expanded ? "show less" : expandLabel}
         </button>
       ) : null}
     </div>

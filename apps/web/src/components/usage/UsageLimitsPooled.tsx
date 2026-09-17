@@ -51,7 +51,7 @@ function AccountChip({ email }: { readonly email: string }) {
   return (
     <span
       role="img"
-      aria-label={`Account ${accountInitials(email)}`}
+      aria-label={`account ${accountInitials(email)}`}
       className="inline-flex size-4 shrink-0 items-center justify-center rounded-full text-[9px] leading-none font-semibold"
       style={{ backgroundColor: `oklch(0.85 0.08 ${hue})`, color: `oklch(0.35 0.1 ${hue})` }}
     >
@@ -167,29 +167,29 @@ function SegmentPopover({
         {account.email ? (
           <RedactedSensitiveText
             value={account.email}
-            ariaLabel="Toggle account email visibility"
-            revealTooltip="Click to reveal email"
-            hideTooltip="Click to hide email"
+            ariaLabel="toggle account email visibility"
+            revealTooltip="click to reveal email"
+            hideTooltip="click to hide email"
             className="w-fit"
           />
         ) : null}
       </div>
       <div className="flex flex-col gap-1 border-t border-border/60 pt-2.5">
-        {account.plan ? <Row label="Plan">{account.plan}</Row> : null}
+        {account.plan ? <Row label="plan">{account.plan}</Row> : null}
         {where ? (
-          <Row label={account.environments.length > 0 ? "Signed in" : "Via"}>{where}</Row>
+          <Row label={account.environments.length > 0 ? "signed in" : "via"}>{where}</Row>
         ) : null}
       </div>
       <div className="flex flex-col gap-1 border-t border-border/60 pt-2.5">
-        <Row label="Left">{remaining}%</Row>
+        <Row label="left">{remaining}%</Row>
         {window.resetsAt ? (
-          <Row label="Resets">
+          <Row label="resets">
             {formatUpcomingTimestamp(window.resetsAt, timestampFormat, now)}
             {resetsIn ? ` · ${resetsIn.replace("resets in ", "in ")}` : ""}
           </Row>
         ) : null}
         {reset && reset.restoresPercent > 0 ? (
-          <Row label="Restores">+{reset.restoresPercent}% of pool</Row>
+          <Row label="restores">+{reset.restoresPercent}% of pool</Row>
         ) : null}
       </div>
       {credits && redeem ? (
@@ -203,7 +203,7 @@ function SegmentPopover({
               className="ms-auto"
               onClick={onRedeem}
             >
-              {redeem.busy ? "Using…" : "Use reset"}
+              {redeem.busy ? "using…" : "use reset"}
             </Button>
           </span>
         </div>
@@ -353,7 +353,7 @@ function LegendRow({
           className="absolute inset-0 rounded-sm opacity-35"
           style={{ backgroundColor: color }}
         />
-        <span className="sr-only">Segment </span>
+        <span className="sr-only">segment </span>
         <span className="relative">{index}</span>
       </span>
       <AccountName account={account} className="min-w-0 truncate font-medium text-foreground" />
@@ -548,7 +548,7 @@ export function UsageLimitsPooled({
     <div className="flex flex-col gap-8">
       {pools.length === 0 && notices.length === 0 ? (
         <p className="text-sm text-muted-foreground">
-          No provider on the selected environments reports subscription limits.
+          no provider on the selected environments reports subscription limits.
         </p>
       ) : null}
       {pools.map((pool) => (

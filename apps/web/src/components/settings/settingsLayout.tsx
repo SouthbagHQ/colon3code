@@ -150,7 +150,7 @@ export function PolicyTooltip({ children }: { readonly children: string }) {
       <TooltipTrigger
         delay={200}
         render={
-          <Button size="icon-micro" variant="ghost-muted" aria-label="Background policy details">
+          <Button size="icon-micro" variant="ghost-muted" aria-label="background policy details">
             <InfoIcon className="size-3.5" />
           </Button>
         }
@@ -354,7 +354,7 @@ export function SettingsRow({
     source === "project" || source === "mixed" ? (
       <SettingResetButton
         label={typeof title === "string" ? title : "override"}
-        tooltip="Reset to inherited value"
+        tooltip="reset to inherited value"
         onClick={() => (onResetOverride ? onResetOverride() : clearOverrides(scopedKeys))}
       />
     ) : null
@@ -388,11 +388,11 @@ export function SettingsRow({
     unavailable && control
       ? inertControl(
           context
-            ? "Reconnect the selected environment to change this setting."
+            ? "reconnect the selected environment to change this setting."
             : PRIMARY_SETTINGS_UNAVAILABLE_MESSAGE,
         )
       : environmentWide && control
-        ? inertControl("Environment-wide setting. Select an environment to change it.")
+        ? inertControl("environment-wide setting. select an environment to change it.")
         : control;
   // Server rows get an indicator beside the title that opens the resolution
   // chain per target at every scope; client rows keep a plain status only.
@@ -408,14 +408,14 @@ export function SettingsRow({
       }),
     );
   const inheritance: { state: SettingInheritanceState; summary: string } = mixed
-    ? { state: "mixed", summary: "Mixed across selected environments" }
+    ? { state: "mixed", summary: "mixed across selected environments" }
     : source === "project"
-      ? { state: "overridden", summary: "Overridden for this project" }
+      ? { state: "overridden", summary: "overridden for this project" }
       : source === "environment" && scopedKeys.length > 0
-        ? { state: "inherited", summary: `Inherited from ${inheritedFrom}` }
+        ? { state: "inherited", summary: `inherited from ${inheritedFrom}` }
         : customized
-          ? { state: "environment", summary: "Set on the environment" }
-          : { state: "default", summary: "Built-in default" };
+          ? { state: "environment", summary: "set on the environment" }
+          : { state: "default", summary: "built-in default" };
   const renderedInheritance =
     context && serverScoped && settingKeys.length > 0 ? (
       <SettingInheritance
@@ -483,7 +483,7 @@ export function SettingsRow({
 
 export function SettingResetButton({
   label,
-  tooltip = "Reset to default",
+  tooltip = "reset to default",
   disabled = false,
   onClick,
 }: {
@@ -499,7 +499,7 @@ export function SettingResetButton({
           <Button
             size="icon-micro"
             variant="ghost-muted"
-            aria-label={`Reset ${label} to default`}
+            aria-label={`reset ${label} to default`}
             disabled={disabled}
             onClick={(event) => {
               event.stopPropagation();

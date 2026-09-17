@@ -39,7 +39,7 @@ function reportScriptFailure(result: AtomCommandResult<unknown, unknown>) {
     toastManager.add({
       type: "error",
       title: "failed to save project actions 3:",
-      description: error instanceof Error ? error.message : "An error occurred.",
+      description: error instanceof Error ? error.message : "an error occurred.",
     });
   }
   return mapAtomCommandResult(result, () => undefined);

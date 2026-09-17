@@ -82,21 +82,21 @@ describe("formatExpiresInLabel", () => {
   });
 
   it("returns Expired when the instant is in the past", () => {
-    expect(formatExpiresInLabel("2026-04-07T11:59:00.000Z")).toBe("Expired");
+    expect(formatExpiresInLabel("2026-04-07T11:59:00.000Z")).toBe("expired");
   });
 
   it("uses sub-minute second count", () => {
-    expect(formatExpiresInLabel("2026-04-07T12:00:45.000Z")).toBe("Expires in 45s");
+    expect(formatExpiresInLabel("2026-04-07T12:00:45.000Z")).toBe("expires in 45s");
   });
 
   it("uses minutes and seconds under one hour", () => {
-    expect(formatExpiresInLabel("2026-04-07T12:04:12.000Z")).toBe("Expires in 4m 12s");
-    expect(formatExpiresInLabel("2026-04-07T12:15:00.000Z")).toBe("Expires in 15m");
+    expect(formatExpiresInLabel("2026-04-07T12:04:12.000Z")).toBe("expires in 4m 12s");
+    expect(formatExpiresInLabel("2026-04-07T12:15:00.000Z")).toBe("expires in 15m");
   });
 
   it("uses hours with minute and second remainder", () => {
-    expect(formatExpiresInLabel("2026-04-07T14:02:03.000Z")).toBe("Expires in 2h 2m 3s");
-    expect(formatExpiresInLabel("2026-04-07T18:00:00.000Z")).toBe("Expires in 6h");
+    expect(formatExpiresInLabel("2026-04-07T14:02:03.000Z")).toBe("expires in 2h 2m 3s");
+    expect(formatExpiresInLabel("2026-04-07T18:00:00.000Z")).toBe("expires in 6h");
   });
 });
 

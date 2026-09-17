@@ -20,37 +20,37 @@ export function presentSavedCloudEnvironmentConnection(
   switch (connection.phase) {
     case "connected":
       return {
-        buttonLabel: "Connected",
+        buttonLabel: "connected",
         statusText: connectionStatusText(connection),
         tone: "connected",
       };
     case "connecting":
       return {
-        buttonLabel: "Connecting…",
+        buttonLabel: "connecting…",
         statusText: connectionStatusText(connection),
         tone: "connecting",
       };
     case "reconnecting":
       return {
-        buttonLabel: "Reconnecting…",
+        buttonLabel: "reconnecting…",
         statusText: connectionStatusText(connection),
         tone: "connecting",
       };
     case "error":
       return {
-        buttonLabel: "Connection failed",
+        buttonLabel: "connection failed",
         statusText: connectionStatusText(connection),
         tone: "error",
       };
     case "offline":
       return {
-        buttonLabel: "Offline",
+        buttonLabel: "offline",
         statusText: connectionStatusText(connection),
         tone: "idle",
       };
     case "available":
       return {
-        buttonLabel: "Not connected",
+        buttonLabel: "not connected",
         statusText: connectionStatusText(connection),
         tone: "idle",
       };

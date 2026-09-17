@@ -47,7 +47,7 @@ describe("ThreadArchiveBlockedError", () => {
       environmentId: "environment-1",
       threadId: "thread-1",
     });
-    expect(error.message).toBe("Cannot archive a running thread.");
+    expect(error.message).toBe("cannot archive a running thread.");
   });
 });
 
@@ -89,7 +89,7 @@ describe("requestThreadUnpinConfirmation", () => {
     });
 
     expect(message).toBe(
-      'Unpin thread "Release prep"?\nThis will move the thread out of your pinned section.',
+      'unpin thread "Release prep"?\nthis will move the thread out of your pinned section.',
     );
     expect(result).toMatchObject({ _tag: "Success", value: false });
   });

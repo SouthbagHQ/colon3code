@@ -33,17 +33,17 @@ export function feedbackBannerItem(
                 toastManager.add({
                   type: "error",
                   title: "could not copy thread ID 3:",
-                  description: error instanceof Error ? error.message : "An error occurred.",
+                  description: error instanceof Error ? error.message : "an error occurred.",
                 });
               },
             );
           }}
         >
-          Copy ID
+          copy ID
         </Button>
       ) : undefined,
     ...(submission.status !== "uploading"
-      ? { dismissLabel: "Dismiss feedback notice", onDismiss }
+      ? { dismissLabel: "dismiss feedback notice", onDismiss }
       : {}),
   };
 }

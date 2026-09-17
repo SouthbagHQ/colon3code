@@ -220,8 +220,8 @@ async function runUpload(job: UploadJob): Promise<void> {
         environmentId: job.environmentId,
         reason:
           verification.status === "missing"
-            ? "Uploaded file expired. Remove it and attach it again."
-            : "Uploaded file could not be verified. Retry when the server reconnects.",
+            ? "uploaded file expired. remove it and attach it again."
+            : "uploaded file could not be verified. retry when the server reconnects.",
         ...(job.previous ? { previous: job.previous } : {}),
       });
       return;
@@ -238,7 +238,7 @@ async function runUpload(job: UploadJob): Promise<void> {
     setUploadState(job.image.id, {
       status: "failed",
       environmentId: job.environmentId,
-      reason: "Unsupported image type",
+      reason: "unsupported image type",
       ...(job.previous ? { previous: job.previous } : {}),
     });
     return;
@@ -248,7 +248,7 @@ async function runUpload(job: UploadJob): Promise<void> {
     setUploadState(job.image.id, {
       status: "failed",
       environmentId: job.environmentId,
-      reason: "Original file is no longer available",
+      reason: "original file is no longer available",
       ...(job.previous ? { previous: job.previous } : {}),
     });
     return;
@@ -321,12 +321,12 @@ async function runUpload(job: UploadJob): Promise<void> {
     environmentId: job.environmentId,
     reason:
       result.step === "mint"
-        ? "Upload could not start"
+        ? "upload could not start"
         : result.step === "resolve-url"
-          ? "Not connected"
+          ? "not connected"
           : result.error instanceof Error
             ? result.error.message
-            : "Upload failed",
+            : "upload failed",
     ...(result.attachmentId ? { attachmentId: result.attachmentId } : {}),
     ...(job.previous ? { previous: job.previous } : {}),
   });
@@ -352,7 +352,7 @@ function pumpUploads(): void {
           setUploadState(job.image.id, {
             status: "failed",
             environmentId: job.environmentId,
-            reason: "Upload failed",
+            reason: "upload failed",
             ...(job.previous ? { previous: job.previous } : {}),
           });
         }

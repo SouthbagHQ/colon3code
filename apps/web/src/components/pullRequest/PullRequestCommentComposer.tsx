@@ -91,7 +91,7 @@ export function PullRequestCommentComposer({
             className="rounded-full shadow-lg [--glass-opacity:50%]"
           />
         }
-        aria-label="Comment on pull request"
+        aria-label="comment on pull request"
       >
         <MessageSquareIcon className="size-4" />
       </PopoverTrigger>
@@ -103,10 +103,10 @@ export function PullRequestCommentComposer({
         initialFocus={textareaRef}
       >
         <div className="mb-3 flex items-center justify-between gap-2">
-          <PopoverTitle className="text-sm">Comment on pull request</PopoverTitle>
+          <PopoverTitle className="text-sm">comment on pull request</PopoverTitle>
           <PopoverClose
             render={<Button size="icon-xs" variant="ghost" />}
-            aria-label="Close comment composer"
+            aria-label="close comment composer"
           >
             <XIcon className="size-3.5" />
           </PopoverClose>
@@ -120,8 +120,8 @@ export function PullRequestCommentComposer({
             disabled={submitting !== null || actionPending}
             value={body}
             rows={3}
-            placeholder="Leave a comment"
-            aria-label="Comment on this pull request"
+            placeholder="leave a comment"
+            aria-label="comment on this pull request"
             onChange={(event) => setBody(event.target.value)}
           />
           <div className="flex flex-wrap justify-end gap-2">
@@ -139,11 +139,11 @@ export function PullRequestCommentComposer({
                 )}
                 {submitting === followUpAction
                   ? followUpAction === "close"
-                    ? "Closing..."
-                    : "Reopening..."
+                    ? "closing..."
+                    : "reopening..."
                   : followUpAction === "close"
-                    ? "Close with comment"
-                    : "Reopen with comment"}
+                    ? "close with comment"
+                    : "reopen with comment"}
               </Button>
             )}
             <Button
@@ -153,7 +153,7 @@ export function PullRequestCommentComposer({
               onClick={() => void submit("comment")}
             >
               <SendIcon className="size-3.5" />
-              {submitting === "comment" ? "Posting..." : "Comment"}
+              {submitting === "comment" ? "posting..." : "comment"}
             </Button>
           </div>
         </div>

@@ -124,11 +124,11 @@ function EnvironmentCloneToasts({ environmentId }: { environmentId: EnvironmentI
       if (clone.phase === "running") {
         const options = stackedThreadToast({
           type: "loading",
-          title: `Cloning ${name}`,
+          title: `cloning ${name}`,
           description: projectCloneProgressSummary(clone),
           timeout: 0,
           actionProps: {
-            children: "Cancel",
+            children: "cancel",
             onClick: () => {
               void runCloneAction("failed to cancel clone 3:", () =>
                 cancelClone({ environmentId, input: { projectId: clone.projectId } }),
@@ -154,7 +154,7 @@ function EnvironmentCloneToasts({ environmentId }: { environmentId: EnvironmentI
           description: clone.destinationPath,
           timeout: 8_000,
           actionProps: {
-            children: "Open project",
+            children: "open project",
             onClick: () => {
               closeToast();
               openProject(clone.projectId);
@@ -177,11 +177,11 @@ function EnvironmentCloneToasts({ environmentId }: { environmentId: EnvironmentI
       const cancelled = clone.phase === "cancelled";
       const options = stackedThreadToast({
         type: cancelled ? "info" : "error",
-        title: cancelled ? `Cancelled cloning ${name}` : `failed to clone ${name} 3:`,
-        description: cancelled ? clone.destinationPath : (clone.error ?? "The clone failed."),
+        title: cancelled ? `cancelled cloning ${name}` : `failed to clone ${name} 3:`,
+        description: cancelled ? clone.destinationPath : (clone.error ?? "the clone failed."),
         timeout: 0,
         actionProps: {
-          children: "Retry",
+          children: "retry",
           onClick: () => {
             void runCloneAction("failed to retry clone 3:", () =>
               retryClone({ environmentId, input: { projectId: clone.projectId } }),
@@ -191,7 +191,7 @@ function EnvironmentCloneToasts({ environmentId }: { environmentId: EnvironmentI
         data: {
           ...(cancelled ? { hideCopyButton: true } : {}),
           secondaryActionProps: {
-            children: "Remove project",
+            children: "remove project",
             onClick: () => {
               // The server drops the clone with the project, which closes
               // this toast; a failed removal leaves it (and Retry) in place.

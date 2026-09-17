@@ -22,8 +22,8 @@ describe("DiffCommentAnnotation", () => {
     expect(markup).not.toContain("Local comment");
     expect(markup).not.toContain("on +78");
     expect(markup).toContain("⌘/Ctrl Enter to send");
-    expect(markup).toContain("Add a comment…");
-    expect(markup).toContain(">Comment</button>");
+    expect(markup).toContain("add a comment…");
+    expect(markup).toContain(">comment</button>");
     expect(markup).toContain("autofocus");
     const textareaControl = markup.match(/<span[^>]*data-slot="textarea-control"[^>]*>/)?.[0];
     expect(textareaControl).toBeDefined();
@@ -38,18 +38,18 @@ describe("DiffCommentAnnotation", () => {
         rangeLabel="src/app.ts:4"
         text=""
         {...callbacks}
-        submitLabel="Add to review"
+        submitLabel="add to review"
         secondaryAction={{
-          label: "Add to agent",
+          label: "add to agent",
           onAction: vi.fn(),
         }}
       />,
     );
 
-    expect(markup).toContain("Add a comment…");
-    expect(markup).toContain(">Add to review</button>");
-    expect(markup.match(/<button[^>]*disabled[^>]*>Add to review<\/button>/)).not.toBeNull();
-    expect(markup.match(/<button[^>]*disabled[^>]*>Add to agent<\/button>/)).not.toBeNull();
+    expect(markup).toContain("add a comment…");
+    expect(markup).toContain(">add to review</button>");
+    expect(markup.match(/<button[^>]*disabled[^>]*>add to review<\/button>/)).not.toBeNull();
+    expect(markup.match(/<button[^>]*disabled[^>]*>add to agent<\/button>/)).not.toBeNull();
   });
 
   it("renders a saved comment without a nested card or redundant range label", () => {
@@ -66,7 +66,7 @@ describe("DiffCommentAnnotation", () => {
     expect(markup).not.toContain("chat-composer-glass");
     expect(markup).not.toContain("on +78");
     expect(markup).toContain("Please keep this branch explicit.");
-    expect(markup).toContain('aria-label="Delete comment"');
+    expect(markup).toContain('aria-label="delete comment"');
     expect(markup).toContain("border-s-2");
     expect(markup).toContain("bg-primary/[0.045]");
     expect(markup).toContain("lucide-message-circle");

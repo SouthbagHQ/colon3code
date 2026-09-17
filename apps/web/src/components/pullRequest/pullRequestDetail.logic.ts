@@ -27,9 +27,9 @@ import { reviewCommentContextId } from "~/lib/composerContextRecords";
 import { removeInlineContextReference } from "~/lib/composerContextReferences";
 
 export const PULL_REQUEST_MERGE_METHOD_LABELS: Record<PullRequestMergeMethod, string> = {
-  merge: "Merge",
-  squash: "Squash and merge",
-  rebase: "Rebase and merge",
+  merge: "merge",
+  squash: "squash and merge",
+  rebase: "rebase and merge",
 };
 
 /** Old environments keep their existing actions; new ones must finish stack discovery first. */
@@ -189,14 +189,14 @@ export function isThreadOwnPullRequest(
 export function pullRequestHandoffLabels(inThisThread: boolean) {
   return inThisThread
     ? {
-        fixFinding: "Fix in this thread",
-        fixCheck: "Fix in this thread",
-        fixFindings: "Fix findings in this thread",
+        fixFinding: "fix in this thread",
+        fixCheck: "fix in this thread",
+        fixFindings: "fix findings in this thread",
       }
     : {
-        fixFinding: "Fix in a thread",
-        fixCheck: "Fix",
-        fixFindings: "Fix findings in a thread",
+        fixFinding: "fix in a thread",
+        fixCheck: "fix",
+        fixFindings: "fix findings in a thread",
       };
 }
 
@@ -491,7 +491,7 @@ export function buildPullRequestTimeline(
             id: "merged",
             at: detail.mergedAt,
             kind: "merged" as const,
-            title: "Pull request merged",
+            title: "pull request merged",
             body: null,
             markdown: false,
             url: null,
@@ -511,7 +511,7 @@ export function buildPullRequestTimeline(
             id: "closed",
             at: detail.closedAt,
             kind: "closed" as const,
-            title: "Pull request closed",
+            title: "pull request closed",
             body: null,
             markdown: false,
             url: null,

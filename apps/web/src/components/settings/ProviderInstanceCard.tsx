@@ -162,9 +162,9 @@ function ProviderAuthEmail(props: { readonly email: string | undefined }) {
   return (
     <RedactedSensitiveText
       value={email}
-      ariaLabel="Toggle account email visibility"
-      revealTooltip="Click to reveal email"
-      hideTooltip="Click to hide email"
+      ariaLabel="toggle account email visibility"
+      revealTooltip="click to reveal email"
+      hideTooltip="click to hide email"
       className="max-w-full truncate"
     />
   );
@@ -253,12 +253,12 @@ function ProviderEnvironmentSection(props: {
 
   return (
     <SettingsRow
-      title="Variables"
+      title="variables"
       description="API keys, base URLs, and other per-instance CLI settings."
       control={
         <Button type="button" size="sm" variant="outline" onClick={addVariable}>
           <PlusIcon className="size-3" />
-          Add variable
+          add variable
         </Button>
       }
     >
@@ -273,7 +273,7 @@ function ProviderEnvironmentSection(props: {
                 onCommit={(name) => updateVariable(variable.id, { name: name.trim() })}
                 placeholder="VARIABLE_NAME"
                 spellCheck={false}
-                aria-label={`Environment variable name ${index + 1}`}
+                aria-label={`environment variable name ${index + 1}`}
               />
               <span className="hidden text-xs text-muted-foreground sm:inline" aria-hidden>
                 =
@@ -286,10 +286,10 @@ function ProviderEnvironmentSection(props: {
                 type={variable.sensitive ? "password" : undefined}
                 autoComplete="off"
                 placeholder={
-                  variable.valueRedacted ? "Stored secret, enter a new value to replace" : "value"
+                  variable.valueRedacted ? "stored secret, enter a new value to replace" : "value"
                 }
                 spellCheck={false}
-                aria-label={`Environment variable value ${index + 1}`}
+                aria-label={`environment variable value ${index + 1}`}
               />
               <Tooltip>
                 <TooltipTrigger
@@ -312,7 +312,7 @@ function ProviderEnvironmentSection(props: {
                         });
                       }}
                       aria-pressed={variable.sensitive}
-                      aria-label={`Mark environment variable ${variable.name || index + 1} as sensitive`}
+                      aria-label={`mark environment variable ${variable.name || index + 1} as sensitive`}
                     >
                       {variable.sensitive ? (
                         <LockIcon className="size-3" />
@@ -323,7 +323,7 @@ function ProviderEnvironmentSection(props: {
                   }
                 />
                 <TooltipPopup side="top">
-                  {variable.sensitive ? "Sensitive, stored separately" : "Plain text"}
+                  {variable.sensitive ? "sensitive, stored separately" : "plain text"}
                 </TooltipPopup>
               </Tooltip>
               <Button
@@ -332,14 +332,14 @@ function ProviderEnvironmentSection(props: {
                 variant="ghost-muted"
                 className="[--control-icon-color:currentColor] hover:text-destructive"
                 onClick={() => removeVariable(variable.id)}
-                aria-label={`Remove environment variable ${variable.name || index + 1}`}
+                aria-label={`remove environment variable ${variable.name || index + 1}`}
               >
                 <XIcon className="size-3" />
               </Button>
             </div>
           ))}
           <p className="text-xs text-muted-foreground">
-            Sensitive values are stored separately and never returned to the app.
+            sensitive values are stored separately and never returned to the app.
           </p>
         </div>
       ) : null}
@@ -433,7 +433,7 @@ export function ProviderInstanceCard({
   const statusStyle = PROVIDER_STATUS_STYLES[statusKey];
   const summary = enabled
     ? getProviderSummary(liveProvider)
-    : { headline: "Disabled", detail: null };
+    : { headline: "disabled", detail: null };
   const authEmail = liveProvider?.auth.email?.trim();
   const isAuthenticated = enabled && liveProvider?.auth.status === "authenticated";
   const authLabel =
@@ -452,7 +452,7 @@ export function ProviderInstanceCard({
       toastManager.add({
         type: "success",
         title: `${providerName} update command copied :3`,
-        description: "Run it in a terminal when you are ready to update.",
+        description: "run it in a terminal when you are ready to update.",
       });
     },
     onError: (error, { providerName }) => {
@@ -579,7 +579,7 @@ export function ProviderInstanceCard({
     isAuthenticated && authEmail ? (
       <>
         {needsAttention ? statusDotNode : null}
-        <span>Authenticated as</span>
+        <span>authenticated as</span>
         <ProviderAuthEmail email={authEmail} />
         {authLabel ? <span>· {authLabel}</span> : null}
         {summary.detail ? (
@@ -614,7 +614,7 @@ export function ProviderInstanceCard({
             type="button"
             className="pointer-events-auto absolute inset-0 cursor-pointer rounded-md outline-none focus-visible:ring-2 focus-visible:ring-ring"
             onClick={onSelect}
-            aria-label={`Select ${displayName}`}
+            aria-label={`select ${displayName}`}
             aria-pressed={selected}
           />
           {titleIconNode}
@@ -641,7 +641,7 @@ export function ProviderInstanceCard({
                           size="icon-micro"
                           variant="ghost-muted"
                           className="pointer-events-auto relative shrink-0"
-                          aria-label={`Copy ${displayName} update command`}
+                          aria-label={`copy ${displayName} update command`}
                           onClick={() =>
                             copyToClipboard(updateCommand, { providerName: displayName })
                           }
@@ -650,10 +650,10 @@ export function ProviderInstanceCard({
                         </Button>
                       }
                     />
-                    <TooltipPopup side="top">Copy update command</TooltipPopup>
+                    <TooltipPopup side="top">copy update command</TooltipPopup>
                   </Tooltip>
                 ) : (
-                  <span role="img" aria-label="Update available" className="inline-flex shrink-0">
+                  <span role="img" aria-label="update available" className="inline-flex shrink-0">
                     <ArrowUpCircleIcon className="size-3.5 text-muted-foreground" />
                   </span>
                 )
@@ -675,7 +675,7 @@ export function ProviderInstanceCard({
             checked={enabled}
             disabled={readOnly}
             onCheckedChange={(checked) => updateEnabled(Boolean(checked))}
-            aria-label={`Enable ${displayName}`}
+            aria-label={`enable ${displayName}`}
           />
         </span>
       </div>
@@ -709,7 +709,7 @@ export function ProviderInstanceCard({
                       ? "text-warning hover:text-warning"
                       : "text-muted-foreground hover:text-foreground",
                   )}
-                  aria-label="Update available — view details"
+                  aria-label="update available — view details"
                 >
                   <ArrowUpCircleIcon />
                 </Button>
@@ -723,7 +723,7 @@ export function ProviderInstanceCard({
               <div className="grid min-w-0 gap-3">
                 <div className="grid gap-0.5">
                   <p className="text-[13px] font-semibold leading-tight text-foreground">
-                    Update available
+                    update available
                   </p>
                   <p
                     className={cn(
@@ -746,7 +746,7 @@ export function ProviderInstanceCard({
                     onClick={onRunUpdate}
                   >
                     {isUpdating ? <Spinner /> : <DownloadIcon />}
-                    {isUpdating ? "Updating" : "Update now"}
+                    {isUpdating ? "updating" : "update now"}
                   </Button>
                 ) : null}
                 {onRunUpdate && updateCommand ? (
@@ -772,13 +772,13 @@ export function ProviderInstanceCard({
                             onClick={() =>
                               copyToClipboard(updateCommand, { providerName: displayName })
                             }
-                            aria-label="Copy update command"
+                            aria-label="copy update command"
                           >
                             <CopyIcon className="size-3" />
                           </Button>
                         }
                       />
-                      <TooltipPopup side="top">Copy command</TooltipPopup>
+                      <TooltipPopup side="top">copy command</TooltipPopup>
                     </Tooltip>
                   </div>
                 ) : null}
@@ -795,7 +795,7 @@ export function ProviderInstanceCard({
             disabled={readOnly}
             className="[--control-icon-color:currentColor] hover:text-destructive"
             onClick={onDelete}
-            aria-label={`Delete instance ${instanceId}`}
+            aria-label={`delete instance ${instanceId}`}
           >
             <Trash2Icon />
           </Button>
@@ -808,7 +808,7 @@ export function ProviderInstanceCard({
     <>
       <SettingsSection title={displayName} icon={titleIconNode} headerAction={editorHeaderAction}>
         <SettingsRow
-          title="Display name"
+          title="display name"
           status={
             <div className="flex min-w-0 flex-wrap items-center gap-x-1.5">{editorStatusNode}</div>
           }
@@ -834,7 +834,7 @@ export function ProviderInstanceCard({
                 className="min-w-0 flex-1 sm:w-56 sm:flex-none"
                 value={instance.displayName ?? ""}
                 onCommit={updateDisplayName}
-                placeholder={driverOption?.label ?? "Instance label"}
+                placeholder={driverOption?.label ?? "instance label"}
                 spellCheck={false}
               />
             </div>
@@ -842,10 +842,10 @@ export function ProviderInstanceCard({
         />
       </SettingsSection>
 
-      {setup ? <SettingsSection title="Setup">{setup}</SettingsSection> : null}
+      {setup ? <SettingsSection title="setup">{setup}</SettingsSection> : null}
 
       <SettingsSection
-        title="Runtime"
+        title="runtime"
         inert={readOnly}
         aria-disabled={readOnly || undefined}
         className={readOnly ? "opacity-50 select-none" : undefined}
@@ -860,12 +860,12 @@ export function ProviderInstanceCard({
           />
         ) : (
           <SettingsRow
-            title="Driver"
+            title="driver"
             description={
               <span>
-                This instance uses{" "}
+                this instance uses{" "}
                 <code className="text-foreground">{String(instance.driver)}</code>, which is not
-                available in this build. Its configuration is preserved.
+                available in this build. its configuration is preserved.
               </span>
             }
           />
@@ -873,7 +873,7 @@ export function ProviderInstanceCard({
       </SettingsSection>
 
       <SettingsSection
-        title="Environment"
+        title="environment"
         inert={readOnly}
         aria-disabled={readOnly || undefined}
         className={readOnly ? "opacity-50 select-none" : undefined}
@@ -886,14 +886,14 @@ export function ProviderInstanceCard({
 
       {driverOption !== undefined ? (
         <SettingsSection
-          title="Models"
+          title="models"
           inert={readOnly}
           aria-disabled={readOnly || undefined}
           className={readOnly ? "opacity-50 select-none" : undefined}
         >
           <div className="px-3 py-3 sm:px-4">
             <p className="mb-3 text-xs text-muted-foreground">
-              Favorites, visibility, and ordering are saved on this device. Custom models are saved
+              favorites, visibility, and ordering are saved on this device. custom models are saved
               on the selected environment.
             </p>
             <ProviderModelsSection

@@ -38,7 +38,7 @@ export function resolveEnvironmentOptionLabel(input: {
       if (!label) return false;
       return !GENERIC_LOCAL_ENVIRONMENT_LABELS.has(label.toLowerCase());
     });
-    return preferredLocalLabel ?? "This device";
+    return preferredLocalLabel ?? "this device";
   }
 
   return runtimeLabel ?? savedLabel ?? input.environmentId;
@@ -83,15 +83,15 @@ export function resolveContextStripLabelsCompact(input: {
 }
 
 export function resolveEnvModeLabel(mode: EnvMode): string {
-  return mode === "worktree" ? "New worktree" : "Current checkout";
+  return mode === "worktree" ? "new worktree" : "current checkout";
 }
 
 export function resolveCurrentWorkspaceLabel(activeWorktreePath: string | null): string {
-  return activeWorktreePath ? "Current worktree" : resolveEnvModeLabel("local");
+  return activeWorktreePath ? "current worktree" : resolveEnvModeLabel("local");
 }
 
 export function resolveLockedWorkspaceLabel(activeWorktreePath: string | null): string {
-  return activeWorktreePath ? "Worktree" : "Local checkout";
+  return activeWorktreePath ? "worktree" : "local checkout";
 }
 
 export interface PreviousWorktreeSeed {
@@ -138,7 +138,7 @@ export function resolvePreviousWorktreeSeed(input: {
 }
 
 export function resolvePreviousWorktreeLabel(seed: PreviousWorktreeSeed): string {
-  return seed.branch ? `Previous worktree (${seed.branch})` : "Previous worktree";
+  return seed.branch ? `previous worktree (${seed.branch})` : "previous worktree";
 }
 
 export function resolveEffectiveEnvMode(input: {
@@ -199,14 +199,14 @@ export function resolveBranchTriggerLabel(input: {
     startFromOrigin,
   } = input;
   if (!resolvedActiveBranch) {
-    return "Select ref";
+    return "select ref";
   }
   if (effectiveEnvMode === "worktree" && !activeWorktreePath) {
     const baseRef =
       startFromOrigin && resolvedActiveBranchIsRemote === false
         ? `origin/${resolvedActiveBranch}`
         : resolvedActiveBranch;
-    return `From ${baseRef}`;
+    return `from ${baseRef}`;
   }
   return resolvedActiveBranch;
 }

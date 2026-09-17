@@ -16,13 +16,13 @@ import {
 const ITEMS: ReadonlyArray<SettingsSearchItem> = [
   {
     id: "word-wrap",
-    title: "Word wrap",
+    title: "word wrap",
     to: "/settings/general",
     searchTerms: ["long lines in code previews"],
   },
   {
     id: "network-access",
-    title: "Network access",
+    title: "network access",
     to: "/settings/connections",
     searchTerms: ["remote pairing backend"],
   },
@@ -218,8 +218,8 @@ describe("searchSettings", () => {
   });
 
   it("serves anchor props to panels from the catalog", () => {
-    expect(searchableSetting("word-wrap")).toEqual({ id: "word-wrap", title: "Word wrap" });
-    expect(searchableSetting("archive")).toEqual({ id: "archive", title: "Archived threads" });
+    expect(searchableSetting("word-wrap")).toEqual({ id: "word-wrap", title: "word wrap" });
+    expect(searchableSetting("archive")).toEqual({ id: "archive", title: "archived threads" });
   });
 
   it("routes appearance settings to their current section", () => {
@@ -323,7 +323,7 @@ describe("settings search targets", () => {
 
   it("treats device-local rows as reachable from every selection", () => {
     const setting = getSettingsSearchTargetScope("time-format")!;
-    expect(setting).toEqual({ title: "Time format", scope: null });
+    expect(setting).toEqual({ title: "time format", scope: null });
     expect(isSettingsSearchScopeAvailable(setting.scope, "project")).toBe(true);
     expect(isSettingsSearchScopeAvailable(setting.scope, "all")).toBe(true);
     expect(getSettingsSearchTargetScope("appearance")).toMatchObject({ scope: null });

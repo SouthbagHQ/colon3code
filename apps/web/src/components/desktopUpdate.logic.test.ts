@@ -54,7 +54,7 @@ describe("desktop update button state", () => {
       canRetry: true,
     };
     expect(resolveDesktopUpdateButtonAction(state)).toBe("download");
-    expect(getDesktopUpdateButtonTooltip(state)).toContain("Click to retry");
+    expect(getDesktopUpdateButtonTooltip(state)).toContain("click to retry");
   });
 
   it("keeps install action available after an install error", () => {
@@ -68,7 +68,7 @@ describe("desktop update button state", () => {
       canRetry: true,
     };
     expect(resolveDesktopUpdateButtonAction(state)).toBe("install");
-    expect(getDesktopUpdateButtonTooltip(state)).toContain("Click to retry");
+    expect(getDesktopUpdateButtonTooltip(state)).toContain("click to retry");
   });
 
   it("keeps install action available after a background updater error", () => {
@@ -82,7 +82,7 @@ describe("desktop update button state", () => {
       canRetry: true,
     };
     expect(resolveDesktopUpdateButtonAction(state)).toBe("install");
-    expect(getDesktopUpdateButtonTooltip(state)).toContain("Click to restart and install");
+    expect(getDesktopUpdateButtonTooltip(state)).toContain("click to restart and install");
   });
 
   it("prefers a newly available release over a stale downloaded version", () => {
@@ -250,7 +250,7 @@ describe("desktop update UI helpers", () => {
       availableVersion: "1.1.0",
     };
 
-    expect(getArm64IntelBuildWarningDescription(state)).toContain("Download the available update");
+    expect(getArm64IntelBuildWarningDescription(state)).toContain("download the available update");
   });
 
   it("includes the downloaded version in the install confirmation copy", () => {
@@ -259,7 +259,7 @@ describe("desktop update UI helpers", () => {
         availableVersion: "1.1.0",
         downloadedVersion: "1.1.1",
       }),
-    ).toContain("Install update 1.1.1 and restart :3 Code?");
+    ).toContain("install update 1.1.1 and restart :3 Code?");
   });
 
   it("falls back to generic install confirmation copy when no version is available", () => {
@@ -268,7 +268,7 @@ describe("desktop update UI helpers", () => {
         availableVersion: null,
         downloadedVersion: null,
       }),
-    ).toContain("Install update and restart :3 Code?");
+    ).toContain("install update and restart :3 Code?");
   });
 
   it("keeps the same install confirmation copy across desktop platforms", () => {
@@ -278,7 +278,7 @@ describe("desktop update UI helpers", () => {
         downloadedVersion: "1.1.0",
       }),
     ).toBe(
-      "Install update 1.1.0 and restart :3 Code?\n\nAny running tasks will be interrupted. Make sure you're ready before continuing.",
+      "install update 1.1.0 and restart :3 Code?\n\nany running tasks will be interrupted. make sure you're ready before continuing.",
     );
   });
 });
@@ -340,10 +340,10 @@ describe("canCheckForUpdate", () => {
 });
 
 describe("getDesktopUpdateButtonTooltip", () => {
-  it("returns 'Up to date' for non-actionable states", () => {
-    expect(getDesktopUpdateButtonTooltip({ ...baseState, status: "idle" })).toBe("Up to date");
+  it("returns 'up to date' for non-actionable states", () => {
+    expect(getDesktopUpdateButtonTooltip({ ...baseState, status: "idle" })).toBe("up to date");
     expect(getDesktopUpdateButtonTooltip({ ...baseState, status: "up-to-date" })).toBe(
-      "Up to date",
+      "up to date",
     );
   });
 });

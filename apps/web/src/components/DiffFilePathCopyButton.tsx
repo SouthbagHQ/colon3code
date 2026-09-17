@@ -26,7 +26,7 @@ export function DiffFilePathCopyButton({ filePath }: { filePath: string }) {
             size="icon-micro"
             variant="ghost"
             className="text-muted-foreground [:hover,[data-pressed]]:bg-transparent"
-            aria-label="Copy file path"
+            aria-label="copy file path"
             onClick={() => copyToClipboard(filePath, undefined)}
           />
         }
@@ -34,7 +34,7 @@ export function DiffFilePathCopyButton({ filePath }: { filePath: string }) {
         {isCopied ? <CheckIcon className="size-3 text-success" /> : <CopyIcon className="size-3" />}
       </TooltipTrigger>
       <TooltipPopup>
-        <p>{isCopied ? "Copied" : "Copy path"}</p>
+        <p>{isCopied ? "copied" : "copy path"}</p>
       </TooltipPopup>
     </Tooltip>
   );

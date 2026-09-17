@@ -34,7 +34,7 @@ function ConfiguredT3ConnectSidebarAvatar() {
       }}
     >
       <UserButton.UserProfilePage
-        label="Mobile clients"
+        label="mobile clients"
         labelIcon={<SmartphoneIcon className="size-4" />}
         url="mobile-clients"
       >
@@ -63,7 +63,7 @@ function ConfiguredT3ConnectSidebarSignIn() {
         <SidebarMenuItem>
           <SidebarMenuButton onClick={openAuthPrompt}>
             <LogInIcon />
-            <span>Sign in to T3 Connect</span>
+            <span>sign in to T3 Connect</span>
           </SidebarMenuButton>
         </SidebarMenuItem>
       </SidebarMenu>

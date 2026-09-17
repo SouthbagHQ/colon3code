@@ -120,11 +120,11 @@ export function fileAttachmentCapabilityBlockReason(
     return null;
   }
   if (!input.attachmentUploadsCapabilityKnown) {
-    return "Waiting for the server before file attachments can send";
+    return "waiting for the server before file attachments can send";
   }
   const maxFileAttachmentBytes = fileAttachmentStagingLimit(input);
   if (maxFileAttachmentBytes === null) {
-    return "This server does not accept file attachments right now. Remove the files to send.";
+    return "this server does not accept file attachments right now. remove the files to send.";
   }
   const oversizedFile = input.files.find((file) => file.sizeBytes > maxFileAttachmentBytes);
   if (oversizedFile) {

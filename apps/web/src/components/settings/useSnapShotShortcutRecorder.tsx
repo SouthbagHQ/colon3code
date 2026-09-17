@@ -71,7 +71,7 @@ export function useSnapShotShortcutRecorder({
     } catch (error) {
       if (!requests.owns(request)) return;
       requests.clear();
-      onError(error instanceof Error ? error.message : "Could not start shortcut recording.");
+      onError(error instanceof Error ? error.message : "could not start shortcut recording.");
     }
   };
   useEffect(
@@ -96,7 +96,7 @@ export function useSnapShotShortcutRecorder({
       const [left, right] = MODIFIER_CODES[modifier];
       if (held.has(left) && held.has(right)) {
         if (!allowModifierPairs) {
-          onError("Add a letter, number, or function key to your shortcut.");
+          onError("add a letter, number, or function key to your shortcut.");
           return;
         }
         stopRecording();
@@ -125,8 +125,8 @@ export function useSnapShotShortcutRecorder({
         disabled={disabled}
         aria-label={
           displayShortcut
-            ? `Record snapshot shortcut, currently ${formatSnapShotShortcutLabel(displayShortcut)}`
-            : "Change snapshot shortcut"
+            ? `record snapshot shortcut, currently ${formatSnapShotShortcutLabel(displayShortcut)}`
+            : "change snapshot shortcut"
         }
         aria-pressed={recording}
         data-keybinding-capture=""
@@ -136,11 +136,11 @@ export function useSnapShotShortcutRecorder({
         onBlur={stopRecording}
       >
         {recording ? (
-          "Press shortcut…"
+          "press shortcut…"
         ) : !displayShortcut ? (
-          "Change shortcut"
+          "change shortcut"
         ) : !allowModifierPairs && isModifierPairShortcut(displayShortcut) ? (
-          "Choose shortcut"
+          "choose shortcut"
         ) : (
           <SnapShotShortcutKeys shortcut={displayShortcut} />
         )}

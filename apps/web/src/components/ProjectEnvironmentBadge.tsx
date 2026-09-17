@@ -21,7 +21,7 @@ export function ProjectEnvironmentBadge(props: {
   // so sort by label to keep the icon and tooltip stable.
   const remoteMembers = props.group.memberProjects
     .filter((member) => member.environmentId !== props.primaryEnvironmentId)
-    .map((member) => ({ ...member, environmentLabel: member.environmentLabel ?? "Remote" }))
+    .map((member) => ({ ...member, environmentLabel: member.environmentLabel ?? "remote" }))
     .sort((a, b) => a.environmentLabel.localeCompare(b.environmentLabel));
   const first = remoteMembers[0];
   if (!first) return null;
@@ -30,7 +30,7 @@ export function ProjectEnvironmentBadge(props: {
     .filter((label, index, all) => all.indexOf(label) === index)
     .join(", ");
   const alsoHere = remoteMembers.length < props.group.memberProjects.length;
-  const description = `${alsoHere ? "Also on" : "On"} ${labels}`;
+  const description = `${alsoHere ? "also on" : "on"} ${labels}`;
   return (
     <Tooltip>
       <TooltipTrigger

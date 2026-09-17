@@ -118,7 +118,7 @@ export async function fetchDeviceAxTree(
     );
     if (!Array.isArray(payload)) {
       const error = isRecord(payload) && typeof payload.error === "string" ? payload.error : null;
-      return { elements: [], errors: [error ?? "Unexpected accessibility payload."] };
+      return { elements: [], errors: [error ?? "unexpected accessibility payload."] };
     }
     return { elements: flattenIosAxTree(payload), errors: [] };
   }
@@ -129,7 +129,7 @@ export async function fetchDeviceAxTree(
   );
   if (!isRecord(payload) || !Array.isArray(payload.nodes)) {
     const error = isRecord(payload) && typeof payload.error === "string" ? payload.error : null;
-    return { elements: [], errors: [error ?? "Unexpected accessibility payload."] };
+    return { elements: [], errors: [error ?? "unexpected accessibility payload."] };
   }
   // uiautomator reports pixel bounds; the first node is the full window.
   const nodes = payload.nodes.filter(

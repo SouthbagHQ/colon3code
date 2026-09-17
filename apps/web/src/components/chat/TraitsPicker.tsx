@@ -44,10 +44,10 @@ import { useComposerMenuState } from "./useComposerMenuState";
 type ProviderOptions = ReadonlyArray<ProviderOptionSelection>;
 
 const SAVED_OPTION_LABELS: Readonly<Record<string, string>> = {
-  agent: "Agent",
-  effort: "Effort",
-  reasoningEffort: "Reasoning effort",
-  variant: "Reasoning",
+  agent: "agent",
+  effort: "effort",
+  reasoningEffort: "reasoning effort",
+  variant: "reasoning",
 };
 
 function savedOptionLabel(id: string): string {
@@ -98,7 +98,7 @@ function DefaultBadge() {
       variant="outline"
       className="inline-flex h-4 w-fit min-w-0 items-center justify-center gap-0 border-border/70 bg-muted/60 px-1.5 py-0 font-semibold text-[10px] text-muted-foreground leading-none sm:h-4"
     >
-      Default
+      default
     </Badge>
   );
 }
@@ -465,7 +465,7 @@ export const TraitsMenuContent = memo(function TraitsMenuContentImpl({
                 {(["on", "off"] as const).map((value) => (
                   <MenuRadioItem key={value} value={value} hideIndicator closeOnClick>
                     <span className="flex w-full min-w-0 items-center justify-between gap-3">
-                      <span>{value === "on" ? "On" : "Off"}</span>
+                      <span>{value === "on" ? "on" : "off"}</span>
                     </span>
                   </MenuRadioItem>
                 ))}
@@ -520,7 +520,7 @@ export function buildTraitsTriggerDisplay(input: {
       input.ultrathinkPromptControlled && descriptor.id === input.primarySelectDescriptorId
         ? "Ultrathink"
         : descriptor.type === "boolean"
-          ? `${descriptor.label} ${descriptor.currentValue === true ? "On" : "Off"}`
+          ? `${descriptor.label} ${descriptor.currentValue === true ? "on" : "off"}`
           : getProviderOptionCurrentLabel(descriptor);
     if (typeof label === "string" && label.length > 0) {
       labels.push(label);

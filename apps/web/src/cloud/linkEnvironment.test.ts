@@ -35,7 +35,7 @@ import {
 
 const TARGET: CloudLinkTarget = {
   environmentId: "environment-1",
-  label: "Desktop",
+  label: "desktop",
   httpBaseUrl: "http://127.0.0.1:3000",
   wsBaseUrl: "ws://127.0.0.1:3000",
 };

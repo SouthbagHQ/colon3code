@@ -215,13 +215,13 @@ import {
   type SidebarProjectSnapshot,
 } from "../sidebarProjectGrouping";
 const SIDEBAR_SORT_LABELS: Record<SidebarProjectSortOrder, string> = {
-  updated_at: "Last user message",
-  created_at: "Created at",
-  manual: "Manual",
+  updated_at: "last user message",
+  created_at: "created at",
+  manual: "manual",
 };
 const SIDEBAR_THREAD_SORT_LABELS: Record<SidebarThreadSortOrder, string> = {
-  updated_at: "Last user message",
-  created_at: "Created at",
+  updated_at: "last user message",
+  created_at: "created at",
 };
 const SIDEBAR_LIST_ANIMATION_OPTIONS = {
   duration: 180,
@@ -229,9 +229,9 @@ const SIDEBAR_LIST_ANIMATION_OPTIONS = {
 } as const;
 const EMPTY_THREAD_JUMP_LABELS = new Map<string, string>();
 const PROJECT_GROUPING_MODE_LABELS: Record<SidebarProjectGroupingMode, string> = {
-  repository: "Group by repository",
-  repository_path: "Group by repository path",
-  separate: "Keep separate",
+  repository: "group by repository",
+  repository_path: "group by repository path",
+  separate: "keep separate",
 };
 const SIDEBAR_ICON_ACTION_BUTTON_CLASS =
   "inline-flex h-6 min-w-6 cursor-pointer items-center justify-center rounded-md px-[calc(--spacing(1)-1px)] text-icon-muted hover:text-foreground focus-visible:outline-hidden focus-visible:ring-1 focus-visible:ring-ring";
@@ -272,11 +272,11 @@ function projectExpansionPreferenceKeys(project: SidebarProjectSnapshot): string
 function projectGroupingModeDescription(mode: SidebarProjectGroupingMode): string {
   switch (mode) {
     case "repository":
-      return "Projects from the same repository share one sidebar row.";
+      return "projects from the same repository share one sidebar row.";
     case "repository_path":
-      return "Projects group only when both the repository and repo-relative path match.";
+      return "projects group only when both the repository and repo-relative path match.";
     case "separate":
-      return "Every project path gets its own sidebar row.";
+      return "every project path gets its own sidebar row.";
   }
 }
 
@@ -430,7 +430,7 @@ const SidebarThreadRow = memo(function SidebarThreadRow(props: SidebarThreadRowP
   const isDesktopLocalThread =
     environment !== null && isDesktopLocalConnectionTarget(environment.entry.target);
   const threadEnvironmentLabel = isRemoteThread
-    ? (remoteEnvLabel ?? (isDesktopLocalThread ? "Local" : "Remote"))
+    ? (remoteEnvLabel ?? (isDesktopLocalThread ? "local" : "remote"))
     : null;
   const isHighlighted = isActive || isSelected;
   const handleOpenDiscoveredPort = useCallback(
@@ -797,7 +797,7 @@ const SidebarThreadRow = memo(function SidebarThreadRow(props: SidebarThreadRowP
                 render={
                   <button
                     type="button"
-                    aria-label={`Open localhost:${discoveredPorts[0]?.port ?? ""}`}
+                    aria-label={`open localhost:${discoveredPorts[0]?.port ?? ""}`}
                     className="inline-flex cursor-pointer items-center justify-center text-emerald-600 outline-hidden focus-visible:ring-1 focus-visible:ring-ring dark:text-emerald-400"
                     onClick={handleOpenDiscoveredPort}
                   />
@@ -806,7 +806,7 @@ const SidebarThreadRow = memo(function SidebarThreadRow(props: SidebarThreadRowP
                 <Globe2Icon className="size-3" />
               </TooltipTrigger>
               <TooltipPopup side="top">
-                Open localhost:{discoveredPorts[0]?.port}
+                open localhost:{discoveredPorts[0]?.port}
                 {discoveredPorts.length > 1 ? ` (+${discoveredPorts.length - 1})` : ""}
               </TooltipPopup>
             </Tooltip>
@@ -841,12 +841,12 @@ const SidebarThreadRow = memo(function SidebarThreadRow(props: SidebarThreadRowP
                 type="button"
                 data-thread-selection-safe
                 data-testid={`thread-archive-confirm-${thread.id}`}
-                aria-label={`Confirm archive ${thread.title}`}
+                aria-label={`confirm archive ${thread.title}`}
                 className="absolute top-1/2 right-1 inline-flex h-5 -translate-y-1/2 cursor-pointer items-center rounded-md bg-destructive/12 px-2 text-[10px] font-medium text-destructive transition-colors hover:bg-destructive/18 focus-visible:outline-hidden focus-visible:ring-1 focus-visible:ring-destructive/40"
                 onPointerDown={stopPropagationOnPointerDown}
                 onClick={handleConfirmArchiveClick}
               >
-                Confirm
+                confirm
               </button>
             ) : !isThreadRunning ? (
               appSettingsConfirmThreadArchive ? (
@@ -855,7 +855,7 @@ const SidebarThreadRow = memo(function SidebarThreadRow(props: SidebarThreadRowP
                     type="button"
                     data-thread-selection-safe
                     data-testid={`thread-archive-${thread.id}`}
-                    aria-label={`Archive ${thread.title}`}
+                    aria-label={`archive ${thread.title}`}
                     className={SIDEBAR_ICON_ACTION_BUTTON_CLASS}
                     onPointerDown={stopPropagationOnPointerDown}
                     onClick={handleStartArchiveConfirmation}
@@ -872,7 +872,7 @@ const SidebarThreadRow = memo(function SidebarThreadRow(props: SidebarThreadRowP
                           type="button"
                           data-thread-selection-safe
                           data-testid={`thread-archive-${thread.id}`}
-                          aria-label={`Archive ${thread.title}`}
+                          aria-label={`archive ${thread.title}`}
                           className={SIDEBAR_ICON_ACTION_BUTTON_CLASS}
                           onPointerDown={stopPropagationOnPointerDown}
                           onClick={handleArchiveImmediateClick}
@@ -882,7 +882,7 @@ const SidebarThreadRow = memo(function SidebarThreadRow(props: SidebarThreadRowP
                       </div>
                     }
                   />
-                  <TooltipPopup side="top">Archive</TooltipPopup>
+                  <TooltipPopup side="top">archive</TooltipPopup>
                 </Tooltip>
               )
             ) : null}
@@ -893,7 +893,7 @@ const SidebarThreadRow = memo(function SidebarThreadRow(props: SidebarThreadRowP
                     <TooltipTrigger
                       render={
                         <span
-                          aria-label={threadEnvironmentLabel ?? "Remote"}
+                          aria-label={threadEnvironmentLabel ?? "remote"}
                           className="inline-flex items-center justify-center"
                         />
                       }
@@ -1099,7 +1099,7 @@ const SidebarProjectThreadList = memo(function SidebarProjectThreadList(
           >
             <span className="flex min-w-0 flex-1 items-center gap-2">
               {hiddenThreadStatus && <ThreadStatusLabel status={hiddenThreadStatus} compact />}
-              <span>Show more</span>
+              <span>show more</span>
             </span>
           </SidebarMenuSubButton>
         </SidebarMenuSubItem>
@@ -1115,7 +1115,7 @@ const SidebarProjectThreadList = memo(function SidebarProjectThreadList(
               collapseThreadListForProject(projectKey);
             }}
           >
-            <span>Show less</span>
+            <span>show less</span>
           </SidebarMenuSubButton>
         </SidebarMenuSubItem>
       )}
@@ -1551,10 +1551,10 @@ const SidebarProjectItem = memo(function SidebarProjectItem(props: SidebarProjec
           stackedThreadToast({
             type: "warning",
             title: "project is not empty 3:",
-            description: "Delete all threads in this project before removing it.",
+            description: "delete all threads in this project before removing it.",
             actionVariant: "destructive",
             actionProps: {
-              children: "Delete anyway",
+              children: "delete anyway",
               onClick: () => {
                 void (async () => {
                   toastManager.close(warningToastId);
@@ -1572,25 +1572,25 @@ const SidebarProjectItem = memo(function SidebarProjectItem(props: SidebarProjec
                   const confirmed = await api.dialogs.confirm(
                     latestProjectThreads.length > 0
                       ? [
-                          `Remove project "${member.title}" and delete its ${latestProjectThreads.length} thread${
+                          `remove project "${member.title}" and delete its ${latestProjectThreads.length} thread${
                             latestProjectThreads.length === 1 ? "" : "s"
                           }?`,
-                          `Path: ${member.workspaceRoot}`,
+                          `path: ${member.workspaceRoot}`,
                           ...(member.environmentLabel
-                            ? [`Environment: ${member.environmentLabel}`]
+                            ? [`environment: ${member.environmentLabel}`]
                             : []),
-                          "This permanently clears conversation history for those threads and any archived threads.",
-                          "This removes only this project entry.",
-                          "This action cannot be undone.",
+                          "this permanently clears conversation history for those threads and any archived threads.",
+                          "this removes only this project entry.",
+                          "this action cannot be undone.",
                         ].join("\n")
                       : [
-                          `Remove project "${member.title}"?`,
-                          `Path: ${member.workspaceRoot}`,
+                          `remove project "${member.title}"?`,
+                          `path: ${member.workspaceRoot}`,
                           ...(member.environmentLabel
-                            ? [`Environment: ${member.environmentLabel}`]
+                            ? [`environment: ${member.environmentLabel}`]
                             : []),
-                          "This permanently clears any archived conversation history.",
-                          "This removes only this project entry.",
+                          "this permanently clears any archived conversation history.",
+                          "this removes only this project entry.",
                         ].join("\n"),
                     { variant: "destructive" },
                   );
@@ -1608,13 +1608,13 @@ const SidebarProjectItem = memo(function SidebarProjectItem(props: SidebarProjec
                         description:
                           error instanceof Error
                             ? error.message
-                            : "Unknown error removing project.",
+                            : "unknown error removing project.",
                       }),
                     );
                   }
                 })().catch((error) => {
                   const message =
-                    error instanceof Error ? error.message : "Unknown error removing project.";
+                    error instanceof Error ? error.message : "unknown error removing project.";
                   console.error("Failed to remove project", {
                     projectId: member.id,
                     environmentId: member.environmentId,
@@ -1636,11 +1636,11 @@ const SidebarProjectItem = memo(function SidebarProjectItem(props: SidebarProjec
       }
 
       const message = [
-        `Remove project "${member.title}"?`,
-        `Path: ${member.workspaceRoot}`,
-        ...(member.environmentLabel ? [`Environment: ${member.environmentLabel}`] : []),
-        "This permanently clears any archived conversation history.",
-        "This removes only this project entry.",
+        `remove project "${member.title}"?`,
+        `path: ${member.workspaceRoot}`,
+        ...(member.environmentLabel ? [`environment: ${member.environmentLabel}`] : []),
+        "this permanently clears any archived conversation history.",
+        "this removes only this project entry.",
       ].join("\n");
       const confirmed = await api.dialogs.confirm(message, { variant: "destructive" });
       if (!confirmed) {
@@ -1650,7 +1650,7 @@ const SidebarProjectItem = memo(function SidebarProjectItem(props: SidebarProjec
       const result = await removeProject(member);
       if (result._tag === "Failure" && !isAtomCommandInterrupted(result)) {
         const error = squashAtomCommandFailure(result);
-        const message = error instanceof Error ? error.message : "Unknown error removing project.";
+        const message = error instanceof Error ? error.message : "unknown error removing project.";
         console.error("Failed to remove project", {
           projectId: member.id,
           environmentId: member.environmentId,
@@ -1753,11 +1753,11 @@ const SidebarProjectItem = memo(function SidebarProjectItem(props: SidebarProjec
 
         const clicked = await api.contextMenu.show(
           [
-            buildTargetedItem("rename", "Rename"),
-            buildTargetedItem("grouping", "Group into..."),
-            buildTargetedItem("copy-path", "Copy Path"),
-            { id: "project-settings", label: "Project settings", icon: "settings" },
-            buildTargetedItem("delete", "Remove", {
+            buildTargetedItem("rename", "rename"),
+            buildTargetedItem("grouping", "group into..."),
+            buildTargetedItem("copy-path", "copy path"),
+            { id: "project-settings", label: "project settings", icon: "settings" },
+            buildTargetedItem("delete", "remove", {
               destructive: true,
             }),
           ],
@@ -1912,7 +1912,7 @@ const SidebarProjectItem = memo(function SidebarProjectItem(props: SidebarProjec
       if (clicked === "archive") {
         if (appSettingsConfirmThreadArchive) {
           const confirmed = await api.dialogs.confirm(
-            `Archive ${count} thread${count === 1 ? "" : "s"}?`,
+            `archive ${count} thread${count === 1 ? "" : "s"}?`,
           );
           if (!confirmed) return;
         }
@@ -1955,8 +1955,8 @@ const SidebarProjectItem = memo(function SidebarProjectItem(props: SidebarProjec
       if (appSettingsConfirmThreadDelete) {
         const confirmed = await api.dialogs.confirm(
           [
-            `Delete ${count} thread${count === 1 ? "" : "s"}?`,
-            "This permanently clears conversation history for these threads.",
+            `delete ${count} thread${count === 1 ? "" : "s"}?`,
+            "this permanently clears conversation history for these threads.",
           ].join("\n"),
           { variant: "destructive" },
         );
@@ -2241,14 +2241,14 @@ const SidebarProjectItem = memo(function SidebarProjectItem(props: SidebarProjec
       const clicked = await api.contextMenu.show(
         [
           ...(thread.branch
-            ? [{ id: "new-thread-on-branch", label: `New thread on ${thread.branch}` }]
+            ? [{ id: "new-thread-on-branch", label: `new thread on ${thread.branch}` }]
             : []),
-          { id: "rename", label: "Rename thread" },
-          { id: "mark-unread", label: "Mark unread" },
-          { id: "copy-path", label: "Copy Path" },
-          { id: "copy-thread-id", label: "Copy Thread ID" },
-          { id: "project-settings", label: "Project settings" },
-          { id: "delete", label: "Delete", destructive: true, icon: "trash" },
+          { id: "rename", label: "rename thread" },
+          { id: "mark-unread", label: "mark unread" },
+          { id: "copy-path", label: "copy path" },
+          { id: "copy-thread-id", label: "copy thread ID" },
+          { id: "project-settings", label: "project settings" },
+          { id: "delete", label: "delete", destructive: true, icon: "trash" },
         ],
         position,
       );
@@ -2301,7 +2301,7 @@ const SidebarProjectItem = memo(function SidebarProjectItem(props: SidebarProjec
             stackedThreadToast({
               type: "error",
               title: "path unavailable 3:",
-              description: "This thread does not have a workspace path to copy.",
+              description: "this thread does not have a workspace path to copy.",
             }),
           );
           return;
@@ -2317,8 +2317,8 @@ const SidebarProjectItem = memo(function SidebarProjectItem(props: SidebarProjec
       if (appSettingsConfirmThreadDelete) {
         const confirmed = await api.dialogs.confirm(
           [
-            `Delete thread "${thread.title}"?`,
-            "This permanently clears conversation history for this thread.",
+            `delete thread "${thread.title}"?`,
+            "this permanently clears conversation history for this thread.",
           ].join("\n"),
           { variant: "destructive" },
         );
@@ -2422,8 +2422,8 @@ const SidebarProjectItem = memo(function SidebarProjectItem(props: SidebarProjec
                 <span
                   aria-label={
                     project.allRemoteMembersAreDesktopLocal
-                      ? "Local sandbox project"
-                      : "Remote project"
+                      ? "local sandbox project"
+                      : "remote project"
                   }
                   className="pointer-events-none absolute top-1/2 right-1.5 inline-flex size-5 -translate-y-1/2 items-center justify-center rounded-md text-icon-muted transition-opacity duration-150 max-sm:right-7 group-hover/project-header:opacity-0 group-focus-within/project-header:opacity-0 max-sm:group-hover/project-header:opacity-100 max-sm:group-focus-within/project-header:opacity-100"
                 />
@@ -2433,8 +2433,8 @@ const SidebarProjectItem = memo(function SidebarProjectItem(props: SidebarProjec
             </TooltipTrigger>
             <TooltipPopup side="top">
               {project.allRemoteMembersAreDesktopLocal
-                ? `Local sandbox: ${project.remoteEnvironmentLabels.join(", ")}`
-                : `Remote environment: ${project.remoteEnvironmentLabels.join(", ")}`}
+                ? `local sandbox: ${project.remoteEnvironmentLabels.join(", ")}`
+                : `remote environment: ${project.remoteEnvironmentLabels.join(", ")}`}
             </TooltipPopup>
           </Tooltip>
         )}
@@ -2444,7 +2444,7 @@ const SidebarProjectItem = memo(function SidebarProjectItem(props: SidebarProjec
               <div className="pointer-events-none absolute top-[calc(50%+1px)] right-0.5 -translate-y-1/2 opacity-0 transition-opacity duration-150 max-sm:pointer-events-auto max-sm:opacity-100 group-hover/project-header:pointer-events-auto group-hover/project-header:opacity-100 group-focus-within/project-header:pointer-events-auto group-focus-within/project-header:opacity-100">
                 <button
                   type="button"
-                  aria-label={`Create new thread in ${project.displayName}`}
+                  aria-label={`create new thread in ${project.displayName}`}
                   data-testid="new-thread-button"
                   className={SIDEBAR_ICON_ACTION_BUTTON_CLASS}
                   onClick={handleCreateThreadClick}
@@ -2455,7 +2455,7 @@ const SidebarProjectItem = memo(function SidebarProjectItem(props: SidebarProjec
             }
           />
           <TooltipPopup side="top">
-            {newThreadShortcutLabel ? `New thread (${newThreadShortcutLabel})` : "New thread"}
+            {newThreadShortcutLabel ? `new thread (${newThreadShortcutLabel})` : "new thread"}
           </TooltipPopup>
         </Tooltip>
       </div>
@@ -2508,18 +2508,18 @@ const SidebarProjectItem = memo(function SidebarProjectItem(props: SidebarProjec
       >
         <DialogPopup className="max-w-lg">
           <DialogHeader>
-            <DialogTitle>Rename project</DialogTitle>
+            <DialogTitle>rename project</DialogTitle>
             <DialogDescription>
               {projectRenameTarget
-                ? `Update the title for ${projectRenameTarget.workspaceRoot}.`
-                : "Update the project title."}
+                ? `update the title for ${projectRenameTarget.workspaceRoot}.`
+                : "update the project title."}
             </DialogDescription>
           </DialogHeader>
           <DialogPanel className="space-y-4">
             <div className="grid gap-1.5">
               <span className="text-xs font-medium text-foreground">Project title</span>
               <Input
-                aria-label="Project title"
+                aria-label="project title"
                 value={projectRenameTitle}
                 onChange={(event) => setProjectRenameTitle(event.target.value)}
                 onKeyDown={(event) => {
@@ -2532,15 +2532,15 @@ const SidebarProjectItem = memo(function SidebarProjectItem(props: SidebarProjec
             </div>
             {projectRenameTarget?.environmentLabel ? (
               <p className="text-xs text-muted-foreground">
-                Environment: {projectRenameTarget.environmentLabel}
+                environment: {projectRenameTarget.environmentLabel}
               </p>
             ) : null}
           </DialogPanel>
           <DialogFooter>
             <Button variant="outline" onClick={closeProjectRenameDialog}>
-              Cancel
+              cancel
             </Button>
-            <Button onClick={() => void submitProjectRename()}>Save</Button>
+            <Button onClick={() => void submitProjectRename()}>save</Button>
           </DialogFooter>
         </DialogPopup>
       </Dialog>
@@ -2555,11 +2555,11 @@ const SidebarProjectItem = memo(function SidebarProjectItem(props: SidebarProjec
       >
         <DialogPopup className="max-w-lg">
           <DialogHeader>
-            <DialogTitle>Project grouping</DialogTitle>
+            <DialogTitle>project grouping</DialogTitle>
             <DialogDescription>
               {projectGroupingTarget
-                ? `Choose how ${projectGroupingTarget.workspaceRoot} should be grouped in the sidebar.`
-                : "Choose how this project should be grouped in the sidebar."}
+                ? `choose how ${projectGroupingTarget.workspaceRoot} should be grouped in the sidebar.`
+                : "choose how this project should be grouped in the sidebar."}
             </DialogDescription>
           </DialogHeader>
           <DialogPanel className="space-y-4">
@@ -2581,13 +2581,13 @@ const SidebarProjectItem = memo(function SidebarProjectItem(props: SidebarProjec
                 <SelectTrigger className="w-full" aria-label="Project grouping rule">
                   <SelectValue>
                     {projectGroupingSelection === "inherit"
-                      ? `Use global default (${PROJECT_GROUPING_MODE_LABELS[projectGroupingSettings.sidebarProjectGroupingMode]})`
+                      ? `use global default (${PROJECT_GROUPING_MODE_LABELS[projectGroupingSettings.sidebarProjectGroupingMode]})`
                       : PROJECT_GROUPING_MODE_LABELS[projectGroupingSelection]}
                   </SelectValue>
                 </SelectTrigger>
                 <SelectPopup align="end" alignItemWithTrigger={false}>
                   <SelectItem hideIndicator value="inherit">
-                    Use global default
+                    use global default
                   </SelectItem>
                   <SelectItem hideIndicator value="repository">
                     {PROJECT_GROUPING_MODE_LABELS.repository}
@@ -2609,9 +2609,9 @@ const SidebarProjectItem = memo(function SidebarProjectItem(props: SidebarProjec
           </DialogPanel>
           <DialogFooter>
             <Button variant="outline" onClick={closeProjectGroupingDialog}>
-              Cancel
+              cancel
             </Button>
-            <Button onClick={saveProjectGroupingPreference}>Save</Button>
+            <Button onClick={saveProjectGroupingPreference}>save</Button>
           </DialogFooter>
         </DialogPopup>
       </Dialog>
@@ -2696,7 +2696,7 @@ function LocalSecondaryStatus() {
             {failed
               .map((entry) => entry.error)
               .filter(Boolean)
-              .join("; ") || "The backend didn't respond."}
+              .join("; ") || "the backend didn't respond."}
           </AlertDescription>
         </Alert>
       ) : null}
@@ -2748,12 +2748,12 @@ function ProjectSortMenu({
         >
           <ArrowUpDownIcon className="size-3.5" />
         </TooltipTrigger>
-        <TooltipPopup side="right">Sidebar options</TooltipPopup>
+        <TooltipPopup side="right">sidebar options</TooltipPopup>
       </Tooltip>
       <MenuPopup align="end" side="bottom" className="min-w-52">
         <MenuGroup>
           <div className="px-2 py-1 sm:text-xs font-medium text-muted-foreground">
-            Sort projects
+            sort projects
           </div>
           <MenuRadioGroup
             value={projectSortOrder}
@@ -2772,7 +2772,7 @@ function ProjectSortMenu({
         </MenuGroup>
         <MenuGroup>
           <div className="px-2 pt-2 pb-1 sm:text-xs font-medium text-muted-foreground">
-            Sort threads
+            sort threads
           </div>
           <MenuRadioGroup
             value={threadSortOrder}
@@ -2791,11 +2791,11 @@ function ProjectSortMenu({
         </MenuGroup>
         <MenuGroup>
           <div className="px-2 pt-2 pb-1 text-muted-foreground sm:text-xs font-medium">
-            Visible threads
+            visible threads
           </div>
           <div className="px-2 py-1">
             <NumberField
-              aria-label="Visible thread count"
+              aria-label="visible thread count"
               className="w-28 gap-0"
               max={MAX_SIDEBAR_THREAD_PREVIEW_COUNT}
               min={MIN_SIDEBAR_THREAD_PREVIEW_COUNT}
@@ -2806,11 +2806,11 @@ function ProjectSortMenu({
             >
               <NumberFieldGroup className="h-7 rounded-md sm:h-6.5">
                 <NumberFieldDecrement
-                  aria-label="Decrease visible thread count"
+                  aria-label="decrease visible thread count"
                   className="px-2 sm:px-2 [&_svg]:size-3.5"
                 />
                 <NumberFieldInput
-                  aria-label="Visible thread count"
+                  aria-label="visible thread count"
                   className="h-7 w-9 grow-0 px-0 text-xs leading-7 sm:h-6.5 sm:leading-6.5"
                   inputMode="numeric"
                   onKeyDownCapture={(event) => {
@@ -2818,7 +2818,7 @@ function ProjectSortMenu({
                   }}
                 />
                 <NumberFieldIncrement
-                  aria-label="Increase visible thread count"
+                  aria-label="increase visible thread count"
                   className="px-2 sm:px-2 [&_svg]:size-3.5"
                 />
               </NumberFieldGroup>
@@ -3012,8 +3012,8 @@ const SidebarProjectsContent = memo(function SidebarProjectsContent(
                   onClick={handleDesktopUpdateButtonClick}
                 >
                   {desktopUpdateButtonAction === "download"
-                    ? "Download ARM build"
-                    : "Install ARM build"}
+                    ? "download ARM build"
+                    : "install ARM build"}
                 </Button>
               </AlertAction>
             ) : null}
@@ -3039,7 +3039,7 @@ const SidebarProjectsContent = memo(function SidebarProjectsContent(
                   <Button
                     size="icon-xs"
                     variant="ghost-muted"
-                    aria-label="Add project"
+                    aria-label="add project"
                     data-testid="sidebar-add-project-trigger"
                     className="size-6 [--control-icon-color:currentColor] text-icon-muted"
                     onClick={openAddProject}
@@ -3048,7 +3048,7 @@ const SidebarProjectsContent = memo(function SidebarProjectsContent(
               >
                 <FolderPlusIcon className="size-3.5" />
               </TooltipTrigger>
-              <TooltipPopup side="right">Add project</TooltipPopup>
+              <TooltipPopup side="right">add project</TooltipPopup>
             </Tooltip>
           </div>
         </div>
@@ -3129,7 +3129,9 @@ const SidebarProjectsContent = memo(function SidebarProjectsContent(
         )}
 
         {projectsLength === 0 && (
-          <div className="px-2 pt-4 text-center text-secondary-label text-xs">no projects yet</div>
+          <div className="px-2 pt-4 text-center text-secondary-label text-xs">
+            no projects yet :3
+          </div>
         )}
       </SidebarGroup>
     </SidebarContent>

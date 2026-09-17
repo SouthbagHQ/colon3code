@@ -39,25 +39,25 @@ describe("T3 Connect environment row", () => {
     const markup = renderRow();
 
     expect(markup).toContain("Studio Mac");
-    expect(markup).toContain("Deregister");
-    expect(markup).not.toContain("Deregister server");
-    expect(markup).not.toContain("Confirm deregistration of Studio Mac");
+    expect(markup).toContain("deregister");
+    expect(markup).not.toContain("deregister server");
+    expect(markup).not.toContain("confirm deregistration of Studio Mac");
   });
 
   it("expands Clerk-style confirmation content beneath the environment row", () => {
     const markup = renderRow({ confirmationOpen: true });
 
-    expect(markup).toContain("Deregister server");
+    expect(markup).toContain("deregister server");
     expect(markup).toContain("“Studio Mac” will be removed from this account.");
-    expect(markup).toContain("Confirm deregistration of Studio Mac");
-    expect(markup).toContain("Local connections on your devices are not changed.");
-    expect(markup).toContain("Cancel");
+    expect(markup).toContain("confirm deregistration of Studio Mac");
+    expect(markup).toContain("local connections on your devices are not changed.");
+    expect(markup).toContain("cancel");
   });
 
   it("locks the confirmation actions while deregistration is pending", () => {
     const markup = renderRow({ confirmationOpen: true, mutationPending: true });
 
-    expect(markup).toContain("Deregistering…");
+    expect(markup).toContain("deregistering…");
     expect(markup.match(/ disabled=""/g)).toHaveLength(3);
   });
 });

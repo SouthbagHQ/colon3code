@@ -162,7 +162,7 @@ describe("serializeRenderedMarkdownFragment", () => {
     }).append(new FakeText("What does this mean?…"));
     const chip = new FakeElement("SPAN", [], {
       "data-markdown-copy": serializeAssistantCitation(citation),
-    }).append(anchor, new FakeElement("BUTTON").append(new FakeText("Edit comment")));
+    }).append(anchor, new FakeElement("BUTTON").append(new FakeText("edit comment")));
     const container = new FakeElement("DIV").append(new FakeText("Explain "), chip);
     const copied = serializeRenderedMarkdownFragment(asNode(container));
     expect(copied).toBe(`Explain ${serializeAssistantCitation(citation)}`);

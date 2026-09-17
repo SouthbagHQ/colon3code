@@ -70,11 +70,11 @@ export function whenAstToExpression(node: KeybindingWhenNode | undefined): strin
 }
 
 export function whenNodeRemoveLabel(node: KeybindingWhenNode, depth: number): string {
-  if (depth === 0) return "Clear all conditions";
+  if (depth === 0) return "clear all conditions";
   if (node.type === "identifier" || (node.type === "not" && node.node.type === "identifier")) {
-    return "Remove condition";
+    return "remove condition";
   }
-  return "Remove group and its conditions";
+  return "remove group and its conditions";
 }
 
 function wrapWhenExpression(node: KeybindingWhenNode): string {
@@ -92,7 +92,7 @@ export function parseWhenExpressionDraft(
   if (!ast) {
     return {
       ok: false,
-      message: "Use variables with !, &&, ||, and parentheses.",
+      message: "use variables with !, &&, ||, and parentheses.",
     };
   }
 

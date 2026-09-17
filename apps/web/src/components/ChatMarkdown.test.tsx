@@ -223,7 +223,7 @@ describe("ChatMarkdown streaming", () => {
       const mounted = renderer!;
       const codeBlock = mounted.root.findByProps({ "data-language": "text" });
       const initialWrap = codeBlock.props["data-wrap"] === "true";
-      const wrap = codeButton(mounted, initialWrap ? "Disable line wrap" : "Wrap lines");
+      const wrap = codeButton(mounted, initialWrap ? "disable line wrap" : "wrap lines");
       await act(async () => {
         wrap.onClick?.({} as Parameters<NonNullable<typeof wrap.onClick>>[0]);
       });
@@ -274,8 +274,8 @@ describe("ChatMarkdown streaming", () => {
       const mounted = renderer!;
       const codeBlock = mounted.root.findByProps({ "data-language": "text" });
       const initialWrap = codeBlock.props["data-wrap"] === "true";
-      const wrap = codeButton(mounted, initialWrap ? "Disable line wrap" : "Wrap lines");
-      const copy = codeButton(mounted, "Copy code");
+      const wrap = codeButton(mounted, initialWrap ? "disable line wrap" : "wrap lines");
+      const copy = codeButton(mounted, "copy code");
       await act(async () => {
         wrap.onClick?.({} as Parameters<NonNullable<typeof wrap.onClick>>[0]);
         copy.onClick?.({} as Parameters<NonNullable<typeof copy.onClick>>[0]);
@@ -313,7 +313,7 @@ describe("ChatMarkdown streaming", () => {
           />,
         );
       });
-      const copyUpdated = codeButton(mounted, "Copied");
+      const copyUpdated = codeButton(mounted, "copied");
       await act(async () => {
         copyUpdated.onClick?.({} as Parameters<NonNullable<typeof copyUpdated.onClick>>[0]);
       });
@@ -644,7 +644,7 @@ describe("ChatMarkdown artifact-template cards", () => {
     expect(html).toContain('data-skill-name="artifact-template-hello-world"');
     expect(html).toContain("Hello World");
     expect(html).toContain("Document template");
-    expect(html).toContain("Use template");
+    expect(html).toContain("use template");
     expect(html).not.toContain("<p><div");
   });
 
@@ -654,7 +654,7 @@ describe("ChatMarkdown artifact-template cards", () => {
     );
 
     expect(html).toContain("chat-markdown-artifact-template");
-    expect(html).not.toContain("Use template");
+    expect(html).not.toContain("use template");
   });
 
   it("leaves malformed and unfinished artifact-template directives literal", () => {

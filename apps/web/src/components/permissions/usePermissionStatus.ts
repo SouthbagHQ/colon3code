@@ -22,7 +22,7 @@ export function usePermissionStatus<Id extends string>(
           setError(null);
         }
       } catch {
-        if (!disposed) setError("Could not check permissions. We'll try again automatically.");
+        if (!disposed) setError("could not check permissions. we'll try again automatically.");
       }
       checking = false;
     };

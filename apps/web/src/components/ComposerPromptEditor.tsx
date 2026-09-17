@@ -158,7 +158,7 @@ function ComposerMentionDecorator(props: { path: string }) {
     <button
       type="button"
       onClick={() => actions.openMention(props.path)}
-      aria-label={`Preview ${props.path}`}
+      aria-label={`preview ${props.path}`}
       className={`${FILE_TAG_CHIP_CLASS_NAME} cursor-pointer focus-visible:outline-2`}
       contentEditable={false}
       spellCheck={false}
@@ -280,7 +280,7 @@ function ComposerSkillDecorator(props: {
   const skill = use(ComposerSkillsContext).find((candidate) => candidate.name === props.skillName);
   return (
     <ContextChipPopover
-      accessibleLabel={`Skill ${props.skillLabel}`}
+      accessibleLabel={`skill ${props.skillLabel}`}
       triggerClassName={COMPOSER_INLINE_SKILL_CHIP_CLASS_NAME}
       chip={
         <>
@@ -302,7 +302,7 @@ function ComposerSkillDecorator(props: {
         </p>
         {skill?.path ? (
           <Button variant="outline" size="sm" onClick={() => actions.openMention(skill.path)}>
-            View instructions
+            view instructions
           </Button>
         ) : null}
       </div>

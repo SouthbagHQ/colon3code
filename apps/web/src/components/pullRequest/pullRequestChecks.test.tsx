@@ -37,8 +37,8 @@ describe("pullRequestChecksState", () => {
       url: "https://github.com/acme/web/actions/runs/42/job/7",
     });
     const manualGate = check("action-required", { url: "https://example.com/manual-gate" });
-    expect(pullRequestCheckStatusLabel(workflow)).toBe("Awaiting approval");
-    expect(pullRequestCheckStatusLabel(manualGate)).toBe("Awaiting action");
+    expect(pullRequestCheckStatusLabel(workflow)).toBe("awaiting approval");
+    expect(pullRequestCheckStatusLabel(manualGate)).toBe("awaiting action");
     expect(summarizePullRequestChecks([check("success"), workflow])).toBe(
       "1 workflow awaiting approval",
     );

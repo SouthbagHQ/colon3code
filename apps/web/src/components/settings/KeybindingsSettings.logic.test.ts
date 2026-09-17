@@ -171,7 +171,7 @@ describe("KeybindingsSettings.logic", () => {
     });
     expect(parseWhenExpressionDraft("editorFocus &&")).toEqual({
       ok: false,
-      message: "Use variables with !, &&, ||, and parentheses.",
+      message: "use variables with !, &&, ||, and parentheses.",
     });
 
     expect(parseWhenExpressionDraft("!(terminalFocus || modelPickerOpen)")).toEqual({
@@ -193,11 +193,11 @@ describe("KeybindingsSettings.logic", () => {
     const group = { type: "and", left: condition, right: negatedCondition } as const;
     const negatedGroup = { type: "not", node: group } as const;
 
-    expect(whenNodeRemoveLabel(group, 0)).toBe("Clear all conditions");
-    expect(whenNodeRemoveLabel(condition, 1)).toBe("Remove condition");
-    expect(whenNodeRemoveLabel(negatedCondition, 1)).toBe("Remove condition");
-    expect(whenNodeRemoveLabel(group, 1)).toBe("Remove group and its conditions");
-    expect(whenNodeRemoveLabel(negatedGroup, 1)).toBe("Remove group and its conditions");
+    expect(whenNodeRemoveLabel(group, 0)).toBe("clear all conditions");
+    expect(whenNodeRemoveLabel(condition, 1)).toBe("remove condition");
+    expect(whenNodeRemoveLabel(negatedCondition, 1)).toBe("remove condition");
+    expect(whenNodeRemoveLabel(group, 1)).toBe("remove group and its conditions");
+    expect(whenNodeRemoveLabel(negatedGroup, 1)).toBe("remove group and its conditions");
   });
 
   it("formats static and project script command labels", () => {

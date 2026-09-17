@@ -20,10 +20,10 @@ interface ComposerPendingApprovalActionsProps {
 
 const APPROVAL_ACTION_CLASS_NAME = "font-normal";
 const DEFAULT_APPROVAL_OPTIONS = [
-  { decision: "cancel", label: "Cancel" },
-  { decision: "decline", label: "Decline" },
-  { decision: "acceptForSession", label: "Always allow this session" },
-  { decision: "accept", label: "Approve" },
+  { decision: "cancel", label: "cancel" },
+  { decision: "decline", label: "decline" },
+  { decision: "acceptForSession", label: "always allow this session" },
+  { decision: "accept", label: "approve" },
 ] satisfies ReadonlyArray<ProviderApprovalOption>;
 
 export const ComposerPendingApprovalActions = memo(function ComposerPendingApprovalActions({

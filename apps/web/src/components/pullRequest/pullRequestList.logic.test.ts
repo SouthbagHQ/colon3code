@@ -804,7 +804,7 @@ describe("default merge-readiness ranking", () => {
     const measured = entry({ number: 2 });
     const empty = entry({ number: 3, additions: 0, deletions: 0 });
     const groups = [
-      { key: "others", label: "Others", entries: [unknown, measured, empty] },
+      { key: "others", label: "others", entries: [unknown, measured, empty] },
     ] as const;
 
     const sorted = sortPullRequestGroups(groups, "ready", "", (row) => row.number !== 1);
@@ -829,8 +829,8 @@ describe("default merge-readiness ranking", () => {
     });
     const sorted = sortPullRequestGroups(
       [
-        { key: "authored", label: "Authored", entries: [authoredWaiting, authoredReady] },
-        { key: "others", label: "Others", entries: [otherReady] },
+        { key: "authored", label: "authored", entries: [authoredWaiting, authoredReady] },
+        { key: "others", label: "others", entries: [otherReady] },
       ],
       "ready",
       "",
@@ -861,8 +861,8 @@ describe("default merge-readiness ranking", () => {
     });
     const sorted = sortPullRequestGroups(
       [
-        { key: "authored", label: "Authored", entries: [olderLarger, newerSmaller] },
-        { key: "others", label: "Others", entries: [entry({ number: 3 })] },
+        { key: "authored", label: "authored", entries: [olderLarger, newerSmaller] },
+        { key: "others", label: "others", entries: [entry({ number: 3 })] },
       ],
       sort,
       "",
@@ -1194,7 +1194,7 @@ describe("merging the environments' own listings", () => {
   it("keeps project errors scoped to the environment that reported them", () => {
     const error = {
       projectId: "project-1" as ProjectId,
-      projectTitle: "Web",
+      projectTitle: "web",
       message: "Not signed in",
     } as const;
     const merged = mergePullRequestLists([

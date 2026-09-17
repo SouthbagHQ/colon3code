@@ -43,7 +43,7 @@ export interface PrStatusIndicator {
 }
 
 export interface TerminalStatusIndicator {
-  label: "Terminal process running";
+  label: "terminal process running";
   colorClass: string;
   pulse: boolean;
 }
@@ -159,7 +159,7 @@ export function ThreadPullRequestBadgeControl({
   const linkedCount = badge?.kind === "pull-request" && badge.others > 0 ? badge.others + 1 : null;
   if (!isStack && (number === undefined || url === undefined)) return null;
   const label = isStack
-    ? `Stack of ${badge.layers} pull requests, ${badge.state}`
+    ? `stack of ${badge.layers} pull requests, ${badge.state}`
     : `${status?.tooltip ?? `PR #${number}, status pending`}${
         badge?.kind === "pull-request" && badge.others > 0
           ? `, and ${badge.others} more linked; overall ${badge.state}`
@@ -305,8 +305,8 @@ export function prStatusIndicator(
   provider: VcsStatusResult["sourceControlProvider"] | null | undefined,
 ): PrStatusIndicator | null {
   function formatPrState(pr: NonNullable<ThreadPr>): string {
-    if (pr.state === "open" && pr.isDraft === true) return "Draft";
-    return pr.state.charAt(0).toUpperCase() + pr.state.slice(1);
+    if (pr.state === "open" && pr.isDraft === true) return "draft";
+    return pr.state;
   }
 
   function formatPrStatusLead(pr: NonNullable<ThreadPr>, changeRequestShortName: string): string {
@@ -383,7 +383,7 @@ export function terminalStatusFromRunningIds(
     return null;
   }
   return {
-    label: "Terminal process running",
+    label: "terminal process running",
     colorClass: "text-teal-600 dark:text-teal-300/90",
     pulse: true,
   };
@@ -401,8 +401,8 @@ export function ThreadWorktreeIndicator({
 
   const displayPath = formatWorktreePathForDisplay(worktreePath);
   const tooltip = thread.branch
-    ? `Worktree: ${displayPath} (${thread.branch})`
-    : `Worktree: ${displayPath}`;
+    ? `worktree: ${displayPath} (${thread.branch})`
+    : `worktree: ${displayPath}`;
 
   return (
     <Tooltip>
@@ -555,7 +555,7 @@ export function ThreadRowTrailingStatus({ thread }: { thread: SidebarThreadSumma
   // glyph is what tells the environments apart.
   const isRemoteThread = thread.environmentId !== primaryEnvironmentId;
   const remoteEnvLabel = environment?.label ?? null;
-  const threadEnvironmentLabel = isRemoteThread ? (remoteEnvLabel ?? "Remote") : null;
+  const threadEnvironmentLabel = isRemoteThread ? (remoteEnvLabel ?? "remote") : null;
   const remoteMachine = resolveEnvironmentMachineKind(environment?.serverConfig ?? null);
   const terminalStatus = terminalStatusFromRunningIds(runningTerminalIds);
 
@@ -588,7 +588,7 @@ export function ThreadRowTrailingStatus({ thread }: { thread: SidebarThreadSumma
           <TooltipTrigger
             render={
               <span
-                aria-label={threadEnvironmentLabel ?? "Remote"}
+                aria-label={threadEnvironmentLabel ?? "remote"}
                 className="inline-flex items-center justify-center"
               />
             }

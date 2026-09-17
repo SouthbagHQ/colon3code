@@ -286,7 +286,7 @@ export function SnapShotCoordinator() {
               stackedThreadToast({
                 type: "error",
                 title: "snapshot taken, but no project is available 3:",
-                description: "Add a project, then capture the window again.",
+                description: "add a project, then capture the window again.",
               }),
             );
             continue;
@@ -303,8 +303,8 @@ export function SnapShotCoordinator() {
               stackedThreadToast({
                 type: "error",
                 title: "snapshot failed 3:",
-                description: `Capture ${item.id}: ${
-                  error instanceof Error ? error.message : "Try the capture again."
+                description: `capture ${item.id}: ${
+                  error instanceof Error ? error.message : "try the capture again."
                 }`,
               }),
             );
@@ -318,7 +318,7 @@ export function SnapShotCoordinator() {
           stackedThreadToast({
             type: "error",
             title: "snapshot failed 3:",
-            description: error instanceof Error ? error.message : "Try the capture again.",
+            description: error instanceof Error ? error.message : "try the capture again.",
           }),
         );
       })
@@ -377,7 +377,7 @@ export function SnapShotCoordinator() {
               stackedThreadToast({
                 type: "error",
                 title: "snapshot failed 3:",
-                description: state.message ?? "Try the capture again.",
+                description: state.message ?? "try the capture again.",
               }),
             );
           });

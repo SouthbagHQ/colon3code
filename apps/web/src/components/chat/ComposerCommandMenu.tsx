@@ -124,13 +124,13 @@ export const ComposerCommandMenu = memo(function ComposerCommandMenu(props: {
             <p className="text-secondary-label text-xs">
               {props.isLoading
                 ? props.triggerKind === "skill"
-                  ? "Searching workspace skills..."
+                  ? "searching workspace skills..."
                   : props.triggerKind === "pull-request"
-                    ? "Finding pull request..."
-                    : "Searching workspace files..."
+                    ? "finding pull request..."
+                    : "searching workspace files..."
                 : (props.emptyStateText ??
                   (props.triggerKind === "skill"
-                    ? "no skills found. Try / to browse provider commands."
+                    ? "no skills found. try / to browse provider commands."
                     : props.triggerKind === "path"
                       ? "no matching files or folders"
                       : "no matching command"))}
@@ -224,12 +224,12 @@ const SKILL_SOURCE_ICON_BY_KIND: Record<ProviderSkillSourceKind, LucideIcon> = {
 };
 
 const SKILL_SOURCE_LABEL_BY_KIND: Record<ProviderSkillSourceKind, string> = {
-  app: "App",
-  repo: "Repo",
-  project: "Project",
-  personal: "Personal",
-  system: "System",
-  other: "Provider",
+  app: "app",
+  repo: "repo",
+  project: "project",
+  personal: "personal",
+  system: "system",
+  other: "provider",
 };
 
 function SkillSourceBadge(props: { kind: ProviderSkillSourceKind; showSkillSuffix: boolean }) {

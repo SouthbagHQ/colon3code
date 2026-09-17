@@ -157,9 +157,9 @@ const RESPONSIVE_SEED_SIZE = { width: 1280, height: 800 } as const;
 const NO_GROUPING: Intl.NumberFormatOptions = { useGrouping: false };
 
 const APPEARANCE_LABELS: Readonly<Record<PreviewAppearancePreference, string>> = {
-  system: "System",
-  light: "Light",
-  dark: "Dark",
+  system: "system",
+  light: "light",
+  dark: "dark",
 };
 
 const zoomLabel = (zoomFactor: number) => `${Math.round(zoomFactor * 100)}%`;
@@ -203,9 +203,9 @@ const viewportSelectValue = (viewport: PreviewViewportSetting): string => {
  */
 const viewportSelectLabel = (viewport: PreviewViewportSetting): string => {
   const value = viewportSelectValue(viewport);
-  if (value === FILL_VALUE) return "Fill panel";
-  if (value === RESPONSIVE_VALUE) return "Responsive";
-  return PREVIEW_VIEWPORT_PRESETS.find((preset) => preset.id === value)?.label ?? "Responsive";
+  if (value === FILL_VALUE) return "fill panel";
+  if (value === RESPONSIVE_VALUE) return "responsive";
+  return PREVIEW_VIEWPORT_PRESETS.find((preset) => preset.id === value)?.label ?? "responsive";
 };
 
 const isValidDimension = (value: number) =>
@@ -279,7 +279,7 @@ function BrowserViewportSetting({ disabled }: { readonly disabled: boolean }) {
   return (
     <SettingsRow
       {...searchableSetting("browser-default-viewport")}
-      description="Tab size for you and agents. Fill fits the panel; other sizes show the device toolbar."
+      description="tab size for you and agents. fill fits the panel; other sizes show the device toolbar."
       resetAction={
         !disabled && viewport._tag !== DEFAULT_BROWSER_VIEWPORT._tag ? (
           <SettingResetButton
@@ -298,15 +298,15 @@ function BrowserViewportSetting({ disabled }: { readonly disabled: boolean }) {
             <SelectTrigger
               size="sm"
               className="w-full min-w-0 sm:w-44"
-              aria-label="Default browser viewport"
+              aria-label="default browser viewport"
             >
               <SelectValue>{viewportSelectLabel(viewport)}</SelectValue>
             </SelectTrigger>
             <SelectPopup align="end" alignItemWithTrigger={false} className="min-w-64">
-              <SelectItem value={FILL_VALUE}>Fill panel</SelectItem>
-              <SelectItem value={RESPONSIVE_VALUE}>Responsive</SelectItem>
+              <SelectItem value={FILL_VALUE}>fill panel</SelectItem>
+              <SelectItem value={RESPONSIVE_VALUE}>responsive</SelectItem>
               <SelectGroup>
-                <SelectGroupLabel>Standard</SelectGroupLabel>
+                <SelectGroupLabel>standard</SelectGroupLabel>
                 {PREVIEW_VIEWPORT_PRESETS.map((preset) => (
                   <SelectItem key={preset.id} value={preset.id}>
                     <span className="flex w-full items-center justify-between gap-5">
@@ -335,7 +335,7 @@ function BrowserViewportSetting({ disabled }: { readonly disabled: boolean }) {
                 onValueCommitted={(value) => commitDimension("width", value)}
               >
                 <NumberFieldGroup>
-                  <NumberFieldInput aria-label="Default viewport width" />
+                  <NumberFieldInput aria-label="default viewport width" />
                 </NumberFieldGroup>
               </NumberField>
               <span className="text-xs text-muted-foreground">×</span>
@@ -350,7 +350,7 @@ function BrowserViewportSetting({ disabled }: { readonly disabled: boolean }) {
                 onValueCommitted={(value) => commitDimension("height", value)}
               >
                 <NumberFieldGroup>
-                  <NumberFieldInput aria-label="Default viewport height" />
+                  <NumberFieldInput aria-label="default viewport height" />
                 </NumberFieldGroup>
               </NumberField>
               <Tooltip>
@@ -360,7 +360,7 @@ function BrowserViewportSetting({ disabled }: { readonly disabled: boolean }) {
                       size="icon-sm"
                       variant="ghost-muted"
                       disabled={disabled}
-                      aria-label={`Rotate to ${
+                      aria-label={`rotate to ${
                         presentedSize.height >= presentedSize.width ? "landscape" : "portrait"
                       }`}
                       onClick={() =>
@@ -371,7 +371,7 @@ function BrowserViewportSetting({ disabled }: { readonly disabled: boolean }) {
                     </Button>
                   }
                 />
-                <TooltipPopup side="top">Rotate</TooltipPopup>
+                <TooltipPopup side="top">rotate</TooltipPopup>
               </Tooltip>
             </div>
           ) : null}
@@ -388,7 +388,7 @@ function BrowserZoomSetting({ disabled }: { readonly disabled: boolean }) {
   return (
     <SettingsRow
       {...searchableSetting("browser-default-zoom")}
-      description="Page zoom applied to new browser tabs."
+      description="page zoom applied to new browser tabs."
       resetAction={
         !disabled && zoomFactor !== DEFAULT_PREVIEW_ZOOM_FACTOR ? (
           <SettingResetButton
@@ -408,7 +408,7 @@ function BrowserZoomSetting({ disabled }: { readonly disabled: boolean }) {
             if (next !== undefined) updateSettings({ browserDefaultZoomFactor: next });
           }}
         >
-          <SelectTrigger size="sm" className="w-full sm:w-40" aria-label="Default browser zoom">
+          <SelectTrigger size="sm" className="w-full sm:w-40" aria-label="default browser zoom">
             <SelectValue>{zoomLabel(zoomFactor)}</SelectValue>
           </SelectTrigger>
           <SelectPopup align="end" alignItemWithTrigger={false}>
@@ -431,7 +431,7 @@ function BrowserAppearanceSetting({ disabled }: { readonly disabled: boolean }) 
   return (
     <SettingsRow
       {...searchableSetting("browser-default-appearance")}
-      description="The color scheme pages are told to prefer. System follows your OS setting."
+      description="the color scheme pages are told to prefer. system follows your OS setting."
       resetAction={
         !disabled && appearance !== DEFAULT_PREVIEW_APPEARANCE ? (
           <SettingResetButton
@@ -453,7 +453,7 @@ function BrowserAppearanceSetting({ disabled }: { readonly disabled: boolean }) 
           <SelectTrigger
             size="sm"
             className="w-full sm:w-40"
-            aria-label="Default browser appearance"
+            aria-label="default browser appearance"
           >
             <SelectValue>{APPEARANCE_LABELS[appearance]}</SelectValue>
           </SelectTrigger>
@@ -477,7 +477,7 @@ function BrowserRecordingFrameRateSetting({ disabled }: { readonly disabled: boo
   return (
     <SettingsRow
       {...searchableSetting("browser-recording-frame-rate")}
-      description="Maximum recording rate. 30 fps saves CPU and storage; 60 fps is smoother."
+      description="maximum recording rate. 30 fps saves CPU and storage; 60 fps is smoother."
       resetAction={
         !disabled && frameRate !== DEFAULT_BROWSER_RECORDING_FRAME_RATE ? (
           <SettingResetButton
@@ -502,7 +502,7 @@ function BrowserRecordingFrameRateSetting({ disabled }: { readonly disabled: boo
           <SelectTrigger
             size="sm"
             className="w-full sm:w-40"
-            aria-label="Browser recording frame rate"
+            aria-label="browser recording frame rate"
           >
             <SelectValue>{frameRate} fps</SelectValue>
           </SelectTrigger>
@@ -520,7 +520,7 @@ function BrowserRecordingFrameRateSetting({ disabled }: { readonly disabled: boo
 }
 
 const LINK_TARGET_LABELS: Readonly<Record<BrowserLinkTarget, string>> = {
-  system: "Your default browser",
+  system: "your default browser",
   app: ":3 Code",
 };
 
@@ -531,7 +531,7 @@ function BrowserLinkTargetSetting({ disabled }: { readonly disabled: boolean }) 
   return (
     <SettingsRow
       {...searchableSetting("browser-link-target")}
-      description="Where links in the chat and terminal open. Hold ⌘ or Ctrl while clicking a link to open it in your default browser either way."
+      description="where links in the chat and terminal open. hold ⌘ or Ctrl while clicking a link to open it in your default browser either way."
       resetAction={
         !disabled && linkTarget !== DEFAULT_BROWSER_LINK_TARGET ? (
           <SettingResetButton
@@ -550,7 +550,7 @@ function BrowserLinkTargetSetting({ disabled }: { readonly disabled: boolean }) 
             }
           }}
         >
-          <SelectTrigger size="sm" className="w-full sm:w-40" aria-label="Open links in">
+          <SelectTrigger size="sm" className="w-full sm:w-40" aria-label="open links in">
             <SelectValue>{LINK_TARGET_LABELS[linkTarget]}</SelectValue>
           </SelectTrigger>
           <SelectPopup align="end" alignItemWithTrigger={false}>
@@ -573,7 +573,7 @@ function DeviceIntegrationSettings() {
   const environmentId = connected ? selected.environmentId : null;
 
   return (
-    <SettingsSection id="devices" title="Devices">
+    <SettingsSection id="devices" title="devices">
       <DeviceIntegrationControls
         key={`${environmentId}:${JSON.stringify(search)}`}
         environmentId={environmentId}
@@ -637,7 +637,7 @@ function DeviceIntegrationControls({
         toastManager.add({
           type: "error",
           title: "device settings not saved on all environments 3:",
-          description: `Could not update ${failed.map((environment) => environment.label).join(", ")}.`,
+          description: `could not update ${failed.map((environment) => environment.label).join(", ")}.`,
         });
       }
     } finally {
@@ -659,7 +659,7 @@ function DeviceIntegrationControls({
               settingKeys={["enableDeviceSupport"]}
               checked={enabled}
               disabled={projectScope || !loaded || !environmentId || busy || pending !== null}
-              aria-label="Device hub"
+              aria-label="device hub"
               onCheckedChange={(checked) =>
                 void update("hub", {
                   enabled: Boolean(checked),
@@ -676,7 +676,7 @@ function DeviceIntegrationControls({
             {...searchableSetting("device-platform-support")}
             description={
               connectedEnvironments.length > 1
-                ? `Status for ${connectedEnvironments.find((environment) => environment.environmentId === environmentId)?.label}. Select an environment to inspect its simulator support.`
+                ? `status for ${connectedEnvironments.find((environment) => environment.environmentId === environmentId)?.label}. select an environment to inspect its simulator support.`
                 : undefined
             }
             status={
@@ -700,7 +700,7 @@ function DeviceIntegrationControls({
                   void list({ environmentId, input: {} }).finally(() => setPending(null));
                 }}
               >
-                {pending === "check" ? "Checking…" : "Refresh"}
+                {pending === "check" ? "checking…" : "refresh"}
               </Button>
             }
           />
@@ -722,7 +722,7 @@ function DeviceIntegrationControls({
                 (!projectScope && (!loaded || !anyHubEnabled || busy)) ||
                 pending !== null
               }
-              aria-label="Agent device access"
+              aria-label="agent device access"
               onCheckedChange={(checked) =>
                 projectScope
                   ? updateSettings({ enableAgentDeviceAccess: Boolean(checked) })
@@ -749,7 +749,7 @@ function BrowserAutoShowFloatingPreviewSetting({ disabled }: { readonly disabled
   return (
     <SettingsRow
       {...searchableSetting("browser-auto-show-floating-preview")}
-      description="Show the floating preview when an agent opens a browser or device unless the agent says otherwise."
+      description="show the floating preview when an agent opens a browser or device unless the agent says otherwise."
       resetAction={
         !disabled && autoShow !== DEFAULT_BROWSER_AUTO_SHOW_FLOATING_PREVIEW ? (
           <SettingResetButton
@@ -769,7 +769,7 @@ function BrowserAutoShowFloatingPreviewSetting({ disabled }: { readonly disabled
           onCheckedChange={(checked) =>
             updateSettings({ browserAutoShowFloatingPreview: Boolean(checked) })
           }
-          aria-label="Auto-show floating preview"
+          aria-label="auto-show floating preview"
         />
       }
     />
@@ -859,7 +859,7 @@ function BrowserProfilesSetting({ disabled }: { readonly disabled: boolean }) {
       toastManager.add({
         type: "error",
         title: `could not clear ${name}'s data 3:`,
-        description: "You're not connected to a server yet.",
+        description: "you're not connected to a server yet.",
       });
       return;
     }
@@ -879,7 +879,7 @@ function BrowserProfilesSetting({ disabled }: { readonly disabled: boolean }) {
   const removeProfile = async (id: string) => {
     if (!settingsHydrated || importInFlightRef.current) return;
     if (!removalAvailable) {
-      setProfileRemovalError("Connect to an environment before removing this profile.");
+      setProfileRemovalError("connect to an environment before removing this profile.");
       return;
     }
     setProfileRemovalError(null);
@@ -893,7 +893,7 @@ function BrowserProfilesSetting({ disabled }: { readonly disabled: boolean }) {
         id,
       );
     } catch {
-      setProfileRemovalError("Profile data could not be deleted. Try again.");
+      setProfileRemovalError("profile data could not be deleted. try again.");
       setProfileRemovalInFlight(false);
       return;
     }
@@ -1056,7 +1056,7 @@ function BrowserProfilesSetting({ disabled }: { readonly disabled: boolean }) {
   return (
     <SettingsRow
       {...searchableSetting("browser-profiles")}
-      description="Profiles separate cookies and logins. Incognito data is cleared when the app closes."
+      description="profiles separate cookies and logins. incognito data is cleared when the app closes."
       control={
         <Menu onOpenChange={(open) => open && loadSources()}>
           <MenuTrigger
@@ -1069,23 +1069,23 @@ function BrowserProfilesSetting({ disabled }: { readonly disabled: boolean }) {
             }
           >
             <PlusIcon />
-            Add profile
+            add profile
           </MenuTrigger>
           <MenuPopup align="end" className="min-w-56">
             <MenuItem
               disabled={!settingsHydrated || atProfileLimit}
               onClick={() => createProfile("New profile")}
             >
-              Blank profile
+              blank profile
             </MenuItem>
             {atProfileLimit ? (
-              <MenuItem disabled>You&rsquo;ve reached the profile limit</MenuItem>
+              <MenuItem disabled>you&rsquo;ve reached the profile limit</MenuItem>
             ) : null}
             <MenuSeparator />
             <MenuGroup>
-              <MenuGroupLabel>Import from</MenuGroupLabel>
+              <MenuGroupLabel>import from</MenuGroupLabel>
               {sources === null ? (
-                <MenuItem disabled>Looking for browsers…</MenuItem>
+                <MenuItem disabled>looking for browsers…</MenuItem>
               ) : importableSources.length === 0 ? (
                 <MenuItem disabled>no supported browsers found</MenuItem>
               ) : (
@@ -1114,7 +1114,7 @@ function BrowserProfilesSetting({ disabled }: { readonly disabled: boolean }) {
                     </MenuItem>
                   ))}
                   {primaryEnvironment == null ? (
-                    <MenuItem disabled>Connect to an environment to import cookies</MenuItem>
+                    <MenuItem disabled>connect to an environment to import cookies</MenuItem>
                   ) : null}
                 </>
               )}
@@ -1159,7 +1159,7 @@ function BrowserProfilesSetting({ disabled }: { readonly disabled: boolean }) {
                     nativeInput
                     size="sm"
                     className="w-full max-w-56"
-                    aria-label={`Rename ${profile.name}`}
+                    aria-label={`rename ${profile.name}`}
                     disabled={profileWritesDisabled || importInFlight}
                     maxLength={BROWSER_PROFILE_NAME_MAX_LENGTH}
                     value={profile.name}
@@ -1173,7 +1173,7 @@ function BrowserProfilesSetting({ disabled }: { readonly disabled: boolean }) {
                   and menu button that are all at 0.64.
                 */}
                 {isDefault ? (
-                  <Badge className={cn(profileWritesDisabled && "opacity-64")}>Default</Badge>
+                  <Badge className={cn(profileWritesDisabled && "opacity-64")}>default</Badge>
                 ) : null}
               </span>
               <Menu>
@@ -1198,13 +1198,13 @@ function BrowserProfilesSetting({ disabled }: { readonly disabled: boolean }) {
                       }
                     }}
                   >
-                    Set as default
+                    set as default
                   </MenuItem>
                   <MenuItem
                     disabled={!settingsHydrated || !removalAvailable}
                     onClick={() => clearProfileData(profile.id, profile.name)}
                   >
-                    Clear cookies and cache
+                    clear cookies and cache
                   </MenuItem>
                   {builtIn ? null : (
                     <MenuItem
@@ -1214,7 +1214,7 @@ function BrowserProfilesSetting({ disabled }: { readonly disabled: boolean }) {
                         if (settingsHydrated) setProfilePendingRemoval(profile);
                       }}
                     >
-                      Remove profile and data
+                      remove profile and data
                     </MenuItem>
                   )}
                   {!removalAvailable ? (
@@ -1222,8 +1222,8 @@ function BrowserProfilesSetting({ disabled }: { readonly disabled: boolean }) {
                       <MenuSeparator />
                       <MenuItem disabled>
                         {environmentsReady
-                          ? "Connect to an environment to clear profile data"
-                          : "Checking environments…"}
+                          ? "connect to an environment to clear profile data"
+                          : "checking environments…"}
                       </MenuItem>
                     </>
                   ) : null}
@@ -1244,9 +1244,9 @@ function BrowserProfilesSetting({ disabled }: { readonly disabled: boolean }) {
       >
         <AlertDialogPopup>
           <AlertDialogHeader>
-            <AlertDialogTitle>Remove “{profilePendingRemoval?.name}”?</AlertDialogTitle>
+            <AlertDialogTitle>remove “{profilePendingRemoval?.name}”?</AlertDialogTitle>
             <AlertDialogDescription>
-              Its cookies and logins are deleted. Tabs already open in this profile stay open until
+              its cookies and logins are deleted. tabs already open in this profile stay open until
               you close them.
             </AlertDialogDescription>
             {profileRemovalError ? (
@@ -1256,7 +1256,7 @@ function BrowserProfilesSetting({ disabled }: { readonly disabled: boolean }) {
             ) : null}
             {!removalAvailable ? (
               <p className="text-sm text-muted-foreground">
-                Connect to an environment to remove this profile and its data.
+                connect to an environment to remove this profile and its data.
               </p>
             ) : null}
           </AlertDialogHeader>
@@ -1265,7 +1265,7 @@ function BrowserProfilesSetting({ disabled }: { readonly disabled: boolean }) {
               disabled={profileRemovalInFlight}
               render={<Button variant="outline" disabled={profileRemovalInFlight} />}
             >
-              Cancel
+              cancel
             </AlertDialogClose>
             <Button
               variant="destructive"
@@ -1276,7 +1276,7 @@ function BrowserProfilesSetting({ disabled }: { readonly disabled: boolean }) {
                 }
               }}
             >
-              {profileRemovalInFlight ? "Removing…" : "Remove profile"}
+              {profileRemovalInFlight ? "removing…" : "remove profile"}
             </Button>
           </AlertDialogFooter>
         </AlertDialogPopup>
@@ -1305,7 +1305,7 @@ function BrowserProfilesSetting({ disabled }: { readonly disabled: boolean }) {
                 toastManager.add({
                   type: "error",
                   title: "could not open System Settings 3:",
-                  description: "Open Privacy & Security → Full Disk Access manually.",
+                  description: "open Privacy & Security → Full Disk Access manually.",
                 });
               });
           }}
@@ -1336,9 +1336,9 @@ export function IntegrationsSettingsPanel() {
       {/* Server-authoritative agent access is scoped by the header selection;
           the preview defaults below are device-local and ignore it. */}
       <ProjectDefaultsSettings category="integrations" />
-      <SettingsSection id="browser" title="Browser">
+      <SettingsSection id="browser" title="browser">
         {previewDefaultsDisabled ? (
-          <SettingsUnavailableGroup message="Only available in the desktop app.">
+          <SettingsUnavailableGroup message="only available in the desktop app.">
             {previewDefaults}
           </SettingsUnavailableGroup>
         ) : (

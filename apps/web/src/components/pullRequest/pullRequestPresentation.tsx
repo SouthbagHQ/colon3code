@@ -41,9 +41,9 @@ export function PullRequestApprovalGlyph() {
           aria-hidden
           className={cn("size-3.5", CHECK_STATUS_PRESENTATION.success.toneClassName)}
         />
-        <span className="sr-only">Approved</span>
+        <span className="sr-only">approved</span>
       </TooltipTrigger>
-      <TooltipPopup>Approved</TooltipPopup>
+      <TooltipPopup>approved</TooltipPopup>
     </Tooltip>
   );
 }
@@ -64,21 +64,21 @@ export function resolvePullRequestState(input: {
 }): StatePresentation {
   if (input.state === "merged") {
     return {
-      label: "Merged",
+      label: "merged",
       toneClassName: "text-violet-600 dark:text-violet-300/90",
       Icon: GitMergeIcon,
     };
   }
   if (input.state === "closed") {
     return {
-      label: "Closed",
+      label: "closed",
       toneClassName: "text-red-600 dark:text-red-300/90",
       Icon: GitPullRequestClosedIcon,
     };
   }
   if (input.isDraft) {
     return {
-      label: "Draft",
+      label: "draft",
       toneClassName: "text-zinc-500 dark:text-zinc-400/80",
       Icon: GitPullRequestDraftIcon,
     };
@@ -87,13 +87,13 @@ export function resolvePullRequestState(input: {
     return {
       // "Has conflicts" leaves out the one thing a reader wants when the warning triangle catches
       // their eye, so name the branch it collides with wherever the caller knows it.
-      label: input.baseBranch ? `Conflicts with ${input.baseBranch}` : "Has conflicts",
+      label: input.baseBranch ? `conflicts with ${input.baseBranch}` : "has conflicts",
       toneClassName: "text-destructive",
       Icon: TriangleAlertIcon,
     };
   }
   return {
-    label: "Open",
+    label: "open",
     toneClassName: "text-emerald-600 dark:text-emerald-300/90",
     Icon: GitPullRequestIcon,
   };
@@ -135,21 +135,21 @@ export function PullRequestStateGlyph({
 }
 
 const CHECK_STATUS_PRESENTATION = {
-  pending: { label: "Running", Icon: Spinner, toneClassName: "text-amber-500" },
+  pending: { label: "running", Icon: Spinner, toneClassName: "text-amber-500" },
   "action-required": {
-    label: "Awaiting action",
+    label: "awaiting action",
     Icon: CircleDotIcon,
     toneClassName: "text-amber-600 dark:text-amber-400/90",
   },
   success: {
-    label: "Passed",
+    label: "passed",
     Icon: CircleCheckIcon,
     toneClassName: "text-emerald-600 dark:text-emerald-300/90",
   },
-  failure: { label: "Failed", Icon: CircleXIcon, toneClassName: "text-destructive" },
-  cancelled: { label: "Cancelled", Icon: CircleXIcon, toneClassName: "text-destructive" },
-  skipped: { label: "Skipped", Icon: CircleDashedIcon, toneClassName: "text-muted-foreground/70" },
-  neutral: { label: "Neutral", Icon: CircleDashedIcon, toneClassName: "text-muted-foreground/70" },
+  failure: { label: "failed", Icon: CircleXIcon, toneClassName: "text-destructive" },
+  cancelled: { label: "cancelled", Icon: CircleXIcon, toneClassName: "text-destructive" },
+  skipped: { label: "skipped", Icon: CircleDashedIcon, toneClassName: "text-muted-foreground/70" },
+  neutral: { label: "neutral", Icon: CircleDashedIcon, toneClassName: "text-muted-foreground/70" },
 } as const satisfies Record<
   PullRequestCheckStatus,
   { label: string; Icon: typeof CircleCheckIcon | typeof Spinner; toneClassName: string }
@@ -167,7 +167,7 @@ export function pullRequestCheckStatusLabel(
   check: Pick<PullRequestCheck, "status" | "url">,
 ): string {
   return isWorkflowApprovalCheck(check)
-    ? "Awaiting approval"
+    ? "awaiting approval"
     : CHECK_STATUS_PRESENTATION[check.status].label;
 }
 
@@ -187,17 +187,17 @@ export function PullRequestCheckStatusIcon({ status }: { status: PullRequestChec
  */
 const CHECKS_STATE_PRESENTATION = {
   passing: {
-    label: "All checks have passed",
+    label: "all checks have passed",
     Icon: CircleCheckIcon,
     toneClassName: CHECK_STATUS_PRESENTATION.success.toneClassName,
   },
   failing: {
-    label: "Some checks were not successful",
+    label: "some checks were not successful",
     Icon: CircleXIcon,
     toneClassName: "text-destructive",
   },
   pending: {
-    label: "Some checks haven't completed yet",
+    label: "some checks haven't completed yet",
     Icon: CircleDotIcon,
     toneClassName: "text-amber-600 dark:text-amber-400/90",
   },
@@ -236,7 +236,7 @@ export function pullRequestChecksState(
  */
 const REVIEW_OUTCOME_PRESENTATION = {
   approved: {
-    label: "Approved",
+    label: "approved",
     Icon: CircleCheckIcon,
     toneClassName: "text-emerald-600 dark:text-emerald-300/90",
     ringClassName: "ring-2 ring-emerald-500 dark:ring-emerald-400",
@@ -245,7 +245,7 @@ const REVIEW_OUTCOME_PRESENTATION = {
     badgeVariant: "success",
   },
   "changes-requested": {
-    label: "Changes requested",
+    label: "changes requested",
     Icon: CircleXIcon,
     toneClassName: "text-destructive",
     ringClassName: "ring-2 ring-destructive",
@@ -253,7 +253,7 @@ const REVIEW_OUTCOME_PRESENTATION = {
     badgeVariant: "error",
   },
   dismissed: {
-    label: "Review dismissed",
+    label: "review dismissed",
     Icon: CircleDashedIcon,
     toneClassName: "text-muted-foreground/70",
     ringClassName: "ring-2 ring-muted-foreground/60",
@@ -401,7 +401,7 @@ export function PullRequestActorLabel({
               href={profileUrl}
               target="_blank"
               rel="noopener noreferrer"
-              aria-label={`Open ${login}'s profile`}
+              aria-label={`open ${login}'s profile`}
             />
           ) : (
             <span />
@@ -416,7 +416,7 @@ export function PullRequestActorLabel({
       >
         {label}
       </TooltipTrigger>
-      <TooltipPopup side="top">{profileUrl ? `Open ${login}'s profile` : login}</TooltipPopup>
+      <TooltipPopup side="top">{profileUrl ? `open ${login}'s profile` : login}</TooltipPopup>
     </Tooltip>
   );
 }
@@ -504,5 +504,5 @@ export function summarizePullRequestChecks(checks: ReadonlyArray<PullRequestChec
     return `${otherActionRequired} ${otherActionRequired === 1 ? "check" : "checks"} awaiting action`;
   }
   if (pending > 0) return `${pending} of ${checks.length} running`;
-  return passed === checks.length ? "All checks passed" : `${passed} of ${checks.length} passing`;
+  return passed === checks.length ? "all checks passed" : `${passed} of ${checks.length} passing`;
 }

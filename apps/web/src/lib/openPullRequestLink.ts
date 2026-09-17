@@ -300,7 +300,7 @@ export function useOpenPrLink(threadRef?: ScopedThreadRef) {
           stackedThreadToast({
             type: "error",
             title: "unable to open pull request link 3:",
-            description: error instanceof Error ? error.message : "An error occurred.",
+            description: error instanceof Error ? error.message : "an error occurred.",
           }),
         );
       });

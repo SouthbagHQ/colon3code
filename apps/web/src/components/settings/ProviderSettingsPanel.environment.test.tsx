@@ -124,7 +124,7 @@ function provider(): ServerProvider {
       updateCommand: "pnpm add -g @openai/codex@latest",
       canUpdate: true,
       checkedAt: "2026-07-24T12:00:00.000Z",
-      message: "Update available.",
+      message: "update available.",
     },
   };
 }
@@ -136,7 +136,7 @@ function renderPanel(options?: {
   hooks.beginRender();
   return EnvironmentProviderSettings({
     environmentId,
-    environmentLabel: "Remote device",
+    environmentLabel: "remote device",
     ...(options?.readOnly === undefined ? {} : { readOnly: options.readOnly }),
     ...(options?.targetInstanceId === undefined
       ? {}
@@ -154,13 +154,13 @@ function isRefreshButton(element: ReactElement<Record<string, unknown>>): boolea
         child !== null &&
         (child as ReactElement<Record<string, unknown>>).props?.className === "sr-only" &&
         (child as ReactElement<Record<string, unknown>>).props?.children ===
-          "Refresh provider status",
+          "refresh provider status",
     )
   );
 }
 
 function isAddProviderButton(element: ReactElement<Record<string, unknown>>): boolean {
-  return element.props["aria-label"] === "Add provider";
+  return element.props["aria-label"] === "add provider";
 }
 
 async function flushPromises(): Promise<void> {
@@ -291,7 +291,7 @@ describe("EnvironmentProviderSettings routing", () => {
     );
     expect(customEditor).not.toBeNull();
 
-    const notice = visitElements(panel, (element) => element.props.title === "Limited permissions");
+    const notice = visitElements(panel, (element) => element.props.title === "limited permissions");
     expect(notice).not.toBeNull();
 
     expect(visitElements(panel, isRefreshButton)).toBeNull();
@@ -303,7 +303,7 @@ describe("EnvironmentProviderSettings routing", () => {
     const panel = renderPanel();
     expect(visitElements(panel, (element) => element.props.inert === true)).toBeNull();
     expect(
-      visitElements(panel, (element) => element.props.title === "Limited permissions"),
+      visitElements(panel, (element) => element.props.title === "limited permissions"),
     ).toBeNull();
     expect(visitElements(panel, isRefreshButton)).not.toBeNull();
     expect(visitElements(panel, isAddProviderButton)).not.toBeNull();
@@ -311,14 +311,14 @@ describe("EnvironmentProviderSettings routing", () => {
 
   it("keeps Advanced visible when search targets the provider health interval", () => {
     let panel = renderPanel();
-    expect(visitElements(panel, (element) => element.props.title === "Advanced")).not.toBeNull();
+    expect(visitElements(panel, (element) => element.props.title === "advanced")).not.toBeNull();
     expect(
       visitElements(panel, (element) => element.props.id === "provider-health-check-interval"),
     ).not.toBeNull();
 
     settingsSearchState.targetId = "provider-health-check-interval";
     panel = renderPanel();
-    expect(visitElements(panel, (element) => element.props.title === "Advanced")).not.toBeNull();
+    expect(visitElements(panel, (element) => element.props.title === "advanced")).not.toBeNull();
     expect(
       visitElements(panel, (element) => element.props.id === "provider-health-check-interval"),
     ).not.toBeNull();

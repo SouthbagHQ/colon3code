@@ -44,15 +44,15 @@ export function getProviderStatusMessage(status: ServerProvider): string {
   if (status.message) return status.message;
   const providerName = status.displayName?.trim() || formatProviderDriverKindLabel(status.driver);
   if (!status.installed && hasProviderSetup(status)) {
-    return `Open provider setup to install ${formatProviderDriverKindLabel(status.driver)} on this environment.`;
+    return `open provider setup to install ${formatProviderDriverKindLabel(status.driver)} on this environment.`;
   }
   if (status.auth.status === "unauthenticated") {
     if (hasProviderSetup(status)) {
       return status.driver === "antigravity"
-        ? "Open provider setup to sign in with Google."
-        : "Open provider setup to sign in.";
+        ? "open provider setup to sign in with Google."
+        : "open provider setup to sign in.";
     }
-    return "Sign in via the CLI to authenticate again.";
+    return "sign in via the CLI to authenticate again.";
   }
   return status.status === "ready"
     ? "no models are available for this provider"
@@ -111,12 +111,12 @@ export const ProviderStatusBanner = memo(function ProviderStatusBanner({
               size="xs"
               variant="link"
             >
-              Open provider setup
+              open provider setup
             </Button>
           ) : null}
         </div>
         <Button
-          aria-label={`Dismiss ${providerName} provider ${status.status}`}
+          aria-label={`dismiss ${providerName} provider ${status.status}`}
           className="absolute top-2 right-2 size-6 text-muted-foreground hover:text-foreground"
           onClick={onDismiss}
           size="icon-xs"

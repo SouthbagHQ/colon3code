@@ -5,10 +5,10 @@ import inputUrl from "./assets/notification-input.mp3";
 
 type NotificationMode = ClientSettings["notificationMode"];
 export const NOTIFICATION_MODE_LABELS = {
-  off: "Off",
-  notifications: "Notifications only",
-  sound: "Sound only",
-  "notifications-and-sound": "Notifications with sound",
+  off: "off",
+  notifications: "notifications only",
+  sound: "sound only",
+  "notifications-and-sound": "notifications with sound",
 } satisfies Record<NotificationMode, string>;
 
 export function hasNotificationSound(mode: NotificationMode) {

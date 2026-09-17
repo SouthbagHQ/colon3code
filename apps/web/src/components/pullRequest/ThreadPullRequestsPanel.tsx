@@ -35,11 +35,11 @@ import {
 } from "./pullRequestPresentation";
 
 const SOURCE_LABELS: Record<ThreadPullRequestLink["source"], string> = {
-  manual: "Linked by you",
-  created: "Created from this thread",
-  agent: "Linked by the agent",
-  stack: "Found in the stack",
-  "stack-dismissed": "Dismissed",
+  manual: "linked by you",
+  created: "created from this thread",
+  agent: "linked by the agent",
+  stack: "found in the stack",
+  "stack-dismissed": "dismissed",
 };
 
 function ChecksGlyph({
@@ -85,7 +85,7 @@ function LinkRow({
       {depth > 0 ? <span aria-hidden className="-ml-2 h-6 w-px shrink-0 bg-border/70" /> : null}
       {snapshot === null ? (
         <GitPullRequestArrow
-          aria-label="Waiting for host state"
+          aria-label="waiting for host state"
           className="size-4 shrink-0 text-muted-foreground"
         />
       ) : (
@@ -122,11 +122,11 @@ function LinkRow({
               snapshot.reviewDecision === "approved" ? (
                 <PullRequestApprovalGlyph />
               ) : (
-                <span className="text-amber-600/90 dark:text-amber-400/80">Changes requested</span>
+                <span className="text-amber-600/90 dark:text-amber-400/80">changes requested</span>
               )
             ) : null}
             {snapshot?.state === "open" && snapshot.mergeability === "conflicting" ? (
-              <span className="text-destructive">Conflicts</span>
+              <span className="text-destructive">conflicts</span>
             ) : null}
             {snapshot?.checksState ? <ChecksGlyph state={snapshot.checksState} /> : null}
             <PullRequestDiffStat
@@ -180,7 +180,7 @@ function LinkRow({
             <Button
               variant="ghost"
               size="icon-xs"
-              aria-label={`Actions for #${link.number}`}
+              aria-label={`actions for #${link.number}`}
               className={cn(
                 "opacity-0 group-hover/pr-row:opacity-100 data-[popup-open]:opacity-100",
               )}
@@ -190,10 +190,10 @@ function LinkRow({
           }
         />
         <MenuPopup align="end" side="bottom">
-          <MenuItem onClick={() => void writeTextToClipboard(link.url, "link")}>Copy link</MenuItem>
-          <MenuItem onClick={(event) => openPrLink(event, link.url, threadRef)}>Open</MenuItem>
+          <MenuItem onClick={() => void writeTextToClipboard(link.url, "link")}>copy link</MenuItem>
+          <MenuItem onClick={(event) => openPrLink(event, link.url, threadRef)}>open</MenuItem>
           <MenuItem onClick={() => onUnlink(link)}>
-            {link.source === "stack" ? "Dismiss from thread" : "Unlink from thread"}
+            {link.source === "stack" ? "dismiss from thread" : "unlink from thread"}
           </MenuItem>
         </MenuPopup>
       </Menu>
@@ -207,7 +207,7 @@ export function ThreadPullRequestsPanel({ threadRef }: { threadRef: ScopedThread
     return (
       <PullRequestsUnavailableState
         title="linked pull requests unavailable 3:"
-        error="This environment does not support multiple linked pull requests."
+        error="this environment does not support multiple linked pull requests."
       />
     );
   }
@@ -253,12 +253,12 @@ function EnabledThreadPullRequestsPanel({ threadRef }: { threadRef: ScopedThread
         <LinkIcon aria-hidden className="size-6 text-muted-foreground/60" />
         <p className="text-sm font-medium">no linked pull requests</p>
         <p className="max-w-60 text-xs text-muted-foreground">
-          Pull requests the agent opens from this thread land here. Link one yourself from a URL or
+          pull requests the agent opens from this thread land here. link one yourself from a URL or
           a number.
         </p>
         <Button size="sm" variant="outline" onClick={openLinkDialog}>
           <PlusIcon className="size-3.5" />
-          Link pull request
+          link pull request
         </Button>
       </div>
     );
@@ -285,7 +285,7 @@ function EnabledThreadPullRequestsPanel({ threadRef }: { threadRef: ScopedThread
         </span>
         <Button size="xs" variant="ghost" onClick={openLinkDialog}>
           <PlusIcon className="size-3.5" />
-          Link
+          link
         </Button>
       </footer>
     </div>

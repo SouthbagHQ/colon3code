@@ -43,7 +43,7 @@ export function TerminalContextInlineChip(props: TerminalContextInlineChipProps)
   if (!expired && text.length > 0 && detailsMode === "popover") {
     return (
       <ContextChipPopover
-        accessibleLabel={`Terminal excerpt, ${label}`}
+        accessibleLabel={`terminal excerpt, ${label}`}
         chip={
           <>
             {icon}
@@ -66,12 +66,12 @@ export function TerminalContextInlineChip(props: TerminalContextInlineChipProps)
               {terminalLabel}
             </span>
             <span className="ml-auto shrink-0 text-secondary-label text-xs">
-              {lineStart === lineEnd ? `Line ${lineStart}` : `Lines ${lineStart}–${lineEnd}`}
+              {lineStart === lineEnd ? `line ${lineStart}` : `lines ${lineStart}–${lineEnd}`}
             </span>
           </div>
           <pre
             className="max-h-80 overflow-auto whitespace-pre bg-muted p-3 font-mono text-foreground text-xs leading-relaxed outline-none [tab-size:4] focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring"
-            aria-label="Captured terminal output"
+            aria-label="captured terminal output"
             tabIndex={0}
           >
             {text}
@@ -91,12 +91,12 @@ export function TerminalContextInlineChip(props: TerminalContextInlineChipProps)
         expired && "border-destructive/35 bg-destructive/8 text-destructive",
       )}
       labelClassName={COMPOSER_INLINE_CHIP_LABEL_CLASS_NAME}
-      aria-label={`Terminal excerpt, ${label}${expired ? ", expired" : ""}`}
+      aria-label={`terminal excerpt, ${label}${expired ? ", expired" : ""}`}
       data-terminal-context-expired={expired ? "true" : undefined}
       tooltipClassName="max-w-80 whitespace-pre-wrap leading-tight"
       tooltip={
         expired
-          ? `Terminal context expired. Remove and re-add ${label} to include it in your message.`
+          ? `terminal context expired. remove and re-add ${label} to include it in your message.`
           : detailsMode === "none"
             ? undefined
             : text

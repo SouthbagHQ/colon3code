@@ -289,8 +289,8 @@ describe("MessagesTimeline", () => {
       <MessagesTimeline {...buildProps()} timelineEntries={[first, second]} />,
     );
 
-    expect(markup).toContain('aria-label="Previous turn"');
-    expect(markup).toContain('aria-label="Next turn"');
+    expect(markup).toContain('aria-label="previous turn"');
+    expect(markup).toContain('aria-label="next turn"');
   });
 
   // Expanding history uses this suite's existing test renderer, deprecated in
@@ -497,7 +497,7 @@ describe("MessagesTimeline", () => {
       />,
     );
 
-    expect(markup).toContain("Worked for 8.0s");
+    expect(markup).toContain("worked for 8.0s");
   });
 
   it("keeps assistant changed-files headers sticky below the thread header", () => {
@@ -546,8 +546,8 @@ describe("MessagesTimeline", () => {
     expect(markup).not.toContain("self-start");
     expect(markup).toContain("whitespace-nowrap");
     expect(markup).toContain("size-3");
-    expect(markup).not.toContain('aria-label="Collapse all folders"');
-    expect(markup).toContain('aria-label="Open diff"');
+    expect(markup).not.toContain('aria-label="collapse all folders"');
+    expect(markup).toContain('aria-label="open diff"');
     expect(markup).toContain("1 changed file");
   });
 
@@ -761,8 +761,8 @@ describe("MessagesTimeline", () => {
       <MessagesTimeline {...buildProps()} timelineEntries={[entry]} />,
     );
 
-    expect(markup).toContain('aria-label="Preview report.pdf"');
-    expect(markup).toContain('aria-label="Download report.pdf"');
+    expect(markup).toContain('aria-label="preview report.pdf"');
+    expect(markup).toContain('aria-label="download report.pdf"');
     expect(markup).not.toContain('download="report.pdf"');
     expect(markup).not.toContain('alt="report.pdf"');
   });
@@ -840,8 +840,8 @@ describe("MessagesTimeline", () => {
       <MessagesTimeline {...buildProps()} timelineEntries={[entry]} />,
     );
 
-    expect(markup).toContain('aria-label="Preview archive.zip"');
-    expect(markup).toContain('aria-label="Download archive.zip"');
+    expect(markup).toContain('aria-label="preview archive.zip"');
+    expect(markup).toContain('aria-label="download archive.zip"');
     expect(markup).not.toContain("<a href=");
   });
 
@@ -868,7 +868,7 @@ describe("MessagesTimeline", () => {
     );
 
     expect(markup).toContain("report.pdf");
-    expect(markup).not.toContain('aria-label="Download report.pdf"');
+    expect(markup).not.toContain('aria-label="download report.pdf"');
   });
 
   it("renders unknown attachment types as inert rows instead of crashing", () => {
@@ -895,7 +895,7 @@ describe("MessagesTimeline", () => {
     );
 
     expect(markup).toContain("voice-memo.ogg");
-    expect(markup).not.toContain('aria-label="Download voice-memo.ogg"');
+    expect(markup).not.toContain('aria-label="download voice-memo.ogg"');
     expect(markup).not.toContain('alt="voice-memo.ogg"');
     expect(markup).not.toContain("<a href=");
   });
@@ -1088,7 +1088,7 @@ describe("MessagesTimeline", () => {
       />,
     );
 
-    expect(markup).toContain("Show full message");
+    expect(markup).toContain("show full message");
     expect(markup).toContain('data-maintain-scroll-at-end="enabled"');
     expect(markup).toContain('data-maintain-scroll-at-end-animated="false"');
     expect(markup).toContain('data-maintain-scroll-at-end-data-change="true"');
@@ -1108,7 +1108,7 @@ describe("MessagesTimeline", () => {
       />,
     );
 
-    expect(markup).not.toContain("Show full message");
+    expect(markup).not.toContain("show full message");
     expect(markup).toContain('data-user-message-collapsible="false"');
     expect(markup).toContain("rounded-2xl bg-message p-3");
   });
@@ -1272,7 +1272,7 @@ describe("MessagesTimeline", () => {
     expect(markup).toContain("lucide-terminal");
     expect(markup).toContain("yoo what&#x27;s");
     expect(markup).not.toContain("terminal_context");
-    expect(markup).toContain("Show full message");
+    expect(markup).toContain("show full message");
   }, 20_000);
 
   it("renders chips for standalone element-pick context messages", () => {
@@ -1309,7 +1309,7 @@ describe("MessagesTimeline", () => {
       />,
     );
 
-    expect(markup).toContain('aria-label="Copy link"');
+    expect(markup).toContain('aria-label="copy link"');
     expect(markup).toContain('data-user-message-collapsed="true"');
     expect(markup).toContain('data-user-message-footer="true"');
   });
@@ -1401,7 +1401,7 @@ describe("MessagesTimeline", () => {
     );
 
     expect(markup).toContain("Ran 2 commands");
-    expect(markup).not.toContain('aria-label="Tool call failed"');
+    expect(markup).not.toContain('aria-label="tool call failed"');
   });
 
   it("keeps the collapsed summary icon neutral when the group ends in a failure", () => {
@@ -1589,7 +1589,7 @@ describe("MessagesTimeline", () => {
     );
 
     expect(markup).toContain("working for");
-    expect(markup).toContain("Running pnpm");
+    expect(markup).toContain("running pnpm");
   });
 
   it("scopes a live row failure to the tool named by the row", () => {
@@ -1643,7 +1643,7 @@ describe("MessagesTimeline", () => {
       />,
     );
 
-    expect(markup).toContain("Running pnpm");
+    expect(markup).toContain("running pnpm");
     expect(markup).not.toContain("tool call failed");
   });
 
@@ -1705,7 +1705,7 @@ describe("MessagesTimeline", () => {
       />,
     );
 
-    expect(markup).toContain("Running pnpm");
+    expect(markup).toContain("running pnpm");
     expect(markup).toContain("lucide-terminal");
     expect(markup).not.toContain("Ran pnpm");
     expect(markup).not.toContain("thinking…");
@@ -1859,12 +1859,12 @@ describe("MessagesTimeline", () => {
     );
 
     // Images report their size like every other attachment chip.
-    expect(markup).toContain('aria-label="Image attachment, shot.png, 1 KB"');
+    expect(markup).toContain('aria-label="image attachment, shot.png, 1 KB"');
     // Selection copy re-emits chips as their canonical links.
     expect(markup).toContain('data-markdown-copy="![shot.png](t3-context://v1/image/img-1)"');
-    expect(markup).toContain('aria-label="File attachment, notes.txt, 1 KB"');
+    expect(markup).toContain('aria-label="file attachment, notes.txt, 1 KB"');
     expect(markup).toContain(">1 KB</span>");
-    expect(markup).not.toContain('aria-label="Download notes.txt"');
+    expect(markup).not.toContain('aria-label="download notes.txt"');
     expect(markup).toContain("legacy.txt");
     expect(markup).not.toContain('href="t3-context://');
     // A picture keeps its tile even though it also has a chip: the chip names it, the tile is

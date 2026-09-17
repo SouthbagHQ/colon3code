@@ -68,7 +68,7 @@ describe("app startup failures", () => {
     const reloadButton = bootShell?.children[0]?.children.find(
       (element) => element.tagName === "button",
     );
-    expect(reloadButton?.text).toBe("Reload");
+    expect(reloadButton?.text).toBe("reload");
     reloadButton?.dispatchEvent(new Event("click"));
     expect(reload).toHaveBeenCalledOnce();
   });

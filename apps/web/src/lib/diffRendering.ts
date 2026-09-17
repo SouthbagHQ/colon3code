@@ -132,13 +132,13 @@ export function getRenderablePatch(
     return {
       kind: "raw",
       text: normalizedPatch,
-      reason: "Unsupported diff format. Showing raw patch.",
+      reason: "unsupported diff format. showing raw patch.",
     };
   } catch {
     return {
       kind: "raw",
       text: normalizedPatch,
-      reason: "Failed to parse patch. Showing raw patch.",
+      reason: "failed to parse patch. showing raw patch.",
     };
   }
 }

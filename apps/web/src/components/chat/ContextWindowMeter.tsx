@@ -48,8 +48,8 @@ export function ContextWindowMeter(props: {
             className="size-7 rounded-full hover:text-muted-foreground data-pressed:text-muted-foreground"
             aria-label={
               usage.maxTokens !== null && usedPercentage
-                ? `Context window ${usedPercentage} used`
-                : `Context window ${formatContextWindowTokens(usage.usedTokens)} tokens used`
+                ? `context window ${usedPercentage} used`
+                : `context window ${formatContextWindowTokens(usage.usedTokens)} tokens used`
             }
           >
             <span className="relative flex size-5 items-center justify-center">
@@ -116,7 +116,7 @@ export function ContextWindowMeter(props: {
               aria-valuemin={0}
               aria-valuemax={100}
               aria-valuenow={Math.round(normalizedPercentage)}
-              aria-label="Context window usage"
+              aria-label="context window usage"
             >
               <div
                 className="h-full rounded-full transition-[width,background-color] duration-500 ease-out motion-reduce:transition-none"
@@ -147,7 +147,7 @@ export function ContextWindowMeter(props: {
                 onClick={onCompact}
               >
                 <Minimize2Icon aria-hidden="true" />
-                Compact context
+                compact context
               </Button>
               {compactDisabled && compactDisabledReason ? (
                 <div className="text-pretty text-secondary-label text-[11px]">

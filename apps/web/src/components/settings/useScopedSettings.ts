@@ -72,7 +72,7 @@ function useRunScopedPlan() {
               savedEnvironmentCount > 0
                 ? "setting saved on some environments 3:"
                 : "setting not saved 3:",
-            description: `Could not update ${failedEnvironments.map((environment) => environment.label).join(", ")}.${savedEnvironmentCount > 0 ? " The other selected environments saved the change." : ""}`,
+            description: `could not update ${failedEnvironments.map((environment) => environment.label).join(", ")}.${savedEnvironmentCount > 0 ? " the other selected environments saved the change." : ""}`,
           });
         },
       );

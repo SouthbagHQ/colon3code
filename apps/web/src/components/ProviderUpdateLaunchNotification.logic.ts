@@ -122,8 +122,8 @@ function getProviderUpdatedTitle(provider: Pick<ServerProvider, "driver" | "vers
 
 function getProviderUpdatedDescription(providerCount: number): string {
   return providerCount === 1
-    ? "New sessions will use the updated provider."
-    : "New sessions will use the updated providers.";
+    ? "new sessions will use the updated provider."
+    : "new sessions will use the updated providers.";
 }
 
 function getProviderFailedUpdateTitle(
@@ -240,7 +240,7 @@ export function getProviderUpdateInitialToastView(input: {
     title: getProviderUpdateInitialToastTitle(input.updateProviders),
     description:
       input.oneClickProviders.length > 0
-        ? "Install the update now or review provider settings."
+        ? "install the update now or review provider settings."
         : `${formatProviderList(input.updateProviders)} can be updated from provider settings.`,
   };
 }
@@ -253,8 +253,8 @@ function getProviderUpdateRunningToastView(providerCount: number): ProviderUpdat
   return {
     phase: "running",
     type: "loading",
-    title: providerCount === 1 ? "Updating provider" : "Updating providers",
-    description: "Running provider update command.",
+    title: providerCount === 1 ? "updating provider" : "updating providers",
+    description: "running provider update command.",
   };
 }
 
@@ -407,8 +407,8 @@ export function getProviderUpdateSidebarPillView(
       tone: "loading",
       title:
         activeProviders.length === 1
-          ? `Updating ${activeProviderName}`
-          : `Updating ${activeProviders.length} providers`,
+          ? `updating ${activeProviderName}`
+          : `updating ${activeProviders.length} providers`,
       description:
         activeProviders.length === 1
           ? `${formatProviderList(activeProviders)} update in progress.`
@@ -535,7 +535,7 @@ function getFailedProviderUpdateDescription(providers: ReadonlyArray<ServerProvi
       return provider.updateState.message;
     }
   }
-  return `${formatProviderList(providers)} failed to update. Check provider settings for details.`;
+  return `${formatProviderList(providers)} failed to update. check provider settings for details.`;
 }
 
 // ===========================================================================
@@ -753,7 +753,7 @@ export function resolveEnvironmentUpdateRowStatus(input: {
   if (input.result) {
     switch (input.result.phase) {
       case "succeeded":
-        return { kind: "success", text: "Updated" };
+        return { kind: "success", text: "updated" };
       case "failed":
         return { kind: "failed", text: input.result.description };
       case "unchanged":
@@ -764,20 +764,20 @@ export function resolveEnvironmentUpdateRowStatus(input: {
   if (input.pill) {
     switch (input.pill.tone) {
       case "success":
-        return { kind: "success", text: "Updated" };
+        return { kind: "success", text: "updated" };
       case "error":
         return { kind: "failed", text: input.pill.description };
       case "warning":
         return { kind: "unchanged", text: input.pill.description };
       default:
-        return { kind: "loading", text: "Updating…" };
+        return { kind: "loading", text: "updating…" };
     }
   }
   // A non-terminal result snapshot or the optimistic pending flag means an
   // update is still in flight — keep showing the spinner rather than reverting
   // to the Update button as if nothing happened.
   if (input.result || input.isPending) {
-    return { kind: "loading", text: "Updating…" };
+    return { kind: "loading", text: "updating…" };
   }
   return { kind: "idle", text: environmentProviderNames(input.group) };
 }

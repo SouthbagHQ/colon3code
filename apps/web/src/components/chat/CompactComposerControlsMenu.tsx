@@ -40,7 +40,7 @@ export const CompactComposerControlsMenu = memo(function CompactComposerControls
             size={size}
             variant="ghost"
             className={size === "xs" ? "shrink-0" : "shrink-0 px-2"}
-            aria-label="More composer controls"
+            aria-label="more composer controls"
             data-composer-shortcut={
               props.traitsMenuContent ? "composer.mode composer.effort" : "composer.mode"
             }
@@ -66,8 +66,8 @@ export const CompactComposerControlsMenu = memo(function CompactComposerControls
                 props.onToggleInteractionMode();
               }}
             >
-              <MenuRadioItem value="default">Chat</MenuRadioItem>
-              <MenuRadioItem value="plan">Plan</MenuRadioItem>
+              <MenuRadioItem value="default">chat</MenuRadioItem>
+              <MenuRadioItem value="plan">plan</MenuRadioItem>
             </MenuRadioGroup>
             <MenuDivider />
           </>
@@ -80,10 +80,10 @@ export const CompactComposerControlsMenu = memo(function CompactComposerControls
             props.onRuntimeModeChange(value as RuntimeMode);
           }}
         >
-          <MenuRadioItem value="approval-required">Supervised</MenuRadioItem>
-          <MenuRadioItem value="auto-accept-edits">Auto-accept edits</MenuRadioItem>
-          <MenuRadioItem value="auto">Auto</MenuRadioItem>
-          <MenuRadioItem value="full-access">Full access</MenuRadioItem>
+          <MenuRadioItem value="approval-required">supervised</MenuRadioItem>
+          <MenuRadioItem value="auto-accept-edits">auto-accept edits</MenuRadioItem>
+          <MenuRadioItem value="auto">auto</MenuRadioItem>
+          <MenuRadioItem value="full-access">full access</MenuRadioItem>
         </MenuRadioGroup>
       </MenuPopup>
     </Menu>

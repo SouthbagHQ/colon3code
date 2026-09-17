@@ -13,13 +13,13 @@ function connection(
 describe("saved cloud environment connection presentation", () => {
   it("only labels a live connection as connected", () => {
     expect(presentSavedCloudEnvironmentConnection(connection("connected"))).toEqual({
-      buttonLabel: "Connected",
+      buttonLabel: "connected",
       statusText: "Connected",
       tone: "connected",
     });
 
     expect(presentSavedCloudEnvironmentConnection(connection("connecting"))).toEqual({
-      buttonLabel: "Connecting…",
+      buttonLabel: "connecting…",
       statusText: "Connecting...",
       tone: "connecting",
     });
@@ -31,7 +31,7 @@ describe("saved cloud environment connection presentation", () => {
         connection("reconnecting", "Relay environment endpoint is unavailable."),
       ),
     ).toEqual({
-      buttonLabel: "Reconnecting…",
+      buttonLabel: "reconnecting…",
       statusText:
         "Failed to connect. Reconnecting... Reason: Relay environment endpoint is unavailable.",
       tone: "connecting",
@@ -39,9 +39,9 @@ describe("saved cloud environment connection presentation", () => {
   });
 
   it.each([
-    ["error", "Connection failed", "Connection failed. Reason: Access denied.", "error"],
-    ["offline", "Offline", "Offline", "idle"],
-    ["available", "Not connected", "Available", "idle"],
+    ["error", "connection failed", "Connection failed. Reason: Access denied.", "error"],
+    ["offline", "offline", "Offline", "idle"],
+    ["available", "not connected", "Available", "idle"],
   ] as const)(
     "presents %s without claiming the environment is connected",
     (phase, buttonLabel, statusText, tone) => {

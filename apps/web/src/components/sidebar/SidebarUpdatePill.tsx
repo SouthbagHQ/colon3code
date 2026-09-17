@@ -146,10 +146,10 @@ function SidebarUpdateControl() {
   const tooltip = showUpdateDetails
     ? state
       ? getDesktopUpdateButtonTooltip(state)
-      : "Update available"
+      : "update available"
     : showCheckIcon
-      ? "Checking for updates…"
-      : "Check for updates";
+      ? "checking for updates…"
+      : "check for updates";
   const disabled = showCheckIcon
     ? true
     : showUpdateDetails
@@ -203,7 +203,7 @@ function SidebarUpdateControl() {
             stackedThreadToast({
               type: "error",
               title: "could not start update download 3:",
-              description: error instanceof Error ? error.message : "An unexpected error occurred.",
+              description: error instanceof Error ? error.message : "an unexpected error occurred.",
             }),
           );
         })
@@ -223,7 +223,7 @@ function SidebarUpdateControl() {
           stackedThreadToast({
             type: "error",
             title: "could not confirm update 3:",
-            description: error instanceof Error ? error.message : "Update confirmation failed.",
+            description: error instanceof Error ? error.message : "update confirmation failed.",
           }),
         );
         return;
@@ -251,7 +251,7 @@ function SidebarUpdateControl() {
             stackedThreadToast({
               type: "error",
               title: "could not install update 3:",
-              description: error instanceof Error ? error.message : "An unexpected error occurred.",
+              description: error instanceof Error ? error.message : "an unexpected error occurred.",
             }),
           );
         })
@@ -272,7 +272,7 @@ function SidebarUpdateControl() {
             type: "error",
             title: "could not check for updates 3:",
             description:
-              result.state.message ?? "Automatic updates are not available in this build.",
+              result.state.message ?? "automatic updates are not available in this build.",
           }),
         );
       })
@@ -281,7 +281,7 @@ function SidebarUpdateControl() {
           stackedThreadToast({
             type: "error",
             title: "could not check for updates 3:",
-            description: error instanceof Error ? error.message : "Update check failed.",
+            description: error instanceof Error ? error.message : "update check failed.",
           }),
         );
       })
@@ -392,7 +392,7 @@ function SidebarUpdateControl() {
         {showReleaseNotesPopover && state ? (
           <PopoverPopup
             align="center"
-            aria-label="Nightly update release notes"
+            aria-label="nightly update release notes"
             className="max-w-none text-balance shadow-xl shadow-black/25"
             initialFocus={false}
             onKeyDownCapture={(event) => {

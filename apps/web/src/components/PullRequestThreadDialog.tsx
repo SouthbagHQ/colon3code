@@ -171,9 +171,9 @@ export function PullRequestThreadDialog({
   const validationMessage = !referenceDirty
     ? null
     : reference.trim().length === 0
-      ? `Paste a ${terminology.singular} URL, checkout command, or enter 123 / #123.`
+      ? `paste a ${terminology.singular} URL, checkout command, or enter 123 / #123.`
       : parsedReference === null
-        ? `Use a ${terminology.singular} URL, checkout command, 123, or #123.`
+        ? `use a ${terminology.singular} URL, checkout command, 123, or #123.`
         : null;
   const errorMessage =
     validationMessage ??
@@ -182,7 +182,7 @@ export function PullRequestThreadDialog({
       : preparePullRequestThreadAction.error instanceof Error
         ? preparePullRequestThreadAction.error.message
         : preparePullRequestThreadAction.error
-          ? `Failed to prepare ${terminology.singular} thread.`
+          ? `failed to prepare ${terminology.singular} thread.`
           : null);
 
   return (
@@ -198,10 +198,10 @@ export function PullRequestThreadDialog({
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2">
             <SourceControlIcon className="size-4" />
-            Checkout {terminology.singular}
+            checkout {terminology.singular}
           </DialogTitle>
           <DialogDescription>
-            Resolve a {sourceControlPresentation.providerName} {terminology.singular}, then create
+            resolve a {sourceControlPresentation.providerName} {terminology.singular}, then create
             the draft thread in the main repo or in a dedicated worktree.
           </DialogDescription>
         </DialogHeader>
@@ -250,7 +250,7 @@ export function PullRequestThreadDialog({
           {isResolving ? (
             <div className="flex items-center gap-2 text-muted-foreground text-xs">
               <Spinner className="size-3.5" />
-              Resolving {terminology.singular}...
+              resolving {terminology.singular}...
             </div>
           ) : null}
 
@@ -264,7 +264,7 @@ export function PullRequestThreadDialog({
             onClick={() => onOpenChange(false)}
             disabled={preparePullRequestThreadAction.isPending}
           >
-            Cancel
+            cancel
           </Button>
           <Button
             type="button"
@@ -280,7 +280,7 @@ export function PullRequestThreadDialog({
               preparePullRequestThreadAction.isPending
             }
           >
-            {preparingMode === "local" ? "Preparing local..." : "Local"}
+            {preparingMode === "local" ? "preparing local..." : "local"}
           </Button>
           <Button
             type="button"
@@ -295,7 +295,7 @@ export function PullRequestThreadDialog({
               preparePullRequestThreadAction.isPending
             }
           >
-            {preparingMode === "worktree" ? "Preparing worktree..." : "Worktree"}
+            {preparingMode === "worktree" ? "preparing worktree..." : "worktree"}
           </Button>
         </DialogFooter>
       </DialogPopup>

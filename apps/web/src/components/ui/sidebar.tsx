@@ -250,8 +250,8 @@ function Sidebar({
             }
           >
             <SheetHeader className="sr-only">
-              <SheetTitle>Sidebar</SheetTitle>
-              <SheetDescription>Displays the mobile sidebar.</SheetDescription>
+              <SheetTitle>sidebar</SheetTitle>
+              <SheetDescription>displays the mobile sidebar.</SheetDescription>
             </SheetHeader>
             <div
               className={cn(
@@ -341,7 +341,7 @@ function SidebarTrigger({ className, onClick, ...props }: React.ComponentProps<t
       {...props}
     >
       {isOpen ? <PanelLeftCloseIcon /> : <PanelLeftIcon />}
-      <span className="sr-only">Toggle Sidebar</span>
+      <span className="sr-only">toggle sidebar</span>
     </Button>
   );
 }
@@ -370,8 +370,8 @@ function SidebarRail({
     latestResizable.current = resolvedResizable;
   }, [resolvedResizable]);
   const canResize = resolvedResizable !== null && open;
-  const railLabel = canResize ? "Resize Sidebar" : "Toggle Sidebar";
-  const railTitle = canResize ? "Drag to resize sidebar" : "Toggle Sidebar";
+  const railLabel = canResize ? "resize sidebar" : "toggle sidebar";
+  const railTitle = canResize ? "drag to resize sidebar" : "toggle sidebar";
   const resize = useResizeDrag<HTMLButtonElement>((event) => {
     if (!resolvedResizable || !open) return null;
     const rail = event.currentTarget;

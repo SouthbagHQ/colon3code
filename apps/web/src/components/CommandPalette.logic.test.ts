@@ -50,7 +50,7 @@ describe("linked pull request thread navigation", () => {
       threadSearchItems: items,
     });
     expect(groups.flatMap((group) => group.items)).toEqual(items);
-    expect(items[0]?.description).toBe("Archived thread");
+    expect(items[0]?.description).toBe("archived thread");
     await items[0]?.run();
     expect(runThread).toHaveBeenCalledWith({ environmentId, id });
   });
@@ -169,8 +169,8 @@ describe("buildCommandPaletteProjectMetadata", () => {
       locationByEnvironmentId: new Map(),
     });
 
-    expect(metadata.searchTerms).toContain("Remote");
-    expect(metadata.environmentLabels).toEqual(["Remote"]);
+    expect(metadata.searchTerms).toContain("remote");
+    expect(metadata.environmentLabels).toEqual(["remote"]);
   });
 });
 
@@ -442,7 +442,7 @@ describe("buildThreadActionItems", () => {
   it("preserves thread project-name matches when there is no stronger title match", () => {
     const group: CommandPaletteGroup = {
       value: "threads-search",
-      label: "Threads",
+      label: "threads",
       items: [
         {
           kind: "action",
@@ -608,7 +608,7 @@ describe("buildThreadActionItems", () => {
         }),
         makeThread({
           id: ThreadId.make("thread-archived"),
-          title: "Archived thread",
+          title: "archived thread",
           archivedAt: "2026-03-20T00:00:00.000Z",
           updatedAt: "2026-03-20T00:00:00.000Z",
         }),

@@ -42,7 +42,7 @@ function RestoreDeviceDefaultsButton({ onRestored }: { onRestored: () => void })
       onClick={() => void restoreDefaults()}
     >
       <RotateCcwIcon className="mx-1 size-3.5" />
-      Restore device defaults
+      restore device defaults
     </Button>
   );
 }
@@ -107,7 +107,7 @@ function SettingsScopeBoundary({ pathname, children }: { pathname: string; child
   if (scope.kind === "environment" && connectedEnvironments.length === 0) {
     return (
       <p className="p-8 text-sm text-muted-foreground">
-        Reconnect {scope.label} to change its settings.
+        reconnect {scope.label} to change its settings.
       </p>
     );
   }

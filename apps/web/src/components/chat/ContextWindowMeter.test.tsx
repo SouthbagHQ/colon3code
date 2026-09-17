@@ -35,14 +35,14 @@ describe("ContextWindowMeter", () => {
     const markup = renderToStaticMarkup(<ContextWindowMeter usage={usage} onCompact={() => {}} />);
 
     expect(markup).toContain('data-close-delay="150"');
-    expect(markup).toContain("Compact context");
+    expect(markup).toContain("compact context");
   });
 
   it("closes an informational hover popover without delay", () => {
     const markup = renderToStaticMarkup(<ContextWindowMeter usage={usage} />);
 
     expect(markup).toContain('data-close-delay="0"');
-    expect(markup).not.toContain("Compact context");
+    expect(markup).not.toContain("compact context");
   });
 
   it("explains why the compact action is disabled", () => {

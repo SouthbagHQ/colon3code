@@ -51,7 +51,7 @@ export function useCloudLinkController() {
   const [operationError, setOperationError] = useState<string | null>(null);
 
   const reportUpdateFailure = (cause: unknown) => {
-    const message = cause instanceof Error ? cause.message : "Could not update T3 Connect access.";
+    const message = cause instanceof Error ? cause.message : "could not update T3 Connect access.";
     const traceId = findErrorTraceId(cause);
     console.error("[t3-connect] Could not update T3 Connect", { message, traceId, cause });
     setOperationError(traceId ? `${message} Trace ID: ${traceId}` : message);
@@ -62,7 +62,7 @@ export function useCloudLinkController() {
       data: traceId
         ? {
             secondaryActionProps: {
-              children: "Copy trace ID",
+              children: "copy trace ID",
               onClick: () => void navigator.clipboard?.writeText(traceId),
             },
           }

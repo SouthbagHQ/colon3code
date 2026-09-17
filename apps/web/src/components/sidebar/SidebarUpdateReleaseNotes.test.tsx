@@ -65,7 +65,7 @@ function renderNotes(state: DesktopUpdateState, openExternal = vi.fn().mockResol
   return SidebarUpdateReleaseNotes({
     shell: { openExternal },
     state,
-    tooltip: "Update available",
+    tooltip: "update available",
   });
 }
 
@@ -92,7 +92,7 @@ describe("SidebarUpdateReleaseNotes", () => {
       "https://github.com/SouthbagHQ/colon3code/releases/tag/v0.0.36-nightly.1",
     ]);
     expect(anchors.map(({ props }) => textContent(props.children))).toEqual([
-      "View release on GitHub",
+      "view release on GitHub",
       "1 more change on GitHub",
       "2 more changes on GitHub",
     ]);

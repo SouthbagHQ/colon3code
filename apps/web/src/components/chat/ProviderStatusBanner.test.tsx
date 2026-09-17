@@ -77,7 +77,7 @@ describe("ProviderStatusBanner", () => {
     );
 
     expect(markup).toContain('role="alert"');
-    expect(markup).toContain('aria-label="Dismiss Codex provider warning"');
+    expect(markup).toContain('aria-label="dismiss Codex provider warning"');
   });
 
   it("labels error dismiss controls with the correct severity", () => {
@@ -88,7 +88,7 @@ describe("ProviderStatusBanner", () => {
       />,
     );
 
-    expect(markup).toContain('aria-label="Dismiss Codex provider error"');
+    expect(markup).toContain('aria-label="dismiss Codex provider error"');
   });
 });
 
@@ -115,7 +115,7 @@ describe("getProviderStatusMessage", () => {
         auth: { status: "unauthenticated" },
         message: "",
       }),
-    ).toBe("Open provider setup to sign in with Google.");
+    ).toBe("open provider setup to sign in with Google.");
   });
 
   it("requires installation on the environment before sign-in", () => {
@@ -129,7 +129,7 @@ describe("getProviderStatusMessage", () => {
         auth: { status: "unauthenticated" },
         message: "",
       }),
-    ).toBe("Open provider setup to install Antigravity on this environment.");
+    ).toBe("open provider setup to install Antigravity on this environment.");
   });
 
   it("keeps CLI sign-in advice for a provider without integrated setup", () => {
@@ -140,6 +140,6 @@ describe("getProviderStatusMessage", () => {
         auth: { status: "unauthenticated" },
         message: "",
       }),
-    ).toBe("Sign in via the CLI to authenticate again.");
+    ).toBe("sign in via the CLI to authenticate again.");
   });
 });

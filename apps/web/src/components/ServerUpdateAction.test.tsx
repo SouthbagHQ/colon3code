@@ -84,7 +84,7 @@ describe("ServerUpdateAction", () => {
     expect(testState.toast).toHaveBeenCalledWith({
       type: "success",
       title: "Test server updated :3",
-      description: "Reconnected on t3@0.0.31.",
+      description: "reconnected on t3@0.0.31.",
     });
   });
 
@@ -129,7 +129,7 @@ describe("ServerUpdateAction", () => {
       />,
     );
 
-    expect(markup).toContain("Update the desktop app on that machine to update this server.");
+    expect(markup).toContain("update the desktop app on that machine to update this server.");
     expect(markup).not.toContain("<button");
   });
 
@@ -158,7 +158,7 @@ describe("ServerUpdateAction", () => {
     expect(testState.toast).toHaveBeenCalledWith({
       type: "success",
       title: "Test server updated :3",
-      description: "Desktop app relaunched on 0.0.34.",
+      description: "desktop app relaunched on 0.0.34.",
     });
   });
 
@@ -362,7 +362,7 @@ describe("ServerUpdateProgress", () => {
       />,
     );
 
-    expect(markup).toContain("Restarting…");
+    expect(markup).toContain("restarting…");
     // The wait state is monochrome and calm: no versions, no step rail, no
     // success/warning colors, one duty-cycled pulse on the dot.
     expect(markup).not.toContain("0.0.30");
@@ -385,7 +385,7 @@ describe("ServerUpdateProgress", () => {
       />,
     );
 
-    expect(markup).toContain("Downloading…");
+    expect(markup).toContain("downloading…");
     expect(markup).not.toContain("Install");
   });
 

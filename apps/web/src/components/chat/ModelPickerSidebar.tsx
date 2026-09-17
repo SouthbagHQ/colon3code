@@ -25,7 +25,7 @@ function describeUnavailableInstance(entry: ProviderInstanceEntry): string {
     return label;
   }
   const kind =
-    entry.status === "error" ? "Unavailable" : entry.status === "warning" ? "Limited" : "Not ready";
+    entry.status === "error" ? "unavailable" : entry.status === "warning" ? "limited" : "not ready";
   const msg = entry.snapshot.message?.trim();
   return msg ? `${label} — ${kind}. ${msg}` : `${label} — ${kind}.`;
 }
@@ -92,7 +92,7 @@ export const ModelPickerSidebar = memo(function ModelPickerSidebar(props: {
     <Toolbar.Root
       className="w-11 shrink-0 overflow-hidden bg-muted/30"
       data-model-picker-sidebar="true"
-      aria-label="Providers"
+      aria-label="providers"
       orientation="vertical"
       onKeyDown={(event) => {
         if (event.altKey || event.ctrlKey || event.metaKey || event.shiftKey) return;
@@ -128,7 +128,7 @@ export const ModelPickerSidebar = memo(function ModelPickerSidebar(props: {
                         )}
                         onClick={() => handleSelect("favorites")}
                         type="button"
-                        aria-label="Favorites"
+                        aria-label="favorites"
                         aria-pressed={props.selectedInstanceId === "favorites"}
                       >
                         <StarIcon className="size-5 fill-current shrink-0" aria-hidden />
@@ -141,7 +141,7 @@ export const ModelPickerSidebar = memo(function ModelPickerSidebar(props: {
                     align="center"
                     className={PICKER_TOOLTIP_CLASS}
                   >
-                    Favorites
+                    favorites
                   </TooltipPopup>
                 </Tooltip>
               </div>

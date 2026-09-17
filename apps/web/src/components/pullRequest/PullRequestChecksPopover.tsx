@@ -44,7 +44,7 @@ function LazyChecksBody({
   if (detailQuery.data === null) {
     return (
       <p className="text-muted-foreground text-xs">
-        {detailQuery.isPending ? "Loading checks…" : "no checks reported"}
+        {detailQuery.isPending ? "loading checks…" : "no checks reported"}
       </p>
     );
   }
@@ -90,7 +90,7 @@ function ChecksBody({
                 });
               }}
             >
-              Details
+              details
             </button>
           )}
         </li>
@@ -137,7 +137,7 @@ export function PullRequestChecksPopover({
           <span
             role="button"
             tabIndex={0}
-            aria-label={`Checks: ${presentation.label}`}
+            aria-label={`checks: ${presentation.label}`}
             className={cn("inline-flex shrink-0 cursor-pointer items-center", className)}
           />
         }

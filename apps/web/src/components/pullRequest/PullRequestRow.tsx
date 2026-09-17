@@ -144,7 +144,7 @@ function PullRequestRowImpl({
             <PullRequestApprovalGlyph />
           ) : entry.reviewDecision === "changes-requested" ? (
             <span className="min-w-0 truncate text-amber-600/90 dark:text-amber-400/80">
-              Changes requested
+              changes requested
             </span>
           ) : null}
           {entry.checksState === undefined ? null : (
@@ -178,7 +178,7 @@ function PullRequestRowImpl({
                   matched in the description
                 </span>
               </TooltipTrigger>
-              <TooltipPopup side="top">Matched in the description</TooltipPopup>
+              <TooltipPopup side="top">matched in the description</TooltipPopup>
             </Tooltip>
           ) : null}
           <span className="flex shrink-0 items-center gap-1">

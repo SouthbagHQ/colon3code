@@ -20,7 +20,7 @@ const provider: ServerProvider = {
 describe("getProviderSummary", () => {
   it("reports ready providers with unknown authentication as available", () => {
     expect(getProviderSummary({ ...provider, auth: { status: "unknown" } })).toEqual({
-      headline: "Available",
+      headline: "available",
       detail: null,
     });
   });
@@ -33,7 +33,7 @@ describe("getProviderSummary", () => {
         message: "The provider process failed to start.",
       }),
     ).toEqual({
-      headline: "Unavailable",
+      headline: "unavailable",
       detail: "The provider process failed to start.",
     });
   });
@@ -46,7 +46,7 @@ describe("getProviderSummary", () => {
         message: "The provider version is unsupported.",
       }),
     ).toEqual({
-      headline: "Needs attention",
+      headline: "needs attention",
       detail: "The provider version is unsupported.",
     });
   });
@@ -60,12 +60,12 @@ describe("getProviderSummary", () => {
         message: "Run codex login.",
       }),
     ).toEqual({
-      headline: "Not authenticated",
+      headline: "not authenticated",
       detail: "Run codex login.",
     });
   });
 
   it("treats a disabled provider status as disabled even before its enabled flag updates", () => {
-    expect(getProviderSummary({ ...provider, status: "disabled" }).headline).toBe("Disabled");
+    expect(getProviderSummary({ ...provider, status: "disabled" }).headline).toBe("disabled");
   });
 });

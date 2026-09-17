@@ -92,19 +92,19 @@ export function getChangedTypographySettingLabels(settings: TypographySettings):
   return [
     ...(settings.fontFamilySans !== DEFAULT_UNIFIED_SETTINGS.fontFamilySans ||
     settings.fontSizeInterface !== DEFAULT_UNIFIED_SETTINGS.fontSizeInterface
-      ? ["Interface font"]
+      ? ["interface font"]
       : []),
     ...(settings.fontFamilyComposer !== DEFAULT_UNIFIED_SETTINGS.fontFamilyComposer ||
     settings.fontSizePrompt !== DEFAULT_UNIFIED_SETTINGS.fontSizePrompt
-      ? ["Prompt font"]
+      ? ["prompt font"]
       : []),
     ...(settings.fontFamilyCode !== DEFAULT_UNIFIED_SETTINGS.fontFamilyCode ||
     settings.fontSizeCode !== DEFAULT_UNIFIED_SETTINGS.fontSizeCode
-      ? ["Code font"]
+      ? ["code font"]
       : []),
     ...(settings.fontFamilyTerminal !== DEFAULT_UNIFIED_SETTINGS.fontFamilyTerminal ||
     settings.fontSizeTerminal !== DEFAULT_UNIFIED_SETTINGS.fontSizeTerminal
-      ? ["Terminal font"]
+      ? ["terminal font"]
       : []),
   ];
 }
@@ -146,22 +146,22 @@ export function getChangedBrowserSettingLabels(settings: BrowserDefaultSettings)
       DEFAULT_UNIFIED_SETTINGS.browserDefaultViewport,
     )
       ? []
-      : ["Browser viewport"]),
+      : ["browser viewport"]),
     ...(settings.browserDefaultZoomFactor !== DEFAULT_UNIFIED_SETTINGS.browserDefaultZoomFactor
-      ? ["Browser zoom"]
+      ? ["browser zoom"]
       : []),
     ...(settings.browserDefaultAppearance !== DEFAULT_UNIFIED_SETTINGS.browserDefaultAppearance
-      ? ["Browser appearance"]
+      ? ["browser appearance"]
       : []),
     ...(settings.browserRecordingFrameRate !== DEFAULT_UNIFIED_SETTINGS.browserRecordingFrameRate
-      ? ["Recording frame rate"]
+      ? ["recording frame rate"]
       : []),
     ...(settings.browserLinkTarget !== DEFAULT_UNIFIED_SETTINGS.browserLinkTarget
-      ? ["Open links in"]
+      ? ["open links in"]
       : []),
     ...(settings.browserAutoShowFloatingPreview !==
     DEFAULT_UNIFIED_SETTINGS.browserAutoShowFloatingPreview
-      ? ["Floating preview"]
+      ? ["floating preview"]
       : []),
   ];
 }
@@ -228,23 +228,23 @@ export function formatDiagnosticsDescription(input: {
   readonly otlpMetricsEnabled: boolean;
   readonly otlpMetricsUrl?: string | undefined;
 }): string {
-  const mode = input.localTracingEnabled ? "Local trace file" : "Terminal logs only";
+  const mode = input.localTracingEnabled ? "local trace file" : "terminal logs only";
   const tracesUrl = input.otlpTracesEnabled ? input.otlpTracesUrl : undefined;
   const metricsUrl = input.otlpMetricsEnabled ? input.otlpMetricsUrl : undefined;
 
   if (tracesUrl && metricsUrl) {
     const collapsedUrl = collapseOtelSignalsUrl({ tracesUrl, metricsUrl });
     return collapsedUrl
-      ? `${mode}. Exporting OTEL to ${collapsedUrl}.`
-      : `${mode}. Exporting OTEL traces to ${tracesUrl} and metrics to ${metricsUrl}.`;
+      ? `${mode}. exporting OTEL to ${collapsedUrl}.`
+      : `${mode}. exporting OTEL traces to ${tracesUrl} and metrics to ${metricsUrl}.`;
   }
 
   if (tracesUrl) {
-    return `${mode}. Exporting OTEL traces to ${tracesUrl}.`;
+    return `${mode}. exporting OTEL traces to ${tracesUrl}.`;
   }
 
   if (metricsUrl) {
-    return `${mode}. Exporting OTEL metrics to ${metricsUrl}.`;
+    return `${mode}. exporting OTEL metrics to ${metricsUrl}.`;
   }
 
   return `${mode}.`;

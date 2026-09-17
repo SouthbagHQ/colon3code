@@ -112,7 +112,7 @@ describe("buildTraitsTriggerDisplay", () => {
       currentValue: true,
     };
     expect(display([EFFORT, thinking])).toEqual({
-      label: "High · Thinking On",
+      label: "High · Thinking on",
       showFastModeIcon: false,
     });
   });
@@ -167,14 +167,14 @@ describe("buildUnavailableModelOptionDescriptors", () => {
     ).toEqual([
       {
         id: "variant",
-        label: "Reasoning",
+        label: "reasoning",
         type: "select",
         options: [{ id: "max", label: "max" }],
         currentValue: "max",
       },
       {
         id: "agent",
-        label: "Agent",
+        label: "agent",
         type: "select",
         options: [{ id: "build", label: "build" }],
         currentValue: "build",

@@ -102,10 +102,10 @@ describe("resolvePreviousWorktreeSeed", () => {
 describe("resolvePreviousWorktreeLabel", () => {
   it("includes the branch when known", () => {
     expect(resolvePreviousWorktreeLabel({ branch: "t3/fix-thing", worktreePath: "/wt" })).toBe(
-      "Previous worktree (t3/fix-thing)",
+      "previous worktree (t3/fix-thing)",
     );
     expect(resolvePreviousWorktreeLabel({ branch: null, worktreePath: "/wt" })).toBe(
-      "Previous worktree",
+      "previous worktree",
     );
   });
 });
@@ -187,7 +187,7 @@ describe("resolveBranchTriggerLabel", () => {
         resolvedActiveBranchIsRemote: false,
         startFromOrigin: true,
       }),
-    ).toBe("From origin/main");
+    ).toBe("from origin/main");
   });
 
   it("shows the origin ref for local branch names that contain slashes", () => {
@@ -199,7 +199,7 @@ describe("resolveBranchTriggerLabel", () => {
         resolvedActiveBranchIsRemote: false,
         startFromOrigin: true,
       }),
-    ).toBe("From origin/feature/demo");
+    ).toBe("from origin/feature/demo");
   });
 
   it("shows the local ref when start from origin is disabled", () => {
@@ -211,7 +211,7 @@ describe("resolveBranchTriggerLabel", () => {
         resolvedActiveBranchIsRemote: false,
         startFromOrigin: false,
       }),
-    ).toBe("From main");
+    ).toBe("from main");
   });
 
   it("does not duplicate the origin prefix for an explicit remote ref", () => {
@@ -223,7 +223,7 @@ describe("resolveBranchTriggerLabel", () => {
         resolvedActiveBranchIsRemote: true,
         startFromOrigin: true,
       }),
-    ).toBe("From origin/feature/demo");
+    ).toBe("from origin/feature/demo");
   });
 
   it("preserves an explicit ref from a non-origin remote", () => {
@@ -235,7 +235,7 @@ describe("resolveBranchTriggerLabel", () => {
         resolvedActiveBranchIsRemote: true,
         startFromOrigin: true,
       }),
-    ).toBe("From upstream/feature/demo");
+    ).toBe("from upstream/feature/demo");
   });
 
   it("keeps current-checkout labels and empty state unchanged", () => {
@@ -256,7 +256,7 @@ describe("resolveBranchTriggerLabel", () => {
         resolvedActiveBranchIsRemote: null,
         startFromOrigin: true,
       }),
-    ).toBe("Select ref");
+    ).toBe("select ref");
   });
 
   it("does not fabricate an origin ref while branch metadata is loading", () => {
@@ -268,7 +268,7 @@ describe("resolveBranchTriggerLabel", () => {
         resolvedActiveBranchIsRemote: null,
         startFromOrigin: true,
       }),
-    ).toBe("From upstream/feature/demo");
+    ).toBe("from upstream/feature/demo");
   });
 });
 
@@ -362,7 +362,7 @@ describe("resolveEnvironmentOptionLabel", () => {
     ).toBe("Julius's Mac mini");
   });
 
-  it("falls back to 'This device' for generic primary labels", () => {
+  it("falls back to 'this device' for generic primary labels", () => {
     expect(
       resolveEnvironmentOptionLabel({
         isPrimary: true,
@@ -370,7 +370,7 @@ describe("resolveEnvironmentOptionLabel", () => {
         runtimeLabel: "Local environment",
         savedLabel: "Local",
       }),
-    ).toBe("This device");
+    ).toBe("this device");
   });
 
   it("keeps configured labels for non-primary environments", () => {
@@ -493,30 +493,30 @@ describe("resolveEffectiveEnvMode", () => {
 
 describe("resolveEnvModeLabel", () => {
   it("uses explicit workspace labels", () => {
-    expect(resolveEnvModeLabel("local")).toBe("Current checkout");
-    expect(resolveEnvModeLabel("worktree")).toBe("New worktree");
+    expect(resolveEnvModeLabel("local")).toBe("current checkout");
+    expect(resolveEnvModeLabel("worktree")).toBe("new worktree");
   });
 });
 
 describe("resolveCurrentWorkspaceLabel", () => {
   it("describes the main repo checkout when no worktree path is active", () => {
-    expect(resolveCurrentWorkspaceLabel(null)).toBe("Current checkout");
+    expect(resolveCurrentWorkspaceLabel(null)).toBe("current checkout");
   });
 
   it("describes the active checkout as a worktree when one is attached", () => {
     expect(resolveCurrentWorkspaceLabel("/repo/.colon3code/worktrees/feature-a")).toBe(
-      "Current worktree",
+      "current worktree",
     );
   });
 });
 
 describe("resolveLockedWorkspaceLabel", () => {
   it("uses a shorter label for the main repo checkout", () => {
-    expect(resolveLockedWorkspaceLabel(null)).toBe("Local checkout");
+    expect(resolveLockedWorkspaceLabel(null)).toBe("local checkout");
   });
 
   it("uses a shorter label for an attached worktree", () => {
-    expect(resolveLockedWorkspaceLabel("/repo/.colon3code/worktrees/feature-a")).toBe("Worktree");
+    expect(resolveLockedWorkspaceLabel("/repo/.colon3code/worktrees/feature-a")).toBe("worktree");
   });
 });
 

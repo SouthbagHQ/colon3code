@@ -195,7 +195,7 @@ export function descriptorsFromCapabilities(
 export function validateDraft(draft: CustomModelDraft): string | null {
   const seenIds = new Set<string>();
   for (const [index, descriptor] of draft.descriptors.entries()) {
-    const position = `Option ${index + 1}`;
+    const position = `option ${index + 1}`;
     const id = descriptor.id.trim();
     if (!id) return `${position} needs an id.`;
     if (seenIds.has(id)) return `${position}: id "${id}" is used twice.`;

@@ -26,9 +26,9 @@ const COLOR_SCHEME_OPTIONS: ReadonlyArray<{
   value: DesktopPreviewColorScheme;
   label: string;
 }> = [
-  { value: "system", label: "System" },
-  { value: "light", label: "Light" },
-  { value: "dark", label: "Dark" },
+  { value: "system", label: "system" },
+  { value: "light", label: "light" },
+  { value: "dark", label: "dark" },
 ];
 
 interface Props {
@@ -99,32 +99,32 @@ export function PreviewMoreMenu({
           render={
             <MenuTrigger
               render={
-                <Button variant="ghost" size="icon-xs" type="button" aria-label="Preview menu" />
+                <Button variant="ghost" size="icon-xs" type="button" aria-label="preview menu" />
               }
             />
           }
         >
           <MoreVertical />
         </TooltipTrigger>
-        <TooltipPopup>More</TooltipPopup>
+        <TooltipPopup>more</TooltipPopup>
       </Tooltip>
       <MenuPopup align="end" sideOffset={6} className="min-w-56">
         <MenuItem onClick={callTab(bridge.hardReload)} disabled={tabDisabled}>
-          Hard reload
+          hard reload
         </MenuItem>
         <MenuItem onClick={callTab(bridge.openDevTools)} disabled={tabDisabled}>
-          Open DevTools
+          open DevTools
         </MenuItem>
         <MenuItem onClick={onNativePictureInPicture} disabled={tabDisabled}>
           {nativePictureInPicture
-            ? "Close separate preview window"
-            : "Open separate preview window"}
+            ? "close separate preview window"
+            : "open separate preview window"}
         </MenuItem>
         <MenuItem onClick={onToggleDeviceToolbar} disabled={tabDisabled}>
-          {deviceToolbarVisible ? "Hide device toolbar" : "Show device toolbar"}
+          {deviceToolbarVisible ? "hide device toolbar" : "show device toolbar"}
         </MenuItem>
         <MenuSub>
-          <MenuSubTrigger disabled={tabDisabled}>Appearance</MenuSubTrigger>
+          <MenuSubTrigger disabled={tabDisabled}>appearance</MenuSubTrigger>
           <MenuSubPopup className="min-w-32">
             <MenuRadioGroup
               value={colorScheme}
@@ -154,14 +154,14 @@ export function PreviewMoreMenu({
           className="justify-between"
           disabled={tabDisabled}
         >
-          <span>Zoom</span>
+          <span>zoom</span>
           <span className="flex items-center gap-1">
             <Button
               variant="outline"
               size="icon-xs"
               type="button"
               onClick={callTab(bridge.zoomOut)}
-              aria-label="Zoom out"
+              aria-label="zoom out"
               disabled={tabDisabled}
             >
               <Minus />
@@ -174,7 +174,7 @@ export function PreviewMoreMenu({
               size="icon-xs"
               type="button"
               onClick={callTab(bridge.zoomIn)}
-              aria-label="Zoom in"
+              aria-label="zoom in"
               disabled={tabDisabled}
             >
               <PlusIcon />
@@ -184,7 +184,7 @@ export function PreviewMoreMenu({
               size="icon-xs"
               type="button"
               onClick={callTab(bridge.resetZoom)}
-              aria-label="Reset zoom"
+              aria-label="reset zoom"
               className="[:hover,[data-pressed]]:bg-foreground/10"
               disabled={tabDisabled}
             >
@@ -209,19 +209,19 @@ export function PreviewMoreMenu({
             // Truncation sits on the label itself: it renders a block box, so
             // `text-overflow` on an inline child inside it never applies and a
             // long name would push the popup past its width instead.
-            <MenuGroupLabel className="max-w-64 truncate">Profile: {profileName}</MenuGroupLabel>
+            <MenuGroupLabel className="max-w-64 truncate">profile: {profileName}</MenuGroupLabel>
           ) : null}
           <MenuItem
             onClick={() =>
               void bridge.clearCookies(environmentId, profileId).catch(() => undefined)
             }
           >
-            Clear cookies
+            clear cookies
           </MenuItem>
           <MenuItem
             onClick={() => void bridge.clearCache(environmentId, profileId).catch(() => undefined)}
           >
-            Clear cache
+            clear cache
           </MenuItem>
         </MenuGroup>
       </MenuPopup>

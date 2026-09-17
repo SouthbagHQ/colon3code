@@ -17,7 +17,7 @@ const sshId = EnvironmentId.make("ssh");
 const environments = [
   { environmentId: sshId, label: "Zulu SSH" },
   { environmentId: relayId, label: "Alpha Relay" },
-  { environmentId: primaryId, label: "This device" },
+  { environmentId: primaryId, label: "this device" },
 ] as const;
 
 describe("provider environment selection", () => {

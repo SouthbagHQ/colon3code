@@ -97,12 +97,12 @@ function DraftStartError({ onRetry }: { readonly onRetry: () => void }) {
             couldn’t start a new thread 3:
           </EmptyTitle>
           <EmptyDescription className="mt-2 text-sm text-muted-foreground/78">
-            The project is still available. Try opening the draft again.
+            the project is still available. try opening the draft again
           </EmptyDescription>
           <div className="mt-5 flex justify-center">
             <Button size="sm" onClick={onRetry}>
               <RefreshIcon className="size-4" />
-              Try again
+              try again
             </Button>
           </div>
         </EmptyHeader>
@@ -119,10 +119,10 @@ function HostedStaticOnboardingState() {
   const cloudEnabled = hasCloudPublicConfig();
   const localEnvironmentOff = isLocalEnvironmentDisabled();
   const description = localEnvironmentOff
-    ? "The local environment is turned off. Connect a remote environment, or turn the local environment back on in Connections."
+    ? "the local environment is turned off. connect a remote environment, or turn the local environment back on in connections."
     : cloudEnabled
-      ? "Enable T3 Connect on that machine, then open Connections here to sign in with the same account. You can also add the machine using a pairing link."
-      : "Open Connections and add that machine using its pairing link. This app must be able to reach it.";
+      ? "enable T3 Connect on that machine, then open connections here to sign in with the same account. you can also add the machine using a pairing link."
+      : "open connections and add that machine using its pairing link. this app must be able to reach it.";
 
   return (
     <SidebarInset className="h-dvh min-h-0 overflow-hidden overscroll-y-none bg-background text-foreground">
@@ -142,10 +142,10 @@ function HostedStaticOnboardingState() {
                 <LinkIcon className="size-5" />
               </div>
               <EmptyTitle className="text-foreground text-xl">
-                Connect to a computer running :3 Code
+                connect to a computer running :3 Code
               </EmptyTitle>
               <EmptyDescription className="mt-2 text-sm leading-relaxed text-muted-foreground/78">
-                This app connects to :3 Code running on your computer or a server. Start the :3 Code
+                this app connects to :3 Code running on your computer or a server. start the :3 Code
                 desktop app or command-line server on that machine and keep it running.
               </EmptyDescription>
               <EmptyDescription className="mt-2 text-sm leading-relaxed text-muted-foreground/78">
@@ -154,7 +154,7 @@ function HostedStaticOnboardingState() {
               <div className="mt-6 flex justify-center">
                 <Button render={<Link to="/settings/connections" />} size="sm">
                   <PlusIcon className="size-4" />
-                  Open Connections
+                  open connections
                 </Button>
               </div>
             </EmptyHeader>

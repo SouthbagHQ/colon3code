@@ -90,10 +90,10 @@ describe("shared pull request state", () => {
 });
 
 describe("prStatusIndicator", () => {
-  it("formats PR tooltips with number, uppercase status, and title", () => {
+  it("formats PR tooltips with number, status, and title", () => {
     expect(prStatusIndicator(status().pr, undefined)).toMatchObject({
-      tooltip: "PR #42 - Open: PR branch",
-      tooltipLead: "PR #42 - Open",
+      tooltip: "PR #42 - open: PR branch",
+      tooltipLead: "PR #42 - open",
       tooltipTitle: "PR branch",
     });
   });
@@ -114,7 +114,7 @@ describe("prStatusIndicator", () => {
     expect(prStatusIndicator({ ...draftPr, isDraft: true }, undefined)).toMatchObject({
       label: "PR draft",
       colorClass: "text-zinc-500 dark:text-zinc-400/80",
-      tooltipLead: "PR #42 - Draft",
+      tooltipLead: "PR #42 - draft",
     });
   });
 });

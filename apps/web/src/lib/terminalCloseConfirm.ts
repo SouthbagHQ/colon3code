@@ -23,12 +23,12 @@ export async function confirmTerminalClose(
     return await localApi.dialogs.confirm(
       labels.length === 1
         ? [
-            `Close terminal "${labels[0]}"?`,
-            "This stops the running process and clears its history.",
+            `close terminal "${labels[0]}"?`,
+            "this stops the running process and clears its history.",
           ].join("\n")
         : [
-            `Close ${labels.length} terminals?`,
-            `This stops their running processes and clears their histories: ${labels
+            `close ${labels.length} terminals?`,
+            `this stops their running processes and clears their histories: ${labels
               .map((label) => `"${label}"`)
               .join(", ")}.`,
           ].join("\n"),

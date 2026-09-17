@@ -147,21 +147,21 @@ function authPresentation(auth: SourceControlProviderAuth): {
   readonly badge: "warning" | null;
 } {
   if (auth.status === "authenticated") {
-    return { label: "Authenticated", badge: null };
+    return { label: "authenticated", badge: null };
   }
   if (auth.status === "unauthenticated") {
-    return { label: "Not authenticated", badge: "warning" };
+    return { label: "not authenticated", badge: "warning" };
   }
-  return { label: "Status unknown", badge: null };
+  return { label: "status unknown", badge: null };
 }
 
 function RedactedAccount(props: { readonly account: string | null }) {
   return (
     <RedactedSensitiveText
       value={props.account}
-      ariaLabel="Toggle source control account visibility"
-      revealTooltip="Click to reveal account"
-      hideTooltip="Click to hide account"
+      ariaLabel="toggle source control account visibility"
+      revealTooltip="click to reveal account"
+      hideTooltip="click to hide account"
     />
   );
 }
@@ -211,18 +211,18 @@ function itemSummary({
   readonly authAccount: string | null;
 }) {
   if (isVcsNotReady(item)) {
-    return <span>Support for {item.label} is coming soon.</span>;
+    return <span>support for {item.label} is coming soon.</span>;
   }
 
   if (item.status !== "available") {
-    return <span>Not available on this server: {item.installHint}</span>;
+    return <span>not available on this server: {item.installHint}</span>;
   }
 
   if (auth) {
     if (auth.status === "authenticated") {
       return (
         <>
-          <span>Authenticated</span>
+          <span>authenticated</span>
           {authAccount ? (
             <>
               <span aria-hidden>as</span>
@@ -234,13 +234,13 @@ function itemSummary({
     }
 
     if (!item.executable) {
-      return <span>Available. {item.installHint}</span>;
+      return <span>available. {item.installHint}</span>;
     }
 
     if (auth.status === "unauthenticated") {
       return (
         <span>
-          {item.label} is not authenticated on this server. Sign in or configure credentials using
+          {item.label} is not authenticated on this server. sign in or configure credentials using
           the <code className="rounded bg-muted px-1 py-px text-[11px]">{item.executable}</code>{" "}
           tool on the server host to enable change request features.
         </span>
@@ -249,12 +249,12 @@ function itemSummary({
     const authDetail = optionLabel(auth.detail);
     return (
       <span>
-        Could not verify {item.label}. {authDetail ?? item.installHint}
+        could not verify {item.label}. {authDetail ?? item.installHint}
       </span>
     );
   }
 
-  return <span>Available</span>;
+  return <span>available</span>;
 }
 
 function DiscoveryItemRow({
@@ -299,7 +299,7 @@ function DiscoveryItemRow({
               {version ? <code className="text-xs text-muted-foreground">{version}</code> : null}
               {isVcsNotReady(item) ? (
                 <Badge variant="warning" size="sm">
-                  Coming Soon
+                  coming soon
                 </Badge>
               ) : null}
               {authStatus?.badge ? (
@@ -319,7 +319,7 @@ function DiscoveryItemRow({
                 variant="ghost-muted"
                 onClick={() => setIsExpanded((open) => !open)}
                 aria-expanded={isExpanded}
-                aria-label={`Toggle ${item.label} details`}
+                aria-label={`toggle ${item.label} details`}
               >
                 <ChevronDownIcon
                   className={cn("size-3.5 transition-transform", isExpanded && "rotate-180")}
@@ -367,9 +367,9 @@ function GitFetchIntervalSettings() {
           <div className="flex min-w-0 items-center gap-1">
             <span className="text-xs font-medium text-foreground">{setting.title}</span>
             <PolicyTooltip>
-              This interval is configured for Git only. The shared Background activity policy still
-              decides whether Git refreshes may run when the timer fires. Custom intervals appear as
-              Advanced in General settings.
+              this interval is configured for Git only. the shared background activity policy still
+              decides whether Git refreshes may run when the timer fires. custom intervals appear as
+              advanced in general settings.
             </PolicyTooltip>
             <span
               className={cn(
@@ -393,7 +393,7 @@ function GitFetchIntervalSettings() {
             </span>
           </div>
           <p className="max-w-2xl text-xs leading-relaxed text-muted-foreground">
-            Refresh remote branches in the background. Set to 0 to avoid automatic Git prompts.
+            refresh remote branches in the background. set to 0 to avoid automatic Git prompts.
           </p>
         </div>
         <div className="flex shrink-0 items-center gap-2">
@@ -412,9 +412,9 @@ function GitFetchIntervalSettings() {
             }
           >
             <NumberFieldGroup>
-              <NumberFieldDecrement aria-label="Decrease fetch interval" />
-              <NumberFieldInput aria-label="Automatic Git fetch interval in seconds" />
-              <NumberFieldIncrement aria-label="Increase fetch interval" />
+              <NumberFieldDecrement aria-label="decrease fetch interval" />
+              <NumberFieldInput aria-label="automatic Git fetch interval in seconds" />
+              <NumberFieldIncrement aria-label="increase fetch interval" />
             </NumberFieldGroup>
           </NumberField>
           <span className="text-xs text-muted-foreground">seconds</span>
@@ -473,7 +473,7 @@ function EmptySourceControlDiscovery({
   const hasError = error !== null;
 
   return (
-    <SettingsSection id={searchableSetting("source-control").id} title="Server environment">
+    <SettingsSection id={searchableSetting("source-control").id} title="server environment">
       <Empty className="min-h-88">
         <EmptyMedia variant="icon">
           <GitPullRequestIcon />
@@ -485,13 +485,13 @@ function EmptySourceControlDiscovery({
           <EmptyDescription>
             {hasError
               ? error
-              : "Install Git on the server, add optional hosting integrations or credentials your workspace needs, then rescan."}
+              : "install Git on the server, add optional hosting integrations or credentials your workspace needs, then rescan."}
           </EmptyDescription>
         </EmptyHeader>
         <EmptyContent>
           <Button size="sm" variant="outline" onClick={onScan} disabled={isPending}>
             <RefreshIcon className="size-3.5" refreshing={isPending} />
-            Scan
+            scan
           </Button>
         </EmptyContent>
       </Empty>
@@ -532,13 +532,13 @@ export function SourceControlSettingsPanel() {
             variant="ghost-muted"
             onClick={handleScan}
             disabled={discovery.isPending}
-            aria-label="Rescan server environment"
+            aria-label="rescan server environment"
           >
             <RefreshIcon refreshing={discovery.isPending} />
           </Button>
         }
       />
-      <TooltipPopup side="top">Rescan Git and hosting integrations</TooltipPopup>
+      <TooltipPopup side="top">rescan Git and hosting integrations</TooltipPopup>
     </Tooltip>
   );
 
@@ -546,25 +546,25 @@ export function SourceControlSettingsPanel() {
     <SettingsPageContainer>
       <ProjectDefaultsSettings category="source-control" />
       {environmentId === null ? (
-        <SettingsSection id={searchableSetting("source-control").id} title="Server environment">
+        <SettingsSection id={searchableSetting("source-control").id} title="server environment">
           <p className="px-4 py-3 text-sm text-muted-foreground">
-            Connect an environment to inspect its version control tools and hosting integrations.
+            connect an environment to inspect its version control tools and hosting integrations.
           </p>
         </SettingsSection>
       ) : isInitialScanPending ? (
         <>
           <SourceControlSectionSkeleton
-            title={`Version Control${environmentSuffix}`}
+            title={`version control${environmentSuffix}`}
             headerAction={scanButton}
           />
-          <SourceControlSectionSkeleton title="Source Control Providers" />
+          <SourceControlSectionSkeleton title="source control providers" />
         </>
       ) : hasDiscoveryItems ? (
         <>
           {hasVersionControlSystems ? (
             <SettingsSection
               id={searchableSetting("source-control").id}
-              title={`Version Control${environmentSuffix}`}
+              title={`version control${environmentSuffix}`}
               headerAction={scanButton}
             >
               {result.versionControlSystems.map((item) => (
@@ -580,8 +580,8 @@ export function SourceControlSettingsPanel() {
               id={hasVersionControlSystems ? undefined : searchableSetting("source-control").id}
               title={
                 hasVersionControlSystems
-                  ? "Source Control Providers"
-                  : `Source Control Providers${environmentSuffix}`
+                  ? "source control providers"
+                  : `source control providers${environmentSuffix}`
               }
               headerAction={hasVersionControlSystems ? null : scanButton}
             >

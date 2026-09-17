@@ -132,7 +132,7 @@ export function PullRequestReactionBar({
             render={
               <button
                 type="button"
-                aria-label="Add a reaction"
+                aria-label="add a reaction"
                 className={cn(
                   PILL_CLASS,
                   "border-border/70 px-1.5 text-muted-foreground hover:border-primary/60 hover:text-foreground",

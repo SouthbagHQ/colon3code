@@ -12,11 +12,11 @@ export function PullRequestStackHeader({
 }) {
   return (
     <MenuGroupLabel className="flex items-center justify-between gap-2">
-      <span>Stack #{number}</span>
+      <span>stack #{number}</span>
       {notice ? (
         <Tooltip>
           <TooltipTrigger render={<span role="status" className="text-xs font-normal" />}>
-            {stale ? "May be stale" : "Refreshing…"}
+            {stale ? "may be stale" : "refreshing…"}
           </TooltipTrigger>
           <TooltipPopup>{notice}</TooltipPopup>
         </Tooltip>

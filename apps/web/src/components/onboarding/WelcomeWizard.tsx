@@ -90,8 +90,8 @@ type WizardStep = "connection" | "agents" | "import";
 const NO_ENVIRONMENTS: readonly EnvironmentId[] = [];
 
 const AGENT_ONBOARDING_THREAD_ID = ThreadId.make("onboarding-agent-setup");
-const ONBOARDING_STAGES = ["Connect", "Agents", "Projects"] as const;
-const SCAN_LIMIT_MESSAGE = "Scan limit reached. Some projects or conversations may be missing.";
+const ONBOARDING_STAGES = ["connect", "agents", "projects"] as const;
+const SCAN_LIMIT_MESSAGE = "scan limit reached. some projects or conversations may be missing.";
 
 export function WelcomeWizard({
   localAvailable,
@@ -161,7 +161,7 @@ export function WelcomeWizard({
           const errorToast = {
             type: "error",
             title: "could not finish setup 3:",
-            description: "Your settings could not be saved. Try again.",
+            description: "your settings could not be saved. try again.",
           } as const;
           if (completionErrorToastIdRef.current === null) {
             completionErrorToastIdRef.current = toastManager.add(errorToast);
@@ -305,7 +305,7 @@ function ConnectionStep({
       </p>
       {directEnvironments.length > 0 ? (
         <fieldset className="mt-5 space-y-2">
-          <legend className="sr-only">Computers to set up</legend>
+          <legend className="sr-only">computers to set up</legend>
           {directEnvironments.map((environment) => (
             <label
               key={environment.environmentId}
@@ -327,7 +327,7 @@ function ConnectionStep({
                     {environment.label}
                   </span>
                   <span className="shrink-0 text-xs text-muted-foreground">
-                    {environment.connection.phase === "connected" ? "Connected" : "Connecting…"}
+                    {environment.connection.phase === "connected" ? "connected" : "connecting…"}
                   </span>
                 </span>
                 {environment.displayUrl ? (
@@ -364,7 +364,7 @@ function ConnectionStep({
             }
           >
             <LinkIcon className="size-4 text-muted-foreground" />
-            <span className="flex-1">Add a computer</span>
+            <span className="flex-1">add a computer</span>
             <ChevronRightIcon
               className={cn("size-4 text-muted-foreground", pairingOpen && "rotate-90")}
             />
@@ -391,7 +391,7 @@ function ConnectionStep({
           disabled={!ready || isPairing}
           onClick={onContinue}
         >
-          Continue
+          continue
           <ArrowRightIcon className="size-3.5" />
         </Button>
       </div>
@@ -443,11 +443,11 @@ function ConnectAccountOption({
         <span className="flex-1">T3 Connect</span>
         <span className="text-xs text-muted-foreground">
           {!isLoaded
-            ? "Loading sign-in…"
+            ? "loading sign-in…"
             : !isSignedIn
-              ? "Sign in"
+              ? "sign in"
               : !discoveryReady
-                ? "Loading computers…"
+                ? "loading computers…"
                 : null}
         </span>
         <ChevronRightIcon
@@ -472,11 +472,11 @@ function ConnectAccountOption({
             ) : null}
           </div>
           <p className="text-sm text-muted-foreground">
-            Run this on each computer you want to connect.
+            run this on each computer you want to connect.
           </p>
           <CommandBlock command="npx t3 connect" className="mt-3" />
           <p className="mt-3 text-xs text-muted-foreground">
-            Keep :3 Code running. Select the computers you want to set up above.
+            keep :3 Code running. select the computers you want to set up above.
           </p>
         </div>
       </CollapsiblePanel>
@@ -523,7 +523,7 @@ function PairingForm({
     }
     if (isAtomCommandInterrupted(result)) return;
     const cause = squashAtomCommandFailure(result);
-    setErrorMessage(cause instanceof Error ? cause.message : "Pairing failed.");
+    setErrorMessage(cause instanceof Error ? cause.message : "pairing failed.");
   };
 
   return (
@@ -537,7 +537,7 @@ function PairingForm({
       >
         <div>
           <label className="block text-sm text-muted-foreground" htmlFor="onboarding-pairing-url">
-            Pairing link
+            pairing link
           </label>
           <Input
             id="onboarding-pairing-url"
@@ -581,19 +581,19 @@ function PairingForm({
               className="group flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground"
             >
               <ChevronRightIcon className="size-3.5 group-data-panel-open:rotate-90" />
-              Need a pairing link?
+              need a pairing link?
             </CollapsibleTrigger>
             <Button type="submit" disabled={isPairing || pairingUrl.trim().length === 0}>
-              {isPairing ? "Pairing..." : "Pair"}
+              {isPairing ? "pairing..." : "pair"}
             </Button>
           </div>
           <CollapsiblePanel className="pt-3">
             <p className="text-sm text-muted-foreground">
-              Run this on the computer with your code.
+              run this on the computer with your code.
             </p>
             <CommandBlock command="npx t3 pair" className="mt-2" />
             <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
-              Start :3 Code first, or run <code className="font-mono">npx t3 serve</code>. Add{" "}
+              start :3 Code first, or run <code className="font-mono">npx t3 serve</code>. add{" "}
               <code className="font-mono">--tailscale</code> to use your tailnet.
             </p>
           </CollapsiblePanel>
@@ -634,7 +634,7 @@ function AgentsStep({
 }) {
   const { environments } = useEnvironments();
   return (
-    <StepShell title="Your agents" description="Agents available on your selected computers.">
+    <StepShell title="your agents" description="agents available on your selected computers.">
       <ScrollArea
         scrollFade
         className="mt-5 h-auto max-h-96 [&_[data-slot=scroll-area-scrollbar]]:opacity-100"
@@ -646,7 +646,7 @@ function AgentsStep({
               environmentId={environmentId}
               machineLabel={
                 environments.find((environment) => environment.environmentId === environmentId)
-                  ?.label ?? "Computer"
+                  ?.label ?? "computer"
               }
             />
           ))}
@@ -654,7 +654,7 @@ function AgentsStep({
       </ScrollArea>
       <div className="mt-6 flex justify-end">
         <Button autoFocus onClick={onContinue}>
-          Continue
+          continue
           <ArrowRightIcon className="size-3.5" />
         </Button>
       </div>
@@ -771,12 +771,12 @@ function AgentCard({
         {providerState === "ready" ? (
           <span className="inline-flex items-center gap-1.5 text-xs font-medium text-success-foreground">
             <CheckIcon className="size-3.5" />
-            Ready
+            ready
           </span>
         ) : providerState === "checking" ? (
-          <span className="text-xs text-muted-foreground">Checking...</span>
+          <span className="text-xs text-muted-foreground">checking...</span>
         ) : providerState === "disabled" ? (
-          <span className="text-xs text-muted-foreground">Disabled</span>
+          <span className="text-xs text-muted-foreground">disabled</span>
         ) : providerState === "attention" ? (
           <span className="text-xs text-muted-foreground">{summary.headline}</span>
         ) : (
@@ -787,7 +787,7 @@ function AgentCard({
             disabled={terminalOpen || !terminalAvailable}
           >
             <TerminalIcon className="size-3.5" />
-            {providerState === "signIn" ? "Sign in" : "Install"}
+            {providerState === "signIn" ? "sign in" : "install"}
           </Button>
         )}
       </div>
@@ -900,25 +900,25 @@ function AgentInstallTerminal({
         <span className="text-[11px] font-medium text-muted-foreground">
           {setupState === "writeFailed" ? (
             <>
-              Run <code className="rounded bg-muted px-1 font-mono">{command}</code> in this
+              run <code className="rounded bg-muted px-1 font-mono">{command}</code> in this
               terminal.
             </>
           ) : setupState === "ready" ? (
-            "Review the command, then press Enter to run it."
+            "review the command, then press Enter to run it."
           ) : setupState === "openFailed" ? (
             "could not open the setup terminal 3:"
           ) : (
-            "Preparing command..."
+            "preparing command..."
           )}
         </span>
         <div className="flex items-center gap-1">
           {setupState === "openFailed" ? (
             <Button size="xs" variant="ghost" onClick={() => setSetupAttempt((value) => value + 1)}>
-              Retry
+              retry
             </Button>
           ) : null}
           <Button size="xs" variant="ghost-muted" onClick={onClose}>
-            Close
+            close
           </Button>
         </div>
       </div>
@@ -928,7 +928,7 @@ function AgentInstallTerminal({
             threadRef={threadRef}
             threadId={AGENT_ONBOARDING_THREAD_ID}
             terminalId={terminalId}
-            terminalLabel={`Install ${driver}`}
+            terminalLabel={`install ${driver}`}
             cwd={cwd}
             providerInstanceId={providerInstanceId}
             advancedTypography={advancedTypography}
@@ -1138,7 +1138,7 @@ function ImportStep({
     if (importedProjectsCount < selection.length) {
       if (importedThreadCount > 0 && skippedThreadCount > 0) {
         setImportError(
-          `Imported ${importedThreadCount} ${importedThreadCount === 1 ? "thread" : "threads"}. ${skippedThreadCount} ${skippedThreadCount === 1 ? "thread" : "threads"} could not be imported.`,
+          `imported ${importedThreadCount} ${importedThreadCount === 1 ? "thread" : "threads"}. ${skippedThreadCount} ${skippedThreadCount === 1 ? "thread" : "threads"} could not be imported.`,
         );
       } else if (skippedThreadCount > 0) {
         setImportError(
@@ -1146,7 +1146,7 @@ function ImportStep({
         );
       } else if (importedThreadCount > 0) {
         setImportError(
-          `Imported ${importedThreadCount} ${importedThreadCount === 1 ? "thread" : "threads"}. Some thread history could not be imported.`,
+          `imported ${importedThreadCount} ${importedThreadCount === 1 ? "thread" : "threads"}. some thread history could not be imported.`,
         );
       } else {
         setImportError("could not import thread history 3:");
@@ -1159,16 +1159,16 @@ function ImportStep({
   if (scans.every((scan) => scan.data === null) && scans.some((scan) => scan.isPending)) {
     return (
       <div className="flex h-full min-h-40 flex-col">
-        <h1 className="text-2xl font-semibold tracking-tight text-foreground">Your projects</h1>
+        <h1 className="text-2xl font-semibold tracking-tight text-foreground">your projects</h1>
         <div className="flex flex-1 flex-col items-center justify-center gap-3 py-6">
           <Spinner className="size-5 text-muted-foreground" />
           <p className="text-center text-sm text-muted-foreground">
-            Looking for projects from Claude Code and Codex…
+            looking for projects from Claude Code and Codex…
           </p>
         </div>
         <div className="flex justify-end">
           <Button variant="ghost-muted" onClick={() => void onDone()}>
-            Do not import projects
+            do not import projects
           </Button>
         </div>
       </div>
@@ -1177,8 +1177,8 @@ function ImportStep({
 
   return (
     <StepShell
-      title="Choose your projects"
-      description="Import projects and conversations from your selected computers."
+      title="choose your projects"
+      description="import projects and conversations from your selected computers."
     >
       {candidates.length > 0 ? (
         <div className="mt-5 flex items-center justify-between gap-3 text-xs text-muted-foreground">
@@ -1192,7 +1192,7 @@ function ImportStep({
               disabled={isImporting || selected.length === candidates.length}
               onClick={() => setSelectedPaths(new Set(candidates.map((item) => item.key)))}
             >
-              Select all
+              select all
             </Button>
             <Button
               variant="ghost"
@@ -1200,7 +1200,7 @@ function ImportStep({
               disabled={isImporting || selected.length === 0}
               onClick={() => setSelectedPaths(new Set())}
             >
-              Select none
+              select none
             </Button>
           </div>
         </div>
@@ -1216,7 +1216,7 @@ function ImportStep({
             );
             const label =
               environments.find((environment) => environment.environmentId === scan.environmentId)
-                ?.label ?? "Computer";
+                ?.label ?? "computer";
             return (
               <fieldset
                 key={scan.environmentId}
@@ -1229,21 +1229,21 @@ function ImportStep({
                 {scan.isPending && scan.data === null ? (
                   <div className="flex items-center gap-2 py-3 text-sm text-muted-foreground">
                     <Spinner className="size-4" />
-                    Looking for projects…
+                    looking for projects…
                   </div>
                 ) : scan.error !== null ? (
                   <div
                     role="alert"
                     className="flex items-center justify-between gap-3 text-sm text-muted-foreground"
                   >
-                    <span>Could not check projects. {scan.error}</span>
+                    <span>could not check projects. {scan.error}</span>
                     <Button variant="ghost" size="sm" onClick={scan.refresh}>
-                      Retry
+                      retry
                     </Button>
                   </div>
                 ) : scanCandidates.length === 0 ? (
                   <p className="py-2 text-sm text-muted-foreground">
-                    No existing Claude Code or Codex projects found.
+                    no existing Claude Code or Codex projects found.
                   </p>
                 ) : null}
                 {scan.data?.truncated ? (
@@ -1268,7 +1268,7 @@ function ImportStep({
           disabled={isImporting}
           onClick={importError ? finishAfterImport : () => void onDone()}
         >
-          {importError ? "Continue without the rest" : "Do not import projects"}
+          {importError ? "continue without the rest" : "do not import projects"}
         </Button>
         <Button
           autoFocus
@@ -1276,8 +1276,8 @@ function ImportStep({
           onClick={() => void runImport(selected)}
         >
           {isImporting
-            ? "Importing…"
-            : `Import ${selected.length} ${selected.length === 1 ? "project" : "projects"}`}
+            ? "importing…"
+            : `import ${selected.length} ${selected.length === 1 ? "project" : "projects"}`}
         </Button>
       </div>
     </StepShell>
@@ -1340,7 +1340,7 @@ function ImportCandidateList({
             />
             <CollapsibleTrigger className="group flex min-w-0 flex-1 items-center gap-1.5 text-left">
               <ChevronRightIcon className="size-3.5 shrink-0 text-muted-foreground transition-transform group-data-panel-open:rotate-90" />
-              <span className="truncate text-sm text-muted-foreground">Other folders</span>
+              <span className="truncate text-sm text-muted-foreground">other folders</span>
               <span className="ml-auto shrink-0 text-xs text-muted-foreground tabular-nums">
                 {other.length} {other.length === 1 ? "folder" : "folders"}
               </span>
@@ -1552,7 +1552,7 @@ function CommandBlock({
       <Button
         size="icon-xs"
         variant="ghost"
-        aria-label="Copy command"
+        aria-label="copy command"
         onClick={() => copyToClipboard(command, undefined)}
       >
         {isCopied ? <CheckIcon className="size-3.5" /> : <CopyIcon className="size-3.5" />}

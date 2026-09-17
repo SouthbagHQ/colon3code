@@ -37,8 +37,8 @@ export function DiffCommentAnnotation({
   onCancel,
   onComment,
   onDelete,
-  placeholder = "Add a comment…",
-  submitLabel = "Comment",
+  placeholder = "add a comment…",
+  submitLabel = "comment",
   pending = false,
   secondaryAction,
   focusOnMount = true,
@@ -71,7 +71,7 @@ export function DiffCommentAnnotation({
             className="-my-1 -mr-1 shrink-0 text-muted-foreground opacity-0 transition-opacity group-hover/comment:opacity-100 focus-visible:opacity-100 max-sm:opacity-100"
             variant="ghost"
             size="icon-xs"
-            aria-label="Delete comment"
+            aria-label="delete comment"
             onClick={onDelete}
           >
             <Trash2 className="size-3" />
@@ -96,7 +96,7 @@ export function DiffCommentAnnotation({
         size="sm"
         value={displayedText}
         placeholder={placeholder}
-        aria-label={`Comment on lines ${rangeLabel}`}
+        aria-label={`comment on lines ${rangeLabel}`}
         onChange={(event) => (onTextChange ?? setLocalDraftText)(event.target.value)}
         onFocus={(event) => {
           const end = event.currentTarget.value.length;
@@ -121,7 +121,7 @@ export function DiffCommentAnnotation({
           size="xs"
           onClick={onCancel}
         >
-          Cancel
+          cancel
         </Button>
         {secondaryAction ? (
           <Button

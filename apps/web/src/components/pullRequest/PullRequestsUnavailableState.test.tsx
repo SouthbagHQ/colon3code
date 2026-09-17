@@ -22,7 +22,7 @@ describe("PullRequestsUnavailableState", () => {
 
     expect(text).toContain("pull requests unavailable 3:");
     expect(text).toContain("Update this environment's :3 Code server");
-    expect(text).not.toContain("Retry");
+    expect(text).not.toContain("retry");
   });
 
   it("retains the retry for transient load failures", () => {
@@ -34,8 +34,8 @@ describe("PullRequestsUnavailableState", () => {
       />,
     );
 
-    expect(html).toContain("Retry");
-    expect(html).toContain("Open on GitHub");
+    expect(html).toContain("retry");
+    expect(html).toContain("open on GitHub");
     expect(html).toContain('href="https://github.com/SouthbagHQ/colon3code/pull/42"');
     expect(html).toContain('target="_blank"');
     expect(html).toContain('rel="noopener noreferrer"');
@@ -49,8 +49,8 @@ describe("PullRequestsUnavailableState", () => {
       />,
     );
 
-    expect(html).toContain("Open on GitHub");
-    expect(html).not.toContain("Retry");
+    expect(html).toContain("open on GitHub");
+    expect(html).not.toContain("retry");
   });
 
   it("can offer a retry without offering GitHub", () => {
@@ -58,8 +58,8 @@ describe("PullRequestsUnavailableState", () => {
       <PullRequestsUnavailableState error="The host did not answer." onRetry={() => {}} />,
     );
 
-    expect(html).toContain("Retry");
-    expect(html).not.toContain("Open on GitHub");
+    expect(html).toContain("retry");
+    expect(html).not.toContain("open on GitHub");
   });
 
   it("renders no action content without a retry or browser target", () => {

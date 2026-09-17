@@ -66,7 +66,7 @@ export const ProposedPlanCard = memo(function ProposedPlanCard({
     },
   });
   const savePathInputId = useId();
-  const title = proposedPlanTitle(planMarkdown) ?? "Proposed plan";
+  const title = proposedPlanTitle(planMarkdown) ?? "proposed plan";
   const lineCount = planMarkdown.split("\n").length;
   const canCollapse = planMarkdown.length > 900 || lineCount > 20;
   const displayedPlanMarkdown = stripDisplayedPlanMarkdown(planMarkdown);
@@ -90,7 +90,7 @@ export const ProposedPlanCard = memo(function ProposedPlanCard({
         stackedThreadToast({
           type: "error",
           title: "workspace path is unavailable 3:",
-          description: "This thread does not have a workspace path to save into.",
+          description: "this thread does not have a workspace path to save into.",
         }),
       );
       return;
@@ -149,24 +149,24 @@ export const ProposedPlanCard = memo(function ProposedPlanCard({
     <div className="rounded-[24px] border border-border/80 bg-card/70 p-4 sm:p-5">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div className="flex min-w-0 items-center gap-2">
-          <Badge variant="secondary">Plan</Badge>
+          <Badge variant="secondary">plan</Badge>
           {/* Same heading level as the message author headings in the timeline,
               so a plan's own headings nest beneath it in the outline. */}
           <h3 className="truncate text-sm font-medium text-foreground">{title}</h3>
         </div>
         <Menu>
           <MenuTrigger
-            render={<Button aria-label="Plan actions" size="icon-xs" variant="outline" />}
+            render={<Button aria-label="plan actions" size="icon-xs" variant="outline" />}
           >
             <EllipsisIcon aria-hidden="true" className="size-4" />
           </MenuTrigger>
           <MenuPopup align="end">
             <MenuItem onClick={handleCopyPlan}>
-              {isCopied ? "Copied!" : "Copy to clipboard"}
+              {isCopied ? "copied!" : "copy to clipboard"}
             </MenuItem>
-            <MenuItem onClick={handleDownload}>Download as markdown</MenuItem>
+            <MenuItem onClick={handleDownload}>download as markdown</MenuItem>
             <MenuItem onClick={openSaveDialog} disabled={!workspaceRoot || isSavingToWorkspace}>
-              Save to workspace
+              save to workspace
             </MenuItem>
           </MenuPopup>
         </Menu>
@@ -202,7 +202,7 @@ export const ProposedPlanCard = memo(function ProposedPlanCard({
               data-scroll-anchor-ignore
               onClick={() => setExpanded((value) => !value)}
             >
-              {expanded ? "Collapse plan" : "Expand plan"}
+              {expanded ? "collapse plan" : "expand plan"}
             </Button>
           </div>
         ) : null}
@@ -218,9 +218,9 @@ export const ProposedPlanCard = memo(function ProposedPlanCard({
       >
         <DialogPopup className="max-w-xl">
           <DialogHeader>
-            <DialogTitle>Save plan to workspace</DialogTitle>
+            <DialogTitle>save plan to workspace</DialogTitle>
             <DialogDescription>
-              Enter a path relative to <code>{workspaceRoot ?? "the workspace"}</code>.
+              enter a path relative to <code>{workspaceRoot ?? "the workspace"}</code>.
             </DialogDescription>
           </DialogHeader>
           <DialogPanel className="space-y-3">
@@ -243,14 +243,14 @@ export const ProposedPlanCard = memo(function ProposedPlanCard({
               onClick={() => setIsSaveDialogOpen(false)}
               disabled={isSavingToWorkspace}
             >
-              Cancel
+              cancel
             </Button>
             <Button
               size="sm"
               onClick={() => void handleSaveToWorkspace()}
               disabled={isSavingToWorkspace}
             >
-              {isSavingToWorkspace ? "Saving..." : "Save"}
+              {isSavingToWorkspace ? "saving..." : "save"}
             </Button>
           </DialogFooter>
         </DialogPopup>

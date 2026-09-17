@@ -233,7 +233,7 @@ describe("Antigravity setup", () => {
     });
     let view = renderSetup();
     expect(
-      visitElements(view, (element) => element.props.children === "Signed in with Google."),
+      visitElements(view, (element) => element.props.children === "signed in with Google."),
     ).toBeNull();
     expect(
       visitElements(view, (element) => element.props.id === `provider-callback-${instanceId}`)
@@ -244,7 +244,7 @@ describe("Antigravity setup", () => {
     expect(
       visitElements(
         renderSetup(),
-        (element) => element.props.children === "Signed in with Google.",
+        (element) => element.props.children === "signed in with Google.",
       ),
     ).toBeNull();
     setup.auth = authState({ phase: "succeeded", authorizationUrl: null });
@@ -252,7 +252,7 @@ describe("Antigravity setup", () => {
       provider: { ...provider, status: "ready", auth: { status: "authenticated" } },
     });
     expect(
-      visitElements(view, (element) => element.props.children === "Signed in with Google."),
+      visitElements(view, (element) => element.props.children === "signed in with Google."),
     ).not.toBeNull();
   });
 
@@ -266,9 +266,9 @@ describe("Antigravity setup", () => {
       provider: { ...provider, status: "ready", auth: { status: "authenticated" } },
     });
     const expired = renderSetup();
-    expect(button(expired, "Sign in with Google")).not.toBeNull();
+    expect(button(expired, "sign in with Google")).not.toBeNull();
     expect(
-      visitElements(expired, (element) => element.props.children === "Signed in with Google."),
+      visitElements(expired, (element) => element.props.children === "signed in with Google."),
     ).toBeNull();
     expect(
       visitElements(expired, (element) => element.props.children === "Google sign-in complete."),
@@ -295,8 +295,8 @@ describe("Antigravity setup", () => {
     });
     setup.startAuth.mockReturnValueOnce(pending);
     const view = renderSetup();
-    click(view, "Sign in with Google");
-    click(view, "Sign in with Google");
+    click(view, "sign in with Google");
+    click(view, "sign in with Google");
 
     expect(setup.startAuth).toHaveBeenCalledTimes(1);
     expect(setup.startAuth).toHaveBeenCalledWith({ environmentId, input: { instanceId } });
@@ -309,14 +309,14 @@ describe("Antigravity setup", () => {
       ...setup.installation!,
       operationId: "install-1",
       phase: "verifying",
-      message: "Checking the downloaded runtime.",
+      message: "checking the downloaded runtime.",
     };
 
     const view = renderSetup();
     expect(
       countElements(
         view,
-        (element) => element.props.children === "Checking the downloaded runtime.",
+        (element) => element.props.children === "checking the downloaded runtime.",
       ),
     ).toBe(1);
   });
@@ -330,12 +330,12 @@ describe("Antigravity setup", () => {
       installedVersion: null,
     };
     const view = renderSetup();
-    click(view, "Remove downloaded runtime");
+    click(view, "remove downloaded runtime");
     await flushPromises();
     expect(setup.removeInstall).not.toHaveBeenCalled();
 
     setup.confirm.mockResolvedValue(true);
-    click(view, "Remove downloaded runtime");
+    click(view, "remove downloaded runtime");
     await flushPromises();
     expect(setup.removeInstall).toHaveBeenCalledWith({ environmentId, input: { instanceId } });
   });
@@ -355,7 +355,7 @@ describe("Antigravity setup", () => {
           auth: { status: "unknown" },
         },
       });
-      click(view, "Sign out of Google");
+      click(view, "sign out of Google");
       await flushPromises();
       expect(setup.logoutAuth).toHaveBeenCalledWith({ environmentId, input: { instanceId } });
     },
@@ -372,7 +372,7 @@ describe("Antigravity setup", () => {
       provider: { ...provider, installed: false },
       binaryPath: "/missing/antigravity",
     });
-    expect(button(view, "Sign in with Google")?.props.disabled).toBe(true);
+    expect(button(view, "sign in with Google")?.props.disabled).toBe(true);
     expect(setup.startAuth).not.toHaveBeenCalled();
   });
 

@@ -29,7 +29,7 @@ describe("typography settings restore", () => {
         fontSizeInterface: 18,
         fontFamilyCode: "Fira Code",
       }),
-    ).toEqual(["Interface font", "Code font"]);
+    ).toEqual(["interface font", "code font"]);
   });
 });
 
@@ -161,7 +161,7 @@ describe("formatDiagnosticsDescription", () => {
         otlpMetricsEnabled: true,
         otlpMetricsUrl: "http://localhost:4318/v1/metrics",
       }),
-    ).toBe("Local trace file. Exporting OTEL to http://localhost:4318/v1/{traces,metrics}.");
+    ).toBe("local trace file. exporting OTEL to http://localhost:4318/v1/{traces,metrics}.");
   });
 
   it("keeps separate trace and metric URLs when their base paths differ", () => {
@@ -174,7 +174,7 @@ describe("formatDiagnosticsDescription", () => {
         otlpMetricsUrl: "http://localhost:9000/v1/metrics",
       }),
     ).toBe(
-      "Local trace file. Exporting OTEL traces to http://localhost:4318/v1/traces and metrics to http://localhost:9000/v1/metrics.",
+      "local trace file. exporting OTEL traces to http://localhost:4318/v1/traces and metrics to http://localhost:9000/v1/metrics.",
     );
   });
 
@@ -185,7 +185,7 @@ describe("formatDiagnosticsDescription", () => {
         otlpTracesEnabled: false,
         otlpMetricsEnabled: false,
       }),
-    ).toBe("Local trace file.");
+    ).toBe("local trace file.");
   });
 });
 
@@ -272,12 +272,12 @@ describe("getChangedBrowserSettingLabels", () => {
         browserAutoShowFloatingPreview: !DEFAULT_UNIFIED_SETTINGS.browserAutoShowFloatingPreview,
       }),
     ).toEqual([
-      "Browser viewport",
-      "Browser zoom",
-      "Browser appearance",
-      "Recording frame rate",
-      "Open links in",
-      "Floating preview",
+      "browser viewport",
+      "browser zoom",
+      "browser appearance",
+      "recording frame rate",
+      "open links in",
+      "floating preview",
     ]);
   });
 });

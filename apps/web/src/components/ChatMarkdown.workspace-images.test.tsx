@@ -149,7 +149,7 @@ describe("ChatMarkdown workspace images", () => {
       4,
     );
     expect(html.match(/max-w-\[min\(100%,30rem\)\]/g)).toHaveLength(4);
-    expect(html).not.toContain("Image unavailable");
+    expect(html).not.toContain("image unavailable");
   });
 
   it("loads a POSIX absolute path and file URI through a signed asset URL", () => {
@@ -168,7 +168,7 @@ describe("ChatMarkdown workspace images", () => {
       { _tag: "media-file", threadId: threadRef.threadId, path: "/tmp/embed-test/2.png" },
       { _tag: "media-file", threadId: threadRef.threadId, path: "/tmp/embed-test/5.png" },
     ]);
-    expect(html).not.toContain("Image unavailable");
+    expect(html).not.toContain("image unavailable");
   });
 
   it("normalizes a drive-absolute src in raw image HTML", () => {
@@ -366,7 +366,7 @@ describe("ChatMarkdown workspace images", () => {
     expect(loadingUrl).not.toContain("animate-pulse");
     expect(frameClassName(loadingBytes)).toEqual(loadingUrl);
     expect(frameClassName(failure)).toEqual(loadingUrl);
-    expect(failure).toContain("Image unavailable");
+    expect(failure).toContain("image unavailable");
     // The bytes are requested inside the frame but never paint at an unknown size.
     expect(loadingBytes).toMatch(/<img[^>]*src="https:\/\/signed[^>]*class="invisible/);
     expect(loadingBytes).not.toContain('loading="lazy"');
@@ -375,7 +375,7 @@ describe("ChatMarkdown workspace images", () => {
   it("gives a standalone remote image the same frame instead of a bare tag", () => {
     const html = render("![remote](https://example.com/shot.png)");
 
-    expect(html).toContain('aria-label="Loading image"');
+    expect(html).toContain('aria-label="loading image"');
     expect(html).toContain("aspect-video");
   });
 
@@ -385,7 +385,7 @@ describe("ChatMarkdown workspace images", () => {
     );
 
     expect(testState.resources).toEqual([]);
-    expect(html).toContain("Image unavailable");
+    expect(html).toContain("image unavailable");
     expect(html).not.toContain("file://");
   });
 
@@ -393,7 +393,7 @@ describe("ChatMarkdown workspace images", () => {
     const html = render("![unsupported](content://media/image/1)");
 
     expect(testState.resources).toEqual([]);
-    expect(html).toContain("Image unavailable");
+    expect(html).toContain("image unavailable");
     expect(html).not.toContain("content://");
   });
 
@@ -403,6 +403,6 @@ describe("ChatMarkdown workspace images", () => {
     expect(testState.resources).toEqual([]);
     expect(html).toContain('src="https://example.com/image.png"');
     expect(html).toContain("max-w-[min(100%,30rem)]");
-    expect(html).not.toContain("Image unavailable");
+    expect(html).not.toContain("image unavailable");
   });
 });

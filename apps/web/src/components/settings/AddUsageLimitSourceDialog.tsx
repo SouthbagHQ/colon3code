@@ -92,10 +92,10 @@ export function AddUsageLimitSourceDialog({
     >
       <DialogPopup className="max-w-md">
         <DialogHeader>
-          <DialogTitle>Add a CLIProxyAPI hub</DialogTitle>
+          <DialogTitle>add a CLIProxyAPI hub</DialogTitle>
           <DialogDescription>
-            Show the quota of every account the hub pools, next to the providers on{" "}
-            {environmentLabel}. The key stays on that server.
+            show the quota of every account the hub pools, next to the providers on{" "}
+            {environmentLabel}. the key stays on that server.
           </DialogDescription>
         </DialogHeader>
         <DialogPanel>
@@ -107,7 +107,7 @@ export function AddUsageLimitSourceDialog({
             }}
           >
             <div className="grid gap-1.5">
-              <Label htmlFor="usage-source-url">Hub URL</Label>
+              <Label htmlFor="usage-source-url">hub URL</Label>
               <Input
                 id="usage-source-url"
                 placeholder="https://hub.example.ts.net:8318"
@@ -117,7 +117,7 @@ export function AddUsageLimitSourceDialog({
               />
             </div>
             <div className="grid gap-1.5">
-              <Label htmlFor="usage-source-key">Management key</Label>
+              <Label htmlFor="usage-source-key">management key</Label>
               <Input
                 id="usage-source-key"
                 type="password"
@@ -127,10 +127,10 @@ export function AddUsageLimitSourceDialog({
               />
             </div>
             <div className="grid gap-1.5">
-              <Label htmlFor="usage-source-label">Label (optional)</Label>
+              <Label htmlFor="usage-source-label">label (optional)</Label>
               <Input
                 id="usage-source-label"
-                placeholder="Defaults to the hub's host name"
+                placeholder="defaults to the hub's host name"
                 value={label}
                 onChange={(event) => setLabel(event.target.value)}
               />
@@ -145,10 +145,10 @@ export function AddUsageLimitSourceDialog({
               onOpenChange(false);
             }}
           >
-            Cancel
+            cancel
           </Button>
           <Button onClick={save} disabled={!canSave}>
-            Add hub
+            add hub
           </Button>
         </DialogFooter>
       </DialogPopup>

@@ -44,7 +44,7 @@ describe("AddProviderInstanceDialog environment routing", () => {
     AddProviderInstanceDialog({
       open: true,
       environmentId: remoteEnvironmentId,
-      environmentLabel: "Remote device",
+      environmentLabel: "remote device",
       onOpenChange: vi.fn(),
     });
 

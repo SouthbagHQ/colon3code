@@ -123,7 +123,7 @@ describe("project action editor save lifecycle", () => {
     expect(renderer!.root.findByType("fieldset").props.disabled).toBe(true);
     const cancel = renderer!.root
       .findAllByType("button")
-      .find((button) => button.children.includes("Cancel"))!;
+      .find((button) => button.children.includes("cancel"))!;
     expect(cancel.props.disabled).not.toBe(true);
 
     await act(async () => {
@@ -228,7 +228,7 @@ describe("project action editor save lifecycle", () => {
       if (exit === "cancel") {
         renderer!.root
           .findAllByType("button")
-          .find((button) => button.children.includes("Cancel"))!
+          .find((button) => button.children.includes("cancel"))!
           .props.onClick();
       } else {
         renderer!.unmount();

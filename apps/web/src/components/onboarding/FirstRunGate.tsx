@@ -213,7 +213,7 @@ function FirstRunRecovery({
         </h1>
         <p className="mt-2 text-sm text-muted-foreground">
           {settingsReadFailed
-            ? "Your saved settings could not be loaded."
+            ? "your saved settings could not be loaded."
             : ":3 Code couldn't confirm this workspace yet."}
         </p>
         <Button
@@ -230,7 +230,7 @@ function FirstRunRecovery({
           }}
         >
           <RefreshIcon refreshing={retrying} />
-          {settingsReadFailed ? "Retry" : "Reload"}
+          {settingsReadFailed ? "retry" : "reload"}
         </Button>
       </div>
     </main>

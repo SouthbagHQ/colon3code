@@ -62,7 +62,7 @@ describe("ProviderModelPicker", () => {
     });
     expect(markup).toContain("Mixed values");
     expect(markup).not.toContain("GPT 5");
-    expect(markup).not.toContain("Unavailable");
+    expect(markup).not.toContain("unavailable");
   });
 
   it.each(["", ANTIGRAVITY_DEFAULT_MODEL])(
@@ -75,7 +75,7 @@ describe("ProviderModelPicker", () => {
         options: [],
       });
 
-      expect(markup).toContain("Choose model");
+      expect(markup).toContain("choose model");
       expect(markup).not.toContain(ANTIGRAVITY_DEFAULT_MODEL);
     },
   );

@@ -81,13 +81,13 @@ export function agentControlledBrowserCloseConfirmation(
   if (activeBrowserCount === 0) return null;
   if (activeBrowserCount === 1) {
     return [
-      "Close browser while the agent is using it?",
-      "The agent is actively controlling this browser. Closing it may interrupt the current browser action.",
+      "close browser while the agent is using it?",
+      "the agent is actively controlling this browser. closing it may interrupt the current browser action.",
     ].join("\n");
   }
   return [
-    `Close ${activeBrowserCount} browsers while the agent is using them?`,
-    "The agent is actively controlling these browsers. Closing them may interrupt the current browser actions.",
+    `close ${activeBrowserCount} browsers while the agent is using them?`,
+    "the agent is actively controlling these browsers. closing them may interrupt the current browser actions.",
   ].join("\n");
 }
 
@@ -531,7 +531,7 @@ export function buildLocalDraftThread(
     id: threadId,
     environmentId: draftThread.environmentId,
     projectId: draftThread.projectId,
-    title: "New thread",
+    title: "new thread",
     modelSelection: fallbackModelSelection,
     runtimeMode: draftThread.runtimeMode,
     interactionMode: draftThread.interactionMode,
@@ -675,18 +675,18 @@ export function getAntigravitySendBlockReason(
 ): string | null {
   if (provider?.driver !== "antigravity") return null;
   if (!provider.installed) {
-    return "Install Antigravity in provider settings before sending.";
+    return "install Antigravity in provider settings before sending.";
   }
   if (provider.auth.status === "unauthenticated") {
-    return "Sign in to Antigravity in provider settings before sending.";
+    return "sign in to Antigravity in provider settings before sending.";
   }
   const slug = model.trim();
-  if (slug.length === 0) return "Choose an Antigravity model before sending.";
+  if (slug.length === 0) return "choose an Antigravity model before sending.";
   // A restart clears the account status and catalog. Session startup checks
   // saved credentials and validates the model before sending the prompt.
   if (provider.auth.status === "unknown") return null;
   if (provider.models.length === 0) {
-    return "Refresh Antigravity models in provider settings before sending.";
+    return "refresh Antigravity models in provider settings before sending.";
   }
   // A saved model that left the catalog is kept in the picker as unavailable
   // so the user sees what the thread used. The server rejects it at turn
@@ -697,7 +697,7 @@ export function getAntigravitySendBlockReason(
     slug !== ANTIGRAVITY_DEFAULT_MODEL &&
     !provider.models.some((entry) => entry.slug === slug || entry.aliases?.includes(slug))
   ) {
-    return "That Antigravity model is no longer available. Choose another model.";
+    return "that Antigravity model is no longer available. choose another model.";
   }
   return null;
 }
@@ -967,12 +967,12 @@ export function buildExpiredTerminalContextToastCopy(
   if (variant === "empty") {
     return {
       title: `${noun} won't be sent 3:`,
-      description: "Remove it or re-add it to include terminal output.",
+      description: "remove it or re-add it to include terminal output.",
     };
   }
   return {
     title: `${noun} omitted from message 3:`,
-    description: "Re-add it if you want that terminal output included.",
+    description: "re-add it if you want that terminal output included.",
   };
 }
 
@@ -1145,7 +1145,7 @@ export function getStartedThreadModelChangeBlockReason(input: {
   }
   return {
     title: "start a new chat to change models 3:",
-    description: "This provider does not allow switching models after a conversation has started.",
+    description: "this provider does not allow switching models after a conversation has started.",
   };
 }
 

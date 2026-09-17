@@ -344,7 +344,7 @@ export function UsageProviderChart({
             viewBox={`0 0 ${VIEW_WIDTH} ${VIEW_HEIGHT}`}
             preserveAspectRatio="none"
             role="img"
-            aria-label={`${resolution === "hour" ? "Hourly" : "Daily"} ${metric === "tokens" ? "processed tokens" : "cost"} by provider`}
+            aria-label={`${resolution === "hour" ? "hourly" : "daily"} ${metric === "tokens" ? "processed tokens" : "cost"} by provider`}
           >
             {ticks.map((tick) => {
               const y = toY(tick);
@@ -424,7 +424,7 @@ export function UsageProviderChart({
                 );
               })}
               <div className="mt-1 flex items-center justify-between gap-3 border-t border-border pt-1">
-                <span className="text-muted-foreground">Total</span>
+                <span className="text-muted-foreground">total</span>
                 <span className="text-foreground tabular-nums">
                   {format(hoveredColumn?.total ?? 0)}
                 </span>

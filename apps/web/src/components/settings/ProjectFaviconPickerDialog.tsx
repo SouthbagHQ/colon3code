@@ -20,7 +20,7 @@ import { toastManager } from "../ui/toast";
 
 function emptyMessage(query: string, error: string | null, isPending: boolean): string {
   if (error) return error;
-  if (isPending) return query.trim() ? "Searching project files…" : "Indexing project files…";
+  if (isPending) return query.trim() ? "searching project files…" : "indexing project files…";
   return query.trim() ? "no matching image files" : "no image files found";
 }
 export function canPickExternalProjectFavicon(cwd: string, platform: string): boolean {
@@ -70,15 +70,15 @@ export function ProjectFaviconPickerDialog(props: {
     <CommandDialog open={props.open} onOpenChange={props.onOpenChange}>
       {props.open ? (
         <CommandDialogPopup
-          aria-label="Choose project icon"
+          aria-label="choose project icon"
           className="overflow-hidden p-0"
           onBackdropPointerDown={() => props.onOpenChange(false)}
         >
           <CommandPaletteContent
-            aria-label="Choose project icon"
+            aria-label="choose project icon"
             autoHighlight="always"
-            escapeLabel="Close"
-            footerActionLabel="Select icon"
+            escapeLabel="close"
+            footerActionLabel="select icon"
             footerTrailing={
               pickExternal ? (
                 <CommandFooterAction
@@ -96,17 +96,17 @@ export function ProjectFaviconPickerDialog(props: {
                           type: "error",
                           title: "could not open image picker 3:",
                           description:
-                            error instanceof Error ? error.message : "An error occurred.",
+                            error instanceof Error ? error.message : "an error occurred.",
                         });
                       })
                       .finally(() => setIsPickingExternal(false));
                   }}
                 >
-                  {`Open in ${fileManagerName}`}
+                  {`open in ${fileManagerName}`}
                 </CommandFooterAction>
               ) : null
             }
-            inputProps={{ placeholder: "Search image files…" }}
+            inputProps={{ placeholder: "search image files…" }}
             mode="none"
             onItemHighlighted={(value) => {
               setHighlightedItemValue(typeof value === "string" ? value : null);

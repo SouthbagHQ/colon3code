@@ -199,33 +199,33 @@ it("acknowledges an unchanged recheck while GNOME still needs a sign-out", () =>
     ...gnome,
     gnomeExtension: { status: "restart-required" as const, message: "Sign out" },
   };
-  expect(captureSetupCheckMessage(state)).toBe("Still waiting for you to sign out and back in.");
+  expect(captureSetupCheckMessage(state)).toBe("still waiting for you to sign out and back in.");
   expect(captureSetupAccessReady(state)).toBe(false);
 });
 
 it("only confirms capture access when the rechecked extension is running and reachable", () => {
-  expect(captureSetupCheckMessage(gnome)).toBe("Ready. Continue to choose your shortcut.");
+  expect(captureSetupCheckMessage(gnome)).toBe("ready. continue to choose your shortcut.");
   expect(captureSetupCheckMessage({ ...gnome, linuxBackend: "picker" })).toBe(
-    "Not ready yet. Finish the step above.",
+    "not ready yet. finish the step above.",
   );
   expect(
     captureSetupCheckMessage({
       ...gnome,
       gnomeExtension: { status: "disabled", message: "Enable it" },
     }),
-  ).toBe("Not ready yet. Finish the step above.");
+  ).toBe("not ready yet. finish the step above.");
 });
 
 it("does not report a successful check when capture support could not be read", () => {
   expect(captureSetupCheckMessage({ ...gnome, message: "Desktop disconnected" })).toContain(
-    "Still unable to check access",
+    "still unable to check access",
   );
   expect(
     captureSetupCheckMessage({
       ...gnome,
       gnomeExtension: { status: "error", message: "Could not read extension state" },
     }),
-  ).toContain("Still unable to check access");
+  ).toContain("still unable to check access");
 });
 
 it("uses a capable portal without requiring the optional GNOME extension", () => {
@@ -242,7 +242,7 @@ it("uses a capable portal without requiring the optional GNOME extension", () =>
       ...state,
       gnomeExtension: { status: "error", message: "Optional extension failed" },
     }),
-  ).toBe("Ready. Continue to choose your shortcut.");
+  ).toBe("ready. continue to choose your shortcut.");
 });
 
 it("lets Niri setup finish with configuration instructions without claiming the binding was verified", () => {
@@ -337,5 +337,5 @@ it.each(["kde", "hyprland"] as const)("ignores errors from inactive helpers on %
     hyprlandHelper: { status: backend === "hyprland" ? "ready" : "error", message: "Hyprland" },
   };
   expect(captureSetupAccessReady(state)).toBe(true);
-  expect(captureSetupCheckMessage(state)).toBe("Ready. Continue to choose your shortcut.");
+  expect(captureSetupCheckMessage(state)).toBe("ready. continue to choose your shortcut.");
 });

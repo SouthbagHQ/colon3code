@@ -335,7 +335,7 @@ describe("composerContextRecords", () => {
     expect(isPullRequestSummaryContext(summary)).toBe(true);
     expect(reviewCommentContextLabel(summary)).toBe("#42");
     expect(pullRequestContextDisplayState(summary)).toBe("open");
-    expect(pullRequestContextKindLabel(summary)).toBe("Open pull request");
+    expect(pullRequestContextKindLabel(summary)).toBe("open pull request");
     expect(
       pullRequestContextDisplayState({
         ...summary,

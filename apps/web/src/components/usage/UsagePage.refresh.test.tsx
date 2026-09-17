@@ -145,7 +145,7 @@ it.each([0, 1])(
     vi.mocked(Date.now).mockReturnValue(Date.parse("2026-09-11T12:30:00Z"));
     await act(async () => {
       renderer.root
-        .findAllByProps({ "aria-label": "Refresh limits" })
+        .findAllByProps({ "aria-label": "refresh limits" })
         .filter((node) => node.type === "button")
         .at(buttonIndex)!
         .props.onClick();
@@ -166,7 +166,7 @@ it("uses the current time when returning to limits from tokens", async () => {
   });
   const selectMetric = (metric: string) => {
     renderer.root
-      .findAll((node) => node.type === "div" && node.props["aria-label"] === "Usage metric")[0]!
+      .findAll((node) => node.type === "div" && node.props["aria-label"] === "usage metric")[0]!
       .props.onValueChange([metric]);
   };
   await act(() => selectMetric("tokens"));

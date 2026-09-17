@@ -39,7 +39,7 @@ describe("shouldShowResourceMonitorRetry", () => {
     expect(
       shouldShowResourceMonitorRetry({
         nativeStatus: null,
-        error: "Resource monitor is unavailable.",
+        error: "resource monitor is unavailable.",
       }),
     ).toBe(true);
   });

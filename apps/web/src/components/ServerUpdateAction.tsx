@@ -21,9 +21,9 @@ import { Tooltip, TooltipPopup, TooltipTrigger } from "./ui/tooltip";
 // folds it into the download phase; everything after the handoff is the
 // restart the user is actually waiting through.
 const UPDATE_STAGE_LABELS: Record<ServerUpdateStage, string> = {
-  downloading: "Downloading…",
-  installing: "Downloading…",
-  resuming: "Restarting…",
+  downloading: "downloading…",
+  installing: "downloading…",
+  resuming: "restarting…",
 };
 const pendingUpdateEnvironmentIds = new Set<EnvironmentId>();
 
@@ -76,8 +76,8 @@ function useServerUpdate() {
         title: `${serverLabel} updated :3`,
         description:
           selfUpdate === "desktop-managed"
-            ? `Desktop app relaunched on ${result.value.targetVersion}.`
-            : `Reconnected on t3@${result.value.targetVersion}.`,
+            ? `desktop app relaunched on ${result.value.targetVersion}.`
+            : `reconnected on t3@${result.value.targetVersion}.`,
       });
     } catch (error) {
       toastManager.add({
@@ -94,7 +94,7 @@ function useServerUpdate() {
 /** Updates eligible machines independently; manual paths remain in the machine list. */
 export function ServerUpdatesAction({
   targets,
-  label = "Update all",
+  label = "update all",
   variant = "outline",
   size = "xs",
   className,
@@ -121,7 +121,7 @@ export function ServerUpdatesAction({
       if (desktopTargets.length > 0) {
         const confirmed =
           (await requestConfirmDialog(
-            `Update the :3 Code desktop apps on ${desktopTargets.map((target) => target.serverLabel).join(", ")}? They will close and relaunch on those machines.`,
+            `update the :3 Code desktop apps on ${desktopTargets.map((target) => target.serverLabel).join(", ")}? they will close and relaunch on those machines.`,
           )) ?? true;
         if (!confirmed) return;
       }
@@ -193,7 +193,7 @@ export function ServerUpdateAction({
   desktopAppUpdate = false,
   threadContinuation = false,
   targetVersion,
-  label = "Update",
+  label = "update",
   variant = "outline",
   size = "xs",
   className,
@@ -211,7 +211,7 @@ export function ServerUpdateAction({
       toastManager.add({
         type: "success",
         title: "update command copied :3",
-        description: `Run \`${command}\` on ${serverLabel} to update it.`,
+        description: `run \`${command}\` on ${serverLabel} to update it.`,
       });
     },
     onError: (error) => {
@@ -233,7 +233,7 @@ export function ServerUpdateAction({
       // remote machine installs without asking anyone there.
       const confirmed =
         (await requestConfirmDialog(
-          `Update the :3 Code desktop app that runs the ${serverLabel}? It will close and relaunch on that machine.`,
+          `update the :3 Code desktop app that runs the ${serverLabel}? it will close and relaunch on that machine.`,
         )) ?? true;
       if (!confirmed) {
         return;
@@ -253,13 +253,13 @@ export function ServerUpdateAction({
   if (selfUpdate === "desktop-managed" && !desktopAppUpdate) {
     return (
       <span className="text-muted-foreground text-xs">
-        Update the desktop app on that machine to update this server.
+        update the desktop app on that machine to update this server.
       </span>
     );
   }
 
   const manualCommand = selfUpdate === null ? manualServerUpdateCommand(targetVersion) : null;
-  const actionLabel = manualCommand !== null ? "Copy update command" : label;
+  const actionLabel = manualCommand !== null ? "copy update command" : label;
   const onClick =
     manualCommand !== null
       ? () => copyToClipboard(manualCommand, { command: manualCommand })

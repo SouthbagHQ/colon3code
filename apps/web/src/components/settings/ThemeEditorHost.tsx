@@ -54,7 +54,7 @@ export function ThemeEditorHost() {
             stackedThreadToast({
               type: "error",
               title: "could not save your theme 3:",
-              description: "Browser storage is unavailable, so the change was not kept.",
+              description: "browser storage is unavailable, so the change was not kept.",
             }),
           );
           return false;
@@ -63,7 +63,7 @@ export function ThemeEditorHost() {
           stackedThreadToast({
             type: "success",
             title: `${savedTheme.label} updated :3`,
-            description: `Its ${mergedAppearance} palette was added.`,
+            description: `its ${mergedAppearance} palette was added.`,
           }),
         );
         return true;
@@ -81,7 +81,7 @@ export function ThemeEditorHost() {
           stackedThreadToast({
             type: "success",
             title: `${savedTheme.label} saved :3`,
-            description: wasActive ? "Your changes are now active." : "Your changes are saved.",
+            description: wasActive ? "your changes are now active." : "your changes are saved.",
           }),
         );
         return true;
@@ -92,7 +92,7 @@ export function ThemeEditorHost() {
           stackedThreadToast({
             type: "error",
             title: "could not save your theme 3:",
-            description: "Browser storage is unavailable, so the change was not kept.",
+            description: "browser storage is unavailable, so the change was not kept.",
           }),
         );
         return false;
@@ -101,7 +101,7 @@ export function ThemeEditorHost() {
         stackedThreadToast({
           type: "success",
           title: `${savedTheme.label} created :3`,
-          description: "It’s now active.",
+          description: "it’s now active.",
         }),
       );
       return true;

@@ -1418,7 +1418,7 @@ type LocalThreadErrorEntry = {
 };
 
 function chatActionErrorMessage(error: unknown): string {
-  return error instanceof Error ? error.message : "An error occurred.";
+  return error instanceof Error ? error.message : "an error occurred.";
 }
 
 const ENVIRONMENT_UNAVAILABLE_SEND_TOAST_TRAIL_SIZE = 3;
@@ -1646,7 +1646,7 @@ export default function ChatView(props: ChatViewProps) {
           type: "warning",
           title: "the composer is not ready 3:",
           description:
-            "Try citing the selection after the connection or pending input is resolved.",
+            "try citing the selection after the connection or pending input is resolved.",
         });
       }
       return inserted;
@@ -2130,7 +2130,7 @@ export default function ChatView(props: ChatViewProps) {
           stackedThreadToast({
             type: "error",
             title,
-            description: error instanceof Error ? error.message : "An error occurred.",
+            description: error instanceof Error ? error.message : "an error occurred.",
           }),
         );
       }
@@ -2141,10 +2141,10 @@ export default function ChatView(props: ChatViewProps) {
     activeProjectClone === null
       ? null
       : activeProjectClone.phase === "running"
-        ? "Cloning repository"
+        ? "cloning repository"
         : activeProjectClone.phase === "done"
           ? null
-          : "Repository not cloned";
+          : "repository not cloned";
   const projectCloneBannerItem = useMemo<ComposerBannerStackItem | null>(() => {
     if (!activeProjectClone || !activeProjectRef || activeProjectClone.phase === "done") {
       return null;
@@ -2157,7 +2157,7 @@ export default function ChatView(props: ChatViewProps) {
         variant: "info",
         priority: "activity",
         icon: <DownloadIcon />,
-        title: `Cloning ${name}`,
+        title: `cloning ${name}`,
         description: projectCloneProgressSummary(activeProjectClone),
         actions: (
           <Button
@@ -2169,7 +2169,7 @@ export default function ChatView(props: ChatViewProps) {
               )
             }
           >
-            Cancel
+            cancel
           </Button>
         ),
       };
@@ -2179,8 +2179,8 @@ export default function ChatView(props: ChatViewProps) {
       id: `project-clone:${projectId}`,
       variant: cancelled ? "warning" : "error",
       icon: <DownloadIcon />,
-      title: cancelled ? `Cancelled cloning ${name}` : `failed to clone ${name} 3:`,
-      description: cancelled ? "Retry to bring in the repository." : activeProjectClone.error,
+      title: cancelled ? `cancelled cloning ${name}` : `failed to clone ${name} 3:`,
+      description: cancelled ? "retry to bring in the repository." : activeProjectClone.error,
       actions: (
         <>
           <Button
@@ -2188,7 +2188,7 @@ export default function ChatView(props: ChatViewProps) {
             variant="ghost"
             onClick={() => void removeClonedProject({ environmentId, projectId })}
           >
-            Remove project
+            remove project
           </Button>
           <Button
             size="xs"
@@ -2199,7 +2199,7 @@ export default function ChatView(props: ChatViewProps) {
               )
             }
           >
-            Retry
+            retry
           </Button>
         </>
       ),
@@ -2347,7 +2347,7 @@ export default function ChatView(props: ChatViewProps) {
           stackedThreadToast({
             type: "error",
             title: "could not reconnect environment 3:",
-            description: error instanceof Error ? error.message : "Failed to reconnect.",
+            description: error instanceof Error ? error.message : "failed to reconnect.",
           }),
         );
       }
@@ -2375,7 +2375,7 @@ export default function ChatView(props: ChatViewProps) {
             stackedThreadToast({
               type: "error",
               title: "could not disconnect server 3:",
-              description: error instanceof Error ? error.message : "Failed to disconnect.",
+              description: error instanceof Error ? error.message : "failed to disconnect.",
             }),
           );
         }
@@ -2631,12 +2631,12 @@ export default function ChatView(props: ChatViewProps) {
           size="xs"
           variant="ghost"
           disabled={disconnectingEnvironment}
-          title="Hide this server's threads. Switch it on again in Connections."
+          title="hide this server's threads. switch it on again in connections."
           onClick={() =>
             void handleDisconnectActiveEnvironment(activeEnvironmentUnavailableState.environmentId)
           }
         >
-          Disconnect server
+          disconnect server
         </Button>
       ) : undefined;
     const environmentReconnecting =
@@ -2670,8 +2670,8 @@ export default function ChatView(props: ChatViewProps) {
               aria-hidden="true"
             />
           ),
-          title: `${unavailableConnection.phase === "connecting" ? "Connecting" : "Reconnecting"} to ${activeEnvironmentUnavailableState.label}`,
-          description: "Finishing an update",
+          title: `${unavailableConnection.phase === "connecting" ? "connecting" : "reconnecting"} to ${activeEnvironmentUnavailableState.label}`,
+          description: "finishing an update",
           actions: disconnectAction,
         });
       } else {
@@ -2692,7 +2692,7 @@ export default function ChatView(props: ChatViewProps) {
                     )
                   }
                 >
-                  Reconnect
+                  reconnect
                 </Button>
               ) : null}
               {disconnectAction}
@@ -2731,7 +2731,7 @@ export default function ChatView(props: ChatViewProps) {
                     type="button"
                     className="block max-w-full cursor-help truncate rounded-sm text-left"
                   >
-                    Server update available
+                    server update available
                   </button>
                 }
               />
@@ -2741,7 +2741,7 @@ export default function ChatView(props: ChatViewProps) {
               </TooltipPopup>
             </Tooltip>
           ) : (
-            "Server update available"
+            "server update available"
           ),
         description:
           !updateInProgress &&
@@ -2762,14 +2762,14 @@ export default function ChatView(props: ChatViewProps) {
             desktopAppUpdate={versionMismatchDesktopAppUpdate}
             threadContinuation={versionMismatchThreadContinuation}
             targetVersion={versionMismatch.clientVersion}
-            label={updateFailed ? "Retry" : "Update"}
+            label={updateFailed ? "retry" : "update"}
             variant="ghost"
           />
         ),
         ...(updateInProgress || (!updateFailed && !versionMismatchDismissKey)
           ? {}
           : {
-              dismissLabel: "Dismiss update notice",
+              dismissLabel: "dismiss update notice",
               onDismiss: () => {
                 if (updateFailed) {
                   dismissServerUpdateFailure(serverUpdateState);
@@ -3126,7 +3126,7 @@ export default function ChatView(props: ChatViewProps) {
       return true;
     }
     setUsageLimitsPanel(null);
-    toastManager.add({ type: "info", title: "Usage limits are unavailable for this provider" });
+    toastManager.add({ type: "info", title: "usage limits are unavailable for this provider" });
     return false;
   }, [
     activeProviderInstanceId,
@@ -3300,7 +3300,7 @@ export default function ChatView(props: ChatViewProps) {
         toastManager.add({
           type: "error",
           title: "could not download " + attachment.name + " 3:",
-          description: error instanceof Error ? error.message : "The attachment is unavailable.",
+          description: error instanceof Error ? error.message : "the attachment is unavailable.",
         });
       }
     },
@@ -3816,7 +3816,7 @@ export default function ChatView(props: ChatViewProps) {
         id: "load-balancing-attachments",
         title: "keep attachments on this machine 3:",
         description:
-          "Remove attachments before choosing automatic routing, then attach them on the selected machine.",
+          "remove attachments before choosing automatic routing, then attach them on the selected machine.",
       });
       return;
     }
@@ -3839,12 +3839,12 @@ export default function ChatView(props: ChatViewProps) {
   ]);
   const autoEnvironmentLabel = automaticEnvironment
     ? draftThread?.loadBalancedEnvironmentId
-      ? "Auto balance"
+      ? "auto balance"
       : loadBalancing.pending
-        ? "Checking machines…"
+        ? "checking machines…"
         : loadBalancing.failed
-          ? "Auto balance unavailable"
-          : "Auto balance"
+          ? "auto balance unavailable"
+          : "auto balance"
     : undefined;
 
   // Handle environment change for draft threads.  When the user picks a
@@ -3962,7 +3962,7 @@ export default function ChatView(props: ChatViewProps) {
         toastManager.add({
           type: "error",
           title: "unable to add to chat 3:",
-          description: "The composer is busy; try again once it is ready.",
+          description: "the composer is busy; try again once it is ready.",
         });
         return;
       }
@@ -4405,7 +4405,7 @@ export default function ChatView(props: ChatViewProps) {
       if (result._tag === "Success") {
         toastManager.add({
           type: "success",
-          title: `deleted action "${deletedName ?? "Unknown"}" :3`,
+          title: `deleted action "${deletedName ?? "unknown"}" :3`,
         });
       } else if (!isAtomCommandInterrupted(result)) {
         const error = squashAtomCommandFailure(result);
@@ -5094,7 +5094,7 @@ export default function ChatView(props: ChatViewProps) {
         stackedThreadToast({
           type: "error",
           title: "failed to copy path 3:",
-          description: "Clipboard API unavailable.",
+          description: "clipboard API unavailable.",
         }),
       );
       return;
@@ -5113,7 +5113,7 @@ export default function ChatView(props: ChatViewProps) {
           stackedThreadToast({
             type: "error",
             title: "failed to copy path 3:",
-            description: error instanceof Error ? error.message : "An error occurred.",
+            description: error instanceof Error ? error.message : "an error occurred.",
           }),
         );
       },
@@ -5814,7 +5814,7 @@ export default function ChatView(props: ChatViewProps) {
         '[data-chat-composer-main-surface="true"]',
       );
       const button = composerOverlayElement?.parentElement?.querySelector<HTMLElement>(
-        'button[aria-label="Scroll to end"]',
+        'button[aria-label="scroll to end"]',
       );
       const clearance =
         composerOverlayElement && mainSurface && button
@@ -5904,7 +5904,7 @@ export default function ChatView(props: ChatViewProps) {
           stackedThreadToast({
             type: "error",
             title: target.failureTitle,
-            description: error instanceof Error ? error.message : "An error occurred.",
+            description: error instanceof Error ? error.message : "an error occurred.",
           }),
         );
       },
@@ -6000,7 +6000,7 @@ export default function ChatView(props: ChatViewProps) {
           stackedThreadToast({
             type: "error",
             title: "failed to un-settle thread 3:",
-            description: error instanceof Error ? error.message : "An error occurred.",
+            description: error instanceof Error ? error.message : "an error occurred.",
           }),
         );
       }
@@ -6028,7 +6028,7 @@ export default function ChatView(props: ChatViewProps) {
           stackedThreadToast({
             type: "error",
             title: "failed to wake thread 3:",
-            description: error instanceof Error ? error.message : "An error occurred.",
+            description: error instanceof Error ? error.message : "an error occurred.",
           }),
         );
       }
@@ -6191,8 +6191,8 @@ export default function ChatView(props: ChatViewProps) {
       title: working
         ? liveCount > 0
           ? `${liveCount} ${liveCount === 1 ? "agent" : "agents"} working`
-          : "Background work"
-        : "Monitoring",
+          : "background work"
+        : "monitoring",
       actions: (
         <Button
           size="xs"
@@ -6200,7 +6200,7 @@ export default function ChatView(props: ChatViewProps) {
           disabled={isStoppingBackgroundWork}
           onClick={() => void handleStopBackgroundWork()}
         >
-          {isStoppingBackgroundWork ? "Stopping..." : "Stop"}
+          {isStoppingBackgroundWork ? "stopping..." : "stop"}
         </Button>
       ),
     };
@@ -6222,9 +6222,9 @@ export default function ChatView(props: ChatViewProps) {
       id: `thread-woke:${activeThread?.id ?? "unknown"}`,
       variant: "info",
       icon: <AlarmClockIcon />,
-      title: "Thread woke from snooze",
-      description: "Send a message to continue",
-      dismissLabel: "Dismiss Woke notification",
+      title: "thread woke from snooze",
+      description: "send a message to continue",
+      dismissLabel: "dismiss woke notification",
       onDismiss: acknowledgeActiveThreadWoke,
     };
   }, [acknowledgeActiveThreadWoke, activeThread?.id, activeThreadWokeVisible]);
@@ -6237,8 +6237,8 @@ export default function ChatView(props: ChatViewProps) {
       id: `thread-${isSnoozed ? "snoozed" : "settled"}:${activeThread?.id ?? "unknown"}`,
       variant: "info",
       icon: isSnoozed ? <AlarmClockIcon /> : <CheckCircle2Icon />,
-      title: `This thread is ${isSnoozed ? "snoozed" : "settled"}`,
-      description: `Send a message to ${isSnoozed ? "wake" : "unsettle"}`,
+      title: `this thread is ${isSnoozed ? "snoozed" : "settled"}`,
+      description: `send a message to ${isSnoozed ? "wake" : "unsettle"}`,
       actions: (
         <Button
           size="xs"
@@ -6250,11 +6250,11 @@ export default function ChatView(props: ChatViewProps) {
         >
           {isSnoozed
             ? isUnsnoozing
-              ? "Waking..."
-              : "Wake now"
+              ? "waking..."
+              : "wake now"
             : isUnsettling
-              ? "Un-settling..."
-              : "Un-settle"}
+              ? "un-settling..."
+              : "un-settle"}
         </Button>
       ),
     };
@@ -6298,10 +6298,10 @@ export default function ChatView(props: ChatViewProps) {
   const compactDisabled = compactThreadUnavailable;
   const compactDisabledReason = compactDisabled
     ? !activeProject
-      ? "Choose a project before compacting"
+      ? "choose a project before compacting"
       : !manualCompactionProviderAvailable
-        ? "Compaction is unavailable for this provider"
-        : "Compacting is unavailable right now"
+        ? "compaction is unavailable for this provider"
+        : "compacting is unavailable right now"
     : null;
   const resumeCompactionBannerItem = useMemo<ComposerBannerStackItem | null>(() => {
     if (
@@ -6335,14 +6335,14 @@ export default function ChatView(props: ChatViewProps) {
           composerRef.current?.compactContext();
         }}
       >
-        Compact
+        compact
       </Button>
     );
     return {
       id: `resume-compaction:${resumeCompactionKey}`,
       variant: "info",
       icon: <Minimize2Icon />,
-      title: "Resume with less context",
+      title: "resume with less context",
       description: `${formatContextWindowTokens(activeContextWindow.usedTokens)} tokens from earlier`,
       actions: compactDisabledReason ? (
         <Tooltip>
@@ -6352,7 +6352,7 @@ export default function ChatView(props: ChatViewProps) {
       ) : (
         compactAction
       ),
-      dismissLabel: "Keep full history",
+      dismissLabel: "keep full history",
       onDismiss: dismiss,
     };
   }, [
@@ -6438,7 +6438,7 @@ export default function ChatView(props: ChatViewProps) {
                 }
               />
               <TooltipPopup side="top" className="max-w-80">
-                This thread last ran on {localCheckoutBranchMismatch.threadBranch}. Sending will
+                this thread last ran on {localCheckoutBranchMismatch.threadBranch}. sending will
                 continue on {localCheckoutBranchMismatch.currentBranch}.
               </TooltipPopup>
             </Tooltip>
@@ -6451,10 +6451,10 @@ export default function ChatView(props: ChatViewProps) {
             disabled={isRestoringThreadBranch}
             onClick={handleRestoreThreadBranch}
           >
-            {isRestoringThreadBranch ? "Restoring..." : "Restore branch"}
+            {isRestoringThreadBranch ? "restoring..." : "restore branch"}
           </Button>
         ),
-        dismissLabel: "Dismiss branch change notice",
+        dismissLabel: "dismiss branch change notice",
         onDismiss: () => {
           dismissBranchMismatchForSession(activeBranchMismatchKey);
           setBranchMismatchDismissTick((tick) => tick + 1);
@@ -6628,7 +6628,7 @@ export default function ChatView(props: ChatViewProps) {
             stackedThreadToast({
               type: "error",
               title: "failed to settle thread 3:",
-              description: error instanceof Error ? error.message : "An error occurred.",
+              description: error instanceof Error ? error.message : "an error occurred.",
             }),
           );
         });
@@ -6648,7 +6648,7 @@ export default function ChatView(props: ChatViewProps) {
               stackedThreadToast({
                 type: "error",
                 title: pinned ? "failed to unpin thread 3:" : "failed to pin thread 3:",
-                description: error instanceof Error ? error.message : "An error occurred.",
+                description: error instanceof Error ? error.message : "an error occurred.",
               }),
             );
           },
@@ -6909,19 +6909,19 @@ export default function ChatView(props: ChatViewProps) {
       if (!supportsConversationRollback) {
         setThreadError(
           activeThread.id,
-          "This provider does not support reverting conversation history. Start a new thread instead.",
+          "this provider does not support reverting conversation history. start a new thread instead.",
         );
         return;
       }
       if (activeEnvironmentUnavailable && activeEnvironmentUnavailableLabel) {
         setThreadError(
           activeThread.id,
-          `Reconnect ${activeEnvironmentUnavailableLabel} before reverting checkpoints.`,
+          `reconnect ${activeEnvironmentUnavailableLabel} before reverting checkpoints.`,
         );
         return;
       }
       if (phase === "running" || isSendBusy || isConnecting) {
-        setThreadError(activeThread.id, "Interrupt the current turn before reverting checkpoints.");
+        setThreadError(activeThread.id, "interrupt the current turn before reverting checkpoints.");
         return;
       }
       if (restoreFiles === undefined) {
@@ -7150,8 +7150,8 @@ export default function ChatView(props: ChatViewProps) {
       toastManager.add(
         stackedThreadToast({
           type: "info",
-          title: "Some attachments stayed queued",
-          description: `A message holds at most ${PROVIDER_SEND_TURN_MAX_ATTACHMENTS} attachments. Use Send now on the queued row when you want the rest to go.`,
+          title: "some attachments stayed queued",
+          description: `a message holds at most ${PROVIDER_SEND_TURN_MAX_ATTACHMENTS} attachments. use send now on the queued row when you want the rest to go.`,
         }),
       );
     }
@@ -7211,8 +7211,8 @@ export default function ChatView(props: ChatViewProps) {
       toastManager.add(
         stackedThreadToast({
           type: "info",
-          title: "Annotation attached to draft",
-          description: "Sending is unavailable right now. Finish the current action, then send.",
+          title: "annotation attached to draft",
+          description: "sending is unavailable right now. finish the current action, then send.",
         }),
       );
     };
@@ -7236,8 +7236,8 @@ export default function ChatView(props: ChatViewProps) {
           ? "checking machine resources 3:"
           : "choose a machine to continue 3:",
         description: loadBalancing.pending
-          ? "Resource checks are still running. You can choose a machine in the composer."
-          : "no eligible machine has available resources. Choose a machine in the composer to override.",
+          ? "resource checks are still running. you can choose a machine in the composer."
+          : "no eligible machine has available resources. choose a machine in the composer to override.",
       });
       return;
     }
@@ -7249,7 +7249,7 @@ export default function ChatView(props: ChatViewProps) {
         ...stackedThreadToast({
           type: "warning",
           title: "not connected: message not sent 3:",
-          description: "Reconnecting to the environment. Try again once it is connected.",
+          description: "reconnecting to the environment. try again once it is connected.",
         }),
         id: `chat-send-environment-unavailable:${toastSlot}`,
       });
@@ -7353,7 +7353,7 @@ export default function ChatView(props: ChatViewProps) {
           stackedThreadToast({
             type: "warning",
             title: "start a Codex thread first 3:",
-            description: "Send a message before you submit feedback.",
+            description: "send a message before you submit feedback.",
           }),
         );
         return;
@@ -7504,7 +7504,7 @@ export default function ChatView(props: ChatViewProps) {
         stackedThreadToast({
           type: "warning",
           title: "choose a project first 3:",
-          description: "This draft no longer points to an available project.",
+          description: "this draft no longer points to an available project.",
         }),
       );
       return;
@@ -7553,7 +7553,7 @@ export default function ChatView(props: ChatViewProps) {
     const shouldCreateWorktree =
       isFirstMessage && sendEnvMode === "worktree" && !activeThread.worktreePath;
     if (shouldCreateWorktree && !activeThreadBranch) {
-      setThreadError(threadIdForSend, "Select a base branch before sending in New worktree mode.");
+      setThreadError(threadIdForSend, "select a base branch before sending in new worktree mode.");
       return;
     }
 
@@ -7680,7 +7680,7 @@ export default function ChatView(props: ChatViewProps) {
       }
       if (getUploadedAttachments({ environmentId, images: composerAttachmentsSnapshot }) === null) {
         sendInFlightRef.current = false;
-        setThreadError(threadIdForSend, "Retry or remove failed uploads before sending.");
+        setThreadError(threadIdForSend, "retry or remove failed uploads before sending.");
         abortQueuedReplay();
         return;
       }
@@ -7844,17 +7844,17 @@ export default function ChatView(props: ChatViewProps) {
     let titleSeed = assistantCitationsToPlainText(stripInlineContextReferences(trimmed)).trim();
     if (!titleSeed) {
       if (firstComposerImageName) {
-        titleSeed = `Image: ${firstComposerImageName}`;
+        titleSeed = `image: ${firstComposerImageName}`;
       } else if (composerFilesSnapshot[0]) {
-        titleSeed = `File: ${composerFilesSnapshot[0].name}`;
+        titleSeed = `file: ${composerFilesSnapshot[0].name}`;
       } else if (composerTerminalContextsSnapshot.length > 0) {
         titleSeed = formatTerminalContextLabel(composerTerminalContextsSnapshot[0]!);
       } else if (composerReviewCommentsSnapshot.length > 0) {
-        titleSeed = `Review: ${reviewCommentContextLabel(composerReviewCommentsSnapshot[0]!)}`;
+        titleSeed = `review: ${reviewCommentContextLabel(composerReviewCommentsSnapshot[0]!)}`;
       } else if (composerPreviewAnnotationsSnapshot.length > 0) {
         titleSeed = previewAnnotationContextLabel(composerPreviewAnnotationsSnapshot[0]!);
       } else {
-        titleSeed = "New thread";
+        titleSeed = "new thread";
       }
     }
     const title = truncate(titleSeed);
@@ -8041,7 +8041,7 @@ export default function ChatView(props: ChatViewProps) {
                 title: "started in background :3",
                 timeout: 5_000,
                 actionProps: {
-                  children: "Open",
+                  children: "open",
                   onClick: () => {
                     void navigate({
                       to: "/$environmentId/$threadId",
@@ -8146,16 +8146,16 @@ export default function ChatView(props: ChatViewProps) {
         }
         setThreadError(
           threadIdForSend,
-          error instanceof Error ? error.message : "Failed to send message.",
+          error instanceof Error ? error.message : "failed to send message.",
         );
         if (backgroundDraftOpened && draftId) {
           toastManager.add(
             stackedThreadToast({
               type: "error",
               title: "background task failed 3:",
-              description: error instanceof Error ? error.message : "Failed to send message.",
+              description: error instanceof Error ? error.message : "failed to send message.",
               actionProps: {
-                children: "Open draft",
+                children: "open draft",
                 onClick: () => {
                   void navigate({ to: "/draft/$draftId", params: { draftId } });
                 },
@@ -8295,7 +8295,7 @@ export default function ChatView(props: ChatViewProps) {
         if (!uploaded) {
           setThreadError(
             activeThreadId,
-            "Wait for attachments to finish uploading, or remove failed uploads.",
+            "wait for attachments to finish uploading, or remove failed uploads.",
           );
           return;
         }
@@ -8792,7 +8792,7 @@ export default function ChatView(props: ChatViewProps) {
             description:
               error instanceof Error
                 ? error.message
-                : "An error occurred while creating the new thread.",
+                : "an error occurred while creating the new thread.",
           }),
         );
       }
@@ -8830,7 +8830,7 @@ export default function ChatView(props: ChatViewProps) {
         currentProviderInstanceId: activeThread.session?.providerInstanceId ?? null,
         nextModelSelection: { instanceId, model },
       });
-      return reason ? `${reason.description} Start a new thread to use this model.` : null;
+      return reason ? `${reason.description} start a new thread to use this model.` : null;
     },
     [activeThread, providerStatuses],
   );
@@ -9189,7 +9189,7 @@ export default function ChatView(props: ChatViewProps) {
     ) : renderedRightPanelSurface?.kind === "pull-request" && !supportsPullRequests ? (
       <PullRequestsUnavailableState
         title="pull requests unavailable 3:"
-        error="Update this environment's :3 Code server to browse pull requests."
+        error="update this environment's :3 Code server to browse pull requests."
       />
     ) : renderedRightPanelSurface?.kind === "pull-request" ? (
       // No onClose: the surface tab's own X owns closing here, and a second X in the header
@@ -9416,7 +9416,7 @@ export default function ChatView(props: ChatViewProps) {
                   className="flex items-center gap-2 rounded-full border border-primary/25 bg-background/95 px-4 py-2.5 text-sm font-medium text-foreground shadow-lg"
                 >
                   <PaperclipIcon className="size-4 text-primary" aria-hidden="true" />
-                  Drop files to attach
+                  drop files to attach
                 </div>
               </div>
             ) : null}
@@ -9530,7 +9530,7 @@ export default function ChatView(props: ChatViewProps) {
                   style={{ bottom: scrollToEndClearance + 4 }}
                 >
                   <Button
-                    aria-label="Scroll to end"
+                    aria-label="scroll to end"
                     onPointerDown={(event) => event.preventDefault()}
                     onClick={() => {
                       composerRef.current?.restoreAfterTimelineReachedEnd();
@@ -9541,7 +9541,7 @@ export default function ChatView(props: ChatViewProps) {
                     variant="glass"
                   >
                     <ChevronDownIcon className="size-3.5" />
-                    Scroll to end
+                    scroll to end
                   </Button>
                 </div>
               )}
@@ -9623,13 +9623,13 @@ export default function ChatView(props: ChatViewProps) {
                             isRevertingCheckpoint={isRevertingCheckpoint}
                             sendDisabledReason={
                               isRevertingCheckpoint
-                                ? "Rewinding conversation"
+                                ? "rewinding conversation"
                                 : feedbackUploading
-                                  ? "Sending feedback"
+                                  ? "sending feedback"
                                   : threadDetailLoading
-                                    ? "Messages loading"
+                                    ? "messages loading"
                                     : worktreeSetupBlocksSend
-                                      ? "Preparing worktree"
+                                      ? "preparing worktree"
                                       : projectCloneSendBlockReason
                             }
                             isPreparingWorktree={isPreparingWorktree}
@@ -9799,19 +9799,19 @@ export default function ChatView(props: ChatViewProps) {
               <AlertDialogPopup>
                 <AlertDialogHeader>
                   <AlertDialogTitle>
-                    Switch to{" "}
+                    switch to{" "}
                     <code className="font-medium">
                       {localCheckoutBranchMismatch?.threadBranch ?? ""}
                     </code>
                     ?
                   </AlertDialogTitle>
                   <AlertDialogDescription>
-                    You have uncommitted changes. They'll carry over to the other branch, or block
+                    you have uncommitted changes. they'll carry over to the other branch, or block
                     the switch if they conflict.
                   </AlertDialogDescription>
                 </AlertDialogHeader>
                 <AlertDialogFooter>
-                  <AlertDialogClose render={<Button variant="outline" />}>Cancel</AlertDialogClose>
+                  <AlertDialogClose render={<Button variant="outline" />}>cancel</AlertDialogClose>
                   <Button
                     variant="default"
                     onClick={() => {
@@ -9819,7 +9819,7 @@ export default function ChatView(props: ChatViewProps) {
                       void handleSwitchCheckoutToThread();
                     }}
                   >
-                    Switch branch
+                    switch branch
                   </Button>
                 </AlertDialogFooter>
               </AlertDialogPopup>
@@ -9980,14 +9980,14 @@ export default function ChatView(props: ChatViewProps) {
       >
         <AlertDialogPopup>
           <AlertDialogHeader>
-            <AlertDialogTitle>Edit from here?</AlertDialogTitle>
+            <AlertDialogTitle>edit from here?</AlertDialogTitle>
             <AlertDialogDescription>
-              Rewind chat to before this message. Your prompt and attachments return to the
+              rewind chat to before this message. your prompt and attachments return to the
               composer.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogClose render={<Button variant="outline" />}>Cancel</AlertDialogClose>
+            <AlertDialogClose render={<Button variant="outline" />}>cancel</AlertDialogClose>
             <Button
               variant="destructive"
               onClick={() => {
@@ -9996,7 +9996,7 @@ export default function ChatView(props: ChatViewProps) {
                 void onRevertToTurnCount(pendingRevert.turnCount, pendingRevert.messageId, true);
               }}
             >
-              Revert files too
+              revert files too
             </Button>
             <Button
               onClick={() => {
@@ -10005,7 +10005,7 @@ export default function ChatView(props: ChatViewProps) {
                 void onRevertToTurnCount(pendingRevert.turnCount, pendingRevert.messageId, false);
               }}
             >
-              Revert and keep changes
+              revert and keep changes
             </Button>
           </AlertDialogFooter>
         </AlertDialogPopup>

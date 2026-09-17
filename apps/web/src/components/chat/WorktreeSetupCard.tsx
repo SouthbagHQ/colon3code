@@ -104,15 +104,15 @@ function ShimmerOverlay({ children }: { children: ReactNode }) {
 function headerLabel(snapshot: WorktreeSetupSnapshot): string {
   switch (snapshot.phase) {
     case "running":
-      return "Setting up worktree…";
+      return "setting up worktree…";
     case "done":
       return snapshot.stages.some((stage) => stage.status === "failed")
-        ? "Worktree ready, setup script failed"
-        : "Worktree ready";
+        ? "worktree ready, setup script failed"
+        : "worktree ready";
     case "failed":
-      return "Worktree setup failed";
+      return "worktree setup failed";
     case "cancelled":
-      return "Worktree setup cancelled";
+      return "worktree setup cancelled";
   }
 }
 
@@ -297,7 +297,7 @@ export function WorktreeSetupCard({
     : snapshot.stages;
 
   return (
-    <section aria-label="Worktree setup" data-worktree-setup-phase={snapshot.phase}>
+    <section aria-label="worktree setup" data-worktree-setup-phase={snapshot.phase}>
       {embedded ? null : <SetupHeaderRow snapshot={snapshot} totalElapsed={totalElapsed} />}
       <div className={embedded ? undefined : "pt-1.5"}>
         {stages.map((stage) => (
@@ -328,24 +328,24 @@ export function WorktreeSetupCard({
           onClick={() => setDetailsOpen((open) => !open)}
         >
           {detailsOpen ? <ChevronDownIcon aria-hidden /> : <ChevronRightIcon aria-hidden />}
-          Details
+          details
         </Button>
         {showTerminal ? (
           <Button type="button" size="xs" variant="ghost-muted" onClick={onOpenTerminal}>
             <TerminalIcon aria-hidden />
-            Open terminal
+            open terminal
           </Button>
         ) : null}
         {onWorkLocally ? (
           <Button type="button" size="xs" variant="ghost-muted" onClick={onWorkLocally}>
             <LaptopIcon aria-hidden />
-            Work locally
+            work locally
           </Button>
         ) : null}
         {onCancel && running ? (
           <Button type="button" size="xs" variant="ghost-muted" onClick={onCancel}>
             <XIcon aria-hidden />
-            Cancel
+            cancel
           </Button>
         ) : null}
       </div>

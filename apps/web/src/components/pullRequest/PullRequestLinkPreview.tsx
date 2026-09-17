@@ -87,7 +87,7 @@ export function PullRequestLinkPreview({
       <PreviewCardPopup align="center" className="w-80 max-w-[calc(100vw-2rem)] p-3">
         {detail === null ? (
           <p className="text-xs leading-relaxed text-muted-foreground wrap-anywhere">
-            {detailQuery.isPending ? "Loading pull request details…" : originalUrl}
+            {detailQuery.isPending ? "loading pull request details…" : originalUrl}
           </p>
         ) : (
           <div className="min-w-0">

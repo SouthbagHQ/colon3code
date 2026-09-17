@@ -233,7 +233,7 @@ export function DeviceStreamView(props: {
       className="relative flex size-full items-center justify-center overflow-hidden bg-black/90 outline-none"
       tabIndex={0}
       role="application"
-      aria-label={`${props.platform === "ios" ? "iOS Simulator" : "Android Emulator"} screen`}
+      aria-label={`${props.platform === "ios" ? "iOS simulator" : "Android emulator"} screen`}
       onKeyDown={(event) => {
         if (event.metaKey && !["r", "R"].includes(event.key)) return;
         event.preventDefault();
@@ -312,17 +312,17 @@ export function DeviceStreamView(props: {
       {status === "streaming" && !inputState.connected ? (
         <div className="pointer-events-none absolute inset-x-0 bottom-0 flex justify-center p-2">
           <span className="rounded-md bg-background/85 px-2 py-1 text-xs text-muted-foreground">
-            Input disconnected{inputState.detail ? ` (${inputState.detail})` : ""}, reconnecting…
+            input disconnected{inputState.detail ? ` (${inputState.detail})` : ""}, reconnecting…
           </span>
         </div>
       ) : null}
       {status !== "streaming" ? (
         <div className="pointer-events-none absolute inset-0">
           <DeviceLoadingView
-            name={props.deviceName ?? "Device"}
+            name={props.deviceName ?? "device"}
             description={props.deviceDescription ?? ""}
             stage="stream"
-            message={status === "error" ? (detail ?? "Stream failed.") : "Connecting video…"}
+            message={status === "error" ? (detail ?? "stream failed.") : "connecting video…"}
             error={status === "error"}
           />
         </div>

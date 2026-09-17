@@ -116,8 +116,8 @@ describe("deriveProviderModelsForDisplay", () => {
       }),
     );
 
-    expect(markup).toContain("Authenticated as");
-    expect(markup).toContain('aria-label="Toggle account email visibility"');
+    expect(markup).toContain("authenticated as");
+    expect(markup).toContain('aria-label="toggle account email visibility"');
     expect(markup).toContain("blur-[2px]");
     expect(markup).not.toContain("developer@example.com");
   });
@@ -156,7 +156,7 @@ describe("deriveProviderModelsForDisplay", () => {
 
     for (const mode of ["list", "editor"] as const) {
       const markup = renderToStaticMarkup(createElement(ProviderInstanceCard, { ...props, mode }));
-      expect(markup).toContain("Unavailable");
+      expect(markup).toContain("unavailable");
       expect(markup).toContain("is not a symlink");
     }
   });

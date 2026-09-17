@@ -73,7 +73,7 @@ describe("saved stack navigation", () => {
     expect(pullRequestStackView(query, saved)).toMatchObject({
       data: saved,
       isFresh: false,
-      notice: expect.stringContaining("Refreshing"),
+      notice: expect.stringContaining("refreshing"),
     });
     expect(
       pullRequestStackView({ ...query, isPending: false, error: "Rate limited" }, saved),

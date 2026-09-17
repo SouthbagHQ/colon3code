@@ -58,7 +58,7 @@ function useMediaActions(source: MediaActionSource) {
   const copyImage = useCallback(async () => {
     if (!navigator.clipboard?.write || typeof ClipboardItem === "undefined") {
       throw new Error(
-        "Image copying is unavailable. Use a secure browser connection or save the image.",
+        "image copying is unavailable. use a secure browser connection or save the image.",
       );
     }
     // Start the clipboard write in the user gesture; fetching/decoding may finish later.
@@ -99,18 +99,18 @@ export function MediaActions({
         typeof ClipboardItem !== "undefined";
       const items: ContextMenuItem<MediaActionId>[] = [];
       if (reference?.kind === "file") {
-        items.push({ id: "copy-full-path", label: "Copy full path" });
+        items.push({ id: "copy-full-path", label: "copy full path" });
         if (reference.relativePath)
-          items.push({ id: "copy-relative-path", label: "Copy relative path" });
+          items.push({ id: "copy-relative-path", label: "copy relative path" });
       } else if (reference?.kind === "url") {
-        items.push({ id: "copy-url", label: "Copy URL" });
+        items.push({ id: "copy-url", label: "copy URL" });
       }
-      if (source.onOpenFile) items.push({ id: "open-file", label: "Open in file viewer" });
-      items.push({ id: "save", label: `Save ${noun}`, disabled: unavailable });
+      if (source.onOpenFile) items.push({ id: "open-file", label: "open in file viewer" });
+      items.push({ id: "save", label: `save ${noun}`, disabled: unavailable });
       if (source.kind === "image") {
         items.push({
           id: "copy-image",
-          label: "Copy image",
+          label: "copy image",
           disabled: unavailable || !canCopyImage,
         });
       }
@@ -137,7 +137,7 @@ export function MediaActions({
       } else if (action === "save" || action === "copy-image") {
         progressToast = toastManager.add({
           type: "loading",
-          title: action === "save" ? `Preparing ${noun} download…` : "Copying image…",
+          title: action === "save" ? `preparing ${noun} download…` : "copying image…",
         });
         await (action === "save" ? save() : copyImage());
         toastManager.update(progressToast, {
@@ -149,7 +149,7 @@ export function MediaActions({
       const toast = stackedThreadToast({
         type: "error",
         title: failureTitle,
-        description: error instanceof Error ? error.message : "The media action failed.",
+        description: error instanceof Error ? error.message : "the media action failed.",
       });
       if (progressToast) toastManager.update(progressToast, toast);
       else toastManager.add(toast);

@@ -24,9 +24,9 @@ const FAILURE_OPERATION_BY_ACTION = {
 } as const satisfies Record<ExternalLinkContextMenuAction, ExternalLinkContextMenuFailureOperation>;
 
 const EXTERNAL_LINK_CONTEXT_MENU_ITEMS = [
-  { id: "open-in-preview", label: "Open in integrated browser" },
-  { id: "open-external", label: "Open in system browser" },
-  { id: "copy-link", label: "Copy Link" },
+  { id: "open-in-preview", label: "open in integrated browser" },
+  { id: "open-external", label: "open in system browser" },
+  { id: "copy-link", label: "copy link" },
 ] as const satisfies readonly ContextMenuItem<ExternalLinkContextMenuAction>[];
 
 /**
@@ -47,7 +47,7 @@ function externalLinkContextMenuItems(options: {
     {
       id: options.threadLinkAction,
       label:
-        options.threadLinkAction === "link-to-thread" ? "Link to thread" : "Unlink from thread",
+        options.threadLinkAction === "link-to-thread" ? "link to thread" : "unlink from thread",
     },
     ...items,
   ];

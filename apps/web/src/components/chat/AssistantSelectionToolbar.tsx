@@ -133,7 +133,7 @@ export function AssistantSelectionToolbar({
       size="xs"
       variant="glass"
       disabled={tooLong}
-      aria-label={tooLong ? "Selection is too long to cite" : "Cite selection in composer"}
+      aria-label={tooLong ? "selection is too long to cite" : "cite selection in composer"}
       className="fixed z-50 max-w-[calc(100vw-1rem)] rounded-full px-2.5"
       style={{ left: selection.position.x, top: selection.position.y }}
       onPointerDown={(event) => event.preventDefault()}
@@ -147,7 +147,7 @@ export function AssistantSelectionToolbar({
       }}
     >
       <QuoteIcon aria-hidden="true" className="size-3.5" />
-      {tooLong ? "Shorten selection" : "Cite"}
+      {tooLong ? "shorten selection" : "cite"}
     </Button>,
     document.body,
   );

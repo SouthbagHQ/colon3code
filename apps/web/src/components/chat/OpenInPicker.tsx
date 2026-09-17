@@ -275,9 +275,9 @@ export const OpenInPicker = memo(function OpenInPicker({
   }, [enableShortcut, keybindings, openInCwd, openInEditor, preferredEditor]);
 
   return (
-    <Group aria-label="Open in editor">
+    <Group aria-label="open in editor">
       <Button
-        aria-label={compact ? "Open file in preferred editor" : undefined}
+        aria-label={compact ? "open file in preferred editor" : undefined}
         className="ps-[8.5px]"
         size="xs"
         variant="outline"
@@ -297,19 +297,19 @@ export const OpenInPicker = memo(function OpenInPicker({
               : "sr-only @3xl/header-actions:not-sr-only @3xl/header-actions:ml-0.5"
           }
         >
-          Open
+          open
         </span>
       </Button>
       <GroupSeparator {...(!compact ? { className: "hidden @3xl/header-actions:block" } : {})} />
       <Menu>
         <MenuTrigger
-          render={<Button aria-label="Choose editor" size="icon-xs" variant="outline" />}
+          render={<Button aria-label="choose editor" size="icon-xs" variant="outline" />}
         >
           <ChevronDownIcon aria-hidden="true" className="size-4" />
         </MenuTrigger>
         <MenuPopup align="end">
           {remote.mode === "remote-unavailable" ? (
-            <MenuItem disabled>No SSH route to {environmentLabel}</MenuItem>
+            <MenuItem disabled>no SSH route to {environmentLabel}</MenuItem>
           ) : (
             <>
               {options.length === 0 && <MenuItem disabled>no installed editors found</MenuItem>}
@@ -323,7 +323,7 @@ export const OpenInPicker = memo(function OpenInPicker({
                 </MenuItem>
               ))}
               {remote.mode === "remote-links" && !remoteHintSeen && (
-                <MenuItem disabled>Opens over SSH. Needs your key on {environmentLabel}</MenuItem>
+                <MenuItem disabled>opens over SSH. needs your key on {environmentLabel}</MenuItem>
               )}
             </>
           )}

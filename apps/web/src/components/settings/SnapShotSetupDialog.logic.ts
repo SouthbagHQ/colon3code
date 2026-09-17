@@ -58,13 +58,13 @@ export function captureSetupCheckMessage(state: DesktopSnapShotState): string {
     (backend === "kde" && state.kdeHelper?.status === "error") ||
     (backend === "hyprland" && state.hyprlandHelper?.status === "error")
   )
-    return "Still unable to check access. See Advanced for help.";
-  if (captureSetupBackend(state) === "picker") return "Ready. You'll choose a window each time.";
+    return "still unable to check access. see advanced for help.";
+  if (captureSetupBackend(state) === "picker") return "ready. you'll choose a window each time.";
   if (gnome && state.gnomeExtension?.status === "restart-required")
-    return "Still waiting for you to sign out and back in.";
+    return "still waiting for you to sign out and back in.";
   return captureSetupAccessReady(state)
-    ? "Ready. Continue to choose your shortcut."
-    : "Not ready yet. Finish the step above.";
+    ? "ready. continue to choose your shortcut."
+    : "not ready yet. finish the step above.";
 }
 
 export function captureSetupShortcutReady(state: DesktopSnapShotState, unsaved: boolean): boolean {

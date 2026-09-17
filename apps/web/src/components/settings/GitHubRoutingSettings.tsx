@@ -17,9 +17,9 @@ import { FoldedSettingsSection } from "./FoldedSettingsSection";
 import { searchableSetting } from "./settingsSearch";
 
 const options: ReadonlyArray<{ value: GitHubRoutingPermission; label: string }> = [
-  { value: "off", label: "Off" },
-  { value: "read", label: "Read PRs" },
-  { value: "read-write", label: "Read and act" },
+  { value: "off", label: "off" },
+  { value: "read", label: "read PRs" },
+  { value: "read-write", label: "read and act" },
 ];
 
 const summaryLabels = { "read-write": "read and act", read: "read PRs" } as const;
@@ -69,12 +69,12 @@ export function GitHubRoutingSettings({
             label: environment.label,
             permission: gitHubRoutingPermissionFor(environment.entry, permissions),
           })),
-        ) ?? "Off"
+        ) ?? "off"
       }
     >
       <p className="px-3 py-2.5 text-xs text-muted-foreground sm:px-4">
-        Machines you trust here can read PR data through each other's GitHub access. Enable both
-        machines. Read and act may use broader permissions than the machine that owns them. This
+        machines you trust here can read PR data through each other's GitHub access. enable both
+        machines. read and act may use broader permissions than the machine that owns them. this
         applies only to this device.
       </p>
       {environments.map((environment) => (

@@ -130,7 +130,7 @@ export function PullRequestChip(props: {
               CONTEXT_INLINE_CHIP_INTERACTIVE_CLASS_NAME,
               "cursor-pointer",
             )}
-            aria-label={`Open ${props.kindLabel} ${props.label}: ${props.metadata.title}`}
+            aria-label={`open ${props.kindLabel} ${props.label}: ${props.metadata.title}`}
             data-markdown-copy={props.copyMarkdown}
             onClick={(event) => props.onOpen(event, props.metadata.url)}
           >
@@ -203,7 +203,7 @@ export function ImageChipButton({
         CONTEXT_INLINE_CHIP_INTERACTIVE_CLASS_NAME,
         "cursor-zoom-in",
       )}
-      aria-label={`Image attachment, ${name}, ${size}`}
+      aria-label={`image attachment, ${name}, ${size}`}
       style={{ ...style, ...(accent ? { "--context-chip-accent": accent } : {}) } as CSSProperties}
       {...props}
     >
@@ -339,7 +339,7 @@ export function UnresolvedChip(props: {
       label={props.label}
       className={props.className}
       labelClassName={props.labelClassName}
-      aria-label={`Unavailable context, ${props.label}`}
+      aria-label={`unavailable context, ${props.label}`}
       data-markdown-copy={props.copyMarkdown}
       tooltip={props.tooltip}
       tooltipClassName={props.tooltipClassName}

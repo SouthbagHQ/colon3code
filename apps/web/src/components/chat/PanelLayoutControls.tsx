@@ -27,7 +27,7 @@ export const PanelLayoutControls = memo(function PanelLayoutControls({
   rightPanelAvailable,
   rightPanelOpen,
   rightPanelShortcutLabel,
-  rightPanelUnavailableLabel = "Right panel is unavailable",
+  rightPanelUnavailableLabel = "right panel is unavailable",
   liveAgentCount,
   onToggleTerminal,
   onToggleRightPanel,
@@ -44,7 +44,7 @@ export const PanelLayoutControls = memo(function PanelLayoutControls({
               className="shrink-0 [-webkit-app-region:no-drag]"
               pressed={terminalOpen}
               onPressedChange={onToggleTerminal}
-              aria-label="Toggle terminal drawer"
+              aria-label="toggle terminal drawer"
               variant="ghost"
               size="sm"
               disabled={!terminalAvailable}
@@ -54,8 +54,8 @@ export const PanelLayoutControls = memo(function PanelLayoutControls({
           </TooltipTrigger>
           <TooltipPopup side="bottom">
             {terminalAvailable
-              ? `Toggle terminal drawer${terminalShortcutLabel ? ` (${terminalShortcutLabel})` : ""}`
-              : "Terminal drawer is unavailable"}
+              ? `toggle terminal drawer${terminalShortcutLabel ? ` (${terminalShortcutLabel})` : ""}`
+              : "terminal drawer is unavailable"}
           </TooltipPopup>
         </Tooltip>
       ) : null}
@@ -67,8 +67,8 @@ export const PanelLayoutControls = memo(function PanelLayoutControls({
             onPressedChange={onToggleRightPanel}
             aria-label={
               liveAgentCount > 0
-                ? `Toggle right panel, ${liveAgentCount} ${liveAgentCount === 1 ? "agent" : "agents"} working`
-                : "Toggle right panel"
+                ? `toggle right panel, ${liveAgentCount} ${liveAgentCount === 1 ? "agent" : "agents"} working`
+                : "toggle right panel"
             }
             variant="ghost"
             size="sm"
@@ -87,7 +87,7 @@ export const PanelLayoutControls = memo(function PanelLayoutControls({
         </TooltipTrigger>
         <TooltipPopup side="bottom">
           {rightPanelAvailable
-            ? `Toggle right panel${rightPanelShortcutLabel ? ` (${rightPanelShortcutLabel})` : ""}${
+            ? `toggle right panel${rightPanelShortcutLabel ? ` (${rightPanelShortcutLabel})` : ""}${
                 liveAgentCount > 0
                   ? ` · ${liveAgentCount} ${liveAgentCount === 1 ? "agent" : "agents"} working`
                   : ""
@@ -106,7 +106,7 @@ export const RightPanelMaximizeControl = memo(function RightPanelMaximizeControl
   maximized: boolean;
   onToggle: () => void;
 }) {
-  const label = maximized ? "Restore panel size" : "Maximize panel";
+  const label = maximized ? "restore panel size" : "maximize panel";
   return (
     <Tooltip>
       <TooltipTrigger

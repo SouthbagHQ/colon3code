@@ -57,12 +57,12 @@ import { Switch } from "./ui/switch";
 import { Textarea } from "./ui/textarea";
 
 const SCRIPT_ICONS: Array<{ id: ProjectScriptIcon; label: string }> = [
-  { id: "play", label: "Play" },
-  { id: "test", label: "Test" },
-  { id: "lint", label: "Lint" },
-  { id: "configure", label: "Configure" },
-  { id: "build", label: "Build" },
-  { id: "debug", label: "Debug" },
+  { id: "play", label: "play" },
+  { id: "test", label: "test" },
+  { id: "lint", label: "lint" },
+  { id: "configure", label: "configure" },
+  { id: "build", label: "build" },
+  { id: "debug", label: "debug" },
 ];
 
 export function ScriptIcon({
@@ -226,11 +226,11 @@ export function ProjectScriptEditorDialog({
     const trimmedName = name.trim();
     const trimmedCommand = command.trim();
     if (trimmedName.length === 0) {
-      setValidationError("Name is required.");
+      setValidationError("name is required.");
       return;
     }
     if (trimmedCommand.length === 0) {
-      setValidationError("Command is required.");
+      setValidationError("command is required.");
       return;
     }
 
@@ -302,16 +302,16 @@ export function ProjectScriptEditorDialog({
       >
         <DialogPopup>
           <DialogHeader>
-            <DialogTitle>{isEditing ? "Edit Action" : "Add Action"}</DialogTitle>
+            <DialogTitle>{isEditing ? "edit action" : "add action"}</DialogTitle>
             <DialogDescription>
-              Actions are project-scoped commands you can run from the top bar or keybindings.
+              actions are project-scoped commands you can run from the top bar or keybindings.
             </DialogDescription>
           </DialogHeader>
           <DialogPanel>
             <form id={formId} onSubmit={submit}>
               <fieldset className="space-y-4" disabled={isSaving}>
                 <div className="space-y-1.5">
-                  <Label htmlFor="script-name">Name</Label>
+                  <Label htmlFor="script-name">name</Label>
                   <div className="flex items-center gap-2">
                     <Popover onOpenChange={setIconPickerOpen} open={iconPickerOpen}>
                       <PopoverTrigger
@@ -320,7 +320,7 @@ export function ProjectScriptEditorDialog({
                             type="button"
                             variant="outline"
                             className="size-9 shrink-0 hover:bg-popover active:bg-popover data-pressed:bg-popover data-pressed:shadow-xs/5 data-pressed:before:shadow-[0_1px_--theme(--color-black/4%)] dark:border-transparent dark:bg-white/[0.035] dark:data-pressed:before:shadow-none"
-                            aria-label="Choose icon"
+                            aria-label="choose icon"
                           />
                         }
                       >
@@ -355,28 +355,28 @@ export function ProjectScriptEditorDialog({
                     <Input
                       id="script-name"
                       autoFocus
-                      placeholder="Test"
+                      placeholder="test"
                       value={name}
                       onChange={(event) => setName(event.target.value)}
                     />
                   </div>
                 </div>
                 <div className="space-y-1.5">
-                  <Label htmlFor="script-keybinding">Keybinding</Label>
+                  <Label htmlFor="script-keybinding">keybinding</Label>
                   <Input
                     id="script-keybinding"
-                    placeholder="Press shortcut"
+                    placeholder="press shortcut"
                     value={keybinding}
                     readOnly
                     onKeyDown={captureKeybinding}
                   />
                   <p className="text-xs text-muted-foreground">
-                    Press a shortcut. Use <code>Backspace</code> to clear. Shortcuts are
-                    environment-wide. Projects using the same action share its shortcut.
+                    press a shortcut. use <code>Backspace</code> to clear. shortcuts are
+                    environment-wide. projects using the same action share its shortcut.
                   </p>
                 </div>
                 <div className="space-y-1.5">
-                  <Label htmlFor="script-command">Command</Label>
+                  <Label htmlFor="script-command">command</Label>
                   <Textarea
                     id="script-command"
                     placeholder="bun test"
@@ -385,7 +385,7 @@ export function ProjectScriptEditorDialog({
                   />
                 </div>
                 <div className="space-y-1.5">
-                  <Label htmlFor="script-preview-url">Preview URL (optional)</Label>
+                  <Label htmlFor="script-preview-url">preview URL (optional)</Label>
                   <Input
                     id="script-preview-url"
                     placeholder="http://localhost:5173"
@@ -393,11 +393,11 @@ export function ProjectScriptEditorDialog({
                     onChange={(event) => setPreviewUrl(event.target.value)}
                   />
                   <p className="text-xs text-muted-foreground">
-                    Open this URL in the in-app preview when this action runs.
+                    open this URL in the in-app preview when this action runs.
                   </p>
                 </div>
                 <label className="flex items-center justify-between gap-3 rounded-md border border-border/70 px-3 py-2 text-sm dark:border-transparent dark:bg-white/[0.035]">
-                  <span>Run automatically on worktree creation</span>
+                  <span>run automatically on worktree creation</span>
                   <Switch
                     checked={runOnWorktreeCreate}
                     onCheckedChange={(checked) => setRunOnWorktreeCreate(Boolean(checked))}
@@ -408,7 +408,7 @@ export function ProjectScriptEditorDialog({
                     runOnWorktreeCreate ? "" : "opacity-60"
                   }`}
                 >
-                  <span>Wait for it to finish before the agent starts</span>
+                  <span>wait for it to finish before the agent starts</span>
                   <Switch
                     checked={waitForSetup}
                     disabled={!runOnWorktreeCreate}
@@ -420,7 +420,7 @@ export function ProjectScriptEditorDialog({
                     previewUrl.trim().length === 0 ? "opacity-60" : ""
                   }`}
                 >
-                  <span>Open preview automatically when this action runs</span>
+                  <span>open preview automatically when this action runs</span>
                   <Switch
                     checked={autoOpenPreview}
                     disabled={previewUrl.trim().length === 0}
@@ -440,14 +440,14 @@ export function ProjectScriptEditorDialog({
                 disabled={isSaving}
                 onClick={() => setDeleteConfirmOpen(true)}
               >
-                Delete
+                delete
               </Button>
             )}
             <Button type="button" variant="outline" onClick={close}>
-              Cancel
+              cancel
             </Button>
             <Button form={formId} type="submit" disabled={isSaving}>
-              {isSaving ? "Saving…" : isEditing ? "Save changes" : "Save action"}
+              {isSaving ? "saving…" : isEditing ? "save changes" : "save action"}
             </Button>
           </DialogFooter>
         </DialogPopup>
@@ -456,11 +456,11 @@ export function ProjectScriptEditorDialog({
       <AlertDialog open={deleteConfirmOpen} onOpenChange={setDeleteConfirmOpen}>
         <AlertDialogPopup>
           <AlertDialogHeader>
-            <AlertDialogTitle>Delete action "{name}"?</AlertDialogTitle>
-            <AlertDialogDescription>This action cannot be undone.</AlertDialogDescription>
+            <AlertDialogTitle>delete action "{name}"?</AlertDialogTitle>
+            <AlertDialogDescription>this action cannot be undone.</AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogClose render={<Button variant="outline" />}>Cancel</AlertDialogClose>
+            <AlertDialogClose render={<Button variant="outline" />}>cancel</AlertDialogClose>
             <Button
               variant="destructive"
               disabled={isSaving}
@@ -471,7 +471,7 @@ export function ProjectScriptEditorDialog({
                 onDelete(request.scriptId);
               }}
             >
-              Delete action
+              delete action
             </Button>
           </AlertDialogFooter>
         </AlertDialogPopup>

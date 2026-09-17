@@ -22,7 +22,7 @@ export function NotificationSettings() {
       {...searchableSetting("thread-notifications")}
       description={
         permissionMessage ??
-        "System alerts when a thread finishes, fails, or needs input or approval. Applies to this device while :3 Code is open."
+        "system alerts when a thread finishes, fails, or needs input or approval. applies to this device while :3 Code is open."
       }
       control={
         <Select
@@ -41,7 +41,7 @@ export function NotificationSettings() {
             if (hasDesktopNotifications(value)) {
               if (typeof Notification === "undefined" || !window.isSecureContext) {
                 setPermissionMessage(
-                  "Notifications need a supported browser over HTTPS, or the desktop app. Sound only is still available.",
+                  "notifications need a supported browser over HTTPS, or the desktop app. sound only is still available.",
                 );
                 return;
               }
@@ -50,13 +50,13 @@ export function NotificationSettings() {
                 const permission = await Notification.requestPermission();
                 if (permission !== "granted") {
                   setPermissionMessage(
-                    "Allow notifications in your browser or system settings, then choose this option again. Sound only is still available.",
+                    "allow notifications in your browser or system settings, then choose this option again. sound only is still available.",
                   );
                   return;
                 }
               } catch {
                 setPermissionMessage(
-                  "Notifications are unavailable in this browser. Sound only is still available.",
+                  "notifications are unavailable in this browser. sound only is still available.",
                 );
                 return;
               } finally {
@@ -66,7 +66,7 @@ export function NotificationSettings() {
             updateSettings({ notificationMode: value });
           }}
         >
-          <SelectTrigger size="sm" className="w-full sm:w-56" aria-label="Thread notifications">
+          <SelectTrigger size="sm" className="w-full sm:w-56" aria-label="thread notifications">
             <SelectValue>{NOTIFICATION_MODE_LABELS[mode]}</SelectValue>
           </SelectTrigger>
           <SelectPopup align="end" alignItemWithTrigger={false}>

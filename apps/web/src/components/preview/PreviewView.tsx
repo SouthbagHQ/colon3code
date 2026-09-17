@@ -88,7 +88,7 @@ function previewProfileName(
   profiles: ReadonlyArray<{ readonly id: string; readonly name: string }>,
   profileId: string,
 ): string {
-  return profiles.find((profile) => profile.id === profileId)?.name ?? "Removed profile";
+  return profiles.find((profile) => profile.id === profileId)?.name ?? "removed profile";
 }
 
 const localApi = typeof window === "undefined" ? null : ensureLocalApi();
@@ -269,7 +269,7 @@ export function PreviewView({
         toastManager.add({
           type: "error",
           title: "unable to resize browser viewport 3:",
-          description: error instanceof Error ? error.message : "An error occurred.",
+          description: error instanceof Error ? error.message : "an error occurred.",
         });
         throw error;
       }
@@ -332,7 +332,7 @@ export function PreviewView({
       toastManager.add({
         type: "error",
         title: "unable to update popped-out preview 3:",
-        description: error instanceof Error ? error.message : "An error occurred.",
+        description: error instanceof Error ? error.message : "an error occurred.",
       });
     });
   }, [desktopOverlay?.pictureInPicture, runtimeTabId]);
@@ -355,7 +355,7 @@ export function PreviewView({
                   stackedThreadToast({
                     type: "error",
                     title: "unable to copy recording path 3:",
-                    description: "Clipboard API unavailable.",
+                    description: "clipboard API unavailable.",
                     actionProps: revealAction,
                   }),
                 );
@@ -377,7 +377,7 @@ export function PreviewView({
                     stackedThreadToast({
                       type: "error",
                       title: "unable to copy recording path 3:",
-                      description: error instanceof Error ? error.message : "An error occurred.",
+                      description: error instanceof Error ? error.message : "an error occurred.",
                       actionProps: revealAction,
                     }),
                   );
@@ -398,7 +398,7 @@ export function PreviewView({
                   actionProps: revealAction,
                   data: {
                     secondaryActionProps: {
-                      children: pathCopied ? "Copied!" : "Copy path",
+                      children: pathCopied ? "copied!" : "copy path",
                       disabled: pathCopied,
                       onClick: copyPath,
                     },
@@ -415,7 +415,7 @@ export function PreviewView({
                 actionProps: revealAction,
                 data: {
                   secondaryActionProps: {
-                    children: "Copy path",
+                    children: "copy path",
                     onClick: copyPath,
                   },
                   secondaryActionVariant: "outline",
@@ -427,7 +427,7 @@ export function PreviewView({
             toastManager.add({
               type: "error",
               title: "unable to stop recording 3:",
-              description: error instanceof Error ? error.message : "An error occurred.",
+              description: error instanceof Error ? error.message : "an error occurred.",
             });
           },
         );
@@ -435,7 +435,7 @@ export function PreviewView({
       }
       if (record) {
         void startBrowserRecording(runtimeTabId, threadRef, tabId).catch((error) => {
-          const description = error instanceof Error ? error.message : "An error occurred.";
+          const description = error instanceof Error ? error.message : "an error occurred.";
           if (isBrowserRecordingStartCancelledError(error)) return;
           toastManager.add({
             type: "error",
@@ -467,7 +467,7 @@ export function PreviewView({
                 title,
                 description,
                 actionProps: {
-                  children: imageCopied ? "Copied!" : "Copy image",
+                  children: imageCopied ? "copied!" : "copy image",
                   disabled: imageCopied,
                   onClick: copyImage,
                 },
@@ -476,7 +476,7 @@ export function PreviewView({
                     {
                       id: "copy-path",
                       props: {
-                        children: pathCopied ? "Copied!" : "Copy path",
+                        children: pathCopied ? "copied!" : "copy path",
                         disabled: pathCopied,
                         onClick: copyPath,
                       },
@@ -496,7 +496,7 @@ export function PreviewView({
               updateScreenshotToast(
                 "error",
                 "unable to copy screenshot path 3:",
-                "Clipboard API unavailable.",
+                "clipboard API unavailable.",
               );
               return;
             }
@@ -514,7 +514,7 @@ export function PreviewView({
                 updateScreenshotToast(
                   "error",
                   "unable to copy screenshot path 3:",
-                  error instanceof Error ? error.message : "An error occurred.",
+                  error instanceof Error ? error.message : "an error occurred.",
                 );
               },
             );
@@ -534,7 +534,7 @@ export function PreviewView({
                 updateScreenshotToast(
                   "error",
                   "unable to copy screenshot 3:",
-                  error instanceof Error ? error.message : "An error occurred.",
+                  error instanceof Error ? error.message : "an error occurred.",
                 );
               },
             );
@@ -545,7 +545,7 @@ export function PreviewView({
               type: "success",
               title: "screenshot saved :3",
               actionProps: {
-                children: "Copy image",
+                children: "copy image",
                 onClick: copyImage,
               },
               data: {
@@ -553,7 +553,7 @@ export function PreviewView({
                   {
                     id: "copy-path",
                     props: {
-                      children: "Copy path",
+                      children: "copy path",
                       onClick: copyPath,
                     },
                   },
@@ -570,7 +570,7 @@ export function PreviewView({
           toastManager.add({
             type: "error",
             title: "unable to capture screenshot 3:",
-            description: error instanceof Error ? error.message : "An error occurred.",
+            description: error instanceof Error ? error.message : "an error occurred.",
           });
         },
       );
@@ -616,7 +616,7 @@ export function PreviewView({
               title: "could not capture the picked element 3:",
               // The send path reports its own outcome, so only say what this
               // handler knows: the crop was dropped.
-              description: "The annotation was kept without the screenshot.",
+              description: "the annotation was kept without the screenshot.",
             }),
           );
         }
@@ -735,7 +735,7 @@ export function PreviewView({
         // user wouldn't be able to actually click anything underneath).
         pickDisabled={!tabId || isUnreachable}
         pickDisabledReason={
-          isUnreachable ? "Page didn't load — pick unavailable until the page renders" : undefined
+          isUnreachable ? "page didn't load — pick unavailable until the page renders" : undefined
         }
         leadingActions={
           // Only when it differs from the default: labelling every tab
@@ -807,7 +807,7 @@ export function PreviewView({
         ) : null}
         {controller !== "none" ? (
           <div className="pointer-events-none absolute left-3 top-3 z-40 rounded-full border border-border/70 bg-background/90 px-2.5 py-1 text-[11px] font-medium shadow-sm backdrop-blur">
-            {controller === "agent" ? "Agent controlling browser" : "Human control"}
+            {controller === "agent" ? "agent controlling browser" : "human control"}
           </div>
         ) : null}
         {navStatus._tag === "LoadFailed" ? (

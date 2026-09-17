@@ -32,51 +32,51 @@ export type ProviderStatusKey = keyof typeof PROVIDER_STATUS_STYLES;
 export function getProviderSummary(provider: ServerProvider | undefined) {
   if (!provider) {
     return {
-      headline: "Checking provider status",
-      detail: "Waiting for the server to report installation and authentication details.",
+      headline: "checking provider status",
+      detail: "waiting for the server to report installation and authentication details.",
     };
   }
   if (!provider.enabled || provider.status === "disabled") {
     return {
-      headline: "Disabled",
+      headline: "disabled",
       detail:
-        provider.message ?? "This provider is installed but disabled for new sessions in :3 Code.",
+        provider.message ?? "this provider is installed but disabled for new sessions in :3 Code.",
     };
   }
   if (!provider.installed) {
     return {
-      headline: "Not found",
+      headline: "not found",
       detail: provider.message ?? "CLI not detected on PATH.",
     };
   }
   if (provider.auth.status === "unauthenticated") {
     return {
-      headline: "Not authenticated",
+      headline: "not authenticated",
       detail: provider.message ?? null,
     };
   }
   if (provider.status === "warning") {
     return {
-      headline: "Needs attention",
+      headline: "needs attention",
       detail:
-        provider.message ?? "The provider is installed, but the server could not fully verify it.",
+        provider.message ?? "the provider is installed, but the server could not fully verify it.",
     };
   }
   if (provider.status === "error") {
     return {
-      headline: "Unavailable",
-      detail: provider.message ?? "The provider failed its startup checks.",
+      headline: "unavailable",
+      detail: provider.message ?? "the provider failed its startup checks.",
     };
   }
   if (provider.auth.status === "authenticated") {
     const authLabel = provider.auth.label ?? provider.auth.type;
     return {
-      headline: authLabel ? `Authenticated · ${authLabel}` : "Authenticated",
+      headline: authLabel ? `authenticated · ${authLabel}` : "authenticated",
       detail: provider.message ?? null,
     };
   }
   return {
-    headline: "Available",
+    headline: "available",
     detail: provider.message ?? null,
   };
 }
@@ -110,7 +110,7 @@ export function getProviderVersionAdvisoryPresentation(
     return null;
   }
 
-  const label = "Update available";
+  const label = "update available";
   const version = advisory.latestVersion;
   const versionLabel = getProviderVersionLabel(version);
 

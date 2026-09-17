@@ -71,9 +71,9 @@ import {
 
 type UsageMetric = UsageChartMetric | "limits";
 const METRIC_OPTIONS = [
-  { value: "cost", label: "Cost" },
-  { value: "tokens", label: "Tokens" },
-  { value: "limits", label: "Limits" },
+  { value: "cost", label: "cost" },
+  { value: "tokens", label: "tokens" },
+  { value: "limits", label: "limits" },
 ] as const satisfies readonly { value: UsageMetric; label: string }[];
 
 function isUsageMetric(value: string | null | undefined): value is UsageMetric {
@@ -81,7 +81,7 @@ function isUsageMetric(value: string | null | undefined): value is UsageMetric {
 }
 
 const WINDOW_OPTIONS = [
-  { days: 1, label: "Past 24h" },
+  { days: 1, label: "past 24h" },
   { days: 7, label: "7 days" },
   { days: 30, label: "30 days" },
   { days: 90, label: "90 days" },
@@ -207,9 +207,9 @@ export function UsagePage() {
       : `${formatDayShort(window.sinceDay)} to ${formatDayShort(window.untilDay)}`;
   const topbarContent = (
     <div className="grid w-full min-w-0 grid-cols-[minmax(0,1fr)_auto] items-center gap-x-3 gap-y-2 py-2 xl:flex">
-      <WorkspaceBreadcrumb ariaLabel="Usage breadcrumb" className="col-span-2 min-w-0">
+      <WorkspaceBreadcrumb ariaLabel="usage breadcrumb" className="col-span-2 min-w-0">
         <WorkspaceBreadcrumbItem>
-          <h1>Usage</h1>
+          <h1>usage</h1>
         </WorkspaceBreadcrumbItem>
         <WorkspaceBreadcrumbSeparator />
         <WorkspaceBreadcrumbItem current className="min-w-10">
@@ -232,7 +232,7 @@ export function UsagePage() {
       ) : null}
       <div className="ms-auto hidden min-w-0 items-center justify-end gap-2 xl:flex">
         <ToggleGroup
-          aria-label="Usage metric"
+          aria-label="usage metric"
           variant="segmented"
           value={[metric]}
           onValueChange={(next) => {
@@ -249,7 +249,7 @@ export function UsagePage() {
         {/* The period does not apply to Limits, so it stays in place but
             disabled; unmounting it shifted the metric toggle ~300px. */}
         <ToggleGroup
-          aria-label="Usage period"
+          aria-label="usage period"
           variant="segmented"
           value={[String(windowDays)]}
           disabled={showingLimits}
@@ -266,7 +266,7 @@ export function UsagePage() {
         </ToggleGroup>
         <Button
           onClick={refreshWindow}
-          aria-label={showingLimits ? "Refresh limits" : "Refresh usage"}
+          aria-label={showingLimits ? "refresh limits" : "refresh usage"}
           aria-busy={isRefreshing}
           disabled={isRefreshing}
           size="icon-sm"
@@ -283,7 +283,7 @@ export function UsagePage() {
           }}
         >
           <SelectTrigger
-            aria-label="Usage metric"
+            aria-label="usage metric"
             size="compact"
             variant="ghost"
             className="w-auto min-w-0"
@@ -306,7 +306,7 @@ export function UsagePage() {
           onValueChange={(value) => selectWindow(Number(value))}
         >
           <SelectTrigger
-            aria-label="Usage period"
+            aria-label="usage period"
             size="compact"
             variant="ghost"
             className="w-auto min-w-0"
@@ -325,7 +325,7 @@ export function UsagePage() {
         </Select>
         <Button
           onClick={refreshWindow}
-          aria-label={showingLimits ? "Refresh limits" : "Refresh usage"}
+          aria-label={showingLimits ? "refresh limits" : "refresh usage"}
           aria-busy={isRefreshing}
           disabled={isRefreshing}
           size="icon-sm"
@@ -349,8 +349,8 @@ export function UsagePage() {
             {selectedEnvironments.length === 0 ? (
               <p className="text-sm text-muted-foreground">
                 {environments.length === 0
-                  ? `Connect an environment to see ${showingLimits ? "limits" : "usage"}.`
-                  : `Select an environment to see ${showingLimits ? "limits" : "usage"}.`}
+                  ? `connect an environment to see ${showingLimits ? "limits" : "usage"}.`
+                  : `select an environment to see ${showingLimits ? "limits" : "usage"}.`}
               </p>
             ) : showingLimits ? (
               <UsageLimitsSection selectedEnvironmentIds={selectedEnvironmentIds} now={limitsNow} />
@@ -424,7 +424,7 @@ export function UsagePage() {
 
                   <div className="flex min-w-0 flex-col gap-3">
                     <h2 className="text-sm font-medium text-foreground">
-                      {isPast24Hours ? "Hourly" : "Daily"}{" "}
+                      {isPast24Hours ? "hourly" : "daily"}{" "}
                       {metric === "tokens" ? "processed tokens" : "cost"}
                     </h2>
                     <UsageProviderChart
@@ -442,17 +442,17 @@ export function UsagePage() {
                 </section>
 
                 <section className="flex flex-col gap-2">
-                  <h2 className="text-sm font-medium text-foreground">Totals</h2>
+                  <h2 className="text-sm font-medium text-foreground">totals</h2>
                   <div className="grid grid-cols-2 gap-x-6 gap-y-4 py-1 md:grid-cols-5">
-                    <Metric label="Processed tokens" value={formatTokens(merged.totalTokens)} />
-                    <Metric label="Cached input" value={formatTokens(merged.cachedInputTokens)} />
+                    <Metric label="processed tokens" value={formatTokens(merged.totalTokens)} />
+                    <Metric label="cached input" value={formatTokens(merged.cachedInputTokens)} />
                     <Metric
-                      label="Uncached input"
+                      label="uncached input"
                       value={formatTokens(merged.uncachedInputTokens)}
                     />
-                    <Metric label="Output" value={formatTokens(merged.outputTokens)} />
+                    <Metric label="output" value={formatTokens(merged.outputTokens)} />
                     <Metric
-                      label="Cache savings"
+                      label="cache savings"
                       value={formatUsd(merged.costQuality.cacheSavingsUsd)}
                     />
                   </div>
@@ -460,9 +460,9 @@ export function UsagePage() {
 
                 <section className="flex flex-col gap-3">
                   <div className="flex items-center justify-between gap-3">
-                    <h2 className="text-sm font-medium text-foreground">Breakdown</h2>
+                    <h2 className="text-sm font-medium text-foreground">breakdown</h2>
                     <ToggleGroup
-                      aria-label="Usage breakdown"
+                      aria-label="usage breakdown"
                       variant="segmented"
                       value={[breakdown]}
                       onValueChange={(next) => {
@@ -472,8 +472,8 @@ export function UsagePage() {
                     >
                       {(
                         [
-                          { value: "model", label: "Model" },
-                          { value: "time", label: isPast24Hours ? "Hour" : "Day" },
+                          { value: "model", label: "model" },
+                          { value: "time", label: isPast24Hours ? "hour" : "day" },
                         ] as const
                       ).map((option) => (
                         <Toggle key={option.value} value={option.value}>
@@ -493,17 +493,17 @@ export function UsagePage() {
                       </colgroup>
                       <thead>
                         <tr className="border-b border-border text-left text-xs text-muted-foreground">
-                          <th className="py-2 font-normal">Model</th>
-                          <th className="py-2 text-right font-normal">Cost</th>
-                          <th className="py-2 text-right font-normal">Share</th>
-                          <th className="py-2 text-right font-normal">Tokens</th>
+                          <th className="py-2 font-normal">model</th>
+                          <th className="py-2 text-right font-normal">cost</th>
+                          <th className="py-2 text-right font-normal">share</th>
+                          <th className="py-2 text-right font-normal">tokens</th>
                         </tr>
                       </thead>
                       <tbody>
                         {breakdownModels.length === 0 ? (
                           <tr>
                             <td colSpan={4} className="py-6 text-center text-muted-foreground">
-                              No activity in this window.
+                              no activity in this window.
                             </td>
                           </tr>
                         ) : (
@@ -520,7 +520,7 @@ export function UsagePage() {
                               </td>
                               <td className="py-2 text-right text-foreground tabular-nums">
                                 {isModelCostUnknown(model) ? (
-                                  <span className="text-muted-foreground">Unpriced</span>
+                                  <span className="text-muted-foreground">unpriced</span>
                                 ) : (
                                   formatUsd(model.costUsd)
                                 )}
@@ -548,14 +548,14 @@ export function UsagePage() {
                       </colgroup>
                       <thead>
                         <tr className="border-b border-border text-left text-xs text-muted-foreground">
-                          <th className="py-2 font-normal">{isPast24Hours ? "Hour" : "Day"}</th>
+                          <th className="py-2 font-normal">{isPast24Hours ? "hour" : "day"}</th>
                           {activeProviders.map((provider) => (
                             <th key={provider} className="py-2 text-right font-normal">
                               {PROVIDER_PRESENTATION[provider].label}
                             </th>
                           ))}
-                          <th className="py-2 text-right font-normal">Total</th>
-                          <th className="py-2 text-right font-normal">Tokens</th>
+                          <th className="py-2 text-right font-normal">total</th>
+                          <th className="py-2 text-right font-normal">tokens</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -565,7 +565,7 @@ export function UsagePage() {
                               colSpan={activeProviders.length + 3}
                               className="py-6 text-center text-muted-foreground"
                             >
-                              No activity in this window.
+                              no activity in this window.
                             </td>
                           </tr>
                         ) : (
@@ -663,7 +663,7 @@ function UsageCoverageNotice({
       ))}
       {duplicateSources.length > 0 ? (
         <span>
-          Counted once across environments sharing a transcript directory:{" "}
+          counted once across environments sharing a transcript directory:{" "}
           {duplicateSources.join(", ")}
         </span>
       ) : null}
@@ -694,7 +694,7 @@ function UsageEnvironmentFilter({
   const [modelPricesOpen, setModelPricesOpen] = useState(false);
   const allSelected = selectedEnvironmentIds === null;
   const label = allSelected
-    ? "All environments"
+    ? "all environments"
     : selectedEnvironments.length === 1
       ? selectedEnvironments[0]!.label
       : `${selectedEnvironments.length} environments`;
@@ -724,7 +724,7 @@ function UsageEnvironmentFilter({
             ) : showUsageStatus && hasIssue ? (
               <CircleAlertIcon
                 className="size-3.5 text-amber-600 dark:text-amber-400"
-                aria-label="Some environments could not report usage"
+                aria-label="some environments could not report usage"
               />
             ) : (
               <ChevronDownIcon
@@ -740,7 +740,7 @@ function UsageEnvironmentFilter({
             closeOnClick={false}
             onCheckedChange={(checked) => onSelectionChange(checked ? null : new Set())}
           >
-            All environments
+            all environments
           </MenuCheckboxItem>
           <MenuSeparator />
           {environments.map((environment) => {
@@ -749,18 +749,18 @@ function UsageEnvironmentFilter({
               selectedEnvironmentIds.has(environment.environmentId);
             const status =
               environment.error !== null
-                ? "Unavailable"
+                ? "unavailable"
                 : environment.summary !== null &&
                     !isCompatibleUsageContractVersion(
                       environment.summary.contractVersion,
                       USAGE_CONTRACT_VERSION,
                     )
-                  ? "Update required"
+                  ? "update required"
                   : environment.summary === null
-                    ? "Scanning…"
+                    ? "scanning…"
                     : environment.isPending
-                      ? "Refreshing…"
-                      : "Ready";
+                      ? "refreshing…"
+                      : "ready";
             return (
               <MenuCheckboxItem
                 key={environment.environmentId}
@@ -795,7 +795,7 @@ function UsageEnvironmentFilter({
           ) : null}
           {showUsageStatus && isPartial ? (
             <p className="px-2 py-2 text-xs text-muted-foreground">
-              Totals are partial while selected environments scan.
+              totals are partial while selected environments scan.
             </p>
           ) : null}
           {showUsageStatus ? (
@@ -808,7 +808,7 @@ function UsageEnvironmentFilter({
           <MenuSeparator />
           <MenuItem onClick={() => setModelPricesOpen(true)}>
             <SlidersHorizontalIcon aria-hidden />
-            Model prices
+            model prices
           </MenuItem>
         </MenuPopup>
       </Menu>
@@ -862,9 +862,9 @@ function UsageSkeleton() {
       </section>
 
       <section className="flex flex-col gap-2">
-        <h2 className="text-sm font-medium text-foreground">Totals</h2>
+        <h2 className="text-sm font-medium text-foreground">totals</h2>
         <div className="grid grid-cols-2 gap-x-6 gap-y-4 py-1 md:grid-cols-5">
-          {["Processed tokens", "Cached input", "Uncached input", "Output", "Cache savings"].map(
+          {["processed tokens", "cached input", "uncached input", "output", "cache savings"].map(
             (label) => (
               <div key={label} className="flex flex-col gap-0.5">
                 <span className="text-xs text-muted-foreground">{label}</span>
@@ -877,7 +877,7 @@ function UsageSkeleton() {
 
       <section className="flex flex-col gap-3">
         <div className="flex items-center justify-between gap-3">
-          <h2 className="text-sm font-medium text-foreground">Breakdown</h2>
+          <h2 className="text-sm font-medium text-foreground">breakdown</h2>
           <Skeleton className="h-7 w-28 rounded-lg" />
         </div>
         <Skeleton className="h-44 bg-muted-foreground/10" />

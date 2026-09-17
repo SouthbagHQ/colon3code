@@ -285,7 +285,7 @@ describe("provider update launch notification logic", () => {
       phase: "initial",
       type: "warning",
       title: "update available: Codex v1.1.0 3:",
-      description: "Install the update now or review provider settings.",
+      description: "install the update now or review provider settings.",
     });
   });
 
@@ -321,7 +321,7 @@ describe("provider update launch notification logic", () => {
     expect(view).toMatchObject({
       phase: "running",
       type: "loading",
-      title: "Updating provider",
+      title: "updating provider",
     });
     expect(shouldShowPrimaryProviderUpdateToast(view)).toBe(false);
   });
@@ -414,7 +414,7 @@ describe("provider update launch notification logic", () => {
       phase: "succeeded",
       type: "success",
       title: "provider updated :3",
-      description: "New sessions will use the updated provider.",
+      description: "new sessions will use the updated provider.",
       dismissAfterVisibleMs: 3_000,
     });
   });
@@ -469,7 +469,7 @@ describe("provider update launch notification logic", () => {
 
     expect(view).toMatchObject({
       tone: "loading",
-      title: "Updating 2 providers",
+      title: "updating 2 providers",
       description: "Codex and Cursor updates are in progress.",
     });
   });
@@ -491,7 +491,7 @@ describe("provider update launch notification logic", () => {
     expect(view).toMatchObject({
       key: "loading:codex:running",
       tone: "loading",
-      title: "Updating Codex",
+      title: "updating Codex",
       description: "Codex update in progress.",
     });
   });
@@ -546,7 +546,7 @@ describe("provider update launch notification logic", () => {
       key: "succeeded:codex:2026-04-23T10:00:00.000Z:Provider updated.",
       tone: "success",
       title: "Codex updated: v1.1.0",
-      description: "New sessions will use the updated provider.",
+      description: "new sessions will use the updated provider.",
       dismissAfterVisibleMs: 3_000,
     });
   });
@@ -945,20 +945,20 @@ describe("provider update launch notification logic", () => {
     const runningResult: ProviderUpdateToastView = {
       phase: "running",
       type: "loading",
-      title: "Updating providers",
-      description: "Running provider update command.",
+      title: "updating providers",
+      description: "running provider update command.",
     };
     const succeededResult: ProviderUpdateToastView = {
       phase: "succeeded",
       type: "success",
       title: "provider updated :3",
-      description: "New sessions will use the updated provider.",
+      description: "new sessions will use the updated provider.",
     };
     const successPill: ProviderUpdateSidebarPillView = {
       key: "succeeded:codex",
       tone: "success",
       title: "Codex updated",
-      description: "New sessions will use the updated provider.",
+      description: "new sessions will use the updated provider.",
     };
 
     it("prefers a transport error", () => {
@@ -987,7 +987,7 @@ describe("provider update launch notification logic", () => {
 
     it("falls through a non-terminal result to live server state", () => {
       // The dispatch snapshot is still "running", but server state already
-      // reports success — the row must not stay pinned on "Updating…".
+      // reports success — the row must not stay pinned on "updating…".
       expect(
         resolveEnvironmentUpdateRowStatus({
           group,

@@ -95,7 +95,7 @@ export function resolveLinkPullRequestInput(input: {
   const url = parseChangeRequestUrl(parsed);
   if (url !== null) {
     if (!input.hasProject({ ...url, url: parsed })) {
-      return { error: `No project in this environment can read ${url.host}/${url.repository}.` };
+      return { error: `no project in this environment can read ${url.host}/${url.repository}.` };
     }
     return {
       link: { host: url.host, repository: url.repository, number: url.number, url: parsed },
@@ -104,12 +104,12 @@ export function resolveLinkPullRequestInput(input: {
   const number = Number(parsed);
   if (!Number.isSafeInteger(number) || number < 1) return null;
   if (input.project === null) {
-    return { error: "Paste a full URL to link a pull request from another repository." };
+    return { error: "paste a full URL to link a pull request from another repository." };
   }
   const webUrl = input.project.webUrl(number);
   const webReference = webUrl === null ? null : parseChangeRequestUrl(webUrl);
   if (webUrl === null || webReference === null) {
-    return { error: "Paste a full URL; this project's host has no known pull request URL." };
+    return { error: "paste a full URL; this project's host has no known pull request URL." };
   }
   return {
     link: { ...webReference, url: webUrl },
@@ -180,7 +180,7 @@ function LinkPullRequestDialog({
     try {
       await linking.changeLink(threadRef, resolved.link.url, true);
     } catch (error) {
-      setSubmitError(error instanceof Error ? error.message : "Could not link the pull request.");
+      setSubmitError(error instanceof Error ? error.message : "could not link the pull request.");
       return;
     } finally {
       setPending(false);
@@ -191,9 +191,9 @@ function LinkPullRequestDialog({
   const validation = !dirty
     ? null
     : reference.trim().length === 0
-      ? "Paste a pull request URL or enter 123 / #123."
+      ? "paste a pull request URL or enter 123 / #123."
       : resolved === null
-        ? "Use a pull request URL, 123, or #123."
+        ? "use a pull request URL, 123, or #123."
         : "error" in resolved
           ? resolved.error
           : null;
@@ -202,16 +202,16 @@ function LinkPullRequestDialog({
     <Dialog open={open} onOpenChange={(next) => (pending ? undefined : onOpenChange(next))}>
       <DialogPopup className="max-w-xl">
         <DialogHeader>
-          <DialogTitle>Link pull request</DialogTitle>
+          <DialogTitle>link pull request</DialogTitle>
           <DialogDescription>
-            Attach a pull request to this thread. A full URL can point at any repository on a host
+            attach a pull request to this thread. A full URL can point at any repository on a host
             this environment has a project for.
           </DialogDescription>
         </DialogHeader>
         <DialogPanel className="space-y-3">
           <Input
             ref={inputRef}
-            placeholder="Pull request URL or #42"
+            placeholder="pull request URL or #42"
             value={reference}
             onChange={(event) => {
               setDirty(true);
@@ -240,7 +240,7 @@ function LinkPullRequestDialog({
             onClick={() => onOpenChange(false)}
             disabled={pending}
           >
-            Cancel
+            cancel
           </Button>
           <Button
             type="button"
@@ -248,7 +248,7 @@ function LinkPullRequestDialog({
             onClick={() => void submit()}
             disabled={pending || resolved === null || "error" in resolved}
           >
-            {pending ? "Linking..." : "Link"}
+            {pending ? "linking..." : "link"}
           </Button>
         </DialogFooter>
       </DialogPopup>

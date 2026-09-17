@@ -24,7 +24,7 @@ function formatRemainingSeconds(seconds: number): string {
 function getPromptErrorMessage(error: unknown): string {
   const message = error instanceof Error ? error.message : "SSH password prompt failed.";
   return message.includes("expired") || message.includes("no longer pending")
-    ? "This SSH password prompt expired. Try connecting again."
+    ? "this SSH password prompt expired. try connecting again."
     : message;
 }
 
@@ -101,7 +101,7 @@ function ActiveSshPasswordPrompt({
   const remainingLabel =
     remainingSeconds === null ? null : formatRemainingSeconds(remainingSeconds);
   const visibleResponseError = isExpired
-    ? "This SSH password prompt expired. Try connecting again."
+    ? "this SSH password prompt expired. try connecting again."
     : responseError;
 
   const respond = async (nextPassword: string | null) => {
@@ -111,7 +111,7 @@ function ActiveSshPasswordPrompt({
 
     const requestId = request.requestId;
     if (nextPassword !== null && isExpired) {
-      setResponseError("This SSH password prompt expired. Try connecting again.");
+      setResponseError("this SSH password prompt expired. try connecting again.");
       return;
     }
 
@@ -158,7 +158,7 @@ function ActiveSshPasswordPrompt({
     >
       <DialogPopup className="max-w-md" showCloseButton={false}>
         <DialogHeader>
-          <DialogTitle>SSH Password Required</DialogTitle>
+          <DialogTitle>SSH password required</DialogTitle>
           <DialogDescription>
             T3 needs your SSH password to connect to <code>{target}</code>. The password is passed
             to the local SSH process for this connection attempt and is not saved by :3 Code.
@@ -184,7 +184,7 @@ function ActiveSshPasswordPrompt({
                         : "shrink-0 text-xs text-muted-foreground"
                     }
                   >
-                    {isExpired ? "Expired" : remainingLabel}
+                    {isExpired ? "expired" : remainingLabel}
                   </span>
                 ) : null}
               </div>
@@ -202,17 +202,17 @@ function ActiveSshPasswordPrompt({
               <p className="text-sm text-destructive">{visibleResponseError}</p>
             ) : (
               <p className="text-sm text-muted-foreground">
-                Use SSH keys to avoid repeated password prompts on new SSH sessions.
+                use SSH keys to avoid repeated password prompts on new SSH sessions.
               </p>
             )}
           </form>
         </DialogPanel>
         <DialogFooter>
           <Button disabled={isResponding} type="button" variant="outline" onClick={cancelPrompt}>
-            {isExpired ? "Dismiss" : "Cancel"}
+            {isExpired ? "dismiss" : "cancel"}
           </Button>
           <Button disabled={isResponding || isExpired} form={formId} type="submit">
-            Continue
+            continue
           </Button>
         </DialogFooter>
       </DialogPopup>

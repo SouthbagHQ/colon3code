@@ -83,14 +83,14 @@ export function liveWorkEntryLabel(
   if (command) {
     const verb =
       status === "inProgress"
-        ? "Running"
+        ? "running"
         : status === "failed"
-          ? "Failed"
+          ? "failed"
           : status === "declined"
-            ? "Declined"
+            ? "declined"
             : status === "stopped"
-              ? "Stopped"
-              : "Ran";
+              ? "stopped"
+              : "ran";
     return `${verb} ${commandProgramName(command) ?? "command"}`;
   }
   return workEntryDisplayLabel(entry, workspaceRoot);
@@ -728,11 +728,11 @@ function deriveTurnFolds(input: {
     const duration = elapsedMs !== null ? formatDuration(elapsedMs) : null;
     const label = isLatestInterruptedTurn
       ? duration
-        ? `You stopped after ${duration}`
-        : "You stopped this response"
+        ? `you stopped after ${duration}`
+        : "you stopped this response"
       : duration
-        ? `Worked for ${duration}`
-        : "Worked";
+        ? `worked for ${duration}`
+        : "worked";
 
     foldsByAnchorEntryId.set(firstHiddenEntry.id, {
       turnId,

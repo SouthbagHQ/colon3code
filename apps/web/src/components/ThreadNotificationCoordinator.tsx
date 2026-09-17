@@ -156,7 +156,7 @@ function EnvironmentNotifications({
           description: thread.title,
           data: { hideCopyButton: true },
           actionProps: {
-            children: "Open thread",
+            children: "open thread",
             onClick: () => {
               toastManager.close(toastId);
               void navigate({

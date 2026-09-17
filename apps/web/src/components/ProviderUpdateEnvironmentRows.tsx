@@ -127,14 +127,14 @@ function EnvironmentUpdateRow({
     case "unchanged":
       trailing = (
         <Button size="xs" variant="outline" onClick={onUpdate}>
-          Retry
+          retry
         </Button>
       );
       break;
     default:
       trailing = (
         <Button size="xs" variant="outline" onClick={onUpdate}>
-          Update
+          update
         </Button>
       );
       break;
@@ -261,7 +261,7 @@ export function ProviderUpdateEnvironmentRows({
         inFlightEnvironmentsRef.current.delete(environmentId);
         clearPending(environmentId);
         setErrorByEnvironment((previous) =>
-          new Map(previous).set(environmentId, "Update timed out — try again."),
+          new Map(previous).set(environmentId, "update timed out — try again."),
         );
       }, PENDING_EXPIRY_MS);
       try {
@@ -308,7 +308,7 @@ export function ProviderUpdateEnvironmentRows({
           setErrorByEnvironment((previous) =>
             new Map(previous).set(
               environmentId,
-              "This environment isn’t connected — try again once it reconnects.",
+              "this environment isn’t connected — try again once it reconnects.",
             ),
           );
           return;

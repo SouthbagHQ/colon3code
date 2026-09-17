@@ -30,11 +30,11 @@ export function PermissionChecklist({
           {permission.granted ? (
             <span role="status" className="flex items-center gap-1 text-xs text-success">
               <CircleCheckIcon className="size-4" aria-hidden="true" />
-              Allowed
+              allowed
             </span>
           ) : (
             <Button size="xs" variant="outline" disabled={busy} onClick={permission.onAllow}>
-              Allow
+              allow
             </Button>
           )}
         </div>
@@ -46,7 +46,7 @@ export function PermissionChecklist({
 export function PermissionContinueButton({
   ready,
   busy = false,
-  children = "Continue",
+  children = "continue",
   ...props
 }: Omit<ComponentProps<typeof Button>, "disabled"> & { ready: boolean; busy?: boolean }) {
   return (

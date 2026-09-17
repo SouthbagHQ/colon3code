@@ -797,7 +797,7 @@ export const ModelPickerContent = memo(function ModelPickerContent(props: {
               ? {
                   disabledInstanceIds: lockedDisabledInstanceIds,
                   getDisabledInstanceTooltip: (entry: ProviderInstanceEntry) =>
-                    `${entry.displayName} is unavailable in this thread. Start a new thread to switch providers.`,
+                    `${entry.displayName} is unavailable in this thread. start a new thread to switch providers.`,
                 }
               : {})}
           />
@@ -850,7 +850,7 @@ export const ModelPickerContent = memo(function ModelPickerContent(props: {
                   ref={searchInputRef}
                   className="[&_input]:h-6.5 [&_input]:font-sans [&_input]:leading-6.5"
                   inputClassName="rounded-none bg-transparent text-sm"
-                  placeholder="Search models..."
+                  placeholder="search models..."
                   showTrigger={false}
                   startAddon={
                     <SearchIcon className="-translate-x-0.5 size-4 shrink-0 text-muted-foreground opacity-70" />
@@ -1013,15 +1013,15 @@ export const ModelPickerContent = memo(function ModelPickerContent(props: {
                       variant="link"
                     >
                       {providerSetupEntries.length > 1
-                        ? `Set up ${entry.displayName}`
-                        : "Open provider setup"}
+                        ? `set up ${entry.displayName}`
+                        : "open provider setup"}
                     </Button>
                   </div>
                 ))}
               </div>
             ) : (
               <ComboboxEmpty className="not-empty:py-6 empty:h-0 text-xs font-normal leading-snug">
-                No models found
+                no models found
               </ComboboxEmpty>
             )}
           </div>

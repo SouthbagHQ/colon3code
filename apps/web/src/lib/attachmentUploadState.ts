@@ -46,11 +46,11 @@ export function attachmentUploadBlockReason(input: {
 
   if (failed > 0) {
     return failed === 1
-      ? "Retry or remove the failed attachment"
-      : "Retry or remove the failed attachments";
+      ? "retry or remove the failed attachment"
+      : "retry or remove the failed attachments";
   }
   if (pending > 0) {
-    return pending === 1 ? "Attachment still uploading" : "Attachments still uploading";
+    return pending === 1 ? "attachment still uploading" : "attachments still uploading";
   }
   return null;
 }

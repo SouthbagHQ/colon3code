@@ -20,7 +20,7 @@ describe("ComposerPendingApprovalPanel", () => {
     );
 
     expect(markup).toContain('data-approval-detail="complete"');
-    expect(markup).toContain('aria-label="Command"');
+    expect(markup).toContain('aria-label="command"');
     expect(markup).toContain('role="group"');
     expect(markup).toContain('tabindex="0"');
     expect(markup).toContain(detail);
@@ -48,7 +48,7 @@ describe("ComposerPendingApprovalPanel", () => {
       />,
     );
 
-    expect(markup).toContain("File read approval");
+    expect(markup).toContain("file read approval");
   });
 
   it("shows the app name and message for an MCP access request", () => {
@@ -65,8 +65,8 @@ describe("ComposerPendingApprovalPanel", () => {
       />,
     );
 
-    expect(markup).toContain('aria-label="App access approval"');
-    expect(markup).toContain('aria-label="App access request"');
+    expect(markup).toContain('aria-label="app access approval"');
+    expect(markup).toContain('aria-label="app access request"');
     expect(markup).toContain(">Safari<");
     expect(markup).toContain("Allow ChatGPT to use Safari?");
   });

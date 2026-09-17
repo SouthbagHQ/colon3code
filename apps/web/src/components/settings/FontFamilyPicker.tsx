@@ -231,7 +231,7 @@ export function FontFamilyPicker({
             <ComboboxInput
               className="[&_input]:h-6.5 [&_input]:ps-5 [&_input]:font-sans [&_input]:leading-6.5"
               inputClassName="rounded-none bg-transparent text-sm"
-              placeholder="Search fonts…"
+              placeholder="search fonts…"
               showTrigger={false}
               size="sm"
               unstyled

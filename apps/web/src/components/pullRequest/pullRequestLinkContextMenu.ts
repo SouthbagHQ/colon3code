@@ -9,22 +9,22 @@ export type PullRequestLinkContextMenuAction = "copy-link" | "open-external";
 
 /** Named for the host rather than "externally": the point is where you will land. */
 const OPEN_ON_HOST_LABELS: Partial<Record<string, string>> = {
-  github: "Open on GitHub",
-  gitlab: "Open on GitLab",
-  forgejo: "Open on Forgejo",
-  bitbucket: "Open on Bitbucket",
-  "azure-devops": "Open on Azure DevOps",
+  github: "open on GitHub",
+  gitlab: "open on GitLab",
+  forgejo: "open on Forgejo",
+  bitbucket: "open on Bitbucket",
+  "azure-devops": "open on Azure DevOps",
 };
 
 export const openOnHostLabel = (provider: string): string =>
-  OPEN_ON_HOST_LABELS[provider] ?? "Open on host";
+  OPEN_ON_HOST_LABELS[provider] ?? "open on host";
 
 /** Copy first: it is the reason to right-click a number rather than click it. */
 function pullRequestLinkContextMenuItems(
   openLabel: string,
 ): readonly ContextMenuItem<PullRequestLinkContextMenuAction>[] {
   return [
-    { id: "copy-link", label: "Copy link", icon: "copy" },
+    { id: "copy-link", label: "copy link", icon: "copy" },
     { id: "open-external", label: openLabel },
   ];
 }

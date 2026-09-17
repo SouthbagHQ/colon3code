@@ -15,7 +15,7 @@ import { PullRequestSummaryTab } from "./PullRequestSummaryTab";
 const detail: PullRequestDetailView = {
   provider: "github",
   projectId: ProjectId.make("project"),
-  projectTitle: "Project",
+  projectTitle: "project",
   workspaceRoot: "/workspace",
   repository: "owner/repo",
   number: 1,
@@ -107,26 +107,26 @@ it("toggles checks from their heading and resets sections for another pull reque
   expect(
     renderer.root.findAllByType("span").some((span) => span.children.includes("Unit tests")),
   ).toBe(false);
-  click("Checks");
+  click("checks");
   expect(
     renderer.root.findAllByType("span").some((span) => span.children.includes("Unit tests")),
   ).toBe(true);
-  click("Checks");
-  expect(heading("Checks").props["aria-expanded"]).toBe(false);
-  click("Checks");
-  click("Description");
+  click("checks");
+  expect(heading("checks").props["aria-expanded"]).toBe(false);
+  click("checks");
+  click("description");
   act(() =>
     renderer.update(render({ ...detail, url: "https://github.com/owner/repo/pull/2", number: 2 })),
   );
-  expect(heading("Checks").props["aria-expanded"]).toBe(false);
-  expect(heading("Description").props["aria-expanded"]).toBe(true);
+  expect(heading("checks").props["aria-expanded"]).toBe(false);
+  expect(heading("description").props["aria-expanded"]).toBe(true);
 });
 
 it("keeps an unsaved description when collapsed and reopened", () => {
   act(() => {
     renderer = create(render());
   });
-  act(() => renderer.root.findByProps({ "aria-label": "Edit description" }).props.onClick());
+  act(() => renderer.root.findByProps({ "aria-label": "edit description" }).props.onClick());
   act(() =>
     renderer.root.findByType("textarea").props.onChange({
       target: { value: "Unsaved description" },
@@ -134,8 +134,8 @@ it("keeps an unsaved description when collapsed and reopened", () => {
       nativeEvent: {},
     }),
   );
-  click("Description");
-  expect(heading("Description").props["aria-expanded"]).toBe(false);
-  click("Description");
+  click("description");
+  expect(heading("description").props["aria-expanded"]).toBe(false);
+  click("description");
   expect(renderer.root.findByType("textarea").props.value).toBe("Unsaved description");
 });

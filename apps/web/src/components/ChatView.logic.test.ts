@@ -113,8 +113,8 @@ describe("agent browser close confirmation", () => {
       }),
     ).toBe(
       [
-        "Close browser while the agent is using it?",
-        "The agent is actively controlling this browser. Closing it may interrupt the current browser action.",
+        "close browser while the agent is using it?",
+        "the agent is actively controlling this browser. closing it may interrupt the current browser action.",
       ].join("\n"),
     );
   });
@@ -125,7 +125,7 @@ describe("agent browser close confirmation", () => {
         "tab-1": { controller: "agent" },
         "tab-2": { controller: "agent" },
       }),
-    ).toContain("Close 2 browsers");
+    ).toContain("close 2 browsers");
   });
 });
 
@@ -1395,7 +1395,7 @@ describe("resolveComposerProviderSelection", () => {
     expect(selection.selectedProviderEntry?.instanceId).toBe(signedOutEntry.instanceId);
     expect(
       getAntigravitySendBlockReason(selection.selectedProviderEntry?.snapshot, "gemini-pro"),
-    ).toBe("Sign in to Antigravity in provider settings before sending.");
+    ).toBe("sign in to Antigravity in provider settings before sending.");
   });
 
   it("blocks sends until the selected Antigravity profile is installed", () => {
@@ -1405,7 +1405,7 @@ describe("resolveComposerProviderSelection", () => {
     }).snapshot;
 
     expect(getAntigravitySendBlockReason(provider, "gemini-pro")).toBe(
-      "Install Antigravity in provider settings before sending.",
+      "install Antigravity in provider settings before sending.",
     );
   });
 
@@ -1422,13 +1422,13 @@ describe("resolveComposerProviderSelection", () => {
       getAntigravitySendBlockReason({ ...provider, models: catalogModels }, "gemini-pro"),
     ).toBeNull();
     expect(getAntigravitySendBlockReason(provider, "")).toBe(
-      "Choose an Antigravity model before sending.",
+      "choose an Antigravity model before sending.",
     );
   });
 
   it("blocks saved model sends until Antigravity loads its account catalog", () => {
     expect(getAntigravitySendBlockReason(entry("antigravity").snapshot, "gemini-pro")).toBe(
-      "Refresh Antigravity models in provider settings before sending.",
+      "refresh Antigravity models in provider settings before sending.",
     );
   });
 
@@ -1436,7 +1436,7 @@ describe("resolveComposerProviderSelection", () => {
     const provider = entry("antigravity", "google_work", { models: catalogModels }).snapshot;
 
     expect(getAntigravitySendBlockReason(provider, "")).toBe(
-      "Choose an Antigravity model before sending.",
+      "choose an Antigravity model before sending.",
     );
   });
 
@@ -1447,7 +1447,7 @@ describe("resolveComposerProviderSelection", () => {
     }).snapshot;
 
     expect(getAntigravitySendBlockReason(provider, "saved-model-not-in-current-catalog")).toBe(
-      "That Antigravity model is no longer available. Choose another model.",
+      "that Antigravity model is no longer available. choose another model.",
     );
     expect(getAntigravitySendBlockReason(provider, "gemini-pro")).toBeNull();
   });
@@ -1671,11 +1671,11 @@ describe("buildExpiredTerminalContextToastCopy", () => {
   it("formats empty and omission guidance", () => {
     expect(buildExpiredTerminalContextToastCopy(1, "empty")).toEqual({
       title: "expired terminal context won't be sent 3:",
-      description: "Remove it or re-add it to include terminal output.",
+      description: "remove it or re-add it to include terminal output.",
     });
     expect(buildExpiredTerminalContextToastCopy(2, "omitted")).toEqual({
       title: "expired terminal contexts omitted from message 3:",
-      description: "Re-add it if you want that terminal output included.",
+      description: "re-add it if you want that terminal output included.",
     });
   });
 });
@@ -1742,7 +1742,7 @@ describe("getStartedThreadModelChangeBlockReason", () => {
     ).toEqual({
       title: "start a new chat to change models 3:",
       description:
-        "This provider does not allow switching models after a conversation has started.",
+        "this provider does not allow switching models after a conversation has started.",
     });
   });
 });

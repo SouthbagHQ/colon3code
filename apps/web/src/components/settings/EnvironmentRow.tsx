@@ -18,7 +18,7 @@ export function formatDesktopSshTarget(target: DesktopSshEnvironmentTarget): str
  */
 export function environmentTransportLabel(environment: EnvironmentPresentation): string {
   const { entry } = environment;
-  if (entry.target._tag === "PrimaryConnectionTarget") return "This machine";
+  if (entry.target._tag === "PrimaryConnectionTarget") return "this machine";
   if (environment.relayManaged) return "T3 Connect";
   if (isDesktopLocalConnectionTarget(entry.target)) return "WSL";
   if (
@@ -28,7 +28,7 @@ export function environmentTransportLabel(environment: EnvironmentPresentation):
   ) {
     return `SSH ${formatDesktopSshTarget(entry.profile.value.target)}`;
   }
-  return environment.displayUrl ?? "Remote link";
+  return environment.displayUrl ?? "remote link";
 }
 
 /**

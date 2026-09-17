@@ -50,7 +50,7 @@ describe("model price writes", () => {
     const fastSaved = new Promise<void>((resolve) => {
       resolveFastSaved = resolve;
     });
-    const targets = [target("fast"), target("slow"), target("offline", { unavailable: "Offline" })];
+    const targets = [target("fast"), target("slow"), target("offline", { unavailable: "offline" })];
     const results = new Map<EnvironmentId, UsagePriceWriteResult>();
     const write = vi.fn(async ({ environmentId }: { environmentId: EnvironmentId }) =>
       environmentId === "slow" ? slow : { _tag: "Success" as const },
@@ -69,7 +69,7 @@ describe("model price writes", () => {
     expect(results.get(EnvironmentId.make("fast"))).toEqual({ status: "saved" });
     expect(results.get(EnvironmentId.make("offline"))).toEqual({
       status: "failed",
-      error: "Offline",
+      error: "offline",
     });
     expect(results.has(EnvironmentId.make("slow"))).toBe(false);
     resolveSlow({ _tag: "Failure" });
@@ -119,8 +119,8 @@ describe("model price writes", () => {
     await writeUsagePrices({
       targets: [
         target("lost"),
-        target("denied", { unavailable: "Read-only access" }),
-        target("old", { unavailable: "Update server to edit prices" }),
+        target("denied", { unavailable: "read-only access" }),
+        target("old", { unavailable: "update server to edit prices" }),
       ],
       changes: new Map([[EnvironmentId.make("lost"), [{ model: "example", price }]]]),
       write,
@@ -129,15 +129,15 @@ describe("model price writes", () => {
     expect(write).toHaveBeenCalledTimes(1);
     expect(onResult).toHaveBeenCalledWith("lost", {
       status: "failed",
-      error: "Could not save. Try again.",
+      error: "could not save. try again.",
     });
     expect(onResult).toHaveBeenCalledWith("denied", {
       status: "failed",
-      error: "Read-only access",
+      error: "read-only access",
     });
     expect(onResult).toHaveBeenCalledWith("old", {
       status: "failed",
-      error: "Update server to edit prices",
+      error: "update server to edit prices",
     });
   });
 });

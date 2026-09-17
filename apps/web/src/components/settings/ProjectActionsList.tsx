@@ -20,7 +20,7 @@ export function ProjectActionsList({
   if (scripts.length === 0)
     return (
       <p className="px-3 py-2 text-base text-muted-foreground sm:px-4 sm:text-sm">
-        No actions configured.
+        no actions configured.
       </p>
     );
   return scripts.map((script) => {
@@ -55,7 +55,7 @@ export function ProjectActionsList({
               size="icon-xs"
               variant="ghost"
               className="shrink-0 text-muted-foreground opacity-0 group-focus-within:opacity-100 group-hover:opacity-100"
-              aria-label={`Edit ${script.name}`}
+              aria-label={`edit ${script.name}`}
               disabled={disabled}
               onClick={() => onEdit(script)}
             >

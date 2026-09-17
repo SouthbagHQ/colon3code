@@ -30,7 +30,7 @@ import { ScreenRotationIcon } from "./ScreenRotationIcon";
 
 const RESPONSIVE_VALUE = "responsive";
 const SELECT_ITEMS = [
-  { value: RESPONSIVE_VALUE, label: "Responsive" },
+  { value: RESPONSIVE_VALUE, label: "responsive" },
   ...PREVIEW_VIEWPORT_PRESETS.map((preset) => ({ value: preset.id, label: preset.label })),
 ];
 
@@ -157,7 +157,7 @@ export function BrowserDeviceToolbar({
       className="sticky left-0 top-0 z-50 flex items-center gap-0.5 overflow-x-auto border-b border-border/70 bg-background/95 px-1.5 shadow-xs backdrop-blur-md [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
       style={{ width, height: BROWSER_DEVICE_TOOLBAR_HEIGHT }}
       role="toolbar"
-      aria-label="Browser device toolbar"
+      aria-label="browser device toolbar"
       data-browser-device-toolbar
       onBlur={(event) => {
         const nextTarget = event.relatedTarget;
@@ -176,7 +176,7 @@ export function BrowserDeviceToolbar({
     >
       {width >= 560 ? (
         <span className="mr-0.5 shrink-0 text-[11px] font-medium text-muted-foreground">
-          Dimensions
+          dimensions
         </span>
       ) : null}
       <Select
@@ -193,14 +193,14 @@ export function BrowserDeviceToolbar({
             "shrink-0 justify-between px-1.5 font-medium",
             width >= 440 ? "w-36" : "w-24",
           )}
-          aria-label="Browser device preset"
+          aria-label="browser device preset"
         >
           <SelectValue />
         </SelectTrigger>
         <SelectPopup align="start" alignItemWithTrigger={false} className="min-w-64">
-          <SelectItem value={RESPONSIVE_VALUE}>Responsive</SelectItem>
+          <SelectItem value={RESPONSIVE_VALUE}>responsive</SelectItem>
           <SelectGroup>
-            <SelectGroupLabel>Standard</SelectGroupLabel>
+            <SelectGroupLabel>standard</SelectGroupLabel>
             {PREVIEW_VIEWPORT_PRESETS.map((preset) => (
               <SelectItem key={preset.id} value={preset.id}>
                 <span className="flex w-full items-center justify-between gap-5">
@@ -217,7 +217,7 @@ export function BrowserDeviceToolbar({
 
       <form
         className="m-0 flex min-w-0 shrink-0 items-center gap-0.5 border-0 p-0"
-        aria-label="Viewport dimensions"
+        aria-label="viewport dimensions"
         onSubmit={(event) => {
           event.preventDefault();
           applyCustomSize();
@@ -242,7 +242,7 @@ export function BrowserDeviceToolbar({
             )
           }
           onChange={(event) => updateCustomDimension("width", event.target.value)}
-          aria-label="Viewport width"
+          aria-label="viewport width"
           aria-invalid={!customValid}
           className={cn(
             "h-6 rounded-md text-center tabular-nums [&_[data-slot=input]]:h-full [&_[data-slot=input]]:px-1 [&_[data-slot=input]]:text-xs [&_[data-slot=input]]:leading-none [&_[data-slot=input]::-webkit-inner-spin-button]:appearance-none [&_[data-slot=input]]:[appearance:textfield]",
@@ -269,7 +269,7 @@ export function BrowserDeviceToolbar({
             )
           }
           onChange={(event) => updateCustomDimension("height", event.target.value)}
-          aria-label="Viewport height"
+          aria-label="viewport height"
           aria-invalid={!customValid}
           className={cn(
             "h-6 rounded-md text-center tabular-nums [&_[data-slot=input]]:h-full [&_[data-slot=input]]:px-1 [&_[data-slot=input]]:text-xs [&_[data-slot=input]]:leading-none [&_[data-slot=input]::-webkit-inner-spin-button]:appearance-none [&_[data-slot=input]]:[appearance:textfield]",
@@ -286,7 +286,7 @@ export function BrowserDeviceToolbar({
               size="icon-xs"
               type="button"
               aria-label={
-                aspectRatio === null ? "Lock viewport aspect ratio" : "Unlock viewport aspect ratio"
+                aspectRatio === null ? "lock viewport aspect ratio" : "unlock viewport aspect ratio"
               }
               aria-pressed={aspectRatio !== null}
               className={cn(aspectRatio !== null && "bg-accent text-foreground")}
@@ -303,14 +303,14 @@ export function BrowserDeviceToolbar({
           )}
         </TooltipTrigger>
         <TooltipPopup side="top">
-          {aspectRatio === null ? "Lock aspect ratio" : "Unlock aspect ratio"}
+          {aspectRatio === null ? "lock aspect ratio" : "unlock aspect ratio"}
         </TooltipPopup>
       </Tooltip>
       <Button
         variant="ghost"
         size="icon-xs"
         type="button"
-        aria-label="Rotate viewport"
+        aria-label="rotate viewport"
         disabled={pending}
         onClick={rotate}
       >
@@ -320,7 +320,7 @@ export function BrowserDeviceToolbar({
         variant="ghost"
         size="icon-xs"
         type="button"
-        aria-label="Close device toolbar"
+        aria-label="close device toolbar"
         className="sticky right-0 ml-auto bg-background/95"
         disabled={pending}
         onClick={() => {

@@ -24,7 +24,7 @@ export function PullRequestActivityUnavailableState({
       <p className="max-w-md text-xs text-muted-foreground">{error}</p>
       <Button size="sm" variant="outline" onClick={onRetry}>
         <RefreshIcon aria-hidden className="size-3.5" />
-        Retry
+        retry
       </Button>
     </div>
   );

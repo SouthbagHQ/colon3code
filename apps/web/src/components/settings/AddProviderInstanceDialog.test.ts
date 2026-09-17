@@ -3,7 +3,7 @@ import { describe, expect, it } from "vite-plus/test";
 import { resolveWizardNavigation } from "./AddProviderInstanceDialog.logic";
 
 describe("resolveWizardNavigation", () => {
-  const invalidId = { instanceIdError: "Instance ID is required." };
+  const invalidId = { instanceIdError: "instance ID is required." };
   const validId = { instanceIdError: null };
 
   it("allows moving from Driver to Identity before the instance id is valid", () => {
@@ -14,7 +14,7 @@ describe("resolveWizardNavigation", () => {
     expect(resolveWizardNavigation(1, 2, 3, invalidId)).toEqual({
       kind: "blocked",
       step: 1,
-      error: "Instance ID is required.",
+      error: "instance ID is required.",
     });
   });
 
@@ -22,7 +22,7 @@ describe("resolveWizardNavigation", () => {
     expect(resolveWizardNavigation(0, 2, 3, invalidId)).toEqual({
       kind: "blocked",
       step: 1,
-      error: "Instance ID is required.",
+      error: "instance ID is required.",
     });
   });
 

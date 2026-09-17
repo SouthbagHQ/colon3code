@@ -95,7 +95,7 @@ interface BranchToolbarBranchSelectorProps {
 }
 
 function toBranchActionErrorMessage(error: unknown): string {
-  return error instanceof Error ? error.message : "An error occurred.";
+  return error instanceof Error ? error.message : "an error occurred.";
 }
 
 export function BranchToolbarBranchSelector({
@@ -349,11 +349,11 @@ export function BranchToolbarBranchSelector({
   const [isBranchActionPending, startBranchActionTransition] = useTransition();
   const totalBranchCount = branchRefState.data?.totalCount ?? 0;
   const branchStatusText = isInitialBranchesLoadPending
-    ? "Loading refs..."
+    ? "loading refs..."
     : isFetchingNextPage
-      ? "Loading more refs..."
+      ? "loading more refs..."
       : hasNextPage
-        ? `Showing ${refs.length} of ${totalBranchCount} refs`
+        ? `showing ${refs.length} of ${totalBranchCount} refs`
         : null;
 
   // ---------------------------------------------------------------------------
@@ -389,7 +389,7 @@ export function BranchToolbarBranchSelector({
       event.preventDefault();
       event.stopPropagation();
       const items: ContextMenuItem<"copy-branch-name">[] = [
-        { id: "copy-branch-name", label: "Copy branch name", icon: "copy" },
+        { id: "copy-branch-name", label: "copy branch name", icon: "copy" },
       ];
       void api.contextMenu.show(items, { x: event.clientX, y: event.clientY }).then((action) => {
         if (action === "copy-branch-name") copyBranchName(branchName);
@@ -695,7 +695,7 @@ export function BranchToolbarBranchSelector({
             <SourceControlIcon className="size-3.5 shrink-0 text-muted-foreground" />
             <span className="flex min-w-0 flex-col items-start">
               <span className="truncate font-medium">
-                Checkout {sourceControlPresentation.terminology.singular}
+                checkout {sourceControlPresentation.terminology.singular}
               </span>
               <span className="truncate text-muted-foreground text-xs">{prReference}</span>
             </span>
@@ -829,7 +829,7 @@ export function BranchToolbarBranchSelector({
             <ComboboxInput
               className="[&_input]:h-6.5 [&_input]:ps-5 [&_input]:font-sans [&_input]:leading-6.5"
               inputClassName="rounded-none bg-transparent text-sm"
-              placeholder="Search refs..."
+              placeholder="search refs..."
               showTrigger={false}
               size="sm"
               unstyled
@@ -892,14 +892,14 @@ export function BranchToolbarBranchSelector({
                       id={startFromOriginSwitchId}
                       checked={startFromOrigin}
                       size="sm"
-                      aria-label="Start worktree from origin"
+                      aria-label="start worktree from origin"
                       onCheckedChange={(checked) => onStartFromOriginChange(Boolean(checked))}
                     />
                   </label>
                 }
               />
               <TooltipPopup side="top" className="max-w-72 whitespace-normal leading-tight">
-                Creates the worktree from the latest matching branch on origin instead of your local
+                creates the worktree from the latest matching branch on origin instead of your local
                 branch.
               </TooltipPopup>
             </Tooltip>

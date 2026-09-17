@@ -22,13 +22,13 @@ const installSteps: ReadonlyArray<{
   readonly stage: RelayClientInstallProgressStage;
   readonly label: string;
 }> = [
-  { stage: "checking", label: "Checking current installation" },
-  { stage: "waiting_for_lock", label: "Waiting for installer" },
-  { stage: "downloading", label: "Downloading relay client" },
-  { stage: "verifying", label: "Verifying download" },
-  { stage: "installing", label: "Installing relay client" },
-  { stage: "validating", label: "Validating executable" },
-  { stage: "activating", label: "Activating installation" },
+  { stage: "checking", label: "checking current installation" },
+  { stage: "waiting_for_lock", label: "waiting for installer" },
+  { stage: "downloading", label: "downloading relay client" },
+  { stage: "verifying", label: "verifying download" },
+  { stage: "installing", label: "installing relay client" },
+  { stage: "validating", label: "validating executable" },
+  { stage: "activating", label: "activating installation" },
 ];
 
 export function RelayClientInstallDialog() {
@@ -65,7 +65,7 @@ export function RelayClientInstallDialog() {
             <DownloadIcon aria-hidden className="size-4.5 text-muted-foreground" />
           </div>
           <DialogTitle>
-            {isInstalling ? "Installing relay client" : "Install relay client?"}
+            {isInstalling ? "installing relay client" : "install relay client?"}
           </DialogTitle>
           <DialogDescription>
             {isInstalling
@@ -85,18 +85,18 @@ export function RelayClientInstallDialog() {
                 </p>
               </div>
               <progress
-                aria-label="Relay client installation progress"
+                aria-label="relay client installation progress"
                 className="h-2 w-full appearance-none overflow-hidden rounded-full bg-muted [&::-moz-progress-bar]:rounded-full [&::-moz-progress-bar]:bg-primary [&::-webkit-progress-bar]:rounded-full [&::-webkit-progress-bar]:bg-muted [&::-webkit-progress-value]:rounded-full [&::-webkit-progress-value]:bg-primary"
                 max={installSteps.length}
                 value={activeStepIndex + 1}
               />
               <p className="text-xs leading-relaxed text-muted-foreground">
-                Keep :3 Code open while the relay client is installed.
+                keep :3 Code open while the relay client is installed.
               </p>
             </div>
           ) : (
             <div className="rounded-xl border border-border/70 bg-muted/35 p-3">
-              <p className="text-sm font-medium text-foreground">Managed relay client</p>
+              <p className="text-sm font-medium text-foreground">managed relay client</p>
               <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
                 :3 Code will download and install version{" "}
                 {view.status === "confirming" ? view.version : ""} locally.
@@ -110,10 +110,10 @@ export function RelayClientInstallDialog() {
               variant="outline"
               onClick={() => respondToRelayClientInstallConfirmation(false)}
             >
-              Cancel
+              cancel
             </Button>
             <Button onClick={() => respondToRelayClientInstallConfirmation(true)}>
-              Download and install
+              download and install
             </Button>
           </DialogFooter>
         ) : null}

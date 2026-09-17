@@ -40,9 +40,9 @@ describe("external chat link context menu", () => {
 
     expect(harness.showContextMenu).toHaveBeenCalledWith(
       [
-        { id: "open-in-preview", label: "Open in integrated browser" },
-        { id: "open-external", label: "Open in system browser" },
-        { id: "copy-link", label: "Copy Link" },
+        { id: "open-in-preview", label: "open in integrated browser" },
+        { id: "open-external", label: "open in system browser" },
+        { id: "copy-link", label: "copy link" },
       ],
       { x: 12, y: 24 },
     );
@@ -63,8 +63,8 @@ describe("external chat link context menu", () => {
 
     expect(harness.showContextMenu).toHaveBeenCalledWith(
       [
-        { id: "open-external", label: "Open in system browser" },
-        { id: "copy-link", label: "Copy Link" },
+        { id: "open-external", label: "open in system browser" },
+        { id: "copy-link", label: "copy link" },
       ],
       { x: 4, y: 8 },
     );
@@ -82,8 +82,8 @@ describe("external chat link context menu", () => {
   });
 
   it.each([
-    ["link-to-thread", "Link to thread", true],
-    ["unlink-from-thread", "Unlink from thread", false],
+    ["link-to-thread", "link to thread", true],
+    ["unlink-from-thread", "unlink from thread", false],
   ] as const)("offers and runs the %s action", async (action, label, linked) => {
     const harness = createHarness(action);
     const href = "https://github.com/SouthbagHQ/colon3code/pull/42";

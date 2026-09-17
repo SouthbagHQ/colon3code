@@ -199,7 +199,7 @@ export function observeAssistantCitationSource({
             toastManager.add({
               type: "warning",
               title: "could not open the cited response 3:",
-              description: "Click the citation to try again.",
+              description: "click the citation to try again.",
             });
           },
         );
@@ -213,7 +213,7 @@ export function observeAssistantCitationSource({
         toastManager.add({
           type: "warning",
           title: "the quoted text has changed 3:",
-          description: "Showing the source response. The saved quote is unchanged.",
+          description: "showing the source response. the saved quote is unchanged.",
         });
       }
     }

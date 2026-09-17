@@ -46,7 +46,7 @@ function failureToast(title: string, error: unknown) {
     stackedThreadToast({
       type: "error",
       title,
-      description: error instanceof Error ? error.message : "An error occurred.",
+      description: error instanceof Error ? error.message : "an error occurred.",
     }),
   );
 }
@@ -171,7 +171,7 @@ export function useThreadActionMenu(input: {
               title: `snoozed until ${snoozeWakeDescription(preset.snoozedUntil, new Date(), timestampFormat)} :3`,
               timeout: 5_000,
               actionProps: {
-                children: "Undo",
+                children: "undo",
                 onClick: () => {
                   void unsnoozeThread(threadRef).then((undone) => {
                     if (undone._tag === "Failure" && !isAtomCommandInterrupted(undone)) {
@@ -266,7 +266,7 @@ export function useThreadActionMenu(input: {
                 stackedThreadToast({
                   type: "error",
                   title: "path unavailable 3:",
-                  description: "This thread does not have a workspace path to copy.",
+                  description: "this thread does not have a workspace path to copy.",
                 }),
               );
               return;
@@ -285,7 +285,7 @@ export function useThreadActionMenu(input: {
           case "archive": {
             if (confirmThreadArchive) {
               const confirmed = await settlePromise(() =>
-                api.dialogs.confirm(`Archive thread "${thread.title}"?`),
+                api.dialogs.confirm(`archive thread "${thread.title}"?`),
               );
               if (confirmed._tag === "Failure" || !confirmed.value) return;
             }
@@ -310,8 +310,8 @@ export function useThreadActionMenu(input: {
               const confirmed = await settlePromise(() =>
                 api.dialogs.confirm(
                   [
-                    `Delete thread "${thread.title}"?`,
-                    "This permanently clears conversation history for this thread.",
+                    `delete thread "${thread.title}"?`,
+                    "this permanently clears conversation history for this thread.",
                   ].join("\n"),
                   { variant: "destructive" },
                 ),

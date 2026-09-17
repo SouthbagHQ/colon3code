@@ -179,7 +179,7 @@ export function ComposerBannerStack({ className, items }: ComposerBannerStackPro
               <ComposerBanner.Peek
                 ref={peekRef}
                 variant={firstStackedItem.variant}
-                aria-label="Show other notices"
+                aria-label="show other notices"
                 aria-expanded={stackExpanded}
                 aria-controls={expandedItemsId}
                 aria-hidden={stackExpanded || undefined}
@@ -196,7 +196,7 @@ export function ComposerBannerStack({ className, items }: ComposerBannerStackPro
               id={expandedItemsId}
               ref={expandedItemsRef}
               role="group"
-              aria-label="Other notices"
+              aria-label="other notices"
               tabIndex={-1}
               data-composer-banner-stack-expanded-items="true"
               className={cn(
@@ -295,7 +295,7 @@ function ComposerBannerStackAlert({
                     <Button
                       size="icon-xs"
                       variant="ghost"
-                      aria-label="Show notice details"
+                      aria-label="show notice details"
                       className="hidden flex-none text-muted-foreground hover:text-foreground @max-[400px]:inline-flex"
                     />
                   }
@@ -318,7 +318,7 @@ function ComposerBannerStackAlert({
             {item.actions}
             {item.onDismiss ? (
               <ComposerBanner.Dismiss
-                aria-label={item.dismissLabel ?? "Dismiss warning"}
+                aria-label={item.dismissLabel ?? "dismiss warning"}
                 disabled={exiting}
                 onClick={onDismissRequest}
               />

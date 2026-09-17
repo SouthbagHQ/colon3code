@@ -15,12 +15,12 @@ afterEach(() => {
 describe("unavailable settings", () => {
   it("groups disabled controls under one reason", () => {
     const markup = renderToStaticMarkup(
-      <SettingsUnavailableGroup message="Only available in the desktop app.">
+      <SettingsUnavailableGroup message="only available in the desktop app.">
         <SettingsRow title="Window capture" description="Capture a window." />
       </SettingsUnavailableGroup>,
     );
 
-    expect(markup).toContain("Only available in the desktop app.");
+    expect(markup).toContain("only available in the desktop app.");
     expect(markup).toContain("border-border/60");
     expect(markup).toContain("[&amp;_h3]:opacity-64");
   });
@@ -30,8 +30,8 @@ describe("settings search targets", () => {
   it("does not persist destination styling in the rendered row", () => {
     const markup = renderToStaticMarkup(
       <SettingsSearchTargetProvider targetId="word-wrap">
-        <SettingsRow id="word-wrap" title="Word wrap" description="Wrap long lines." />
-        <SettingsRow id="time-format" title="Time format" description="Choose a clock." />
+        <SettingsRow id="word-wrap" title="word wrap" description="Wrap long lines." />
+        <SettingsRow id="time-format" title="time format" description="Choose a clock." />
       </SettingsSearchTargetProvider>,
     );
 

@@ -129,13 +129,13 @@ function ExpandableHeaderSearch({
                 size="icon-xs"
                 variant="ghost-muted"
                 onClick={() => onOpenChange(true)}
-                aria-label="Search keybindings"
+                aria-label="search keybindings"
               >
                 <SearchIcon />
               </Button>
             }
           />
-          <TooltipPopup side="top">Search keybindings</TooltipPopup>
+          <TooltipPopup side="top">search keybindings</TooltipPopup>
         </Tooltip>
       </>
     );
@@ -160,8 +160,8 @@ function ExpandableHeaderSearch({
             onOpenChange(false);
           }
         }}
-        placeholder="Search keybindings"
-        aria-label="Search keybindings"
+        placeholder="search keybindings"
+        aria-label="search keybindings"
         className="w-44 [&_[data-slot=input]]:pl-7"
         size="sm"
       />
@@ -277,12 +277,12 @@ function UnknownWhenVariableWarning({
   if (identifiers.length === 0) return null;
   const label =
     identifiers.length === 1
-      ? `Unknown condition: ${identifiers[0]}`
-      : `Unknown conditions: ${identifiers.join(", ")}`;
+      ? `unknown condition: ${identifiers[0]}`
+      : `unknown conditions: ${identifiers.join(", ")}`;
 
   return (
     <WarningTooltipIcon label={label} focusable={focusable} className="size-4.5">
-      :3 Code does not recognize this condition yet. It can still be saved, but it may not match
+      :3 Code does not recognize this condition yet. it can still be saved, but it may not match
       unless the runtime provides it.
     </WarningTooltipIcon>
   );
@@ -292,12 +292,12 @@ function KeybindingConflictWarning({ labels }: { labels: ReadonlyArray<string> }
   if (labels.length === 0) return null;
   const description =
     labels.length === 1
-      ? `Conflicts with ${labels[0]}.`
-      : `Conflicts with ${labels.slice(0, 3).join(", ")}${labels.length > 3 ? ", and more" : ""}.`;
+      ? `conflicts with ${labels[0]}.`
+      : `conflicts with ${labels.slice(0, 3).join(", ")}${labels.length > 3 ? ", and more" : ""}.`;
 
   return (
     <WarningTooltipIcon label={description}>
-      {description} The most recent matching binding wins when both conditions can apply.
+      {description} the most recent matching binding wins when both conditions can apply.
     </WarningTooltipIcon>
   );
 }
@@ -320,7 +320,7 @@ function WhenVariableSelect({
   return (
     <Select value={value} onValueChange={(nextValue) => nextValue && onChange(nextValue)}>
       <SelectTrigger size="compact" className="min-w-0 flex-1 font-mono">
-        <SelectValue placeholder="Condition" className="leading-7" />
+        <SelectValue placeholder="condition" className="leading-7" />
         {unknownIdentifiers && unknownIdentifiers.length > 0 ? (
           <UnknownWhenVariableWarning identifiers={unknownIdentifiers} focusable={false} />
         ) : null}
@@ -401,12 +401,12 @@ function WhenExpressionNodeEditor({
         <Toggle
           pressed={condition.negated}
           onPressedChange={(pressed) => onChange(setConditionNegated(node, pressed))}
-          aria-label={`Negate ${condition.identifier}`}
+          aria-label={`negate ${condition.identifier}`}
           variant="outline"
           size="compact"
           className="min-w-10"
         >
-          Not
+          not
         </Toggle>
         <WhenVariableSelect
           value={condition.identifier}
@@ -436,12 +436,12 @@ function WhenExpressionNodeEditor({
           <Toggle
             pressed
             onPressedChange={(pressed) => onChange(pressed ? node : node.node)}
-            aria-label="Negate group"
+            aria-label="negate group"
             variant="outline"
             size="compact"
             className="min-w-10"
           >
-            Not
+            not
           </Toggle>
           {onRemove ? (
             <WhenExpressionRemoveButton
@@ -555,11 +555,11 @@ function WhenExpressionNodeEditor({
         </Select>
         <Button type="button" variant="outline" size="compact" onClick={addCondition}>
           <PlusIcon className="size-3.5" />
-          Condition
+          condition
         </Button>
         <Button type="button" variant="outline" size="compact" onClick={addGroup}>
           <PlusIcon className="size-3.5" />
-          Group
+          group
         </Button>
         {onRemove ? (
           <WhenExpressionRemoveButton
@@ -653,16 +653,16 @@ function WhenExpressionBuilder({
     <div className="w-[min(34rem,calc(100vw-2rem))] space-y-3">
       <div className="flex items-start justify-between gap-3">
         <div className="min-w-0">
-          <div className="text-sm font-medium text-foreground">When</div>
+          <div className="text-sm font-medium text-foreground">when</div>
         </div>
         <div className="flex shrink-0 items-center gap-2">
           <Button type="button" variant="outline" size="compact" onClick={addRootCondition}>
             <PlusIcon className="size-3.5" />
-            Condition
+            condition
           </Button>
           <Button type="button" variant="outline" size="compact" onClick={addRootGroup}>
             <PlusIcon className="size-3.5" />
-            Group
+            group
           </Button>
         </div>
       </div>
@@ -672,9 +672,9 @@ function WhenExpressionBuilder({
           <Input
             value={expressionDraft}
             onChange={(event) => updateExpressionDraft(event.currentTarget.value)}
-            placeholder="Always"
+            placeholder="always"
             aria-invalid={Boolean(parseError)}
-            aria-label="When expression"
+            aria-label="when expression"
             className={cn(
               "h-7 rounded-md font-mono text-[12px] leading-7 sm:h-7 sm:leading-7",
               unknownIdentifiers.length > 0 && "pr-9",
@@ -708,18 +708,18 @@ function WhenExpressionBuilder({
             <div className="flex flex-wrap gap-2">
               <Button type="button" size="compact" onClick={addRootCondition}>
                 <PlusIcon className="size-3.5" />
-                Condition
+                condition
               </Button>
               <Button type="button" variant="outline" size="compact" onClick={addRootGroup}>
                 <PlusIcon className="size-3.5" />
-                Group
+                group
               </Button>
             </div>
           </div>
         )}
         {parseError ? (
           <div className="pointer-events-none absolute inset-0 flex items-center justify-center rounded-lg border border-destructive/30 bg-background/75 p-4 text-center text-xs text-destructive backdrop-blur-[1px]">
-            Fix the expression above to continue editing visually.
+            fix the expression above to continue editing visually.
           </div>
         ) : null}
       </div>
@@ -849,14 +849,14 @@ function KeybindingKeyControl({
           disabled={isSaving || keyDraft.trim().length === 0 || !isWhenDraftValid}
           onClick={save}
         >
-          {isSaving ? "Saving" : "Save"}
+          {isSaving ? "saving" : "save"}
         </Button>
       ) : null}
       {showPill ? (
         <button
           type="button"
           onClick={() => setDraft({ isRecording: true })}
-          aria-label={`Edit shortcut for ${commandLabel(row.command)}: ${formatShortcutLabel(row.binding.shortcut)}`}
+          aria-label={`edit shortcut for ${commandLabel(row.command)}: ${formatShortcutLabel(row.binding.shortcut)}`}
           className={cn(
             "inline-flex h-8 cursor-pointer items-center rounded-md border border-transparent px-1.5 sm:h-7 outline-none transition-colors hover:border-border/70 hover:bg-accent focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/24",
             pillClassName,
@@ -868,9 +868,9 @@ function KeybindingKeyControl({
         <Input
           data-keybinding-capture=""
           autoFocus={isRecording}
-          aria-label={`Keybinding for ${commandLabel(row.command)}`}
+          aria-label={`keybinding for ${commandLabel(row.command)}`}
           value={isRecording ? "" : keyDraft}
-          placeholder={isRecording ? "Press shortcut" : "Unassigned"}
+          placeholder={isRecording ? "press shortcut" : "unassigned"}
           size="sm"
           className={cn("w-44 font-mono", isRecording && "border-primary/70 bg-primary/5")}
           onFocus={() => setDraft({ isRecording: true })}
@@ -909,9 +909,9 @@ function WhenClauseControl({
             className="min-w-0 shrink font-mono"
           />
         }
-        aria-label={`Edit when clause for ${label}`}
+        aria-label={`edit when clause for ${label}`}
       >
-        <span className="truncate">{expression || "Always"}</span>
+        <span className="truncate">{expression || "always"}</span>
         <ChevronDownIcon className="size-3.5 shrink-0 opacity-60" />
       </PopoverTrigger>
       <PopoverContent align="start" sideOffset={6}>
@@ -951,7 +951,7 @@ function KeybindingRowMenu({
             size="icon-sm"
             className="text-muted-foreground hover:text-foreground"
             disabled={isSaving}
-            aria-label={`Actions for ${commandLabel(row.command)}`}
+            aria-label={`actions for ${commandLabel(row.command)}`}
           />
         }
       >
@@ -960,12 +960,12 @@ function KeybindingRowMenu({
       <MenuPopup align="end" className="min-w-36">
         {canReset ? (
           <MenuItem disabled={isSaving} onClick={() => onReset(row)}>
-            Reset to default
+            reset to default
           </MenuItem>
         ) : null}
         {canRemove ? (
           <MenuItem variant="destructive" disabled={isSaving} onClick={() => onRemove(row)}>
-            Remove
+            remove
           </MenuItem>
         ) : null}
       </MenuPopup>
@@ -977,7 +977,7 @@ function KeybindingSourceBadge({ source }: { source: KeybindingRow["source"] }) 
   if (source === "Default") return null;
   return (
     <Badge variant="outline" size="sm" className="font-normal text-muted-foreground">
-      {source}
+      {source.toLowerCase()}
     </Badge>
   );
 }
@@ -1005,7 +1005,7 @@ function KeybindingRowWhen({
 }) {
   return (
     <span className="flex h-6 items-center gap-1.5">
-      <span className="text-[12px] leading-none text-muted-foreground/70">When</span>
+      <span className="text-[12px] leading-none text-muted-foreground/70">when</span>
       <WhenClauseControl
         label={commandLabel(row.command)}
         expression={editor.whenDraftExpression}
@@ -1151,7 +1151,7 @@ function NewKeybindingCommandSelect({
       onValueChange={(value) => draft.setCommandDraft(value as KeybindingCommand)}
     >
       <SelectTrigger size="sm" className={className}>
-        <SelectValue placeholder="Command" />
+        <SelectValue placeholder="command" />
       </SelectTrigger>
       <SelectContent
         alignItemWithTrigger={false}
@@ -1181,9 +1181,9 @@ function NewKeybindingKeyInput({
     <Input
       data-keybinding-capture=""
       autoFocus={autoFocus}
-      aria-label={`Keybinding for ${draft.commandLabelText}`}
+      aria-label={`keybinding for ${draft.commandLabelText}`}
       value={draft.isRecording ? "" : draft.keyDraft}
-      placeholder={draft.isRecording ? "Press shortcut" : "Unassigned"}
+      placeholder={draft.isRecording ? "press shortcut" : "unassigned"}
       size="sm"
       className={cn("font-mono", draft.isRecording && "border-primary/70 bg-primary/5", className)}
       onFocus={() => draft.setDraft({ isRecording: true })}
@@ -1230,14 +1230,14 @@ function NewKeybindingCancelIcon({
             size="icon-sm"
             className="text-muted-foreground hover:text-foreground"
             disabled={isSaving}
-            aria-label="Cancel new keybinding"
+            aria-label="cancel new keybinding"
             onClick={onCancel}
           />
         }
       >
         <XIcon className="size-3.5" />
       </TooltipTrigger>
-      <TooltipPopup side="top">Cancel</TooltipPopup>
+      <TooltipPopup side="top">cancel</TooltipPopup>
     </Tooltip>
   );
 }
@@ -1250,10 +1250,10 @@ function NewKeybindingSettingsRow(props: NewKeybindingProps) {
   return (
     <SettingsRow
       className="rounded-none bg-muted/15"
-      title="New keybinding"
+      title="new keybinding"
       description={
         <span className="flex h-6 items-center gap-1.5">
-          <span className="text-[12px] leading-none text-muted-foreground/70">When</span>
+          <span className="text-[12px] leading-none text-muted-foreground/70">when</span>
           <NewKeybindingWhen draft={draft} variables={variables} />
         </span>
       }
@@ -1267,7 +1267,7 @@ function NewKeybindingSettingsRow(props: NewKeybindingProps) {
           <KeybindingConflictWarning labels={draft.conflictLabels} />
           <NewKeybindingKeyInput draft={draft} className="w-44" />
           <Button size="sm" disabled={isSaving || !draft.canSave} onClick={draft.save}>
-            {isSaving ? "Saving" : "Save"}
+            {isSaving ? "saving" : "save"}
           </Button>
           <NewKeybindingCancelIcon isSaving={isSaving} onCancel={onCancel} />
         </div>
@@ -1309,7 +1309,7 @@ function KeybindingsList(props: KeybindingsListProps) {
       ))}
       {rows.length === 0 && !isAddingBinding ? (
         <div className="px-4 py-12 text-center text-sm text-muted-foreground">
-          No keybindings match your search.
+          no keybindings match your search.
         </div>
       ) : null}
     </div>
@@ -1322,7 +1322,7 @@ function BrowserKeybindingNotice() {
     <div className="flex items-center gap-2 px-3 py-2.5 text-[12px] leading-[1.45] text-muted-foreground sm:px-4">
       <TriangleAlertIcon className="size-3.5 shrink-0 text-warning" aria-hidden />
       <span>
-        Some shortcuts may be claimed by the browser before :3 Code sees them. Use the desktop app
+        some shortcuts may be claimed by the browser before :3 Code sees them. use the desktop app
         for better keybinding support.
       </span>
     </div>
@@ -1396,7 +1396,7 @@ export function KeybindingsSettingsPanel() {
       toastManager.add({
         title: "unable to open keybindings file 3:",
         description:
-          error instanceof Error ? error.message : "The keybindings file was not opened.",
+          error instanceof Error ? error.message : "the keybindings file was not opened.",
         type: "error",
       });
     })();
@@ -1428,7 +1428,7 @@ export function KeybindingsSettingsPanel() {
           const error = squashAtomCommandFailure(failed);
           toastManager.add({
             title: "unable to save keybinding 3:",
-            description: error instanceof Error ? error.message : "The keybinding was not saved.",
+            description: error instanceof Error ? error.message : "the keybinding was not saved.",
             type: "error",
           });
         }
@@ -1456,7 +1456,7 @@ export function KeybindingsSettingsPanel() {
           const error = squashAtomCommandFailure(result);
           toastManager.add({
             title: "unable to remove keybinding 3:",
-            description: error instanceof Error ? error.message : "The keybinding was not removed.",
+            description: error instanceof Error ? error.message : "the keybinding was not removed.",
             type: "error",
           });
         }
@@ -1526,13 +1526,13 @@ export function KeybindingsSettingsPanel() {
                     size="icon-xs"
                     variant="ghost-muted"
                     onClick={() => setIsAddingBinding(true)}
-                    aria-label="Add keybinding"
+                    aria-label="add keybinding"
                   >
                     <PlusIcon />
                   </Button>
                 }
               />
-              <TooltipPopup side="top">Add keybinding</TooltipPopup>
+              <TooltipPopup side="top">add keybinding</TooltipPopup>
             </Tooltip>
             <Tooltip>
               <TooltipTrigger
@@ -1543,13 +1543,13 @@ export function KeybindingsSettingsPanel() {
                     variant="ghost-muted"
                     disabled={!keybindingsConfigPath}
                     onClick={openKeybindingsFile}
-                    aria-label="Open keybindings.json"
+                    aria-label="open keybindings.json"
                   >
                     <FileJsonIcon />
                   </Button>
                 }
               />
-              <TooltipPopup side="top">Open keybindings.json</TooltipPopup>
+              <TooltipPopup side="top">open keybindings.json</TooltipPopup>
             </Tooltip>
           </div>
         }

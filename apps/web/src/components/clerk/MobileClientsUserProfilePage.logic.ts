@@ -26,20 +26,20 @@ export function mobileClientPlatformLabel(device: RelayClientDeviceRecord): stri
 
 export function mobileClientNotificationDetail(device: RelayClientDeviceRecord): string {
   if (!device.notifications.enabled) {
-    return "Push notifications are disabled on this device.";
+    return "push notifications are disabled on this device.";
   }
 
   const enabledPreferences = NOTIFICATION_PREFERENCES.flatMap(([preference, label]) =>
     device.notifications[preference] ? [label] : [],
   );
   return enabledPreferences.length > 0
-    ? `Alerts enabled for ${enabledPreferences.join(", ")}.`
-    : "Push notifications are enabled, but no alert types are selected.";
+    ? `alerts enabled for ${enabledPreferences.join(", ")}.`
+    : "push notifications are enabled, but no alert types are selected.";
 }
 
 export function mobileClientUpdatedAtLabel(updatedAt: string): string {
   const date = new Date(updatedAt);
   return Number.isNaN(date.getTime())
-    ? "Update time unavailable"
-    : `Updated ${mobileClientUpdatedAtFormatter.format(date)}`;
+    ? "update time unavailable"
+    : `updated ${mobileClientUpdatedAtFormatter.format(date)}`;
 }

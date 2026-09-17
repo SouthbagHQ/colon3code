@@ -94,7 +94,7 @@ export function useAssistantCitationTarget({
         if (navigation.requestedPages.has(cursor) || navigation.requestedPages.size >= 20) {
           fail(
             "could not load the cited response 3:",
-            "Load earlier turns, then click the citation to try again. Your saved quote is unchanged.",
+            "load earlier turns, then click the citation to try again. your saved quote is unchanged.",
           );
           return;
         }
@@ -104,14 +104,14 @@ export function useAssistantCitationTarget({
       }
       fail(
         "the cited response is unavailable 3:",
-        "It may have been removed. The selected text is still saved in your citation.",
+        "it may have been removed. the selected text is still saved in your citation.",
       );
       return;
     }
     if (source.kind !== "message" || source.message.role !== "assistant") {
       fail(
         "the citation does not refer to an assistant response 3:",
-        "The selected text is still saved in your citation.",
+        "the selected text is still saved in your citation.",
       );
       return;
     }

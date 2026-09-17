@@ -35,13 +35,13 @@ export function resolveEnvironmentIconPickerLock(input: {
   readonly operateAccess: "granted" | "denied" | "pending";
 }): string | null {
   if (input.serverConfig === null) {
-    return "Connect to this environment to change its icon.";
+    return "connect to this environment to change its icon.";
   }
   if (input.serverConfig.environment.capabilities.environmentIcon !== true) {
-    return "This environment's server is too old to keep an icon. Update it to choose one.";
+    return "this environment's server is too old to keep an icon. update it to choose one.";
   }
   if (input.operateAccess === "denied") {
-    return "Your session on this environment cannot change its settings.";
+    return "your session on this environment cannot change its settings.";
   }
   return null;
 }
@@ -97,7 +97,7 @@ export function EnvironmentIconMenu({
     <MenuSub>
       <MenuSubTrigger>
         <EnvironmentMachineIcon kind={resolved} />
-        Icon
+        icon
       </MenuSubTrigger>
       <MenuSubPopup className="min-w-44">
         {lock !== null ? (

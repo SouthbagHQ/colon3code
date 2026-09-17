@@ -86,8 +86,8 @@ export const ProviderModelPicker = memo(function ProviderModelPicker(props: {
   const triggerTitle = selectedModel
     ? getTriggerDisplayModelName(selectedModel)
     : props.model === ANTIGRAVITY_DEFAULT_MODEL
-      ? "Choose model"
-      : props.model || "Choose model";
+      ? "choose model"
+      : props.model || "choose model";
   const triggerLabel = selectedModel
     ? `${getTriggerDisplayModelLabel(selectedModel)}${selectedModel.isUnavailable ? " (Unavailable)" : ""}`
     : triggerTitle;
@@ -222,7 +222,7 @@ export const ProviderModelPicker = memo(function ProviderModelPicker(props: {
           </Tooltip>
           {selectedModel?.isUnavailable && props.triggerLabel === undefined ? (
             <Badge variant="outline" size="sm">
-              Unavailable
+              unavailable
             </Badge>
           ) : null}
         </span>

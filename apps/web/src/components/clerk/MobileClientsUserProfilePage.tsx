@@ -28,7 +28,7 @@ function MobileClientStatusBadge({
 }) {
   return (
     <Badge variant={enabled ? "success" : "outline"}>
-      {label}: {enabled ? "On" : "Off"}
+      {label}: {enabled ? "on" : "off"}
     </Badge>
   );
 }
@@ -52,7 +52,7 @@ function MobileClientRow({ device }: { readonly device: RelayClientDeviceRecord 
       <div className="mt-2 flex flex-wrap gap-1.5">
         <MobileClientStatusBadge
           enabled={device.notifications.enabled}
-          label="Push notifications"
+          label="push notifications"
         />
         <MobileClientStatusBadge enabled={device.liveActivities.enabled} label="Live Activities" />
       </div>
@@ -65,7 +65,7 @@ function MobileClientRow({ device }: { readonly device: RelayClientDeviceRecord 
 
 function MobileClientsSkeleton() {
   return (
-    <div aria-label="Loading mobile clients" className="divide-y border-t" role="status">
+    <div aria-label="loading mobile clients" className="divide-y border-t" role="status">
       {MOBILE_CLIENT_SKELETON_ROWS.map((row) => (
         <div key={row} className="py-4">
           <div className="flex gap-3">
@@ -94,8 +94,8 @@ function EmptyMobileClients() {
       <EmptyHeader>
         <EmptyTitle className="text-[1.0625rem] leading-6">no mobile clients</EmptyTitle>
         <EmptyDescription className="text-[0.8125rem] leading-[1.125rem]">
-          Sign in to :3 Code on your iPhone to register it for push notifications and Live
-          Activities.
+          sign in to :3 Code on your iPhone to register it for push notifications and Live
+          activities
         </EmptyDescription>
       </EmptyHeader>
     </Empty>
@@ -111,8 +111,8 @@ export function MobileClientsUserProfilePage() {
 
   return (
     <ClerkUserProfilePage
-      title="Mobile clients"
-      description="Devices registered to receive T3 Connect activity from your environments."
+      title="mobile clients"
+      description="devices registered to receive T3 Connect activity from your environments."
       action={
         <ClerkUserProfileRefreshButton
           isPending={devicesState.isPending}
@@ -128,12 +128,12 @@ export function MobileClientsUserProfilePage() {
           >
             <div>
               <p className="font-medium text-destructive-foreground">
-                Could not load mobile clients
+                could not load mobile clients
               </p>
               <p className="mt-0.5 text-xs text-muted-foreground">{devicesState.error}</p>
             </div>
             <Button size="xs" variant="outline" onClick={devicesState.refresh}>
-              Try again
+              try again
             </Button>
           </div>
         ) : null}

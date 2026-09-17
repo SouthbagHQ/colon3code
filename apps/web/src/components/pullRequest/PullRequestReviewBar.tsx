@@ -28,19 +28,19 @@ const VERDICTS: ReadonlyArray<{
 }> = [
   {
     value: "comment",
-    label: "Comment",
+    label: "comment",
     sent: "review submitted :3",
     icon: <MessageSquareIcon className="size-3" />,
   },
   {
     value: "approve",
-    label: "Approve",
+    label: "approve",
     sent: "pull request approved :3",
     icon: <CheckIcon className="size-3" />,
   },
   {
     value: "request-changes",
-    label: "Request changes",
+    label: "request changes",
     sent: "changes requested :3",
     icon: <XCircleIcon className="size-3" />,
   },
@@ -124,7 +124,7 @@ export function PullRequestReviewBar({
         </span>
         {comments.length > 0 ? (
           <Button size="xs" variant="ghost" disabled={pending} onClick={() => clear(reviewKey)}>
-            Discard
+            discard
           </Button>
         ) : null}
       </div>
@@ -134,10 +134,10 @@ export function PullRequestReviewBar({
         value={body}
         placeholder={
           requestChangesSummaryRequired && verdicts.includes("request-changes")
-            ? "Summarize your review (required to request changes)"
-            : "Summarize your review (optional)"
+            ? "summarize your review (required to request changes)"
+            : "summarize your review (optional)"
         }
-        aria-label="Review summary"
+        aria-label="review summary"
         onChange={(event) => setSummary(reviewKey, event.target.value)}
       />
       <div className="mt-2 flex flex-wrap justify-end gap-2">

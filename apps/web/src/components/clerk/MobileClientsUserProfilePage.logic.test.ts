@@ -33,7 +33,7 @@ describe("mobile client presentation", () => {
 
     expect(mobileClientPlatformLabel(client)).toBe("iOS 18 · :3 Code 1.2.3");
     expect(mobileClientNotificationDetail(client)).toBe(
-      "Alerts enabled for approvals, completions.",
+      "alerts enabled for approvals, completions.",
     );
   });
 
@@ -50,7 +50,7 @@ describe("mobile client presentation", () => {
       mobileClientNotificationDetail(
         device({ notifications: { ...device().notifications, enabled: false } }),
       ),
-    ).toBe("Push notifications are disabled on this device.");
+    ).toBe("push notifications are disabled on this device.");
     expect(
       mobileClientNotificationDetail(
         device({
@@ -63,7 +63,7 @@ describe("mobile client presentation", () => {
           },
         }),
       ),
-    ).toBe("Push notifications are enabled, but no alert types are selected.");
+    ).toBe("push notifications are enabled, but no alert types are selected.");
   });
 
   it("handles missing app versions and invalid update timestamps", () => {
@@ -71,6 +71,6 @@ describe("mobile client presentation", () => {
       "iOS · :3 Code 1.2.3",
     );
     expect(mobileClientPlatformLabel(device({ appVersion: null }))).toBe("iOS 18");
-    expect(mobileClientUpdatedAtLabel("not-a-date")).toBe("Update time unavailable");
+    expect(mobileClientUpdatedAtLabel("not-a-date")).toBe("update time unavailable");
   });
 });

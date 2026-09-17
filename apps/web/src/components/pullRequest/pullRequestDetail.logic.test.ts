@@ -251,17 +251,17 @@ describe("pull request primary control", () => {
 describe("pull request handoff labels", () => {
   it("names the open thread when actions write to its composer", () => {
     expect(pullRequestHandoffLabels(true)).toEqual({
-      fixFinding: "Fix in this thread",
-      fixCheck: "Fix in this thread",
-      fixFindings: "Fix findings in this thread",
+      fixFinding: "fix in this thread",
+      fixCheck: "fix in this thread",
+      fixFindings: "fix findings in this thread",
     });
   });
 
   it("keeps the standalone pull request page labels", () => {
     expect(pullRequestHandoffLabels(false)).toEqual({
-      fixFinding: "Fix in a thread",
-      fixCheck: "Fix",
-      fixFindings: "Fix findings in a thread",
+      fixFinding: "fix in a thread",
+      fixCheck: "fix",
+      fixFindings: "fix findings in a thread",
     });
   });
 });

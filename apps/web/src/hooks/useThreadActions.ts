@@ -49,7 +49,7 @@ export class ThreadArchiveBlockedError extends Schema.TaggedError<ThreadArchiveB
   },
 ) {
   override get message(): string {
-    return "Cannot archive a running thread.";
+    return "cannot archive a running thread.";
   }
 }
 
@@ -85,7 +85,7 @@ export class ThreadSnoozeBlockedError extends Schema.TaggedError<ThreadSnoozeBlo
   },
 ) {
   override get message(): string {
-    return "This thread is waiting on you. Respond to the pending request before snoozing it.";
+    return "this thread is waiting on you. respond to the pending request before snoozing it.";
   }
 }
 
@@ -150,8 +150,8 @@ export async function requestThreadUnpinConfirmation(input: {
   return settlePromise(() =>
     confirm(
       [
-        `Unpin thread "${input.title}"?`,
-        "This will move the thread out of your pinned section.",
+        `unpin thread "${input.title}"?`,
+        "this will move the thread out of your pinned section.",
       ].join("\n"),
     ),
   );
@@ -166,7 +166,7 @@ export async function navigateAfterThreadDeletion(navigate: () => Promise<void>)
       stackedThreadToast({
         type: "error",
         title: "thread deleted, but navigation failed 3:",
-        description: error instanceof Error ? error.message : "An error occurred.",
+        description: error instanceof Error ? error.message : "an error occurred.",
       }),
     );
   }
@@ -360,10 +360,10 @@ export function useThreadActions() {
         const confirmationResult = await settlePromise(() =>
           localApi.dialogs.confirm(
             [
-              "This thread is the only one linked to this worktree:",
+              "this thread is the only one linked to this worktree:",
               displayWorktreePath ?? orphanedWorktreePath,
               "",
-              "Delete the worktree too?",
+              "delete the worktree too?",
             ].join("\n"),
             { variant: "destructive" },
           ),
@@ -458,7 +458,7 @@ export function useThreadActions() {
       if (cleanupFailure) {
         const removalFailed = removeResult._tag === "Failure";
         const error = squashAtomCommandFailure(cleanupFailure);
-        const message = error instanceof Error ? error.message : "An error occurred.";
+        const message = error instanceof Error ? error.message : "an error occurred.";
         console.error("Worktree cleanup failed after thread deletion", {
           threadId: threadRef.threadId,
           projectCwd: threadProject.workspaceRoot,
@@ -472,7 +472,7 @@ export function useThreadActions() {
               ? "failed to delete worktree 3:"
               : "worktree deleted, but Git status refresh failed 3:",
             description: removalFailed
-              ? `Could not remove ${displayWorktreePath ?? orphanedWorktreePath}. ${message}`
+              ? `could not remove ${displayWorktreePath ?? orphanedWorktreePath}. ${message}`
               : message,
           }),
         );
@@ -732,8 +732,8 @@ export function useThreadActions() {
         const confirmationResult = await settlePromise(() =>
           localApi.dialogs.confirm(
             [
-              `Delete thread "${title}"?`,
-              "This permanently clears conversation history for this thread.",
+              `delete thread "${title}"?`,
+              "this permanently clears conversation history for this thread.",
             ].join("\n"),
             { variant: "destructive" },
           ),

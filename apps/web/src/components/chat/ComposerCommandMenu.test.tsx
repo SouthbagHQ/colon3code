@@ -14,7 +14,7 @@ describe("ComposerCommandMenu", () => {
             type: "slash-command",
             command: "model",
             label: "/model",
-            description: "Switch response model for this thread",
+            description: "switch response model for this thread",
           },
         ]}
         resolvedTheme="dark"
@@ -27,7 +27,7 @@ describe("ComposerCommandMenu", () => {
     );
 
     expect(markup).toContain("/model");
-    expect(markup).toContain("Switch response model for this thread");
+    expect(markup).toContain("switch response model for this thread");
   });
 
   it("shows the app source for an app skill", () => {
@@ -44,7 +44,7 @@ describe("ComposerCommandMenu", () => {
               scope: "user",
               enabled: true,
             },
-            label: "Browser",
+            label: "browser",
             description: "Open and control the in-app browser",
           },
         ]}
@@ -57,9 +57,9 @@ describe("ComposerCommandMenu", () => {
       />,
     );
 
-    expect(markup).toContain("Browser");
+    expect(markup).toContain("browser");
     expect(markup).toContain('data-slot="badge"');
-    expect(markup).toContain(">App Skill</span>");
+    expect(markup).toContain(">app Skill</span>");
     expect(markup).toContain("Open and control the in-app browser");
     expect(markup).toContain("<svg");
   });
@@ -95,7 +95,7 @@ describe("ComposerCommandMenu", () => {
     expect(markup).toContain('<span class="text-secondary-label">/skill:</span>Ask Matt');
     expect(markup).toContain('data-slot="badge"');
     expect(markup).toContain("lucide-folder");
-    expect(markup).toContain(">Repo</span>");
+    expect(markup).toContain(">repo</span>");
     expect(markup).toContain("Find the right skill or workflow");
   });
 });

@@ -256,8 +256,8 @@ export function terminalSelectionMenuItems(options?: {
   return [
     ...(options?.canAddToChat === false
       ? []
-      : ([{ id: "add-to-chat", label: "Add to chat" }] satisfies ContextMenuItem<"add-to-chat">[])),
-    { id: "copy", label: "Copy" },
+      : ([{ id: "add-to-chat", label: "add to chat" }] satisfies ContextMenuItem<"add-to-chat">[])),
+    { id: "copy", label: "copy" },
   ];
 }
 
@@ -277,7 +277,7 @@ export function terminalContextMenuItems(options: {
       ...item,
       disabled: !hasSelection,
     })),
-    { id: "paste", label: "Paste" },
+    { id: "paste", label: "paste" },
   ];
 }
 
@@ -436,7 +436,7 @@ export function TerminalViewport({
         hasHandledExitRef.current = false;
       } else if (shouldHandleTerminalExit(status, synchronized, hasHandledExitRef.current)) {
         hasHandledExitRef.current = true;
-        writeSystemMessage(terminal, status === "closed" ? "Terminal closed" : "Process exited");
+        writeSystemMessage(terminal, status === "closed" ? "terminal closed" : "process exited");
         window.setTimeout(() => {
           if (hasHandledExitRef.current) {
             handleSessionExited();
@@ -626,7 +626,7 @@ export function TerminalViewport({
         try {
           await writeTextToClipboard(text, "terminal selection");
         } catch (error) {
-          reportIfCurrent(requestId, error, "Unable to copy terminal selection");
+          reportIfCurrent(requestId, error, "unable to copy terminal selection");
         }
         focusIfCurrent(requestId);
       };
@@ -643,7 +643,7 @@ export function TerminalViewport({
             () => requestId === selectionActionRequestIdRef.current,
           );
         } catch (error) {
-          reportIfCurrent(requestId, error, "Unable to read the clipboard");
+          reportIfCurrent(requestId, error, "unable to read the clipboard");
           return;
         }
         focusIfCurrent(requestId);
@@ -669,7 +669,7 @@ export function TerminalViewport({
             { x: event.clientX, y: event.clientY },
           );
         } catch (error) {
-          reportIfCurrent(requestId, error, "Unable to open the terminal context menu");
+          reportIfCurrent(requestId, error, "unable to open the terminal context menu");
           focusIfCurrent(requestId);
           return;
         }
@@ -762,7 +762,7 @@ export function TerminalViewport({
         if (navigationData !== null) {
           event.preventDefault();
           event.stopPropagation();
-          void sendTerminalInput(navigationData, "Failed to move cursor");
+          void sendTerminalInput(navigationData, "failed to move cursor");
           return false;
         }
 
@@ -770,14 +770,14 @@ export function TerminalViewport({
         if (deleteData !== null) {
           event.preventDefault();
           event.stopPropagation();
-          void sendTerminalInput(deleteData, "Failed to delete terminal input");
+          void sendTerminalInput(deleteData, "failed to delete terminal input");
           return false;
         }
 
         if (!isTerminalClearShortcut(event)) return true;
         event.preventDefault();
         event.stopPropagation();
-        void sendTerminalInput("\u000c", "Failed to clear terminal");
+        void sendTerminalInput("\u000c", "failed to clear terminal");
         return false;
       }
 
@@ -786,7 +786,7 @@ export function TerminalViewport({
         if (!latestTerminal) return;
         if (isTerminalUrl(text)) {
           if (!localApi) {
-            writeSystemMessage(latestTerminal, "Opening links is unavailable in this browser.");
+            writeSystemMessage(latestTerminal, "opening links is unavailable in this browser.");
             return;
           }
           const fallbackToBrowser = () => {
@@ -1251,21 +1251,21 @@ export default function ThreadTerminalDrawer({
     [cwd, runtimeEnv, terminalLaunchLocationsById, worktreePath],
   );
   const splitTerminalActionLabel = hasReachedSplitLimit
-    ? `Split Terminal Horizontally (max ${MAX_TERMINALS_PER_GROUP} per group)`
+    ? `split terminal horizontally (max ${MAX_TERMINALS_PER_GROUP} per group)`
     : splitShortcutLabel
-      ? `Split Terminal Horizontally (${splitShortcutLabel})`
-      : "Split Terminal Horizontally";
+      ? `split terminal horizontally (${splitShortcutLabel})`
+      : "split terminal horizontally";
   const splitTerminalVerticalActionLabel = hasReachedSplitLimit
-    ? `Split Terminal Vertically (max ${MAX_TERMINALS_PER_GROUP} per group)`
+    ? `split terminal vertically (max ${MAX_TERMINALS_PER_GROUP} per group)`
     : splitVerticalShortcutLabel
-      ? `Split Terminal Vertically (${splitVerticalShortcutLabel})`
-      : "Split Terminal Vertically";
+      ? `split terminal vertically (${splitVerticalShortcutLabel})`
+      : "split terminal vertically";
   const newTerminalActionLabel = newShortcutLabel
-    ? `New Terminal (${newShortcutLabel})`
-    : "New Terminal";
+    ? `new terminal (${newShortcutLabel})`
+    : "new terminal";
   const closeTerminalActionLabel = closeShortcutLabel
-    ? `Close Terminal (${closeShortcutLabel})`
-    : "Close Terminal";
+    ? `close terminal (${closeShortcutLabel})`
+    : "close terminal";
   const onSplitTerminalAction = useCallback(() => {
     if (hasReachedSplitLimit) return;
     onSplitTerminal();
@@ -1532,7 +1532,7 @@ export default function ThreadTerminalDrawer({
                           threadRef={threadRef}
                           threadId={threadId}
                           terminalId={terminalId}
-                          terminalLabel={terminalLabelById.get(terminalId) ?? "Terminal"}
+                          terminalLabel={terminalLabelById.get(terminalId) ?? "terminal"}
                           cwd={terminalLaunchLocation.cwd}
                           {...(terminalLaunchLocation.worktreePath !== undefined
                             ? { worktreePath: terminalLaunchLocation.worktreePath }
@@ -1562,7 +1562,7 @@ export default function ThreadTerminalDrawer({
                   threadRef={threadRef}
                   threadId={threadId}
                   terminalId={resolvedActiveTerminalId}
-                  terminalLabel={terminalLabelById.get(resolvedActiveTerminalId) ?? "Terminal"}
+                  terminalLabel={terminalLabelById.get(resolvedActiveTerminalId) ?? "terminal"}
                   cwd={activeTerminalLaunchLocation.cwd}
                   {...(activeTerminalLaunchLocation.worktreePath !== undefined
                     ? { worktreePath: activeTerminalLaunchLocation.worktreePath }
@@ -1636,10 +1636,10 @@ export default function ThreadTerminalDrawer({
                   const terminalCount = terminalGroup.terminalIds.length;
                   const isSplitGroup = terminalCount > 1;
                   const groupLabel = !isSplitGroup
-                    ? "Single"
+                    ? "single"
                     : terminalGroup.splitDirection === "vertical"
-                      ? "Stacked"
-                      : "Side by side";
+                      ? "stacked"
+                      : "side by side";
                   const GroupIcon = !isSplitGroup
                     ? Square
                     : terminalGroup.splitDirection === "vertical"
@@ -1669,8 +1669,8 @@ export default function ThreadTerminalDrawer({
                       <div className="flex flex-col gap-0.5">
                         {terminalGroup.terminalIds.map((terminalId) => {
                           const isActive = terminalId === resolvedActiveTerminalId;
-                          const terminalLabel = terminalLabelById.get(terminalId) ?? "Terminal";
-                          const closeTerminalLabel = `Close ${terminalLabel}${
+                          const terminalLabel = terminalLabelById.get(terminalId) ?? "terminal";
+                          const closeTerminalLabel = `close ${terminalLabel}${
                             isActive && closeShortcutLabel ? ` (${closeShortcutLabel})` : ""
                           }`;
                           return (

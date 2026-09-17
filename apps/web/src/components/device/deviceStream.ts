@@ -361,7 +361,7 @@ export function createDeviceStreamClient(
     const support = await VideoDecoder.isConfigSupported(full).catch(() => ({ supported: false }));
     if (stopped) return false;
     if (!support.supported) {
-      setStatus("error", `This browser cannot decode ${config.codec}.`);
+      setStatus("error", `this browser cannot decode ${config.codec}.`);
       return false;
     }
     if (!videoDecoder || videoDecoder.state === "closed") videoDecoder = makeDecoder();
@@ -369,7 +369,7 @@ export function createDeviceStreamClient(
       videoDecoder.configure(full);
       return true;
     } catch (cause) {
-      setStatus("error", `Video decoder: ${(cause as Error).message}`);
+      setStatus("error", `video decoder: ${(cause as Error).message}`);
       return false;
     }
   };
@@ -604,7 +604,7 @@ export function createDeviceStreamClient(
     } else if (useWebCodecs) {
       connectAndroid();
     } else {
-      setStatus("error", "This browser cannot decode the Android stream (WebCodecs unavailable).");
+      setStatus("error", "this browser cannot decode the Android stream (WebCodecs unavailable).");
     }
   };
 

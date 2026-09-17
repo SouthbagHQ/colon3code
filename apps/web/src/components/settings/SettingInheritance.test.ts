@@ -16,8 +16,8 @@ describe("settingInheritanceLayers", () => {
       "defaultAutoPull",
     );
     expect(layers.map((layer) => [layer.label, layer.value, layer.effective])).toEqual([
-      ["Laptop", "Inherits", false],
-      ["Default", "Off", true],
+      ["Laptop", "inherits", false],
+      ["default", "off", true],
     ]);
   });
 
@@ -34,9 +34,9 @@ describe("settingInheritanceLayers", () => {
       "defaultAutoPull",
     );
     expect(layers.map((layer) => [layer.label, layer.value, layer.effective])).toEqual([
-      ["Project", "Off", true],
-      ["Laptop", "On", false],
-      ["Default", "Off", false],
+      ["project", "off", true],
+      ["Laptop", "on", false],
+      ["default", "off", false],
     ]);
     const inherited = settingInheritanceLayers(
       {
@@ -49,9 +49,9 @@ describe("settingInheritanceLayers", () => {
       "defaultAutoPull",
     );
     expect(inherited.map((layer) => [layer.value, layer.effective])).toEqual([
-      ["Inherits", false],
-      ["On", true],
-      ["Off", false],
+      ["inherits", false],
+      ["on", true],
+      ["off", false],
     ]);
   });
 });

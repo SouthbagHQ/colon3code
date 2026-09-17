@@ -93,7 +93,7 @@ export const BranchToolbarEnvModeSelector = memo(function BranchToolbarEnvModeSe
         variant="ghost"
         size="xs"
         className="min-w-0 shrink font-normal text-xs!"
-        aria-label="Workspace"
+        aria-label="workspace"
         data-composer-shortcut="composer.workspace"
         data-composer-context-control
       >
@@ -118,7 +118,7 @@ export const BranchToolbarEnvModeSelector = memo(function BranchToolbarEnvModeSe
       </SelectTrigger>
       <SelectPopup alignItemWithTrigger={false} {...composerFloatingLayerProps}>
         <SelectGroup>
-          <SelectGroupLabel>Workspace</SelectGroupLabel>
+          <SelectGroupLabel>workspace</SelectGroupLabel>
           <SelectItem value="local">
             <span className="inline-flex items-center gap-1.5">
               {activeWorktreePath ? (

@@ -74,7 +74,7 @@ describe("ProjectFaviconPickerDialog", () => {
       readonly onPickExternal: () => Promise<string | null>;
     }) as ReactElement<Record<string, unknown>>;
 
-    const button = visitElements(picker, (element) => element.props.children === "Open in Finder");
+    const button = visitElements(picker, (element) => element.props.children === "open in Finder");
     expect(button).not.toBeNull();
 
     (button?.props.onClick as (() => void) | undefined)?.();
@@ -108,7 +108,7 @@ describe("ProjectFaviconPickerDialog", () => {
 
     hooks.beginRender();
     const picker = ProjectFaviconPickerDialog(props) as ReactElement<Record<string, unknown>>;
-    const button = visitElements(picker, (element) => element.props.children === "Open in Finder");
+    const button = visitElements(picker, (element) => element.props.children === "open in Finder");
 
     (button?.props.onClick as (() => void) | undefined)?.();
     await Promise.resolve();

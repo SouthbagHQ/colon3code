@@ -195,7 +195,7 @@ export function SidebarProviderUpdatePill() {
               <Button
                 size="icon-micro"
                 variant="ghost"
-                aria-label="Dismiss provider update notice"
+                aria-label="dismiss provider update notice"
                 className="relative z-[1] mr-1 [--control-icon-color:currentColor] rounded-md text-inherit opacity-70 hover:bg-transparent hover:opacity-100"
                 onClick={() => startExit(displayedView.key, null, displayedView.key)}
               >
@@ -203,7 +203,7 @@ export function SidebarProviderUpdatePill() {
               </Button>
             }
           />
-          <TooltipPopup side="top">Dismiss until provider status changes</TooltipPopup>
+          <TooltipPopup side="top">dismiss until provider status changes</TooltipPopup>
         </Tooltip>
       )}
     </div>

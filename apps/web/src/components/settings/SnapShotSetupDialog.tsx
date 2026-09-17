@@ -21,43 +21,43 @@ import {
 } from "./SnapShotSetupDialog.logic";
 
 const SETUP_STEPS = [
-  { id: "access", label: "Access" },
-  { id: "shortcut", label: "Shortcut" },
+  { id: "access", label: "access" },
+  { id: "shortcut", label: "shortcut" },
 ] as const;
 
 const GNOME_ACCESS_COPY = {
   "not-installed": {
-    title: "Install the extension",
+    title: "install the extension",
     description:
-      "The :3 Code GNOME extension lets you capture other windows and bring them into your draft. Sign out once after installing.",
+      "the :3 Code GNOME extension lets you capture other windows and bring them into your draft. sign out once after installing.",
   },
   "restart-required": {
-    title: "Extension installed",
-    description: "Save your work, then sign out and back in. Your setup will be waiting here.",
+    title: "extension installed",
+    description: "save your work, then sign out and back in. your setup will be waiting here.",
   },
   "update-required": {
-    title: "Update the extension",
-    description: "Install the update, then sign out and back in.",
+    title: "update the extension",
+    description: "install the update, then sign out and back in.",
   },
   "extensions-disabled": {
-    title: "Allow GNOME extensions",
-    description: "Open GNOME Extensions and turn on extensions, then check again.",
+    title: "allow GNOME extensions",
+    description: "open GNOME extensions and turn on extensions, then check again.",
   },
   disabled: {
-    title: "Enable the extension",
-    description: "Enable :3 Code SnapShots to start capturing windows.",
+    title: "enable the extension",
+    description: "enable :3 Code SnapShots to start capturing windows.",
   },
   enabled: {
-    title: "Capture is ready",
-    description: "Next, choose your shortcut.",
+    title: "capture is ready",
+    description: "next, choose your shortcut.",
   },
   unsupported: {
-    title: "Automatic capture isn't available",
-    description: "Use Take snapshot from the command palette to choose a window.",
+    title: "automatic capture isn't available",
+    description: "use take snapshot from the command palette to choose a window.",
   },
   error: {
     title: "couldn't set up the extension 3:",
-    description: "Check :3 Code SnapShots in GNOME Extensions, then try again.",
+    description: "check :3 Code SnapShots in GNOME extensions, then try again.",
   },
 };
 
@@ -212,66 +212,66 @@ export function SnapShotSetupDialog({
   const accessCopy =
     state.message && !macPermissions
       ? {
-          title: "Let's try that again",
-          description: "Couldn't check snapshots. Try again to continue.",
+          title: "let's try that again",
+          description: "couldn't check snapshots. try again to continue.",
         }
       : backend === "gnome" && extension
         ? extension.status === "enabled" && !accessReady
           ? {
-              title: "Check capture access",
-              description: "The extension isn't ready yet. Try again in a moment.",
+              title: "check capture access",
+              description: "the extension isn't ready yet. try again in a moment.",
             }
           : GNOME_ACCESS_COPY[extension.status]
         : helperBackend
           ? helper?.status === "ready"
             ? {
-                title: "Capture is ready",
-                description: "Next, choose your shortcut.",
+                title: "capture is ready",
+                description: "next, choose your shortcut.",
               }
             : helper?.status === "error"
               ? {
-                  title: "Let's fix capture access",
-                  description: "Try reinstalling the capture helper, then check again.",
+                  title: "let's fix capture access",
+                  description: "try reinstalling the capture helper, then check again.",
                 }
               : {
                   title:
                     helper?.status === "update-required"
-                      ? "Update the capture helper"
-                      : "Allow snapshots",
+                      ? "update the capture helper"
+                      : "allow snapshots",
                   description:
-                    ":3 Code's capture helper lets you capture other apps and return to your draft. It's included with :3 Code.",
+                    ":3 Code's capture helper lets you capture other apps and return to your draft. it's included with :3 Code.",
                 }
           : backend === "niri"
             ? {
-                title: "Capture is ready",
-                description: "Next, choose your shortcut.",
+                title: "capture is ready",
+                description: "next, choose your shortcut.",
               }
             : backend === "picker"
               ? {
-                  title: "Choose a window each time",
+                  title: "choose a window each time",
                   description:
-                    "Your desktop doesn't support automatic capture. You'll choose the window to capture instead.",
+                    "your desktop doesn't support automatic capture. you'll choose the window to capture instead.",
                 }
               : {
-                  title: "Allow snapshots",
+                  title: "allow snapshots",
                   description:
                     backend === "portal"
-                      ? "Your desktop may ask for permission when you first capture."
+                      ? "your desktop may ask for permission when you first capture."
                       : macPermissions
                         ? macPermissionsReady
-                          ? "Test a snapshot of the current window. If macOS asks to bypass its window picker, choose Allow. The test image is discarded."
-                          : "Allow each permission, then continue."
-                        : "Allow access when prompted to start capturing windows.",
+                          ? "test a snapshot of the current window. if macOS asks to bypass its window picker, choose Allow. the test image is discarded."
+                          : "allow each permission, then continue."
+                        : "allow access when prompted to start capturing windows.",
                 };
-  const title = step === "access" ? accessCopy.title : "Choose your shortcut";
+  const title = step === "access" ? accessCopy.title : "choose your shortcut";
   const description =
     step === "access"
       ? accessCopy.description
       : configShortcut
-        ? "Click the shortcut, then press the keys you want."
+        ? "click the shortcut, then press the keys you want."
         : state.mode === "portal"
-          ? "Choose your keys, then approve the permission prompt if asked."
-          : "Use both Shift keys, or record a different shortcut.";
+          ? "choose your keys, then approve the permission prompt if asked."
+          : "use both Shift keys, or record a different shortcut.";
   const stepIndex = SETUP_STEPS.findIndex(({ id }) => id === step);
   const details = [
     ...new Set(
@@ -299,7 +299,7 @@ export function SnapShotSetupDialog({
       }}
     >
       <WizardPopup showCloseButton={!busy}>
-        <WizardHeader title={desktop ? `Set up snapshots for ${desktop}` : "Set up snapshots"}>
+        <WizardHeader title={desktop ? `set up snapshots for ${desktop}` : "set up snapshots"}>
           <WizardSteps
             steps={SETUP_STEPS.map((item) => item.label)}
             currentStep={stepIndex}
@@ -335,7 +335,7 @@ export function SnapShotSetupDialog({
                         id: "screenRecording",
                         icon: <ScreenRecordingIcon />,
                         title: "Screen Recording",
-                        description: "Capture the window you're using.",
+                        description: "capture the window you're using.",
                         granted: macPermissions.screenRecording,
                         onAllow: () => void onAction("allow-screen-recording"),
                       },
@@ -344,8 +344,8 @@ export function SnapShotSetupDialog({
                         icon: <AccessibilityPermissionIcon />,
                         title: "Accessibility",
                         description: includeAccessibility
-                          ? "Include text and controls from the captured app."
-                          : "Optional. Include text and controls from the captured app.",
+                          ? "include text and controls from the captured app."
+                          : "optional. include text and controls from the captured app.",
                         granted: macPermissions.accessibility,
                         onAllow: () => void onAction("allow-accessibility"),
                       },
@@ -364,7 +364,7 @@ export function SnapShotSetupDialog({
                     disabled={busy}
                     onClick={() => void onAction(installHelper)}
                   >
-                    Reinstall helper
+                    reinstall helper
                   </Button>
                 ) : null}
               </>
@@ -395,24 +395,24 @@ export function SnapShotSetupDialog({
                     disabled={busy}
                     onClick={() => void onAction("retry-shortcut")}
                   >
-                    {state.mode === "portal" ? "Shortcut permissions" : "Try again"}
+                    {state.mode === "portal" ? "shortcut permissions" : "try again"}
                   </Button>
                 ) : null}
               </div>
             )}
             {step === "shortcut" && !accessReady ? (
               <p role="alert" className="text-destructive">
-                Capture needs attention. Go back to check access.
+                capture needs attention. go back to check access.
               </p>
             ) : null}
             {error ? (
               <p role="alert" className="text-destructive">
-                Couldn't finish this step. Try again or check Advanced for help.
+                couldn't finish this step. try again or check advanced for help.
               </p>
             ) : null}
             {details.length > 0 || (step === "access" && (backend === "gnome" || helperBackend)) ? (
               <details className="text-xs text-muted-foreground">
-                <summary className="cursor-pointer">Advanced</summary>
+                <summary className="cursor-pointer">advanced</summary>
                 <div className="mt-3 space-y-3">
                   {details.map((detail) => (
                     <p key={detail} className="break-words">
@@ -420,7 +420,7 @@ export function SnapShotSetupDialog({
                     </p>
                   ))}
                   {step === "access" && (backend === "gnome" || helperBackend) ? (
-                    <p>Included with :3 Code. No download needed.</p>
+                    <p>included with :3 Code. no download needed.</p>
                   ) : null}
                   {step === "access" && backend === "gnome" && extension?.status === "enabled" ? (
                     <Button
@@ -429,7 +429,7 @@ export function SnapShotSetupDialog({
                       disabled={busy}
                       onClick={() => void onAction("disable-extension")}
                     >
-                      Disable extension
+                      disable extension
                     </Button>
                   ) : null}
                   {step === "access" && helperBackend && helper?.status !== "not-installed" ? (
@@ -439,7 +439,7 @@ export function SnapShotSetupDialog({
                       disabled={busy}
                       onClick={() => void onAction(removeHelper)}
                     >
-                      Remove capture helper
+                      remove capture helper
                     </Button>
                   ) : null}
                 </div>
@@ -450,11 +450,11 @@ export function SnapShotSetupDialog({
         <WizardFooter>
           {step !== "access" ? (
             <Button variant="ghost" disabled={busy} onClick={() => changeStep("access")}>
-              Back
+              back
             </Button>
           ) : null}
           <Button variant="ghost" disabled={busy} onClick={() => void onClose(false)}>
-            {wasEnabled ? "Close" : "Finish later"}
+            {wasEnabled ? "close" : "finish later"}
           </Button>
           {step === "access" ? (
             helperBackend && !accessReady && helper?.status !== "ready" ? (
@@ -466,14 +466,14 @@ export function SnapShotSetupDialog({
                 }
               >
                 {checking
-                  ? "Checking…"
+                  ? "checking…"
                   : busy
-                    ? "Installing…"
+                    ? "installing…"
                     : helper?.status === "error"
-                      ? "Check again"
+                      ? "check again"
                       : helper?.status === "update-required"
-                        ? "Update helper"
-                        : "Install helper"}
+                        ? "update helper"
+                        : "install helper"}
               </Button>
             ) : backend === "gnome" && !accessReady && extension?.status !== "enabled" ? (
               <Button
@@ -488,20 +488,20 @@ export function SnapShotSetupDialog({
                 }
               >
                 {checking
-                  ? "Checking…"
+                  ? "checking…"
                   : busy
                     ? install
-                      ? "Installing…"
+                      ? "installing…"
                       : enable
-                        ? "Enabling…"
-                        : "Working…"
+                        ? "enabling…"
+                        : "working…"
                     : install
                       ? extension?.status === "update-required"
-                        ? "Update extension"
-                        : "Install extension"
+                        ? "update extension"
+                        : "install extension"
                       : enable
-                        ? "Enable extension"
-                        : "Check again"}
+                        ? "enable extension"
+                        : "check again"}
               </Button>
             ) : (
               <PermissionContinueButton
@@ -512,14 +512,14 @@ export function SnapShotSetupDialog({
                 }}
               >
                 {busy
-                  ? "Working…"
+                  ? "working…"
                   : macPermissions
-                    ? "Test capture and continue"
+                    ? "test capture and continue"
                     : backend === "direct"
-                      ? "Allow capture"
+                      ? "allow capture"
                       : !accessReady && !macPermissions
-                        ? "Try again"
-                        : "Continue"}
+                        ? "try again"
+                        : "continue"}
               </PermissionContinueButton>
             )
           ) : !configShortcut ? (
@@ -531,7 +531,7 @@ export function SnapShotSetupDialog({
                 if (!shortcutChanged || (await onSaveShortcut())) await onClose(true);
               }}
             >
-              {busy ? "Saving…" : shortcutChanged ? "Save and finish" : "Done"}
+              {busy ? "saving…" : shortcutChanged ? "save and finish" : "done"}
             </Button>
           ) : null}
         </WizardFooter>

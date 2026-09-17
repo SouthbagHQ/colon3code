@@ -39,9 +39,9 @@ import { UsageLimitsPooled } from "./UsageLimitsPooled";
 import { PROVIDER_PRESENTATION } from "./usageProviders";
 
 const PACE: Record<LimitPace, { readonly label: string; readonly icon: typeof GaugeIcon }> = {
-  ahead: { label: "Ahead of pace: spending faster than the window elapses", icon: TrendingUpIcon },
-  on: { label: "On pace with the window", icon: GaugeIcon },
-  under: { label: "Under pace: headroom left for the rest of the window", icon: TrendingDownIcon },
+  ahead: { label: "ahead of pace: spending faster than the window elapses", icon: TrendingUpIcon },
+  on: { label: "on pace with the window", icon: GaugeIcon },
+  under: { label: "under pace: headroom left for the rest of the window", icon: TrendingDownIcon },
 };
 
 /** The series colour the cost chart uses for this driver, so the two views read as one. */
@@ -133,11 +133,11 @@ function WindowBar({
             {remaining}% left{timeLeft !== null ? ` · ${timeLeft}% of the window left` : ""}
           </span>
           {timeLeft !== null ? (
-            <span className="text-muted-foreground">The line is where even spending would be.</span>
+            <span className="text-muted-foreground">the line is where even spending would be.</span>
           ) : null}
           {resetsAt ? (
             <span className="text-muted-foreground">
-              Resets {resetsAt}
+              resets {resetsAt}
               {resetsIn ? ` · ${resetsIn}` : ""}
             </span>
           ) : null}
@@ -195,10 +195,10 @@ export function LimitWindows({
 }
 
 const OUTCOME_TEXT: Record<ProviderConsumeResetCreditOutcome, string> = {
-  reset: "Reset applied. Your windows have cleared.",
+  reset: "reset applied. your windows have cleared.",
   nothingToReset: "nothing to reset right now",
   noCredit: "no reset credit left",
-  alreadyRedeemed: "That credit was already redeemed.",
+  alreadyRedeemed: "that credit was already redeemed.",
 };
 
 /** Everything a redeem needs: where to send it and what to say afterwards. */
@@ -250,15 +250,15 @@ export function ResetCreditDialog({
     <AlertDialog open={open} onOpenChange={onOpenChange}>
       <AlertDialogPopup>
         <AlertDialogHeader>
-          <AlertDialogTitle>Use a reset credit?</AlertDialogTitle>
+          <AlertDialogTitle>use a reset credit?</AlertDialogTitle>
           <AlertDialogDescription>
-            This redeems one credit on your account and clears the current rate-limit windows. It
+            this redeems one credit on your account and clears the current rate-limit windows. it
             cannot be undone.
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogClose render={<Button variant="outline" />}>Cancel</AlertDialogClose>
-          <Button onClick={onConfirm}>Use credit</Button>
+          <AlertDialogClose render={<Button variant="outline" />}>cancel</AlertDialogClose>
+          <Button onClick={onConfirm}>use credit</Button>
         </AlertDialogFooter>
       </AlertDialogPopup>
     </AlertDialog>
@@ -301,7 +301,7 @@ export function ResetCredits({
       <span className="tabular-nums">{resetCreditsSummary(credits, now)}</span>
       {credits.availableCount > 0 ? (
         <Button size="xs" variant="outline" disabled={busy} onClick={() => setConfirming(true)}>
-          {busy ? "Using…" : "Use reset"}
+          {busy ? "using…" : "use reset"}
         </Button>
       ) : null}
       {status ? <span className="text-foreground">{status}</span> : null}

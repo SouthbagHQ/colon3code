@@ -40,8 +40,8 @@ export function PreviewEmptyState({
         </EmptyMedia>
         <EmptyTitle>no preview yet :3</EmptyTitle>
         <EmptyDescription>
-          Type a URL above, or run a dev script. Browser-ready localhost servers will show up here
-          automatically.
+          type a URL above, or run a dev script. browser-ready localhost servers will show up here
+          automatically
         </EmptyDescription>
       </Empty>
     );
@@ -54,7 +54,7 @@ export function PreviewEmptyState({
           <div className="flex flex-col gap-3">
             <div className="flex items-center gap-2 text-sm text-muted-foreground">
               <History className="size-4 shrink-0" />
-              <h2 className="font-medium">Recently used</h2>
+              <h2 className="font-medium">recently used</h2>
             </div>
             <DiscoveryList>
               {recents.map((entry) => (
@@ -73,7 +73,7 @@ export function PreviewEmptyState({
           <div className="flex flex-col gap-3">
             <div className="flex items-center gap-2 text-sm text-muted-foreground">
               <RadioTower className="size-4 shrink-0" />
-              <h2 className="font-medium">Local servers</h2>
+              <h2 className="font-medium">local servers</h2>
             </div>
             <DiscoveryList>
               {servers.map((server) => (
@@ -86,7 +86,7 @@ export function PreviewEmptyState({
               ))}
             </DiscoveryList>
             <p className="px-1 text-xs text-muted-foreground">
-              Select a live local server to open it in this browser tab.
+              select a live local server to open it in this browser tab.
             </p>
           </div>
         ) : null}

@@ -1872,7 +1872,7 @@ describe("deriveTimelineEntries", () => {
     const plan = {
       id: "plan:thread:turn",
       turnId: streamingMessage.turnId,
-      planMarkdown: "Plan",
+      planMarkdown: "plan",
       implementedAt: null,
       implementationThreadId: null,
       createdAt: streamingMessage.createdAt,

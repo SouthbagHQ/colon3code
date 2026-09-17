@@ -146,7 +146,7 @@ export function MediaVideoPlayer({
         >
           <span className="inline-flex items-center gap-1.5">
             <TriangleAlertIcon aria-hidden className="size-3.5 shrink-0" />
-            Video unavailable{label ? ` · ${label}` : ""}
+            video unavailable{label ? ` · ${label}` : ""}
           </span>
           <span className="flex flex-wrap items-center justify-center gap-2">
             {latestSrc !== null || onRetry ? (
@@ -157,7 +157,7 @@ export function MediaVideoPlayer({
                 onClick={() => void retry()}
               >
                 <RotateCwIcon />
-                {retrying ? "Retrying…" : "Retry video"}
+                {retrying ? "retrying…" : "retry video"}
               </Button>
             ) : null}
             <OpenMediaLink originalUrl={originalUrl} src={latestSrc ?? src} fileName={label} />
@@ -168,7 +168,7 @@ export function MediaVideoPlayer({
           key={loadAttempt}
           ref={videoRef}
           src={src}
-          aria-label={label || "Video preview"}
+          aria-label={label || "video preview"}
           aria-hidden={onOpen ? true : undefined}
           autoPlay={onOpen ? false : autoPlay}
           controls={!onOpen}
@@ -193,7 +193,7 @@ export function MediaVideoPlayer({
       ) : (
         <span
           role="status"
-          aria-label={failed ? "Video preview unavailable" : "Loading video"}
+          aria-label={failed ? "video preview unavailable" : "loading video"}
           className={cn("block aspect-video w-full rounded-lg bg-muted/60", stateClassName)}
           style={style}
         />
@@ -201,7 +201,7 @@ export function MediaVideoPlayer({
       {onOpen ? (
         <button
           type="button"
-          aria-label={label ? `Play ${label}` : "Play video"}
+          aria-label={label ? `play ${label}` : "play video"}
           onClick={onOpen}
           className="absolute inset-0 flex cursor-pointer items-center justify-center rounded-lg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
         >

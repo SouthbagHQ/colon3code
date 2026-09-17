@@ -20,7 +20,7 @@ export function showBootError(error: unknown) {
 
   const reload = document.createElement("button");
   reload.type = "button";
-  reload.textContent = "Reload";
+  reload.textContent = "reload";
   reload.addEventListener("click", () => window.location.reload());
   content.append(reload);
   bootShell.replaceChildren(content);

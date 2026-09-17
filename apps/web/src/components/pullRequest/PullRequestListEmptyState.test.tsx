@@ -36,19 +36,19 @@ describe("PullRequestListEmptyState", () => {
   it("asks for a project ahead of anything a search or a filter could say", () => {
     const text = render({ hasProjects: false, searching: true, query: "fix", filtered: true });
     expect(text).toContain("no projects in this workspace");
-    expect(text).toContain("Add project");
+    expect(text).toContain("add project");
   });
 
   it("leaves the retry off the states where asking again could not change the answer", () => {
-    expect(render({ hasProjects: false })).not.toContain("Check again");
-    expect(render({ searching: true, query: "fix" })).not.toContain("Check again");
+    expect(render({ hasProjects: false })).not.toContain("check again");
+    expect(render({ searching: true, query: "fix" })).not.toContain("check again");
   });
 
   it("offers the retry once the hosts have answered", () => {
-    expect(render({})).toContain("Check again");
-    expect(render({ filtered: true })).toContain("Check again");
-    expect(render({ query: "fix" })).toContain("Check again");
-    expect(render({ canLoadMore: true })).toContain("Load more pull requests");
-    expect(render({ refreshing: true })).toContain("Checking...");
+    expect(render({})).toContain("check again");
+    expect(render({ filtered: true })).toContain("check again");
+    expect(render({ query: "fix" })).toContain("check again");
+    expect(render({ canLoadMore: true })).toContain("load more pull requests");
+    expect(render({ refreshing: true })).toContain("checking...");
   });
 });

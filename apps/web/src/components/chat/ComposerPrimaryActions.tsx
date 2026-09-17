@@ -42,15 +42,15 @@ const formatPendingPrimaryActionLabel = (input: {
   questionIndex: number;
 }) => {
   if (input.isResponding) {
-    return "Submitting...";
+    return "submitting...";
   }
   if (input.compact) {
-    return input.isLastQuestion ? "Submit" : "Next";
+    return input.isLastQuestion ? "submit" : "next";
   }
   if (!input.isLastQuestion) {
-    return "Next question";
+    return "next question";
   }
-  return input.questionIndex > 0 ? "Submit answers" : "Submit answer";
+  return input.questionIndex > 0 ? "submit answers" : "submit answer";
 };
 
 const preventPointerFocus: PointerEventHandler<HTMLElement> = (event) => {
@@ -96,7 +96,7 @@ export const ComposerPrimaryActions = memo(function ComposerPrimaryActions({
       )}
       {...pointerFocusProps}
       onClick={onInterrupt}
-      aria-label="Stop generation"
+      aria-label="stop generation"
     >
       <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor" aria-hidden="true">
         <rect x="2" y="2" width="8" height="8" rx="1.5" />
@@ -117,7 +117,7 @@ export const ComposerPrimaryActions = memo(function ComposerPrimaryActions({
               {...pointerFocusProps}
               onClick={onPreviousPendingQuestion}
               disabled={pendingAction.isResponding}
-              aria-label="Previous question"
+              aria-label="previous question"
             >
               <ChevronLeftIcon className="size-3.5" />
             </Button>
@@ -130,7 +130,7 @@ export const ComposerPrimaryActions = memo(function ComposerPrimaryActions({
               onClick={onPreviousPendingQuestion}
               disabled={pendingAction.isResponding}
             >
-              Previous
+              previous
             </Button>
           )
         ) : null}
@@ -172,7 +172,7 @@ export const ComposerPrimaryActions = memo(function ComposerPrimaryActions({
           {...pointerFocusProps}
           disabled={isSendBusy || isSendDisabled || isConnecting || isEnvironmentUnavailable}
         >
-          {isConnecting || isSendBusy ? "Sending..." : "Refine"}
+          {isConnecting || isSendBusy ? "sending..." : "refine"}
         </Button>
       );
     }
@@ -186,7 +186,7 @@ export const ComposerPrimaryActions = memo(function ComposerPrimaryActions({
           {...pointerFocusProps}
           disabled={isSendBusy || isSendDisabled || isConnecting || isEnvironmentUnavailable}
         >
-          {isConnecting || isSendBusy ? "Sending..." : "Implement"}
+          {isConnecting || isSendBusy ? "sending..." : "implement"}
         </Button>
         <Menu>
           <MenuTrigger
@@ -195,7 +195,7 @@ export const ComposerPrimaryActions = memo(function ComposerPrimaryActions({
                 size="sm"
                 variant="default"
                 className="h-9 rounded-l-none rounded-r-full border-l-message-action-foreground/20 bg-message-action px-2 text-message-action-foreground hover:bg-message-action-hover sm:h-8"
-                aria-label="Implementation actions"
+                aria-label="implementation actions"
                 {...pointerFocusProps}
                 disabled={isSendBusy || isSendDisabled || isConnecting || isEnvironmentUnavailable}
               />
@@ -208,7 +208,7 @@ export const ComposerPrimaryActions = memo(function ComposerPrimaryActions({
               disabled={isSendBusy || isSendDisabled || isConnecting || isEnvironmentUnavailable}
               onClick={() => void onImplementPlanInNewThread()}
             >
-              Implement in a new thread
+              implement in a new thread
             </MenuItem>
           </MenuPopup>
         </Menu>
@@ -235,18 +235,18 @@ export const ComposerPrimaryActions = memo(function ComposerPrimaryActions({
       }
       aria-label={
         isEnvironmentUnavailable
-          ? "Environment disconnected"
+          ? "environment disconnected"
           : sendDisabledReason
             ? sendDisabledReason
             : isConnecting
-              ? "Connecting"
+              ? "connecting"
               : isPreparingWorktree
-                ? "Preparing worktree"
+                ? "preparing worktree"
                 : isSendBusy
-                  ? "Sending"
+                  ? "sending"
                   : isRunning
-                    ? "Queue message"
-                    : "Send message"
+                    ? "queue message"
+                    : "send message"
       }
     >
       {stageBackdropVariant ? (

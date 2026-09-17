@@ -83,12 +83,12 @@ const COMING_SOON_DRIVER_OPTIONS: readonly ComingSoonDriverOption[] = [
   },
   {
     value: ProviderDriverKind.make("acpRegistry"),
-    label: "ACP Registry",
+    label: "ACP registry",
     icon: ACPRegistryIcon,
   },
   {
     value: ProviderDriverKind.make("piAgent"),
-    label: "Pi Agent",
+    label: "Pi agent",
     icon: PiAgentIcon,
   },
 ];
@@ -99,12 +99,12 @@ const COMING_SOON_DRIVER_OPTIONS: readonly ComingSoonDriverOption[] = [
  * Returns a user-facing error string, or `null` if valid.
  */
 function validateInstanceId(id: string, existing: ReadonlySet<string>): string | null {
-  if (id.length === 0) return "Instance ID is required.";
-  if (id.length > 64) return "Instance ID must be 64 characters or fewer.";
+  if (id.length === 0) return "instance ID is required.";
+  if (id.length > 64) return "instance ID must be 64 characters or fewer.";
   if (!INSTANCE_ID_PATTERN.test(id)) {
-    return "Instance ID must start with a letter and use only letters, digits, '-', or '_'.";
+    return "instance ID must start with a letter and use only letters, digits, '-', or '_'.";
   }
-  if (existing.has(id)) return `An instance named '${id}' already exists.`;
+  if (existing.has(id)) return `an instance named '${id}' already exists.`;
   return null;
 }
 
@@ -149,7 +149,7 @@ export function AddProviderInstanceDialog({
   );
   const instanceIdError = validateInstanceId(instanceId, existingIds);
   const showInstanceIdError = hasAttemptedSubmit && instanceIdError !== null;
-  const previewLabel = label.trim() || `${driverOption.label} Workspace`;
+  const previewLabel = label.trim() || `${driverOption.label} workspace`;
   const wizardStepSummaries = [driverOption.label, previewLabel, null] as const;
 
   const configDraft = configByDriver[driver] ?? EMPTY_CONFIG_DRAFT;
@@ -216,7 +216,7 @@ export function AddProviderInstanceDialog({
       toastManager.add({
         type: "error",
         title: "could not add provider instance 3:",
-        description: error instanceof Error ? error.message : "Update failed.",
+        description: error instanceof Error ? error.message : "update failed.",
       });
     }
   };
@@ -225,10 +225,10 @@ export function AddProviderInstanceDialog({
     <Dialog open={open} onOpenChange={onOpenChange}>
       <WizardPopup>
         <WizardHeader
-          title="Add provider instance"
+          title="add provider instance"
           description={
             <>
-              Configure an additional provider instance on {environmentLabel} — for example, a
+              configure an additional provider instance on {environmentLabel} — for example, a
               second Codex install pointed at a different workspace.
             </>
           }
@@ -244,7 +244,7 @@ export function AddProviderInstanceDialog({
         <WizardPanel>
           <div className={cn("grid gap-2", wizardStep !== 0 && "hidden")}>
             <div id="add-instance-driver-label" className="text-sm font-medium text-foreground">
-              Driver
+              driver
             </div>
             <RadioGroup
               value={driver}
@@ -294,7 +294,7 @@ export function AddProviderInstanceDialog({
                       {option.label}
                     </span>
                     <Badge variant="warning" size="sm">
-                      Coming Soon
+                      coming soon
                     </Badge>
                   </RadioPrimitive.Root>
                 );
@@ -303,20 +303,20 @@ export function AddProviderInstanceDialog({
           </div>
 
           <label className={cn("grid gap-2", wizardStep !== 1 && "hidden")}>
-            <span className="text-xs font-medium text-foreground">Label</span>
+            <span className="text-xs font-medium text-foreground">label</span>
             <Input
               className="bg-background"
-              placeholder="e.g. Work"
+              placeholder="e.g. work"
               value={label}
               onChange={(event) => setLabel(event.target.value)}
             />
             <span className="text-[11px] text-muted-foreground">
-              Shown in the provider list. Optional.
+              shown in the provider list. optional.
             </span>
           </label>
 
           <label className={cn("grid gap-2", wizardStep !== 1 && "hidden")}>
-            <span className="text-xs font-medium text-foreground">Instance ID</span>
+            <span className="text-xs font-medium text-foreground">instance ID</span>
             <Input
               className="bg-background"
               placeholder={`${driver}_work`}
@@ -330,19 +330,19 @@ export function AddProviderInstanceDialog({
               <span className="text-[11px] text-destructive">{instanceIdError}</span>
             ) : (
               <span className="text-[11px] text-muted-foreground">
-                Routing key used by threads and sessions. Letters, digits, '-', or '_'.
+                routing key used by threads and sessions. letters, digits, '-', or '_'.
               </span>
             )}
           </label>
 
           <div className={cn("grid gap-2", wizardStep !== 1 && "hidden")}>
-            <span className="text-xs font-medium text-foreground">Accent color</span>
+            <span className="text-xs font-medium text-foreground">accent color</span>
             <div className="flex min-w-0 flex-wrap items-center gap-2">
               <input
                 type="color"
                 value={normalizeProviderAccentColor(accentColor) ?? PROVIDER_ACCENT_SWATCHES[0]}
                 onChange={(event) => setAccentColor(event.target.value)}
-                aria-label="Provider instance accent color"
+                aria-label="provider instance accent color"
                 className="h-8 w-10 cursor-pointer rounded-xl border border-input bg-background p-0.5"
               />
               <div className="flex flex-wrap gap-1.5">
@@ -360,7 +360,7 @@ export function AddProviderInstanceDialog({
                       )}
                       style={{ backgroundColor: swatch }}
                       onClick={() => setAccentColor(swatch)}
-                      aria-label={`Use ${swatch} accent`}
+                      aria-label={`use ${swatch} accent`}
                     />
                   );
                 })}
@@ -373,12 +373,12 @@ export function AddProviderInstanceDialog({
                   className="text-muted-foreground"
                   onClick={() => setAccentColor("")}
                 >
-                  Clear
+                  clear
                 </Button>
               ) : null}
             </div>
             <span className="text-[11px] text-muted-foreground">
-              Optional marker shown in the picker.
+              optional marker shown in the picker.
             </span>
           </div>
 
@@ -395,7 +395,7 @@ export function AddProviderInstanceDialog({
           ) : wizardStep === 2 ? (
             <div className="grid gap-2">
               <p className="text-sm text-muted-foreground">
-                This driver has no required configuration. You can add the instance now.
+                this driver has no required configuration. you can add the instance now.
               </p>
             </div>
           ) : null}
@@ -412,12 +412,12 @@ export function AddProviderInstanceDialog({
               setWizardStep((step) => Math.max(0, step - 1));
             }}
           >
-            {wizardStep === 0 ? "Cancel" : "Back"}
+            {wizardStep === 0 ? "cancel" : "back"}
           </Button>
           {wizardStep < ADD_PROVIDER_WIZARD_STEPS.length - 1 ? (
-            <Button onClick={() => navigateToStep(wizardStep + 1)}>Next</Button>
+            <Button onClick={() => navigateToStep(wizardStep + 1)}>next</Button>
           ) : (
-            <Button onClick={handleSave}>Add instance</Button>
+            <Button onClick={handleSave}>add instance</Button>
           )}
         </WizardFooter>
       </WizardPopup>

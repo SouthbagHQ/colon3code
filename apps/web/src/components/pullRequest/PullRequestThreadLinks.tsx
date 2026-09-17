@@ -105,8 +105,8 @@ function EnabledPullRequestThreadLinks({
     linking.mode === "multiple" ? ((relations.data ?? lastRelations)?.threads ?? []) : [];
   const linkedThreadsLabel =
     linkedThreads.length > 0
-      ? `Linked from ${linkedThreads.length} ${linkedThreads.length === 1 ? "thread" : "threads"}`
-      : "Linked threads";
+      ? `linked from ${linkedThreads.length} ${linkedThreads.length === 1 ? "thread" : "threads"}`
+      : "linked threads";
   return (
     <>
       {display === "count" && (linkedThreads.length > 0 || relations.error !== null) ? (
@@ -151,16 +151,16 @@ function EnabledPullRequestThreadLinks({
             <LinkIcon aria-hidden className="size-3.5" />
           )}
           {linkedHere
-            ? "Unlink from this thread"
+            ? "unlink from this thread"
             : currentThreadRef
-              ? "Link to this thread"
-              : "Link to thread"}
+              ? "link to this thread"
+              : "link to thread"}
         </MenuItem>
       ) : null}
       {display === "picker" ? (
         <Dialog open onOpenChange={onPickerOpenChange}>
           <DialogPopup className="max-w-md" showCloseButton={false}>
-            <DialogTitle className="sr-only">Link pull request to a thread</DialogTitle>
+            <DialogTitle className="sr-only">link pull request to a thread</DialogTitle>
             <ThreadPicker
               environmentId={environmentId}
               url={url}
@@ -206,12 +206,12 @@ function ThreadPicker({
     )
     .toSorted((a, b) => b.updatedAt.localeCompare(a.updatedAt));
   return (
-    <Command mode="none" value={query} onValueChange={setQuery} aria-label="Choose a thread">
-      <CommandInput placeholder="Search threads or projects..." disabled={pending} />
+    <Command mode="none" value={query} onValueChange={setQuery} aria-label="choose a thread">
+      <CommandInput placeholder="search threads or projects..." disabled={pending} />
       <CommandList className="max-h-80 overflow-y-auto">
         {candidates.length === 0 ? (
           <div className="px-3 py-6 text-center text-sm text-muted-foreground">
-            No active threads found.
+            no active threads found.
           </div>
         ) : (
           candidates.map((thread) => {
@@ -225,7 +225,7 @@ function ThreadPicker({
               >
                 <MessageSquareIcon aria-hidden className="size-4 shrink-0" />
                 <span className="flex min-w-0 flex-1 flex-col">
-                  <span className="truncate">{thread.title || "Untitled thread"}</span>
+                  <span className="truncate">{thread.title || "untitled thread"}</span>
                   <span className="truncate text-xs text-muted-foreground">
                     {projectNames.get(thread.projectId)}
                   </span>
@@ -233,7 +233,7 @@ function ThreadPicker({
                 {linked ? (
                   <>
                     <CheckIcon aria-hidden className="size-3.5" />
-                    <span className="text-xs text-muted-foreground">Linked</span>
+                    <span className="text-xs text-muted-foreground">linked</span>
                   </>
                 ) : null}
               </CommandItem>

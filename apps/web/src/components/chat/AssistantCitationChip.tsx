@@ -95,7 +95,7 @@ export function AssistantCitationChip({
     <Link
       {...sourceLinkProps}
       className="inline-flex h-full min-w-0 items-center gap-[0.33em] rounded-sm text-inherit no-underline focus-visible:outline-2 focus-visible:outline-[var(--contrast-foreground)]"
-      aria-label={`View cited assistant text: ${label}`}
+      aria-label={`view cited assistant text: ${label}`}
     >
       <QuoteIcon aria-hidden="true" className={COMPOSER_INLINE_CHIP_ICON_CLASS_NAME} />
       <span className={cn(COMPOSER_INLINE_CHIP_LABEL_CLASS_NAME, "max-w-[16em]")}>{label}</span>
@@ -105,7 +105,7 @@ export function AssistantCitationChip({
     <Link
       {...sourceLinkProps}
       className="inline-flex h-full min-w-0 items-center gap-[0.33em] rounded-sm text-inherit no-underline hover:bg-[color-mix(in_oklab,var(--context-chip-accent)_17%,transparent)] focus-visible:outline-2 focus-visible:outline-[var(--contrast-foreground)]"
-      aria-label={`View cited assistant text: ${label}`}
+      aria-label={`view cited assistant text: ${label}`}
     >
       <QuoteIcon aria-hidden="true" className={COMPOSER_INLINE_CHIP_ICON_CLASS_NAME} />
       <span className={cn(COMPOSER_INLINE_CHIP_LABEL_CLASS_NAME, "max-w-[16em]")}>{label}</span>
@@ -126,13 +126,13 @@ export function AssistantCitationChip({
       ) : (
         <Tooltip>
           <TooltipTrigger render={chatSourceLink} />
-          <TooltipPopup side="top">View source</TooltipPopup>
+          <TooltipPopup side="top">view source</TooltipPopup>
         </Tooltip>
       )}
       {commentEditor ? (
         <Popover open={commentEditor.open} onOpenChange={commentEditor.onOpenChange}>
           <PopoverTrigger
-            aria-label={citation.comment ? "Edit citation comment" : "Add comment to citation"}
+            aria-label={citation.comment ? "edit citation comment" : "add comment to citation"}
             className={CITATION_ACTION_BUTTON_CLASS_NAME}
           >
             <PencilIcon aria-hidden="true" className="size-[0.85em]" />
@@ -147,7 +147,7 @@ export function AssistantCitationChip({
                 commentInputRef.current?.focus({ preventScroll: true });
                 return false;
               }}
-              aria-label="Edit citation comment"
+              aria-label="edit citation comment"
               className="w-72 max-w-[calc(100vw-1rem)]"
               viewportClassName="p-3"
               onPointerDown={(event) => event.stopPropagation()}

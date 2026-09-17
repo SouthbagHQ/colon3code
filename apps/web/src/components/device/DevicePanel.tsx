@@ -37,7 +37,7 @@ import { DeviceToolsPanel } from "./DeviceToolsPanel";
 import { PreviewPanelShell, type PreviewPanelMode } from "../preview/PreviewPanelShell";
 
 const platformLabel = (platform: DevicePlatform) =>
-  platform === "ios" ? "iOS Simulators" : "Android Emulators";
+  platform === "ios" ? "iOS simulators" : "Android emulators";
 
 const deviceKey = (device: Pick<DeviceSummary, "hostId" | "id">) =>
   `${device.hostId}\u0000${device.id}`;
@@ -186,13 +186,13 @@ export function DevicePanel(props: {
       <div className="flex h-9 shrink-0 items-center gap-1.5 border-b px-2">
         <span className="min-w-0 flex-1 truncate text-xs text-muted-foreground">
           {props.surface.target
-            ? `${state.hosts.find((host) => host.id === props.surface.target?.hostId)?.label ?? "Device host"} · ${activeDevice?.version ?? props.surface.target.platform}`
-            : (pendingDevice?.name ?? "Choose a device")}
+            ? `${state.hosts.find((host) => host.id === props.surface.target?.hostId)?.label ?? "device host"} · ${activeDevice?.version ?? props.surface.target.platform}`
+            : (pendingDevice?.name ?? "choose a device")}
         </span>
         {activeDevice ? (
           <>
             <DeviceButton
-              label="Home"
+              label="home"
               onClick={() => handle?.pressButton("home")}
               disabled={!handle?.inputConnected}
             >
@@ -201,14 +201,14 @@ export function DevicePanel(props: {
             {activeDevice.platform === "android" ? (
               <>
                 <DeviceButton
-                  label="Back"
+                  label="back"
                   onClick={() => handle?.pressButton("back")}
                   disabled={!handle?.inputConnected}
                 >
                   <ChevronLeft />
                 </DeviceButton>
                 <DeviceButton
-                  label="Recents"
+                  label="recents"
                   onClick={() => handle?.pressButton("recents")}
                   disabled={!handle?.inputConnected}
                 >
@@ -217,7 +217,7 @@ export function DevicePanel(props: {
               </>
             ) : (
               <DeviceButton
-                label="Rotate"
+                label="rotate"
                 onClick={() => handle?.rotate()}
                 disabled={!handle?.inputConnected}
               >
@@ -225,7 +225,7 @@ export function DevicePanel(props: {
               </DeviceButton>
             )}
             <Toggle
-              aria-label="Tools"
+              aria-label="tools"
               variant="ghost"
               size="xs"
               pressed={toolsOpen}
@@ -233,13 +233,13 @@ export function DevicePanel(props: {
             >
               <SlidersHorizontal />
             </Toggle>
-            <DeviceButton label="Float device over chat" onClick={floatActive}>
+            <DeviceButton label="float device over chat" onClick={floatActive}>
               <PictureInPicture2 />
             </DeviceButton>
-            <DeviceButton label="Power off" onClick={() => closeActive(true)}>
+            <DeviceButton label="power off" onClick={() => closeActive(true)}>
               <Power />
             </DeviceButton>
-            <DeviceButton label="Close" onClick={() => closeActive(false)}>
+            <DeviceButton label="close" onClick={() => closeActive(false)}>
               <X />
             </DeviceButton>
           </>
@@ -255,7 +255,7 @@ export function DevicePanel(props: {
       ) : null}
       {bootingDevices.length > 0 ? (
         <div role="status" className="border-b px-3 py-2 text-xs text-muted-foreground">
-          Starting {bootingDevices.map((device) => device.name).join(", ")}… This can take a minute.
+          starting {bootingDevices.map((device) => device.name).join(", ")}… this can take a minute.
         </div>
       ) : null}
       {operationError ? (
@@ -267,7 +267,7 @@ export function DevicePanel(props: {
           <Button
             size="icon-xs"
             variant="ghost"
-            aria-label="Dismiss device error"
+            aria-label="dismiss device error"
             onClick={() => setOperationError(null)}
           >
             <X className="size-3" />
@@ -283,7 +283,7 @@ export function DevicePanel(props: {
                 environmentId={environmentId}
                 platform={activeDevice.platform}
                 deviceName={activeDevice.name}
-                deviceDescription={`${state.hosts.find((host) => host.id === activeDevice.hostId)?.label ?? "Device host"} · ${activeDevice.version}`}
+                deviceDescription={`${state.hosts.find((host) => host.id === activeDevice.hostId)?.label ?? "device host"} · ${activeDevice.version}`}
                 deviceId={activeDevice.id}
                 hostId={activeDevice.hostId}
                 visible={props.visible}
@@ -306,21 +306,21 @@ export function DevicePanel(props: {
           </>
         ) : pendingDevice || hostBusy || !loaded ? (
           <DeviceLoadingView
-            name={pendingDevice?.name ?? "Devices"}
+            name={pendingDevice?.name ?? "devices"}
             description={
               pendingDevice
-                ? `${state.hosts.find((host) => host.id === pendingDevice.hostId)?.label ?? "Device host"} · ${pendingDevice.version}`
+                ? `${state.hosts.find((host) => host.id === pendingDevice.hostId)?.label ?? "device host"} · ${pendingDevice.version}`
                 : ""
             }
             stage="opening"
             message={
               pendingDevice
                 ? pendingDevice.booted
-                  ? "Opening device…"
-                  : "Starting device…"
+                  ? "opening device…"
+                  : "starting device…"
                 : state.hostStatus === "installing"
-                  ? "Installing device support…"
-                  : "Finding devices…"
+                  ? "installing device support…"
+                  : "finding devices…"
             }
           />
         ) : (
@@ -336,7 +336,7 @@ export function DevicePanel(props: {
                   <Smartphone className="size-6 opacity-60" />
                   <p className="max-w-sm">
                     {state.hostStatus === "failed"
-                      ? (state.hostStatusDetail ?? "The device hub failed to start.")
+                      ? (state.hostStatusDetail ?? "the device hub failed to start.")
                       : "no simulators or emulators were found on this environment"}
                   </p>
                 </>
@@ -359,16 +359,16 @@ export function DevicePanel(props: {
                               </span>
                             }
                             title={device.name}
-                            description={`${state.hosts.find((host) => host.id === device.hostId)?.label} · ${device.version} · ${device.booted ? "Running" : "Stopped"}`}
+                            description={`${state.hosts.find((host) => host.id === device.hostId)?.label} · ${device.version} · ${device.booted ? "running" : "stopped"}`}
                             disabled={pendingDeviceKey !== null}
-                            aria-label={`${device.booted ? "Open" : "Start"} ${device.name}`}
+                            aria-label={`${device.booted ? "open" : "start"} ${device.name}`}
                             onClick={() => void selectDevice(deviceKey(device))}
                             action={
                               pendingDeviceKey === deviceKey(device) ? (
                                 <Spinner className="size-3" />
                               ) : (
                                 <span className="text-xs text-muted-foreground">
-                                  {device.booted ? "Open" : "Start"}
+                                  {device.booted ? "open" : "start"}
                                 </span>
                               )
                             }
@@ -383,7 +383,7 @@ export function DevicePanel(props: {
               !state.devices.some((device) => device.platform === "android") &&
               !unavailablePlatforms.some((platform) => platform.platform === "android") ? (
                 <p className="max-w-sm text-xs">
-                  No Android virtual devices found. Create one in Android Studio's Device Manager,
+                  no Android virtual devices found. create one in Android Studio's Device Manager,
                   then refresh.
                 </p>
               ) : null}
@@ -394,7 +394,7 @@ export function DevicePanel(props: {
                   size="sm"
                   onClick={() => void list({ environmentId, input: {} })}
                 >
-                  Refresh devices
+                  refresh devices
                 </Button>
               ) : null}
             </div>

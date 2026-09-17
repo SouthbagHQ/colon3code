@@ -396,7 +396,7 @@ export function usePrimarySettings<T = UnifiedSettings>(
 }
 
 export const PRIMARY_SETTINGS_UNAVAILABLE_MESSAGE =
-  "This setting is saved on a server, and the hosted app is not anchored to one. Change it from the desktop app or from the server's own address.";
+  "this setting is saved on a server, and the hosted app is not anchored to one. change it from the desktop app or from the server's own address.";
 
 /**
  * Whether primary-scoped server settings have a server to live on. The
@@ -476,7 +476,7 @@ function useUpdateSettingsTarget(environmentId: EnvironmentId | null) {
           }
           if (!wroteToTarget) {
             warnUnsaved(
-              targets.size > 0 ? "Update older servers to save this setting." : undefined,
+              targets.size > 0 ? "update older servers to save this setting." : undefined,
             );
           }
         }

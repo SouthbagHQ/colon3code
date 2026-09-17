@@ -13,7 +13,7 @@ function Spinner({
 }: React.ComponentPropsWithoutRef<typeof LoaderCircleIcon>) {
   return (
     <Colon3Wordmark
-      aria-label="Loading"
+      aria-label="loading"
       ref={observeVisibleAnimation}
       className={cn("spinner-bounce", className)}
       role="status"

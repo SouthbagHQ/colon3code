@@ -12,7 +12,7 @@ describe("resolveEnvironmentIconPickerLock", () => {
   it("locks until the environment is connected", () => {
     expect(
       resolveEnvironmentIconPickerLock({ serverConfig: null, operateAccess: "granted" }),
-    ).toMatch(/Connect/);
+    ).toMatch(/connect/);
   });
 
   it("locks on servers that predate the setting, before looking at permissions", () => {

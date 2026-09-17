@@ -223,7 +223,7 @@ function FileContextChip(props: {
       error={props.upload?.status === "failed"}
       unresolved={needsReattach}
       suffix={suffix}
-      accessibleLabel={`${isVideo && !needsReattach ? "Preview video" : "File"} attachment, ${props.record.name}, ${size}`}
+      accessibleLabel={`${isVideo && !needsReattach ? "preview video" : "file"} attachment, ${props.record.name}, ${size}`}
       onOpen={
         !needsReattach
           ? () =>
@@ -232,7 +232,7 @@ function FileContextChip(props: {
       }
       tooltip={
         needsReattach
-          ? `${props.record.name} was not saved with this draft. Attach it again to send it.`
+          ? `${props.record.name} was not saved with this draft. attach it again to send it.`
           : attachmentTooltip(props.record, props.upload)
       }
     />
@@ -300,12 +300,12 @@ function ComposerPreviewAnnotationDetails({
       {annotation.screenshot?.dataUrl ? (
         <img
           src={annotation.screenshot.dataUrl}
-          alt="Annotated preview crop"
+          alt="annotated preview crop"
           className="max-h-64 w-full border-border/70 border-b bg-muted object-contain"
         />
       ) : (
         <div className="border-border/70 border-b bg-muted/40 px-3 py-2 text-secondary-label text-xs">
-          Screenshot unavailable
+          screenshot unavailable
         </div>
       )}
       <div className="whitespace-pre-wrap wrap-break-word px-3 py-2.5 text-sm text-foreground">
@@ -321,7 +321,7 @@ function UnresolvedContextChip(props: { label: string }) {
       label={props.label}
       className={COMPOSER_INLINE_CHIP_CLASS_NAME}
       labelClassName={COMPOSER_INLINE_CHIP_LABEL_CLASS_NAME}
-      tooltip="This context is no longer available. Remove it or attach it again."
+      tooltip="this context is no longer available. remove it or attach it again."
       tooltipClassName="max-w-80 leading-tight"
     />
   );
@@ -410,7 +410,7 @@ const composerContextPresentationRegistry = createContextPresentationRegistry<
               )
             }
             label={reviewCommentContextLabel(entry.record)}
-            kindLabel={isPullRequest ? pullRequestContextKindLabel(entry.record) : "Review comment"}
+            kindLabel={isPullRequest ? pullRequestContextKindLabel(entry.record) : "review comment"}
             details={<ComposerReviewCommentDetails comment={entry.record} />}
             detailsMode={definition.capabilities.details}
             toneClassName={
@@ -438,7 +438,7 @@ const composerContextPresentationRegistry = createContextPresentationRegistry<
               />
             }
             label={previewAnnotationContextLabel(entry.record)}
-            kindLabel="Preview annotation"
+            kindLabel="preview annotation"
             details={<ComposerPreviewAnnotationDetails annotation={entry.record} />}
             detailsMode={definition.capabilities.details}
             toneClassName={CONTEXT_INLINE_CHIP_TONE_CLASS_NAMES["preview-annotation"]}

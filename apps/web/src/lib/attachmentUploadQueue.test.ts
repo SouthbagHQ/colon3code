@@ -545,7 +545,7 @@ describe("attachmentUploadQueue", () => {
       await awaitAttachmentUploads([file.id]);
       expect(readAttachmentUpload(file.id)).toMatchObject({
         status: "failed",
-        reason: "Uploaded file could not be verified. Retry when the server reconnects.",
+        reason: "uploaded file could not be verified. retry when the server reconnects.",
       });
       expect(useComposerDraftStore.getState().getComposerDraft(draftId)?.files).toMatchObject([
         {

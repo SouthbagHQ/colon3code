@@ -79,10 +79,9 @@ function CommentAuthor({ actor }: { actor: PullRequestActor | null }) {
   );
 }
 
-/** "CHANGES_REQUESTED" reads as "Changes requested": one capital, the host's underscores gone. */
+/** "CHANGES_REQUESTED" reads as "changes requested": lowercase, the host's underscores gone. */
 function reviewStateLabel(state: string): string {
-  const words = state.toLowerCase().replace(/_/g, " ");
-  return words.charAt(0).toUpperCase() + words.slice(1);
+  return state.toLowerCase().replace(/_/g, " ");
 }
 
 /** What every remark in the conversation needs to be rewritten where it sits. */
@@ -118,7 +117,7 @@ function CommentBody({
         cwd={editing.cwd}
         environmentId={editing.environmentId}
         threadRef={editing.threadRef}
-        label="Edit comment"
+        label="edit comment"
         saving={editing.saving}
         onSave={(body) => editing.onSave(comment, body)}
         onCancel={() => editing.onEdit(null)}
@@ -139,7 +138,7 @@ function CommentBody({
           size="icon-xs"
           variant="ghost"
           className="shrink-0 text-muted-foreground opacity-0 transition-opacity group-focus-within:opacity-100 group-hover:opacity-100 focus-visible:opacity-100"
-          aria-label="Edit comment"
+          aria-label="edit comment"
           onClick={() => editing.onEdit(comment)}
         >
           <PencilIcon className="size-3" />
@@ -316,8 +315,8 @@ export function PullRequestSummaryTab({
   activityPending,
   activityError,
   pendingFinding,
-  fixFindingLabel = "Fix in a thread",
-  fixCheckLabel = "Fix",
+  fixFindingLabel = "fix in a thread",
+  fixCheckLabel = "fix",
   onFixFinding,
   onRefresh,
 }: {
@@ -352,7 +351,7 @@ export function PullRequestSummaryTab({
         className="w-full"
         onClick={() => setShown({ url: detail.url, count: shownComments + COMMENT_PAGE })}
       >
-        Show {Math.min(hiddenCommentCount, COMMENT_PAGE)} oldest{" "}
+        show {Math.min(hiddenCommentCount, COMMENT_PAGE)} oldest{" "}
         {hiddenCommentCount === 1 ? "comment" : "comments"}
       </Button>
     ) : null;
@@ -474,10 +473,10 @@ export function PullRequestSummaryTab({
     <div className="h-full overflow-y-auto" data-pull-request-summary-scroll>
       <section className="px-4 pt-2.5 pb-1">
         <div className="space-y-2">
-          <MetaRow icon={<UsersIcon className="size-3.5" />} label="Reviewers">
+          <MetaRow icon={<UsersIcon className="size-3.5" />} label="reviewers">
             <span className="flex min-w-0 flex-wrap items-center gap-1.5">
               {reviewerEntries.length === 0 ? (
-                <span className="text-muted-foreground">None</span>
+                <span className="text-muted-foreground">none</span>
               ) : (
                 <span className="flex items-center -space-x-1">
                   {reviewerEntries.map((entry) => {
@@ -566,10 +565,10 @@ export function PullRequestSummaryTab({
           {/* The row is shown empty only where a label could be put on it from here; on a host
               with none to offer, an empty row is a row about nothing. */}
           {detail.labels.length > 0 || detail.capabilities.labels === true ? (
-            <MetaRow icon={<TagIcon className="size-3.5" />} label="Labels">
+            <MetaRow icon={<TagIcon className="size-3.5" />} label="labels">
               <span className="flex min-w-0 flex-wrap items-center gap-1">
                 {detail.labels.length === 0 ? (
-                  <span className="text-muted-foreground">None</span>
+                  <span className="text-muted-foreground">none</span>
                 ) : (
                   detail.labels.map((label) => {
                     const dot = pullRequestLabelColor(label.color);
@@ -601,7 +600,7 @@ export function PullRequestSummaryTab({
         </div>
       </section>
 
-      <Section key={`description:${detail.url}`} title="Description" keepMounted>
+      <Section key={`description:${detail.url}`} title="description" keepMounted>
         <div className="group">
           {bodyScope === detail.url ? (
             <PullRequestMarkdownEditor
@@ -611,8 +610,8 @@ export function PullRequestSummaryTab({
               cwd={detail.workspaceRoot}
               environmentId={environmentId}
               threadRef={threadRef}
-              label="Pull request description"
-              placeholder="Describe this pull request"
+              label="pull request description"
+              placeholder="describe this pull request"
               saving={bodySaving}
               onSave={(body) => void saveBody(body)}
               onCancel={() => setBodyScope(null)}
@@ -631,7 +630,7 @@ export function PullRequestSummaryTab({
                   size="icon-xs"
                   variant="ghost"
                   className="shrink-0 text-muted-foreground opacity-0 transition-opacity group-focus-within:opacity-100 group-hover:opacity-100 focus-visible:opacity-100"
-                  aria-label="Edit description"
+                  aria-label="edit description"
                   onClick={() => setBodyScope(detail.url)}
                 >
                   <PencilIcon className="size-3" />
@@ -642,7 +641,7 @@ export function PullRequestSummaryTab({
         </div>
       </Section>
 
-      <Section key={`checks:${detail.url}`} title="Checks" defaultOpen={false}>
+      <Section key={`checks:${detail.url}`} title="checks" defaultOpen={false}>
         {detail.checks.length === 0 ? (
           <p className="text-xs text-muted-foreground">no checks reported</p>
         ) : (
@@ -683,7 +682,7 @@ export function PullRequestSummaryTab({
                   >
                     <HammerIcon className="size-3" />
                     {pendingFinding === pullRequestFindingKey(finding)
-                      ? "Preparing..."
+                      ? "preparing..."
                       : fixCheckLabel}
                   </Button>
                 ) : null}
@@ -694,7 +693,7 @@ export function PullRequestSummaryTab({
       </Section>
 
       <Section
-        title="Comments"
+        title="comments"
         actions={
           <Button
             size="xs"
@@ -702,13 +701,13 @@ export function PullRequestSummaryTab({
             className="h-7 shrink-0 px-2 text-[10px] text-muted-foreground"
             aria-label={
               commentOrder === "newest"
-                ? "Show oldest comments first"
-                : "Show newest comments first"
+                ? "show oldest comments first"
+                : "show newest comments first"
             }
             onClick={() => setCommentOrder((value) => (value === "newest" ? "oldest" : "newest"))}
           >
             <ArrowDownUpIcon aria-hidden className="size-3" />
-            {commentOrder === "newest" ? "Newest first" : "Oldest first"}
+            {commentOrder === "newest" ? "newest first" : "oldest first"}
           </Button>
         }
       >
@@ -720,7 +719,7 @@ export function PullRequestSummaryTab({
           <>
             {detail.commentsTruncated ? (
               <p className="mb-2 rounded-md border border-amber-500/30 bg-amber-500/5 px-2 py-1.5 text-xs">
-                This conversation is longer than this page reads in one go. The most recent{" "}
+                this conversation is longer than this page reads in one go. the most recent{" "}
                 {detail.comments.length} are here; open it on the host to read the rest.
               </p>
             ) : null}
@@ -739,7 +738,7 @@ export function PullRequestSummaryTab({
                         key={comment.id}
                         comment={comment}
                         editing={commentEditing}
-                        label={thread?.isResolved ? "Resolved" : "Approval dismissed"}
+                        label={thread?.isResolved ? "resolved" : "approval dismissed"}
                         body={body}
                         reactionBar={
                           <PullRequestReactionBar
@@ -812,7 +811,7 @@ export function PullRequestSummaryTab({
                           >
                             <HammerIcon className="size-3" />
                             {pendingFinding === pullRequestFindingKey(finding)
-                              ? "Preparing..."
+                              ? "preparing..."
                               : fixFindingLabel}
                           </Button>
                         ) : null}

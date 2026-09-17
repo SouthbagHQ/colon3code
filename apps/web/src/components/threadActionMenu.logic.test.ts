@@ -41,7 +41,7 @@ describe("buildThreadActionMenuItems", () => {
     const copyIndex = items.findIndex((item) => item.id === "copy");
     expect(items[copyIndex + 1]).toMatchObject({
       id: "project-settings",
-      label: "Project settings",
+      label: "project settings",
       icon: "settings",
     });
     expect(items[copyIndex + 2]?.id).toBe("archive");
@@ -74,7 +74,7 @@ describe("buildThreadActionMenuItems", () => {
     const item = buildThreadActionMenuItems({ ...baseState, isRegeneratingTitle: true }).find(
       (candidate) => candidate.id === "regenerate-title",
     );
-    expect(item).toMatchObject({ label: "Regenerating…", disabled: true });
+    expect(item).toMatchObject({ label: "regenerating…", disabled: true });
   });
 
   it("marks delete as destructive and keeps it last", () => {

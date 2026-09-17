@@ -29,9 +29,9 @@ function AccountSummary({ account }: { readonly account: UsageLimitsReport["acco
         <RedactedSensitiveText
           key={label}
           value={label}
-          ariaLabel="Toggle account label visibility"
-          revealTooltip="Click to reveal account"
-          hideTooltip="Click to hide account"
+          ariaLabel="toggle account label visibility"
+          revealTooltip="click to reveal account"
+          hideTooltip="click to hide account"
           className="max-w-full truncate align-bottom font-sans text-xs leading-normal"
         />
       ) : (
@@ -61,9 +61,9 @@ export function usageLimitsBannerItem(
     variant: "info",
     priority: "notice",
     icon: <GaugeIcon />,
-    title: "Usage limits",
+    title: "usage limits",
     description: summary,
-    dismissLabel: "Dismiss usage limits",
+    dismissLabel: "dismiss usage limits",
     onDismiss,
     children: <UsageLimitsBannerBody report={report} environmentId={environmentId} />,
   };

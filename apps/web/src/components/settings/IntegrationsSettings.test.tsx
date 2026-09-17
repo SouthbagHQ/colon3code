@@ -111,7 +111,7 @@ const deviceState = (overrides: Partial<DeviceServiceState> = {}): DeviceService
     {
       id: "local",
       kind: "local",
-      label: "This machine",
+      label: "this machine",
       hubInstalled: false,
       agentDeviceInstalled: false,
       platforms: [

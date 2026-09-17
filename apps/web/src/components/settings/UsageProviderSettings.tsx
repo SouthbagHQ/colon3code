@@ -41,7 +41,7 @@ export function UsageProviderSettings({
           !readOnly ? (
             <Button size="xs" variant="outline" onClick={() => setAdding(true)}>
               <PlusIcon className="size-3" aria-hidden />
-              Add hub
+              add hub
             </Button>
           ) : null
         }
@@ -57,7 +57,7 @@ export function UsageProviderSettings({
                 title={label}
                 description={
                   <span className="break-all">
-                    CLI Proxy{source.enabled ? "" : " · Disabled"}
+                    CLI proxy{source.enabled ? "" : " · disabled"}
                     {label !== source.url ? ` · ${source.url}` : ""}
                   </span>
                 }
@@ -98,20 +98,20 @@ function RemoveUsageProviderButton({
   return (
     <>
       <Button size="xs" variant="ghost" onClick={() => setOpen(true)}>
-        Remove
+        remove
       </Button>
       <AlertDialog open={open} onOpenChange={setOpen}>
         <AlertDialogPopup>
           <AlertDialogHeader>
-            <AlertDialogTitle>Remove {label}?</AlertDialogTitle>
+            <AlertDialogTitle>remove {label}?</AlertDialogTitle>
             <AlertDialogDescription>
-              The hub's management key is deleted from this server. Its accounts leave the Limits
-              view; the hub itself is untouched. Add it again with the URL and key to bring them
+              the hub's management key is deleted from this server. its accounts leave the limits
+              view; the hub itself is untouched. add it again with the URL and key to bring them
               back.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogClose render={<Button variant="outline" />}>Cancel</AlertDialogClose>
+            <AlertDialogClose render={<Button variant="outline" />}>cancel</AlertDialogClose>
             <Button
               variant="destructive"
               onClick={() => {
@@ -119,7 +119,7 @@ function RemoveUsageProviderButton({
                 onConfirm();
               }}
             >
-              Remove hub
+              remove hub
             </Button>
           </AlertDialogFooter>
         </AlertDialogPopup>

@@ -73,7 +73,7 @@ function countRemainder(count: number, named: boolean): string {
 export function pullRequestReactionTooltip(reaction: PullRequestReaction): string {
   const viewerHasRoom = reaction.actors.length < reaction.count;
   const names =
-    reaction.viewerHasReacted && viewerHasRoom ? ["You", ...reaction.actors] : [...reaction.actors];
+    reaction.viewerHasReacted && viewerHasRoom ? ["you", ...reaction.actors] : [...reaction.actors];
   const shown = names.slice(0, Math.min(NAMED_ACTOR_LIMIT, reaction.count));
   const others = Math.max(0, reaction.count - shown.length);
   const parts = [...shown, ...(others > 0 ? [countRemainder(others, shown.length > 0)] : [])];

@@ -22,7 +22,7 @@ import {
 } from "./versionSkew";
 
 const MISMATCH_HINT =
-  "Version mismatch. Try syncing the client and server to the same :3 Code version.";
+  "version mismatch. try syncing the client and server to the same :3 Code version.";
 
 describe("versionSkew", () => {
   beforeEach(() => {
@@ -215,7 +215,7 @@ describe("versionSkew", () => {
   });
 
   it("matches version-drift guidance to the advertised update path", () => {
-    expect(serverUpdateGuidance("respawn")).toBe("Update to stay in sync");
-    expect(serverUpdateGuidance("desktop-managed")).toBe("Update the desktop app");
+    expect(serverUpdateGuidance("respawn")).toBe("update to stay in sync");
+    expect(serverUpdateGuidance("desktop-managed")).toBe("update the desktop app");
   });
 });

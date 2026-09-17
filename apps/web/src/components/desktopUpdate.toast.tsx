@@ -36,7 +36,7 @@ function ReleaseNotesLink({
       }}
       type="button"
     >
-      Read more
+      read more
       <ArrowRightIcon
         aria-hidden
         className="ml-1 inline size-3 -rotate-45 align-[-0.125em]"
@@ -56,7 +56,7 @@ export function showDesktopUpdateDownloadedToast(
     title: "update downloaded :3",
     description: (
       <>
-        Restart the app from the update button to install it.
+        restart the app from the update button to install it.
         {releaseUrl ? <ReleaseNotesLink releaseUrl={releaseUrl} shell={shell} /> : null}
       </>
     ),

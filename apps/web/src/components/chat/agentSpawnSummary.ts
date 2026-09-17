@@ -33,16 +33,16 @@ export function deriveAgentSpawnSummary({
   ]
     .filter(Boolean)
     .join(" and ");
-  const lead = `${batches > 0 ? "Launched" : live ? "Kicked off" : "Ran"} ${subjects || "subagents"}`;
+  const lead = `${batches > 0 ? "launched" : live ? "kicked off" : "ran"} ${subjects || "subagents"}`;
 
   const status = live
     ? working > 0
       ? `${working} working`
       : "working"
     : coordinatorStatus === "failed"
-      ? "Workflow failed"
+      ? "workflow failed"
       : coordinatorStatus === "cancelled" || coordinatorStatus === "interrupted"
-        ? "Workflow stopped"
+        ? "workflow stopped"
         : failed > 0
           ? `${failed} failed`
           : stopped > 0
@@ -51,7 +51,7 @@ export function deriveAgentSpawnSummary({
               ? `${idle} idle`
               : coordinatorStatus !== "completed" &&
                   (agents.length === 0 || agents.length < agentCount)
-                ? "Status unavailable"
+                ? "status unavailable"
                 : "✓ completed";
   const tone = live
     ? "working"
