@@ -1,0 +1,349 @@
+name: Fork release
+
+# The fork's release train. Upstream's release.yml needs the T3 Connect relay,
+# Clerk, npm trusted publishing, Vercel and Blacksmith runners, none of which
+# this fork has. This workflow builds the same six desktop installers and CLI
+# archives on GitHub-hosted runners, unsigned, and attaches them to a GitHub
+# Release for the pushed `t3-code-release-<version>` tag.
+
+on:
+  push:
+    tags:
+      - "t3-code-release-*"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: fork-release-${{ github.ref_name }}
+  cancel-in-progress: false
+
+jobs:
+  preflight:
+    name: Resolve release
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    outputs:
+      version: ${{ steps.meta.outputs.version }}
+      tag: ${{ steps.meta.outputs.tag }}
+      ref: ${{ github.sha }}
+    steps:
+      - id: meta
+        name: Derive version from tag
+        shell: bash
+        env:
+          TAG: ${{ github.ref_name }}
+        run: |
+          set -euo pipefail
+          version="${TAG#t3-code-release-}"
+          if [[ ! "$version" =~ ^[0-9]+\.[0-9]+\.[0-9]+(-[0-9A-Za-z.]+)?$ ]]; then
+            echo "Tag '$TAG' must be t3-code-release-<semver>, got version '$version'." >&2
+            exit 1
+          fi
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
+
+  build_bundle:
+    name: Build JS bundle
+    needs: [preflight]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ needs.preflight.outputs.ref }}
+          sparse-checkout: |
+            /*
+            !/.repos/
+          sparse-checkout-cone-mode: false
+
+      - name: Setup Vite+
+        uses: voidzero-dev/setup-vp@v1
+        with:
+          node-version-file: package.json
+          cache: true
+          run-install: false
+
+      - name: Install bundle dependencies
+        run: vp install --filter=t3... --filter=@t3tools/web... --filter=@t3tools/desktop... --filter=@t3tools/scripts...
+
+      - name: Align package versions to release version
+        run: node scripts/update-release-package-versions.ts "${{ needs.preflight.outputs.version }}"
+
+      - uses: ./.github/actions/setup-apt-mirrors
+
+      - name: Install browser secret helper build libraries
+        run: sudo apt-get update && sudo apt-get install -y libsecret-1-dev pkg-config
+
+      - name: Build JS bundle
+        run: vp run build:desktop
+
+      - name: Upload JS bundle
+        uses: actions/upload-artifact@v7
+        with:
+          name: js-bundle
+          path: |
+            apps/server/dist
+            apps/desktop/dist-electron
+          if-no-files-found: error
+          retention-days: 1
+
+  desktop_mac_arm64:
+    name: Desktop macOS arm64
+    needs: [preflight, build_bundle]
+    uses: ./.github/workflows/release-desktop.yml
+    secrets: inherit
+    with:
+      version: ${{ needs.preflight.outputs.version }}
+      ref: ${{ needs.preflight.outputs.ref }}
+      release_channel: stable
+      relay_client_tracing: false
+      clerk_publishable_key: ""
+      clerk_jwt_template: ""
+      clerk_cli_oauth_client_id: ""
+      relay_url: ""
+      label: macOS arm64
+      runner: macos-15
+      platform: mac
+      target: dmg
+      arch: arm64
+      rust_target: aarch64-apple-darwin
+      resource_key: darwin-arm64
+      cli_archive: true
+      timeout_minutes: 60
+
+  desktop_mac_x64:
+    name: Desktop macOS x64
+    needs: [preflight, build_bundle]
+    uses: ./.github/workflows/release-desktop.yml
+    secrets: inherit
+    with:
+      version: ${{ needs.preflight.outputs.version }}
+      ref: ${{ needs.preflight.outputs.ref }}
+      release_channel: stable
+      relay_client_tracing: false
+      clerk_publishable_key: ""
+      clerk_jwt_template: ""
+      clerk_cli_oauth_client_id: ""
+      relay_url: ""
+      label: macOS x64
+      runner: macos-15-intel
+      platform: mac
+      target: dmg
+      arch: x64
+      rust_target: x86_64-apple-darwin
+      resource_key: darwin-x64
+      timeout_minutes: 90
+
+  desktop_linux_x64:
+    name: Desktop Linux x64
+    needs: [preflight, build_bundle]
+    uses: ./.github/workflows/release-desktop.yml
+    secrets: inherit
+    with:
+      version: ${{ needs.preflight.outputs.version }}
+      ref: ${{ needs.preflight.outputs.ref }}
+      release_channel: stable
+      relay_client_tracing: false
+      clerk_publishable_key: ""
+      clerk_jwt_template: ""
+      clerk_cli_oauth_client_id: ""
+      relay_url: ""
+      label: Linux x64
+      runner: ubuntu-24.04
+      platform: linux
+      target: AppImage
+      arch: x64
+      rust_target: x86_64-unknown-linux-gnu
+      resource_key: linux-x64
+      cli_archive: true
+      timeout_minutes: 60
+
+  desktop_linux_arm64:
+    name: Desktop Linux arm64
+    needs: [preflight, build_bundle]
+    uses: ./.github/workflows/release-desktop.yml
+    secrets: inherit
+    with:
+      version: ${{ needs.preflight.outputs.version }}
+      ref: ${{ needs.preflight.outputs.ref }}
+      release_channel: stable
+      relay_client_tracing: false
+      clerk_publishable_key: ""
+      clerk_jwt_template: ""
+      clerk_cli_oauth_client_id: ""
+      relay_url: ""
+      label: Linux arm64
+      runner: ubuntu-24.04-arm
+      platform: linux
+      target: AppImage
+      arch: arm64
+      rust_target: aarch64-unknown-linux-gnu
+      resource_key: linux-arm64
+      cli_archive: true
+      timeout_minutes: 60
+
+  # Windows embeds the same-arch Linux CLI archive as its WSL runtime, so each
+  # Windows job waits for the matching Linux job.
+  desktop_win_x64:
+    name: Desktop Windows x64
+    needs: [preflight, build_bundle, desktop_linux_x64]
+    uses: ./.github/workflows/release-desktop.yml
+    secrets: inherit
+    with:
+      version: ${{ needs.preflight.outputs.version }}
+      ref: ${{ needs.preflight.outputs.ref }}
+      release_channel: stable
+      relay_client_tracing: false
+      clerk_publishable_key: ""
+      clerk_jwt_template: ""
+      clerk_cli_oauth_client_id: ""
+      relay_url: ""
+      label: Windows x64
+      runner: windows-2025
+      platform: win
+      target: nsis
+      arch: x64
+      rust_target: x86_64-pc-windows-msvc
+      resource_key: win32-x64
+      cli_archive: true
+      timeout_minutes: 90
+
+  desktop_win_arm64:
+    name: Desktop Windows arm64
+    needs: [preflight, build_bundle, desktop_linux_arm64]
+    uses: ./.github/workflows/release-desktop.yml
+    secrets: inherit
+    with:
+      version: ${{ needs.preflight.outputs.version }}
+      ref: ${{ needs.preflight.outputs.ref }}
+      release_channel: stable
+      relay_client_tracing: false
+      clerk_publishable_key: ""
+      clerk_jwt_template: ""
+      clerk_cli_oauth_client_id: ""
+      relay_url: ""
+      label: Windows arm64
+      runner: windows-11-arm
+      platform: win
+      target: nsis
+      arch: arm64
+      rust_target: aarch64-pc-windows-msvc
+      resource_key: win32-arm64
+      cli_archive: true
+      timeout_minutes: 90
+
+  release:
+    name: Publish GitHub Release
+    needs:
+      [
+        preflight,
+        desktop_mac_arm64,
+        desktop_mac_x64,
+        desktop_linux_x64,
+        desktop_linux_arm64,
+        desktop_win_x64,
+        desktop_win_arm64,
+      ]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ needs.preflight.outputs.ref }}
+          sparse-checkout: |
+            /*
+            !/.repos/
+          sparse-checkout-cone-mode: false
+
+      - name: Setup Vite+
+        uses: voidzero-dev/setup-vp@v1
+        with:
+          node-version-file: package.json
+          cache: true
+          run-install: |
+            args:
+              - --filter=@t3tools/scripts...
+
+      - name: Download all desktop artifacts
+        uses: actions/download-artifact@v8
+        with:
+          pattern: desktop-*
+          merge-multiple: true
+          path: release-assets
+
+      - name: Download all CLI archives
+        uses: actions/download-artifact@v8
+        with:
+          pattern: cli-*
+          merge-multiple: true
+          path: release-assets
+
+      - name: Write CLI archive checksums
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd release-assets
+          shopt -s nullglob
+          archives=(t3-*.tar.gz t3-*.zip)
+          if [[ ${#archives[@]} -eq 0 ]]; then
+            echo "No CLI archives were produced." >&2
+            exit 1
+          fi
+          sha256sum "${archives[@]}" > SHA256SUMS
+          cat SHA256SUMS
+
+      - name: Merge macOS updater manifests
+        shell: bash
+        run: |
+          shopt -s nullglob
+          for x64_manifest in release-assets/*-mac-x64.yml; do
+            arm64_manifest="${x64_manifest%-x64.yml}.yml"
+            if [[ -f "$arm64_manifest" ]]; then
+              node scripts/merge-update-manifests.ts --platform mac "$arm64_manifest" "$x64_manifest"
+              rm -f "$x64_manifest"
+            fi
+          done
+
+      - name: Merge Windows updater manifests
+        shell: bash
+        run: |
+          shopt -s nullglob
+          for x64_manifest in release-assets/*-win-x64.yml; do
+            arm64_manifest="${x64_manifest%-x64.yml}-arm64.yml"
+            merged_manifest="${x64_manifest%-win-x64.yml}.yml"
+            if [[ -f "$arm64_manifest" ]]; then
+              node scripts/merge-update-manifests.ts --platform win "$x64_manifest" "$arm64_manifest" "$merged_manifest"
+              rm -f "$x64_manifest" "$arm64_manifest"
+            else
+              mv "$x64_manifest" "$merged_manifest"
+            fi
+          done
+
+      - name: List release assets
+        run: ls -la release-assets
+
+      - name: Publish release
+        uses: softprops/action-gh-release@v3
+        with:
+          tag_name: ${{ needs.preflight.outputs.tag }}
+          target_commitish: ${{ needs.preflight.outputs.ref }}
+          name: ":3 Code ${{ needs.preflight.outputs.version }}"
+          generate_release_notes: true
+          prerelease: false
+          make_latest: true
+          files: |
+            release-assets/*.dmg
+            release-assets/*.zip
+            release-assets/*.AppImage
+            release-assets/*.exe
+            release-assets/*.blockmap
+            release-assets/*.yml
+            release-assets/*.tar.gz
+            release-assets/SHA256SUMS
+          fail_on_unmatched_files: true
+          token: ${{ github.token }}
