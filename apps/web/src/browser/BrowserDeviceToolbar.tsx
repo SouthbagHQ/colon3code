@@ -7,7 +7,7 @@ import {
   type PreviewViewportSetting,
 } from "@t3tools/contracts";
 import { PREVIEW_VIEWPORT_PRESETS, resolvePreviewViewport } from "@t3tools/shared/previewViewport";
-import { Link2, Unlink2, X } from "lucide-react";
+import { LinkIcon, UnlinkIcon, XIcon } from "~/icons";
 import { useState } from "react";
 
 import { Button } from "~/components/ui/button";
@@ -297,9 +297,9 @@ export function BrowserDeviceToolbar({
           }
         >
           {aspectRatio === null ? (
-            <Unlink2 className={cn(aspectRatio !== null && "text-foreground")} />
+            <UnlinkIcon className={cn(aspectRatio !== null && "text-foreground")} />
           ) : (
-            <Link2 className={cn(aspectRatio !== null && "text-foreground")} />
+            <LinkIcon className={cn(aspectRatio !== null && "text-foreground")} />
           )}
         </TooltipTrigger>
         <TooltipPopup side="top">
@@ -327,7 +327,7 @@ export function BrowserDeviceToolbar({
           apply({ _tag: "fill" }, null);
         }}
       >
-        <X />
+        <XIcon />
       </Button>
     </div>
   );

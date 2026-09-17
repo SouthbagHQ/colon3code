@@ -1,12 +1,12 @@
 import { RefreshIcon } from "~/components/ui/refresh-icon";
 import {
-  ArrowLeft,
-  ArrowRight,
-  Camera,
-  ExternalLink,
-  MousePointerClick,
-  PictureInPicture2,
-} from "lucide-react";
+  ArrowLeftIcon,
+  ArrowRightIcon,
+  CameraIcon,
+  ExternalLinkIcon,
+  MousePointerClickIcon,
+  PictureInPictureIcon,
+} from "~/icons";
 import {
   type FormEvent,
   type KeyboardEvent,
@@ -132,7 +132,7 @@ export function PreviewChromeRow({
                 />
               }
             >
-              <ArrowLeft />
+              <ArrowLeftIcon />
             </TooltipTrigger>
             <TooltipPopup>back</TooltipPopup>
           </Tooltip>
@@ -149,7 +149,7 @@ export function PreviewChromeRow({
                 />
               }
             >
-              <ArrowRight />
+              <ArrowRightIcon />
             </TooltipTrigger>
             <TooltipPopup>forward</TooltipPopup>
           </Tooltip>
@@ -229,7 +229,7 @@ export function PreviewChromeRow({
                     />
                   }
                 >
-                  <ExternalLink />
+                  <ExternalLinkIcon />
                 </TooltipTrigger>
                 <TooltipPopup>open in system browser</TooltipPopup>
               </Tooltip>
@@ -252,7 +252,7 @@ export function PreviewChromeRow({
                 />
               }
             >
-              <MousePointerClick className={cn(pickActive && "text-primary")} />
+              <MousePointerClickIcon className={cn(pickActive && "text-primary")} />
             </TooltipTrigger>
             <TooltipPopup>
               {pickDisabled && pickDisabledReason
@@ -278,7 +278,7 @@ export function PreviewChromeRow({
                 />
               }
             >
-              <Camera className={cn(recording && "text-destructive")} />
+              <CameraIcon className={cn(recording && "text-destructive")} />
               {recording ? (
                 <span className="absolute right-0.5 top-0.5 size-1.5 animate-status-pulse rounded-full bg-destructive" />
               ) : null}
@@ -305,7 +305,7 @@ export function PreviewChromeRow({
                 />
               }
             >
-              <PictureInPicture2 className={cn(pictureInPicture && "text-primary")} />
+              <PictureInPictureIcon className={cn(pictureInPicture && "text-primary")} />
             </TooltipTrigger>
             <TooltipPopup>
               {pictureInPicture ? "close floating preview" : "float preview over chat"}

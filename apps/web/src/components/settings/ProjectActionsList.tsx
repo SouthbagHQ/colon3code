@@ -1,5 +1,5 @@
 import type { ProjectScript, ResolvedKeybindingsConfig } from "@t3tools/contracts";
-import { SettingsIcon } from "lucide-react";
+import { SettingsIcon } from "~/icons";
 import { shortcutLabelForCommand } from "../../keybindings";
 import { commandForProjectScript } from "../../projectScripts";
 import { ScriptIcon } from "../projectScriptEditor";

@@ -10,7 +10,7 @@ import { AsyncResult } from "effect/unstable/reactivity";
 import { type EnvironmentId, type ProjectIconOverride } from "@t3tools/contracts";
 import { useLocation, useNavigate } from "@tanstack/react-router";
 import * as Cause from "effect/Cause";
-import { Trash2Icon } from "lucide-react";
+import { TrashIcon } from "~/icons";
 import { lazy, Suspense, useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 import { useComposerDraftStore } from "../../composerDraftStore";
@@ -503,7 +503,7 @@ function ProjectDetail({
                 variant="destructive-outline"
                 onClick={() => void removeMembers(group.memberProjects)}
               >
-                <Trash2Icon />
+                <TrashIcon />
                 {hasOtherMembers
                   ? "remove checkout"
                   : group.memberProjects.length > 1

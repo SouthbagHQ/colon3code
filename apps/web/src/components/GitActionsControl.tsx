@@ -37,7 +37,7 @@ import {
   InfoIcon,
   LockIcon,
   GlobeIcon,
-} from "lucide-react";
+} from "~/icons";
 import { Radio as RadioPrimitive } from "@base-ui/react/radio";
 import {
   AzureDevOpsIcon,
@@ -637,7 +637,7 @@ function PublishRepositoryDialog(props: PublishRepositoryDialogProps) {
                             <Button
                               variant="outline"
                               size="xs"
-                              className="h-5 rounded-[.25rem] px-1.5 text-[10px] text-warning-foreground"
+                              className="h-5 rounded px-1.5 text-[10px] text-warning-foreground"
                               onClick={(event) => {
                                 event.preventDefault();
                                 event.stopPropagation();

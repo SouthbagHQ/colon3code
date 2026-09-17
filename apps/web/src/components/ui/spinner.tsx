@@ -1,4 +1,4 @@
-import type { LoaderCircleIcon } from "lucide-react";
+import type { LoaderCircleIcon } from "~/icons";
 import { Colon3Wordmark } from "../Colon3Wordmark";
 import { observeVisibleAnimation } from "~/lib/visibleAnimation";
 import { cn } from "~/lib/utils";

@@ -6,15 +6,15 @@ import { filePreviewKind, FILE_TEXT_PREVIEW_MAX_BYTES } from "@t3tools/shared/fi
 import {
   CheckIcon,
   ChevronRightIcon,
-  Code2,
+  CodeIcon,
   CopyIcon,
   DownloadIcon,
-  Eye,
-  Table2,
-  Trash2Icon,
+  EyeIcon,
+  TableIcon,
+  TrashIcon,
   WrapTextIcon,
   XIcon,
-} from "lucide-react";
+} from "~/icons";
 import { lazy, Suspense, useEffect, useMemo, useRef, useState } from "react";
 
 import { useAssetUrlRefresh } from "~/assets/assetUrls";
@@ -314,11 +314,11 @@ export function AttachmentFilePreview(props: {
             onPress={() => setRendered((value) => !value)}
           >
             {rendered ? (
-              <Code2 className="size-3.5" />
+              <CodeIcon className="size-3.5" />
             ) : renderedMode === "table" ? (
-              <Table2 className="size-3.5" />
+              <TableIcon className="size-3.5" />
             ) : (
-              <Eye className="size-3.5" />
+              <EyeIcon className="size-3.5" />
             )}
           </FileSurfaceAction>
         ) : null}
@@ -350,7 +350,7 @@ export function AttachmentFilePreview(props: {
         ) : null}
         {props.onRemove ? (
           <FileSurfaceAction label="remove from draft" onPress={props.onRemove}>
-            <Trash2Icon className="size-3.5" />
+            <TrashIcon className="size-3.5" />
           </FileSurfaceAction>
         ) : null}
         {props.onClose ? (

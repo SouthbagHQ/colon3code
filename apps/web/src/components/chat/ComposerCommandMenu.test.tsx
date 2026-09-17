@@ -1,4 +1,6 @@
 import { renderToStaticMarkup } from "react-dom/server";
+import { FolderIcon } from "~/icons";
+import { iconPath } from "~/test/iconMarkup";
 import { ProviderDriverKind } from "@t3tools/contracts";
 import { describe, expect, it } from "vite-plus/test";
 
@@ -94,7 +96,7 @@ describe("ComposerCommandMenu", () => {
 
     expect(markup).toContain('<span class="text-secondary-label">/skill:</span>Ask Matt');
     expect(markup).toContain('data-slot="badge"');
-    expect(markup).toContain("lucide-folder");
+    expect(markup).toContain(iconPath(FolderIcon));
     expect(markup).toContain(">repo</span>");
     expect(markup).toContain("Find the right skill or workflow");
   });

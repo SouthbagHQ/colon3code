@@ -6,9 +6,9 @@ import {
   PenLineIcon,
   PlusIcon,
   SunIcon,
-  Trash2Icon,
+  TrashIcon,
   UploadIcon,
-} from "lucide-react";
+} from "~/icons";
 import { useCallback, useEffect, useState, type ReactElement } from "react";
 import { useEnvironmentThemeDefinitions } from "../../hooks/useEnvironmentTheme";
 import { readThemeHalvesRaw } from "../../hooks/useTheme";
@@ -398,7 +398,7 @@ function ThemeLibraryCard({
                               onRemove();
                             }}
                           >
-                            <Trash2Icon />
+                            <TrashIcon />
                           </Button>
                         }
                       />

@@ -1,5 +1,5 @@
 import { RefreshIcon } from "~/components/ui/refresh-icon";
-import { ExternalLinkIcon, GitPullRequestIcon } from "lucide-react";
+import { ExternalLinkIcon, GitPullRequestIcon } from "~/icons";
 
 import { Button } from "../ui/button";
 import {

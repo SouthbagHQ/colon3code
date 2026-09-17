@@ -5,12 +5,7 @@ import {
   type EnvironmentId,
   type UsageProviderKind,
 } from "@t3tools/contracts";
-import {
-  CircleAlertIcon,
-  ChevronDownIcon,
-  CircleDashedIcon,
-  SlidersHorizontalIcon,
-} from "lucide-react";
+import { CircleAlertIcon, ChevronDownIcon, CircleDashedIcon, SlidersHorizontalIcon } from "~/icons";
 import { useMemo, useRef, useState } from "react";
 
 import {

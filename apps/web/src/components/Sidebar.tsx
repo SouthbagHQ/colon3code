@@ -57,9 +57,9 @@ import {
   ShieldQuestionIcon,
   SquarePenIcon,
   TerminalIcon,
-  Undo2Icon,
+  UndoIcon,
   XIcon,
-} from "lucide-react";
+} from "~/icons";
 import {
   memo,
   useCallback,
@@ -953,7 +953,7 @@ const dropVerbBadge: Record<SidebarDropVerb, ReactNode> = {
   ),
   unsettle: (
     <>
-      <Undo2Icon aria-hidden className="size-3" />
+      <UndoIcon aria-hidden className="size-3" />
       un-settle
     </>
   ),
@@ -1699,7 +1699,7 @@ const SidebarThreadRow = memo(function SidebarThreadRow(props: {
                         />
                       }
                     >
-                      <Undo2Icon className="mb-px size-3.5" />
+                      <UndoIcon className="mb-px size-3.5" />
                     </TooltipTrigger>
                     <TooltipPopup side="top">un-settle thread</TooltipPopup>
                   </Tooltip>

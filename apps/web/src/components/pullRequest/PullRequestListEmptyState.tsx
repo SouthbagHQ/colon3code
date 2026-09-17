@@ -12,7 +12,7 @@ import { RefreshIcon } from "~/components/ui/refresh-icon";
  * with no project to read from — leave the button out, since pressing it could only repeat what
  * is already happening or ask nobody.
  */
-import { PlusIcon, SearchIcon } from "lucide-react";
+import { PlusIcon, SearchIcon } from "~/icons";
 
 import { openCommandPalette } from "../../commandPaletteBus";
 import { Button } from "../ui/button";

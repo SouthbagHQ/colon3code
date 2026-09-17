@@ -1,5 +1,5 @@
 import type { PullRequestRef, PullRequestStack } from "@t3tools/contracts";
-import { CheckIcon } from "lucide-react";
+import { CheckIcon } from "~/icons";
 import { MenuItem, MenuGroupLabel } from "../ui/menu";
 import { PullRequestStackLayerContent } from "./PullRequestStackLayerContent";
 

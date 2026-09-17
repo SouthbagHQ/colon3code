@@ -14,7 +14,7 @@ import {
   MinusIcon,
   TerminalIcon,
   XIcon,
-} from "lucide-react";
+} from "~/icons";
 import { useEffect, useState, type ReactNode } from "react";
 
 import { Button } from "~/components/ui/button";

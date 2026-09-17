@@ -1,4 +1,4 @@
-import { InfoIcon, Undo2Icon } from "lucide-react";
+import { InfoIcon, UndoIcon } from "~/icons";
 import { DEFAULT_SERVER_SETTINGS, type ServerSettings } from "@t3tools/contracts";
 import * as Equal from "effect/Equal";
 import { useLocation, useNavigate } from "@tanstack/react-router";
@@ -506,7 +506,7 @@ export function SettingResetButton({
               onClick();
             }}
           >
-            <Undo2Icon className="size-3" />
+            <UndoIcon className="size-3" />
           </Button>
         }
       />

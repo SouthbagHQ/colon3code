@@ -21,7 +21,7 @@ import {
   formatSubagentTokenCount,
 } from "@t3tools/client-runtime/state/subagentRuntime";
 import type { EnvironmentId, ThreadId } from "@t3tools/contracts";
-import { Bot, Braces, Check, ChevronDown, ChevronRight, X } from "lucide-react";
+import { BotIcon, BracesIcon, CheckIcon, ChevronDownIcon, ChevronRightIcon, XIcon } from "~/icons";
 import { useEffect, useRef, useState } from "react";
 
 import { cn } from "~/lib/utils";
@@ -171,7 +171,7 @@ function AgentRow({ agent }: { agent: RuntimeSubagent }) {
         <span className="inline-flex items-center gap-1">
           <AgentElapsed agent={agent} />
           {agent.status === "completed" ? (
-            <Check aria-hidden className="size-3 text-success" />
+            <CheckIcon aria-hidden className="size-3 text-success" />
           ) : null}
         </span>
       </span>
@@ -220,7 +220,7 @@ function PhaseRail({ group }: { group: AgentPanelWorkflowGroup }) {
       {group.phases.map((phase, index) => (
         <div key={phase.index} className="flex items-center gap-1">
           {index > 0 ? (
-            <ChevronRight aria-hidden className="size-3 text-muted-foreground/40" />
+            <ChevronRightIcon aria-hidden className="size-3 text-muted-foreground/40" />
           ) : null}
           <div
             className={cn(
@@ -280,7 +280,7 @@ function WorkflowScriptView({
   return (
     <div className="mx-1.5 mb-1 rounded-md border border-border/60 bg-background/60">
       <div className="flex items-center gap-2 border-b border-border/50 px-2 py-1">
-        <Braces aria-hidden className="size-3 text-muted-foreground" />
+        <BracesIcon aria-hidden className="size-3 text-muted-foreground" />
         <span className="truncate font-mono text-[.65rem] text-muted-foreground">
           {scriptPath.split("/").at(-1)}
         </span>
@@ -291,7 +291,7 @@ function WorkflowScriptView({
           aria-label="close script"
           className="ml-auto"
         >
-          <X aria-hidden className="size-3" />
+          <XIcon aria-hidden className="size-3" />
         </Button>
       </div>
       <div className="max-h-72 overflow-auto p-2">
@@ -348,11 +348,11 @@ function PhaseSection({
         )}
       >
         {open ? (
-          <ChevronDown aria-hidden className="size-3 shrink-0" />
+          <ChevronDownIcon aria-hidden className="size-3 shrink-0" />
         ) : (
-          <ChevronRight aria-hidden className="size-3 shrink-0" />
+          <ChevronRightIcon aria-hidden className="size-3 shrink-0" />
         )}
-        {phase.state === "done" ? <Check aria-hidden className="size-3" /> : null}
+        {phase.state === "done" ? <CheckIcon aria-hidden className="size-3" /> : null}
         <span>{phase.title}</span>
         <span className="font-normal normal-case text-muted-foreground/70">
           {phase.state === "pending" && phase.members.length === 0
@@ -426,7 +426,7 @@ function ExpandedWorkflowSection({
           onClick={onCollapse}
           aria-label="collapse workflow"
         >
-          <ChevronDown aria-hidden className="size-3" />
+          <ChevronDownIcon aria-hidden className="size-3" />
         </Button>
       </div>
       <PhaseRail group={group} />
@@ -491,7 +491,7 @@ function CollapsedWorkflowSection({
           <span>{members.length} agents</span>
           <span className="tabular-nums">· {formatSubagentTokenCount(totalTokens)} tok</span>
           {elapsed ? <span className="tabular-nums">· {elapsed}</span> : null}
-          <ChevronRight aria-hidden className="size-3" />
+          <ChevronRightIcon aria-hidden className="size-3" />
         </span>
       </button>
     </section>
@@ -533,7 +533,7 @@ export function AgentsPanel({
   if (!model.hasAgents) {
     return (
       <div className="flex h-full flex-col items-center justify-center gap-2 p-6 text-center">
-        <Bot aria-hidden className="size-6 text-muted-foreground/60" />
+        <BotIcon aria-hidden className="size-6 text-muted-foreground/60" />
         <p className="text-sm font-medium">no agents yet, it's quiet in here :3</p>
         <p className="max-w-56 text-xs text-muted-foreground">
           when this thread spawns subagents or runs a workflow, they'll pop up here with live

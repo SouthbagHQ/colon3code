@@ -1,5 +1,5 @@
 import { useSupportsMultiplePullRequests } from "~/hooks/useSupportsMultiplePullRequests";
-import { GitPullRequestIcon } from "lucide-react";
+import { GitPullRequestIcon } from "~/icons";
 import { resolveThreadCurrentPullRequestLink } from "@t3tools/shared/threadPullRequests";
 import { Spinner } from "~/components/ui/spinner";
 import {
@@ -7,12 +7,12 @@ import {
   ArrowUpDownIcon,
   ChevronRightIcon,
   FolderPlusIcon,
-  Globe2Icon,
+  GlobeIcon,
   SearchIcon,
   SquarePenIcon,
   TerminalIcon,
   TriangleAlertIcon,
-} from "lucide-react";
+} from "~/icons";
 import {
   ChangeRequestStatusIcon,
   prStatusIndicator,
@@ -803,7 +803,7 @@ const SidebarThreadRow = memo(function SidebarThreadRow(props: SidebarThreadRowP
                   />
                 }
               >
-                <Globe2Icon className="size-3" />
+                <GlobeIcon className="size-3" />
               </TooltipTrigger>
               <TooltipPopup side="top">
                 open localhost:{discoveredPorts[0]?.port}

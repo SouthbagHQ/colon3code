@@ -1,6 +1,6 @@
 import { Spinner } from "~/components/ui/spinner";
 import { NotificationSettings } from "./NotificationSettings";
-import { ArchiveIcon, ArchiveX, ChevronRightIcon, SettingsIcon } from "lucide-react";
+import { ArchiveIcon, UnarchiveIcon, ChevronRightIcon, SettingsIcon } from "~/icons";
 import { Link, useNavigate } from "@tanstack/react-router";
 import type { CSSProperties, ReactNode } from "react";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
@@ -3364,7 +3364,7 @@ export function ArchivedThreadsPanel() {
                       })();
                     }}
                   >
-                    <ArchiveX className="size-3.5" />
+                    <UnarchiveIcon className="size-3.5" />
                     <span>unarchive</span>
                   </Button>
                 }

@@ -1,5 +1,5 @@
 import { RefreshIcon } from "~/components/ui/refresh-icon";
-import { CheckIcon, DownloadIcon, RotateCwIcon } from "lucide-react";
+import { CheckIcon, DownloadIcon, RotateCwIcon } from "~/icons";
 import type { AnimationEventHandler } from "react";
 
 const DOWNLOAD_PROGRESS_RADIUS = 14;
@@ -93,7 +93,7 @@ function DesktopUpdateDownloadedIcon() {
     <span className="relative grid size-4 place-items-center">
       <RotateCwIcon className="size-4" />
       <span className="absolute -right-1 -bottom-1 grid size-2.5 place-items-center rounded-full bg-foreground text-background ring-2 ring-background">
-        <CheckIcon className="size-2" strokeWidth={3} />
+        <CheckIcon className="size-2" />
       </span>
     </span>
   );

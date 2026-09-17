@@ -2,7 +2,7 @@ import { Button } from "../ui/button";
 import { type ContextWindowSnapshot, formatContextWindowTokens } from "~/lib/contextWindow";
 import { Popover, PopoverPopup, PopoverTrigger } from "../ui/popover";
 import { formatContextWindowCompactionMessage } from "./ContextWindowMeter.logic";
-import { Minimize2Icon } from "lucide-react";
+import { MinimizeIcon } from "~/icons";
 import { composerFloatingLayerProps } from "./composerEventScope";
 
 function formatPercentage(value: number | null): string | null {
@@ -146,7 +146,7 @@ export function ContextWindowMeter(props: {
                 disabled={compactDisabled}
                 onClick={onCompact}
               >
-                <Minimize2Icon aria-hidden="true" />
+                <MinimizeIcon aria-hidden="true" />
                 compact context
               </Button>
               {compactDisabled && compactDisabledReason ? (

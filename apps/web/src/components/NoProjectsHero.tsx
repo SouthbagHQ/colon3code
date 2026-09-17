@@ -1,4 +1,4 @@
-import { PlusIcon } from "lucide-react";
+import { PlusIcon } from "~/icons";
 import { useCallback } from "react";
 
 import { openCommandPalette } from "../commandPaletteBus";

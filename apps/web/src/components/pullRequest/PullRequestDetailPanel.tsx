@@ -28,7 +28,7 @@ import {
   FileDiffIcon,
   FolderGit2Icon,
   GitBranchIcon,
-  GitCommitHorizontalIcon,
+  GitCommitIcon,
   GitMergeIcon,
   GitPullRequestClosedIcon,
   GitPullRequestDraftIcon,
@@ -38,13 +38,13 @@ import {
   MessageCircleQuestionIcon,
   MessageSquareIcon,
   LinkIcon,
-  MoreHorizontalIcon,
+  EllipsisIcon,
   PanelRightIcon,
   PencilIcon,
   PlayIcon,
   RotateCcwIcon,
   TriangleAlertIcon,
-} from "lucide-react";
+} from "~/icons";
 import {
   lazy,
   Suspense,
@@ -1962,7 +1962,7 @@ export function PullRequestDetailPanel({
                           />
                         }
                       >
-                        <MoreHorizontalIcon className="size-4" />
+                        <EllipsisIcon className="size-4" />
                       </MenuTrigger>
                     }
                   />
@@ -2574,7 +2574,7 @@ export function PullRequestDetailPanel({
                           }`
                     }
                   >
-                    <GitCommitHorizontalIcon aria-hidden className="size-3" />
+                    <GitCommitIcon aria-hidden className="size-3" />
                     {activityError
                       ? "—"
                       : activityPending

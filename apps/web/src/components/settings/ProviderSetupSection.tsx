@@ -12,7 +12,7 @@ import {
   type ServerProvider,
 } from "@t3tools/contracts";
 import { useRef, useState } from "react";
-import { Trash2Icon } from "lucide-react";
+import { TrashIcon } from "~/icons";
 
 import { writeTextToClipboard } from "../../hooks/useCopyToClipboard";
 import { ensureLocalApi } from "../../localApi";
@@ -378,7 +378,7 @@ function ProviderSetupActions({
                       />
                     }
                   >
-                    <Trash2Icon className="size-3.5" />
+                    <TrashIcon className="size-3.5" />
                   </TooltipTrigger>
                   <TooltipPopup>remove downloaded runtime</TooltipPopup>
                 </Tooltip>

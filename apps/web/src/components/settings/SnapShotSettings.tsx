@@ -7,7 +7,7 @@ import {
   type DesktopSnapShotSetupAction,
   type SnapShotShortcut,
 } from "@t3tools/contracts";
-import { ChevronDownIcon, PlayIcon } from "lucide-react";
+import { ChevronDownIcon, PlayIcon } from "~/icons";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 import { cn } from "~/lib/utils";

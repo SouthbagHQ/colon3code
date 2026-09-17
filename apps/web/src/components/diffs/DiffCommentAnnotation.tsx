@@ -1,4 +1,4 @@
-import { MessageCircle, Trash2 } from "lucide-react";
+import { MessageCircleIcon, TrashIcon } from "~/icons";
 import { useLayoutEffect, useRef, useState, type ReactNode } from "react";
 
 import { Button } from "~/components/ui/button";
@@ -64,7 +64,10 @@ export function DiffCommentAnnotation({
         contentEditable={false}
         onPointerDown={(event) => event.stopPropagation()}
       >
-        <MessageCircle className="mt-0.5 size-3.5 shrink-0 text-primary/70" aria-hidden="true" />
+        <MessageCircleIcon
+          className="mt-0.5 size-3.5 shrink-0 text-primary/70"
+          aria-hidden="true"
+        />
         <p className="min-w-0 flex-1 whitespace-pre-wrap text-[13px] leading-5">{displayedText}</p>
         {onDelete ? (
           <Button
@@ -74,7 +77,7 @@ export function DiffCommentAnnotation({
             aria-label="delete comment"
             onClick={onDelete}
           >
-            <Trash2 className="size-3" />
+            <TrashIcon className="size-3" />
           </Button>
         ) : null}
       </div>

@@ -21,7 +21,7 @@ import {
   squashAtomCommandFailure,
 } from "@t3tools/client-runtime/state/runtime";
 import { mediaFileReference } from "@t3tools/client-runtime/media-reference";
-import { Code2, Eye, FolderTree, Globe2, Table2, WrapTextIcon } from "lucide-react";
+import { CodeIcon, EyeIcon, FolderTreeIcon, GlobeIcon, TableIcon, WrapTextIcon } from "~/icons";
 import * as Schema from "effect/Schema";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
@@ -1123,11 +1123,11 @@ export default function FilePreviewPanel({
               }}
             >
               {rendered ? (
-                <Code2 className="size-3.5" />
+                <CodeIcon className="size-3.5" />
               ) : renderedMode === "table" ? (
-                <Table2 className="size-3.5" />
+                <TableIcon className="size-3.5" />
               ) : (
-                <Eye className="size-3.5" />
+                <EyeIcon className="size-3.5" />
               )}
             </FileSurfaceAction>
           ) : null}
@@ -1142,7 +1142,7 @@ export default function FilePreviewPanel({
           ) : null}
           {canOpenInBrowser ? (
             <FileSurfaceAction label="open file in preview browser" onPress={handleOpenInBrowser}>
-              <Globe2 className="size-3.5" />
+              <GlobeIcon className="size-3.5" />
             </FileSurfaceAction>
           ) : null}
           {!isHostFile ? (
@@ -1151,7 +1151,7 @@ export default function FilePreviewPanel({
               pressed={explorerOpen}
               onPress={toggleExplorer}
             >
-              <FolderTree className="size-3.5" />
+              <FolderTreeIcon className="size-3.5" />
             </FileSurfaceAction>
           ) : null}
         </div>

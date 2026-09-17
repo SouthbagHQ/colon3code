@@ -1,5 +1,5 @@
 import { resolveEnvironmentMachineKind } from "@t3tools/contracts";
-import { LayersIcon } from "lucide-react";
+import { LayersIcon } from "~/icons";
 import type { ReactNode } from "react";
 
 import { cn } from "../../lib/utils";

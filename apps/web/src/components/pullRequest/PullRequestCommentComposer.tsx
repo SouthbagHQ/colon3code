@@ -5,7 +5,7 @@ import {
   RotateCcwIcon,
   SendIcon,
   XIcon,
-} from "lucide-react";
+} from "~/icons";
 import { useRef, useState } from "react";
 
 import { useAtomCommand } from "~/state/use-atom-command";

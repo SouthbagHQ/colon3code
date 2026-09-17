@@ -3,13 +3,7 @@ import {
   resolveThreadPullRequestChains,
   visibleThreadPullRequests,
 } from "@t3tools/shared/threadPullRequests";
-import {
-  GitPullRequestArrow,
-  LayersIcon,
-  LinkIcon,
-  MoreHorizontalIcon,
-  PlusIcon,
-} from "lucide-react";
+import { GitPullRequestArrowIcon, LayersIcon, LinkIcon, EllipsisIcon, PlusIcon } from "~/icons";
 import { useCallback, useMemo } from "react";
 
 import { writeTextToClipboard } from "~/hooks/useCopyToClipboard";
@@ -84,7 +78,7 @@ function LinkRow({
     >
       {depth > 0 ? <span aria-hidden className="-ml-2 h-6 w-px shrink-0 bg-border/70" /> : null}
       {snapshot === null ? (
-        <GitPullRequestArrow
+        <GitPullRequestArrowIcon
           aria-label="waiting for host state"
           className="size-4 shrink-0 text-muted-foreground"
         />
@@ -147,7 +141,7 @@ function LinkRow({
                 {stack.kind === "native" ? (
                   <LayersIcon aria-hidden className="size-3" />
                 ) : (
-                  <GitPullRequestArrow aria-hidden className="size-3" />
+                  <GitPullRequestArrowIcon aria-hidden className="size-3" />
                 )}
                 {stack.size}
               </TooltipTrigger>
@@ -185,7 +179,7 @@ function LinkRow({
                 "opacity-0 group-hover/pr-row:opacity-100 data-[popup-open]:opacity-100",
               )}
             >
-              <MoreHorizontalIcon className="size-3.5" />
+              <EllipsisIcon className="size-3.5" />
             </Button>
           }
         />

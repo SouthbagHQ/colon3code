@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import { IconContext } from "@phosphor-icons/react";
 import { createHashHistory, createBrowserHistory } from "@tanstack/react-router";
 
 import "./fonts.css";
@@ -39,7 +40,13 @@ window.addEventListener("vite:preloadError", (event) => {
   }
 });
 
-const app = <AppRoot router={router} />;
+// Bold weight gives the Phosphor set its rounded, chunky look (see ~/icons);
+// 24px matches the default box the previous icon set rendered into.
+const app = (
+  <IconContext.Provider value={{ weight: "bold", size: 24 }}>
+    <AppRoot router={router} />
+  </IconContext.Provider>
+);
 
 // Managed auth is cloud-only, and the Electron Clerk provider bundles the full
 // clerk-js runtime. Loading only the selected runtime as a split chunk keeps

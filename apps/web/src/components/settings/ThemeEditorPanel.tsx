@@ -1,11 +1,11 @@
 import {
   ChevronDownIcon,
   ChevronUpIcon,
-  MousePointer2Icon,
+  MousePointerIcon,
   PaintbrushIcon,
   PlusIcon,
   XIcon,
-} from "lucide-react";
+} from "~/icons";
 import {
   useCallback,
   useEffect,
@@ -1210,7 +1210,7 @@ export function ThemeEditorPanel({
                   setIsInspecting(true);
                 }}
               >
-                <MousePointer2Icon />
+                <MousePointerIcon />
                 {isInspecting ? "cancel" : "inspect"}
               </Button>
             }

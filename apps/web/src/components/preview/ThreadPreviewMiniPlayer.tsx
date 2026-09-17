@@ -1,7 +1,7 @@
 "use client";
 
 import { FILL_PREVIEW_VIEWPORT, type ScopedThreadRef } from "@t3tools/contracts";
-import { PanelRightIcon, PictureInPicture2, XIcon } from "lucide-react";
+import { PanelRightIcon, PictureInPictureIcon, XIcon } from "~/icons";
 import {
   type PointerEvent as ReactPointerEvent,
   type ReactNode,
@@ -217,7 +217,7 @@ function BrowserMiniPlayer({
               />
             }
           >
-            <PictureInPicture2 />
+            <PictureInPictureIcon />
           </TooltipTrigger>
           <TooltipPopup side="top">
             {desktopOverlay?.pictureInPicture

@@ -7,7 +7,7 @@ import {
   FolderIcon,
   HistoryIcon,
   ScaleIcon,
-} from "lucide-react";
+} from "~/icons";
 import {
   type Ref,
   memo,

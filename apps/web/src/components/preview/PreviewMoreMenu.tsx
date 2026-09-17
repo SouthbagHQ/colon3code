@@ -1,7 +1,7 @@
 "use client";
 
 import type { DesktopPreviewColorScheme, EnvironmentId } from "@t3tools/contracts";
-import { Minus, MoreVertical, Plus as PlusIcon, RotateCcw } from "lucide-react";
+import { MinusIcon, MoreVerticalIcon, PlusIcon, RotateCcwIcon } from "~/icons";
 
 import { Button } from "~/components/ui/button";
 import {
@@ -104,7 +104,7 @@ export function PreviewMoreMenu({
             />
           }
         >
-          <MoreVertical />
+          <MoreVerticalIcon />
         </TooltipTrigger>
         <TooltipPopup>more</TooltipPopup>
       </Tooltip>
@@ -164,7 +164,7 @@ export function PreviewMoreMenu({
               aria-label="zoom out"
               disabled={tabDisabled}
             >
-              <Minus />
+              <MinusIcon />
             </Button>
             <span className="min-w-12 text-center text-xs tabular-nums text-muted-foreground">
               {zoomLabel}
@@ -188,7 +188,7 @@ export function PreviewMoreMenu({
               className="[:hover,[data-pressed]]:bg-foreground/10"
               disabled={tabDisabled}
             >
-              <RotateCcw />
+              <RotateCcwIcon />
             </Button>
           </span>
         </MenuItem>

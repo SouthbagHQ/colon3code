@@ -1,4 +1,4 @@
-import { ArrowUpIcon, ClockIcon } from "lucide-react";
+import { ArrowUpIcon, ClockIcon } from "~/icons";
 import { ReadOnlySourcePreview } from "../files/AttachmentFilePreview";
 import { useRightPanelStore } from "~/rightPanelStore";
 import {
@@ -116,18 +116,18 @@ import {
   GlobeIcon,
   HammerIcon,
   MessageCircleIcon,
-  Minimize2Icon,
+  MinimizeIcon,
   MousePointerClickIcon,
   PaintbrushIcon,
   SearchIcon,
   SmartphoneIcon,
   SquarePenIcon,
   TerminalIcon,
-  Undo2Icon,
+  UndoIcon,
   WrenchIcon,
   XIcon,
   ZapIcon,
-} from "lucide-react";
+} from "~/icons";
 import type {
   ComposerContextId,
   ComposerContextRecord,
@@ -1062,7 +1062,7 @@ export const MessagesTimeline = memo(function MessagesTimeline({
             onScroll={handleScroll}
             onItemSizeChanged={reportContentOverflow}
             className={cn(
-              "scrollbar-gutter-both h-full min-h-0 overflow-x-hidden overscroll-y-contain px-3 [overflow-anchor:none] sm:px-5",
+              "scrollbar-gutter-both h-full min-h-0 overflow-x-hidden overscroll-y-contain px-4 [overflow-anchor:none] sm:px-6",
               topFadeEnabled && "topbar-scroll-fade",
             )}
             ListHeaderComponent={
@@ -1614,7 +1614,7 @@ function ContextCompactionTimelineRow({
     >
       <span className="h-px flex-1 bg-border/70" />
       <span className="flex shrink-0 items-center gap-1.5">
-        <Minimize2Icon aria-hidden="true" className="size-3" />
+        <MinimizeIcon aria-hidden="true" className="size-3" />
         {row.label}
       </span>
       <span className="h-px flex-1 bg-border/70" />
@@ -1833,7 +1833,7 @@ function UserTimelineRow({ row }: { row: Extract<TimelineRow, { kind: "message" 
 
   return (
     <div className="group flex flex-col items-end gap-1">
-      <div className="relative max-w-[80%] rounded-2xl bg-message p-3 text-message-foreground">
+      <div className="relative max-w-[80%] rounded-2xl bg-message p-3.5 text-message-foreground">
         <MessageAuthorHeading>you</MessageAuthorHeading>
         {(regularImages.length > 0 || userVideos.length > 0) && (
           <div className="mb-2 grid max-w-[210px] grid-cols-2 gap-2">
@@ -2032,7 +2032,7 @@ function RevertUserMessageButton({
           />
         }
       >
-        <Undo2Icon className="size-3" />
+        <UndoIcon className="size-3" />
       </TooltipTrigger>
       <TooltipPopup side="top">edit from here</TooltipPopup>
     </Tooltip>
@@ -2263,7 +2263,7 @@ function ThinkingTimelineRow() {
 function CompactingLabel() {
   return (
     <span className="inline-flex items-center gap-1.5">
-      <Minimize2Icon aria-hidden="true" className="size-3" /> tidying up the context… :3
+      <MinimizeIcon aria-hidden="true" className="size-3" /> tidying up the context… :3
     </span>
   );
 }

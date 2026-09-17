@@ -27,11 +27,11 @@ import {
   LayersIcon,
   ListChecksIcon,
   PenLineIcon,
-  Plug2Icon,
-  Maximize2Icon,
-  Minimize2Icon,
+  PlugIcon,
+  MaximizeIcon,
+  MinimizeIcon,
   SearchIcon,
-} from "lucide-react";
+} from "~/icons";
 import {
   useCallback,
   useEffect,
@@ -206,8 +206,8 @@ const SORT_OPTIONS = [
   { value: "updated", label: "recently updated", Icon: ClockIcon },
   { value: "newest", label: "newest shown", Icon: CalendarArrowDownIcon },
   { value: "oldest", label: "oldest shown", Icon: CalendarArrowUpIcon },
-  { value: "largest", label: "largest shown", Icon: Maximize2Icon },
-  { value: "smallest", label: "smallest shown", Icon: Minimize2Icon },
+  { value: "largest", label: "largest shown", Icon: MaximizeIcon },
+  { value: "smallest", label: "smallest shown", Icon: MinimizeIcon },
 ] as const satisfies ReadonlyArray<PullRequestFilterOption<PullRequestListSort>>;
 
 /** Long enough that a keystroke does not become a request, short enough to feel answered. */
@@ -1732,7 +1732,7 @@ function PullRequestsRouteView() {
   // kind force the hostname to tell them apart.
   const hostEntries = hosts.length > 0 ? hosts : expectedHosts;
   const hostMenuOptions: ReadonlyArray<PullRequestFilterOption<string>> = [
-    { value: "", label: "all", Icon: Plug2Icon },
+    { value: "", label: "all", Icon: PlugIcon },
     ...hostEntries.map((entry) => {
       // `expectedHosts` stands in before the server has answered, and nothing is known to be
       // unreadable yet; once the summaries arrive they carry whether each one could be read.
@@ -2405,7 +2405,7 @@ function PullRequestsColumn({
                 label="filter by provider"
                 outlined
                 iconOnly={host !== undefined}
-                triggerIcon={<Plug2Icon aria-hidden className="size-4" />}
+                triggerIcon={<PlugIcon aria-hidden className="size-4" />}
                 triggerLabel="all"
                 value={host ?? ""}
                 options={hostMenuOptions}

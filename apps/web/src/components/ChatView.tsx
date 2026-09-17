@@ -224,14 +224,14 @@ import { resolveShortcutCommand, shortcutLabelForCommand } from "../keybindings"
 import ThreadTerminalDrawer from "./ThreadTerminalDrawer";
 import {
   AlarmClockIcon,
-  CheckCircle2Icon,
+  CircleCheckIcon,
   ChevronDownIcon,
   DownloadIcon,
   GitBranchIcon,
-  Minimize2Icon,
+  MinimizeIcon,
   PaperclipIcon,
   WifiOffIcon,
-} from "lucide-react";
+} from "~/icons";
 import { cn, randomHex, randomUUID } from "~/lib/utils";
 import { stackedThreadToast, toastManager } from "./ui/toast";
 import { decodeProjectScriptKeybindingRule } from "~/lib/projectScriptKeybindings";
@@ -6242,7 +6242,7 @@ export default function ChatView(props: ChatViewProps) {
     return {
       id: `thread-${isSnoozed ? "snoozed" : "settled"}:${activeThread?.id ?? "unknown"}`,
       variant: "info",
-      icon: isSnoozed ? <AlarmClockIcon /> : <CheckCircle2Icon />,
+      icon: isSnoozed ? <AlarmClockIcon /> : <CircleCheckIcon />,
       title: `this thread is ${isSnoozed ? "snoozed" : "settled"}`,
       description: `send a message to ${isSnoozed ? "wake" : "unsettle"}`,
       actions: (
@@ -6347,7 +6347,7 @@ export default function ChatView(props: ChatViewProps) {
     return {
       id: `resume-compaction:${resumeCompactionKey}`,
       variant: "info",
-      icon: <Minimize2Icon />,
+      icon: <MinimizeIcon />,
       title: "resume with less context",
       description: `${formatContextWindowTokens(activeContextWindow.usedTokens)} tokens from earlier`,
       actions: compactDisabledReason ? (

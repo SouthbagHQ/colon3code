@@ -4,7 +4,7 @@ import { mergeProps } from "@base-ui/react/merge-props";
 import { Select as SelectPrimitive } from "@base-ui/react/select";
 import { useRender } from "@base-ui/react/use-render";
 import { cva, type VariantProps } from "class-variance-authority";
-import { ChevronDownIcon, ChevronsUpDownIcon, ChevronUpIcon } from "lucide-react";
+import { ChevronDownIcon, ChevronsUpDownIcon, ChevronUpIcon } from "~/icons";
 import type * as React from "react";
 
 import { cn } from "~/lib/utils";
@@ -158,7 +158,7 @@ function SelectPopup({
             )}
           >
             <SelectPrimitive.List
-              className={cn("max-h-(--available-height) overflow-y-auto p-1", className)}
+              className={cn("max-h-(--available-height) overflow-y-auto p-1.5", className)}
               data-slot="select-list"
             >
               {children}

@@ -88,16 +88,16 @@ html[data-mobile-composer-route-transition="true"]::view-transition-old(t3-mobil
    * Compact UI geometry. Keep these values semantic so sidebar, palette,
    * tooltip, and toolbar controls cannot quietly drift apart.
    */
-  --control-radius: 0.5rem;
-  --sidebar-content-inset: 0.5rem;
+  --control-radius: 0.625rem;
+  --sidebar-content-inset: 0.625rem;
   --sidebar-control-gap: 0.5rem;
   --sidebar-icon-color: color-mix(
     in srgb,
     var(--contrast-sidebar-muted-foreground) 60%,
     var(--sidebar)
   );
-  --sidebar-row-content-inset: 0.625rem;
-  --command-shell-inset: 0.5rem;
+  --sidebar-row-content-inset: 0.75rem;
+  --command-shell-inset: 0.625rem;
   --command-content-inset: 1rem;
   --floating-content-inset: 0.75rem;
   --glass-blur: 12px;
@@ -144,6 +144,9 @@ html[data-mobile-composer-route-transition="true"]::view-transition-old(t3-mobil
 }
 
 @theme inline {
+  /* Bare `rounded` is inlined from this theme value, not the runtime --radius
+     the sm/md/lg scale derives from, so it needs its own bump to stay soft. */
+  --radius: 0.375rem;
   --color-zinc-25: oklch(99.2% 0 0);
   --animate-skeleton: skeleton 2.4s infinite;
   /* Duty-cycled indicator animations: long holds with stepped ramps, so the
@@ -998,7 +1001,7 @@ html[data-mobile-composer-route-transition="true"]::view-transition-old(t3-mobil
 
 :root {
   color-scheme: light;
-  --radius: 0.875rem;
+  --radius: 1rem;
   /* Default look: a warm blush canvas with a rose accent. Built-in and custom
      themes override every token below through the data-theme-id block. */
   --background: oklch(0.975 0.014 25);

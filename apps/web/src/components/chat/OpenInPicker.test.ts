@@ -1,4 +1,4 @@
-import { FolderClosedIcon } from "lucide-react";
+import { FolderClosedIcon } from "~/icons";
 import { describe, expect, it } from "vite-plus/test";
 
 import { FileExplorerIcon, FinderIcon } from "../Icons";

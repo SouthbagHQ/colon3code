@@ -6,6 +6,7 @@ import {
   useMemo,
   useRef,
   useState,
+  type ComponentProps,
   type ComponentType,
   type KeyboardEvent,
 } from "react";
@@ -13,16 +14,16 @@ import {
   ArchiveIcon,
   BlocksIcon,
   BotIcon,
-  createLucideIcon,
   GitBranchIcon,
   PanelsTopLeftIcon,
   KeyboardIcon,
-  Link2Icon,
+  LinkIcon,
   PaletteIcon,
   SearchIcon,
-  Settings2Icon,
+  SlidersIcon,
   XIcon,
-} from "lucide-react";
+} from "~/icons";
+import { createLucideIcon } from "lucide-react";
 import { useLocation, useNavigate } from "@tanstack/react-router";
 
 import { Button } from "../ui/button";
@@ -49,7 +50,7 @@ import {
 import { useAvailableSettingsSearchItems } from "./useAvailableSettingsSearchItems";
 import { validateSettingsScopeSearch } from "./settingsScope";
 
-const SnapShotIcon = createLucideIcon("snap-shot", [
+const SnapShotGlyph = createLucideIcon("snap-shot", [
   [
     "path",
     {
@@ -60,6 +61,11 @@ const SnapShotIcon = createLucideIcon("snap-shot", [
   ["rect", { width: "10", height: "8", x: "7", y: "8", rx: "2", key: "window" }],
   ["circle", { cx: "12", cy: "12", r: "1.5", key: "lens" }],
 ]);
+
+/** Custom lucide glyph; the heavier stroke matches the bold Phosphor set around it. */
+function SnapShotIcon(props: ComponentProps<typeof SnapShotGlyph>) {
+  return <SnapShotGlyph strokeWidth={2.25} {...props} />;
+}
 
 const T3ConnectSidebarSignIn = lazy(() =>
   import("../clerk/T3ConnectSidebarSignIn").then((module) => ({
@@ -75,7 +81,7 @@ const T3ConnectSidebarAvatar = lazy(() =>
 const SETTINGS_SECTION_ICONS: Readonly<
   Record<SettingsPath, ComponentType<{ className?: string }>>
 > = {
-  "/settings/general": Settings2Icon,
+  "/settings/general": SlidersIcon,
   "/settings/appearance": PaletteIcon,
   "/settings/projects": PanelsTopLeftIcon,
   "/settings/keybindings": KeyboardIcon,
@@ -83,7 +89,7 @@ const SETTINGS_SECTION_ICONS: Readonly<
   "/settings/providers": BotIcon,
   "/settings/integrations": BlocksIcon,
   "/settings/source-control": GitBranchIcon,
-  "/settings/connections": Link2Icon,
+  "/settings/connections": LinkIcon,
   "/settings/archived": ArchiveIcon,
 };
 

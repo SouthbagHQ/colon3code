@@ -10,13 +10,13 @@ import type {
   PullRequestThreadComment,
 } from "@t3tools/contracts";
 import {
-  CheckCircle2Icon,
+  CircleCheckIcon,
   CircleIcon,
   HammerIcon,
   MessageSquareIcon,
   PencilIcon,
-  Trash2Icon,
-} from "lucide-react";
+  TrashIcon,
+} from "~/icons";
 import { useRef, useState } from "react";
 
 import { formatRelativeTimeLabel } from "~/timestampFormat";
@@ -81,7 +81,7 @@ export function PendingReviewCommentCard({
           aria-label="discard this comment"
           onClick={onRemove}
         >
-          <Trash2Icon className="size-3.5" />
+          <TrashIcon className="size-3.5" />
         </Button>
       </div>
       <p className="mt-2 whitespace-pre-wrap leading-relaxed">{comment.body}</p>
@@ -220,7 +220,7 @@ export function ReviewThreadCard({
     >
       <div className="flex items-center gap-2 text-xs text-muted-foreground">
         {thread.isResolved ? (
-          <CheckCircle2Icon className="size-3.5 text-emerald-600 dark:text-emerald-500" />
+          <CircleCheckIcon className="size-3.5 text-emerald-600 dark:text-emerald-500" />
         ) : (
           <CircleIcon className="size-3.5" />
         )}

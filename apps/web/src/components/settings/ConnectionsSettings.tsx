@@ -4,7 +4,7 @@ import {
   PlusIcon,
   QrCodeIcon,
   TerminalIcon,
-} from "lucide-react";
+} from "~/icons";
 import { useAtomValue } from "@effect/atom-react";
 import { Atom } from "effect/unstable/reactivity";
 import {

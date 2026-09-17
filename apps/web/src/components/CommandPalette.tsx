@@ -53,7 +53,7 @@ import {
   SettingsIcon,
   SquarePenIcon,
   TextSearchIcon,
-} from "lucide-react";
+} from "~/icons";
 import {
   useCallback,
   useDeferredValue,
@@ -1442,7 +1442,7 @@ function OpenCommandPaletteDialog(props: {
                   <Button
                     variant="outline"
                     size="xs"
-                    className="h-5 rounded-[.25rem] px-1.5 text-[10px] text-warning-foreground"
+                    className="h-5 rounded px-1.5 text-[10px] text-warning-foreground"
                     onClick={() => {
                       openSourceControlSettings();
                     }}

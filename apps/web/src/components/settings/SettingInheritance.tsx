@@ -3,7 +3,7 @@ import {
   resolveEnvironmentMachineKind,
   type ServerSettings,
 } from "@t3tools/contracts";
-import { CheckIcon, LayersIcon } from "lucide-react";
+import { CheckIcon, LayersIcon } from "~/icons";
 import * as Equal from "effect/Equal";
 
 import { cn } from "../../lib/utils";

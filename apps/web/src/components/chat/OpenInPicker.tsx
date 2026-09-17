@@ -15,7 +15,7 @@ import {
   useRemoteOpenState,
 } from "../../remoteOpen";
 import { useEnvironment } from "../../state/environments";
-import { ChevronDownIcon, FolderClosedIcon } from "lucide-react";
+import { ChevronDownIcon, FolderClosedIcon, type IconComponent } from "~/icons";
 import { Button } from "../ui/button";
 import { Group, GroupSeparator } from "../ui/group";
 import { Menu, MenuItem, MenuPopup, MenuShortcut, MenuTrigger } from "../ui/menu";
@@ -52,7 +52,7 @@ import { useAtomCommand } from "~/state/use-atom-command";
 
 type OpenInOption = {
   label: string;
-  Icon: Icon;
+  Icon: Icon | IconComponent;
   value: EditorId;
   kind: "brand" | "generic";
 };

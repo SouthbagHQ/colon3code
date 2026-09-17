@@ -1,4 +1,4 @@
-import { PlayIcon, RotateCwIcon, TriangleAlertIcon } from "lucide-react";
+import { PlayIcon, RotateCwIcon, TriangleAlertIcon } from "~/icons";
 import { useCallback, useEffect, useRef, useState, type CSSProperties } from "react";
 
 import { cn } from "../../lib/utils";

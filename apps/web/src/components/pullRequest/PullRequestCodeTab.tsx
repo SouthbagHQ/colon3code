@@ -15,15 +15,15 @@ import {
   ChevronRightIcon,
   ChevronsDownUpIcon,
   ChevronsUpDownIcon,
-  Columns2Icon,
+  ColumnsIcon,
   FolderTreeIcon,
   MessageSquareIcon,
   MessageSquareOffIcon,
-  Rows3Icon,
+  RowsIcon,
   TextWrapIcon,
   TriangleAlertIcon,
   XIcon,
-} from "lucide-react";
+} from "~/icons";
 import { useAtomRefresh } from "@effect/atom-react";
 import * as Schema from "effect/Schema";
 import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
@@ -1166,10 +1166,10 @@ function PullRequestCodeTab({
           }}
         >
           <Toggle aria-label="stacked diff view" value="stacked">
-            <Rows3Icon className="size-3.5" />
+            <RowsIcon className="size-3.5" />
           </Toggle>
           <Toggle aria-label="split diff view" value="split">
-            <Columns2Icon className="size-3.5" />
+            <ColumnsIcon className="size-3.5" />
           </Toggle>
         </ToggleGroup>
         <Tooltip>

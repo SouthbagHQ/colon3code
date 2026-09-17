@@ -1,5 +1,5 @@
 import type { ComponentProps } from "react";
-import { ChevronDownIcon, type LucideIcon } from "lucide-react";
+import { ChevronDownIcon, type IconComponent } from "~/icons";
 
 import { cn } from "~/lib/utils";
 import { Button } from "../ui/button";
@@ -48,7 +48,7 @@ export function ComposerControlIcon({
   opticalSize = "default",
   size = "sm",
 }: {
-  icon: LucideIcon;
+  icon: IconComponent;
   className?: string | undefined;
   opticalSize?: "default" | "large";
   size?: ComposerControlSize;
@@ -82,7 +82,6 @@ export function ComposerControlChevron({
         className,
       )}
       data-composer-control-chevron
-      strokeWidth={2.25}
     />
   );
 }

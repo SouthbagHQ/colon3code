@@ -10,7 +10,7 @@ import {
   type LimitPoolWindow,
   remainingPercent,
 } from "@t3tools/shared/usageLimits";
-import { AlertTriangleIcon, TicketIcon } from "lucide-react";
+import { TriangleAlertIcon, TicketIcon } from "~/icons";
 import { type ReactNode, useState } from "react";
 
 import { usePrimarySettings } from "../../hooks/useSettings";
@@ -565,7 +565,7 @@ function LimitNotices({ notices }: { readonly notices: readonly string[] }) {
   if (notices.length === 0) return null;
   return (
     <Alert variant="warning" controlAlignment="first-line">
-      <AlertTriangleIcon />
+      <TriangleAlertIcon />
       {notices.map((notice) => (
         <AlertTitle key={notice} className="break-words">
           {notice}

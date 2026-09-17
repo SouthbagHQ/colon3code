@@ -1,5 +1,5 @@
 import type { DesktopBridge, DesktopUpdateState } from "@t3tools/contracts";
-import { ArrowRightIcon } from "lucide-react";
+import { ArrowRightIcon } from "~/icons";
 
 import {
   getDesktopUpdateDownloadedVersion,
@@ -37,11 +37,7 @@ function ReleaseNotesLink({
       type="button"
     >
       read more
-      <ArrowRightIcon
-        aria-hidden
-        className="ml-1 inline size-3 -rotate-45 align-[-0.125em]"
-        strokeWidth={2.25}
-      />
+      <ArrowRightIcon aria-hidden className="ml-1 inline size-3 -rotate-45 align-[-0.125em]" />
     </button>
   );
 }

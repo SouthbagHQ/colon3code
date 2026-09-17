@@ -1,5 +1,5 @@
 import type { PullRequestContextMetadata } from "@t3tools/contracts";
-import { CircleDashedIcon, FilmIcon, GitPullRequestIcon, ImageIcon } from "lucide-react";
+import { CircleDashedIcon, FilmIcon, GitPullRequestIcon, ImageIcon } from "~/icons";
 import {
   useState,
   type ComponentProps,

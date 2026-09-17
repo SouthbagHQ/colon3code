@@ -15,13 +15,13 @@ import {
   ChevronRightIcon,
   ChevronsDownUpIcon,
   ChevronsUpDownIcon,
-  Columns2Icon,
+  ColumnsIcon,
   FolderTreeIcon,
   PilcrowIcon,
-  Rows3Icon,
+  RowsIcon,
   SearchIcon,
   TextWrapIcon,
-} from "lucide-react";
+} from "~/icons";
 import * as Schema from "effect/Schema";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useCodeViewFileReveal } from "./diffs/useCodeViewFileReveal";
@@ -819,10 +819,10 @@ export default function DiffPanel({
           }}
         >
           <Toggle aria-label="stacked diff view" value="stacked">
-            <Rows3Icon className="size-3.5" />
+            <RowsIcon className="size-3.5" />
           </Toggle>
           <Toggle aria-label="split diff view" value="split">
-            <Columns2Icon className="size-3.5" />
+            <ColumnsIcon className="size-3.5" />
           </Toggle>
         </ToggleGroup>
         <Tooltip>

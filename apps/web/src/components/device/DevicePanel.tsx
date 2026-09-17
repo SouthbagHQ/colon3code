@@ -5,16 +5,16 @@ import type {
   ScopedThreadRef,
 } from "@t3tools/contracts";
 import {
-  ChevronLeft,
-  Home,
-  PictureInPicture2,
-  Power,
-  RotateCcw,
-  SlidersHorizontal,
-  Smartphone,
-  Square,
-  X,
-} from "lucide-react";
+  ChevronLeftIcon,
+  HomeIcon,
+  PictureInPictureIcon,
+  PowerIcon,
+  RotateCcwIcon,
+  SlidersHorizontalIcon,
+  SmartphoneIcon,
+  SquareIcon,
+  XIcon,
+} from "~/icons";
 import { useEffect, useMemo, useState } from "react";
 
 import { usePreviewMiniPlayerStore } from "~/previewMiniPlayerStore";
@@ -196,7 +196,7 @@ export function DevicePanel(props: {
               onClick={() => handle?.pressButton("home")}
               disabled={!handle?.inputConnected}
             >
-              <Home />
+              <HomeIcon />
             </DeviceButton>
             {activeDevice.platform === "android" ? (
               <>
@@ -205,14 +205,14 @@ export function DevicePanel(props: {
                   onClick={() => handle?.pressButton("back")}
                   disabled={!handle?.inputConnected}
                 >
-                  <ChevronLeft />
+                  <ChevronLeftIcon />
                 </DeviceButton>
                 <DeviceButton
                   label="recents"
                   onClick={() => handle?.pressButton("recents")}
                   disabled={!handle?.inputConnected}
                 >
-                  <Square />
+                  <SquareIcon />
                 </DeviceButton>
               </>
             ) : (
@@ -221,7 +221,7 @@ export function DevicePanel(props: {
                 onClick={() => handle?.rotate()}
                 disabled={!handle?.inputConnected}
               >
-                <RotateCcw />
+                <RotateCcwIcon />
               </DeviceButton>
             )}
             <Toggle
@@ -231,16 +231,16 @@ export function DevicePanel(props: {
               pressed={toolsOpen}
               onPressedChange={(pressed) => setToolsOpen(Boolean(pressed))}
             >
-              <SlidersHorizontal />
+              <SlidersHorizontalIcon />
             </Toggle>
             <DeviceButton label="float device over chat" onClick={floatActive}>
-              <PictureInPicture2 />
+              <PictureInPictureIcon />
             </DeviceButton>
             <DeviceButton label="power off" onClick={() => closeActive(true)}>
-              <Power />
+              <PowerIcon />
             </DeviceButton>
             <DeviceButton label="close" onClick={() => closeActive(false)}>
-              <X />
+              <XIcon />
             </DeviceButton>
           </>
         ) : null}
@@ -270,7 +270,7 @@ export function DevicePanel(props: {
             aria-label="dismiss device error"
             onClick={() => setOperationError(null)}
           >
-            <X className="size-3" />
+            <XIcon className="size-3" />
           </Button>
         </div>
       ) : null}
@@ -333,7 +333,7 @@ export function DevicePanel(props: {
             >
               {grouped.length === 0 ? (
                 <>
-                  <Smartphone className="size-6 opacity-60" />
+                  <SmartphoneIcon className="size-6 opacity-60" />
                   <p className="max-w-sm">
                     {state.hostStatus === "failed"
                       ? (state.hostStatusDetail ?? "aw, the device hub didn't start 3:")
@@ -346,7 +346,7 @@ export function DevicePanel(props: {
                   {grouped.map((group) => (
                     <section key={group.platform} className="space-y-3">
                       <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                        <Smartphone className="size-4 shrink-0" />
+                        <SmartphoneIcon className="size-4 shrink-0" />
                         <h3 className="font-medium">{platformLabel(group.platform)}</h3>
                       </div>
                       <DiscoveryList>
@@ -355,7 +355,7 @@ export function DevicePanel(props: {
                             key={deviceKey(device)}
                             icon={
                               <span className="grid size-8 shrink-0 place-items-center rounded-md border border-border/60">
-                                <Smartphone className="size-4" />
+                                <SmartphoneIcon className="size-4" />
                               </span>
                             }
                             title={device.name}

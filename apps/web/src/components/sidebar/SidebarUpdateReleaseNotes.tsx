@@ -1,5 +1,5 @@
 import type { DesktopBridge, DesktopUpdateState } from "@t3tools/contracts";
-import { ExternalLinkIcon } from "lucide-react";
+import { ExternalLinkIcon } from "~/icons";
 
 import {
   getDesktopUpdateReleaseHistoryUrl,
@@ -38,7 +38,7 @@ function ReleaseLink({
       }}
     >
       {children}
-      <ExternalLinkIcon aria-hidden className="size-3 shrink-0" strokeWidth={2.25} />
+      <ExternalLinkIcon aria-hidden className="size-3 shrink-0" />
     </a>
   );
 }

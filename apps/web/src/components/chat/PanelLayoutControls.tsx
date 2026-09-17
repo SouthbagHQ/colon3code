@@ -1,4 +1,4 @@
-import { Maximize2Icon, Minimize2Icon, PanelBottomIcon, PanelRightIcon } from "lucide-react";
+import { MaximizeIcon, MinimizeIcon, PanelBottomIcon, PanelRightIcon } from "~/icons";
 import { memo } from "react";
 
 import { Toggle } from "../ui/toggle";
@@ -119,11 +119,7 @@ export const RightPanelMaximizeControl = memo(function RightPanelMaximizeControl
             variant="ghost"
             size="sm"
           >
-            {maximized ? (
-              <Minimize2Icon className="size-4" />
-            ) : (
-              <Maximize2Icon className="size-4" />
-            )}
+            {maximized ? <MinimizeIcon className="size-4" /> : <MaximizeIcon className="size-4" />}
           </Toggle>
         }
       />

@@ -15,17 +15,17 @@ import {
   InfoIcon,
   LightbulbIcon,
   MailIcon,
-  Maximize2Icon,
+  MaximizeIcon,
   MessageSquareIcon,
   MessageSquareWarningIcon,
-  Minimize2Icon,
+  MinimizeIcon,
   OctagonAlertIcon,
   PresentationIcon,
   SparklesIcon,
   TriangleAlertIcon,
   WrapTextIcon,
-  type LucideIcon,
-} from "lucide-react";
+  type IconComponent,
+} from "~/icons";
 import type {
   AssetResource,
   EnvironmentId,
@@ -281,7 +281,7 @@ const ARTIFACT_TEMPLATE_ICON_BY_KIND = {
   image: ImageIcon,
   email: MailIcon,
   slack: MessageSquareIcon,
-} satisfies Record<CodexArtifactTemplateKind, LucideIcon>;
+} satisfies Record<CodexArtifactTemplateKind, IconComponent>;
 
 function CodexArtifactTemplateCard(props: {
   readonly template: CodexArtifactTemplate;
@@ -788,7 +788,7 @@ function MarkdownTable({ children, ...props }: React.ComponentProps<"table">) {
               />
             }
           >
-            {expanded ? <Minimize2Icon className="size-3" /> : <Maximize2Icon className="size-3" />}
+            {expanded ? <MinimizeIcon className="size-3" /> : <MaximizeIcon className="size-3" />}
           </TooltipTrigger>
           <TooltipPopup side="top">{expandLabel}</TooltipPopup>
         </Tooltip>

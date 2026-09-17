@@ -24,7 +24,7 @@ import {
   InfoIcon,
   TriangleAlertIcon,
   XIcon,
-} from "lucide-react";
+} from "~/icons";
 
 import { cn } from "~/lib/utils";
 import { Button, buttonVariants } from "~/components/ui/button";
@@ -166,9 +166,9 @@ function ToastExpandableSection({
         type="button"
       >
         {open ? (
-          <ChevronUpIcon className="size-3.5 shrink-0 opacity-80" strokeWidth={2.25} />
+          <ChevronUpIcon className="size-3.5 shrink-0 opacity-80" />
         ) : (
-          <ChevronDownIcon className="size-3.5 shrink-0 opacity-80" strokeWidth={2.25} />
+          <ChevronDownIcon className="size-3.5 shrink-0 opacity-80" />
         )}
         {open ? collapseLabel : expandLabel}
       </button>
@@ -253,13 +253,11 @@ function ToastDescriptionAndExpandable({
             <ChevronUpIcon
               aria-hidden
               className="mt-0.5 size-3.5 shrink-0 text-muted-foreground opacity-80"
-              strokeWidth={2.25}
             />
           ) : (
             <ChevronDownIcon
               aria-hidden
               className="mt-0.5 size-3.5 shrink-0 text-muted-foreground opacity-80"
-              strokeWidth={2.25}
             />
           )}
         </TooltipTrigger>
@@ -671,17 +669,21 @@ function Toasts({ position }: { position: ToastPosition }) {
                   }
                   type="button"
                 >
-                  <XIcon className="size-3" strokeWidth={2.25} />
+                  <XIcon className="size-3" />
                 </button>
               </div>
               <Toast.Content
                 className={cn(
                   // `overflow-x: clip` avoids the CSS quirk where pairing `hidden` + `y: visible`
                   // forces `y` to `auto`. Expandable detail panels can extend below without being cut off.
-                  "pointer-events-auto min-h-0 overflow-y-visible pl-3.5 text-sm transition-opacity duration-250 [overflow-x:clip] data-expanded:opacity-100",
+                  "pointer-events-auto min-h-0 overflow-y-visible pl-4 text-sm transition-opacity duration-250 [overflow-x:clip] data-expanded:opacity-100",
                   stackedActionLayout
-                    ? "flex flex-col gap-2 py-2.5 pr-3.5"
-                    : cn("py-3", "flex items-center justify-between gap-1.5", inlineContentEndPad),
+                    ? "flex flex-col gap-2 py-3 pr-4"
+                    : cn(
+                        "py-3.5",
+                        "flex items-center justify-between gap-1.5",
+                        inlineContentEndPad,
+                      ),
                   hideCollapsedContent &&
                     "not-data-expanded:pointer-events-none not-data-expanded:opacity-0",
                 )}
@@ -766,16 +768,16 @@ function AnchoredToasts() {
                           }
                           type="button"
                         >
-                          <XIcon className="size-3" strokeWidth={2.25} />
+                          <XIcon className="size-3" />
                         </button>
                       </div>
                       <Toast.Content
                         className={cn(
-                          "pointer-events-auto min-h-0 overflow-y-visible pl-3.5 text-sm [overflow-x:clip]",
+                          "pointer-events-auto min-h-0 overflow-y-visible pl-4 text-sm [overflow-x:clip]",
                           stackedActionLayout
-                            ? "flex flex-col gap-2 py-2.5 pr-3.5"
+                            ? "flex flex-col gap-2 py-3 pr-4"
                             : cn(
-                                "py-3",
+                                "py-3.5",
                                 "flex items-center justify-between gap-1.5",
                                 inlineContentEndPad,
                               ),

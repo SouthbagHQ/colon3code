@@ -1,5 +1,5 @@
 import { memo, useEffect, useRef, useState, type PointerEventHandler } from "react";
-import { ChevronDownIcon, ChevronLeftIcon } from "lucide-react";
+import { ChevronDownIcon, ChevronLeftIcon } from "~/icons";
 import { useEnvironmentIdentificationMode } from "~/hooks/useSettings";
 import { cn } from "~/lib/utils";
 import { Colon3Wordmark } from "../Colon3Wordmark";

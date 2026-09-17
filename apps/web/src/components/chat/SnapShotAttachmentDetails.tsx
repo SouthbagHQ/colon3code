@@ -1,5 +1,5 @@
 import type { SnapShotSource } from "@t3tools/contracts";
-import { ImageIcon, TextIcon } from "lucide-react";
+import { ImageIcon, TextIcon } from "~/icons";
 import { Suspense, use, useMemo, type CSSProperties } from "react";
 
 import { useTheme } from "../../hooks/useTheme";

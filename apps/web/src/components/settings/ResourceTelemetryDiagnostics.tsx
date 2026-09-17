@@ -1,7 +1,7 @@
 import { RefreshIcon } from "~/components/ui/refresh-icon";
 import {
   ActivityIcon,
-  AlertTriangleIcon,
+  TriangleAlertIcon,
   BatteryIcon,
   ChevronDownIcon,
   ChevronRightIcon,
@@ -10,7 +10,7 @@ import {
   GaugeIcon,
   HardDriveIcon,
   MemoryStickIcon,
-} from "lucide-react";
+} from "~/icons";
 import type {
   BackgroundBooleanState,
   EnvironmentId,
@@ -1074,7 +1074,7 @@ export function ResourceTelemetryDiagnostics({
           </div>
           {telemetry.error ? (
             <div className="flex items-start gap-2 border-t border-destructive/20 bg-destructive/5 px-4 py-3 text-xs text-destructive sm:px-5">
-              <AlertTriangleIcon className="mt-0.5 size-3.5 shrink-0" />
+              <TriangleAlertIcon className="mt-0.5 size-3.5 shrink-0" />
               <span>{telemetry.error}</span>
             </div>
           ) : null}
@@ -1255,7 +1255,7 @@ export function ResourceTelemetryDiagnostics({
         <div className="overflow-hidden rounded-2xl border border-border/70 bg-card shadow-[0_1px_1px_rgb(0_0_0/0.03)]">
           {history.error ? (
             <div className="flex items-start gap-2 border-b border-destructive/20 bg-destructive/5 px-4 py-3 text-xs text-destructive sm:px-5">
-              <AlertTriangleIcon className="mt-0.5 size-3.5 shrink-0" />
+              <TriangleAlertIcon className="mt-0.5 size-3.5 shrink-0" />
               <span>{history.error}</span>
             </div>
           ) : null}
