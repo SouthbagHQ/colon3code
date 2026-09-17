@@ -22,3 +22,28 @@
     will-change: var(--visible-animation-will-change, auto);
   }
 }
+
+/* One-shot hop for the :3 mark when a turn finishes. Transform-only, runs once
+   per mount, so callers replay it by remounting the mark with a new key. */
+@keyframes mark-hop {
+  0% {
+    transform: translateY(0) scale(1);
+  }
+  30% {
+    transform: translateY(-28%) scale(0.94, 1.06);
+  }
+  60% {
+    transform: translateY(0) scale(1.08, 0.92);
+  }
+  100% {
+    transform: translateY(0) scale(1);
+  }
+}
+
+.mark-hop {
+  transform-origin: 50% 100%;
+
+  @media (prefers-reduced-motion: no-preference) and (forced-colors: none) {
+    animation: mark-hop 420ms ease-out 1;
+  }
+}

@@ -1,5 +1,6 @@
 "use client";
 
+import { Colon3Wordmark } from "~/components/Colon3Wordmark";
 import { Spinner } from "~/components/ui/spinner";
 
 import { Toast } from "@base-ui/react/toast";
@@ -19,7 +20,6 @@ import {
   ChevronDownIcon,
   ChevronUpIcon,
   CircleAlertIcon,
-  CircleCheckIcon,
   CopyIcon,
   InfoIcon,
   TriangleAlertIcon,
@@ -85,7 +85,7 @@ const TOAST_ICONS = {
   error: CircleAlertIcon,
   info: InfoIcon,
   loading: Spinner,
-  success: CircleCheckIcon,
+  success: Colon3Wordmark,
   warning: TriangleAlertIcon,
 } as const;
 
@@ -358,7 +358,7 @@ function ToastBodyContent({
             className="[&>svg]:h-lh [&>svg]:w-4 [&_svg]:pointer-events-none [&_svg]:shrink-0"
             data-slot="toast-icon"
           >
-            <Icon className="in-data-[type=error]:text-destructive in-data-[type=info]:text-info in-data-[type=success]:text-success in-data-[type=warning]:text-warning in-data-[type=loading]:opacity-80" />
+            <Icon className="in-data-[type=error]:text-destructive in-data-[type=info]:text-info in-data-[type=success]:text-accent in-data-[type=warning]:text-warning in-data-[type=loading]:opacity-80" />
           </div>
         ) : null}
         <div

@@ -1,4 +1,5 @@
-import { Empty, EmptyDescription, EmptyHeader, EmptyTitle } from "./ui/empty";
+import { Colon3Wordmark } from "./Colon3Wordmark";
+import { Empty, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from "./ui/empty";
 import { SidebarInset } from "./ui/sidebar";
 import { isElectron } from "../env";
 import { WorkspacePageHeader } from "./WorkspacePageHeader";
@@ -22,6 +23,9 @@ export function NoActiveThreadState() {
         <Empty className="flex-1">
           <div className="w-full max-w-lg px-8 py-12">
             <EmptyHeader className="max-w-none">
+              <EmptyMedia>
+                <Colon3Wordmark className="size-14 text-accent/35" aria-hidden />
+              </EmptyMedia>
               <EmptyTitle className="text-foreground text-xl">
                 {" "}
                 pick a thread and let's keep going :3

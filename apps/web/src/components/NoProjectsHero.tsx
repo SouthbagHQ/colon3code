@@ -3,7 +3,8 @@ import { useCallback } from "react";
 
 import { openCommandPalette } from "../commandPaletteBus";
 import { Button } from "./ui/button";
-import { Empty, EmptyDescription, EmptyHeader, EmptyTitle } from "./ui/empty";
+import { Colon3Wordmark } from "./Colon3Wordmark";
+import { Empty, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from "./ui/empty";
 import { SidebarInset } from "./ui/sidebar";
 
 export function NoProjectsHero() {
@@ -15,6 +16,9 @@ export function NoProjectsHero() {
         <Empty className="flex-1">
           <div className="w-full max-w-lg px-8 py-12">
             <EmptyHeader className="max-w-none">
+              <EmptyMedia>
+                <Colon3Wordmark className="size-16 text-accent/35 sm:size-20" aria-hidden />
+              </EmptyMedia>
               <EmptyTitle className="text-foreground text-2xl sm:text-3xl">
                 {" "}
                 meow! what should we make today? :3

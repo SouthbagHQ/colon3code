@@ -1,4 +1,4 @@
-import { memo, type PointerEventHandler } from "react";
+import { memo, useEffect, useRef, useState, type PointerEventHandler } from "react";
 import { ChevronDownIcon, ChevronLeftIcon } from "lucide-react";
 import { useEnvironmentIdentificationMode } from "~/hooks/useSettings";
 import { cn } from "~/lib/utils";
@@ -7,6 +7,7 @@ import { StageBackdropButtonArt, useSidebarStageBackdropVariant } from "../Sideb
 import { Button } from "../ui/button";
 import { Menu, MenuItem, MenuPopup, MenuTrigger } from "../ui/menu";
 import { Spinner } from "../ui/spinner";
+import "../ui/spinner.css";
 import { Tooltip, TooltipPopup, TooltipTrigger } from "../ui/tooltip";
 import { composerFloatingLayerProps } from "./composerEventScope";
 
@@ -78,6 +79,15 @@ export const ComposerPrimaryActions = memo(function ComposerPrimaryActions({
   onInterrupt,
   onImplementPlanInNewThread,
 }: ComposerPrimaryActionsProps) {
+  // Remount the :3 mark once when a turn finishes so it does a single hop
+  // (see spinner.css). Keyed on the falling edge, so a fresh mount stays still.
+  const wasRunningRef = useRef(isRunning);
+  const [hopKey, setHopKey] = useState(0);
+  useEffect(() => {
+    if (wasRunningRef.current && !isRunning) setHopKey((key) => key + 1);
+    wasRunningRef.current = isRunning;
+  }, [isRunning]);
+
   const pointerFocusProps = preserveComposerFocusOnPointerDown
     ? { onPointerDown: preventPointerFocus }
     : undefined;
@@ -290,7 +300,11 @@ export const ComposerPrimaryActions = memo(function ComposerPrimaryActions({
       {isConnecting || isSendBusy ? (
         <Spinner className="size-3.5" aria-hidden="true" />
       ) : (
-        <Colon3Wordmark className="size-3.5" aria-hidden="true" />
+        <Colon3Wordmark
+          key={hopKey}
+          className={cn("size-3.5", hopKey > 0 && "mark-hop")}
+          aria-hidden="true"
+        />
       )}
     </button>
   );
