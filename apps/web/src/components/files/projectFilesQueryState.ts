@@ -129,7 +129,7 @@ export function clearProjectFileQueryData(
 function errorMessage<A>(result: AsyncResult.AsyncResult<A, unknown>): string | null {
   if (result._tag !== "Failure") return null;
   const cause = Cause.squash(result.cause);
-  return cause instanceof Error ? cause.message : "workspace query failed 3: mrow";
+  return cause instanceof Error ? cause.message : "workspace query failed 3:";
 }
 
 export function useProjectEntriesQuery(

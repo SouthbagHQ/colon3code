@@ -7,14 +7,14 @@ import {
 } from "./SnapShotSetupDialog.logic";
 
 export function snapShotStatus(state: DesktopSnapShotState | null, enabled: boolean): string {
-  if (!state) return "checking snapshots, purr…";
-  if (state.mode === "unavailable") return state.message ?? "not supported on this platform, mrow.";
-  if (!enabled) return "meow, turn this on to set up snapshots.";
+  if (!state) return "checking snapshots,… ;3";
+  if (state.mode === "unavailable") return state.message ?? "not supported on this platform ;3";
+  if (!enabled) return "turn this on to set up snapshots :3";
   return snapShotSetupSummary(state, enabled);
 }
 
 export function snapShotSetupSummary(state: DesktopSnapShotState, enabled: boolean): string {
-  if (state.message) return "capture needs attention, mrrp";
+  if (state.message) return "capture needs attention ^w^";
   if (state.linuxBackend === "hyprland" && state.hyprlandHelper?.status !== "ready")
     return state.hyprlandHelper?.status === "error"
       ? "check capture access in setup"
@@ -45,8 +45,8 @@ export function snapShotSetupSummary(state: DesktopSnapShotState, enabled: boole
 export function snapShotShortcutStatus(state: DesktopSnapShotState | null): string | null {
   if (!state) return null;
   if (state.linuxBackend === "hyprland") return state.shortcutMessage;
-  if (state.shortcutPending) return "mrrp, approve the shortcut permission prompt to continue.";
-  if (state.shortcutRegistered) return state.mode === "portal" ? null : "shortcut saved :3 purr";
+  if (state.shortcutPending) return "approve the shortcut permission prompt to continue :3";
+  if (state.shortcutRegistered) return state.mode === "portal" ? null : "shortcut saved :3";
   return state.shortcutMessage;
 }
 
@@ -82,24 +82,24 @@ export function snapShotFeedbackUnavailableMessage(
   if (state?.mode !== "portal" || state.linuxFeedbackAvailable) return undefined;
   if (state.linuxBackend === "hyprland")
     return state.hyprlandHelper?.status === "ready"
-      ? "mrrp, capture effects aren't available on this desktop."
-      : "install or update the capture helper to enable effects, meow.";
-  if (state.linuxBackend === "niri") return "capture effects aren't available on Niri, mrow.";
+      ? "capture effects aren't available on this desktop :3"
+      : "install or update the capture helper to enable effects :3";
+  if (state.linuxBackend === "niri") return "capture effects aren't available on Niri :3";
   if (state.linuxBackend === "kde")
     return state.kdeHelper?.status === "ready"
-      ? "mrrp, capture effects aren't available on this desktop."
-      : "install or update the capture helper to enable effects, meow.";
+      ? "capture effects aren't available on this desktop :3"
+      : "install or update the capture helper to enable effects :3";
   return state.linuxBackend === "gnome-extension"
-    ? "update the GNOME extension, then sign out and back in to enable effects, nya~"
+    ? "update the GNOME extension, then sign out and back in to enable effects ^w^"
     : captureSetupBackend(state) === "gnome"
-      ? "finish extension setup to enable effects, meow."
-      : "mrrp, capture effects aren't available on this desktop.";
+      ? "finish extension setup to enable effects :3"
+      : "capture effects aren't available on this desktop :3";
 }
 
 export function snapShotDescription(state: DesktopSnapShotState | null): string {
   return state?.mode === "portal" && captureSetupBackend(state) === "picker"
-    ? "mrrp, automatic capture isn't available here. choose a window instead."
-    : "capture a window and attach it to your current draft, nya~";
+    ? "automatic capture isn't available here. choose a window instead ^w^"
+    : "capture a window and attach it to your current draft ;3";
 }
 
 export function snapShotAccessibilityUnavailableMessage(
@@ -107,15 +107,15 @@ export function snapShotAccessibilityUnavailableMessage(
 ): string | undefined {
   if (state?.mode !== "portal") return undefined;
   if (state.linuxBackend === "picker" || state.linuxBackend === "screenshot-portal")
-    return "this desktop only provides a screenshot, mrow.";
+    return "this desktop only provides a screenshot ^w^";
   return undefined;
 }
 
 export function snapShotUnavailableMessage(hasBridge: boolean): string | undefined {
   if (hasBridge) return undefined;
   return typeof window !== "undefined" && window.desktopBridge
-    ? "update the desktop app to use snapshots, meow."
-    : "only available in the desktop app, nya~";
+    ? "update the desktop app to use snapshots :3"
+    : "only available in the desktop app ;3";
 }
 
 export function snapShotSoundPatch(sound: SnapShotSoundSelection): ClientSettingsPatch {

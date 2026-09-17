@@ -73,9 +73,10 @@ export function GitHubRoutingSettings({
       }
     >
       <p className="px-3 py-2.5 text-xs text-muted-foreground sm:px-4">
-        meow, machines you trust here can read PR data through each other's GitHub access. enable
-        both machines. read and act may use broader permissions than the machine that owns them.
-        this applies only to this device, nya~
+        {" "}
+        machines you trust here can read PR data through each other's GitHub access. enable both
+        machines. read and act may use broader permissions than the machine that owns them. this
+        applies only to this device :3
       </p>
       {environments.map((environment) => (
         <EnvironmentRow
@@ -99,7 +100,7 @@ export function GitHubRoutingSettings({
                   if (result._tag === "Failure")
                     toastManager.add({
                       type: "error",
-                      title: "could not save GitHub routing permission 3: mrrp",
+                      title: "could not save GitHub routing permission 3:",
                     });
                 },
               );

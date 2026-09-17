@@ -65,9 +65,9 @@ export function pullRequestStackView(
       data === null
         ? null
         : query.error
-          ? "stack data may be stale. we couldn’t refresh it, mrrp"
+          ? "stack data may be stale. we couldn’t refresh it 3:"
           : !query.isSuccess || query.isPending
-            ? "refreshing stack… showing saved data, purr"
+            ? "refreshing stack… showing saved data :3"
             : null,
   };
 }

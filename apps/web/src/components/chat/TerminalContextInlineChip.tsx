@@ -96,7 +96,7 @@ export function TerminalContextInlineChip(props: TerminalContextInlineChipProps)
       tooltipClassName="max-w-80 whitespace-pre-wrap leading-tight"
       tooltip={
         expired
-          ? `terminal context expired, mrrp. remove and re-add ${label} to include it in your message.`
+          ? `terminal context expired. remove and re-add 3: ${label} to include it in your message.`
           : detailsMode === "none"
             ? undefined
             : text

@@ -148,7 +148,7 @@ function SidebarUpdateControl() {
       ? getDesktopUpdateButtonTooltip(state)
       : "update available"
     : showCheckIcon
-      ? "checking for updates… purr"
+      ? "checking for updates… :3"
       : "check for updates";
   const disabled = showCheckIcon
     ? true
@@ -193,7 +193,7 @@ function SidebarUpdateControl() {
           toastManager.add(
             stackedThreadToast({
               type: "error",
-              title: "could not download update 3: mrrp",
+              title: "could not download update 3:",
               description: actionError,
             }),
           );
@@ -223,8 +223,7 @@ function SidebarUpdateControl() {
           stackedThreadToast({
             type: "error",
             title: "could not confirm update 3:",
-            description:
-              error instanceof Error ? error.message : "update confirmation failed, mrow.",
+            description: error instanceof Error ? error.message : "update confirmation failed 3:",
           }),
         );
         return;
@@ -242,7 +241,7 @@ function SidebarUpdateControl() {
           toastManager.add(
             stackedThreadToast({
               type: "error",
-              title: "could not install update 3: mrow",
+              title: "could not install update 3:",
               description: actionError,
             }),
           );
@@ -281,7 +280,7 @@ function SidebarUpdateControl() {
         toastManager.add(
           stackedThreadToast({
             type: "error",
-            title: "could not check for updates 3: mrrp",
+            title: "could not check for updates 3:",
             description: error instanceof Error ? error.message : "update check failed.",
           }),
         );

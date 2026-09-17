@@ -279,7 +279,7 @@ function BrowserViewportSetting({ disabled }: { readonly disabled: boolean }) {
   return (
     <SettingsRow
       {...searchableSetting("browser-default-viewport")}
-      description="tab size for you and agents, meow. fill fits the panel; other sizes show the device toolbar."
+      description="tab size for you and agents. fill fits the panel; other sizes show the device toolbar ^w^"
       resetAction={
         !disabled && viewport._tag !== DEFAULT_BROWSER_VIEWPORT._tag ? (
           <SettingResetButton
@@ -388,7 +388,7 @@ function BrowserZoomSetting({ disabled }: { readonly disabled: boolean }) {
   return (
     <SettingsRow
       {...searchableSetting("browser-default-zoom")}
-      description="page zoom applied to new browser tabs, nya~"
+      description="page zoom applied to new browser tabs :3"
       resetAction={
         !disabled && zoomFactor !== DEFAULT_PREVIEW_ZOOM_FACTOR ? (
           <SettingResetButton
@@ -431,7 +431,7 @@ function BrowserAppearanceSetting({ disabled }: { readonly disabled: boolean }) 
   return (
     <SettingsRow
       {...searchableSetting("browser-default-appearance")}
-      description="the color scheme pages are told to prefer. system follows your OS setting, purr."
+      description="the color scheme pages are told to prefer. system follows your OS setting ^w^"
       resetAction={
         !disabled && appearance !== DEFAULT_PREVIEW_APPEARANCE ? (
           <SettingResetButton
@@ -477,7 +477,7 @@ function BrowserRecordingFrameRateSetting({ disabled }: { readonly disabled: boo
   return (
     <SettingsRow
       {...searchableSetting("browser-recording-frame-rate")}
-      description="mrrp, maximum recording rate. 30 fps saves CPU and storage; 60 fps is smoother."
+      description="maximum recording rate. 30 fps saves CPU and storage; 60 fps is smoother :3"
       resetAction={
         !disabled && frameRate !== DEFAULT_BROWSER_RECORDING_FRAME_RATE ? (
           <SettingResetButton
@@ -531,7 +531,7 @@ function BrowserLinkTargetSetting({ disabled }: { readonly disabled: boolean }) 
   return (
     <SettingsRow
       {...searchableSetting("browser-link-target")}
-      description="where links in the chat and terminal open, meow. hold ⌘ or Ctrl while clicking a link to open it in your default browser either way."
+      description="where links in the chat and terminal open. hold ⌘ or Ctrl while clicking a link to open it in your default browser either way :3"
       resetAction={
         !disabled && linkTarget !== DEFAULT_BROWSER_LINK_TARGET ? (
           <SettingResetButton
@@ -636,7 +636,7 @@ function DeviceIntegrationControls({
       if (failed.length > 0) {
         toastManager.add({
           type: "error",
-          title: "device settings not saved on all environments 3: mrrp",
+          title: "device settings not saved on all environments 3:",
           description: `could not update ${failed.map((environment) => environment.label).join(", ")}.`,
         });
       }
@@ -676,7 +676,7 @@ function DeviceIntegrationControls({
             {...searchableSetting("device-platform-support")}
             description={
               connectedEnvironments.length > 1
-                ? `status for ${connectedEnvironments.find((environment) => environment.environmentId === environmentId)?.label}. select an environment to inspect its simulator support, nya~`
+                ? `status for ${connectedEnvironments.find((environment) => environment.environmentId === environmentId)?.label}select an environment to inspect its simulator support :3`
                 : undefined
             }
             status={
@@ -749,7 +749,7 @@ function BrowserAutoShowFloatingPreviewSetting({ disabled }: { readonly disabled
   return (
     <SettingsRow
       {...searchableSetting("browser-auto-show-floating-preview")}
-      description="show the floating preview when an agent opens a browser or device unless the agent says otherwise, purr."
+      description="show the floating preview when an agent opens a browser or device unless the agent says otherwise :3"
       resetAction={
         !disabled && autoShow !== DEFAULT_BROWSER_AUTO_SHOW_FLOATING_PREVIEW ? (
           <SettingResetButton
@@ -859,7 +859,7 @@ function BrowserProfilesSetting({ disabled }: { readonly disabled: boolean }) {
       toastManager.add({
         type: "error",
         title: `could not clear ${name}'s data 3:`,
-        description: "you're not connected to a server yet, mrrp.",
+        description: "you're not connected to a server yet ^w^",
       });
       return;
     }
@@ -869,17 +869,17 @@ function BrowserProfilesSetting({ disabled }: { readonly disabled: boolean }) {
       id,
     )
       .then(() => {
-        toastManager.add({ type: "success", title: `cleared ${name}'s cookies and cache :3 purr` });
+        toastManager.add({ type: "success", title: `cleared ${name}'s cookies and cache :3` });
       })
       .catch(() => {
-        toastManager.add({ type: "error", title: `could not clear ${name}'s data 3: mrow` });
+        toastManager.add({ type: "error", title: `could not clear ${name}'s data 3:` });
       });
   };
 
   const removeProfile = async (id: string) => {
     if (!settingsHydrated || importInFlightRef.current) return;
     if (!removalAvailable) {
-      setProfileRemovalError("connect to an environment before removing this profile, meow.");
+      setProfileRemovalError("connect to an environment before removing this profile :3");
       return;
     }
     setProfileRemovalError(null);
@@ -1056,7 +1056,7 @@ function BrowserProfilesSetting({ disabled }: { readonly disabled: boolean }) {
   return (
     <SettingsRow
       {...searchableSetting("browser-profiles")}
-      description="mrrp, profiles separate cookies and logins. incognito data is cleared when the app closes."
+      description="profiles separate cookies and logins. incognito data is cleared when the app closes :3"
       control={
         <Menu onOpenChange={(open) => open && loadSources()}>
           <MenuTrigger
@@ -1079,7 +1079,7 @@ function BrowserProfilesSetting({ disabled }: { readonly disabled: boolean }) {
               blank profile
             </MenuItem>
             {atProfileLimit ? (
-              <MenuItem disabled>you&rsquo;ve reached the profile limit, nya~</MenuItem>
+              <MenuItem disabled>you&rsquo;ve reached the profile limit :3</MenuItem>
             ) : null}
             <MenuSeparator />
             <MenuGroup>
@@ -1246,8 +1246,9 @@ function BrowserProfilesSetting({ disabled }: { readonly disabled: boolean }) {
           <AlertDialogHeader>
             <AlertDialogTitle>remove “{profilePendingRemoval?.name}”?</AlertDialogTitle>
             <AlertDialogDescription>
-              mrrp, its cookies and logins are deleted. tabs already open in this profile stay open
-              until you close them.
+              {" "}
+              its cookies and logins are deleted. tabs already open in this profile stay open until
+              you close them ^w^
             </AlertDialogDescription>
             {profileRemovalError ? (
               <p aria-live="polite" className="text-sm text-destructive">
@@ -1256,7 +1257,8 @@ function BrowserProfilesSetting({ disabled }: { readonly disabled: boolean }) {
             ) : null}
             {!removalAvailable ? (
               <p className="text-sm text-muted-foreground">
-                connect to an environment to remove this profile and its data, meow.
+                {" "}
+                connect to an environment to remove this profile and its data ^w^
               </p>
             ) : null}
           </AlertDialogHeader>
@@ -1304,7 +1306,7 @@ function BrowserProfilesSetting({ disabled }: { readonly disabled: boolean }) {
               .catch(() => {
                 toastManager.add({
                   type: "error",
-                  title: "could not open System Settings 3: mrrp",
+                  title: "could not open System Settings 3:",
                   description: "open Privacy & Security → Full Disk Access manually.",
                 });
               });
@@ -1338,7 +1340,7 @@ export function IntegrationsSettingsPanel() {
       <ProjectDefaultsSettings category="integrations" />
       <SettingsSection id="browser" title="browser">
         {previewDefaultsDisabled ? (
-          <SettingsUnavailableGroup message="only available in the desktop app, nya~">
+          <SettingsUnavailableGroup message="only available in the desktop app ;3">
             {previewDefaults}
           </SettingsUnavailableGroup>
         ) : (

@@ -82,12 +82,12 @@ export function agentControlledBrowserCloseConfirmation(
   if (activeBrowserCount === 1) {
     return [
       "close browser while the agent is using it?",
-      "mrrp, the agent is actively controlling this browser. closing it may interrupt the current browser action.",
+      "the agent is actively controlling this browser. closing it may interrupt the current browser action :3",
     ].join("\n");
   }
   return [
     `close ${activeBrowserCount} browsers while the agent is using them?`,
-    "mrrp, the agent is actively controlling these browsers. closing them may interrupt the current browser actions.",
+    "the agent is actively controlling these browsers. closing them may interrupt the current browser actions ^w^",
   ].join("\n");
 }
 
@@ -967,12 +967,12 @@ export function buildExpiredTerminalContextToastCopy(
   if (variant === "empty") {
     return {
       title: `${noun} won't be sent 3:`,
-      description: "remove it or re-add it to include terminal output, nya~",
+      description: "remove it or re-add it to include terminal output :3",
     };
   }
   return {
     title: `${noun} omitted from message 3:`,
-    description: "re-add it if you want that terminal output included, nya~",
+    description: "re-add it if you want that terminal output included :3",
   };
 }
 
@@ -1144,9 +1144,9 @@ export function getStartedThreadModelChangeBlockReason(input: {
     return null;
   }
   return {
-    title: "start a new chat to change models 3: mrrp",
+    title: "start a new chat to change models 3:",
     description:
-      "this provider does not allow switching models after a conversation has started, nya~",
+      "this provider does not allow switching models after a conversation has started :3",
   };
 }
 

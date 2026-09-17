@@ -86,8 +86,9 @@ export function LoadBalancingSettings({
       }
     >
       <p className="px-3 py-2.5 text-xs text-muted-foreground sm:px-4">
+        {" "}
         new threads in shared projects start on the machine with the most free CPU and memory,
-        weighted by each machine's preference, purr.
+        weighted by each machine's preference ^w^
       </p>
       {environments.map((environment) => (
         <EnvironmentRow

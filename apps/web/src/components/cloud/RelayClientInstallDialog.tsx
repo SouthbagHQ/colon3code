@@ -65,12 +65,12 @@ export function RelayClientInstallDialog() {
             <DownloadIcon aria-hidden className="size-4.5 text-muted-foreground" />
           </div>
           <DialogTitle>
-            {isInstalling ? "installing relay client… purr" : "install relay client? :3"}
+            {isInstalling ? "installing relay client… ^w^" : "install relay client? :3"}
           </DialogTitle>
           <DialogDescription>
             {isInstalling
-              ? ":3 Code is preparing this environment for secure access through T3 Connect, nya~"
-              : ":3 Code needs the relay client to make this environment available through T3 Connect, meow."}
+              ? ":3 Code is preparing this environment for secure access through T3 Connect"
+              : ":3 Code needs the relay client to make this environment available through T3 Connect."}
           </DialogDescription>
         </DialogHeader>
         <DialogPanel scrollFade={false}>

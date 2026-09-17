@@ -142,14 +142,14 @@ export function MediaActions({
         await (action === "save" ? save() : copyImage());
         toastManager.update(progressToast, {
           type: "success",
-          title: action === "save" ? "download started :3" : "image copied, purr :3",
+          title: action === "save" ? "download started :3" : "image copied :3",
         });
       }
     } catch (error) {
       const toast = stackedThreadToast({
         type: "error",
         title: failureTitle,
-        description: error instanceof Error ? error.message : "the media action failed, mrow.",
+        description: error instanceof Error ? error.message : "the media action failed 3:",
       });
       if (progressToast) toastManager.update(progressToast, toast);
       else toastManager.add(toast);

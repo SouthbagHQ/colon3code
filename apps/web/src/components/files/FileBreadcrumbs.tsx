@@ -133,12 +133,12 @@ function BreadcrumbMenuContent(props: {
             <span className="min-w-0 flex-1 truncate">retry loading folder</span>
           </MenuItem>
         ) : !directoryAvailable && !entriesTruncated ? (
-          <MenuItem disabled>this folder is no longer available, mrrp</MenuItem>
+          <MenuItem disabled>this folder is no longer available 3:</MenuItem>
         ) : children.length === 0 ? (
           <MenuItem disabled>
             {entriesTruncated
               ? "no entries from this folder are available in the partial workspace index"
-              : "this folder is empty, nya~"}
+              : "this folder is empty :3"}
           </MenuItem>
         ) : (
           children.map((entry) => {
@@ -188,7 +188,7 @@ function BreadcrumbMenuContent(props: {
       {entriesTruncated ? (
         <>
           <MenuSeparator />
-          <MenuItem disabled>some workspace entries are not shown, mrow</MenuItem>
+          <MenuItem disabled>some workspace entries are not shown :3</MenuItem>
         </>
       ) : null}
     </MenuPopup>

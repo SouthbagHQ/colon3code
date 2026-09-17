@@ -334,7 +334,7 @@ function TimelineLoadEarlierHeader({
           disabled={loading}
           className="w-full py-1.5 text-xs text-muted-foreground/60 hover:text-foreground disabled:cursor-default"
         >
-          {loading ? "loading earlier turns… purr" : "load earlier turns"}
+          {loading ? "loading earlier turns… ;3" : "load earlier turns"}
         </button>
       </div>
     </div>
@@ -1514,10 +1514,10 @@ function QueuedMessageTimelineRow({
     queuedMessage.reviewComments.length;
   const text = queuedMessage.prompt.trim();
   const statusLabel = queuedMessage.holdUntilUserAction
-    ? "waits for send now, mrrp"
+    ? "waits for send now :3"
     : row.isNext
-      ? "sends after the next tool call or when the turn ends, nya~"
-      : "sends after the messages above it, purr";
+      ? "sends after the next tool call or when the turn ends ^w^"
+      : "sends after the messages above it :3";
   return (
     <div className="flex flex-col items-end" data-queued-message-id={queuedMessage.id}>
       <div className="max-w-[80%] rounded-2xl border border-dashed border-border p-3 text-message-foreground/80">
@@ -2221,8 +2221,9 @@ function WorkingTimelineRow({ row }: { row: Extract<TimelineRow, { kind: "workin
         >
           {isPreparingWorktree ? (
             <>
-              setting up worktree… nya~
-              <ActivityShimmerOverlay>setting up worktree… nya~</ActivityShimmerOverlay>
+              {" "}
+              setting up worktree… ^w^
+              <ActivityShimmerOverlay>setting up worktree… ^w^</ActivityShimmerOverlay>
             </>
           ) : isCompacting ? (
             <>
@@ -2233,10 +2234,10 @@ function WorkingTimelineRow({ row }: { row: Extract<TimelineRow, { kind: "workin
             </>
           ) : row.createdAt ? (
             <>
-              working for <WorkingTimer createdAt={row.createdAt} /> nya~
+              working for <WorkingTimer createdAt={row.createdAt} />
             </>
           ) : (
-            "working… nya~"
+            "working… ^w^"
           )}
         </span>
       </div>
@@ -2250,7 +2251,7 @@ function ThinkingTimelineRow() {
   return (
     <div className="min-h-7">
       {isPreparingWorktree || isCompacting ? null : (
-        <LiveActivityRow label="thinking… purr" iconName="brain" active shimmer />
+        <LiveActivityRow label="thinking… :3" iconName="brain" active shimmer />
       )}
     </div>
   );
@@ -2259,8 +2260,7 @@ function ThinkingTimelineRow() {
 function CompactingLabel() {
   return (
     <span className="inline-flex items-center gap-1.5">
-      <Minimize2Icon aria-hidden="true" className="size-3" />
-      compacting… purr
+      <Minimize2Icon aria-hidden="true" className="size-3" /> compacting… :3
     </span>
   );
 }
@@ -3025,7 +3025,7 @@ function UnavailableUserMessageContextChip(props: UserMessageContextRenderContex
       className={CHAT_INLINE_CHIP_CLASS_NAME}
       labelClassName={CHAT_INLINE_CHIP_LABEL_CLASS_NAME}
       copyMarkdown={props.copyMarkdown}
-      tooltip="this context is no longer available, mrrp 3:"
+      tooltip="this context is no longer available 3:"
       tooltipClassName="max-w-96 whitespace-pre-wrap leading-tight"
     />
   );

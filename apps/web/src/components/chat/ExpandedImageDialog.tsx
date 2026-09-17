@@ -228,8 +228,8 @@ export const ExpandedImageDialog = memo(function ExpandedImageDialog({
               <ExpandedMediaFailure>
                 <p>
                   {openOriginalLink
-                    ? "this image could not be loaded, mrow 3:"
-                    : "image unavailable, mrrp. the file may have been moved or deleted."}
+                    ? "this image could not be loaded 3:"
+                    : "image unavailable. the file may have been moved or deleted 3:"}
                 </p>
                 {openOriginalLink}
               </ExpandedMediaFailure>

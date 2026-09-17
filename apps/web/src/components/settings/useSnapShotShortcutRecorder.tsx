@@ -96,7 +96,7 @@ export function useSnapShotShortcutRecorder({
       const [left, right] = MODIFIER_CODES[modifier];
       if (held.has(left) && held.has(right)) {
         if (!allowModifierPairs) {
-          onError("mrrp, add a letter, number, or function key to your shortcut.");
+          onError("add a letter, number, or function key to your shortcut :3");
           return;
         }
         stopRecording();

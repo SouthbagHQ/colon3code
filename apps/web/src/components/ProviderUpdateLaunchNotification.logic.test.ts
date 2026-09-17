@@ -285,7 +285,7 @@ describe("provider update launch notification logic", () => {
       phase: "initial",
       type: "warning",
       title: "update available: Codex v1.1.0 3:",
-      description: "install the update now or review provider settings, nya~",
+      description: "install the update now or review provider settings :3",
     });
   });
 
@@ -386,7 +386,7 @@ describe("provider update launch notification logic", () => {
       phase: "unchanged",
       type: "warning",
       title: "provider still needs an update 3:",
-      description: "Cursor still appears outdated, mrrp. check provider settings for details.",
+      description: "Cursor still appears outdated. check provider settings for details :3",
     });
   });
 
@@ -414,7 +414,7 @@ describe("provider update launch notification logic", () => {
       phase: "succeeded",
       type: "success",
       title: "provider updated :3",
-      description: "new sessions will use the updated provider, purr",
+      description: "new sessions will use the updated provider ^w^",
       dismissAfterVisibleMs: 3_000,
     });
   });
@@ -546,7 +546,7 @@ describe("provider update launch notification logic", () => {
       key: "succeeded:codex:2026-04-23T10:00:00.000Z:Provider updated.",
       tone: "success",
       title: "Codex updated: v1.1.0",
-      description: "new sessions will use the updated provider, purr",
+      description: "new sessions will use the updated provider ^w^",
       dismissAfterVisibleMs: 3_000,
     });
   });
@@ -946,19 +946,19 @@ describe("provider update launch notification logic", () => {
       phase: "running",
       type: "loading",
       title: "updating providers",
-      description: "running provider update command, purr",
+      description: "running provider update command :3",
     };
     const succeededResult: ProviderUpdateToastView = {
       phase: "succeeded",
       type: "success",
       title: "provider updated :3",
-      description: "new sessions will use the updated provider, purr",
+      description: "new sessions will use the updated provider ^w^",
     };
     const successPill: ProviderUpdateSidebarPillView = {
       key: "succeeded:codex",
       tone: "success",
       title: "Codex updated",
-      description: "new sessions will use the updated provider, purr",
+      description: "new sessions will use the updated provider ^w^",
     };
 
     it("prefers a transport error", () => {

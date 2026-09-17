@@ -150,7 +150,7 @@ function EnvironmentCloneToasts({ environmentId }: { environmentId: EnvironmentI
       if (clone.phase === "done") {
         const options = stackedThreadToast({
           type: "success",
-          title: `cloned ${name} :3 purr`,
+          title: `cloned ${name} :3`,
           description: clone.destinationPath,
           timeout: 8_000,
           actionProps: {
@@ -177,7 +177,7 @@ function EnvironmentCloneToasts({ environmentId }: { environmentId: EnvironmentI
       const cancelled = clone.phase === "cancelled";
       const options = stackedThreadToast({
         type: cancelled ? "info" : "error",
-        title: cancelled ? `cancelled cloning ${name}, mrrp` : `failed to clone ${name} 3:`,
+        title: cancelled ? `cancelled cloning ${name}` : `failed to clone ${name} 3:`,
         description: cancelled ? clone.destinationPath : (clone.error ?? "the clone failed."),
         timeout: 0,
         actionProps: {

@@ -24,7 +24,7 @@ function formatRemainingSeconds(seconds: number): string {
 function getPromptErrorMessage(error: unknown): string {
   const message = error instanceof Error ? error.message : "SSH password prompt failed.";
   return message.includes("expired") || message.includes("no longer pending")
-    ? "this SSH password prompt expired, mrrp. try connecting again."
+    ? "this SSH password prompt expired. try connecting again 3:"
     : message;
 }
 
@@ -101,7 +101,7 @@ function ActiveSshPasswordPrompt({
   const remainingLabel =
     remainingSeconds === null ? null : formatRemainingSeconds(remainingSeconds);
   const visibleResponseError = isExpired
-    ? "this SSH password prompt expired, mrrp. try connecting again."
+    ? "this SSH password prompt expired. try connecting again 3:"
     : responseError;
 
   const respond = async (nextPassword: string | null) => {
@@ -111,7 +111,7 @@ function ActiveSshPasswordPrompt({
 
     const requestId = request.requestId;
     if (nextPassword !== null && isExpired) {
-      setResponseError("this SSH password prompt expired, mrrp. try connecting again.");
+      setResponseError("this SSH password prompt expired. try connecting again 3:");
       return;
     }
 

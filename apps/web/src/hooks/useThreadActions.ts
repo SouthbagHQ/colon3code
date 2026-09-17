@@ -151,7 +151,7 @@ export async function requestThreadUnpinConfirmation(input: {
     confirm(
       [
         `unpin thread "${input.title}"?`,
-        "this will move the thread out of your pinned section, mrrp.",
+        "this will move the thread out of your pinned section :3",
       ].join("\n"),
     ),
   );
@@ -165,7 +165,7 @@ export async function navigateAfterThreadDeletion(navigate: () => Promise<void>)
     toastManager.add(
       stackedThreadToast({
         type: "error",
-        title: "thread deleted, but navigation failed 3: mrrp",
+        title: "thread deleted, but navigation failed 3:",
         description: error instanceof Error ? error.message : "an error occurred.",
       }),
     );
@@ -360,7 +360,7 @@ export function useThreadActions() {
         const confirmationResult = await settlePromise(() =>
           localApi.dialogs.confirm(
             [
-              "this thread is the only one linked to this worktree, mrow:",
+              "this thread is the only one linked to this worktree: ^w^",
               displayWorktreePath ?? orphanedWorktreePath,
               "",
               "delete the worktree too? 3:",
@@ -469,7 +469,7 @@ export function useThreadActions() {
           stackedThreadToast({
             type: "error",
             title: removalFailed
-              ? "failed to delete worktree 3: mrow"
+              ? "failed to delete worktree 3:"
               : "worktree deleted, but Git status refresh failed 3:",
             description: removalFailed
               ? `could not remove ${displayWorktreePath ?? orphanedWorktreePath}. ${message}`
@@ -733,7 +733,7 @@ export function useThreadActions() {
           localApi.dialogs.confirm(
             [
               `delete thread "${title}"?`,
-              "this permanently clears conversation history for this thread, mrow.",
+              "this permanently clears conversation history for this thread :3",
             ].join("\n"),
             { variant: "destructive" },
           ),

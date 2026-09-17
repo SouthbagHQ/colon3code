@@ -704,7 +704,7 @@ function PullRequestCodeTab({
         >
           {diffQuery.error !== null ? (
             <>
-              <span>the rest of this diff could not be loaded, mrrp</span>
+              <span>the rest of this diff could not be loaded 3:</span>
               <Button size="xs" variant="outline" onClick={() => diffQuery.refresh()}>
                 retry
               </Button>
@@ -835,14 +835,14 @@ function PullRequestCodeTab({
           if (result._tag === "Failure") {
             toastManager.add({
               type: "error",
-              title: "more comments could not be loaded 3: mrow",
+              title: "more comments could not be loaded 3:",
             });
             return null;
           }
           return result.value;
         }}
         onReply={(body) =>
-          runThreadCommand("reply could not be posted 3: mrrp", () =>
+          runThreadCommand("reply could not be posted 3:", () =>
             replyToThread({
               environmentId,
               input: { ...reference, threadId: thread.id, body },
@@ -862,7 +862,7 @@ function PullRequestCodeTab({
           )
         }
         onToggleResolved={() =>
-          void runThreadCommand("the conversation could not be updated 3: mrow", () =>
+          void runThreadCommand("the conversation could not be updated 3:", () =>
             setThreadResolution({
               environmentId,
               input: { ...reference, threadId: thread.id, resolved: !thread.isResolved },
@@ -1103,8 +1103,8 @@ function PullRequestCodeTab({
                 />
               </TooltipTrigger>
               <TooltipPopup side="bottom">
-                the host withheld part of this diff — a binary file, or a change too large to
-                inline, mrrp
+                the host withheld part of this diff — a binary file, or a change too large to inline
+                :3
               </TooltipPopup>
             </Tooltip>
           ) : null}
@@ -1118,7 +1118,6 @@ function PullRequestCodeTab({
               </TooltipTrigger>
               <TooltipPopup side="bottom">
                 A comment is anchored to the whole change, so switch to All commits to write one,
-                nya~
               </TooltipPopup>
             </Tooltip>
           ) : null}
@@ -1270,8 +1269,9 @@ function PullRequestCodeTab({
     return withReviewBar(
       <p className="px-4 py-5 text-sm text-muted-foreground">
         {commit === null
-          ? "this pull request has no file changes, mrrp"
-          : "this commit has no file changes, mrow"}
+          ? "this pull request has no file changes ^w^"
+          : "this commit has no file changes :3"}{" "}
+        ;3
       </p>,
     );
   }

@@ -116,8 +116,8 @@ function ChatRouteGlobalShortcuts() {
           toastManager.add(
             stackedThreadToast({
               type: "info",
-              title: "preview is desktop-only, mrrp",
-              description: "open :3 Code in the desktop app to use the in-app preview, nya~",
+              title: "preview is desktop-only :3",
+              description: "open :3 Code in the desktop app to use the in-app preview",
             }),
           );
           return;

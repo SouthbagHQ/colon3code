@@ -288,7 +288,7 @@ it("shows permission errors once in a toast and allows retrying", async () => {
   const tree = renderWithEffects();
   expect(toastManager.add).toHaveBeenCalledExactlyOnceWith({
     type: "error",
-    title: "couldn't open shortcut permissions 3: mrow",
+    title: "couldn't open shortcut permissions 3:",
     description: "The desktop service disconnected.",
   });
   expect(visitElements(tree, (element) => element.props.role === "alert")).toBeNull();
@@ -316,7 +316,7 @@ it("keeps a failed preference unchanged and reports the save error in a toast", 
   expect(flash(renderWithEffects()).checked).toBe(true);
   expect(toastManager.add).toHaveBeenCalledExactlyOnceWith({
     type: "error",
-    title: "couldn't save capture settings 3: mrrp",
+    title: "couldn't save capture settings 3:",
     description: "The settings file is read-only.",
   });
   flash(renderWithEffects()).onCheckedChange(false);

@@ -44,7 +44,7 @@ function formatByteSize(bytes: number): string {
 /** Returns the error to show for a file too large to be a theme, else null. */
 export function describeOversizedThemeFile(bytes: number): string | null {
   if (bytes <= MAX_THEME_FILE_BYTES) return null;
-  return `mrrp, that file is ${formatByteSize(bytes)}. theme files are only a few KB, so this one was not read (limit ${formatByteSize(MAX_THEME_FILE_BYTES)}).`;
+  return `that file is ^w^ ${formatByteSize(bytes)}. theme files are only a few KB, so this one was not read (limit ${formatByteSize(MAX_THEME_FILE_BYTES)}).`;
 }
 
 function escapeJsonHtml(value: string): string {
@@ -198,7 +198,7 @@ export function ThemeImportDialog({
       setError(null);
     } catch {
       if (requestId !== importRequestRef.current) return;
-      setError("could not read that file 3: mrrp. paste the JSON below instead.");
+      setError("could not read that file 3: paste the JSON below instead.");
     } finally {
       if (requestId === importRequestRef.current) setIsReading(false);
     }
@@ -406,12 +406,12 @@ export function ThemeImportDialog({
         } catch {
           // Storage is failing wholesale; the error below covers it.
         }
-        setError("theme added, but it could not be selected 3: mrow. try again.");
+        setError("theme added, but it could not be selected 3: try again.");
         return;
       }
       onOpenChange(false);
     } catch (cause) {
-      setError(cause instanceof Error ? cause.message : "that theme file is invalid 3: mrrp");
+      setError(cause instanceof Error ? cause.message : "that theme file is invalid 3:");
     }
   }, [json, onImported, onOpenChange]);
 
@@ -525,7 +525,7 @@ export function ThemeImportDialog({
                   <div className="min-w-0">
                     <p className="text-sm font-medium">theme file</p>
                     <p className="truncate text-xs text-muted-foreground">
-                      {fileName ?? "drop :3 Code or VS Code .json files here, meow"}
+                      {fileName ?? "drop :3 Code or VS Code.json files here"}
                     </p>
                   </div>
                   {chooseButton()}

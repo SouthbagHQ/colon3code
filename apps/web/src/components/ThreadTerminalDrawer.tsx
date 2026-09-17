@@ -626,7 +626,7 @@ export function TerminalViewport({
         try {
           await writeTextToClipboard(text, "terminal selection");
         } catch (error) {
-          reportIfCurrent(requestId, error, "unable to copy terminal selection 3: mrrp");
+          reportIfCurrent(requestId, error, "unable to copy terminal selection 3:");
         }
         focusIfCurrent(requestId);
       };
@@ -669,7 +669,7 @@ export function TerminalViewport({
             { x: event.clientX, y: event.clientY },
           );
         } catch (error) {
-          reportIfCurrent(requestId, error, "unable to open the terminal context menu 3: mrow");
+          reportIfCurrent(requestId, error, "unable to open the terminal context menu 3:");
           focusIfCurrent(requestId);
           return;
         }
@@ -786,10 +786,7 @@ export function TerminalViewport({
         if (!latestTerminal) return;
         if (isTerminalUrl(text)) {
           if (!localApi) {
-            writeSystemMessage(
-              latestTerminal,
-              "mrrp, opening links is unavailable in this browser.",
-            );
+            writeSystemMessage(latestTerminal, "opening links is unavailable in this browser 3:");
             return;
           }
           const fallbackToBrowser = () => {
@@ -810,7 +807,7 @@ export function TerminalViewport({
             toastManager.add(
               stackedThreadToast({
                 type: "error",
-                title: "unable to open link 3: mrrp",
+                title: "unable to open link 3:",
                 description: error instanceof Error ? error.message : "An error occurred.",
               }),
             );
@@ -1412,7 +1409,7 @@ export default function ThreadTerminalDrawer({
           />
         ) : null}
         <div className="flex min-h-0 flex-1 flex-col items-center justify-center gap-3 px-4 py-6 text-center text-sm text-muted-foreground">
-          <p>no terminal sessions for this thread yet, nya~</p>
+          <p>no terminal sessions for this thread yet ^w^</p>
           <Button size="xs" variant="outline" onClick={onNewTerminalAction}>
             {newTerminalActionLabel}
           </Button>

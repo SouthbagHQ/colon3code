@@ -32,7 +32,7 @@ export function LocalEnvironmentSetting() {
     try {
       await setEnabled(!enabled);
     } catch (cause) {
-      setError(cause instanceof Error ? cause.message : "couldn't change this setting 3: mrrp");
+      setError(cause instanceof Error ? cause.message : "couldn't change this setting 3:");
       setIsUpdating(false);
     }
   };
@@ -43,8 +43,8 @@ export function LocalEnvironmentSetting() {
         {...searchableSetting("local-environment")}
         description={
           enabled
-            ? "purr, run agents on this computer. turn off to use :3 Code only with remote environments."
-            : "turned off, mrrp. agents only run in remote environments."
+            ? "run agents on this computer. turn off to use :3 Code only with remote environments."
+            : "turned off. agents only run in remote environments ^w^"
         }
         control={
           <Switch
@@ -66,12 +66,12 @@ export function LocalEnvironmentSetting() {
         <AlertDialogPopup>
           <AlertDialogHeader>
             <AlertDialogTitle>
-              {enabled ? "mrrp, turn off local environment?" : "turn on local environment? ^w^"}
+              {enabled ? "turn off local environment? :3" : "turn on local environment? ^w^"}
             </AlertDialogTitle>
             <AlertDialogDescription>
               {enabled
-                ? "mrow, :3 Code will restart without running a server on this computer. any agents and terminals running here will stop, and other devices will no longer be able to connect to this computer. your projects, history, and remote environments are unaffected, nya~"
-                : "meow, :3 Code will restart and start running a server on this computer again, purr."}
+                ? ":3 Code will restart without running a server on this computer. any agents and terminals running here will stop, and other devices will no longer be able to connect to this computer. your projects, history, and remote environments are unaffected"
+                : ":3 Code will restart and start running a server on this computer again."}
             </AlertDialogDescription>
           </AlertDialogHeader>
           {error ? <p className="px-6 pb-4 text-sm text-destructive">{error}</p> : null}

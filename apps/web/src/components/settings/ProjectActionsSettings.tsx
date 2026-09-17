@@ -122,7 +122,7 @@ export function ProjectActionsSettings() {
         setRequest({
           scriptId: null,
           initial: payload,
-          error: error instanceof Error ? error.message : "failed to import action 3: mrrp",
+          error: error instanceof Error ? error.message : "failed to import action 3:",
         });
       }
     },
@@ -136,7 +136,7 @@ export function ProjectActionsSettings() {
         settingKeys={["defaultProjectScripts"]}
         mixed={mixed}
         title="actions"
-        description="meow, commands that run in this project's checkout or its worktree, with optional shortcuts."
+        description="commands that run in this project's checkout or its worktree, with optional shortcuts :3"
         onResetOverride={() => void persist(() => null)}
         control={
           <div className="flex flex-wrap items-center gap-1.5">
@@ -160,7 +160,8 @@ export function ProjectActionsSettings() {
                   <MenuGroup>
                     <MenuGroupLabel>import from t3.json</MenuGroupLabel>
                     <p className="px-2 pb-2 text-pretty text-sm text-muted-foreground">
-                      add actions declared by this checkout without editing them first, nya~
+                      {" "}
+                      add actions declared by this checkout without editing them first :3
                     </p>
                   </MenuGroup>
                   <MenuSeparator />
@@ -196,7 +197,7 @@ export function ProjectActionsSettings() {
       {mixed ? (
         <SettingsRow
           title="different actions across environments"
-          description="mrrp, choose one environment to edit its list. adding an action here adds it on every selected environment."
+          description="choose one environment to edit its list. adding an action here adds it on every selected environment ^w^"
         />
       ) : (
         <ProjectActionsList
@@ -208,8 +209,8 @@ export function ProjectActionsSettings() {
       )}
       {t3File.status === "invalid" ? (
         <SettingsRow
-          title="t3.json is invalid 3: mrow"
-          description="a t3.json exists in this checkout but fails to parse, so every action and icon it declares is ignored. check the JSON syntax and icon values, mrrp."
+          title="t3.json is invalid 3:"
+          description="a t3.json exists in this checkout but fails to parse, so every action and icon it declares is ignored. check the JSON syntax and icon values :3"
           className="text-warning"
         />
       ) : null}

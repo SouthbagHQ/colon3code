@@ -54,9 +54,9 @@ export async function writeUsagePrices(input: {
           result =
             saved._tag === "Success"
               ? { status: "saved" }
-              : { status: "failed", error: "could not save 3: try again, mrrp" };
+              : { status: "failed", error: "could not save 3: try again" };
         } catch {
-          result = { status: "failed", error: "could not save 3: try again, mrrp" };
+          result = { status: "failed", error: "could not save 3: try again" };
         }
       }
       input.onResult(target.environmentId, result);

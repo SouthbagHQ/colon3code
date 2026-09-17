@@ -57,7 +57,7 @@ it("ignores a stale request after a newer request starts", () => {
 });
 
 it("reports unavailable capture support without browser globals", () => {
-  expect(snapShotUnavailableMessage(false)).toBe("only available in the desktop app, nya~");
+  expect(snapShotUnavailableMessage(false)).toBe("only available in the desktop app ;3");
 });
 
 it("describes Niri setup without claiming a global shortcut is registered", () => {
@@ -86,7 +86,7 @@ it("distinguishes Hyprland helper setup, action registration, and verified short
     hyprlandHelper: { status: "not-installed", message: "install helper" },
   };
   expect(snapShotSetupButtonLabel(state)).toBe("set up Hyprland capture");
-  expect(snapShotStatus(state, false)).toBe("meow, turn this on to set up snapshots.");
+  expect(snapShotStatus(state, false)).toBe("turn this on to set up snapshots :3");
   expect(snapShotStatus(state, true)).toContain("install the capture helper");
   expect(snapShotFeedbackUnavailableMessage(state)).toContain("install or update");
   const ready = {
@@ -130,8 +130,8 @@ it.each(["gnome-extension", "niri", "screenshot-portal", "picker"] as const)(
     };
 
     expect(DEFAULT_CLIENT_SETTINGS.snapShotEnabled).toBe(false);
-    expect(snapShotStatus(state, false)).toBe("meow, turn this on to set up snapshots.");
-    expect(snapShotStatus(state, true)).toBe("capture needs attention, mrrp");
+    expect(snapShotStatus(state, false)).toBe("turn this on to set up snapshots :3");
+    expect(snapShotStatus(state, true)).toBe("capture needs attention ^w^");
   },
 );
 
@@ -320,7 +320,7 @@ it("hides macOS setup only while permissions and the shortcut are all in place",
     message: "Allow Accessibility in System Settings, then restart :3 Code.",
   };
   expect(snapShotSetupComplete(revoked, true)).toBe(false);
-  expect(snapShotStatus(revoked, true)).toBe("capture needs attention, mrrp");
+  expect(snapShotStatus(revoked, true)).toBe("capture needs attention ^w^");
   expect(snapShotSetupButtonLabel(revoked)).toBe("continue setup");
   expect(snapShotSetupComplete({ ...revoked, message: null }, false)).toBe(true);
   expect(

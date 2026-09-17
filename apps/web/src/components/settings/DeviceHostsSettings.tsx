@@ -65,7 +65,7 @@ export function DeviceHostsSettings(props: { environmentId: EnvironmentId | null
       } else {
         toastManager.add({
           type: "error",
-          title: "device hosts not saved on all environments 3: mrrp",
+          title: "device hosts not saved on all environments 3:",
           description: `could not update ${failed.map((environment) => environment.label).join(", ")}.`,
         });
       }
@@ -79,7 +79,7 @@ export function DeviceHostsSettings(props: { environmentId: EnvironmentId | null
       title="device hosts"
       serverScoped
       settingKeys={["deviceHosts"]}
-      description="mrrp, add remote machines with simulator or emulator runtimes installed, and the selected environments will connect over SSH and set up device tools automatically."
+      description="add remote machines with simulator or emulator runtimes installed, and the selected environments will connect over SSH and set up device tools automatically ;3"
       control={
         <Button
           size="sm"
@@ -97,7 +97,8 @@ export function DeviceHostsSettings(props: { environmentId: EnvironmentId | null
       <div className="pt-3 pb-2">
         {!props.environmentId ? (
           <p className="text-sm text-muted-foreground">
-            connect a selected environment to manage device hosts, nya~
+            {" "}
+            connect a selected environment to manage device hosts ^w^
           </p>
         ) : (
           <>
@@ -122,11 +123,11 @@ export function DeviceHostsSettings(props: { environmentId: EnvironmentId | null
                     toastManager.add({
                       type: failed.length ? "error" : "success",
                       title: failed.length
-                        ? `${host.label}: ${failed.length} of ${targets.length} environments failed 3: mrow`
+                        ? `${host.label}: ${failed.length} of ${targets.length} environments failed 3:`
                         : `${host.label}: connection checks passed :3`,
                       description: failed.length
                         ? `could not connect from ${failed.map((target) => target.label).join(", ")}.`
-                        : "connected or already available locally on each selected environment, purr.",
+                        : "connected or already available locally on each selected environment ;3",
                     });
                     return results;
                   }}

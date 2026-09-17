@@ -122,8 +122,8 @@ function getProviderUpdatedTitle(provider: Pick<ServerProvider, "driver" | "vers
 
 function getProviderUpdatedDescription(providerCount: number): string {
   return providerCount === 1
-    ? "new sessions will use the updated provider, purr"
-    : "new sessions will use the updated providers, purr";
+    ? "new sessions will use the updated provider ^w^"
+    : "new sessions will use the updated providers ;3";
 }
 
 function getProviderFailedUpdateTitle(
@@ -240,7 +240,7 @@ export function getProviderUpdateInitialToastView(input: {
     title: getProviderUpdateInitialToastTitle(input.updateProviders),
     description:
       input.oneClickProviders.length > 0
-        ? "install the update now or review provider settings, nya~"
+        ? "install the update now or review provider settings :3"
         : `${formatProviderList(input.updateProviders)} can be updated from provider settings.`,
   };
 }
@@ -254,7 +254,7 @@ function getProviderUpdateRunningToastView(providerCount: number): ProviderUpdat
     phase: "running",
     type: "loading",
     title: providerCount === 1 ? "updating provider" : "updating providers",
-    description: "running provider update command, purr",
+    description: "running provider update command :3",
   };
 }
 
@@ -299,7 +299,7 @@ export function getProviderUpdateProgressToastView(input: {
           : "providers still need updates 3:",
       description: `${formatProviderList(unchangedProviders)} ${
         unchangedProviders.length === 1 ? "still appears" : "still appear"
-      } outdated, mrrp. check provider settings for details.`,
+      } outdated. check provider settings for details :3`,
     };
   }
 
@@ -466,7 +466,7 @@ export function getProviderUpdateSidebarPillView(
           : `${unchangedProviders.length} providers still need updates 3:`,
       description: `${formatProviderList(unchangedProviders)} ${
         unchangedProviders.length === 1 ? "still appears" : "still appear"
-      } outdated, mrrp. review provider settings for details.`,
+      } outdated. review provider settings for details :3`,
       dismissible: true,
     });
   }
@@ -535,7 +535,7 @@ function getFailedProviderUpdateDescription(providers: ReadonlyArray<ServerProvi
       return provider.updateState.message;
     }
   }
-  return `${formatProviderList(providers)} failed to update 3: check provider settings for details, mrrp`;
+  return `${formatProviderList(providers)} failed to update 3: check provider settings for details`;
 }
 
 // ===========================================================================

@@ -215,7 +215,7 @@ function itemSummary({
   }
 
   if (item.status !== "available") {
-    return <span>mrrp, not available on this server: {item.installHint}</span>;
+    return <span>not available on this server: {item.installHint}</span>;
   }
 
   if (auth) {
@@ -240,7 +240,7 @@ function itemSummary({
     if (auth.status === "unauthenticated") {
       return (
         <span>
-          mrrp, {item.label} is not authenticated on this server. sign in or configure credentials
+          {item.label} is not authenticated on this server. sign in or configure credentials :3
           using the{" "}
           <code className="rounded bg-muted px-1 py-px text-[11px]">{item.executable}</code> tool on
           the server host to enable change request features.
@@ -370,7 +370,7 @@ function GitFetchIntervalSettings() {
             <PolicyTooltip>
               this interval is configured for Git only. the shared background activity policy still
               decides whether Git refreshes may run when the timer fires. custom intervals appear as
-              advanced in general settings, nya~
+              advanced in general settings ^w^
             </PolicyTooltip>
             <span
               className={cn(
@@ -481,14 +481,13 @@ function EmptySourceControlDiscovery({
         </EmptyMedia>
         <EmptyHeader>
           <EmptyTitle>
-            {hasError
-              ? "could not scan the server environment 3: mrrp"
-              : "nothing detected yet, nya~"}
+            {hasError ? "could not scan the server environment 3:" : "nothing detected yet :3"} 3:
           </EmptyTitle>
           <EmptyDescription>
             {hasError
               ? error
-              : "meow, install Git on the server, add optional hosting integrations or credentials your workspace needs, then rescan."}
+              : "install Git on the server, add optional hosting integrations or credentials your workspace needs, then rescan."}{" "}
+            ^w^
           </EmptyDescription>
         </EmptyHeader>
         <EmptyContent>
@@ -551,8 +550,7 @@ export function SourceControlSettingsPanel() {
       {environmentId === null ? (
         <SettingsSection id={searchableSetting("source-control").id} title="server environment">
           <p className="px-4 py-3 text-sm text-muted-foreground">
-            mrrp, connect an environment to inspect its version control tools and hosting
-            integrations.
+            connect an environment to inspect its version control tools and hosting ;3 integrations.
           </p>
         </SettingsSection>
       ) : isInitialScanPending ? (

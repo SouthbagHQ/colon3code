@@ -68,7 +68,7 @@ export function useDirectoryEntries(environmentId: EnvironmentId, cwd: string) {
             setErrors((previous) =>
               new Map(previous).set(
                 directoryPath,
-                cause instanceof Error ? cause.message : "unable to load folder 3: mrrp",
+                cause instanceof Error ? cause.message : "unable to load folder 3:",
               ),
             );
           }

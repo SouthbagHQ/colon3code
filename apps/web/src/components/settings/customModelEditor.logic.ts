@@ -197,16 +197,16 @@ export function validateDraft(draft: CustomModelDraft): string | null {
   for (const [index, descriptor] of draft.descriptors.entries()) {
     const position = `option ${index + 1}`;
     const id = descriptor.id.trim();
-    if (!id) return `mrrp, ${position} needs an id.`;
+    if (!id) return `${position} needs an id ;3`;
     if (seenIds.has(id)) return `${position}: id "${id}" is used twice.`;
     seenIds.add(id);
     if (!descriptor.label.trim()) return `${position} needs a label.`;
     if (descriptor.type !== "select") continue;
-    if (descriptor.choices.length === 0) return `${position} needs at least one choice, mrow.`;
+    if (descriptor.choices.length === 0) return `${position} needs at least one choice :3`;
     const seenChoices = new Set<string>();
     for (const choice of descriptor.choices) {
       const choiceId = choice.id.trim();
-      if (!choiceId) return `mrrp, ${position} has a choice without a value.`;
+      if (!choiceId) return `${position} has a choice without a value.`;
       if (seenChoices.has(choiceId)) {
         return `${position}: choice "${choiceId}" is used twice.`;
       }

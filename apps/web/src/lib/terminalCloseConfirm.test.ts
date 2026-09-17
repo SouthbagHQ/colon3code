@@ -63,7 +63,7 @@ describe("terminal close confirmation", () => {
     expect(confirmMock).toHaveBeenCalledWith(
       [
         "close 2 terminals?",
-        'this stops their running processes and clears their histories, mrow: "Terminal 1", "Development server".',
+        'this stops their running processes and clears their histories 3: "Terminal 1", "Development server"',
       ].join("\n"),
       { variant: "destructive" },
     );

@@ -32,16 +32,15 @@ export type ProviderStatusKey = keyof typeof PROVIDER_STATUS_STYLES;
 export function getProviderSummary(provider: ServerProvider | undefined) {
   if (!provider) {
     return {
-      headline: "checking provider status, meow",
-      detail: "waiting for the server to report installation and authentication details, purr.",
+      headline: "checking provider status :3",
+      detail: "waiting for the server to report installation and authentication details :3",
     };
   }
   if (!provider.enabled || provider.status === "disabled") {
     return {
       headline: "disabled",
       detail:
-        provider.message ??
-        "this provider is installed but disabled for new sessions in :3 Code, nya~",
+        provider.message ?? "this provider is installed but disabled for new sessions in :3 Code",
     };
   }
   if (!provider.installed) {
@@ -61,7 +60,7 @@ export function getProviderSummary(provider: ServerProvider | undefined) {
       headline: "needs attention",
       detail:
         provider.message ??
-        "mrrp, the provider is installed, but the server could not fully verify it.",
+        "the provider is installed, but the server could not fully verify it 3:",
     };
   }
   if (provider.status === "error") {
@@ -120,8 +119,8 @@ export function getProviderVersionAdvisoryPresentation(
     detail:
       advisory.message ??
       (versionLabel
-        ? `${label}: install ${versionLabel}, meow.`
-        : `${label}: install the latest provider version, meow.`),
+        ? `${label}: install ${versionLabel}`
+        : `${label}: install the latest provider version :3`),
     updateCommand: advisory.updateCommand,
     emphasis: "normal" as const,
   };

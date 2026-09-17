@@ -99,12 +99,12 @@ const COMING_SOON_DRIVER_OPTIONS: readonly ComingSoonDriverOption[] = [
  * Returns a user-facing error string, or `null` if valid.
  */
 function validateInstanceId(id: string, existing: ReadonlySet<string>): string | null {
-  if (id.length === 0) return "mrrp, instance ID is required.";
+  if (id.length === 0) return "instance ID is required.";
   if (id.length > 64) return "instance ID must be 64 characters or fewer.";
   if (!INSTANCE_ID_PATTERN.test(id)) {
     return "instance ID must start with a letter and use only letters, digits, '-', or '_'.";
   }
-  if (existing.has(id)) return `an instance named '${id}' already exists, mrow.`;
+  if (existing.has(id)) return `an instance named '${id}' already exists.`;
   return null;
 }
 
@@ -208,14 +208,14 @@ export function AddProviderInstanceDialog({
       updateSettings({ providerInstances: nextMap });
       toastManager.add({
         type: "success",
-        title: "provider instance added :3 purr",
+        title: "provider instance added :3",
         description: `${driverOption.label} instance '${instanceId}' was added.`,
       });
       onOpenChange(false);
     } catch (error) {
       toastManager.add({
         type: "error",
-        title: "could not add provider instance 3: mrrp",
+        title: "could not add provider instance 3:",
         description: error instanceof Error ? error.message : "update failed.",
       });
     }
@@ -228,7 +228,7 @@ export function AddProviderInstanceDialog({
           title="add provider instance ^w^"
           description={
             <>
-              mrrp, configure an additional provider instance on {environmentLabel} — for example, a
+              configure an additional provider instance on {environmentLabel} — for example, a ^w^
               second Codex install pointed at a different workspace.
             </>
           }
@@ -311,7 +311,7 @@ export function AddProviderInstanceDialog({
               onChange={(event) => setLabel(event.target.value)}
             />
             <span className="text-[11px] text-muted-foreground">
-              shown in the provider list. optional, nya~
+              shown in the provider list. optional ;3
             </span>
           </label>
 
@@ -330,7 +330,7 @@ export function AddProviderInstanceDialog({
               <span className="text-[11px] text-destructive">{instanceIdError}</span>
             ) : (
               <span className="text-[11px] text-muted-foreground">
-                routing key used by threads and sessions. letters, digits, '-', or '_', meow.
+                routing key used by threads and sessions. letters, digits, '-', or '_' :3
               </span>
             )}
           </label>
@@ -395,7 +395,7 @@ export function AddProviderInstanceDialog({
           ) : wizardStep === 2 ? (
             <div className="grid gap-2">
               <p className="text-sm text-muted-foreground">
-                purr, this driver has no required configuration. you can add the instance now :3
+                this driver has no required configuration. you can add the instance now :3
               </p>
             </div>
           ) : null}

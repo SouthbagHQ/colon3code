@@ -1621,7 +1621,7 @@ function PullRequestsRouteView() {
       ) : !pullRequestsSupported ? (
         <PullRequestsUnavailableState
           title="pull requests unavailable 3:"
-          error="update your :3 Code servers to browse pull requests, mrrp."
+          error="update your :3 Code servers to browse pull requests."
         />
       ) : firstLoad ? (
         <PullRequestListGhost rows={7} />
@@ -1721,7 +1721,7 @@ function PullRequestsRouteView() {
               load more pull requests
             </Button>
           ) : (
-            <span>narrow your search to find more pull requests, nya~</span>
+            <span>narrow your search to find more pull requests ^w^</span>
           )}
         </div>
       ) : null}
@@ -1908,12 +1908,12 @@ function PullRequestsRouteView() {
     void writeTextToClipboard(url, "pull request link").then(
       (didCopy) => {
         if (didCopy)
-          toastManager.add({ type: "success", title: "PR link copied, meow :3", description: url });
+          toastManager.add({ type: "success", title: "PR link copied :3", description: url });
       },
       (error) => {
         toastManager.add({
           type: "error",
-          title: "failed to copy PR link 3: mrrp",
+          title: "failed to copy PR link 3:",
           description: error instanceof Error ? error.message : "an error occurred.",
         });
       },

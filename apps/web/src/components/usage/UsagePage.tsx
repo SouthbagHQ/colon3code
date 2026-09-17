@@ -349,8 +349,8 @@ export function UsagePage() {
             {selectedEnvironments.length === 0 ? (
               <p className="text-sm text-muted-foreground">
                 {environments.length === 0
-                  ? `connect an environment to see ${showingLimits ? "limits" : "usage"}, meow`
-                  : `select an environment to see ${showingLimits ? "limits" : "usage"}, nya~`}
+                  ? `connect an environment to see ${showingLimits ? "limits" : "usage"}`
+                  : `select an environment to see ${showingLimits ? "limits" : "usage"}`}
               </p>
             ) : showingLimits ? (
               <UsageLimitsSection selectedEnvironmentIds={selectedEnvironmentIds} now={limitsNow} />
@@ -503,7 +503,8 @@ export function UsagePage() {
                         {breakdownModels.length === 0 ? (
                           <tr>
                             <td colSpan={4} className="py-6 text-center text-muted-foreground">
-                              no activity in this window, purr
+                              {" "}
+                              no activity in this window :3
                             </td>
                           </tr>
                         ) : (
@@ -565,7 +566,8 @@ export function UsagePage() {
                               colSpan={activeProviders.length + 3}
                               className="py-6 text-center text-muted-foreground"
                             >
-                              no activity in this window, purr
+                              {" "}
+                              no activity in this window :3
                             </td>
                           </tr>
                         ) : (
@@ -795,7 +797,8 @@ function UsageEnvironmentFilter({
           ) : null}
           {showUsageStatus && isPartial ? (
             <p className="px-2 py-2 text-xs text-muted-foreground">
-              totals are partial while selected environments scan, purr
+              {" "}
+              totals are partial while selected environments scan :3
             </p>
           ) : null}
           {showUsageStatus ? (

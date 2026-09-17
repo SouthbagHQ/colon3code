@@ -150,7 +150,7 @@ function WorkspaceImagePreview(props: {
     return (
       <MediaActions source={actionsSource}>
         <div className="flex min-h-0 flex-1 items-center justify-center px-6 text-center text-xs leading-relaxed text-destructive">
-          unable to load workspace image 3: mrow
+          unable to load workspace image 3:
         </div>
       </MediaActions>
     );
@@ -207,7 +207,7 @@ function WorkspaceBrowserPreview(props: {
   if (assetUrl._tag === "Failure") {
     return (
       <div className="flex min-h-0 flex-1 items-center justify-center px-6 text-center text-xs leading-relaxed text-destructive">
-        unable to load file preview 3: mrrp
+        unable to load file preview 3:
       </div>
     );
   }
@@ -314,7 +314,7 @@ function WorkspaceAudioPreview(props: {
   if (assetUrl._tag === "Failure" || (url !== null && failedUrl === url)) {
     return (
       <FileSurfaceFailure
-        message="unable to load audio 3: mrow"
+        message="unable to load audio 3:"
         onRetry={() => {
           setFailedUrl(null);
           void refreshAssetUrl().catch(() => undefined);
@@ -1068,7 +1068,7 @@ export default function FilePreviewPanel({
       toastManager.add(
         stackedThreadToast({
           type: "error",
-          title: "unable to open file in browser 3: mrrp",
+          title: "unable to open file in browser 3:",
           description: error instanceof Error ? error.message : "an error occurred.",
         }),
       );
@@ -1163,7 +1163,6 @@ export default function FilePreviewPanel({
       file.data?.truncated ? (
         <div className="shrink-0 border-b border-warning/20 bg-warning-surface px-3 py-1.5 text-[11px] text-warning-foreground">
           preview limited to the first 1 MB of a {file.data.byteLength.toLocaleString()} byte file,
-          meow
         </div>
       ) : null}
       <div className="flex min-h-0 flex-1 overflow-hidden">

@@ -79,10 +79,7 @@ export function resolveSettingsScope(
   });
 
   if (search.checkout && !search.project) {
-    return unavailable(
-      "project-required",
-      "select a project to choose one of its checkouts, meow.",
-    );
+    return unavailable("project-required", "select a project to choose one of its checkouts ;3");
   }
 
   const environment = environments.find((candidate) => candidate.environmentId === search.machine);
@@ -102,8 +99,8 @@ export function resolveSettingsScope(
       return unavailable(
         "checkout-missing",
         search.checkout
-          ? "this checkout is no longer available in the selected project and environment, mrrp."
-          : "this project has no checkout on this environment, nya~",
+          ? "this checkout is no longer available in the selected project and environment 3:"
+          : "this project has no checkout on this environment ;3",
       );
     }
     if (search.checkout) {

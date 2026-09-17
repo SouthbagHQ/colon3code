@@ -116,7 +116,7 @@ export function useAutoBalanceUpdateBanner(
                   <div className="text-muted-foreground">
                     {machine.connected
                       ? `ready to update to ${machine.targetVersion} :3`
-                      : "reconnect this machine to update, mrrp"}
+                      : "reconnect this machine to update :3"}
                   </div>
                 )}
               </div>

@@ -262,7 +262,8 @@ export function ThemeSearchSection({
           search community themes ^w^
         </h3>
         <p className="mt-0.5 text-muted-foreground text-xs">
-          find open-source themes from Open VSX, meow.
+          {" "}
+          find open-source themes from Open VSX ^w^
         </p>
       </div>
       <InputGroup>
@@ -278,7 +279,7 @@ export function ThemeSearchSection({
             if (event.key === "Enter" && !isSearching && installingId === null)
               void runSearch(query.trim());
           }}
-          placeholder="search themes, nya..."
+          placeholder="search themes. ^w^"
           size="lg"
           type="search"
           value={query}
@@ -436,8 +437,9 @@ export function ThemeSearchSection({
           <AlertDialogHeader>
             <AlertDialogTitle>update “{pendingUpdate?.name}”?</AlertDialogTitle>
             <AlertDialogDescription>
-              mrrp, this replaces its installed variants, including any local edits. variants no
-              longer in the extension will be removed.
+              {" "}
+              this replaces its installed variants, including any local edits. variants no longer in
+              the extension will be removed 3:
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>

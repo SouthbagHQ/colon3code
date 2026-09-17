@@ -171,7 +171,7 @@ it.each(["niri", "hyprland"] as const)(
     await finish(bridge.applySnapShotConfig.mock.results[0]!.value);
     expect(bridge.applySnapShotConfig).toHaveBeenCalledExactlyOnceWith(custom.id);
     expect(toastManager.add).toHaveBeenCalledWith(
-      expect.objectContaining({ description: "use Ctrl+Alt+Y from another app, nya~" }),
+      expect.objectContaining({ description: "use Ctrl+Alt+Y from another app ^w^" }),
     );
   },
 );
@@ -257,7 +257,7 @@ it("keeps read failures actionable with technical details in Advanced, then perm
   await finish(bridge.previewSnapShotConfig.mock.results[0]!.value);
   const failed = render();
   expect(visitElements(failed, (element) => element.props.role === "alert")?.props.children).toBe(
-    "mrrp, couldn't prepare the changes. check advanced for help.",
+    "couldn't prepare the changes. check advanced for help 3:",
   );
   const advanced = visitElements(failed, (element) => element.type === "details");
   expect(

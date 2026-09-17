@@ -149,14 +149,14 @@ export function shouldOpenDefaultBrowserProfileFromMenuClick(
 }
 
 const SURFACE_DISABLED_REASONS = {
-  browser: "mrrp, browser previews are only available in the :3 Code desktop app.",
-  terminal: "terminal surfaces are only available from a project thread, nya~",
-  files: "meow, files are only available when a project is open.",
+  browser: "browser previews are only available in the :3 Code desktop app.",
+  terminal: "terminal surfaces are only available from a project thread ^w^",
+  files: "files are only available when a project is open ^w^",
   diff: "diff is only available for server threads in Git repositories 3:",
-  pullRequest: "this thread's branch has no pull request yet, mrrp",
+  pullRequest: "this thread's branch has no pull request yet ^w^",
   pullRequests: "no linked pull requests are available for this thread 3:",
-  agents: "agents are only available from a thread, nya~",
-  device: "mrow, devices are only available from a thread.",
+  agents: "agents are only available from a thread :3",
+  device: "devices are only available from a thread :3",
 } as const;
 
 /** Overlays that must win over the launcher's letter shortcuts. */
@@ -173,10 +173,10 @@ const LAUNCHER_SHORTCUT_BLOCKING_LAYERS = [
 
 /** One-line unavailability hints for the empty-state rows. */
 const SURFACE_UNAVAILABLE_HINTS = {
-  browser: "only available in the desktop app, mrrp",
+  browser: "only available in the desktop app ;3",
   terminal: "available when a project is open.",
   files: "available when a project is open.",
-  diff: "available for Git repositories, nya~",
+  diff: "available for Git repositories ^w^",
   pullRequest: "no pull request on this branch yet 3:",
   pullRequests: "no linked pull requests available",
   agents: "available from a thread.",
@@ -507,9 +507,7 @@ function RightPanelEmptyState(props: {
       )}
     >
       <div className="w-full max-w-xs">
-        <h3 className="mb-3 text-center font-medium text-foreground text-sm">
-          open a surface, meow
-        </h3>
+        <h3 className="mb-3 text-center font-medium text-foreground text-sm"> open a surface ;3</h3>
         <div className="flex flex-col gap-0.5">
           {actions.map((action) =>
             action.available ? (

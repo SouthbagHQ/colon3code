@@ -199,7 +199,7 @@ export function PreviewView({
         if (error instanceof BrowserSettingsReadError) {
           toastManager.add({
             type: "error",
-            title: "unable to open browser 3: mrow",
+            title: "unable to open browser 3:",
             description: error.message,
           });
         }
@@ -331,7 +331,7 @@ export function PreviewView({
     void operation(runtimeTabId).catch((error) => {
       toastManager.add({
         type: "error",
-        title: "unable to update popped-out preview 3: mrrp",
+        title: "unable to update popped-out preview 3:",
         description: error instanceof Error ? error.message : "an error occurred.",
       });
     });
@@ -355,7 +355,7 @@ export function PreviewView({
                   stackedThreadToast({
                     type: "error",
                     title: "unable to copy recording path 3:",
-                    description: "clipboard API unavailable, mrrp",
+                    description: "clipboard API unavailable 3:",
                     actionProps: revealAction,
                   }),
                 );
@@ -394,7 +394,7 @@ export function PreviewView({
                 toastId,
                 stackedThreadToast({
                   type: "success",
-                  title: "recording saved :3 purr",
+                  title: "recording saved :3",
                   actionProps: revealAction,
                   data: {
                     secondaryActionProps: {
@@ -411,7 +411,7 @@ export function PreviewView({
             toastId = toastManager.add(
               stackedThreadToast({
                 type: "success",
-                title: "recording saved :3 purr",
+                title: "recording saved :3",
                 actionProps: revealAction,
                 data: {
                   secondaryActionProps: {
@@ -426,7 +426,7 @@ export function PreviewView({
           (error) => {
             toastManager.add({
               type: "error",
-              title: "unable to stop recording 3: mrow",
+              title: "unable to stop recording 3:",
               description: error instanceof Error ? error.message : "an error occurred.",
             });
           },
@@ -457,7 +457,7 @@ export function PreviewView({
 
           const updateScreenshotToast = (
             type: "success" | "error" = "success",
-            title = "screenshot saved :3 meow",
+            title = "screenshot saved :3",
             description?: string,
           ) => {
             toastManager.update(
@@ -543,7 +543,7 @@ export function PreviewView({
           toastId = toastManager.add(
             stackedThreadToast({
               type: "success",
-              title: "screenshot saved :3 meow",
+              title: "screenshot saved :3",
               actionProps: {
                 children: "copy image",
                 onClick: copyImage,
@@ -569,7 +569,7 @@ export function PreviewView({
         (error) => {
           toastManager.add({
             type: "error",
-            title: "unable to capture screenshot 3: mrrp",
+            title: "unable to capture screenshot 3:",
             description: error instanceof Error ? error.message : "an error occurred.",
           });
         },
@@ -616,7 +616,7 @@ export function PreviewView({
               title: "could not capture the picked element 3:",
               // The send path reports its own outcome, so only say what this
               // handler knows: the crop was dropped.
-              description: "the annotation was kept without the screenshot, mrow",
+              description: "the annotation was kept without the screenshot ;3",
             }),
           );
         }
@@ -736,7 +736,7 @@ export function PreviewView({
         pickDisabled={!tabId || isUnreachable}
         pickDisabledReason={
           isUnreachable
-            ? "page didn't load — pick unavailable until the page renders, mrrp"
+            ? "page didn't load — pick unavailable until the page renders 3:"
             : undefined
         }
         leadingActions={

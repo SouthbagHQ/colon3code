@@ -87,8 +87,7 @@ export function T3ConnectEnvironmentRow(props: {
               </p>
               <p className="mt-4 max-w-xl text-[0.8125rem] leading-[1.125rem] text-muted-foreground">
                 T3 Connect access will be revoked, any managed tunnel will be removed, and a host
-                space will become available. local connections on your devices are not changed,
-                mrrp.
+                space will become available. local connections on your devices are not changed :3
               </p>
               <div className="mt-4 flex justify-end gap-2">
                 <Button
@@ -157,7 +156,7 @@ export function T3ConnectUserProfilePage() {
       environmentsState.refresh();
       toastManager.add({
         type: "success",
-        title: "server deregistered, meow :3",
+        title: "server deregistered :3",
         description: "T3 Connect access was revoked and a host space is now available.",
       });
       return;
@@ -175,7 +174,7 @@ export function T3ConnectUserProfilePage() {
     });
     toastManager.add({
       type: "error",
-      title: "could not deregister server 3: mrrp",
+      title: "could not deregister server 3:",
       description: message,
       data: traceId
         ? {
@@ -202,7 +201,7 @@ export function T3ConnectUserProfilePage() {
   return (
     <ClerkUserProfilePage
       title="T3 Connect"
-      description="environments registered to your account, purr. connections on this device are managed in settings."
+      description="environments registered to your account. connections on this device are managed in settings :3"
       action={
         <ClerkUserProfileRefreshButton
           disabled={deregisteringEnvironmentId !== null}
@@ -223,7 +222,7 @@ export function T3ConnectUserProfilePage() {
 
         {isInitialLoad ? (
           <p className="border-t py-4 text-[0.8125rem] text-muted-foreground" role="status">
-            loading environments… purr
+            loading environments… :3
           </p>
         ) : environments.length > 0 ? (
           <ul className="border-t">

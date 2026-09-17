@@ -73,7 +73,7 @@ function useServerUpdate() {
       }
       toastManager.add({
         type: "success",
-        title: `${serverLabel} updated :3 purr`,
+        title: `${serverLabel} updated :3`,
         description:
           selfUpdate === "desktop-managed"
             ? `desktop app relaunched on ${result.value.targetVersion}.`
@@ -121,7 +121,7 @@ export function ServerUpdatesAction({
       if (desktopTargets.length > 0) {
         const confirmed =
           (await requestConfirmDialog(
-            `update the :3 Code desktop apps on ${desktopTargets.map((target) => target.serverLabel).join(", ")}? they will close and relaunch on those machines, nya~`,
+            `update the :3 Code desktop apps on ${desktopTargets.map((target) => target.serverLabel).join(", ")}? they will close and relaunch on those machines ;3`,
           )) ?? true;
         if (!confirmed) return;
       }
@@ -210,14 +210,14 @@ export function ServerUpdateAction({
     onCopy: ({ command }) => {
       toastManager.add({
         type: "success",
-        title: "update command copied :3 purr",
+        title: "update command copied :3",
         description: `run \`${command}\` on ${serverLabel} to update it.`,
       });
     },
     onError: (error) => {
       toastManager.add({
         type: "error",
-        title: "could not copy update command 3: mrrp",
+        title: "could not copy update command 3:",
         description: error.message,
       });
     },
@@ -233,7 +233,7 @@ export function ServerUpdateAction({
       // remote machine installs without asking anyone there.
       const confirmed =
         (await requestConfirmDialog(
-          `update the :3 Code desktop app that runs the ${serverLabel}? it will close and relaunch on that machine, nya~`,
+          `update the :3 Code desktop app that runs the ${serverLabel}? it will close and relaunch on that machine :3`,
         )) ?? true;
       if (!confirmed) {
         return;

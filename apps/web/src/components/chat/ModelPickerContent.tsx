@@ -797,7 +797,7 @@ export const ModelPickerContent = memo(function ModelPickerContent(props: {
               ? {
                   disabledInstanceIds: lockedDisabledInstanceIds,
                   getDisabledInstanceTooltip: (entry: ProviderInstanceEntry) =>
-                    `${entry.displayName} is unavailable in this thread, mrrp. start a new thread to switch providers.`,
+                    `${entry.displayName} is unavailable in this thread. start a new thread to switch providers 3:`,
                 }
               : {})}
           />
@@ -850,7 +850,7 @@ export const ModelPickerContent = memo(function ModelPickerContent(props: {
                   ref={searchInputRef}
                   className="[&_input]:h-6.5 [&_input]:font-sans [&_input]:leading-6.5"
                   inputClassName="rounded-none bg-transparent text-sm"
-                  placeholder="search models... meow"
+                  placeholder="search models. :3"
                   showTrigger={false}
                   startAddon={
                     <SearchIcon className="-translate-x-0.5 size-4 shrink-0 text-muted-foreground opacity-70" />
@@ -1021,7 +1021,8 @@ export const ModelPickerContent = memo(function ModelPickerContent(props: {
               </div>
             ) : (
               <ComboboxEmpty className="not-empty:py-6 empty:h-0 text-xs font-normal leading-snug">
-                no models found, mrow
+                {" "}
+                no models found 3:
               </ComboboxEmpty>
             )}
           </div>

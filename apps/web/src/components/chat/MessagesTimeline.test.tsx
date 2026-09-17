@@ -1665,7 +1665,7 @@ describe("MessagesTimeline", () => {
       />,
     );
 
-    expect(markup).toContain("thinking… purr");
+    expect(markup).toContain("thinking… :3");
     expect(markup).toContain("lucide-brain");
     expect(markup).toContain('data-timeline-row-id="live-activity-row"');
   });
@@ -1708,7 +1708,7 @@ describe("MessagesTimeline", () => {
     expect(markup).toContain("running pnpm");
     expect(markup).toContain("lucide-terminal");
     expect(markup).not.toContain("Ran pnpm");
-    expect(markup).not.toContain("thinking… purr");
+    expect(markup).not.toContain("thinking… :3");
     expect(markup).not.toContain('data-timeline-row-kind="thinking"');
   });
 

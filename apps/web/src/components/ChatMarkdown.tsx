@@ -1877,7 +1877,7 @@ const MarkdownFileLink = memo(function MarkdownFileLink({
         toastManager.add(
           stackedThreadToast({
             type: "error",
-            title: "unable to open file 3: mrrp",
+            title: "unable to open file 3:",
             description: error instanceof Error ? error.message : "an error occurred.",
           }),
         );
@@ -1889,7 +1889,7 @@ const MarkdownFileLink = memo(function MarkdownFileLink({
         toastManager.add(
           stackedThreadToast({
             type: "error",
-            title: "unable to open file 3: mrrp",
+            title: "unable to open file 3:",
             description: cause instanceof Error ? cause.message : "an error occurred.",
           }),
         );
@@ -1965,7 +1965,7 @@ const MarkdownFileLink = memo(function MarkdownFileLink({
         toastManager.add(
           stackedThreadToast({
             type: "error",
-            title: "unable to reveal file 3: mrrp",
+            title: "unable to reveal file 3:",
             description: error instanceof Error ? error.message : "an error occurred.",
           }),
         );
@@ -1977,7 +1977,7 @@ const MarkdownFileLink = memo(function MarkdownFileLink({
         toastManager.add(
           stackedThreadToast({
             type: "error",
-            title: "unable to reveal file 3: mrrp",
+            title: "unable to reveal file 3:",
             description: cause instanceof Error ? cause.message : "an error occurred.",
           }),
         );
@@ -2002,7 +2002,7 @@ const MarkdownFileLink = memo(function MarkdownFileLink({
         () => {
           toastManager.add({
             type: "success",
-            title: `${title} copied :3 purr`,
+            title: `${title} copied :3`,
             description: value,
           });
         },
@@ -2287,11 +2287,11 @@ function useChatMarkdownState({
           toastManager.add(
             stackedThreadToast({
               type: "error",
-              title: "media unavailable 3: mrow",
+              title: "media unavailable 3:",
               description:
                 error instanceof Error
                   ? error.message
-                  : "the file could not be loaded, mrrp. it may have been moved or deleted.",
+                  : "the file could not be loaded. it may have been moved or deleted 3:",
             }),
           );
         },
@@ -2446,7 +2446,7 @@ function useChatMarkdownState({
             toastManager.add(
               stackedThreadToast({
                 type: "error",
-                title: "unable to open link in browser 3: mrrp",
+                title: "unable to open link in browser 3:",
                 description: error.message,
               }),
             );
@@ -2992,8 +2992,7 @@ const CHAT_MARKDOWN_COMPONENTS = {
                         operation === "link-pull-request-to-thread"
                           ? "unable to link pull request 3:"
                           : "unable to unlink pull request 3:",
-                      description:
-                        cause instanceof Error ? cause.message : "the request failed, mrrp",
+                      description: cause instanceof Error ? cause.message : "the request failed 3:",
                     }),
                   );
                 }

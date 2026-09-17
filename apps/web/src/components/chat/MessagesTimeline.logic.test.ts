@@ -1993,7 +1993,7 @@ describe("deriveMessagesTimelineRows", () => {
       expect.objectContaining({
         kind: "turn-fold",
         turnId: "turn-1",
-        label: "you stopped after 47s, mrrp",
+        label: "you stopped after 47s 3:",
         expanded: false,
       }),
     ]);

@@ -194,7 +194,7 @@ export const ChatHeader = memo(function ChatHeader({
       setRenaming(null);
       const resolution = resolveRenameCommit({ title, originalTitle: activeThreadTitle });
       if (resolution.action === "reject-empty") {
-        toastManager.add({ type: "warning", title: "thread title cannot be empty, mrrp 3:" });
+        toastManager.add({ type: "warning", title: "thread title cannot be empty 3:" });
         return;
       }
       if (resolution.action === "noop") return;

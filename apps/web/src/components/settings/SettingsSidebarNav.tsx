@@ -246,7 +246,7 @@ export function SettingsSidebarNav({ pathname }: { pathname: string }) {
                 setActiveResultIndex(0);
               }}
               onKeyDown={handleSearchKeyDown}
-              placeholder="search, meow"
+              placeholder="search ^w^"
               aria-label="search settings"
               role="combobox"
               aria-autocomplete="list"
@@ -282,7 +282,8 @@ export function SettingsSidebarNav({ pathname }: { pathname: string }) {
               role="status"
               className="px-2 py-6 text-center text-xs text-sidebar-muted-foreground"
             >
-              no settings found, nya~
+              {" "}
+              no settings found 3:
             </p>
           ) : null}
           {isSearching ? (

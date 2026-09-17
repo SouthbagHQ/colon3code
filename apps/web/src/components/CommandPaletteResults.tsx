@@ -95,7 +95,7 @@ export function CommandPaletteResults(props: CommandPaletteResultsProps) {
         {props.emptyStateMessage ??
           (props.isActionsOnly
             ? "no matching actions 3:"
-            : "no matching commands, projects, or threads, mrrp")}
+            : "no matching commands, projects, or threads :3")}
       </div>
     );
   }

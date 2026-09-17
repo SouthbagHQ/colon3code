@@ -32,7 +32,7 @@ export function feedbackBannerItem(
               (error: unknown) => {
                 toastManager.add({
                   type: "error",
-                  title: "could not copy thread ID, mrow 3:",
+                  title: "could not copy thread ID 3:",
                   description: error instanceof Error ? error.message : "an error occurred.",
                 });
               },

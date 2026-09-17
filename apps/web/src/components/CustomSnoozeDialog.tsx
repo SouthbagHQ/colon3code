@@ -81,8 +81,8 @@ function CustomSnoozeDialog() {
             if (!snoozedUntil) {
               setError(
                 mode === "date"
-                  ? "choose a valid date and time in the future, mrrp"
-                  : "enter a positive duration, nya~",
+                  ? "choose a valid date and time in the future ^w^"
+                  : "enter a positive duration ;3",
               );
               return;
             }

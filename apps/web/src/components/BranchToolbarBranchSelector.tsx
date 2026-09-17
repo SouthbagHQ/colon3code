@@ -95,7 +95,7 @@ interface BranchToolbarBranchSelectorProps {
 }
 
 function toBranchActionErrorMessage(error: unknown): string {
-  return error instanceof Error ? error.message : "an error occurred, mrrp";
+  return error instanceof Error ? error.message : "an error occurred 3:";
 }
 
 export function BranchToolbarBranchSelector({
@@ -365,7 +365,7 @@ export function BranchToolbarBranchSelector({
         if (!didCopy) return;
         toastManager.add({
           type: "success",
-          title: "branch name copied :3 purr",
+          title: "branch name copied :3",
           description: branchName,
         });
       },
@@ -459,7 +459,7 @@ export function BranchToolbarBranchSelector({
         toastManager.add(
           stackedThreadToast({
             type: "error",
-            title: "failed to switch ref 3: mrrp",
+            title: "failed to switch ref 3:",
             description: toBranchActionErrorMessage(squashAtomCommandFailure(checkoutResult)),
           }),
         );
@@ -899,8 +899,9 @@ export function BranchToolbarBranchSelector({
                 }
               />
               <TooltipPopup side="top" className="max-w-72 whitespace-normal leading-tight">
+                {" "}
                 creates the worktree from the latest matching branch on origin instead of your local
-                branch, nya~
+                branch :3
               </TooltipPopup>
             </Tooltip>
           ) : null}

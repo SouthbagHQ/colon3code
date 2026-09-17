@@ -203,7 +203,7 @@ export function SidebarProviderUpdatePill() {
               </Button>
             }
           />
-          <TooltipPopup side="top">dismiss until provider status changes, nya~</TooltipPopup>
+          <TooltipPopup side="top">dismiss until provider status changes :3</TooltipPopup>
         </Tooltip>
       )}
     </div>

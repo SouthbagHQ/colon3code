@@ -37,7 +37,7 @@ export function DiffCommentAnnotation({
   onCancel,
   onComment,
   onDelete,
-  placeholder = "add a comment… meow",
+  placeholder = "add a comment… ^w^",
   submitLabel = "comment",
   pending = false,
   secondaryAction,

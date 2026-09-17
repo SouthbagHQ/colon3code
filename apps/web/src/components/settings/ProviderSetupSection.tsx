@@ -37,24 +37,24 @@ interface ProviderSetupSectionProps {
 }
 
 const AUTH_PHASE_LABELS: Record<ProviderAuthState["phase"], string> = {
-  idle: "meow, sign in with your Google account.",
-  starting: "starting Google sign-in, purr.",
-  waiting: "waiting for Google sign-in, nya~",
+  idle: "sign in with your Google account ;3",
+  starting: "starting Google sign-in :3",
+  waiting: "waiting for Google sign-in :3",
   verifying: "checking Google sign-in and available models.",
   succeeded: "Google sign-in complete :3",
-  failed: "Google sign-in failed 3: mrrp",
-  cancelled: "Google sign-in cancelled, mrow.",
+  failed: "Google sign-in failed 3:",
+  cancelled: "Google sign-in cancelled 3:",
 };
 
 /** API key methods skip the browser, so the phases read as a credential check. */
 const CREDENTIAL_PHASE_LABELS: Record<ProviderAuthState["phase"], string> = {
-  idle: "meow, connect with the credentials in the provider settings.",
-  starting: "checking credentials, purr.",
-  waiting: "checking credentials, purr.",
+  idle: "connect with the credentials in the provider settings :3",
+  starting: "checking credentials :3",
+  waiting: "checking credentials :3",
   verifying: "checking credentials and available models.",
   succeeded: "connected :3",
-  failed: "could not connect with the configured credentials 3: mrrp",
-  cancelled: "connection cancelled, mrow.",
+  failed: "could not connect with the configured credentials 3:",
+  cancelled: "connection cancelled 3:",
 };
 
 /** Read the configured method from the instance config. Unknown values fall back to personal. */
@@ -78,7 +78,7 @@ export function ProviderSetupSection(props: ProviderSetupSectionProps) {
       <SettingsRow
         className="@max-lg/setup:[&>div:first-child]:flex @max-lg/setup:[&>div:first-child]:items-stretch @max-lg/setup:[&>div:first-child]:gap-3"
         title="environment"
-        description="device that runs this provider, nya~"
+        description="device that runs this provider ;3"
         control={
           <div className="flex min-w-0 flex-col gap-2 sm:items-end">
             <span className="text-muted-foreground [overflow-wrap:anywhere]">
@@ -93,11 +93,11 @@ export function ProviderSetupSection(props: ProviderSetupSectionProps) {
         }
       />
       {props.readOnly ? (
-        <SettingsRow title="setup unavailable" description="mrrp, provider setup is read-only." />
+        <SettingsRow title="setup unavailable" description="provider setup is read-only ^w^" />
       ) : props.provider?.setup === undefined ? (
         <SettingsRow
           title="update required"
-          description="update this environment to manage Antigravity, meow."
+          description="update this environment to manage Antigravity ^w^"
         />
       ) : (
         <ProviderSetupActions
@@ -169,7 +169,7 @@ function ProviderSetupActions({
   const authenticated = provider.auth.status === "authenticated";
   const authStatusMessage =
     auth === null
-      ? "reading sign-in status, purr."
+      ? "reading sign-in status :3"
       : authActive || auth.phase === "failed" || auth.phase === "cancelled"
         ? (auth.message ?? phaseLabels[auth.phase])
         : authenticated
@@ -193,11 +193,11 @@ function ProviderSetupActions({
             ? "installed :3"
             : usesCustomBinary
               ? enabled
-                ? "mrrp, the configured Antigravity runtime is unavailable."
+                ? "the configured Antigravity runtime is unavailable 3:"
                 : "the configured Antigravity runtime has not been checked."
               : installation?.totalBytes
                 ? `${Math.ceil(installation.totalBytes / 1_000_000)} MB download.`
-                : "not installed, mrow.";
+                : "not installed ;3";
 
   async function runCommand<A, E>(
     label: string,
@@ -212,13 +212,13 @@ function ProviderSetupActions({
       if (result._tag === "Failure") {
         if (!isAtomCommandInterrupted(result)) {
           const failure = squashAtomCommandFailure(result);
-          setError(failure instanceof Error ? failure.message : "provider setup failed 3: mrrp");
+          setError(failure instanceof Error ? failure.message : "provider setup failed 3:");
         }
         return false;
       }
       return true;
     } catch {
-      setError("provider setup failed 3: mrrp. try again.");
+      setError("provider setup failed 3: try again.");
       return false;
     } finally {
       pendingRef.current = false;
@@ -243,7 +243,7 @@ function ProviderSetupActions({
       setCopiedFlowId(auth?.flowId ?? null);
       setError(null);
     } catch {
-      setError("could not copy the sign-in link 3: mrow. use open sign-in page.");
+      setError("could not copy the sign-in link 3: use open sign-in page.");
     }
   }
 
@@ -260,7 +260,7 @@ function ProviderSetupActions({
 
   async function signOut() {
     const confirmed = await ensureLocalApi().dialogs.confirm(
-      `mrrp, ${usesBrowser ? "sign out of Google" : "disconnect"} for ${provider.displayName ?? "Antigravity"} on ${environmentLabel}? this stops its running threads. thread history is kept, nya~`,
+      `${usesBrowser ? "sign out of Google" : "disconnect"} for ${provider.displayName ?? "Antigravity"} on ${environmentLabel}? this stops its running threads. thread history is kept ^w^`,
     );
     if (confirmed) {
       await runCommand("signing out", () => logoutAuth(target));
@@ -269,7 +269,7 @@ function ProviderSetupActions({
 
   async function removeRuntime() {
     const confirmed = await ensureLocalApi().dialogs.confirm(
-      `mrow, remove the downloaded Antigravity runtime from ${environmentLabel}? Google sign-in and thread history are kept.`,
+      `remove the downloaded Antigravity runtime from ^w^ ${environmentLabel}? Google sign-in and thread history are kept.`,
     );
     if (confirmed) {
       await runCommand("removing runtime", () => removeInstall(target));
@@ -286,13 +286,14 @@ function ProviderSetupActions({
           <div className="space-y-2">
             {usesCustomBinary ? (
               <p className="text-muted-foreground">
-                uses the custom binary path below. installation keeps that path, meow.
+                {" "}
+                uses the custom binary path below. installation keeps that path :3
               </p>
             ) : null}
             {!installed && !provider.setup?.canInstall ? (
               <p className="text-muted-foreground">
-                mrrp, automatic installation unavailable. set a binary path or use another
-                environment.
+                {" "}
+                automatic installation unavailable. set a binary path or use another environment 3:
               </p>
             ) : null}
           </div>
@@ -482,7 +483,8 @@ function ProviderSetupActions({
                   }}
                 >
                   <label htmlFor={`provider-callback-${instanceId}`}>
-                    if the final localhost page does not load, paste its full URL here, nya~
+                    {" "}
+                    if the final localhost page does not load, paste its full URL here :3
                   </label>
                   <Input
                     id={`provider-callback-${instanceId}`}
@@ -511,7 +513,8 @@ function ProviderSetupActions({
               </>
             ) : auth?.phase === "waiting" ? (
               <p className="text-muted-foreground">
-                sign-in is open in another client. complete or cancel it there, meow.
+                {" "}
+                sign-in is open in another client. complete or cancel it there ^w^
               </p>
             ) : null}
           </div>

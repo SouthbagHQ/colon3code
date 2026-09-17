@@ -895,15 +895,18 @@ export default function DiffPanel({
     <DiffPanelShell mode={mode} header={headerRow}>
       {!activeThread ? (
         <div className="flex flex-1 items-center justify-center px-5 text-center text-xs text-muted-foreground/70">
-          meow, select a thread to inspect turn diffs.
+          {" "}
+          select a thread to inspect turn diffs :3
         </div>
       ) : !isGitRepo ? (
         <div className="flex flex-1 items-center justify-center px-5 text-center text-xs text-muted-foreground/70">
-          turn diffs are unavailable because this project is not a git repository, mrrp
+          {" "}
+          turn diffs are unavailable because this project is not a git repository 3:
         </div>
       ) : selectedTurnId !== null && orderedTurnDiffSummaries.length === 0 ? (
         <div className="flex flex-1 items-center justify-center px-5 text-center text-xs text-muted-foreground/70">
-          no completed turns yet, nya~
+          {" "}
+          no completed turns yet ;3
         </div>
       ) : (
         <>
@@ -934,8 +937,8 @@ export default function DiffPanel({
                 <div className="flex h-full items-center justify-center px-3 py-2 text-xs text-muted-foreground/70">
                   <p>
                     {hasNoNetChanges
-                      ? "no net changes in this selection, purr"
-                      : "mrrp, no patch available for this selection"}
+                      ? "no net changes in this selection ^w^"
+                      : "no patch available for this selection 3:"}
                   </p>
                 </div>
               )

@@ -21,7 +21,8 @@ export function PullRequestActivityUnavailableState({
       )}
     >
       <p className="text-sm font-medium text-foreground">
-        could not load pull request activity 3: mrow
+        {" "}
+        could not load pull request activity 3:
       </p>
       <p className="max-w-md text-xs text-muted-foreground">{error}</p>
       <Button size="sm" variant="outline" onClick={onRetry}>

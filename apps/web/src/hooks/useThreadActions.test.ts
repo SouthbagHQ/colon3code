@@ -21,7 +21,7 @@ describe("navigateAfterThreadDeletion", () => {
     expect(addToast).toHaveBeenCalledOnce();
     expect(addToast).toHaveBeenCalledWith(
       expect.objectContaining({
-        title: "thread deleted, but navigation failed 3: mrrp",
+        title: "thread deleted, but navigation failed 3:",
         description: "route unavailable",
       }),
     );
@@ -89,7 +89,7 @@ describe("requestThreadUnpinConfirmation", () => {
     });
 
     expect(message).toBe(
-      'unpin thread "Release prep"?\nthis will move the thread out of your pinned section, mrrp.',
+      'unpin thread "Release prep"?\nthis will move the thread out of your pinned section :3',
     );
     expect(result).toMatchObject({ _tag: "Success", value: false });
   });

@@ -551,7 +551,7 @@ export function ThemeLibrary({
     toastManager.add(
       stackedThreadToast({
         type: "error",
-        title: "couldn’t save theme selection 3: mrrp",
+        title: "couldn’t save theme selection 3:",
         description: "try again.",
       }),
     );
@@ -561,7 +561,7 @@ export function ThemeLibrary({
     toastManager.add(
       stackedThreadToast({
         type: "error",
-        title: "couldn’t remove theme 3: mrow",
+        title: "couldn’t remove theme 3:",
         description: "try again.",
       }),
     );
@@ -931,7 +931,7 @@ export function ThemeLibrary({
               type: "success",
               title:
                 importedThemes.length === 1
-                  ? `${importedThemes[0]!.label} ${verb} :3 purr`
+                  ? `${importedThemes[0]!.label} ${verb} :3`
                   : `${importedThemes.length} themes ${verb} :3`,
               description: importedThemes.map((imported) => imported.label).join(", "),
             }),
@@ -947,7 +947,7 @@ export function ThemeLibrary({
               stackedThreadToast({
                 type: "success",
                 title: `${importedTheme.label} added :3`,
-                description: `it’s now your ${modes[0]!} theme, purr.`,
+                description: `it’s now your ${modes[0]!} theme :3`,
               }),
             );
             return true;
@@ -956,8 +956,8 @@ export function ThemeLibrary({
           toastManager.add(
             stackedThreadToast({
               type: "success",
-              title: `${importedTheme.label} added :3 meow`,
-              description: "it’s now active, nya~",
+              title: `${importedTheme.label} added :3`,
+              description: "it’s now active :3",
             }),
           );
           return true;
@@ -975,8 +975,8 @@ export function ThemeLibrary({
             </AlertDialogTitle>
             <AlertDialogDescription>
               {canRemoveCollection
-                ? "mrrp, select the variants you want to remove. you can restore them by importing the extension again."
-                : "you can bring it back anytime by importing its JSON file, nya~"}
+                ? "select the variants you want to remove. you can restore them by importing the extension again ^w^"
+                : "you can bring it back anytime by importing its JSON file ^w^"}
             </AlertDialogDescription>
           </AlertDialogHeader>
           {canRemoveCollection ? (

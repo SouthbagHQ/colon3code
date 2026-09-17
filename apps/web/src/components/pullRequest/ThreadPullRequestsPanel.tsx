@@ -206,8 +206,8 @@ export function ThreadPullRequestsPanel({ threadRef }: { threadRef: ScopedThread
   if (configs.get(threadRef.environmentId)?.environment.capabilities.threadPullRequests !== true) {
     return (
       <PullRequestsUnavailableState
-        title="linked pull requests unavailable 3: mrrp"
-        error="this environment does not support multiple linked pull requests, mrow"
+        title="linked pull requests unavailable 3:"
+        error="this environment does not support multiple linked pull requests ^w^"
       />
     );
   }

@@ -134,9 +134,7 @@ export function AttachmentFilePreview(props: {
       })
       .catch((cause: unknown) => {
         if (!cancelled)
-          setError(
-            cause instanceof Error ? cause.message : "the attachment is unavailable 3: mrrp",
-          );
+          setError(cause instanceof Error ? cause.message : "the attachment is unavailable 3:");
       });
     return () => {
       cancelled = true;
@@ -179,9 +177,7 @@ export function AttachmentFilePreview(props: {
       if (!controller.signal.aborted) setContent(result);
     })().catch((cause: unknown) => {
       if (!controller.signal.aborted)
-        setContentError(
-          cause instanceof Error ? cause.message : "could not load this file 3: mrow",
-        );
+        setContentError(cause instanceof Error ? cause.message : "could not load this file 3:");
     });
     return () => controller.abort();
   }, [url, needsText, revision, props.sizeBytes, props.file, refresh]);
@@ -223,8 +219,8 @@ export function AttachmentFilePreview(props: {
       } catch (cause) {
         toastManager.add({
           type: "error",
-          title: "could not save file 3: mrrp",
-          description: cause instanceof Error ? cause.message : "please try again, meow",
+          title: "could not save file 3:",
+          description: cause instanceof Error ? cause.message : "please try again 3:",
         });
       } finally {
         setSaving(false);
@@ -257,11 +253,7 @@ export function AttachmentFilePreview(props: {
   ) : kind === "pdf" || kind === "html" ? (
     <BrowserDocumentFrame src={url} title={props.name} pdf={kind === "pdf"} />
   ) : kind === "audio" ? (
-    <AudioPreview
-      src={url}
-      name={props.name}
-      onError={() => setError("unable to load audio 3: mrow")}
-    />
+    <AudioPreview src={url} name={props.name} onError={() => setError("unable to load audio 3:")} />
   ) : kind === "video" ? (
     <div className="flex min-h-0 flex-1 items-center justify-center bg-black">
       <video
@@ -279,15 +271,15 @@ export function AttachmentFilePreview(props: {
         src={url}
         alt={props.name}
         className="max-h-full max-w-full object-contain"
-        onError={() => setError("unable to load image 3: mrrp")}
+        onError={() => setError("unable to load image 3:")}
       />
     </div>
   ) : (
     <div className="flex min-h-0 flex-1 flex-col items-center justify-center gap-1 px-6 text-center">
-      <p className="text-sm font-medium">no preview for this file, mrow</p>
+      <p className="text-sm font-medium">no preview for this file :3</p>
       <p className="max-w-sm text-xs leading-relaxed text-muted-foreground">
         save it to open in an app that supports {props.name.split(".").at(-1) || "this format"}{" "}
-        files, nya~
+        files
       </p>
     </div>
   );
@@ -362,7 +354,7 @@ export function AttachmentFilePreview(props: {
       {content?.truncated ? (
         <FileSurfaceNotice>
           preview limited to the first 1 MB of a {props.sizeBytes.toLocaleString()} byte file. save
-          the file to read it in full, purr
+          the file to read it in full ^w^
         </FileSurfaceNotice>
       ) : null}
       {body}

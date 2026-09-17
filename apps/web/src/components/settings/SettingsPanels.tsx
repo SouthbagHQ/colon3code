@@ -184,9 +184,9 @@ const RESPONSE_STREAMING_MODE_LABELS: Record<ResponseStreamingMode, string> = {
 };
 
 const RESPONSE_STREAMING_MODE_DESCRIPTIONS: Record<ResponseStreamingMode, string> = {
-  turn: "text appears once the agent finishes its turn, purr.",
-  paragraph: "each paragraph or code block appears as soon as it is complete, nya~",
-  token: "mrrp, every token repaints the message as it arrives. slower and harder to read.",
+  turn: "text appears once the agent finishes its turn :3",
+  paragraph: "each paragraph or code block appears as soon as it is complete ^w^",
+  token: "every token repaints the message as it arrives. slower and harder to read ^w^",
 };
 
 const TIMESTAMP_FORMAT_LABELS = {
@@ -220,12 +220,12 @@ const BACKGROUND_ACTIVITY_PROFILE_OPTION_LABELS: Record<BackgroundActivityProfil
 };
 
 const BACKGROUND_ACTIVITY_PROFILE_DESCRIPTIONS: Record<BackgroundActivityProfile, string> = {
-  balanced: "pauses probes for idle clients, locked hosts, or low power mode, meow.",
+  balanced: "pauses probes for idle clients, locked hosts, or low power mode ^w^",
   performance: "allows scoped background probes while any subscribed client remains connected uwu",
-  "battery-saver": "also pauses background probes when the host or client is on battery, purr.",
+  "battery-saver": "also pauses background probes when the host or client is on battery ^w^",
 };
 
-const ADVANCED_BACKGROUND_ACTIVITY_DESCRIPTION = "uses custom intervals, nya~";
+const ADVANCED_BACKGROUND_ACTIVITY_DESCRIPTION = "uses custom intervals :3";
 
 const DEFAULT_DRIVER_KIND = ProviderDriverKind.make("codex");
 const BACKGROUND_ACTIVITY_BOOLEAN_OVERRIDES: ReadonlyArray<{
@@ -294,7 +294,7 @@ function AboutVersionSection() {
           toastManager.add(
             stackedThreadToast({
               type: "error",
-              title: "could not change update track 3: mrrp",
+              title: "could not change update track 3:",
               description: error instanceof Error ? error.message : "update track change failed.",
             }),
           );
@@ -317,7 +317,7 @@ function AboutVersionSection() {
         toastManager.add(
           stackedThreadToast({
             type: "error",
-            title: "could not download update 3: mrow",
+            title: "could not download update 3:",
             description: error instanceof Error ? error.message : "download failed.",
           }),
         );
@@ -356,7 +356,7 @@ function AboutVersionSection() {
           toastManager.add(
             stackedThreadToast({
               type: "error",
-              title: "could not install update 3: mrrp",
+              title: "could not install update 3:",
               description: error instanceof Error ? error.message : "install failed.",
             }),
           );
@@ -409,7 +409,7 @@ function AboutVersionSection() {
   const description =
     action === "download" || action === "install"
       ? "update available ^w^"
-      : "current version of the application, purr.";
+      : "current version of the application ^w^";
 
   return (
     <>
@@ -437,7 +437,7 @@ function AboutVersionSection() {
       {hasDesktopBridge ? (
         <SettingsRow
           title="update track"
-          description="use stable releases or nightly builds. switch back anytime, nya~"
+          description="use stable releases or nightly builds. switch back anytime ^w^"
           control={
             <Select
               value={selectedUpdateChannel}
@@ -469,7 +469,7 @@ function AboutVersionSection() {
       ) : selectedHostedAppChannel ? (
         <SettingsRow
           title="update track"
-          description="switches the hosted app release channel, meow."
+          description="switches the hosted app release channel :3"
           control={
             <Select
               value={selectedHostedAppChannel}
@@ -681,10 +681,9 @@ export function useSettingsRestore(onRestored?: () => void) {
     if (changedSettingLabels.length === 0) return;
     const api = readLocalApi();
     const confirmed = await (api ?? ensureLocalApi()).dialogs.confirm(
-      [
-        "mrrp, restore default settings?",
-        `this will reset: ${changedSettingLabels.join(", ")}.`,
-      ].join("\n"),
+      ["restore default settings? :3", `this will reset: ${changedSettingLabels.join(", ")}.`].join(
+        "\n",
+      ),
       { variant: "destructive" },
     );
     if (!confirmed) return;
@@ -712,7 +711,7 @@ export function useSettingsRestore(onRestored?: () => void) {
       toastManager.add(
         stackedThreadToast({
           type: "error",
-          title: "couldn’t restore theme settings 3: mrow",
+          title: "couldn’t restore theme settings 3:",
           description: "try again.",
         }),
       );
@@ -834,11 +833,12 @@ function TokenStreamingWarningDialog({
     <AlertDialog open={open} onOpenChange={onOpenChange}>
       <AlertDialogPopup className="max-w-lg">
         <AlertDialogHeader>
-          <AlertDialogTitle>token by token is a worse experience, mrrp</AlertDialogTitle>
+          <AlertDialogTitle>token by token is a worse experience ;3</AlertDialogTitle>
           <AlertDialogDescription>
-            mrow, token streaming repaints the message on every delta. it is slower, harder to read,
-            and costs more CPU on every connected device. this mode stays only for backwards
-            compatibility. use paragraph streaming instead, nya~
+            {" "}
+            token streaming repaints the message on every delta. it is slower, harder to read, and
+            costs more CPU on every connected device. this mode stays only for backwards
+            compatibility. use paragraph streaming instead :3
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
@@ -883,7 +883,8 @@ function BackgroundActivityAdvancedDialog({
         <DialogHeader>
           <DialogTitle>background activity ^w^</DialogTitle>
           <DialogDescription>
-            meow, tune the shared power policy and the background intervals that feed it.
+            {" "}
+            tune the shared power policy and the background intervals that feed it ^w^
           </DialogDescription>
         </DialogHeader>
         <DialogPanel className="space-y-0 px-6 pb-5">
@@ -892,7 +893,8 @@ function BackgroundActivityAdvancedDialog({
               <div className="min-w-0 space-y-1">
                 <div className="text-sm font-medium">shared policy</div>
                 <p className="text-xs leading-relaxed text-muted-foreground">
-                  controls whether background work may run after a subscribed interval fires, purr.
+                  {" "}
+                  controls whether background work may run after a subscribed interval fires ^w^
                 </p>
               </div>
               <Select
@@ -936,7 +938,8 @@ function BackgroundActivityAdvancedDialog({
                   {searchableSetting("git-fetch-interval").title}
                 </div>
                 <p className="text-xs leading-relaxed text-muted-foreground">
-                  refresh remote branch status in the background, nya~
+                  {" "}
+                  refresh remote branch status in the background :3
                 </p>
               </div>
               <div className="flex shrink-0 items-center gap-2">
@@ -974,7 +977,8 @@ function BackgroundActivityAdvancedDialog({
               <div className="min-w-0 space-y-1">
                 <div className="text-sm font-medium">provider health interval</div>
                 <p className="text-xs leading-relaxed text-muted-foreground">
-                  refresh provider availability, versions, auth state, and model metadata, meow.
+                  {" "}
+                  refresh provider availability, versions, auth state, and model metadata :3
                 </p>
               </div>
               <div className="flex shrink-0 items-center gap-2">
@@ -1050,7 +1054,8 @@ function BackgroundActivityAdvancedDialog({
               <div className="min-w-0 space-y-1">
                 <div className="text-sm font-medium">idle host monitor</div>
                 <p className="text-xs leading-relaxed text-muted-foreground">
-                  mrrp, poll host power state when no foreground client is active.
+                  {" "}
+                  poll host power state when no foreground client is active ^w^
                 </p>
               </div>
               <div className="flex shrink-0 items-center gap-2">
@@ -1184,10 +1189,10 @@ export function AppearanceSettingsPanel() {
         </div>
       </SettingsSection>
 
-      <SettingsSection id="appearance-interface" title="interface nya">
+      <SettingsSection id="appearance-interface" title="interface ^w^">
         <SettingsRow
           {...searchableSetting("setting-appearance-contrast")}
-          description="adjust the contrast of colors and borders across the interface, purr."
+          description="adjust the contrast of colors and borders across the interface :3"
           resetAction={
             settings.appearanceContrast !== DEFAULT_UNIFIED_SETTINGS.appearanceContrast ? (
               <SettingResetButton
@@ -1282,7 +1287,7 @@ export function AppearanceSettingsPanel() {
         {showEnvironmentIdentification ? (
           <SettingsRow
             {...searchableSetting("environment-identification")}
-            description="meow, choose how dev and nightly environments are identified."
+            description="choose how dev and nightly environments are identified :3"
             resetAction={
               settings.environmentIdentificationMode !== DEFAULT_ENVIRONMENT_IDENTIFICATION_MODE ? (
                 <SettingResetButton
@@ -1326,7 +1331,7 @@ export function AppearanceSettingsPanel() {
         ) : null}
         <SettingsRow
           {...searchableSetting("diff-color-scheme")}
-          description="choose colors for additions and deletions, including change counts, nya~"
+          description="choose colors for additions and deletions, including change counts :3"
           resetAction={
             settings.diffColorScheme !== DEFAULT_UNIFIED_SETTINGS.diffColorScheme ? (
               <SettingResetButton
@@ -1375,7 +1380,7 @@ export function AppearanceSettingsPanel() {
       <SettingsSection id="motion" title="motion ^w^">
         <SettingsRow
           {...searchableSetting("panel-animations")}
-          description="set how fast panels open and close, purr."
+          description="set how fast panels open and close ^w^"
           control={
             <div className="grid w-full grid-cols-[5rem_minmax(0,1fr)] items-center gap-3 sm:w-auto sm:grid-cols-[7rem_13rem] sm:gap-4">
               <PanelAnimationsPreview durationMs={settings.panelAnimationDurationMs} />
@@ -1458,7 +1463,7 @@ function InterfaceFontRow({ preview }: { preview?: ReactNode }) {
   return (
     <FontFamilySettingsRow
       {...searchableSetting("interface-font")}
-      description="everything outside code blocks and the terminal, meow."
+      description="everything outside code blocks and the terminal :3"
       defaultFamily={defaults.sans}
       defaultValue={DEFAULT_UNIFIED_SETTINGS.fontFamilySans}
       value={settings.fontFamilySans}
@@ -1489,7 +1494,7 @@ function PromptFontRow() {
   return (
     <FontFamilySettingsRow
       {...searchableSetting("prompt-font")}
-      description="only the box you write prompts in. mono works well here, purr."
+      description="only the box you write prompts in. mono works well here ;3"
       defaultFamily={defaults.interfaceFamily}
       defaultValue={DEFAULT_UNIFIED_SETTINGS.fontFamilyComposer}
       value={settings.fontFamilyComposer}
@@ -1515,7 +1520,7 @@ function PromptFontRow() {
 
 function CodeFontRow({
   title,
-  description = "code blocks, diffs, and file previews, nya~",
+  description = "code blocks, diffs, and file previews ;3",
   preview,
 }: {
   title?: string;
@@ -1602,7 +1607,7 @@ function FontSmoothingRow() {
   return (
     <SettingsRow
       {...searchableSetting("font-smoothing")}
-      description="use thinner grayscale text smoothing instead of the macOS default, meow."
+      description="use thinner grayscale text smoothing instead of the macOS default ^w^"
       resetAction={
         settings.fontSmoothing !== DEFAULT_UNIFIED_SETTINGS.fontSmoothing ? (
           <SettingResetButton
@@ -1630,7 +1635,7 @@ function WordWrapRow() {
   return (
     <SettingsRow
       {...searchableSetting("word-wrap")}
-      description="wrap long lines in code blocks, tables, diffs, and file previews by default, purr."
+      description="wrap long lines in code blocks, tables, diffs, and file previews by default :3"
       resetAction={
         settings.wordWrap !== DEFAULT_UNIFIED_SETTINGS.wordWrap ? (
           <SettingResetButton
@@ -1674,7 +1679,7 @@ function SimpleFontRows() {
       <InterfaceFontRow preview={<PromptFontPreview />} />
       <CodeFontRow
         title="monospace font"
-        description="code blocks, diffs, file previews, and the terminal, nya~"
+        description="code blocks, diffs, file previews, and the terminal ;3"
         preview={
           <>
             <CodeFontPreview />
@@ -1734,7 +1739,7 @@ function TypographySection() {
   return (
     <SettingsSection
       id="typography"
-      title="typography, meow"
+      title="typography :3"
       headerAction={
         <label className="flex cursor-pointer items-center gap-2 text-xs font-medium text-muted-foreground">
           advanced
@@ -2042,7 +2047,7 @@ function LegacyFeaturesSection() {
           <div className="relative overflow-visible rounded-xl border border-border/60 bg-card/40 text-foreground shadow-xs/5 [&>*+*]:border-t [&>*+*]:border-border/50 [&>[data-slot=settings-row]]:rounded-none">
             <SettingsRow
               {...searchableSetting("legacy-plan-mode")}
-              description="mrrp, restore build/plan, /plan, /default, and Shift+Tab. off uses build mode."
+              description="restore build/plan, /plan, /default, and Shift+Tab. off uses build mode :3"
               control={
                 <Switch
                   checked={settings.planModeEnabled}
@@ -2055,7 +2060,7 @@ function LegacyFeaturesSection() {
             />
             <SettingsRow
               {...searchableSetting("legacy-context-window-indicator")}
-              description="shows context window usage as a circular indicator in the composer, nya~"
+              description="shows context window usage as a circular indicator in the composer :3"
               control={
                 <Switch
                   checked={settings.contextWindowMeterEnabled}
@@ -2068,7 +2073,7 @@ function LegacyFeaturesSection() {
             />
             <SettingsRow
               {...searchableSetting("legacy-sidebar")}
-              description="restore per-project thread trees instead of the default flat sidebar, meow."
+              description="restore per-project thread trees instead of the default flat sidebar :3"
               control={
                 <Switch
                   checked={settings.legacySidebarEnabled}
@@ -2171,10 +2176,10 @@ export function GeneralSettingsPanel() {
   return (
     <SettingsPageContainer>
       <ProjectDefaultsSettings category="general" />
-      <SettingsSection id="organization" title="organization nya">
+      <SettingsSection id="organization" title="organization ^w^">
         <SettingsRow
           {...searchableSetting("project-grouping")}
-          description="combine matching repositories across environments, purr."
+          description="combine matching repositories across environments ^w^"
           resetAction={
             settings.sidebarProjectGroupingMode !==
             DEFAULT_UNIFIED_SETTINGS.sidebarProjectGroupingMode ? (
@@ -2214,7 +2219,7 @@ export function GeneralSettingsPanel() {
               serverScoped
               settingKeys={["sidebarAutoSettleOnMerge"]}
               {...searchableSetting("auto-settle-merged-threads")}
-              description="settle a thread when its pull request merges. closed pull requests still settle automatically, meow."
+              description="settle a thread when its pull request merges. closed pull requests still settle automatically :3"
               resetAction={
                 settings.sidebarAutoSettleOnMerge !==
                 DEFAULT_UNIFIED_SETTINGS.sidebarAutoSettleOnMerge ? (
@@ -2244,7 +2249,7 @@ export function GeneralSettingsPanel() {
               serverScoped
               settingKeys={["sidebarAutoSettleAfterDays"]}
               {...searchableSetting("auto-settle-inactive-threads")}
-              description="sidebar threads with no activity for this long settle automatically, nya~"
+              description="sidebar threads with no activity for this long settle automatically ;3"
               resetAction={
                 settings.sidebarAutoSettleAfterDays !==
                 DEFAULT_UNIFIED_SETTINGS.sidebarAutoSettleAfterDays ? (
@@ -2277,7 +2282,7 @@ export function GeneralSettingsPanel() {
                 serverScoped
                 settingKeys={["sidebarAutoSettleAfterDays"]}
                 title={searchableSetting("days-before-auto-settle").title}
-                description="any new activity un-settles a thread automatically, purr."
+                description="any new activity un-settles a thread automatically :3"
                 control={
                   <AutoSettleDaysInput
                     value={settings.sidebarAutoSettleAfterDays}
@@ -2294,7 +2299,7 @@ export function GeneralSettingsPanel() {
         <NotificationSettings />
         <SettingsRow
           {...searchableSetting("in-app-notifications")}
-          description="meow, show a toast when another thread finishes, fails, or needs input or approval while this app has focus."
+          description="show a toast when another thread finishes, fails, or needs input or approval while this app has focus :3"
           control={
             <Switch
               checked={settings.inAppNotificationsEnabled}
@@ -2305,7 +2310,7 @@ export function GeneralSettingsPanel() {
         />
         <SettingsRow
           {...searchableSetting("time-format")}
-          description="system default follows your browser or OS clock preference, nya~"
+          description="system default follows your browser or OS clock preference :3"
           resetAction={
             settings.timestampFormat !== DEFAULT_UNIFIED_SETTINGS.timestampFormat ? (
               <SettingResetButton
@@ -2350,7 +2355,7 @@ export function GeneralSettingsPanel() {
           {...searchableSetting("response-streaming")}
           description={
             mixedResponseStreamingMode
-              ? "mrrp, the selected targets use different streaming modes."
+              ? "the selected targets use different streaming modes ;3"
               : RESPONSE_STREAMING_MODE_DESCRIPTIONS[settings.responseStreamingMode]
           }
           resetAction={
@@ -2416,7 +2421,7 @@ export function GeneralSettingsPanel() {
         />
         <SettingsRow
           {...searchableSetting("hide-whitespace-changes")}
-          description="set whether the diff panel ignores whitespace-only edits by default, purr."
+          description="set whether the diff panel ignores whitespace-only edits by default ^w^"
           resetAction={
             settings.diffIgnoreWhitespace !== DEFAULT_UNIFIED_SETTINGS.diffIgnoreWhitespace ? (
               <SettingResetButton
@@ -2441,7 +2446,7 @@ export function GeneralSettingsPanel() {
         />
         <SettingsRow
           {...searchableSetting("default-diff-file-state")}
-          description="start with files expanded or collapsed when opening diffs or a pull request's code tab, meow."
+          description="start with files expanded or collapsed when opening diffs or a pull request's code tab :3"
           resetAction={
             settings.diffFilesCollapsed !== DEFAULT_UNIFIED_SETTINGS.diffFilesCollapsed ? (
               <SettingResetButton
@@ -2483,7 +2488,7 @@ export function GeneralSettingsPanel() {
         />
         <SettingsRow
           {...searchableSetting("diff-layout")}
-          description="show diffs stacked or side by side. the toggle in the diff toolbar changes this too, nya~"
+          description="show diffs stacked or side by side. the toggle in the diff toolbar changes this too ;3"
           resetAction={
             settings.diffLayout !== DEFAULT_UNIFIED_SETTINGS.diffLayout ? (
               <SettingResetButton
@@ -2518,7 +2523,7 @@ export function GeneralSettingsPanel() {
 
         <SettingsRow
           {...searchableSetting("proactive-panels")}
-          description="purr, open linked pull requests when found and turn diffs when work changes files."
+          description="open linked pull requests when found and turn diffs when work changes files ;3"
           resetAction={
             settings.proactivePanelsEnabled !== DEFAULT_UNIFIED_SETTINGS.proactivePanelsEnabled ? (
               <SettingResetButton
@@ -2544,7 +2549,7 @@ export function GeneralSettingsPanel() {
 
         <SettingsRow
           {...searchableSetting("skills-in-slash-menu")}
-          description="also include skills in the / command menu. skills always appear when you type $, meow."
+          description="also include skills in the / command menu. skills always appear when you type $ :3"
           resetAction={
             settings.showSkillsInSlashMenu !== DEFAULT_UNIFIED_SETTINGS.showSkillsInSlashMenu ? (
               <SettingResetButton
@@ -2597,7 +2602,7 @@ export function GeneralSettingsPanel() {
 
         <SettingsRow
           {...searchableSetting("follow-up-behavior")}
-          description="queue follow-ups while the agent runs or steer the current turn, nya~"
+          description="queue follow-ups while the agent runs or steer the current turn :3"
           resetAction={
             settings.followUpBehavior !== DEFAULT_UNIFIED_SETTINGS.followUpBehavior ? (
               <SettingResetButton
@@ -2640,7 +2645,7 @@ export function GeneralSettingsPanel() {
           serverScoped
           settingKeys={["enableProviderUpdateChecks"]}
           {...searchableSetting("provider-update-checks")}
-          description="check installed provider CLIs for newer available versions, purr."
+          description="check installed provider CLIs for newer available versions :3"
           resetAction={
             settings.enableProviderUpdateChecks !==
             DEFAULT_UNIFIED_SETTINGS.enableProviderUpdateChecks ? (
@@ -2670,10 +2675,10 @@ export function GeneralSettingsPanel() {
           {...searchableSetting("continue-threads-after-server-update")}
           serverScoped
           settingKeys={["continueThreadsAfterServerUpdate"]}
-          description="meow, automatically resume interrupted threads after an update, crash, or machine restart on the selected environments. update older servers first."
+          description="automatically resume interrupted threads after an update, crash, or machine restart on the selected environments. update older servers first ^w^"
           status={
             !supportsRestartContinuation
-              ? "mrrp, all selected connected environments must support restart continuation."
+              ? "all selected connected environments must support restart continuation ;3"
               : undefined
           }
           resetAction={
@@ -2713,7 +2718,7 @@ export function GeneralSettingsPanel() {
               {searchableSetting("background-activity").title}
               <PolicyTooltip>
                 this shared policy gates background work such as Git refreshes and provider health
-                probes after their individual intervals elapse, nya~
+                probes after their individual intervals elapse :3
               </PolicyTooltip>
             </span>
           }
@@ -2798,12 +2803,12 @@ export function GeneralSettingsPanel() {
         />
       </SettingsSection>
 
-      <SettingsSection id="projects-and-threads" title="projects & threads, meow">
+      <SettingsSection id="projects-and-threads" title="projects & threads :3">
         <SettingsRow
           serverScoped
           settingKeys={["newWorktreesStartFromOrigin"]}
           {...searchableSetting("start-from-origin")}
-          description="creates the worktree from the latest matching branch on origin instead of your local branch, purr."
+          description="creates the worktree from the latest matching branch on origin instead of your local branch ^w^"
           resetAction={
             settings.newWorktreesStartFromOrigin !==
             DEFAULT_UNIFIED_SETTINGS.newWorktreesStartFromOrigin ? (
@@ -2833,7 +2838,7 @@ export function GeneralSettingsPanel() {
           serverScoped
           settingKeys={["addProjectBaseDirectory"]}
           {...searchableSetting("add-project-starts-in")}
-          description='leave empty to use "~/" when the add project browser opens, nya~'
+          description='leave empty to use "~/" when the add project browser opens :3'
           resetAction={
             settings.addProjectBaseDirectory !==
             DEFAULT_UNIFIED_SETTINGS.addProjectBaseDirectory ? (
@@ -2864,7 +2869,7 @@ export function GeneralSettingsPanel() {
       <SettingsSection id="confirmations" title="confirmations">
         <SettingsRow
           {...searchableSetting("unpin-confirmation")}
-          description="ask before unpinning a thread from the pinned section, meow."
+          description="ask before unpinning a thread from the pinned section :3"
           resetAction={
             settings.confirmThreadUnpin !== DEFAULT_UNIFIED_SETTINGS.confirmThreadUnpin ? (
               <SettingResetButton
@@ -2890,7 +2895,7 @@ export function GeneralSettingsPanel() {
 
         <SettingsRow
           {...searchableSetting("archive-confirmation")}
-          description="require a second click on the inline archive action before a thread is archived, purr."
+          description="require a second click on the inline archive action before a thread is archived :3"
           resetAction={
             settings.confirmThreadArchive !== DEFAULT_UNIFIED_SETTINGS.confirmThreadArchive ? (
               <SettingResetButton
@@ -2916,7 +2921,7 @@ export function GeneralSettingsPanel() {
 
         <SettingsRow
           {...searchableSetting("delete-confirmation")}
-          description="mrrp, ask before deleting a thread and its chat history."
+          description="ask before deleting a thread and its chat history ;3"
           resetAction={
             settings.confirmThreadDelete !== DEFAULT_UNIFIED_SETTINGS.confirmThreadDelete ? (
               <SettingResetButton
@@ -2943,7 +2948,7 @@ export function GeneralSettingsPanel() {
         {isElectron ? (
           <SettingsRow
             {...searchableSetting("quit-confirmation")}
-            description="hold mode also quits on two quick presses, nya~"
+            description="hold mode also quits on two quick presses ^w^"
             resetAction={
               settings.confirmQuit !== DEFAULT_UNIFIED_SETTINGS.confirmQuit ? (
                 <SettingResetButton
@@ -2988,7 +2993,7 @@ export function GeneralSettingsPanel() {
           serverScoped
           settingKeys={["textGenerationModelSelection"]}
           {...searchableSetting("text-generation-model")}
-          description="used for thread titles and other generated text on connected devices with this provider. source control can override it, meow."
+          description="used for thread titles and other generated text on connected devices with this provider. source control can override it ;3"
           resetAction={
             hasServerTargets && isTextGenerationModelDirty ? (
               <SettingResetButton
@@ -3005,11 +3010,13 @@ export function GeneralSettingsPanel() {
           control={
             !hasServerTargets ? (
               <span className="text-sm text-muted-foreground">
-                mrrp, connect an environment to choose its text generation model.
+                {" "}
+                connect an environment to choose its text generation model ^w^
               </span>
             ) : !hasTextGenerationProvider ? (
               <span className="text-sm text-muted-foreground">
-                no text generation providers available, mrow.
+                {" "}
+                no text generation providers available :3
               </span>
             ) : (
               <div className="flex flex-wrap items-center justify-end gap-1.5">
@@ -3038,7 +3045,7 @@ export function GeneralSettingsPanel() {
                     if (reason) {
                       toastManager.add({
                         type: "error",
-                        title: "text generation model not saved 3: mrrp",
+                        title: "text generation model not saved 3:",
                         description: reason,
                       });
                       return;
@@ -3101,7 +3108,7 @@ export function GeneralSettingsPanel() {
         ) : (
           <SettingsRow
             title={<AboutVersionTitle />}
-            description="current version of the application, purr."
+            description="current version of the application ^w^"
           />
         )}
       </SettingsSection>
@@ -3110,8 +3117,8 @@ export function GeneralSettingsPanel() {
           {...searchableSetting("diagnostics")}
           description={
             isEnvironmentScope
-              ? "inspect processes, resource use, and logs on this environment, meow."
-              : "inspect processes, resource use, and logs on one environment at a time, nya~"
+              ? "inspect processes, resource use, and logs on this environment ;3"
+              : "inspect processes, resource use, and logs on one environment at a time :3"
           }
           control={
             <Button
@@ -3127,7 +3134,7 @@ export function GeneralSettingsPanel() {
         />
         <SettingsRow
           {...searchableSetting("open-source-licenses")}
-          description="notices for dependencies, assets, and optional tools used by :3 Code, purr."
+          description="notices for dependencies, assets, and optional tools used by :3 Code."
           control={
             <Button
               render={<Link to="/settings/open-source-licenses" />}
@@ -3227,7 +3234,7 @@ export function ArchivedThreadsPanel() {
           toastManager.add(
             stackedThreadToast({
               type: "error",
-              title: "failed to unarchive thread 3: mrrp",
+              title: "failed to unarchive thread 3:",
               description: error instanceof Error ? error.message : "an error occurred.",
             }),
           );
@@ -3244,7 +3251,7 @@ export function ArchivedThreadsPanel() {
           toastManager.add(
             stackedThreadToast({
               type: "error",
-              title: "failed to delete thread 3: mrow",
+              title: "failed to delete thread 3:",
               description: error instanceof Error ? error.message : "an error occurred.",
             }),
           );
@@ -3270,15 +3277,15 @@ export function ArchivedThreadsPanel() {
                   <ArchiveIcon className="size-3.5 text-muted-foreground" />
                 )}
                 {isLoadingArchive
-                  ? "loading archived threads, purr"
+                  ? "loading archived threads :3"
                   : archiveError
-                    ? "could not load archived threads 3: mrrp"
-                    : "no archived threads, nya~"}
+                    ? "could not load archived threads 3:"
+                    : "no archived threads :3"}
               </span>
             }
             description={
               isLoadingArchive
-                ? "checking connected environments, meow."
+                ? "checking connected environments :3"
                 : (archiveError ?? "archived threads will appear here uwu")
             }
           />
@@ -3311,7 +3318,7 @@ export function ArchivedThreadsPanel() {
                       toastManager.add(
                         stackedThreadToast({
                           type: "error",
-                          title: "archived thread action failed 3: mrow",
+                          title: "archived thread action failed 3:",
                           description:
                             error instanceof Error ? error.message : "an error occurred.",
                         }),
