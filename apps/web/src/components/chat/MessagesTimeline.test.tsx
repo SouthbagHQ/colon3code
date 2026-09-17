@@ -264,7 +264,7 @@ function buildSnapShotTimelineEntry(previewUrl?: string) {
             kind: "snap-shot" as const,
             capturedAt: "2026-03-17T19:12:28.000Z",
             appName: "Terminal",
-            windowTitle: "t3code — Tests",
+            windowTitle: "colon3code — Tests",
             appIconDataUrl: "data:image/png;base64,aWNvbg==",
           },
         },
@@ -695,7 +695,7 @@ describe("MessagesTimeline", () => {
     expect(markup).toContain('data-maintain-visible-content-position-size="true"');
     expect(markup).toContain('data-maintain-visible-content-position-restore="true"');
     expect(markup).toContain("Terminal");
-    expect(markup).toContain("t3code — Tests");
+    expect(markup).toContain("colon3code — Tests");
     expect(markup).toContain('src="data:image/png;base64,aWNvbg=="');
     expect(markup).toContain("h-28 w-52 max-w-full");
     expect(onAnchorReady).toHaveBeenCalledOnce();
@@ -709,7 +709,7 @@ describe("MessagesTimeline", () => {
 
     expect(markup).toContain("screenshot.png");
     expect(markup).not.toContain("Terminal");
-    expect(markup).not.toContain("t3code — Tests");
+    expect(markup).not.toContain("colon3code — Tests");
     expect(markup).not.toContain('src="data:image/png;base64,aWNvbg=="');
     expect(markup).not.toContain("h-28 w-52 max-w-full");
   });
@@ -1351,16 +1351,18 @@ describe("MessagesTimeline", () => {
               createdAt: "2026-03-17T19:12:28.000Z",
               label: "Updated files",
               tone: "tool",
-              changedFiles: ["C:/Users/mike/dev-stuff/t3code/apps/web/src/session-logic.ts"],
+              changedFiles: ["C:/Users/mike/dev-stuff/colon3code/apps/web/src/session-logic.ts"],
             },
           },
         ]}
-        workspaceRoot="C:/Users/mike/dev-stuff/t3code"
+        workspaceRoot="C:/Users/mike/dev-stuff/colon3code"
       />,
     );
 
     expect(markup).toContain("Changed 1 file");
-    expect(markup).not.toContain("C:/Users/mike/dev-stuff/t3code/apps/web/src/session-logic.ts");
+    expect(markup).not.toContain(
+      "C:/Users/mike/dev-stuff/colon3code/apps/web/src/session-logic.ts",
+    );
   });
 
   it("keeps mixed-success tool groups neutral", () => {

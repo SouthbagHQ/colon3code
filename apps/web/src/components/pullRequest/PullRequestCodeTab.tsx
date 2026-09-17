@@ -102,7 +102,7 @@ type ReviewAnnotation = DiffLineAnnotation<ReviewAnnotationGroup>;
 /** Commits per press of "Show more" in the scope menu. */
 const COMMIT_PAGE_SIZE = 10;
 
-const PULL_REQUEST_FILE_TREE_STORAGE_KEY = "t3code.pullRequestFileTreeOpen";
+const PULL_REQUEST_FILE_TREE_STORAGE_KEY = "colon3code.pullRequestFileTreeOpen";
 
 /** One answer from the host: a whole number of files, and where the next one carries on. */
 interface DiffSlice {

@@ -38,7 +38,7 @@ const makeServerSettingsLayer = () =>
     Layer.provideMerge(
       Layer.fresh(
         ServerConfig.layerTest(process.cwd(), {
-          prefix: "t3code-server-settings-test-",
+          prefix: "colon3code-server-settings-test-",
         }),
       ),
     ),
@@ -92,7 +92,7 @@ it.layer(NodeServices.layer)("server settings", (it) => {
     });
     const configLayer = Layer.fresh(
       ServerConfig.layerTest(process.cwd(), {
-        prefix: "t3code-server-settings-secret-failure-test-",
+        prefix: "colon3code-server-settings-secret-failure-test-",
       }),
     );
     const settingsLayer = ServerSettingsModule.layer.pipe(
@@ -1080,7 +1080,7 @@ it.layer(NodeServices.layer)("server settings", (it) => {
       Layer.provideMerge(
         Layer.fresh(
           ServerConfig.layerTest(process.cwd(), {
-            prefix: "t3code-inline-secret-failure-test-",
+            prefix: "colon3code-inline-secret-failure-test-",
           }),
         ),
       ),

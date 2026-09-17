@@ -39,9 +39,9 @@ const THREAD_ID = ThreadId.make("thread-1");
 function makeLink(overrides: Partial<ThreadPullRequestLink> = {}): ThreadPullRequestLink {
   return {
     host: "github.com",
-    repository: "t3tools/t3code",
+    repository: "southbaghq/colon3code",
     number: 42,
-    url: "https://github.com/t3tools/t3code/pull/42",
+    url: "https://github.com/southbaghq/colon3code/pull/42",
     source: "manual",
     linkedAt: NOW,
     snapshot: null,
@@ -64,13 +64,13 @@ function makeReadModel(pullRequests: ReadonlyArray<ThreadPullRequestLink>): Orch
         updatedAt: NOW,
         deletedAt: null,
         repositoryIdentity: {
-          canonicalKey: "github.com/t3tools/t3code",
+          canonicalKey: "github.com/southbaghq/colon3code",
           provider: "github",
-          displayName: "t3tools/t3code",
+          displayName: "southbaghq/colon3code",
           locator: {
             source: "git-remote",
             remoteName: "origin",
-            remoteUrl: "https://github.com/t3tools/t3code.git",
+            remoteUrl: "https://github.com/southbaghq/colon3code.git",
           },
         },
       },
@@ -119,7 +119,7 @@ it.layer(NodeServices.layer)("pull request link decider", (it) => {
     Effect.gen(function* () {
       const existing = makeLink({
         host: "forge.example",
-        url: "http://forge.example:3000/t3tools/t3code/pulls/42",
+        url: "http://forge.example:3000/southbaghq/colon3code/pulls/42",
       });
       let model = makeReadModel([existing]);
       const command = yield* decodeCommand({
@@ -127,9 +127,9 @@ it.layer(NodeServices.layer)("pull request link decider", (it) => {
         commandId: "link-other-port",
         threadId: THREAD_ID,
         host: "forge.example",
-        repository: "t3tools/t3code",
+        repository: "southbaghq/colon3code",
         number: 42,
-        url: "http://forge.example:4000/t3tools/t3code/pulls/42",
+        url: "http://forge.example:4000/southbaghq/colon3code/pulls/42",
         source: "manual",
       });
       const linked = expectSingleEvent(
@@ -144,7 +144,7 @@ it.layer(NodeServices.layer)("pull request link decider", (it) => {
         commandId: "unlink-old-port",
         threadId: THREAD_ID,
         host: "forge.example:3000",
-        repository: "t3tools/t3code",
+        repository: "southbaghq/colon3code",
         number: 42,
       });
       const unlinked = expectSingleEvent(
@@ -163,7 +163,7 @@ it.layer(NodeServices.layer)("pull request link decider", (it) => {
       const own = makeLink();
       const foreign = makeLink({
         host: "github.enterprise.test",
-        url: "https://github.enterprise.test/t3tools/t3code/pull/42",
+        url: "https://github.enterprise.test/southbaghq/colon3code/pull/42",
         linkedAt: "2026-01-02T00:00:00Z",
       });
       const command = yield* decodeCommand({
@@ -192,9 +192,9 @@ it.layer(NodeServices.layer)("pull request link decider", (it) => {
         threadId: THREAD_ID,
         linkedPullRequest: {
           projectId: "project-1",
-          repository: "t3tools/t3code",
+          repository: "southbaghq/colon3code",
           number: 99,
-          url: "https://github.com/t3tools/t3code/pull/99",
+          url: "https://github.com/southbaghq/colon3code/pull/99",
         },
       });
       const decided = yield* decideOrchestrationCommand({ readModel: model, command });
@@ -319,9 +319,9 @@ it.layer(NodeServices.layer)("pull request link decider", (it) => {
           commandId: CommandId.make("cmd-link"),
           threadId: THREAD_ID,
           host: " GitHub.com ",
-          repository: "T3Tools/T3Code",
+          repository: "SouthbagHQ/Colon3Code",
           number: 42,
-          url: "https://github.com/t3tools/t3code/pull/42",
+          url: "https://github.com/southbaghq/colon3code/pull/42",
           source: "manual",
         },
         readModel: makeReadModel([]),
@@ -330,9 +330,9 @@ it.layer(NodeServices.layer)("pull request link decider", (it) => {
       const event = expectSingleEvent(decided, "thread.pull-request-linked");
       expect(event.payload.link).toEqual({
         host: "github.com",
-        repository: "t3tools/t3code",
+        repository: "southbaghq/colon3code",
         number: 42,
-        url: "https://github.com/t3tools/t3code/pull/42",
+        url: "https://github.com/southbaghq/colon3code/pull/42",
         source: "manual",
         linkedAt: event.payload.updatedAt,
         snapshot: null,
@@ -350,9 +350,9 @@ it.layer(NodeServices.layer)("pull request link decider", (it) => {
           commandId: CommandId.make("cmd-link-dup"),
           threadId: THREAD_ID,
           host: "GITHUB.COM",
-          repository: "t3tools/t3code",
+          repository: "southbaghq/colon3code",
           number: 42,
-          url: "https://github.com/t3tools/t3code/pull/42",
+          url: "https://github.com/southbaghq/colon3code/pull/42",
           source: "agent",
         },
         readModel: makeReadModel([makeLink()]),
@@ -370,7 +370,7 @@ it.layer(NodeServices.layer)("pull request link decider", (it) => {
           kind: "native",
           id: "stack-1",
           number: 1,
-          url: "https://github.com/t3tools/t3code/stack/1",
+          url: "https://github.com/southbaghq/colon3code/stack/1",
           base: "main",
           layers: [{ number: 42, headBranch: "feat/links", state: "open" }],
         },
@@ -381,9 +381,9 @@ it.layer(NodeServices.layer)("pull request link decider", (it) => {
           commandId: CommandId.make("cmd-relink"),
           threadId: THREAD_ID,
           host: "github.com",
-          repository: "t3tools/t3code",
+          repository: "southbaghq/colon3code",
           number: 42,
-          url: "https://github.com/t3tools/t3code/pull/42",
+          url: "https://github.com/southbaghq/colon3code/pull/42",
           source: "manual",
         },
         readModel: makeReadModel([dismissed]),
@@ -402,9 +402,9 @@ it.layer(NodeServices.layer)("pull request link decider", (it) => {
           commandId: CommandId.make("cmd-stack-readd"),
           threadId: THREAD_ID,
           host: "github.com",
-          repository: "t3tools/t3code",
+          repository: "southbaghq/colon3code",
           number: 42,
-          url: "https://github.com/t3tools/t3code/pull/42",
+          url: "https://github.com/southbaghq/colon3code/pull/42",
           source: "stack",
         },
         readModel: makeReadModel([makeLink({ source: "stack-dismissed" })]),
@@ -421,7 +421,7 @@ it.layer(NodeServices.layer)("pull request link decider", (it) => {
           commandId: CommandId.make("cmd-unlink"),
           threadId: THREAD_ID,
           host: "GitHub.com",
-          repository: "t3tools/t3code",
+          repository: "southbaghq/colon3code",
           number: 42,
         },
         readModel: makeReadModel([makeLink()]),
@@ -430,7 +430,7 @@ it.layer(NodeServices.layer)("pull request link decider", (it) => {
       expect(event.payload).toMatchObject({
         threadId: THREAD_ID,
         host: "github.com",
-        repository: "t3tools/t3code",
+        repository: "southbaghq/colon3code",
         number: 42,
       });
     }),
@@ -445,7 +445,7 @@ it.layer(NodeServices.layer)("pull request link decider", (it) => {
           commandId: CommandId.make("cmd-unlink-stack"),
           threadId: THREAD_ID,
           host: "github.com",
-          repository: "t3tools/t3code",
+          repository: "southbaghq/colon3code",
           number: 42,
         },
         readModel: makeReadModel([member]),
@@ -466,7 +466,7 @@ it.layer(NodeServices.layer)("pull request link decider", (it) => {
             kind: "native",
             id: "stack-1",
             number: 1,
-            url: "https://github.com/t3tools/t3code/stack/1",
+            url: "https://github.com/southbaghq/colon3code/stack/1",
             base: "main",
             layers: [
               { number: 42, headBranch: "first", state: "open" },
@@ -518,7 +518,7 @@ it.layer(NodeServices.layer)("pull request link decider", (it) => {
           commandId: CommandId.make("cmd-unlink-missing"),
           threadId: THREAD_ID,
           host: "github.com",
-          repository: "t3tools/t3code",
+          repository: "southbaghq/colon3code",
           number: 7,
         },
         readModel: makeReadModel([makeLink()]),
@@ -535,7 +535,7 @@ it.layer(NodeServices.layer)("pull request link decider", (it) => {
           commandId: CommandId.make("cmd-sync-missing"),
           threadId: THREAD_ID,
           host: "github.com",
-          repository: "t3tools/t3code",
+          repository: "southbaghq/colon3code",
           number: 42,
           snapshot,
           stack: null,
@@ -554,7 +554,7 @@ it.layer(NodeServices.layer)("pull request link decider", (it) => {
           commandId: CommandId.make("cmd-sync"),
           threadId: THREAD_ID,
           host: "GitHub.com",
-          repository: "t3tools/t3code",
+          repository: "southbaghq/colon3code",
           number: 42,
           snapshot,
           stack: null,
@@ -565,7 +565,7 @@ it.layer(NodeServices.layer)("pull request link decider", (it) => {
       expect(event.payload).toMatchObject({
         threadId: THREAD_ID,
         host: "github.com",
-        repository: "t3tools/t3code",
+        repository: "southbaghq/colon3code",
         number: 42,
         snapshot,
         stack: null,

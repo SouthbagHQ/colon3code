@@ -1,11 +1,11 @@
-# Running T3 Code in the background
+# Running :3 Code in the background
 
-On Linux and macOS, T3 Code can run as a service for your user so you do not need
+On Linux and macOS, :3 Code can run as a service for your user so you do not need
 to keep a terminal open.
 
 ## Manage the service
 
-Run these commands on the machine that will host T3 Code:
+Run these commands on the machine that will host :3 Code:
 
 | Task                            | Command                           |
 | ------------------------------- | --------------------------------- |
@@ -23,9 +23,9 @@ one. An older CLI refuses to replace a newer service unless you explicitly add
 
 Updating restarts the server. Finish active work first, and wait for any remote
 update already in progress. To match a remote client's version, follow
-[Updating T3 Code](./updating.md).
+[Updating :3 Code](./updating.md).
 
-Self-contained builds install as a download from the T3 Code GitHub release
+Self-contained builds install as a download from the :3 Code GitHub release
 instead of through npm, so the machine running the service does not need
 Node.js or npm once the CLI is on it. To get the CLI onto a machine without
 Node, run the install script:
@@ -38,8 +38,8 @@ On Windows, run `irm https://t3.codes/install.ps1 | iex` in PowerShell instead.
 
 It places `t3` in `~/.local/bin` and reuses the same download when you later
 run `t3 service install`. It follows the stable train by default; set
-`T3CODE_CHANNEL=nightly` for nightlies, `T3CODE_VERSION` to pin an exact
-version, or `T3CODE_RELEASE_BASE_URL` to download from a mirror.
+`COLON3CODE_CHANNEL=nightly` for nightlies, `COLON3CODE_VERSION` to pin an exact
+version, or `COLON3CODE_RELEASE_BASE_URL` to download from a mirror.
 
 `preview` is a third train that maintainers cut from unreleased branches to
 exercise the release pipeline. Those builds can be broken, receive no fixes,
@@ -67,7 +67,7 @@ you want them gone too. Pass `--yes` from a script.
 
 ## Platform support
 
-Linux needs systemd user services. Setup enables lingering so T3 Code starts at
+Linux needs systemd user services. Setup enables lingering so :3 Code starts at
 boot and keeps running after logout. If this needs administrator permission,
 setup prints a recovery command before changing the service.
 
@@ -101,7 +101,7 @@ ssh -t your-server 'sudo loginctl enable-linger "$(id -un)"'
 ```
 
 Then retry service setup as your normal user. Run only the `loginctl` command
-with sudo; running T3 Code as root creates a separate installation and Connect
+with sudo; running :3 Code as root creates a separate installation and Connect
 identity. Without administrator access, run `t3 serve` in a terminal and keep
 that session open.
 
@@ -109,14 +109,14 @@ that session open.
 | --------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
 | `linger-unavailable`                    | Run `loginctl show-user "$(id -un)" --property=Linger` and check that systemd-logind is available.                             |
 | `user-manager-unavailable`              | Run `systemctl --user status` in a login session for the service user; check your distribution's systemd user-session support. |
-| `service-disabled` or `service-stopped` | Read the log and `systemctl --user status t3code.service`, then use the repair command printed by T3 Code.                     |
+| `service-disabled` or `service-stopped` | Read the log and `systemctl --user status colon3code.service`, then use the repair command printed by :3 Code.                 |
 | `restart-pending`                       | A newer version is installed but the service still runs the previous one. Run `t3 service restart`.                            |
 
 On macOS, check **System Settings → General → Login Items** if the service no
 longer starts at login. If agent work cannot access Desktop, Documents, or
 Downloads, it may need Full Disk Access for the Node executable listed in
 `ProgramArguments` in
-`~/Library/LaunchAgents/com.t3tools.t3code.service.plist`.
+`~/Library/LaunchAgents/com.t3tools.colon3code.service.plist`.
 
 For failures after signing in to T3 Connect, see
 [connection troubleshooting](./remote-access.md#t3-connect-troubleshooting).

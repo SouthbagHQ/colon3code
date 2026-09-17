@@ -791,7 +791,7 @@ export const makeAntigravityAdapter = Effect.fn("makeAntigravityAdapter")(functi
               // leaf directory holding only uploads.
               const runtime = yield* options.makeRuntime({
                 cwd,
-                clientInfo: { name: "t3-code", version: "0.0.0" },
+                clientInfo: { name: "colon3-code", version: "0.0.0" },
                 clientFileSystem: true,
                 ...(mcp?.agentDeviceEnvironment
                   ? { agentDeviceEnvironment: mcp.agentDeviceEnvironment }
@@ -802,7 +802,7 @@ export const makeAntigravityAdapter = Effect.fn("makeAntigravityAdapter")(functi
                   ? [
                       {
                         type: "http",
-                        name: "t3-code",
+                        name: "colon3-code",
                         url: mcp.endpoint,
                         headers: [{ name: "Authorization", value: mcp.authorizationHeader }],
                       },

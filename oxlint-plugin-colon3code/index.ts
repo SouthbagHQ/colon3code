@@ -10,7 +10,7 @@ import noNativeTitleTooltip from "./rules/no-native-title-tooltip.ts";
 
 export default definePlugin({
   meta: {
-    name: "t3code",
+    name: "colon3code",
   },
   rules: {
     "namespace-node-imports": namespaceNodeImports,

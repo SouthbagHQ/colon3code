@@ -190,7 +190,7 @@ describe("ProviderCommandReactor", () => {
   }) {
     const now = "2026-01-01T00:00:00.000Z";
     const baseDir =
-      input?.baseDir ?? NodeFS.mkdtempSync(NodePath.join(NodeOS.tmpdir(), "t3code-reactor-"));
+      input?.baseDir ?? NodeFS.mkdtempSync(NodePath.join(NodeOS.tmpdir(), "colon3code-reactor-"));
     createdBaseDirs.add(baseDir);
     const { stateDir } = deriveServerPathsSync(baseDir, undefined);
     createdStateDirs.add(stateDir);
@@ -677,7 +677,7 @@ describe("ProviderCommandReactor", () => {
           commandId: CommandId.make("cmd-sign-out-worktree"),
           threadId,
           title: "New thread",
-          branch: "t3code/1234abcd",
+          branch: "colon3code/1234abcd",
           worktreePath: NodePath.join(harness.stateDir, "missing-worktree"),
         });
 
@@ -2551,7 +2551,7 @@ describe("ProviderCommandReactor", () => {
         type: "thread.meta.update",
         commandId: CommandId.make("cmd-thread-branch"),
         threadId: ThreadId.make("thread-1"),
-        branch: "t3code/1234abcd",
+        branch: "colon3code/1234abcd",
         worktreePath: "/tmp/provider-project-worktree",
       }),
     );

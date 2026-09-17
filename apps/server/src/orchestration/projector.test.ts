@@ -123,7 +123,7 @@ describe("orchestration projector", () => {
           projects: [
             {
               id: ProjectId.make("project-1"),
-              title: "T3 Code",
+              title: ":3 Code",
               workspaceRoot: "/repo",
               defaultModelSelection: null,
               scripts: [],
@@ -131,13 +131,13 @@ describe("orchestration projector", () => {
               updatedAt: now,
               deletedAt: null,
               repositoryIdentity: {
-                canonicalKey: "github.com/pingdotgg/t3code",
+                canonicalKey: "github.com/southbaghq/colon3code",
                 provider: "github",
-                displayName: "pingdotgg/t3code",
+                displayName: "southbaghq/colon3code",
                 locator: {
                   source: "git-remote",
                   remoteName: "origin",
-                  remoteUrl: "https://github.com/pingdotgg/t3code.git",
+                  remoteUrl: "https://github.com/southbaghq/colon3code.git",
                 },
               },
             },
@@ -162,14 +162,14 @@ describe("orchestration projector", () => {
       );
       const linkedPullRequest = {
         projectId: "project-1",
-        repository: "pingdotgg/t3code",
+        repository: "southbaghq/colon3code",
         number: 42,
-        url: "https://github.com/pingdotgg/t3code/pull/42",
+        url: "https://github.com/southbaghq/colon3code/pull/42",
       };
       const branchPullRequest = {
         ...linkedPullRequest,
         number: 43,
-        url: "https://github.com/pingdotgg/t3code/pull/43",
+        url: "https://github.com/southbaghq/colon3code/pull/43",
       };
       const updates = [
         { payload: { linkedPullRequest, branchPullRequest }, expected: branchPullRequest },

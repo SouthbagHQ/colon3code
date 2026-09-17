@@ -42,9 +42,9 @@ function makeEvent(input: {
 function makeLink(overrides: Partial<ThreadPullRequestLink> = {}): ThreadPullRequestLink {
   return {
     host: "github.com",
-    repository: "t3tools/t3code",
+    repository: "southbaghq/colon3code",
     number: 42,
-    url: "https://github.com/t3tools/t3code/pull/42",
+    url: "https://github.com/southbaghq/colon3code/pull/42",
     source: "manual",
     linkedAt: NOW,
     snapshot: null,
@@ -122,13 +122,13 @@ it.effect("projects link, sync, and unlink onto the thread", () =>
   Effect.gen(function* () {
     const created = yield* createThread(
       yield* createProject(createEmptyReadModel(NOW), {
-        canonicalKey: "github.com/t3tools/t3code",
+        canonicalKey: "github.com/southbaghq/colon3code",
         provider: "github",
-        displayName: "t3tools/t3code",
+        displayName: "southbaghq/colon3code",
         locator: {
           source: "git-remote",
           remoteName: "origin",
-          remoteUrl: "https://github.com/t3tools/t3code.git",
+          remoteUrl: "https://github.com/southbaghq/colon3code.git",
         },
       }),
     );
@@ -147,9 +147,9 @@ it.effect("projects link, sync, and unlink onto the thread", () =>
     // The legacy field is derived from the array so old clients keep working.
     expect(linked.threads[0]?.linkedPullRequest).toEqual({
       projectId: PROJECT_ID,
-      repository: "t3tools/t3code",
+      repository: "southbaghq/colon3code",
       number: 42,
-      url: "https://github.com/t3tools/t3code/pull/42",
+      url: "https://github.com/southbaghq/colon3code/pull/42",
     });
 
     // A second link for the same key replaces in place (used for un-dismiss
@@ -177,7 +177,7 @@ it.effect("projects link, sync, and unlink onto the thread", () =>
         payload: {
           threadId: THREAD_ID,
           host: "github.com",
-          repository: "t3tools/t3code",
+          repository: "southbaghq/colon3code",
           number: 42,
           snapshot,
           stack: null,
@@ -195,7 +195,7 @@ it.effect("projects link, sync, and unlink onto the thread", () =>
         payload: {
           threadId: THREAD_ID,
           host: "github.com",
-          repository: "t3tools/t3code",
+          repository: "southbaghq/colon3code",
           number: 42,
           updatedAt: LATER,
         },
@@ -209,7 +209,7 @@ it.effect("projects link, sync, and unlink onto the thread", () =>
 it.effect("ignores a sync for a pull request that is no longer linked", () =>
   Effect.gen(function* () {
     const created = yield* createThread(createEmptyReadModel(NOW));
-    const other = makeLink({ number: 7, url: "https://github.com/t3tools/t3code/pull/7" });
+    const other = makeLink({ number: 7, url: "https://github.com/southbaghq/colon3code/pull/7" });
     const linked = yield* projectEvent(
       created,
       makeEvent({
@@ -226,7 +226,7 @@ it.effect("ignores a sync for a pull request that is no longer linked", () =>
         payload: {
           threadId: THREAD_ID,
           host: "github.com",
-          repository: "t3tools/t3code",
+          repository: "southbaghq/colon3code",
           number: 42,
           snapshot,
           stack: null,
@@ -242,19 +242,19 @@ it.effect("ignores a sync for a pull request that is no longer linked", () =>
 it.effect("mirrors legacy meta-updated links into pullRequests using the project host", () =>
   Effect.gen(function* () {
     const withProject = yield* createProject(createEmptyReadModel(NOW), {
-      canonicalKey: "GitHub.com/t3tools/t3code",
+      canonicalKey: "GitHub.com/southbaghq/colon3code",
       provider: "github",
-      displayName: "t3tools/t3code",
+      displayName: "southbaghq/colon3code",
       locator: {
         source: "git-remote",
         remoteName: "origin",
-        remoteUrl: "git@github.com:t3tools/t3code.git",
+        remoteUrl: "git@github.com:southbaghq/colon3code.git",
       },
     });
     const created = yield* createThread(withProject);
     const agentLink = makeLink({
       number: 7,
-      url: "https://github.com/t3tools/t3code/pull/7",
+      url: "https://github.com/southbaghq/colon3code/pull/7",
       source: "agent",
     });
     const withAgentLink = yield* projectEvent(
@@ -275,9 +275,9 @@ it.effect("mirrors legacy meta-updated links into pullRequests using the project
           threadId: THREAD_ID,
           linkedPullRequest: {
             projectId: PROJECT_ID,
-            repository: "T3Tools/T3Code",
+            repository: "SouthbagHQ/Colon3Code",
             number: 42,
-            url: "https://github.com/t3tools/t3code/pull/42",
+            url: "https://github.com/southbaghq/colon3code/pull/42",
           },
           updatedAt: LATER,
         },
@@ -287,9 +287,9 @@ it.effect("mirrors legacy meta-updated links into pullRequests using the project
       agentLink,
       {
         host: "github.com",
-        repository: "t3tools/t3code",
+        repository: "southbaghq/colon3code",
         number: 42,
-        url: "https://github.com/t3tools/t3code/pull/42",
+        url: "https://github.com/southbaghq/colon3code/pull/42",
         source: "manual",
         linkedAt: LATER,
         snapshot: null,
@@ -299,9 +299,9 @@ it.effect("mirrors legacy meta-updated links into pullRequests using the project
     // Two open links read as a stack; the derived field points at the top.
     expect(legacyLinked.threads[0]?.linkedPullRequest).toEqual({
       projectId: PROJECT_ID,
-      repository: "t3tools/t3code",
+      repository: "southbaghq/colon3code",
       number: 42,
-      url: "https://github.com/t3tools/t3code/pull/42",
+      url: "https://github.com/southbaghq/colon3code/pull/42",
     });
 
     // Null clears only the manual link; the agent's stays.
@@ -316,9 +316,9 @@ it.effect("mirrors legacy meta-updated links into pullRequests using the project
     expect(legacyCleared.threads[0]?.pullRequests).toEqual([agentLink]);
     expect(legacyCleared.threads[0]?.linkedPullRequest).toEqual({
       projectId: PROJECT_ID,
-      repository: "t3tools/t3code",
+      repository: "southbaghq/colon3code",
       number: 7,
-      url: "https://github.com/t3tools/t3code/pull/7",
+      url: "https://github.com/southbaghq/colon3code/pull/7",
     });
   }),
 );
@@ -335,9 +335,9 @@ it.effect("falls back to the link URL host when the project has no repository id
           threadId: THREAD_ID,
           linkedPullRequest: {
             projectId: PROJECT_ID,
-            repository: "t3tools/t3code",
+            repository: "southbaghq/colon3code",
             number: 42,
-            url: "https://GitLab.example.com/t3tools/t3code/-/merge_requests/42",
+            url: "https://GitLab.example.com/southbaghq/colon3code/-/merge_requests/42",
           },
           updatedAt: LATER,
         },

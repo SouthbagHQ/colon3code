@@ -1,4 +1,4 @@
-// This file mostly exists because we want dev mode to say "T3 Code (Dev)" instead of "electron"
+// This file mostly exists because we want dev mode to say ":3 Code (Dev)" instead of "electron"
 
 import * as NodeChildProcess from "node:child_process";
 import * as NodeFS from "node:fs";
@@ -15,12 +15,17 @@ const repoRoot = NodePath.resolve(desktopDir, "..", "..");
 const devBundleIdSuffix = NodePath.basename(repoRoot)
   .toLowerCase()
   .replaceAll(/[^a-z0-9]+/g, "");
-const APP_DISPLAY_NAME = isDevelopment ? "T3 Code (Dev)" : "T3 Code (Alpha)";
+const APP_DISPLAY_NAME = isDevelopment ? ":3 Code (Dev)" : ":3 Code (Alpha)";
+// Bundle directory and executable names use U+A789 MODIFIER LETTER COLON: a
+// real ":" is a path separator for Finder and illegal on Windows. The display
+// name above is applied through a localized InfoPlist.strings so Finder and the
+// Dock show a real colon and search tokenizes it as punctuation.
+const APP_BUNDLE_NAME = isDevelopment ? "꞉3 Code (Dev)" : "꞉3 Code (Alpha)";
 const APP_BUNDLE_ID = isDevelopment
-  ? `com.t3tools.t3code.dev.${devBundleIdSuffix || "local"}`
-  : "com.t3tools.t3code";
-const APP_PROTOCOL_SCHEMES = isDevelopment ? ["t3code-dev"] : ["t3code"];
-const LAUNCHER_VERSION = 19;
+  ? `com.t3tools.colon3code.dev.${devBundleIdSuffix || "local"}`
+  : "com.t3tools.colon3code";
+const APP_PROTOCOL_SCHEMES = isDevelopment ? ["colon3code-dev"] : ["colon3code"];
+const LAUNCHER_VERSION = 20;
 const developmentMacIconPngPath = NodePath.join(
   repoRoot,
   "assets",
@@ -28,7 +33,7 @@ const developmentMacIconPngPath = NodePath.join(
   "blueprint-macos-1024.png",
 );
 const productionMacIconPngPath = NodePath.join(repoRoot, "assets", "prod", "black-macos-1024.png");
-// oxlint-disable-next-line t3code/no-global-process-runtime -- Standalone launcher script has no Effect runtime.
+// oxlint-disable-next-line colon3code/no-global-process-runtime -- Standalone launcher script has no Effect runtime.
 const hostPlatform = NodeOS.platform();
 
 function setPlistString(plistPath, key, value) {
@@ -111,14 +116,14 @@ function shellSingleQuote(value) {
 export function makeDevelopmentEnvironmentScript(environment) {
   const envEntries = [
     ["VITE_DEV_SERVER_URL", environment.VITE_DEV_SERVER_URL],
-    ["T3CODE_PORT", environment.T3CODE_PORT],
-    ["T3CODE_HOME", environment.T3CODE_HOME],
-    ["T3CODE_COMMIT_HASH", environment.T3CODE_COMMIT_HASH],
-    ["T3CODE_OTLP_TRACES_URL", environment.T3CODE_OTLP_TRACES_URL],
-    ["T3CODE_OTLP_EXPORT_INTERVAL_MS", environment.T3CODE_OTLP_EXPORT_INTERVAL_MS],
-    ["T3CODE_OTLP_HEADERS", environment.T3CODE_OTLP_HEADERS],
-    ["T3CODE_OTLP_PROTOCOL", environment.T3CODE_OTLP_PROTOCOL],
-    ["T3CODE_DESKTOP_APP_USER_MODEL_ID", APP_BUNDLE_ID],
+    ["COLON3CODE_PORT", environment.COLON3CODE_PORT],
+    ["COLON3CODE_HOME", environment.COLON3CODE_HOME],
+    ["COLON3CODE_COMMIT_HASH", environment.COLON3CODE_COMMIT_HASH],
+    ["COLON3CODE_OTLP_TRACES_URL", environment.COLON3CODE_OTLP_TRACES_URL],
+    ["COLON3CODE_OTLP_EXPORT_INTERVAL_MS", environment.COLON3CODE_OTLP_EXPORT_INTERVAL_MS],
+    ["COLON3CODE_OTLP_HEADERS", environment.COLON3CODE_OTLP_HEADERS],
+    ["COLON3CODE_OTLP_PROTOCOL", environment.COLON3CODE_OTLP_PROTOCOL],
+    ["COLON3CODE_DESKTOP_APP_USER_MODEL_ID", APP_BUNDLE_ID],
   ].filter((entry) => typeof entry[1] === "string" && entry[1].trim().length > 0);
   return [
     ...envEntries.map(
@@ -138,7 +143,7 @@ export function makeDevelopmentLauncherScript({
   return [
     "#!/bin/sh",
     `if [ -f ${shellSingleQuote(environmentFilePath)} ]; then . ${shellSingleQuote(environmentFilePath)}; fi`,
-    `exec ${shellSingleQuote(electronBinaryPath)} --t3code-dev-root=${shellSingleQuote(desktopRoot)} ${shellSingleQuote(mainEntryPath)} "$@"`,
+    `exec ${shellSingleQuote(electronBinaryPath)} --colon3code-dev-root=${shellSingleQuote(desktopRoot)} ${shellSingleQuote(mainEntryPath)} "$@"`,
     "",
   ].join("\n");
 }
@@ -262,17 +267,25 @@ function ensureMacIconIcns(runtimeDir) {
   }
 }
 
+// Finder, the Dock and the app switcher only show a name that differs from
+// the bundle filename when it comes from a localized InfoPlist.strings and
+// Info.plist opts in with LSHasLocalizedDisplayName; the unlocalized names
+// here must keep matching the bundle filename.
 export function resolveMacBundleInfoPlistStrings(executableName) {
   return {
-    CFBundleDisplayName: APP_DISPLAY_NAME,
-    CFBundleName: APP_DISPLAY_NAME,
+    CFBundleDisplayName: APP_BUNDLE_NAME,
+    CFBundleName: APP_BUNDLE_NAME,
     CFBundleIdentifier: APP_BUNDLE_ID,
     CFBundleExecutable: executableName,
     CFBundleIconFile: "icon.icns",
     NSScreenCaptureUsageDescription:
-      "T3 Code captures the active window when you use the snapshot shortcut.",
-    NSDocumentsFolderUsageDescription: "T3 Code reads project files you open in the desktop app.",
+      ":3 Code captures the active window when you use the snapshot shortcut.",
+    NSDocumentsFolderUsageDescription: ":3 Code reads project files you open in the desktop app.",
   };
+}
+
+export function resolveMacBundleLocalizedStrings() {
+  return `CFBundleDisplayName = ${JSON.stringify(APP_DISPLAY_NAME)};\nCFBundleName = ${JSON.stringify(APP_DISPLAY_NAME)};\n`;
 }
 
 function patchMainBundleInfoPlist(appBundlePath, iconPath, executableName) {
@@ -286,8 +299,15 @@ function patchMainBundleInfoPlist(appBundlePath, iconPath, executableName) {
       CFBundleURLSchemes: APP_PROTOCOL_SCHEMES,
     },
   ]);
+  setPlistJson(infoPlistPath, "LSHasLocalizedDisplayName", true);
 
   const resourcesDir = NodePath.join(appBundlePath, "Contents", "Resources");
+  const stringsDir = NodePath.join(resourcesDir, "en.lproj");
+  NodeFS.mkdirSync(stringsDir, { recursive: true });
+  NodeFS.writeFileSync(
+    NodePath.join(stringsDir, "InfoPlist.strings"),
+    resolveMacBundleLocalizedStrings(),
+  );
   NodeFS.copyFileSync(iconPath, NodePath.join(resourcesDir, "icon.icns"));
   NodeFS.copyFileSync(iconPath, NodePath.join(resourcesDir, "electron.icns"));
 }
@@ -331,9 +351,9 @@ function readJson(path) {
   }
 }
 
-export function resolveMacLauncherPaths(appBundlePath, displayName = APP_DISPLAY_NAME) {
+export function resolveMacLauncherPaths(appBundlePath, bundleName = APP_BUNDLE_NAME) {
   const executableDir = NodePath.posix.join(appBundlePath, "Contents", "MacOS");
-  const launcherExecutableName = `${displayName} Launcher`;
+  const launcherExecutableName = `${bundleName} Launcher`;
   return {
     launcherExecutableName,
     launcherBinaryPath: NodePath.posix.join(executableDir, launcherExecutableName),
@@ -344,7 +364,7 @@ export function resolveMacLauncherPaths(appBundlePath, displayName = APP_DISPLAY
 function buildMacLauncher(electronBinaryPath) {
   const sourceAppBundlePath = NodePath.resolve(NodePath.dirname(electronBinaryPath), "../..");
   const runtimeDir = NodePath.join(desktopDir, ".electron-runtime");
-  const targetAppBundlePath = NodePath.join(runtimeDir, `${APP_DISPLAY_NAME}.app`);
+  const targetAppBundlePath = NodePath.join(runtimeDir, `${APP_BUNDLE_NAME}.app`);
   const developmentPaths = resolveMacLauncherPaths(targetAppBundlePath);
   const runtimeElectronBinaryPath = developmentPaths.runtimeElectronBinaryPath;
   const launcherBinaryPath = isDevelopment
@@ -402,7 +422,7 @@ function buildMacLauncher(electronBinaryPath) {
   if (isDevelopment) {
     // Keep Electron's native executable inside the branded bundle. Launching the
     // node_modules copy makes macOS associate the process (and Dock label) with
-    // Electron.app even though this bundle's Info.plist has the T3 Code name.
+    // Electron.app even though this bundle's Info.plist has the :3 Code name.
     // Its conventional executable name also keeps Electron's default-app runtime
     // in development mode instead of making app.isPackaged report true.
     writeDevelopmentEnvironmentScript();

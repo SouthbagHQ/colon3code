@@ -694,7 +694,7 @@ function parseBigInt(input: string): bigint {
 
 /**
  * Parses the `OTEL_EXPORTER_OTLP_HEADERS` wire format used by
- * `T3CODE_OTLP_HEADERS`: W3C Baggage `key=value` pairs joined by commas, with
+ * `COLON3CODE_OTLP_HEADERS`: W3C Baggage `key=value` pairs joined by commas, with
  * percent-encoded values. Each pair splits at its first `=` so an encoded or
  * literal `=` inside a value survives, and whitespace around the separators is
  * ignored.

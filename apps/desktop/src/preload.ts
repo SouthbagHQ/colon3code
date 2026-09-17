@@ -29,7 +29,7 @@ function isSnapShotEvent(value: unknown): value is DesktopSnapShotEvent {
 
 exposeClerkBridge({ passkeys: true });
 
-// oxlint-disable-next-line t3code/no-global-process-runtime -- Electron exposes the client platform in its sandboxed preload process.
+// oxlint-disable-next-line colon3code/no-global-process-runtime -- Electron exposes the client platform in its sandboxed preload process.
 const clientPlatform = process.platform;
 
 if (clientPlatform === "darwin") {

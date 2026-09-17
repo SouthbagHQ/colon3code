@@ -114,8 +114,8 @@ describe("ProjectSetupScriptRunner", () => {
         cwd: "/repo/worktrees/a",
         worktreePath: "/repo/worktrees/a",
         env: {
-          T3CODE_PROJECT_ROOT: "/repo/project",
-          T3CODE_WORKTREE_PATH: "/repo/worktrees/a",
+          COLON3CODE_PROJECT_ROOT: "/repo/project",
+          COLON3CODE_WORKTREE_PATH: "/repo/worktrees/a",
           NO_COLOR: "1",
           FORCE_COLOR: "0",
         },
@@ -219,8 +219,8 @@ describe("ProjectSetupScriptRunner", () => {
           env: {
             NO_COLOR: "1",
             FORCE_COLOR: "0",
-            T3CODE_PROJECT_ROOT: "/repo/project",
-            T3CODE_WORKTREE_PATH: "/repo/worktrees/a",
+            COLON3CODE_PROJECT_ROOT: "/repo/project",
+            COLON3CODE_WORKTREE_PATH: "/repo/worktrees/a",
           },
         });
         expect(write).toHaveBeenCalledWith({

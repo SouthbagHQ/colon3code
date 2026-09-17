@@ -68,7 +68,7 @@ const CURSOR_PARAMETERIZED_MODEL_PICKER_MIN_VERSION_DATE = 2026_04_08;
 const CURSOR_CLI_INSTALLATION_DOCS_URL = "https://cursor.com/docs/cli/installation";
 const CURSOR_ACP_MODEL_DISCOVERY_FAILED_MESSAGE = [
   "Cursor ACP model discovery failed.",
-  "Cursor CLI setup may be incomplete; install or enable the Cursor CLI, restart T3 Code, and try again.",
+  "Cursor CLI setup may be incomplete; install or enable the Cursor CLI, restart :3 Code, and try again.",
   `See ${CURSOR_CLI_INSTALLATION_DOCS_URL}.`,
   "Check server logs for ACP details.",
 ].join(" ");
@@ -96,7 +96,7 @@ export function buildInitialCursorProviderSnapshot(
           version: null,
           status: "warning",
           auth: { status: "unknown" },
-          message: "Cursor is disabled in T3 Code settings.",
+          message: "Cursor is disabled in :3 Code settings.",
         },
       });
     }
@@ -422,7 +422,7 @@ const makeCursorAcpProbeRuntime = (
           ...(environment ? { env: environment } : {}),
         },
         cwd: process.cwd(),
-        clientInfo: { name: "t3-code-provider-probe", version: "0.0.0" },
+        clientInfo: { name: "colon3-code-provider-probe", version: "0.0.0" },
         authMethodId: "cursor_login",
         clientCapabilities: CURSOR_PARAMETERIZED_MODEL_PICKER_CAPABILITIES,
       }).pipe(Layer.provide(Layer.succeed(ChildProcessSpawner.ChildProcessSpawner, spawner))),
@@ -638,7 +638,7 @@ function joinProviderMessages(...messages: ReadonlyArray<string | undefined>): s
 function buildCursorCliCommandMissingMessage(binaryPath: string): string {
   return [
     `Cursor CLI command \`${binaryPath}\` was not found.`,
-    `Install or enable the Cursor CLI, make sure \`${binaryPath}\` is on PATH, then restart T3 Code.`,
+    `Install or enable the Cursor CLI, make sure \`${binaryPath}\` is on PATH, then restart :3 Code.`,
     `See ${CURSOR_CLI_INSTALLATION_DOCS_URL}.`,
   ].join(" ");
 }
@@ -1029,7 +1029,7 @@ export const checkCursorProviderStatus = Effect.fn("checkCursorProviderStatus")(
         version: null,
         status: "warning",
         auth: { status: "unknown" },
-        message: "Cursor is disabled in T3 Code settings.",
+        message: "Cursor is disabled in :3 Code settings.",
       },
     });
   }

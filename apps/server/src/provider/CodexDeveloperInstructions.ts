@@ -3,9 +3,9 @@ import { buildRuntimeInstructions } from "./RuntimeInstructions.ts";
 
 const T3_CODE_BROWSER_TOOL_INSTRUCTIONS = `
 
-## T3 Code collaborative browser
+## :3 Code collaborative browser
 
-You are running inside T3 Code. The \`t3-code\` MCP server is the product-native collaborative browser shared with the user. When it exposes \`preview_*\` tools, prefer those tools for browser navigation, inspection, interaction, screenshots, and recordings.
+You are running inside :3 Code. The \`colon3-code\` MCP server is the product-native collaborative browser shared with the user. When it exposes \`preview_*\` tools, prefer those tools for browser navigation, inspection, interaction, screenshots, and recordings.
 
 For browser work, first call \`preview_status\`. If no automation-capable preview is attached, call \`preview_open\` before concluding that the browser is unavailable. Then use \`preview_navigate\`, \`preview_snapshot\`, and the focused interaction tools. Prefer snapshot-provided locators over coordinates.
 
@@ -14,19 +14,19 @@ Do not switch to global browser skills, Chrome, Node REPL browser automation, st
 
 const T3_CODE_DEVICE_TOOL_INSTRUCTIONS = `
 
-## T3 Code devices
+## :3 Code devices
 
-The \`t3-code\` MCP server also exposes \`device_*\` tools for iOS Simulators and Android Emulators on this environment. For mobile verification, call \`device_list\`, then \`device_open\` so the user can watch the device in their Device panel; its result explains how to drive the device. Driving happens through the \`agent-device\` CLI, which is on PATH. Keep the host config and session flags returned by \`device_open\` on every command so concurrent devices stay independent: prefer \`agent-device snapshot -i\` refs over coordinates, and use \`device_screenshot\` when you need to see the screen. Do not call simctl, adb, xcrun, or serve-sim directly while these tools are present. If \`device_list\` reports a platform as unavailable, say so instead of trying another route.
+The \`colon3-code\` MCP server also exposes \`device_*\` tools for iOS Simulators and Android Emulators on this environment. For mobile verification, call \`device_list\`, then \`device_open\` so the user can watch the device in their Device panel; its result explains how to drive the device. Driving happens through the \`agent-device\` CLI, which is on PATH. Keep the host config and session flags returned by \`device_open\` on every command so concurrent devices stay independent: prefer \`agent-device snapshot -i\` refs over coordinates, and use \`device_screenshot\` when you need to see the screen. Do not call simctl, adb, xcrun, or serve-sim directly while these tools are present. If \`device_list\` reports a platform as unavailable, say so instead of trying another route.
 `;
 
-export interface T3CodeToolAvailability {
+export interface Colon3CodeToolAvailability {
   readonly browser: boolean;
   readonly device: boolean;
 }
 
 const normalizeAvailability = (
-  availability: boolean | T3CodeToolAvailability,
-): T3CodeToolAvailability =>
+  availability: boolean | Colon3CodeToolAvailability,
+): Colon3CodeToolAvailability =>
   typeof availability === "boolean" ? { browser: availability, device: false } : availability;
 
 /**
@@ -36,7 +36,7 @@ const normalizeAvailability = (
  * from Playwright, agent-browser, and raw simctl/adb, so leaving them in would
  * talk it out of the only automation it still has.
  */
-const browserToolInstructions = (availability: boolean | T3CodeToolAvailability): string => {
+const browserToolInstructions = (availability: boolean | Colon3CodeToolAvailability): string => {
   const tools = normalizeAvailability(availability);
   return `${tools.browser ? T3_CODE_BROWSER_TOOL_INSTRUCTIONS : ""}${
     tools.device ? T3_CODE_DEVICE_TOOL_INSTRUCTIONS : ""
@@ -44,7 +44,7 @@ const browserToolInstructions = (availability: boolean | T3CodeToolAvailability)
 };
 
 const codexPlanModeDeveloperInstructions = (
-  browserToolsAvailable: boolean | T3CodeToolAvailability,
+  browserToolsAvailable: boolean | Colon3CodeToolAvailability,
 ): string => `<collaboration_mode># Plan Mode (Conversational)
 
 You work in 3 phases, and you should *chat your way* to a great plan before finalizing it. A great plan is very detailed-intent- and implementation-wise-so that it can be handed to another engineer or agent to be implemented right away. It must be **decision complete**, where the implementer does not need to make any decisions.
@@ -177,7 +177,7 @@ ${browserToolInstructions(browserToolsAvailable)}
 </collaboration_mode>`;
 
 const codexDefaultModeDeveloperInstructions = (
-  browserToolsAvailable: boolean | T3CodeToolAvailability,
+  browserToolsAvailable: boolean | Colon3CodeToolAvailability,
 ): string => `<collaboration_mode># Collaboration Mode: Default
 
 You are now in Default mode. Any previous instructions for other modes (e.g. Plan mode) are no longer active.
@@ -201,11 +201,11 @@ export function buildCodexDeveloperInstructions(
   interactionMode: ProviderInteractionMode,
   runtime: CodexRuntimeInfo,
   /**
-   * Whether the `t3-code` MCP server is attached to this turn. Callers derive
+   * Whether the `colon3-code` MCP server is attached to this turn. Callers derive
    * it from the session's actual MCP configuration rather than re-reading the
    * setting, so the prompt cannot claim tools the turn doesn't have.
    */
-  browserToolsAvailable: boolean | T3CodeToolAvailability = true,
+  browserToolsAvailable: boolean | Colon3CodeToolAvailability = true,
 ): string {
   const base =
     interactionMode === "plan"

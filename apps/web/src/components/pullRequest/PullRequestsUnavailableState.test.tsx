@@ -16,12 +16,12 @@ describe("PullRequestsUnavailableState", () => {
     const text = textOf(
       PullRequestsUnavailableState({
         title: "Pull requests unavailable",
-        error: "Update this environment's T3 Code server to browse pull requests.",
+        error: "Update this environment's :3 Code server to browse pull requests.",
       }),
     );
 
     expect(text).toContain("Pull requests unavailable");
-    expect(text).toContain("Update this environment's T3 Code server");
+    expect(text).toContain("Update this environment's :3 Code server");
     expect(text).not.toContain("Retry");
   });
 
@@ -30,13 +30,13 @@ describe("PullRequestsUnavailableState", () => {
       <PullRequestsUnavailableState
         error="GitHub did not answer."
         onRetry={() => {}}
-        gitHubUrl="https://github.com/pingdotgg/t3code/pull/42"
+        gitHubUrl="https://github.com/SouthbagHQ/colon3code/pull/42"
       />,
     );
 
     expect(html).toContain("Retry");
     expect(html).toContain("Open on GitHub");
-    expect(html).toContain('href="https://github.com/pingdotgg/t3code/pull/42"');
+    expect(html).toContain('href="https://github.com/SouthbagHQ/colon3code/pull/42"');
     expect(html).toContain('target="_blank"');
     expect(html).toContain('rel="noopener noreferrer"');
   });
@@ -45,7 +45,7 @@ describe("PullRequestsUnavailableState", () => {
     const html = renderToStaticMarkup(
       <PullRequestsUnavailableState
         error="This server cannot read the pull request."
-        gitHubUrl="https://github.com/pingdotgg/t3code/pull/9"
+        gitHubUrl="https://github.com/SouthbagHQ/colon3code/pull/9"
       />,
     );
 

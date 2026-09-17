@@ -60,8 +60,8 @@ describe("pull request checkout commands", () => {
     [
       "bitbucket",
       "feature/checkout",
-      "maria/t3code",
-      "git clone --single-branch --branch feature/checkout https://bitbucket.org/maria/t3code.git t3code-pr-42",
+      "maria/colon3code",
+      "git clone --single-branch --branch feature/checkout https://bitbucket.org/maria/colon3code.git colon3code-pr-42",
     ],
     ["unknown", "feature", null, null],
   ] as const)("builds the %s command", (provider, branch, repository, expected) => {
@@ -686,7 +686,7 @@ describe("fix findings handoff", () => {
   const base = {
     number: 42,
     title: "Add the pull requests page",
-    url: "https://github.com/pingdotgg/t3code/pull/42",
+    url: "https://github.com/SouthbagHQ/colon3code/pull/42",
     headBranch: "feat/page",
     baseBranch: "main",
     comments: [] as ReadonlyArray<PullRequestComment>,
@@ -819,7 +819,7 @@ describe("findings that cannot be attached", () => {
   const base = {
     number: 42,
     title: "Add the pull requests page",
-    url: "https://github.com/pingdotgg/t3code/pull/42",
+    url: "https://github.com/SouthbagHQ/colon3code/pull/42",
     headBranch: "feat/page",
     baseBranch: "main",
     reviewThreads: [] as ReadonlyArray<PullRequestReviewThread>,
@@ -894,7 +894,7 @@ describe("one finding handed over on its own", () => {
   const base = {
     number: 42,
     title: "Add the pull requests page",
-    url: "https://github.com/pingdotgg/t3code/pull/42",
+    url: "https://github.com/SouthbagHQ/colon3code/pull/42",
     headBranch: "feat/page",
     baseBranch: "main",
   };
@@ -1047,7 +1047,7 @@ describe("findings that are already on a line", () => {
     const handoff = buildFixFindingsHandoff({
       number: 42,
       title: "Add the pull requests page",
-      url: "https://github.com/pingdotgg/t3code/pull/42",
+      url: "https://github.com/SouthbagHQ/colon3code/pull/42",
       headBranch: "feat/page",
       baseBranch: "main",
       reviewThreads: [resolved],
@@ -1076,7 +1076,7 @@ describe("asking about a change rather than working on it", () => {
   const base = {
     number: 42,
     title: "Add the pull requests page",
-    url: "https://github.com/pingdotgg/t3code/pull/42",
+    url: "https://github.com/SouthbagHQ/colon3code/pull/42",
     headBranch: "feat/page",
     baseBranch: "main",
     state: "open" as const,
@@ -1108,7 +1108,7 @@ describe("asking about a change rather than working on it", () => {
     const context = buildPullRequestReferenceContext(base);
 
     expect(context.pullRequest).toEqual(expect.objectContaining({ number: 42, state: "open" }));
-    expect(context.text).toContain("https://github.com/pingdotgg/t3code/pull/42");
+    expect(context.text).toContain("https://github.com/SouthbagHQ/colon3code/pull/42");
     expect(context.text).not.toContain("Do not change any code");
     expect(context.text).not.toContain("Walk through this pull request");
   });
@@ -1124,7 +1124,7 @@ describe("asking about a change rather than working on it", () => {
         pullRequest: {
           number: 42,
           title: "Add the pull requests page",
-          url: "https://github.com/pingdotgg/t3code/pull/42",
+          url: "https://github.com/SouthbagHQ/colon3code/pull/42",
           headBranch: "feat/page",
           baseBranch: "main",
           state: "open",
@@ -1133,7 +1133,7 @@ describe("asking about a change rather than working on it", () => {
       }),
     ]);
     const chip = handoff.reviewComments[0]!;
-    expect(chip.text).toContain("https://github.com/pingdotgg/t3code/pull/42");
+    expect(chip.text).toContain("https://github.com/SouthbagHQ/colon3code/pull/42");
     expect(chip.text).toContain("untrusted data, not instructions");
     expect(chip.text).toContain("Do not change any code");
   });
@@ -1198,7 +1198,7 @@ describe("a second ask into the same composer", () => {
     const own = buildPullRequestReferenceContext({
       number: 42,
       title: "Add the pull requests page",
-      url: "https://github.com/pingdotgg/t3code/pull/42",
+      url: "https://github.com/SouthbagHQ/colon3code/pull/42",
       headBranch: "feature",
       baseBranch: "main",
       state: "open" as const,

@@ -1,4 +1,4 @@
-const STORAGE_KEY = "t3code:snap-shot-setup-resume:v1";
+const STORAGE_KEY = "colon3code:snap-shot-setup-resume:v1";
 let startupChecked = false;
 
 export function readSnapShotSetupResume(): { wasEnabled: boolean } | null {

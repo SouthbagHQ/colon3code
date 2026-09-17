@@ -58,7 +58,7 @@ const target: TargetRow = {
   platform: "android",
   ios_major_version: null,
   app_version: null,
-  bundle_id: "com.t3tools.t3code.dev",
+  bundle_id: "com.t3tools.colon3code.dev",
   aps_environment: null,
   push_token: "fcm-token",
   push_to_start_token: null,

@@ -50,9 +50,9 @@ function link(
 ): ThreadPullRequestLink {
   return {
     host: "github.com",
-    repository: "pingdotgg/t3code",
+    repository: "southbaghq/colon3code",
     number,
-    url: `https://github.com/pingdotgg/t3code/pull/${number}`,
+    url: `https://github.com/southbaghq/colon3code/pull/${number}`,
     source: "manual",
     linkedAt: `2026-01-01T00:00:${String(number).padStart(2, "0")}.000Z`,
     snapshot: null,
@@ -87,14 +87,14 @@ describe("threadPullRequestKeysEqual", () => {
   it("ignores host and repository case", () => {
     expect(
       threadPullRequestKeysEqual(
-        { host: "GitHub.com", repository: "PingDotGG/t3code", number: 1 },
-        { host: "github.com", repository: "pingdotgg/t3code", number: 1 },
+        { host: "GitHub.com", repository: "SouthbagHQ/colon3code", number: 1 },
+        { host: "github.com", repository: "southbaghq/colon3code", number: 1 },
       ),
     ).toBe(true);
     expect(
       threadPullRequestKeysEqual(
-        { host: "github.com", repository: "pingdotgg/t3code", number: 1 },
-        { host: "gitlab.com", repository: "pingdotgg/t3code", number: 1 },
+        { host: "github.com", repository: "southbaghq/colon3code", number: 1 },
+        { host: "gitlab.com", repository: "southbaghq/colon3code", number: 1 },
       ),
     ).toBe(false);
   });
@@ -127,7 +127,7 @@ describe("resolveThreadCurrentPullRequest", () => {
       kind: "native" as const,
       id: "s1",
       number: 1,
-      url: "https://github.com/pingdotgg/t3code/stacks/1",
+      url: "https://github.com/southbaghq/colon3code/stacks/1",
       base: "main",
       layers: [
         { number: 10, headBranch: "a", state: "open" as const },
@@ -160,28 +160,28 @@ describe("resolveThreadCurrentPullRequest", () => {
 
 describe("legacyLinkedPullRequestOf", () => {
   const identity = {
-    canonicalKey: "github.com/pingdotgg/t3code",
+    canonicalKey: "github.com/southbaghq/colon3code",
     provider: "github",
-    displayName: "pingdotgg/t3code",
+    displayName: "southbaghq/colon3code",
     locator: {
       source: "git-remote" as const,
       remoteName: "origin",
-      remoteUrl: "https://github.com/pingdotgg/t3code.git",
+      remoteUrl: "https://github.com/southbaghq/colon3code.git",
     },
   };
   it("projects only links the owning project can route without a host", () => {
     expect(legacyLinkedPullRequestOf([link(7)], "project-1" as never, identity)).toEqual({
       projectId: "project-1",
-      repository: "pingdotgg/t3code",
+      repository: "southbaghq/colon3code",
       number: 7,
-      url: "https://github.com/pingdotgg/t3code/pull/7",
+      url: "https://github.com/southbaghq/colon3code/pull/7",
     });
     expect(legacyLinkedPullRequestOf([], "project-1" as never, identity)).toBeNull();
   });
   it.each([
     {
       host: "github.enterprise.test",
-      url: "https://github.enterprise.test/pingdotgg/t3code/pull/7",
+      url: "https://github.enterprise.test/southbaghq/colon3code/pull/7",
     },
     { repository: "acme/other", url: "https://github.com/acme/other/pull/7" },
   ])("omits an unsafe legacy route %j", (foreign) => {
@@ -263,7 +263,7 @@ describe("resolveThreadPullRequestChains", () => {
       kind: "native" as const,
       id: "s1",
       number: 1,
-      url: "https://github.com/pingdotgg/t3code/stacks/1",
+      url: "https://github.com/southbaghq/colon3code/stacks/1",
       base: "main",
       layers: [
         { number: 5, headBranch: "a", state: "merged" as const },
@@ -347,7 +347,7 @@ describe("chain selection and badge state", () => {
       kind: "native" as const,
       id: "native-1",
       number: 1,
-      url: "https://github.com/pingdotgg/t3code/stacks/1",
+      url: "https://github.com/southbaghq/colon3code/stacks/1",
       base: "main",
       layers: [
         { number: 2, headBranch: "base", state: "merged" as const },
@@ -388,7 +388,7 @@ describe("chain selection and badge state", () => {
 
   it("keeps branch matching case-sensitive while ignoring repository case", () => {
     const bottom = link(1, {
-      repository: "PingDotGG/T3code",
+      repository: "SouthbagHQ/Colon3code",
       snapshot: snapshot({ headBranch: "Base" }),
     });
     const top = link(2, { snapshot: snapshot({ headBranch: "top", baseBranch: "base" }) });
@@ -442,8 +442,8 @@ describe("threadPullRequestSearchTerms", () => {
       ],
     });
     expect(terms).toContain("#12");
-    expect(terms).toContain("pingdotgg/t3code#12");
-    expect(terms).toContain("https://github.com/pingdotgg/t3code/pull/12");
+    expect(terms).toContain("southbaghq/colon3code#12");
+    expect(terms).toContain("https://github.com/southbaghq/colon3code/pull/12");
     expect(terms).toContain("Fix login");
     expect(terms).toContain("#34");
     expect(terms.join(" ")).not.toContain("56");
@@ -453,9 +453,9 @@ describe("threadPullRequestSearchTerms", () => {
 it("searches the legacy projection when old environments decode to an empty links list", () => {
   const linkedPullRequest = {
     projectId: ProjectId.make("project"),
-    repository: "pingdotgg/t3code",
+    repository: "southbaghq/colon3code",
     number: 12,
-    url: "https://github.com/pingdotgg/t3code/pull/12",
+    url: "https://github.com/southbaghq/colon3code/pull/12",
   };
   expect(threadPullRequestSearchTerms({ pullRequests: [], linkedPullRequest })).toContain("#12");
   expect(

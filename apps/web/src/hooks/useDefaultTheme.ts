@@ -12,7 +12,7 @@ import { useTheme } from "./useTheme";
  * hopping between primary environments neither replays one environment's
  * theme over the user's pick nor swallows another's.
  */
-const APPLIED_DEFAULT_THEME_STORAGE_PREFIX = "t3code:default-theme-applied:v2:";
+const APPLIED_DEFAULT_THEME_STORAGE_PREFIX = "colon3code:default-theme-applied:v2:";
 
 /**
  * One generation per set: keyed on when the theme was set, not just its

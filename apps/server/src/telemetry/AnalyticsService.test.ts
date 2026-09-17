@@ -25,7 +25,7 @@ interface RecordedBatchRequest {
         readonly serverArch?: string;
         readonly serverAppVersion?: string;
         readonly serverMode?: string;
-        readonly t3CodeVersion?: string;
+        readonly colon3CodeVersion?: string;
       };
     }>;
   } | null;
@@ -41,7 +41,7 @@ interface RecordedBatchBody {
       readonly serverArch?: string;
       readonly serverAppVersion?: string;
       readonly serverMode?: string;
-      readonly t3CodeVersion?: string;
+      readonly colon3CodeVersion?: string;
     };
   }>;
 }
@@ -57,10 +57,10 @@ it.layer(NodeServices.layer)("AnalyticsService test", (it) => {
       const telemetryLayer = AnalyticsService.layer.pipe(Layer.provideMerge(serverConfigLayer));
       const configLayer = ConfigProvider.layer(
         ConfigProvider.fromUnknown({
-          T3CODE_TELEMETRY_ENABLED: true,
-          T3CODE_POSTHOG_KEY: "phc_test_key",
-          T3CODE_POSTHOG_HOST: "http://localhost",
-          T3CODE_TELEMETRY_FLUSH_BATCH_SIZE: 20,
+          COLON3CODE_TELEMETRY_ENABLED: true,
+          COLON3CODE_POSTHOG_KEY: "phc_test_key",
+          COLON3CODE_POSTHOG_HOST: "http://localhost",
+          COLON3CODE_TELEMETRY_FLUSH_BATCH_SIZE: 20,
         }),
       );
       const batchServerLayer = HttpServer.serve(
@@ -140,7 +140,7 @@ it.layer(NodeServices.layer)("AnalyticsService test", (it) => {
             (event) =>
               event.properties?.serverOs === "Linux" &&
               event.properties.serverArch === "arm64" &&
-              event.properties.serverAppVersion === event.properties.t3CodeVersion &&
+              event.properties.serverAppVersion === event.properties.colon3CodeVersion &&
               event.properties.serverMode === "web",
           ),
         ),
@@ -158,9 +158,9 @@ it.layer(NodeServices.layer)("AnalyticsService test", (it) => {
       const telemetryLayer = AnalyticsService.layer.pipe(Layer.provideMerge(serverConfigLayer));
       const configLayer = ConfigProvider.layer(
         ConfigProvider.fromUnknown({
-          T3CODE_TELEMETRY_ENABLED: false,
-          T3CODE_POSTHOG_KEY: "phc_test_key",
-          T3CODE_POSTHOG_HOST: "http://localhost",
+          COLON3CODE_TELEMETRY_ENABLED: false,
+          COLON3CODE_POSTHOG_KEY: "phc_test_key",
+          COLON3CODE_POSTHOG_HOST: "http://localhost",
         }),
       );
       const batchServerLayer = HttpServer.serve(

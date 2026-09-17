@@ -69,7 +69,7 @@ export default defineConfig({
       "apps/mobile/uniwind-types.d.ts",
     ],
     plugins: ["eslint", "oxc", "react", "unicorn", "typescript"],
-    jsPlugins: ["./oxlint-plugin-t3code/index.ts"],
+    jsPlugins: ["./oxlint-plugin-colon3code/index.ts"],
     categories: {
       correctness: "warn",
       suspicious: "warn",
@@ -119,21 +119,21 @@ export default defineConfig({
           ],
         },
       ],
-      "t3code/no-global-process-runtime": "error",
-      "t3code/no-inline-schema-compile": "warn",
-      "t3code/no-manual-effect-runtime-in-tests": "error",
-      "t3code/no-native-title-tooltip": "error",
-      "t3code/namespace-node-imports": "error",
+      "colon3code/no-global-process-runtime": "error",
+      "colon3code/no-inline-schema-compile": "warn",
+      "colon3code/no-manual-effect-runtime-in-tests": "error",
+      "colon3code/no-native-title-tooltip": "error",
+      "colon3code/namespace-node-imports": "error",
     },
     overrides: [
       {
         // The one place that reads the host platform to seed the injected references.
         files: ["packages/shared/src/hostProcess.ts"],
-        rules: { "t3code/no-global-process-runtime": "off" },
+        rules: { "colon3code/no-global-process-runtime": "off" },
       },
       {
         files: ["apps/mobile/src/**"],
-        rules: { "t3code/no-mobile-uniwind-theme-escape-hatches": "error" },
+        rules: { "colon3code/no-mobile-uniwind-theme-escape-hatches": "error" },
       },
       {
         // Code that runs on Hermes. It has no ES2023 change-array-by-copy methods, and
@@ -146,7 +146,7 @@ export default defineConfig({
           "packages/shared/src/**",
         ],
         excludeFiles: ["**/*.test.ts", "**/*.test.tsx"],
-        rules: { "t3code/no-hermes-unsupported-array-methods": "error" },
+        rules: { "colon3code/no-hermes-unsupported-array-methods": "error" },
       },
       {
         // Reviewed native and third-party interop boundaries that cannot consume a className.
@@ -177,7 +177,10 @@ export default defineConfig({
           "apps/mobile/src/native/T3ComposerEditor.native.tsx",
         ],
         rules: {
-          "t3code/no-mobile-uniwind-theme-escape-hatches": ["error", { allowUniwindTheme: true }],
+          "colon3code/no-mobile-uniwind-theme-escape-hatches": [
+            "error",
+            { allowUniwindTheme: true },
+          ],
         },
       },
       // Legacy manual Effect runners tracked as debt: no net-new occurrences.
@@ -200,7 +203,7 @@ export default defineConfig({
         "apps/server/src/provider/acp/CursorAcpSupport.test.ts": 1,
       }).map(([file, maxOccurrences]) => {
         const rule: ["error", { maxOccurrences: number }] = ["error", { maxOccurrences }];
-        return { files: [file], rules: { "t3code/no-manual-effect-runtime-in-tests": rule } };
+        return { files: [file], rules: { "colon3code/no-manual-effect-runtime-in-tests": rule } };
       }),
     ],
     options: {

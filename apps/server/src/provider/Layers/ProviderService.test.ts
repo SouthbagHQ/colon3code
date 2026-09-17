@@ -2461,7 +2461,7 @@ routing.layer("ProviderServiceLive routing", (it) => {
                 kind: "snap-shot",
                 capturedAt: "2026-09-01T11:00:00.000Z",
                 appName: "Ghostty",
-                windowTitle: "~/Developer/t3code",
+                windowTitle: "~/Developer/colon3code",
                 accessibility: {
                   format: "element-tree",
                   coordinateSpace: "captured-image",
@@ -2469,7 +2469,7 @@ routing.layer("ProviderServiceLive routing", (it) => {
                   truncated: false,
                   root: {
                     role: "window",
-                    name: "~/Developer/t3code",
+                    name: "~/Developer/colon3code",
                     bounds: { x: 0, y: 0, width: 2367, height: 1600 },
                     state: { active: true },
                     children: [
@@ -2539,12 +2539,12 @@ routing.layer("ProviderServiceLive routing", (it) => {
           windowData,
           encodeJson({
             appName: "Ghostty",
-            windowTitle: "~/Developer/t3code",
+            windowTitle: "~/Developer/colon3code",
             accessibility: {
               format: "element-tree",
               root: {
                 role: "window",
-                name: "~/Developer/t3code",
+                name: "~/Developer/colon3code",
                 state: { active: true },
                 children: [
                   {

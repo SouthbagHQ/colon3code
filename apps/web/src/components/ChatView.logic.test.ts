@@ -319,20 +319,20 @@ describe("proactive panels", () => {
   it("follows a changed server PR link without replacing an unrelated open panel", () => {
     const previous = {
       projectId: ProjectId.make("project-1"),
-      repository: "pingdotgg/t3code",
+      repository: "southbaghq/colon3code",
       number: 42,
-      url: "https://github.com/pingdotgg/t3code/pull/42",
+      url: "https://github.com/southbaghq/colon3code/pull/42",
     };
     const current = {
       ...previous,
       number: 43,
-      url: "https://github.com/pingdotgg/t3code/pull/43",
+      url: "https://github.com/southbaghq/colon3code/pull/43",
     };
     const surface = {
       id: "pull-request:previous",
       kind: "pull-request",
       projectId: previous.projectId,
-      repository: "PingDotGG/T3Code",
+      repository: "SouthbagHQ/Colon3Code",
       number: previous.number,
     } satisfies RightPanelSurface;
 

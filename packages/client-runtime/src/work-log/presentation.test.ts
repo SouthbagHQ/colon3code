@@ -207,11 +207,11 @@ describe("summarizeToolGroup", () => {
 
 describe("resolveWorkEntryToolPresentation", () => {
   it.each([
-    "mcp__t3-code__preview_click",
+    "mcp__colon3-code__preview_click",
     "mcp__t3_code__preview_click",
-    "mcp__t3code__preview_click",
-    "T3-code.preview_click",
-    "t3-code · preview_click completed",
+    "mcp__colon3code__preview_click",
+    "Colon3-code.preview_click",
+    "colon3-code · preview_click completed",
     "t3_code/preview_click",
     "preview_click",
   ])("recognizes browser tool names across providers: %s", (label) => {
@@ -224,11 +224,11 @@ describe("resolveWorkEntryToolPresentation", () => {
   it("labels device tools with the device icon", () => {
     expect(
       resolveWorkEntryToolPresentation({
-        label: "mcp__t3-code__device_open",
+        label: "mcp__colon3-code__device_open",
         toolLifecycleStatus: "completed",
       }),
     ).toEqual({ displayName: "Opened a device in the Device panel", icon: "device" });
-    expect(resolveWorkEntryToolPresentation({ label: "t3-code · device_screenshot" })).toEqual({
+    expect(resolveWorkEntryToolPresentation({ label: "colon3-code · device_screenshot" })).toEqual({
       displayName: "Taking a screenshot of the device",
       icon: "device",
     });
@@ -239,7 +239,7 @@ describe("resolveWorkEntryToolPresentation", () => {
       resolveWorkEntryToolPresentation({
         label: "Tool call complete",
         toolTitle: "Inspect the current page",
-        toolData: { server: "t3-code", tool: "preview_snapshot", result: { title: "Example" } },
+        toolData: { server: "colon3-code", tool: "preview_snapshot", result: { title: "Example" } },
       }),
     ).toEqual({ displayName: "Taking a snapshot of the preview page", icon: "browser" });
   });
@@ -254,14 +254,14 @@ describe("resolveWorkEntryToolPresentation", () => {
   ])("describes the tool's own %s state", (toolLifecycleStatus, displayName) => {
     expect(
       resolveWorkEntryToolPresentation({
-        label: "T3-code.preview_click",
+        label: "Colon3-code.preview_click",
         toolLifecycleStatus,
       }),
     ).toEqual({ displayName, icon: "browser" });
   });
 
   it("uses the summary's state only when the provider omitted a lifecycle status", () => {
-    const entry = { label: "T3-code.preview_click" };
+    const entry = { label: "Colon3-code.preview_click" };
     expect(resolveWorkEntryToolPresentation(entry, "inProgress")?.displayName).toBe(
       "Clicking in the preview browser",
     );
@@ -303,7 +303,7 @@ describe("resolveWorkEntryToolPresentation", () => {
       "Handed off thread to a git worktree",
     ],
   ])("preserves verb forms and the rest of %s's label", (tool, running, completed) => {
-    const entry = { label: `t3-code.${tool}` };
+    const entry = { label: `colon3-code.${tool}` };
     expect(
       resolveWorkEntryToolPresentation({ ...entry, toolLifecycleStatus: "inProgress" })
         ?.displayName,
@@ -319,14 +319,14 @@ describe("resolveWorkEntryToolPresentation", () => {
         label: "mcp__t3_code__task_status",
         toolTitle: "Check the child task",
       }),
-    ).toEqual({ displayName: "Getting delegated task status", icon: "t3-code" });
+    ).toEqual({ displayName: "Getting delegated task status", icon: "colon3-code" });
   });
 
   it("does not brand unknown tools or another server's matching tool name", () => {
     for (const label of [
       "mcp__github__preview_click",
-      "t3-code.unknown_tool",
-      "t3-code.toString",
+      "colon3-code.unknown_tool",
+      "colon3-code.toString",
       "Search files",
     ]) {
       expect(resolveWorkEntryToolPresentation({ label })).toBeNull();
@@ -343,7 +343,7 @@ describe("resolveWorkEntryToolPresentation", () => {
 describe("browser group summaries", () => {
   const browserEntry: WorkLogPresentationEntry = {
     label: "MCP tool call",
-    toolData: { server: "t3-code", tool: "preview_click" },
+    toolData: { server: "colon3-code", tool: "preview_click" },
     itemType: "mcp_tool_call",
     toolLifecycleStatus: "completed",
     tone: "tool",
@@ -383,7 +383,7 @@ describe("browser group summaries", () => {
         commandEntry,
         {
           ...browserEntry,
-          toolData: { server: "t3-code", tool: "task_status" },
+          toolData: { server: "colon3-code", tool: "task_status" },
         },
       ]),
     ).toBe("Used browser 1 time, ran 1 command, and used 1 tool");
@@ -587,10 +587,10 @@ describe("resolveViewedImageAsset", () => {
 
 describe("pull request tool presentation", () => {
   it.each([
-    "mcp__t3-code__link_pull_request",
+    "mcp__colon3-code__link_pull_request",
     "mcp__t3_code__link_pull_request",
-    "T3-code · link_pull_request",
-    "t3code/link_pull_request",
+    "Colon3-code · link_pull_request",
+    "colon3code/link_pull_request",
     "link_pull_request",
   ])("recognizes the native linking tool: %s", (label) => {
     const entry = { label, tone: "tool" as const, toolLifecycleStatus: "completed" };
@@ -614,7 +614,7 @@ describe("pull request tool presentation", () => {
         toolTitle: "Custom title",
         toolLifecycleStatus,
         toolData: {
-          server: "t3-code",
+          server: "colon3-code",
           tool: "link_pull_request",
           arguments: { url: "https://github.com/acme/web/pull/42" },
         },
@@ -628,7 +628,7 @@ describe("pull request tool presentation", () => {
         label: "MCP tool call",
         toolLifecycleStatus: "completed",
         toolData: {
-          toolName: "mcp__t3-code__unlink_pull_request",
+          toolName: "mcp__colon3-code__unlink_pull_request",
           rawInput: { repository: "acme/web", number: 42 },
         },
       }),
@@ -637,20 +637,20 @@ describe("pull request tool presentation", () => {
 
   it("summarizes native PR work separately from ordinary tools and integration metadata", () => {
     const link: WorkLogPresentationEntry = {
-      label: "T3-code · link_pull_request",
+      label: "Colon3-code · link_pull_request",
       tone: "tool",
       itemType: "mcp_tool_call",
       toolLifecycleStatus: "completed",
-      toolSource: { key: "t3-code", name: "T3 Code", kind: "integration" },
+      toolSource: { key: "colon3-code", name: ":3 Code", kind: "integration" },
     };
     const list: WorkLogPresentationEntry = {
       ...link,
-      label: "T3-code · list_thread_pull_requests",
+      label: "Colon3-code · list_thread_pull_requests",
     };
     expect(summarizeToolGroup([link, link, list])).toBe(
       "Linked 2 pull requests and checked linked pull requests",
     );
-    expect(summarizeToolGroup([{ ...link, label: "T3-code · unlink_pull_request" }])).toBe(
+    expect(summarizeToolGroup([{ ...link, label: "Colon3-code · unlink_pull_request" }])).toBe(
       "Unlinked 1 pull request",
     );
     expect(toolGroupSummaryKind([link, link, list])).toBe("pull-request");
@@ -664,7 +664,7 @@ describe("pull request tool presentation", () => {
 describe("device group summaries", () => {
   const deviceEntry = (tool: string): WorkLogPresentationEntry => ({
     label: "MCP tool call",
-    toolData: { server: "t3-code", tool },
+    toolData: { server: "colon3-code", tool },
     itemType: "mcp_tool_call",
     toolLifecycleStatus: "completed",
     tone: "tool",

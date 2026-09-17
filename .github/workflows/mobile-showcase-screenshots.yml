@@ -24,10 +24,10 @@ on:
       theme:
         description: Palette to capture (all multiplies the run by six)
         required: true
-        default: t3-code
+        default: colon3-code
         type: choice
         options:
-          - t3-code
+          - colon3-code
           - t3-chat
           - grove
           - ocean

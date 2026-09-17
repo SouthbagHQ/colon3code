@@ -138,7 +138,7 @@ function resolveT3McpToolPresentation(
 ) {
   if (!value) return null;
   const name = normalizeCompactToolLabel(value).replace(
-    /^(?:mcp__(?:t3-code|t3_code|t3code)__|(?:t3-code|t3_code|t3code)(?:[.:/]|\s*·\s*))/i,
+    /^(?:mcp__(?:colon3-code|t3_code|colon3code)__|(?:colon3-code|t3_code|colon3code)(?:[.:/]|\s*·\s*))/i,
     "",
   );
   if (!Object.hasOwn(T3_MCP_TOOL_LABELS, name)) return null;
@@ -180,7 +180,7 @@ function resolveT3McpToolPresentation(
           ? ("browser" as const)
           : name.startsWith("device_")
             ? ("device" as const)
-            : ("t3-code" as const),
+            : ("colon3-code" as const),
     ...(actionKind === undefined ? {} : { action: actionKind }),
   };
 }

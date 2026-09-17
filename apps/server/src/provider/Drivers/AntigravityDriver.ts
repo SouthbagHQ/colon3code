@@ -210,7 +210,7 @@ export const AntigravityDriver: ProviderDriver<AntigravitySettings, AntigravityD
         );
         const runtime = yield* makeRuntime({
           cwd,
-          clientInfo: { name: "t3-code-provider-setup", version: "0.0.0" },
+          clientInfo: { name: "colon3-code-provider-setup", version: "0.0.0" },
           mcpServers: [],
           ...(input.onAuthorizationUrl ? { onAuthorizationUrl: input.onAuthorizationUrl } : {}),
         });
@@ -268,7 +268,7 @@ export const AntigravityDriver: ProviderDriver<AntigravitySettings, AntigravityD
             Effect.gen(function* () {
               const runtime = yield* makeRuntime({
                 cwd: serverConfig.stateDir,
-                clientInfo: { name: "t3-code-provider-probe", version: "0.0.0" },
+                clientInfo: { name: "colon3-code-provider-probe", version: "0.0.0" },
                 mcpServers: [],
               });
               return yield* runtime.initialize();
@@ -318,7 +318,7 @@ export const AntigravityDriver: ProviderDriver<AntigravitySettings, AntigravityD
         makeRuntime: (cwd) =>
           makeRuntime({
             cwd,
-            clientInfo: { name: "t3-code-text", version: "0.0.0" },
+            clientInfo: { name: "colon3-code-text", version: "0.0.0" },
             mcpServers: [],
           }),
       });

@@ -283,7 +283,7 @@ const stageWebClient = Effect.fn("stageWebClient")(function* (source: string, ta
 });
 
 const MacSigningConfig = Config.all({
-  identity: Config.string("T3CODE_CLI_MAC_SIGN_IDENTITY").pipe(Config.option),
+  identity: Config.string("COLON3CODE_CLI_MAC_SIGN_IDENTITY").pipe(Config.option),
   appleApiKey: Config.string("APPLE_API_KEY").pipe(Config.option),
   appleApiKeyId: Config.string("APPLE_API_KEY_ID").pipe(Config.option),
   appleApiIssuer: Config.string("APPLE_API_ISSUER").pipe(Config.option),
@@ -331,7 +331,7 @@ const signMacArchiveContents = Effect.fn("signMacArchiveContents")(function* (in
     );
   }
   if (identity === "-") {
-    yield* Effect.log("[cli-archive] Signed ad hoc (no T3CODE_CLI_MAC_SIGN_IDENTITY).");
+    yield* Effect.log("[cli-archive] Signed ad hoc (no COLON3CODE_CLI_MAC_SIGN_IDENTITY).");
     return;
   }
 

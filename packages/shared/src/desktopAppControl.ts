@@ -26,14 +26,14 @@ export function resolveDesktopAppControlAddress(input: {
   const stateHash = shortHash(input.stateDir);
   if (input.platform === "win32") {
     return {
-      address: `\\\\.\\pipe\\t3code-app-${stateHash}`,
+      address: `\\\\.\\pipe\\colon3code-app-${stateHash}`,
       directory: null,
     };
   }
 
   const userKey =
     input.userId === undefined ? shortHash(input.stateDir).slice(0, 12) : input.userId;
-  const directory = input.joinPath(input.tempDir, `t3code-${userKey}`);
+  const directory = input.joinPath(input.tempDir, `colon3code-${userKey}`);
   return {
     address: input.joinPath(directory, `${stateHash}.sock`),
     directory,

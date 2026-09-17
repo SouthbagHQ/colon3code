@@ -821,7 +821,7 @@ describe("DesktopRemoteUpdates", () => {
   });
 
   it.effect("fails fast with the disabled reason when updates are off", () => {
-    const harness = makeHarness({ env: { T3CODE_DISABLE_AUTO_UPDATE: "true" } });
+    const harness = makeHarness({ env: { COLON3CODE_DISABLE_AUTO_UPDATE: "true" } });
 
     return runRemoteUpdatesTest(harness, ({ reports, requests }) =>
       Effect.gen(function* () {
@@ -833,7 +833,7 @@ describe("DesktopRemoteUpdates", () => {
         assert.equal(terminals[0]?.outcome, "failed");
         assert.equal(
           terminals[0]?.reason,
-          "Automatic updates are disabled by the T3CODE_DISABLE_AUTO_UPDATE setting.",
+          "Automatic updates are disabled by the COLON3CODE_DISABLE_AUTO_UPDATE setting.",
         );
         assert.equal(harness.quitAndInstalls(), 0);
       }),

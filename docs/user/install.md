@@ -1,6 +1,6 @@
-# Install T3 Code
+# Install :3 Code
 
-T3 Code runs coding agents on your computer and lets you control them from its
+:3 Code runs coding agents on your computer and lets you control them from its
 desktop, web, or mobile app. Set up the machine where the agents will work first.
 
 ## Requirements
@@ -11,7 +11,7 @@ self-contained executable. SSH hosts and WSL backends need Node.js 22.16+
 server runtime.
 
 You need an installed, authenticated provider before starting a thread. You can
-launch T3 Code and configure providers afterwards.
+launch :3 Code and configure providers afterwards.
 
 ## Run without installing
 
@@ -26,11 +26,11 @@ The executable is built for Apple Silicon Macs, Linux, and Windows. There is
 no Intel Mac build of it, because Node cannot produce a single executable for
 that platform; the Intel desktop app is unaffected. To run a standalone server
 on an Intel Mac, build it from source. You need Node.js 24 and `vp` (see
-[Install vp](https://github.com/pingdotgg/t3code#install-vp)):
+[Install vp](https://github.com/SouthbagHQ/colon3code#install-vp)):
 
 ```bash
-git clone https://github.com/pingdotgg/t3code
-cd t3code && vp i && vp run build:desktop
+git clone https://github.com/SouthbagHQ/colon3code
+cd colon3code && vp i && vp run build:desktop
 node apps/server/dist/bin.mjs
 ```
 
@@ -40,20 +40,20 @@ however you run other Node processes.
 
 ## Desktop app
 
-Download a release from [GitHub Releases](https://github.com/pingdotgg/t3code/releases),
+Download a release from [GitHub Releases](https://github.com/SouthbagHQ/colon3code/releases),
 or use a package manager:
 
-| Platform           | Install                         |
-| ------------------ | ------------------------------- |
-| Windows            | `winget install T3Tools.T3Code` |
-| macOS              | `brew install --cask t3-code`   |
-| Arch Linux         | `yay -S t3code-bin`             |
-| Arch Linux nightly | `yay -S t3code-nightly-bin`     |
+| Platform           | Install                             |
+| ------------------ | ----------------------------------- |
+| Windows            | `winget install T3Tools.Colon3Code` |
+| macOS              | `brew install --cask colon3-code`   |
+| Arch Linux         | `yay -S colon3code-bin`             |
+| Arch Linux nightly | `yay -S colon3code-nightly-bin`     |
 
 ### Windows Subsystem for Linux
 
 Choose a WSL distro in **Settings → Connections** to run agents and projects
-there. Install Node.js and provider CLIs inside that distro. T3 Code installs its
+there. Install Node.js and provider CLIs inside that distro. :3 Code installs its
 matching server runtime there automatically; the first launch after an app
 update can take longer.
 
@@ -72,9 +72,9 @@ command cannot reach the app, start or update the desktop app and try again.
 
 ## Mobile app
 
-Install T3 Code from the
-[App Store](https://apps.apple.com/us/app/t3-code-remote-claude-more/id6787819824) or
-[Google Play](https://play.google.com/store/apps/details?id=com.t3tools.t3code).
+Install :3 Code from the
+[App Store](https://apps.apple.com/us/app/colon3-code-remote-claude-more/id6787819824) or
+[Google Play](https://play.google.com/store/apps/details?id=com.t3tools.colon3code).
 The phone connects to a server on another machine. Follow
 [remote access](./remote-access.md) to link it through T3 Connect or a pairing URL.
 
@@ -98,15 +98,15 @@ computer.
 | Cursor      | Install [Cursor CLI](https://cursor.com/cli), then run `agent login`.                        |
 | Grok Build  | Install [Grok Build CLI](https://x.ai/cli), then run `grok login`.                           |
 | OpenCode    | Install [OpenCode](https://opencode.ai), then run `opencode auth login`.                     |
-| Antigravity | Install and sign in with Google from T3 Code's provider settings.                            |
+| Antigravity | Install and sign in with Google from :3 Code's provider settings.                            |
 
-Provider CLIs must be on the server's `PATH`. If T3 Code cannot find one, set its
+Provider CLIs must be on the server's `PATH`. If :3 Code cannot find one, set its
 **Binary path** in provider settings, especially when using a version manager.
 Cursor's executable is `cursor-agent`, although its login command is
 `agent login`. Antigravity can use its managed runtime without a `PATH` entry.
 
 When a provider CLI is behind its latest release, its provider card shows the
-available version. **Update now** appears only when T3 Code can tell which
+available version. **Update now** appears only when :3 Code can tell which
 installer owns the CLI (its own update command, Homebrew, or a global npm, pnpm,
 bun, or Vite+ install) and runs that installer. Otherwise update the CLI the same
 way you installed it. Homebrew installs compare against the version Homebrew
@@ -114,7 +114,7 @@ offers, which can trail the npm release by a few hours.
 
 Add another provider instance for a separate account or configuration. Each
 instance can have its own environment variables, such as API keys or a custom
-base URL. Mark secret values as sensitive; after saving, T3 Code does not display
+base URL. Mark secret values as sensitive; after saving, :3 Code does not display
 their original values.
 
 For provider-specific setup and accounts, see [Codex](./providers-codex.md),
@@ -127,4 +127,4 @@ For provider-specific setup and accounts, see [Codex](./providers-codex.md),
 - [Permission modes](./permission-modes.md): choose when agents ask before acting.
 - [Remote access](./remote-access.md): connect from another device.
 - [Running in the background](./background-service.md): keep a Linux or macOS host available.
-- [Updating T3 Code](./updating.md): update the app and connected servers.
+- [Updating :3 Code](./updating.md): update the app and connected servers.

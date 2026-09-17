@@ -84,13 +84,13 @@ describe("partitionOnboardingProjects", () => {
 
 describe("groupOnboardingProjects", () => {
   it("groups clones by origin, keeps local repos separate, and folds non-git folders away", () => {
-    const main = candidate("/code/t3code", {
-      git: github("pingdotgg/t3code"),
+    const main = candidate("/code/colon3code", {
+      git: github("SouthbagHQ/colon3code"),
       threadCount: 79,
       lastActiveAt: "2026-08-21T12:00:00.000Z",
     });
-    const clone = candidate("/code/clones/t3code-2", {
-      git: github("pingdotgg/t3code"),
+    const clone = candidate("/code/clones/colon3code-2", {
+      git: github("SouthbagHQ/colon3code"),
       threadCount: 13,
       lastActiveAt: "2026-08-10T12:00:00.000Z",
     });
@@ -120,8 +120,8 @@ describe("groupOnboardingProjects", () => {
         lastActiveAt: "2026-08-22T00:00:00.000Z",
       },
       {
-        label: "pingdotgg/t3code",
-        paths: ["/code/t3code", "/code/clones/t3code-2"],
+        label: "SouthbagHQ/colon3code",
+        paths: ["/code/colon3code", "/code/clones/colon3code-2"],
         threadCount: 92,
         lastActiveAt: "2026-08-21T12:00:00.000Z",
       },

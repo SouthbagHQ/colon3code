@@ -78,7 +78,7 @@ describe("Windows browser lock errors", () => {
 /** A scratch home with the source's user-data directory already created. */
 const withSourceHome = Effect.fnUntraced(function* () {
   const fileSystem = yield* FileSystem.FileSystem;
-  const home = yield* fileSystem.makeTempDirectoryScoped({ prefix: "t3code-sources-" });
+  const home = yield* fileSystem.makeTempDirectoryScoped({ prefix: "colon3code-sources-" });
   const context = yield* sourcePathContext.pipe(
     Effect.provideService(HostProcessEnvironment, { HOME: home }),
     Effect.provideService(HostProcessPlatform, "darwin"),
@@ -131,7 +131,9 @@ describe("Helium on Linux", () => {
     run(
       Effect.gen(function* () {
         const fileSystem = yield* FileSystem.FileSystem;
-        const home = yield* fileSystem.makeTempDirectoryScoped({ prefix: "t3code-helium-linux-" });
+        const home = yield* fileSystem.makeTempDirectoryScoped({
+          prefix: "colon3code-helium-linux-",
+        });
         const context = yield* sourcePathContext.pipe(
           Effect.provideService(HostProcessEnvironment, { HOME: home }),
           Effect.provideService(HostProcessPlatform, "linux"),
@@ -195,7 +197,7 @@ describe("isSourceRunning", () => {
       Effect.gen(function* () {
         const fileSystem = yield* FileSystem.FileSystem;
         const home = yield* fileSystem.makeTempDirectoryScoped({
-          prefix: "t3code-helium-windows-lock-",
+          prefix: "colon3code-helium-windows-lock-",
         });
         const context = yield* sourcePathContext.pipe(
           Effect.provideService(HostProcessEnvironment, {
@@ -681,7 +683,7 @@ describe("Firefox Snap profiles", () => {
         Effect.gen(function* () {
           const fileSystem = yield* FileSystem.FileSystem;
           const home = yield* fileSystem.makeTempDirectoryScoped({
-            prefix: "t3code-firefox-snap-",
+            prefix: "colon3code-firefox-snap-",
           });
           const context = yield* sourcePathContext.pipe(
             Effect.provideService(HostProcessEnvironment, { HOME: home }),
@@ -722,7 +724,9 @@ describe("Firefox Snap profiles", () => {
     run(
       Effect.gen(function* () {
         const fileSystem = yield* FileSystem.FileSystem;
-        const home = yield* fileSystem.makeTempDirectoryScoped({ prefix: "t3code-firefox-snap-" });
+        const home = yield* fileSystem.makeTempDirectoryScoped({
+          prefix: "colon3code-firefox-snap-",
+        });
         const context = yield* sourcePathContext.pipe(
           Effect.provideService(HostProcessEnvironment, { HOME: home }),
           Effect.provideService(HostProcessPlatform, "linux"),
@@ -770,7 +774,7 @@ describe("listSourceProfiles Firefox fallback", () => {
           const fileSystem = yield* FileSystem.FileSystem;
           const path = yield* Path.Path;
           const home = yield* fileSystem.makeTempDirectoryScoped({
-            prefix: `t3code-firefox-${platform}-`,
+            prefix: `colon3code-firefox-${platform}-`,
           });
           const appData = path.join(home, "AppData", "Roaming");
           const context = yield* sourcePathContext.pipe(
@@ -809,7 +813,7 @@ describe("listSourceProfiles Firefox fallback", () => {
         const fileSystem = yield* FileSystem.FileSystem;
         const path = yield* Path.Path;
         const home = yield* fileSystem.makeTempDirectoryScoped({
-          prefix: "t3code-firefox-stale-ini-",
+          prefix: "colon3code-firefox-stale-ini-",
         });
         const context = yield* sourcePathContext.pipe(
           Effect.provideService(HostProcessEnvironment, { HOME: home }),
@@ -848,7 +852,7 @@ describe("listSourceProfiles Firefox fallback", () => {
         const fileSystem = yield* FileSystem.FileSystem;
         const path = yield* Path.Path;
         const home = yield* fileSystem.makeTempDirectoryScoped({
-          prefix: "t3code-firefox-counts-",
+          prefix: "colon3code-firefox-counts-",
         });
         const context = yield* sourcePathContext.pipe(
           Effect.provideService(HostProcessEnvironment, { HOME: home }),
@@ -900,7 +904,7 @@ describe("isSourceRunning for Firefox", () => {
     run(
       Effect.gen(function* () {
         const fileSystem = yield* FileSystem.FileSystem;
-        const home = yield* fileSystem.makeTempDirectoryScoped({ prefix: "t3code-firefox-" });
+        const home = yield* fileSystem.makeTempDirectoryScoped({ prefix: "colon3code-firefox-" });
         const context = yield* sourcePathContext.pipe(
           Effect.provideService(HostProcessEnvironment, { HOME: home }),
           Effect.provideService(HostProcessPlatform, "darwin"),
@@ -935,7 +939,7 @@ describe("isSourceRunning for Firefox", () => {
     run(
       Effect.gen(function* () {
         const fileSystem = yield* FileSystem.FileSystem;
-        const directory = yield* fileSystem.makeTempDirectoryScoped({ prefix: "t3code-lock-" });
+        const directory = yield* fileSystem.makeTempDirectoryScoped({ prefix: "colon3code-lock-" });
         const lock = `${directory}/.parentlock`;
         yield* fileSystem.writeFileString(lock, "");
         // A Mac without the developer tools has only Apple's shim, which
@@ -959,7 +963,7 @@ describe("isSourceRunning for Firefox", () => {
         Effect.gen(function* () {
           const fileSystem = yield* FileSystem.FileSystem;
           const spawner = yield* ChildProcessSpawner.ChildProcessSpawner;
-          const home = yield* fileSystem.makeTempDirectoryScoped({ prefix: "t3code-firefox-" });
+          const home = yield* fileSystem.makeTempDirectoryScoped({ prefix: "colon3code-firefox-" });
           const context = yield* sourcePathContext.pipe(
             Effect.provideService(HostProcessEnvironment, { HOME: home }),
             Effect.provideService(HostProcessPlatform, "darwin"),
@@ -1029,7 +1033,7 @@ describe("isSourceRunning for Firefox", () => {
     run(
       Effect.gen(function* () {
         const fileSystem = yield* FileSystem.FileSystem;
-        const home = yield* fileSystem.makeTempDirectoryScoped({ prefix: "t3code-firefox-" });
+        const home = yield* fileSystem.makeTempDirectoryScoped({ prefix: "colon3code-firefox-" });
         const context = yield* sourcePathContext.pipe(
           // Firefox's win32 root hangs off %APPDATA%; without it the root is
           // undefined and the fixture would escape the sandbox into the repo.

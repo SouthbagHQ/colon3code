@@ -347,7 +347,7 @@ it.effect("reveals a file in File Explorer through PowerShell on Windows", () =>
 // single `/select,"<path>"` switch. Mock argv assertions cannot prove this —
 // only Windows' own PowerShell -> CreateProcess quoting chain can, so the
 // test runs only where that chain exists.
-// oxlint-disable-next-line t3code/no-global-process-runtime -- the skip decision needs the real host platform, outside any Effect runtime.
+// oxlint-disable-next-line colon3code/no-global-process-runtime -- the skip decision needs the real host platform, outside any Effect runtime.
 it.skipIf(process.platform !== "win32")(
   "delivers the raw /select switch for spaced paths through real PowerShell",
   { timeout: 60_000 },

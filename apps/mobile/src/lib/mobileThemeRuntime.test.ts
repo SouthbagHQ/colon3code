@@ -14,8 +14,8 @@ const initialState: MobileThemeRuntimeState = {
 
 describe("mobileThemeRuntime", () => {
   it("keeps the default palette on Uniwind's built-in appearance themes", () => {
-    expect(getMobileUniwindThemeName("t3-code", "light")).toBe("light");
-    expect(getMobileUniwindThemeName("t3-code", "dark")).toBe("dark");
+    expect(getMobileUniwindThemeName("colon3-code", "light")).toBe("light");
+    expect(getMobileUniwindThemeName("colon3-code", "dark")).toBe("dark");
   });
 
   it("maps custom palettes and appearances to registered themes", () => {

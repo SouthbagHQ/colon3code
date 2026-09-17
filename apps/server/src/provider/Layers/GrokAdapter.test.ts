@@ -89,7 +89,7 @@ async function readJsonLines(filePath: string) {
 }
 
 const grokAdapterTestLayer = ServerConfig.layerTest(process.cwd(), {
-  prefix: "t3code-grok-adapter-test-",
+  prefix: "colon3code-grok-adapter-test-",
 }).pipe(Layer.provideMerge(NodeServices.layer));
 
 const makeTestAdapter = (binaryPath: string, options?: Parameters<typeof makeGrokAdapter>[1]) =>

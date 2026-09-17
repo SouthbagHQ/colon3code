@@ -30,7 +30,7 @@ async function createFixture(): Promise<{
   readonly dependencyRoot: string;
   readonly root: string;
 }> {
-  const root = await NodeFSP.mkdtemp(NodePath.join(NodeOS.tmpdir(), "t3code-licenses-"));
+  const root = await NodeFSP.mkdtemp(NodePath.join(NodeOS.tmpdir(), "colon3code-licenses-"));
   tempDirectories.push(root);
   const appManifest = NodePath.join(root, "package.json");
   const dependencyRoot = NodePath.join(root, "node_modules", "demo-dependency");
@@ -88,7 +88,7 @@ describe("third-party license generation", () => {
 
     expect(config).toContain(revision.trim());
     expect(config).toContain(
-      "https://github.com/Yash-Singh1/ghostty/tree/t3code/custom-io-ordered-feed",
+      "https://github.com/Yash-Singh1/ghostty/tree/colon3code/custom-io-ordered-feed",
     );
   });
 
@@ -142,7 +142,7 @@ describe("third-party license generation", () => {
             {
               licenseId: "MIT",
               copyrights: ["Copyright (c) 2026 Example Author"],
-              preamble: ["Adapted for T3 Code."],
+              preamble: ["Adapted for :3 Code."],
             },
           ],
           bundles: ["assets", "web"],
@@ -157,7 +157,7 @@ describe("third-party license generation", () => {
     });
 
     expect(manifest.entries.find((entry) => entry.name === "generated-asset")?.noticeText).toBe(
-      "Adapted for T3 Code.\n\nMIT License\n\nCopyright (c) 2026 Example Author\n\nPermission text",
+      "Adapted for :3 Code.\n\nMIT License\n\nCopyright (c) 2026 Example Author\n\nPermission text",
     );
   });
 
