@@ -10,6 +10,8 @@ on:
   push:
     tags:
       - "t3-code-release-*"
+  # Run it by hand on a tag ref when the tag push did not fire the workflow.
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -35,6 +37,10 @@ jobs:
           TAG: ${{ github.ref_name }}
         run: |
           set -euo pipefail
+          if [[ "${TAG}" != t3-code-release-* ]]; then
+            echo "Run this workflow on a t3-code-release-<version> tag ref, not '${TAG}'." >&2
+            exit 1
+          fi
           version="${TAG#t3-code-release-}"
           if [[ ! "$version" =~ ^[0-9]+\.[0-9]+\.[0-9]+(-[0-9A-Za-z.]+)?$ ]]; then
             echo "Tag '$TAG' must be t3-code-release-<semver>, got version '$version'." >&2
