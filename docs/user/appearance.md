@@ -51,7 +51,7 @@ the default and published themes.
 
 ### Publish a theme
 
-Save a theme exported from :3 Code into `~/.t3/userdata/themes/` on the server, or the `themes`
+Save a theme exported from :3 Code into `~/.colon3code/userdata/themes/` on the server, or the `themes`
 directory under your custom state directory. The filename supplies the theme ID: `nightfall.json`
 can be selected with `t3 theme set nightfall`. Keep the filename stable when updating its colors.
 Do not use `system`, `light`, `dark`, or a built-in theme's ID.

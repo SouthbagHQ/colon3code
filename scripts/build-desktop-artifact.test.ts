@@ -685,8 +685,23 @@ it.layer(NodeServices.layer)("build-desktop-artifact", (it) => {
       }
       assert.deepStrictEqual(mac.electronLanguages, DESKTOP_ELECTRON_LANGUAGES);
       // Finder only shows ":3 Code" for a "꞉3 Code.app" bundle through a
-      // localized display name, which the afterPack hook writes.
-      assert.equal(mac.afterPack, `./${MAC_DISPLAY_NAME_AFTER_PACK_FILE}`);
+      // localized display name, which the afterPack hook writes. The hook path
+      // is absolute because electron-builder resolves relative ones against
+      // its cwd rather than --projectDir.
+      assert.notProperty(mac, "afterPack");
+      const stagedMac = yield* createBuildConfig(
+        "mac",
+        "dmg",
+        "1.2.3",
+        false,
+        false,
+        undefined,
+        undefined,
+        false,
+        "arm64",
+        "/tmp/stage/app",
+      );
+      assert.equal(stagedMac.afterPack, `/tmp/stage/app/${MAC_DISPLAY_NAME_AFTER_PACK_FILE}`);
       assert.equal(
         (mac.mac as { extendInfo: Record<string, unknown> }).extendInfo.LSHasLocalizedDisplayName,
         true,

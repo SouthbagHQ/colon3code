@@ -2680,12 +2680,18 @@ export const createBuildConfig = Effect.fn("createBuildConfig")(function* (
   // source file was never written fails the electron-builder step.
   wslRuntimeBundled = false,
   arch?: typeof BuildArch.Type,
+  // electron-builder resolves a relative hook path against its own cwd (the
+  // repo root), not --projectDir, so the stage dir is needed for an absolute one.
+  stageAppDir?: string,
 ) {
+  const path = yield* Path.Path;
   const buildConfig: Record<string, unknown> = {
     appId: DESKTOP_APP_ID,
     productName: resolveDesktopProductName(version),
     artifactName: "Colon3-Code-${version}-${arch}.${ext}",
-    ...(platform === "mac" ? { afterPack: `./${MAC_DISPLAY_NAME_AFTER_PACK_FILE}` } : {}),
+    ...(platform === "mac" && stageAppDir !== undefined
+      ? { afterPack: path.join(stageAppDir, MAC_DISPLAY_NAME_AFTER_PACK_FILE) }
+      : {}),
     electronLanguages: [...DESKTOP_ELECTRON_LANGUAGES],
     files: [
       ...DESKTOP_FILE_EXCLUSIONS,
@@ -2728,7 +2734,6 @@ export const createBuildConfig = Effect.fn("createBuildConfig")(function* (
   }
 
   if (platform === "mac") {
-    const path = yield* Path.Path;
     const repoRoot = yield* RepoRoot;
     buildConfig.mac = {
       target: target === "dmg" ? [target, "zip"] : [target],
@@ -3714,6 +3719,7 @@ const buildDesktopArtifact = Effect.fn("buildDesktopArtifact")(function* (
         : undefined,
       bundlesWslRuntime({ platform: options.platform, runtimeArchivePath: options.wslRuntime }),
       options.arch,
+      stageAppDir,
     ),
     dependencies: stageDependencies,
     devDependencies: {

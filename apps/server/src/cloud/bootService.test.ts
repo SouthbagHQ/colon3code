@@ -24,11 +24,11 @@ import {
   serviceStateHasPendingUpdate,
 } from "./serviceProtocol.ts";
 
-const linuxRuntime = "/home/theo/.t3/runtime/versions/1.2.3/t3";
+const linuxRuntime = "/home/theo/.colon3code/runtime/versions/1.2.3/t3";
 const linuxPlan = {
   program: [linuxRuntime, "__service-launcher"],
-  baseDir: "/home/theo/.t3",
-  logPath: "/home/theo/.t3/userdata/logs/boot-service.log",
+  baseDir: "/home/theo/.colon3code",
+  logPath: "/home/theo/.colon3code/userdata/logs/boot-service.log",
   unitPath: "/home/theo/.config/systemd/user/colon3code.service",
 };
 
@@ -49,8 +49,10 @@ it("reads the served T3 home back out of a rendered unit or plist", () => {
   });
 
   expect(
-    BootService.bootServiceBaseDirOf(BootService.renderBootServiceUnit(plan("/home/theo/.t3"))),
-  ).toBe("/home/theo/.t3");
+    BootService.bootServiceBaseDirOf(
+      BootService.renderBootServiceUnit(plan("/home/theo/.colon3code")),
+    ),
+  ).toBe("/home/theo/.colon3code");
   // Spaces and specifiers are quoted and escaped on the way in.
   expect(
     BootService.bootServiceBaseDirOf(
@@ -74,11 +76,11 @@ it("survives the kernel OOM-killing a greedy agent child", () => {
   expect(unit).toContain("OOMPolicy=continue");
 });
 
-const macRuntime = "/Users/theo/.t3/runtime/versions/1.2.3/t3";
+const macRuntime = "/Users/theo/.colon3code/runtime/versions/1.2.3/t3";
 const macPlan = {
   program: [macRuntime, "__service-launcher"],
-  baseDir: "/Users/theo/.t3",
-  logPath: "/Users/theo/.t3/userdata/logs/boot-service.log",
+  baseDir: "/Users/theo/.colon3code",
+  logPath: "/Users/theo/.colon3code/userdata/logs/boot-service.log",
   unitPath: "/Users/theo/Library/LaunchAgents/com.t3tools.colon3code.service.plist",
 };
 const macInstallerPath =
@@ -113,10 +115,10 @@ it("appends both stdio streams to the boot service log", () => {
   const plist = BootService.renderBootServicePlist(macPlan, macRenderOptions);
 
   expect(plist).toContain(
-    "<key>StandardOutPath</key>\n  <string>/Users/theo/.t3/userdata/logs/boot-service.log</string>",
+    "<key>StandardOutPath</key>\n  <string>/Users/theo/.colon3code/userdata/logs/boot-service.log</string>",
   );
   expect(plist).toContain(
-    "<key>StandardErrorPath</key>\n  <string>/Users/theo/.t3/userdata/logs/boot-service.log</string>",
+    "<key>StandardErrorPath</key>\n  <string>/Users/theo/.colon3code/userdata/logs/boot-service.log</string>",
   );
 });
 
@@ -137,7 +139,7 @@ const makeHarness = Effect.fn("test.make_boot_service_harness")(function* (
   const fs = yield* FileSystem.FileSystem;
   const path = yield* Path.Path;
   const home = yield* fs.makeTempDirectoryScoped({ prefix: "t3-boot-service-test-" });
-  const baseDir = path.join(home, ".t3");
+  const baseDir = path.join(home, ".colon3code");
   const statePath = path.join(baseDir, "runtime", "service-state.json");
   // A complete pinned runtime is already present, so install only validates
   // it and never downloads a release archive.
@@ -600,7 +602,7 @@ it.layer(NodeServices.layer)("boot service install", (it) => {
       const path = yield* Path.Path;
       const otherHome = yield* fs.makeTempDirectoryScoped({ prefix: "t3-other-home-" });
 
-      const other = yield* makeService(undefined, "1.2.3", path.join(otherHome, ".t3"));
+      const other = yield* makeService(undefined, "1.2.3", path.join(otherHome, ".colon3code"));
       expect(yield* other.restart).toBe(false);
       expect(commands.filter((command) => command.startsWith("systemctl "))).toEqual([]);
     }),

@@ -33,7 +33,7 @@ it("treats stable installs as direct invocations", () => {
   for (const entryPath of [
     "/usr/local/lib/node_modules/t3/dist/bin.mjs",
     "/home/theo/Code/work/colon3code/apps/server/dist/bin.mjs",
-    "/home/theo/.t3/runtime/0.0.31/node_modules/t3/dist/bin.mjs",
+    "/home/theo/.colon3code/runtime/0.0.31/node_modules/t3/dist/bin.mjs",
     "",
   ]) {
     assert.equal(

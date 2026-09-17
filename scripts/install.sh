@@ -8,7 +8,7 @@
 #   COLON3CODE_CHANNEL           release train to follow: stable, nightly, or preview
 #                            (default: stable; preview is a maintainers' test train)
 #   COLON3CODE_VERSION           exact version to install (overrides COLON3CODE_CHANNEL)
-#   COLON3CODE_HOME              T3 home directory (default: ~/.t3)
+#   COLON3CODE_HOME              T3 home directory (default: ~/.colon3code)
 #   COLON3CODE_INSTALL_BIN_DIR   where the `t3` symlink goes (default: ~/.local/bin)
 #   COLON3CODE_RELEASE_BASE_URL  mirror for releases/download (default: GitHub)
 #

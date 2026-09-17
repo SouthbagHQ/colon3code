@@ -61,8 +61,8 @@ pin one, `--channel` to follow a different release train (moving onto preview fr
 
 `t3 uninstall` reverses the install script: it shows what it found (the
 background service, the `t3` launcher, every downloaded version under
-`~/.t3/runtime`), asks once, and removes them. Your projects, threads, and
-settings under `~/.t3/userdata` are kept; delete that directory yourself if
+`~/.colon3code/runtime`), asks once, and removes them. Your projects, threads, and
+settings under `~/.colon3code/userdata` are kept; delete that directory yourself if
 you want them gone too. Pass `--yes` from a script.
 
 ## Platform support

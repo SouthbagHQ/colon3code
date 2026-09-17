@@ -40,7 +40,7 @@ The development identity is `:3 Code Dev`, bundle/package `com.t3tools.colon3cod
 
 ## Start one disposable T3 environment
 
-Run backend commands from the repository root. Use the ignored, worktree-local `.t3` directory or create a fresh directory with the host OS's temporary-directory mechanism. An explicit base directory stores state in `<base-dir>/userdata`; never point testing at shared `~/.t3` state.
+Run backend commands from the repository root. Use the ignored, worktree-local `.colon3code` directory or create a fresh directory with the host OS's temporary-directory mechanism. An explicit base directory stores state in `<base-dir>/userdata`; never point testing at shared `~/.colon3code` state.
 
 Seed a small number of meaningful Git projects before starting the backend:
 

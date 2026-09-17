@@ -7,7 +7,7 @@
 #   COLON3CODE_CHANNEL           release train to follow: stable, nightly, or preview
 #                            (default: stable; preview is a maintainers' test train)
 #   COLON3CODE_VERSION           exact version to install (overrides COLON3CODE_CHANNEL)
-#   COLON3CODE_HOME              T3 home directory (default: ~\.t3)
+#   COLON3CODE_HOME              T3 home directory (default: ~\.colon3code)
 #   COLON3CODE_INSTALL_BIN_DIR   where t3.exe is linked (default: ~\.local\bin)
 #   COLON3CODE_RELEASE_BASE_URL  mirror for releases/download (default: GitHub)
 #
@@ -18,7 +18,7 @@ $ErrorActionPreference = "Stop"
 
 $repo = "SouthbagHQ/colon3code"
 $baseUrl = if ($env:COLON3CODE_RELEASE_BASE_URL) { $env:COLON3CODE_RELEASE_BASE_URL.TrimEnd("/") } else { "https://github.com/$repo/releases/download" }
-$t3Home = if ($env:COLON3CODE_HOME) { $env:COLON3CODE_HOME } else { Join-Path $HOME ".t3" }
+$t3Home = if ($env:COLON3CODE_HOME) { $env:COLON3CODE_HOME } else { Join-Path $HOME ".colon3code" }
 $binDir = if ($env:COLON3CODE_INSTALL_BIN_DIR) { $env:COLON3CODE_INSTALL_BIN_DIR } else { Join-Path $HOME ".local\bin" }
 
 function Fail([string] $message) {
