@@ -1062,7 +1062,7 @@ export const MessagesTimeline = memo(function MessagesTimeline({
             onScroll={handleScroll}
             onItemSizeChanged={reportContentOverflow}
             className={cn(
-              "scrollbar-gutter-both h-full min-h-0 overflow-x-hidden overscroll-y-contain px-4 [overflow-anchor:none] sm:px-6",
+              "scrollbar-gutter-both h-full min-h-0 overflow-x-hidden overscroll-y-contain px-5 [overflow-anchor:none] sm:px-8",
               topFadeEnabled && "topbar-scroll-fade",
             )}
             ListHeaderComponent={
@@ -1833,7 +1833,7 @@ function UserTimelineRow({ row }: { row: Extract<TimelineRow, { kind: "message" 
 
   return (
     <div className="group flex flex-col items-end gap-1">
-      <div className="relative max-w-[80%] rounded-2xl bg-message p-3.5 text-message-foreground">
+      <div className="relative max-w-[80%] rounded-2xl bg-message p-4 text-message-foreground">
         <MessageAuthorHeading>you</MessageAuthorHeading>
         {(regularImages.length > 0 || userVideos.length > 0) && (
           <div className="mb-2 grid max-w-[210px] grid-cols-2 gap-2">
@@ -2066,7 +2066,7 @@ function AssistantTimelineRow({ row }: { row: Extract<TimelineRow, { kind: "mess
 
   return (
     <>
-      <div className="relative min-w-0 px-1 py-0.5">
+      <div className="relative min-w-0 px-1.5 py-1">
         <MessageAuthorHeading>:3 Code</MessageAuthorHeading>
         <AssistantCitationSource
           messageId={row.message.id}

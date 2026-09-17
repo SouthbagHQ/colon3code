@@ -89,15 +89,15 @@ html[data-mobile-composer-route-transition="true"]::view-transition-old(t3-mobil
    * tooltip, and toolbar controls cannot quietly drift apart.
    */
   --control-radius: 0.625rem;
-  --sidebar-content-inset: 0.625rem;
-  --sidebar-control-gap: 0.5rem;
+  --sidebar-content-inset: 0.75rem;
+  --sidebar-control-gap: 0.625rem;
   --sidebar-icon-color: color-mix(
     in srgb,
     var(--contrast-sidebar-muted-foreground) 60%,
     var(--sidebar)
   );
-  --sidebar-row-content-inset: 0.75rem;
-  --command-shell-inset: 0.625rem;
+  --sidebar-row-content-inset: 0.875rem;
+  --command-shell-inset: 0.75rem;
   --command-content-inset: 1rem;
   --floating-content-inset: 0.75rem;
   --glass-blur: 12px;

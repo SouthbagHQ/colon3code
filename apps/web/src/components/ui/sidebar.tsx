@@ -716,10 +716,10 @@ const sidebarMenuButtonVariants = cva(
     variants: {
       size: {
         default:
-          "h-8 rounded-[var(--control-radius)] px-[var(--sidebar-row-content-inset)] py-1.5 text-sm",
-        icon: "size-8 justify-center rounded-[var(--control-radius)] p-0",
+          "h-9 rounded-[var(--control-radius)] px-[var(--sidebar-row-content-inset)] py-2 text-sm",
+        icon: "size-9 justify-center rounded-[var(--control-radius)] p-0",
         lg: "h-12 rounded-lg p-2 text-sm group-data-[collapsible=icon]:p-0!",
-        sm: "h-7 rounded-lg p-2 text-xs",
+        sm: "h-8 rounded-lg p-2 text-xs",
       },
       variant: {
         default: "font-medium text-sidebar-muted-foreground/80",
@@ -872,7 +872,7 @@ function SidebarMenuSubButton({
 }) {
   const defaultProps = {
     className: cn(
-      "-translate-x-px flex h-7 min-w-0 cursor-pointer items-center gap-2 overflow-hidden rounded-lg px-2 text-sidebar-foreground outline-hidden ring-ring hover:bg-sidebar-row-hover hover:text-sidebar-foreground focus-visible:ring-2 active:bg-sidebar-row-active active:text-sidebar-foreground disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 [&>span:last-child]:truncate [&>svg:not([class*='size-'])]:size-4 [&>svg]:shrink-0 [&>svg]:text-sidebar-muted-foreground",
+      "-translate-x-px flex h-8 min-w-0 cursor-pointer items-center gap-2 overflow-hidden rounded-lg px-2.5 text-sidebar-foreground outline-hidden ring-ring hover:bg-sidebar-row-hover hover:text-sidebar-foreground focus-visible:ring-2 active:bg-sidebar-row-active active:text-sidebar-foreground disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 [&>span:last-child]:truncate [&>svg:not([class*='size-'])]:size-4 [&>svg]:shrink-0 [&>svg]:text-sidebar-muted-foreground",
       "data-[active=true]:bg-sidebar-row-selected data-[active=true]:text-sidebar-foreground",
       size === "sm" && "text-xs",
       size === "md" && "text-sm",
