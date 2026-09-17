@@ -6,6 +6,7 @@ import {
   type ScopedThreadRef,
   type ServerProviderModel,
 } from "@t3tools/contracts";
+import { cuteDescriptorLabel, cuteOptionDescription, cuteOptionLabel } from "./cuteTraits";
 import {
   applyClaudePromptEffortPrefix,
   buildProviderOptionSelectionsFromDescriptors,
@@ -373,9 +374,11 @@ export const TraitsMenuContent = memo(function TraitsMenuContentImpl({
               {index > 0 ? <MenuDivider /> : null}
               <MenuGroup>
                 <div className="px-2 pt-1.5 pb-1 font-medium text-muted-foreground text-xs">
-                  {descriptor.label}
+                  {cuteDescriptorLabel(descriptor.label)}
                 </div>
-                <div className="px-2 pb-1.5 text-muted-foreground/80 text-xs">{value}</div>
+                <div className="px-2 pb-1.5 text-muted-foreground/80 text-xs">
+                  {cuteOptionLabel(value)}
+                </div>
               </MenuGroup>
             </div>
           );
@@ -397,7 +400,7 @@ export const TraitsMenuContent = memo(function TraitsMenuContentImpl({
             {index > 0 ? <MenuDivider /> : null}
             <MenuGroup>
               <div className="px-2 pt-1.5 pb-1 font-medium text-muted-foreground text-xs">
-                {descriptor.label}
+                {cuteDescriptorLabel(descriptor.label)}
               </div>
               {ultrathinkInBodyText && descriptor.id === primarySelectDescriptor?.id ? (
                 <div className="px-2 pb-1.5 text-muted-foreground/80 text-xs">
@@ -423,7 +426,7 @@ export const TraitsMenuContent = memo(function TraitsMenuContentImpl({
                     <span className="flex w-full min-w-0 flex-col">
                       <span className="flex w-full min-w-0 items-center justify-between gap-3">
                         <span className="min-w-0 truncate">
-                          {option.label}
+                          {cuteOptionLabel(option.label)}
                           {option.isDefault ? (
                             <>
                               {" "}
@@ -432,9 +435,9 @@ export const TraitsMenuContent = memo(function TraitsMenuContentImpl({
                           ) : null}
                         </span>
                       </span>
-                      {option.description ? (
+                      {cuteOptionDescription(descriptor, option) ? (
                         <span className="max-w-56 text-pretty text-muted-foreground/80 text-xs">
-                          {option.description}
+                          {cuteOptionDescription(descriptor, option)}
                         </span>
                       ) : null}
                     </span>
@@ -453,7 +456,7 @@ export const TraitsMenuContent = memo(function TraitsMenuContentImpl({
             {index > 0 || selectDescriptors.length > 0 ? <MenuDivider /> : null}
             <MenuGroup>
               <div className="px-2 py-1.5 font-medium text-muted-foreground text-xs">
-                {descriptor.label}
+                {cuteDescriptorLabel(descriptor.label)}
               </div>
               <MenuRadioGroup
                 value={selectedValue}
@@ -524,7 +527,7 @@ export function buildTraitsTriggerDisplay(input: {
           ? `${descriptor.label} ${descriptor.currentValue === true ? "on" : "off"}`
           : getProviderOptionCurrentLabel(descriptor);
     if (typeof label === "string" && label.length > 0) {
-      labels.push(label);
+      labels.push(cuteOptionLabel(label));
     }
   }
 
@@ -532,7 +535,7 @@ export function buildTraitsTriggerDisplay(input: {
   // off an empty label list alone would also catch descriptors that resolved to
   // no label at all, printing a bogus "Normal" for a model without fast mode.
   if (labels.length === 0 && fastModeFallbackLabel !== null) {
-    return { label: fastModeFallbackLabel, showFastModeIcon: false };
+    return { label: cuteOptionLabel(fastModeFallbackLabel), showFastModeIcon: false };
   }
   return { label: labels.join(" · "), showFastModeIcon: fastModeEnabled };
 }

@@ -7,22 +7,22 @@ export const runtimeModeConfig: Record<
 > = {
   "approval-required": {
     label: "supervised",
-    description: "ask before commands and file changes.",
+    description: "i'll ask before running commands or touching files :3",
     icon: LockIcon,
   },
   "auto-accept-edits": {
     label: "auto-accept edits",
-    description: "auto-approve edits, ask before other actions.",
+    description: "edits go straight in, i'll still ask before anything else ^w^",
     icon: PenLineIcon,
   },
   auto: {
     label: "auto",
-    description: "supported providers approve routine actions; others still ask.",
+    description: "routine stuff just happens where the provider allows it, the rest still asks",
     icon: SparklesIcon,
   },
   "full-access": {
     label: "full access",
-    description: "allow commands and edits without prompts.",
+    description: "no prompts, i just go. brave choice uwu",
     icon: LockOpenIcon,
   },
 };
