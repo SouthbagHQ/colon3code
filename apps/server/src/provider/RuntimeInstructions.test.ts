@@ -26,3 +26,18 @@ describe("buildRuntimeInstructions", () => {
     expect(instructions).not.toContain("reasoning effort");
   });
 });
+
+describe("voice instructions", () => {
+  it("asks for the app's cute voice in chat prose only", () => {
+    const instructions = buildRuntimeInstructions({ harness: "Claude Code" });
+    expect(instructions).toContain("<voice>");
+    expect(instructions).toMatch(/"meow", "mrrp", "nya", or "uwu"/);
+    expect(instructions).toContain('":3" when something worked, "3:" when something went wrong');
+    expect(instructions).toContain("Do not apply it to code, comments, commit messages");
+    // Runtime info stays first so harness-level parsing of the header is unchanged.
+    expect(instructions.indexOf("<runtime_info>")).toBeLessThan(instructions.indexOf("<voice>"));
+    expect(instructions.indexOf("<voice>")).toBeLessThan(
+      instructions.indexOf("<pull_request_linking>"),
+    );
+  });
+});
