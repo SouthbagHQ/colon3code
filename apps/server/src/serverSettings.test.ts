@@ -9,6 +9,8 @@ import {
   resolveProviderInstanceEnabled,
   ServerSettings,
   ServerSettingsPatch,
+  SOUTHBAG_CODE_DEFAULT_MODEL,
+  SOUTHBAG_CODE_DRIVER_KIND,
 } from "@t3tools/contracts";
 import { createModelSelection } from "@t3tools/shared/model";
 import { assert, it } from "@effect/vitest";
@@ -391,6 +393,33 @@ it.layer(NodeServices.layer)("server settings", (it) => {
         instanceId: ProviderInstanceId.make("claude_openrouter"),
         model: "openai/gpt-5.5",
       });
+    }).pipe(Effect.provide(makeServerSettingsLayer())),
+  );
+
+  it.effect("falls back to the southbag-code instance id from providers.southbagCode", () =>
+    Effect.gen(function* () {
+      const serverSettings = yield* ServerSettingsModule.ServerSettingsService;
+      // Every provider ahead of Southbag Code in the legacy map is disabled, and
+      // the current text-generation provider is one of them. The fallback must
+      // use the driver kind (`southbag-code`), not the settings key.
+      const next = yield* serverSettings.updateSettings({
+        providers: {
+          codex: { enabled: false },
+          claudeAgent: { enabled: false },
+          cursor: { enabled: false },
+          grok: { enabled: false },
+        },
+        textGenerationModelSelection: {
+          instanceId: ProviderInstanceId.make("codex"),
+          model: "gpt-5",
+        },
+      });
+      assert.deepEqual(next.textGenerationModelSelection, {
+        instanceId: ProviderInstanceId.make(SOUTHBAG_CODE_DRIVER_KIND),
+        model: SOUTHBAG_CODE_DEFAULT_MODEL,
+      });
+      assert.isTrue(next.providers.southbagCode.enabled);
+      assert.equal(next.providers.southbagCode.binaryPath, "southbag-code");
     }).pipe(Effect.provide(makeServerSettingsLayer())),
   );
 

@@ -273,6 +273,25 @@ export const GrokIcon: Icon = ({ className, ...props }) => (
   </svg>
 );
 
+/** Southbag Code: a little bag with a :3 face. Monochrome, follows `currentColor`. */
+export const SouthbagCodeIcon: Icon = (props) => (
+  <svg
+    {...props}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.8"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <path d="M6.5 8.5h11l1 11.5a1 1 0 0 1-1 1h-11a1 1 0 0 1-1-1z" />
+    <path d="M9 8.5V7a3 3 0 0 1 6 0v1.5" />
+    <path d="M9.75 14.5c.5.9 1.3 1.4 2.25 1.4s1.75-.5 2.25-1.4" />
+    <circle cx="10.2" cy="12.2" r=".5" fill="currentColor" stroke="none" />
+    <circle cx="13.8" cy="12.2" r=".5" fill="currentColor" stroke="none" />
+  </svg>
+);
+
 export const TraeIcon: Icon = (props) => (
   <svg {...props} viewBox="0 0 24 24" fill="currentColor">
     {/* Back rectangle: left strip + bottom strip drawn separately — empty bottom-left corner is the gap between them */}

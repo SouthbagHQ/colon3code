@@ -219,6 +219,7 @@ export function ComposerToolbarScroller(props: {
 
 export function ComposerActionButton(props: {
   readonly accessibilityLabel: string;
+  readonly accessibilityHint?: string;
   readonly disabled?: boolean;
   readonly icon: ComponentProps<typeof SymbolView>["name"];
   readonly onPress: () => void;
@@ -227,6 +228,7 @@ export function ComposerActionButton(props: {
   return (
     <Pressable
       accessibilityLabel={props.accessibilityLabel}
+      accessibilityHint={props.accessibilityHint}
       accessibilityRole="button"
       accessibilityState={{ disabled: props.disabled }}
       className="size-[44px] shrink-0 items-center justify-center active:opacity-70"
@@ -237,7 +239,9 @@ export function ComposerActionButton(props: {
         className={cn(
           "size-[30px] items-center justify-center rounded-full",
           props.variant === "danger"
-            ? "bg-danger"
+            ? props.disabled
+              ? "bg-danger/40"
+              : "bg-danger"
             : props.disabled
               ? "bg-primary/15"
               : "bg-primary",

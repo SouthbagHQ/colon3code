@@ -576,6 +576,35 @@ export function ProviderInstanceCard({
   // home entry that is not a symlink, a missing binary). Show it wherever the
   // headline shows so the user can act without opening the editor.
   const needsAttention = statusKey === "warning" || statusKey === "error";
+  // Drivers that ship as an npm package say how to get the binary once the
+  // server has confirmed it is missing.
+  const installHintNode =
+    enabled &&
+    liveProvider !== undefined &&
+    !liveProvider.installed &&
+    driverOption?.installCommand ? (
+      <span className="min-w-0 [overflow-wrap:anywhere]">
+        · install with{" "}
+        <code className="rounded bg-muted/60 px-1 py-0.5 text-[11px]">
+          {driverOption.installCommand}
+        </code>
+        {driverOption.docsUrl ? (
+          <>
+            {" "}
+            (
+            <a
+              href={driverOption.docsUrl}
+              rel="noreferrer"
+              target="_blank"
+              className="underline underline-offset-2 hover:text-foreground"
+            >
+              docs
+            </a>
+            )
+          </>
+        ) : null}
+      </span>
+    ) : null;
   const editorStatusNode =
     isAuthenticated && authEmail ? (
       <>
@@ -594,6 +623,7 @@ export function ProviderInstanceCard({
         {summary.detail ? (
           <span className="min-w-0 [overflow-wrap:anywhere]">· {summary.detail}</span>
         ) : null}
+        {installHintNode}
       </>
     );
   if (mode === "list") {

@@ -7,7 +7,8 @@ environments. It shows token use, cache savings, model breakdowns, and estimated
 cost. These estimates are not your subscription bill.
 
 Totals depend on the history available on each server. Grok turns without a saved completed-turn
-record are missing from the totals.
+record are missing from the totals. Southbag Code does not keep a usage transcript, so its
+threads do not appear in **Usage**.
 
 Usage includes each configured account's history, including disabled accounts. Custom homes follow
 the account's home setting or its `CODEX_HOME`, `CLAUDE_CONFIG_DIR`, or `GROK_HOME` environment

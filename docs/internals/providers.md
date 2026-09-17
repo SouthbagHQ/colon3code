@@ -35,6 +35,33 @@ client connections and provider-instance rebuilds. Releases are immutable, with 
 selecting the version for new processes. Running processes hold leases on their version. Updates
 and removal must respect those leases instead of replacing executables under a running agent.
 
+## Southbag Code
+
+Southbag Code has no ACP mode. The adapter drives `southbag-code --mode rpc`, Pi's newline-delimited
+JSON protocol, with one process per thread; a process holds one session, so threads cannot share
+one. Frame on `\n` only and strip a trailing `\r`; Node `readline` reframes the stream and must
+not be used. Sessions are written under the server's userdata via `--session-dir` rather than the
+agent's default home, so resume works from the thread record alone and does not depend on the
+user's own Southbag Code history.
+
+The model sentinel `southbag-default`
+([contracts](../../packages/contracts/src/model.ts)) means "keep the session's configured model".
+Never send it over the RPC; only concrete `provider/modelId` slugs from `get_available_models` are
+valid `set_model` arguments.
+
+The driver is registered first in [`BUILT_IN_DRIVERS`](../../apps/server/src/provider/builtInDrivers.ts)
+on purpose. The web picks the first picker-ready provider in the server's list as the default for
+new threads, and the list follows this array, so the position is the product decision that
+Southbag Code is the default whenever its binary is installed. Reordering the array changes the
+default provider.
+
+The provider supports full access only: it runs tools without approval and has no plan mode.
+Extension-UI `confirm`, `select`, and `input` requests are surfaced as approval or user-input
+requests where the host contract allows and auto-cancelled otherwise. The composer's stop button is
+disabled, not hidden, whenever the selected provider is `southbag-code`. This is a deliberate
+product rule ("Kevin is watching"), not a missing capability: the adapter still implements
+`interruptTurn` through the `abort` command so the server can stop sessions internally.
+
 ## Setup must not happen as a health-check side effect
 
 Opening a provider session can start MCP servers, run hooks, or launch a login browser.

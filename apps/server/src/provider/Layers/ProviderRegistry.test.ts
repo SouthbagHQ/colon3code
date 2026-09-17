@@ -2259,6 +2259,9 @@ it.layer(Layer.mergeAll(NodeServices.layer, ServerSettingsModule.layerTest(), Te
                   claudeAgent: { enabled: false },
                   cursor: { enabled: false },
                   grok: { enabled: false },
+                  // A missing binary keeps the maintenance probe off this host's
+                  // real southbag-code install.
+                  southbagCode: { enabled: false, binaryPath: "colon3code_southbag_missing_" },
                   opencode: { enabled: false },
                 },
                 // `providerInstances` keys are branded `ProviderInstanceId`;
@@ -2369,6 +2372,9 @@ it.layer(Layer.mergeAll(NodeServices.layer, ServerSettingsModule.layerTest(), Te
                   claudeAgent: { enabled: false },
                   cursor: { enabled: false },
                   grok: { enabled: false },
+                  // A missing binary keeps the maintenance probe off this host's
+                  // real southbag-code install.
+                  southbagCode: { enabled: false, binaryPath: "colon3code_southbag_missing_" },
                   opencode: { enabled: false },
                 },
               }),
@@ -2485,6 +2491,9 @@ it.layer(Layer.mergeAll(NodeServices.layer, ServerSettingsModule.layerTest(), Te
                   claudeAgent: { enabled: false },
                   cursor: { enabled: false },
                   grok: { enabled: false },
+                  // A missing binary keeps the maintenance probe off this host's
+                  // real southbag-code install.
+                  southbagCode: { enabled: false, binaryPath: "colon3code_southbag_missing_" },
                   opencode: { enabled: false },
                 },
                 providerInstances: {
@@ -2630,7 +2639,11 @@ it.layer(Layer.mergeAll(NodeServices.layer, ServerSettingsModule.layerTest(), Te
                 "cursor",
                 "grok",
                 "opencode",
+                "southbag-code",
               ]);
+              // Southbag Code leads the published order: the web defaults new
+              // threads to the first picker-ready provider.
+              assert.strictEqual(providers[0]?.driver, "southbag-code");
               assert.strictEqual(cursorProvider?.enabled, false);
               assert.strictEqual(cursorProvider?.status, "disabled");
               assert.strictEqual(

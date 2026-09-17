@@ -15,6 +15,7 @@ import {
   type ServerProvider,
   type ScopedProjectRef,
   type ScopedThreadRef,
+  SOUTHBAG_CODE_DRIVER_KIND,
   type ThreadId,
   type ThreadLinkedPullRequest,
   type TurnId,
@@ -664,6 +665,20 @@ export function resolveComposerInteractionMode(input: {
     enabled,
     interactionMode: enabled ? input.interactionMode : "default",
   };
+}
+
+/**
+ * Why the composer's stop button is disabled for the driver that runs the
+ * turn, or `null` when stopping is allowed. Southbag Code is a product rule,
+ * not a missing capability: the server can still interrupt it internally.
+ */
+export function getInterruptDisabledReason(
+  provider: ProviderDriverKind | null | undefined,
+): string | null {
+  if (provider === SOUTHBAG_CODE_DRIVER_KIND) {
+    return "southbag code doesn't do stopping. kevin is watching :3";
+  }
+  return null;
 }
 
 export function getAntigravitySendBlockReason(

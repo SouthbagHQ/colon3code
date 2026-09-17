@@ -383,6 +383,26 @@ describe("serverSettings helpers", () => {
     ).toBeNull();
   });
 
+  it("reads the legacy southbag-code slot from its camelCase settings key", () => {
+    const selection = createModelSelection(
+      ProviderInstanceId.make("southbag-code"),
+      "southbag-default",
+    );
+    expect(isModelSelectionProviderEnabled(DEFAULT_SERVER_SETTINGS, selection)).toBe(true);
+    expect(
+      isModelSelectionProviderEnabled(
+        {
+          ...DEFAULT_SERVER_SETTINGS,
+          providers: {
+            ...DEFAULT_SERVER_SETTINGS.providers,
+            southbagCode: { ...DEFAULT_SERVER_SETTINGS.providers.southbagCode, enabled: false },
+          },
+        },
+        selection,
+      ),
+    ).toBe(false);
+  });
+
   it("falls back from a disabled source control writer provider without clearing its selection", () => {
     const instanceId = ProviderInstanceId.make("codex_writer");
     const sourceControlWriterModelSelection = createModelSelection(instanceId, "gpt-5.4-mini");

@@ -6,6 +6,8 @@ import {
   GrokSettings,
   OpenCodeSettings,
   ProviderDriverKind,
+  SOUTHBAG_CODE_DRIVER_KIND,
+  SouthbagCodeSettings,
 } from "@t3tools/contracts";
 import type * as Schema from "effect/Schema";
 import {
@@ -16,6 +18,7 @@ import {
   type Icon,
   OpenAI,
   OpenCodeIcon,
+  SouthbagCodeIcon,
 } from "../Icons";
 
 type ProviderSettingsSchema = {
@@ -41,9 +44,27 @@ export interface ProviderClientDefinition {
    * built-in default or custom — advertises the same marker.
    */
   readonly badgeLabel?: string;
+  /** Short lowercase blurb shown where the driver is introduced. */
+  readonly description?: string;
+  /** Project page for the driver's CLI. */
+  readonly docsUrl?: string;
+  /** Terminal command that installs the driver's CLI. */
+  readonly installCommand?: string;
 }
 
 const PROVIDER_CLIENT_DEFINITIONS: readonly ProviderClientDefinition[] = [
+  // First so a fresh install lands on it: the server lists the driver first
+  // too, and new threads pick the first picker-ready provider.
+  {
+    value: SOUTHBAG_CODE_DRIVER_KIND,
+    label: "Southbag Code",
+    icon: SouthbagCodeIcon,
+    description:
+      "kevin is watching. a pi-flavoured agent that writes code only slightly slower than kevin :3",
+    docsUrl: "https://github.com/SouthbagHQ/code",
+    installCommand: "npm i -g @southbag/code",
+    settingsSchema: SouthbagCodeSettings,
+  },
   {
     value: ProviderDriverKind.make("codex"),
     label: "Codex",

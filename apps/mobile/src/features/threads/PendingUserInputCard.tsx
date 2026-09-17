@@ -37,6 +37,8 @@ export interface PendingUserInputCardProps {
   readonly onToggleCollapsed: () => void;
   /** Renders a stop control on the collapsed bar, which replaces the composer. */
   readonly onStopThread?: () => void;
+  /** Keeps that stop control visible but inert, explaining why. */
+  readonly stopThreadBlockedHint?: string | null;
   /**
    * 0 collapsed → 1 expanded. Slides the iOS overlay card down behind the
    * collapsed bar (inside a clipping window) on the UI thread; the host
@@ -191,8 +193,10 @@ export function PendingUserInputCard(props: PendingUserInputCardProps) {
       {props.onStopThread ? (
         <ControlPill
           accessibilityLabel="Stop"
+          accessibilityHint={props.stopThreadBlockedHint ?? undefined}
           icon="stop.fill"
           variant="danger"
+          disabled={props.stopThreadBlockedHint != null}
           className="h-9 w-9"
           onPress={props.onStopThread}
         />

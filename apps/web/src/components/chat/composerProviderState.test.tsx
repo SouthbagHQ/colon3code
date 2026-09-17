@@ -268,7 +268,7 @@ describe("getComposerProviderState", () => {
     );
   });
 
-  it.each(["codex", "claudeAgent", "cursor", "grok"])(
+  it.each(["codex", "claudeAgent", "cursor", "grok", "southbag-code"])(
     "does not preserve unknown options for a missing %s model",
     (provider) => {
       const state = getComposerProviderState({

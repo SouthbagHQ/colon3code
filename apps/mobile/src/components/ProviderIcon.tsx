@@ -1,5 +1,5 @@
 import { Image } from "expo-image";
-import { Path, Svg } from "react-native-svg";
+import { Circle, Path, Svg } from "react-native-svg";
 import { View } from "react-native";
 import { providerInstanceInitials } from "@t3tools/client-runtime/state/provider-instance-display";
 import { useAppearancePreferences } from "../features/settings/appearance/AppearancePreferencesProvider";
@@ -49,6 +49,29 @@ export function ProviderIcon(props: ProviderIconProps) {
           fill={fill}
           d="M7.62249 16.7237C4.83113 14.0422 5.3124 9.89222 7.69417 7.49905C9.45541 5.72786 12.341 5.00497 14.86 6.06768L17.5653 4.81138C17.0779 4.45714 16.4533 4.07613 15.7365 3.80839C12.4966 2.46764 8.6178 3.13492 5.98413 5.78141C3.45081 8.32904 2.65415 12.2463 4.02219 15.5889C5.04412 18.0871 3.36889 19.8541 1.68137 21.6377C1.08337 22.2699 0.483318 22.9022 0 23.5716L7.62045 16.7257"
         />
+      </Svg>
+    );
+  }
+
+  if (props.provider === "southbag-code") {
+    // A little bag with a :3 face, drawn in the monochrome foreground so it
+    // matches the Grok/Codex glyphs in both themes.
+    return (
+      <Svg
+        width={size}
+        height={size}
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke={mono}
+        strokeWidth={1.8}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <Path d="M6.5 8.5h11l1 11.5a1 1 0 0 1-1 1h-11a1 1 0 0 1-1-1z" />
+        <Path d="M9 8.5V7a3 3 0 0 1 6 0v1.5" />
+        <Path d="M9.75 14.5c.5.9 1.3 1.4 2.25 1.4s1.75-.5 2.25-1.4" />
+        <Circle cx={10.2} cy={12.2} r={0.5} fill={mono} stroke="none" />
+        <Circle cx={13.8} cy={12.2} r={0.5} fill={mono} stroke="none" />
       </Svg>
     );
   }

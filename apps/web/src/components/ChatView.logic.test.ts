@@ -8,6 +8,7 @@ import {
   ProviderDriverKind,
   ProviderInstanceId,
   type ServerProvider,
+  SOUTHBAG_CODE_DRIVER_KIND,
   ThreadId,
   TurnId,
 } from "@t3tools/contracts";
@@ -45,6 +46,7 @@ import {
   dismissBranchMismatchForSession,
   ENVIRONMENT_RECONNECT_WARNING_GRACE_MS,
   getAntigravitySendBlockReason,
+  getInterruptDisabledReason,
   getStartedThreadModelChangeBlockReason,
   hasEnvironmentReconnectWarningGraceElapsed,
   hasServerAcknowledgedLocalDispatch,
@@ -1514,6 +1516,20 @@ describe("resolveComposerProviderSelection", () => {
     });
 
     expect(selection.selectedProviderEntry).toBeUndefined();
+  });
+});
+
+describe("getInterruptDisabledReason", () => {
+  it("refuses to stop Southbag Code turns from the composer", () => {
+    expect(getInterruptDisabledReason(SOUTHBAG_CODE_DRIVER_KIND)).toBe(
+      "southbag code doesn't do stopping. kevin is watching :3",
+    );
+  });
+
+  it("lets every other driver stop", () => {
+    expect(getInterruptDisabledReason(ProviderDriverKind.make("codex"))).toBeNull();
+    expect(getInterruptDisabledReason(ProviderDriverKind.make("grok"))).toBeNull();
+    expect(getInterruptDisabledReason(null)).toBeNull();
   });
 });
 

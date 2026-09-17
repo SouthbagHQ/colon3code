@@ -84,6 +84,7 @@ import type {
 } from "../../lib/threadActivity";
 import { PendingApprovalCard } from "./PendingApprovalCard";
 import { ComposerFeedback } from "./ComposerFeedback";
+import { resolveStopActionBlockedHint } from "./composer-stop-action";
 import { ComposerUsageLimits } from "./ComposerUsageLimits";
 import { PendingUserInputCard } from "./PendingUserInputCard";
 import { ThreadCreationFailedCard } from "./ThreadCreationFailedCard";
@@ -297,6 +298,10 @@ export const ThreadDetailScreen = memo(function ThreadDetailScreen(props: Thread
   const navigationHeaderHeight = useContext(HeaderHeightContext) || insets.top + IOS_NAV_BAR_HEIGHT;
   const agentLabel = `${props.selectedThread.modelSelection.instanceId} agent`;
   const selectedThreadKey = scopedThreadKey(props.environmentId, props.selectedThread.id);
+  const stopThreadBlockedHint = resolveStopActionBlockedHint({
+    serverConfig: props.serverConfig,
+    thread: props.selectedThread,
+  });
   const composerEditorRef = useRef<ComposerEditorHandle>(null);
   const draftMessageRef = useRef(props.draftMessage);
   draftMessageRef.current = props.draftMessage;
@@ -998,6 +1003,7 @@ export const ThreadDetailScreen = memo(function ThreadDetailScreen(props: Thread
                         collapsed={userInputCollapsed}
                         onToggleCollapsed={handleToggleUserInputCollapsed}
                         onStopThread={props.onStopThread}
+                        stopThreadBlockedHint={stopThreadBlockedHint}
                         cardProgress={userInputCardProgress}
                         cardCoverage={userInputCardCoverage}
                         onInputFocusChange={handleOwnedInputFocusChange}

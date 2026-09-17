@@ -1,4 +1,4 @@
-import { ProviderDriverKind } from "@t3tools/contracts";
+import { ProviderDriverKind, SOUTHBAG_CODE_DRIVER_KIND } from "@t3tools/contracts";
 import {
   AntigravityIcon,
   ClaudeAI,
@@ -7,6 +7,7 @@ import {
   Icon,
   OpenAI,
   OpenCodeIcon,
+  SouthbagCodeIcon,
 } from "../Icons";
 
 export const PROVIDER_ICON_BY_PROVIDER: Partial<Record<ProviderDriverKind, Icon>> = {
@@ -16,6 +17,7 @@ export const PROVIDER_ICON_BY_PROVIDER: Partial<Record<ProviderDriverKind, Icon>
   [ProviderDriverKind.make("cursor")]: CursorIcon,
   [ProviderDriverKind.make("grok")]: GrokIcon,
   [ProviderDriverKind.make("antigravity")]: AntigravityIcon,
+  [SOUTHBAG_CODE_DRIVER_KIND]: SouthbagCodeIcon,
 };
 
 export type ModelEsque = {

@@ -49,6 +49,7 @@ import * as Stream from "effect/Stream";
 import * as SqlClient from "effect/unstable/sql/SqlClient";
 import { writeFileStringAtomically } from "./atomicWrite.ts";
 import * as ServerConfig from "./config.ts";
+import { driverKindForLegacyProviderSettingsKey } from "./provider/providerSettingsKeys.ts";
 import { type DeepPartial, deepMerge } from "@t3tools/shared/Struct";
 import { fromJsonStringPretty, fromLenientJson } from "@t3tools/shared/schemaJson";
 import {
@@ -329,11 +330,16 @@ function fallbackTextGenerationProvider(settings: ServerSettings): ServerSetting
   // Same precedence as isModelSelectionProviderEnabled: an explicit provider
   // instance wins over the legacy providers map, which decodes to defaults
   // (codex enabled) when the Providers UI has only written providerInstances.
-  const fallbackEntry = Object.entries(settings.providers).find(([driver, provider]) => {
-    const instance = settings.providerInstances[ProviderInstanceId.make(driver)];
+  const fallbackEntry = Object.entries(settings.providers).find(([key, provider]) => {
+    const instance =
+      settings.providerInstances[
+        ProviderInstanceId.make(driverKindForLegacyProviderSettingsKey(key))
+      ];
     return instance === undefined ? provider.enabled : resolveProviderInstanceEnabled(instance);
   });
-  const fallback = fallbackEntry ? ProviderDriverKind.make(fallbackEntry[0]) : undefined;
+  const fallback = fallbackEntry
+    ? driverKindForLegacyProviderSettingsKey(fallbackEntry[0])
+    : undefined;
   if (!fallback) {
     return settings;
   }

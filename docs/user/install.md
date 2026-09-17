@@ -91,19 +91,24 @@ and enable the provider you want. Installation, login, and configuration belong
 to that environment's machine, even when you connect from a phone or another
 computer.
 
-| Provider    | Install and authenticate                                                                     |
-| ----------- | -------------------------------------------------------------------------------------------- |
-| Codex       | Install [Codex CLI](https://developers.openai.com/codex/cli), then run `codex login`.        |
-| Claude      | Install [Claude Code](https://claude.com/product/claude-code), then run `claude auth login`. |
-| Cursor      | Install [Cursor CLI](https://cursor.com/cli), then run `agent login`.                        |
-| Grok Build  | Install [Grok Build CLI](https://x.ai/cli), then run `grok login`.                           |
-| OpenCode    | Install [OpenCode](https://opencode.ai), then run `opencode auth login`.                     |
-| Antigravity | Install and sign in with Google from :3 Code's provider settings.                            |
+| Provider      | Install and authenticate                                                                     |
+| ------------- | -------------------------------------------------------------------------------------------- |
+| Codex         | Install [Codex CLI](https://developers.openai.com/codex/cli), then run `codex login`.        |
+| Claude        | Install [Claude Code](https://claude.com/product/claude-code), then run `claude auth login`. |
+| Cursor        | Install [Cursor CLI](https://cursor.com/cli), then run `agent login`.                        |
+| Grok Build    | Install [Grok Build CLI](https://x.ai/cli), then run `grok login`.                           |
+| OpenCode      | Install [OpenCode](https://opencode.ai), then run `opencode auth login`.                     |
+| Antigravity   | Install and sign in with Google from :3 Code's provider settings.                            |
+| Southbag Code | Install [Southbag Code](https://github.com/SouthbagHQ/code) with `npm i -g @southbag/code`.  |
 
 Provider CLIs must be on the server's `PATH`. If :3 Code cannot find one, set its
 **Binary path** in provider settings, especially when using a version manager.
 Cursor's executable is `cursor-agent`, although its login command is
 `agent login`. Antigravity can use its managed runtime without a `PATH` entry.
+Southbag Code's executable is `southbag-code`; `npm i -g @southbag/code` puts it on
+`PATH`, and no login is needed. It is enabled as soon as it is installed and becomes
+the default provider for new threads. Change the provider in the composer to use another
+one.
 
 When a provider CLI is behind its latest release, its provider card shows the
 available version. **Update now** appears only when :3 Code can tell which

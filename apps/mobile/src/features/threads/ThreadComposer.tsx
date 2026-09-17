@@ -89,6 +89,7 @@ import { useScaledTextRole } from "../settings/appearance/useScaledTextRole";
 import type { RemoteClientConnectionState } from "../../lib/connection";
 import { resolveProviderOptionDescriptors } from "../../lib/providerOptions";
 import { ComposerCommandPopover } from "./ComposerCommandPopover";
+import { resolveStopActionBlockedHint } from "./composer-stop-action";
 import { useComposerCommandMenu } from "./use-composer-command-menu";
 import {
   ComposerDictationCancelAction,
@@ -310,6 +311,11 @@ export const ThreadComposer = memo(function ThreadComposer(props: ThreadComposer
     !hasContent &&
     (props.selectedThread.session?.status === "running" ||
       props.selectedThread.session?.status === "starting");
+  // Southbag Code keeps the stop button visible but inert; the hint carries the joke.
+  const stopBlockedHint = resolveStopActionBlockedHint({
+    serverConfig: props.serverConfig,
+    thread: props.selectedThread,
+  });
 
   const uploadStates = useAtomValue(composerAttachmentUploadsAtom);
   const attachmentsUploading =
@@ -883,8 +889,10 @@ export const ThreadComposer = memo(function ThreadComposer(props: ThreadComposer
                 {showStopAction ? (
                   <ComposerActionButton
                     accessibilityLabel="Stop agent"
+                    accessibilityHint={stopBlockedHint ?? undefined}
                     icon="stop.fill"
                     variant="danger"
+                    disabled={stopBlockedHint !== null}
                     onPress={props.onStopThread}
                   />
                 ) : (
@@ -974,8 +982,10 @@ export const ThreadComposer = memo(function ThreadComposer(props: ThreadComposer
                   {showStopAction ? (
                     <ComposerActionButton
                       accessibilityLabel="Stop agent"
+                      accessibilityHint={stopBlockedHint ?? undefined}
                       icon="stop.fill"
                       variant="danger"
+                      disabled={stopBlockedHint !== null}
                       onPress={props.onStopThread}
                     />
                   ) : voicePresentation.showsSend ? (

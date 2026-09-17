@@ -30,4 +30,8 @@ actions still require approval.
 Antigravity can still send native approval requests in **Full access**. It only offers remembered
 approvals for actions that support them.
 
+Southbag Code supports **Full access** only. It runs commands and edits without asking, and it
+has no plan mode. Its turns also cannot be stopped from the composer: the stop button is
+disabled while Southbag Code is the selected provider. Kevin is watching.
+
 See the [provider guides](./install.md#providers) for setup and provider-specific limits.

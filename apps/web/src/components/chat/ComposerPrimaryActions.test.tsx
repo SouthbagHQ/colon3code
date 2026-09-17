@@ -44,7 +44,10 @@ function renderPendingActions(isRunning: boolean) {
   );
 }
 
-function renderRunningActions(hasSendableContent: boolean) {
+function renderRunningActions(
+  hasSendableContent: boolean,
+  options: { interruptDisabledReason?: string | null } = {},
+) {
   return renderToStaticMarkup(
     createElement(ComposerPrimaryActions, {
       compact: true,
@@ -58,6 +61,7 @@ function renderRunningActions(hasSendableContent: boolean) {
       isEnvironmentUnavailable: false,
       isPreparingWorktree: false,
       hasSendableContent,
+      interruptDisabledReason: options.interruptDisabledReason ?? null,
       onPreviousPendingQuestion: () => {},
       onInterrupt: () => {},
       onImplementPlanInNewThread: () => {},
@@ -137,5 +141,26 @@ describe("ComposerPrimaryActions", () => {
 
     expect(markup).toContain('aria-label="stop generation"');
     expect(markup).not.toContain('aria-label="queue message"');
+  });
+
+  it("keeps Stop generation visible but inert when the provider refuses stopping", () => {
+    const markup = renderRunningActions(true, {
+      interruptDisabledReason: "southbag code doesn't do stopping. kevin is watching :3",
+    });
+    const stopButton = /<button[^>]*aria-label="stop generation"[^>]*>/.exec(markup)?.[0];
+
+    expect(stopButton).toBeDefined();
+    expect(stopButton).toContain("disabled");
+    expect(stopButton).toContain('aria-disabled="true"');
+    expect(markup).toContain('aria-label="queue message"');
+  });
+
+  it("leaves Stop generation clickable when no provider blocks stopping", () => {
+    const stopButton = /<button[^>]*aria-label="stop generation"[^>]*>/.exec(
+      renderRunningActions(false),
+    )?.[0];
+
+    expect(stopButton).toBeDefined();
+    expect(stopButton).not.toContain("disabled");
   });
 });

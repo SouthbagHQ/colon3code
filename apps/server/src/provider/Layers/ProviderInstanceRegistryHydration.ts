@@ -53,6 +53,7 @@ import * as Stream from "effect/Stream";
 
 import { ServerSettingsService } from "../../serverSettings.ts";
 import { BUILT_IN_DRIVERS, type BuiltInDriversEnv } from "../builtInDrivers.ts";
+import { legacyProviderSettingsKeyForDriver } from "../providerSettingsKeys.ts";
 import { ProviderInstanceRegistry } from "../Services/ProviderInstanceRegistry.ts";
 import { ProviderInstanceRegistryMutator } from "../Services/ProviderInstanceRegistryMutator.ts";
 import { ProviderInstanceRegistryMutableLayer } from "./ProviderInstanceRegistryLive.ts";
@@ -83,13 +84,10 @@ export const deriveProviderInstanceConfigMap = (
       continue;
     }
 
-    // Only built-in drivers have a legacy mirror; the registry's
-    // `providers` struct is keyed on the same literal slug as
-    // `driverKind`. Access is dynamic (the driver kind is a branded string),
-    // but it's constrained to `keyof settings.providers` by the union of
-    // built-in driver kinds.
-    const legacyKey = driver.driverKind as keyof ServerSettings["providers"];
-    const legacyConfig = settings.providers[legacyKey];
+    // Only built-in drivers have a legacy mirror. The `providers` struct is
+    // keyed on the driver kind for every driver except `southbag-code`, whose
+    // slot is `southbagCode`; the key helper owns that mapping.
+    const legacyConfig = settings.providers[legacyProviderSettingsKeyForDriver(driver.driverKind)];
     if (legacyConfig === undefined) {
       continue;
     }

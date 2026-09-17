@@ -30,10 +30,14 @@ const mergeProviderModels = (
 };
 
 /**
- * Built-in drivers in presentation order. Codex and Claude lead, the opt-in
- * providers follow, and unknown or fork drivers sort after every built-in.
+ * Built-in drivers in presentation order, matching `BUILT_IN_DRIVERS`. The web
+ * defaults new threads to the first picker-ready provider in this order, so
+ * Southbag Code leads (it is the preferred provider whenever it is installed),
+ * then Codex and Claude, then the opt-in providers; unknown or fork drivers
+ * sort after every built-in.
  */
 const BUILT_IN_DRIVER_ORDER: ReadonlyArray<string> = [
+  "southbag-code",
   "codex",
   "claudeAgent",
   "cursor",
