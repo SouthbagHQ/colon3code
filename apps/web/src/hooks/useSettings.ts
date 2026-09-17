@@ -434,7 +434,7 @@ function useUpdateSettingsTarget(environmentId: EnvironmentId | null) {
         const warnUnsaved = (description = PRIMARY_SETTINGS_UNAVAILABLE_MESSAGE) =>
           toastManager.add({
             type: "warning",
-            title: "Setting not saved",
+            title: "setting not saved 3:",
             description,
           });
         if (Object.keys(localPatch).length > 0) {

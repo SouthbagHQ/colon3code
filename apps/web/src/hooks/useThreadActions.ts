@@ -165,7 +165,7 @@ export async function navigateAfterThreadDeletion(navigate: () => Promise<void>)
     toastManager.add(
       stackedThreadToast({
         type: "error",
-        title: "Thread deleted, but navigation failed",
+        title: "thread deleted, but navigation failed 3:",
         description: error instanceof Error ? error.message : "An error occurred.",
       }),
     );
@@ -469,8 +469,8 @@ export function useThreadActions() {
           stackedThreadToast({
             type: "error",
             title: removalFailed
-              ? "Failed to delete worktree"
-              : "Worktree deleted, but Git status refresh failed",
+              ? "failed to delete worktree 3:"
+              : "worktree deleted, but Git status refresh failed 3:",
             description: removalFailed
               ? `Could not remove ${displayWorktreePath ?? orphanedWorktreePath}. ${message}`
               : message,

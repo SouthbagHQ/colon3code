@@ -337,7 +337,7 @@ export function DevicePanel(props: {
                   <p className="max-w-sm">
                     {state.hostStatus === "failed"
                       ? (state.hostStatusDetail ?? "The device hub failed to start.")
-                      : "No simulators or emulators were found on this environment."}
+                      : "no simulators or emulators were found on this environment"}
                   </p>
                 </>
               ) : null}

@@ -55,7 +55,7 @@ export function getProviderStatusMessage(status: ServerProvider): string {
     return "Sign in via the CLI to authenticate again.";
   }
   return status.status === "ready"
-    ? "No models are available for this provider."
+    ? "no models are available for this provider"
     : status.status === "error"
       ? `${providerName} provider is unavailable.`
       : `${providerName} provider has limited availability.`;

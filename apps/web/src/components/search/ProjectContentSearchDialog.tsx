@@ -241,7 +241,7 @@ function OpenContentSearchDialog(props: {
       {matches.length === 0 ? (
         <div className="flex flex-1 items-center justify-center px-6 text-center text-sm text-muted-foreground">
           {search.hasQuery && !search.isPending && !search.error
-            ? "No results found."
+            ? "no results found"
             : "Type to search across your project."}
         </div>
       ) : (

@@ -1,0 +1,24 @@
+/* Transform-only bounce for the :3 loading mark. Paused offscreen and under
+   reduced motion via the shared visible-animation vars (see visibleAnimation.ts). */
+@keyframes spinner-bounce {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+  40% {
+    transform: translateY(-12%) scale(0.96, 1.04);
+  }
+  75% {
+    transform: translateY(0) scale(1.05, 0.95);
+  }
+}
+
+.spinner-bounce {
+  transform-origin: 50% 100%;
+
+  @media (prefers-reduced-motion: no-preference) and (forced-colors: none) {
+    animation: spinner-bounce 900ms ease-in-out infinite;
+    animation-play-state: var(--visible-animation-state, paused);
+    will-change: var(--visible-animation-will-change, auto);
+  }
+}

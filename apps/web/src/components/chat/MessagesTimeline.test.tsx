@@ -1588,7 +1588,7 @@ describe("MessagesTimeline", () => {
       />,
     );
 
-    expect(markup).toContain("Working for");
+    expect(markup).toContain("working for");
     expect(markup).toContain("Running pnpm");
   });
 
@@ -1665,7 +1665,7 @@ describe("MessagesTimeline", () => {
       />,
     );
 
-    expect(markup).toContain("Thinking");
+    expect(markup).toContain("thinking…");
     expect(markup).toContain("lucide-brain");
     expect(markup).toContain('data-timeline-row-id="live-activity-row"');
   });
@@ -1708,7 +1708,7 @@ describe("MessagesTimeline", () => {
     expect(markup).toContain("Running pnpm");
     expect(markup).toContain("lucide-terminal");
     expect(markup).not.toContain("Ran pnpm");
-    expect(markup).not.toContain("Thinking");
+    expect(markup).not.toContain("thinking…");
     expect(markup).not.toContain('data-timeline-row-kind="thinking"');
   });
 

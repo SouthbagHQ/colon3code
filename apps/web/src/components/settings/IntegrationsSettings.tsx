@@ -636,7 +636,7 @@ function DeviceIntegrationControls({
       if (failed.length > 0) {
         toastManager.add({
           type: "error",
-          title: "Device settings not saved on all environments",
+          title: "device settings not saved on all environments 3:",
           description: `Could not update ${failed.map((environment) => environment.label).join(", ")}.`,
         });
       }
@@ -858,7 +858,7 @@ function BrowserProfilesSetting({ disabled }: { readonly disabled: boolean }) {
     if (!previewBridge || !environmentsReady || environments.length === 0) {
       toastManager.add({
         type: "error",
-        title: `Could not clear ${name}'s data`,
+        title: `could not clear ${name}'s data 3:`,
         description: "You're not connected to a server yet.",
       });
       return;
@@ -869,10 +869,10 @@ function BrowserProfilesSetting({ disabled }: { readonly disabled: boolean }) {
       id,
     )
       .then(() => {
-        toastManager.add({ type: "success", title: `Cleared ${name}'s cookies and cache` });
+        toastManager.add({ type: "success", title: `cleared ${name}'s cookies and cache :3` });
       })
       .catch(() => {
-        toastManager.add({ type: "error", title: `Could not clear ${name}'s data` });
+        toastManager.add({ type: "error", title: `could not clear ${name}'s data 3:` });
       });
   };
 
@@ -1087,7 +1087,7 @@ function BrowserProfilesSetting({ disabled }: { readonly disabled: boolean }) {
               {sources === null ? (
                 <MenuItem disabled>Looking for browsers…</MenuItem>
               ) : importableSources.length === 0 ? (
-                <MenuItem disabled>No supported browsers found</MenuItem>
+                <MenuItem disabled>no supported browsers found</MenuItem>
               ) : (
                 // Every source is a plain row — running, needs-permission and
                 // ready all look the same here. The wizard picks up whatever
@@ -1304,7 +1304,7 @@ function BrowserProfilesSetting({ disabled }: { readonly disabled: boolean }) {
               .catch(() => {
                 toastManager.add({
                   type: "error",
-                  title: "Could not open System Settings",
+                  title: "could not open System Settings 3:",
                   description: "Open Privacy & Security → Full Disk Access manually.",
                 });
               });

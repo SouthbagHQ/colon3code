@@ -178,7 +178,9 @@ function LicenseManifestError({ message, onRetry }: { message: string; onRetry: 
   return (
     <div className="flex flex-col items-start gap-3 px-3 py-5 sm:px-4">
       <div className="flex flex-col gap-1">
-        <h3 className="text-sm font-medium text-foreground">Open-source notices are unavailable</h3>
+        <h3 className="text-sm font-medium text-foreground">
+          open-source notices are unavailable 3:
+        </h3>
         <p className="max-w-[70ch] text-pretty text-[13px] leading-[1.45] text-muted-foreground/80">
           {message}
         </p>

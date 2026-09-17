@@ -160,7 +160,7 @@ export function WelcomeWizard({
         .catch(() => {
           const errorToast = {
             type: "error",
-            title: "Could not finish setup",
+            title: "could not finish setup 3:",
             description: "Your settings could not be saved. Try again.",
           } as const;
           if (completionErrorToastIdRef.current === null) {
@@ -189,7 +189,7 @@ export function WelcomeWizard({
         initialFocus={() => document.getElementById("onboarding-pairing-url") ?? true}
       >
         <WizardHeader
-          title="Set up :3 Code"
+          title="welcome to :3 Code"
           identity={
             <div className="flex items-baseline gap-1.5" role="img" aria-label=":3 Code">
               <Colon3Wordmark className="h-4 w-auto shrink-0" aria-hidden />
@@ -298,11 +298,10 @@ function ConnectionStep({
   }, [ready]);
   return (
     <>
-      <h1 className="text-2xl font-semibold tracking-tight text-foreground">
-        Connect your computers
-      </h1>
+      <h1 className="text-2xl font-semibold tracking-tight text-foreground">welcome to :3 Code</h1>
       <p className="mt-2.5 text-sm leading-relaxed text-muted-foreground">
-        Choose one or more computers. We’ll set up agents and projects on each.
+        pick one or more computers and we’ll set up agents and projects on each. let’s get you going
+        :3
       </p>
       {directEnvironments.length > 0 ? (
         <fieldset className="mt-5 space-y-2">
@@ -467,7 +466,7 @@ function ConnectAccountOption({
                 selection={{ selectedIds, onChange: onToggleEnvironment, autoSelectedComputers }}
                 refreshWhileEmpty
                 empty={
-                  <p className="py-3 text-sm text-muted-foreground">No computers linked yet.</p>
+                  <p className="py-3 text-sm text-muted-foreground">no computers linked yet</p>
                 }
               />
             ) : null}
@@ -907,7 +906,7 @@ function AgentInstallTerminal({
           ) : setupState === "ready" ? (
             "Review the command, then press Enter to run it."
           ) : setupState === "openFailed" ? (
-            "Could not open the setup terminal."
+            "could not open the setup terminal 3:"
           ) : (
             "Preparing command..."
           )}
@@ -1150,7 +1149,7 @@ function ImportStep({
           `Imported ${importedThreadCount} ${importedThreadCount === 1 ? "thread" : "threads"}. Some thread history could not be imported.`,
         );
       } else {
-        setImportError("Could not import thread history.");
+        setImportError("could not import thread history 3:");
       }
       return;
     }

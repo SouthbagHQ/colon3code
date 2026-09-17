@@ -193,7 +193,7 @@ function SidebarUpdateControl() {
           toastManager.add(
             stackedThreadToast({
               type: "error",
-              title: "Could not download update",
+              title: "could not download update 3:",
               description: actionError,
             }),
           );
@@ -202,7 +202,7 @@ function SidebarUpdateControl() {
           toastManager.add(
             stackedThreadToast({
               type: "error",
-              title: "Could not start update download",
+              title: "could not start update download 3:",
               description: error instanceof Error ? error.message : "An unexpected error occurred.",
             }),
           );
@@ -222,7 +222,7 @@ function SidebarUpdateControl() {
         toastManager.add(
           stackedThreadToast({
             type: "error",
-            title: "Could not confirm update",
+            title: "could not confirm update 3:",
             description: error instanceof Error ? error.message : "Update confirmation failed.",
           }),
         );
@@ -241,7 +241,7 @@ function SidebarUpdateControl() {
           toastManager.add(
             stackedThreadToast({
               type: "error",
-              title: "Could not install update",
+              title: "could not install update 3:",
               description: actionError,
             }),
           );
@@ -250,7 +250,7 @@ function SidebarUpdateControl() {
           toastManager.add(
             stackedThreadToast({
               type: "error",
-              title: "Could not install update",
+              title: "could not install update 3:",
               description: error instanceof Error ? error.message : "An unexpected error occurred.",
             }),
           );
@@ -270,7 +270,7 @@ function SidebarUpdateControl() {
         toastManager.add(
           stackedThreadToast({
             type: "error",
-            title: "Could not check for updates",
+            title: "could not check for updates 3:",
             description:
               result.state.message ?? "Automatic updates are not available in this build.",
           }),
@@ -280,7 +280,7 @@ function SidebarUpdateControl() {
         toastManager.add(
           stackedThreadToast({
             type: "error",
-            title: "Could not check for updates",
+            title: "could not check for updates 3:",
             description: error instanceof Error ? error.message : "Update check failed.",
           }),
         );

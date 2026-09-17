@@ -38,7 +38,7 @@ export function PreviewEmptyState({
         <EmptyMedia variant="icon">
           <Globe className="size-4.5 text-muted-foreground" />
         </EmptyMedia>
-        <EmptyTitle>No preview yet</EmptyTitle>
+        <EmptyTitle>no preview yet :3</EmptyTitle>
         <EmptyDescription>
           Type a URL above, or run a dev script. Browser-ready localhost servers will show up here
           automatically.

@@ -301,7 +301,7 @@ function WorkflowScriptView({
             {result.value.truncated ? "\n… (truncated)" : ""}
           </pre>
         ) : result._tag === "Failure" ? (
-          <p className="text-xs text-destructive-foreground">Could not load the script.</p>
+          <p className="text-xs text-destructive-foreground">could not load the script 3:</p>
         ) : (
           <p className="text-xs text-muted-foreground">Loading…</p>
         )}
@@ -534,7 +534,7 @@ export function AgentsPanel({
     return (
       <div className="flex h-full flex-col items-center justify-center gap-2 p-6 text-center">
         <Bot aria-hidden className="size-6 text-muted-foreground/60" />
-        <p className="text-sm font-medium">No agents yet</p>
+        <p className="text-sm font-medium">no agents yet :3</p>
         <p className="max-w-56 text-xs text-muted-foreground">
           When this thread spawns subagents or runs a workflow, they show up here with live status,
           activity, and token usage.

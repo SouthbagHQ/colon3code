@@ -1,7 +1,11 @@
 import { LegendList, type LegendListRef } from "@legendapp/list/react";
 import { CheckIcon, ChevronDownIcon, SearchIcon } from "lucide-react";
 import { useEffect, useMemo, useRef, useState, useSyncExternalStore } from "react";
-import { isMonospaceFamily, queryInstalledFontFamilies } from "../../appearanceFonts";
+import {
+  BUNDLED_SANS_FONT_FAMILIES,
+  isMonospaceFamily,
+  queryInstalledFontFamilies,
+} from "../../appearanceFonts";
 import {
   Combobox,
   ComboboxEmpty,
@@ -141,7 +145,14 @@ export function FontFamilyPicker({
 
   const families = useMemo(() => {
     if (enumeration.status !== "granted") return [];
-    return requireMonospace ? enumeration.families.filter(isMonospaceFamily) : enumeration.families;
+    if (requireMonospace) return enumeration.families.filter(isMonospaceFamily);
+    // Bundled faces are not installed, so enumeration never lists them;
+    // offer them first so they can be picked (and re-picked) like any other.
+    const installed = new Set(enumeration.families);
+    return [
+      ...BUNDLED_SANS_FONT_FAMILIES.filter((family) => !installed.has(family)),
+      ...enumeration.families,
+    ];
   }, [enumeration, requireMonospace]);
 
   const items = useMemo(() => {
@@ -230,7 +241,7 @@ export function FontFamilyPicker({
           </div>
         </div>
         <div className="flex min-h-0 flex-1 flex-col overflow-hidden">
-          <ComboboxEmpty>No fonts found.</ComboboxEmpty>
+          <ComboboxEmpty>no fonts found</ComboboxEmpty>
           <div className="relative min-h-0 max-h-72 w-full flex-1 overflow-hidden">
             <ComboboxListVirtualized className="size-full min-w-0 p-0">
               <LegendList<string>

@@ -6,6 +6,7 @@ import {
   clampInterfaceFontSize,
   clampPromptFontSize,
   cssFontFamilies,
+  DEFAULT_SANS_FONT_STACK,
   resolveDefaultFamilyLabel,
   resolveTerminalFontPreference,
   resolveTerminalFontSizePreference,
@@ -49,6 +50,10 @@ describe("cssFontFamilies", () => {
 });
 
 describe("resolveDefaultFamilyLabel", () => {
+  it("names the bundled interface face without probing the machine", () => {
+    expect(resolveDefaultFamilyLabel(DEFAULT_SANS_FONT_STACK)).toBe("Nunito");
+  });
+
   it("skips generic keywords and returns null for a stack of only generics", () => {
     expect(resolveDefaultFamilyLabel("system-ui, sans-serif")).toBeNull();
     expect(resolveDefaultFamilyLabel("ui-monospace, monospace")).toBeNull();

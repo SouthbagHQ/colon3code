@@ -312,7 +312,7 @@ export const OpenInPicker = memo(function OpenInPicker({
             <MenuItem disabled>No SSH route to {environmentLabel}</MenuItem>
           ) : (
             <>
-              {options.length === 0 && <MenuItem disabled>No installed editors found</MenuItem>}
+              {options.length === 0 && <MenuItem disabled>no installed editors found</MenuItem>}
               {options.map(({ label, Icon, value, kind }) => (
                 <MenuItem key={value} onClick={() => openInEditor(value)}>
                   <Icon aria-hidden="true" className={getOpenInIconClass(kind)} />

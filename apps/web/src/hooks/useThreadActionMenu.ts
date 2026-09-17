@@ -101,22 +101,22 @@ export function useThreadActionMenu(input: {
   const timestampFormat = useClientSettings((s) => s.timestampFormat);
   const { copyToClipboard: copyPathToClipboard } = useCopyToClipboard<{ path: string }>({
     onCopy: ({ path }) => {
-      toastManager.add({ type: "success", title: "Path copied", description: path });
+      toastManager.add({ type: "success", title: "path copied :3", description: path });
     },
-    onError: (error) => failureToast("Failed to copy path", error),
+    onError: (error) => failureToast("failed to copy path 3:", error),
   });
   const { copyToClipboard: copyBranchToClipboard } = useCopyToClipboard<{ branch: string }>({
     target: "branch name",
     onCopy: ({ branch }) => {
-      toastManager.add({ type: "success", title: "Branch copied", description: branch });
+      toastManager.add({ type: "success", title: "branch copied :3", description: branch });
     },
-    onError: (error) => failureToast("Failed to copy branch", error),
+    onError: (error) => failureToast("failed to copy branch 3:", error),
   });
   const { copyToClipboard: copyThreadIdToClipboard } = useCopyToClipboard<{ threadId: ThreadId }>({
     onCopy: ({ threadId }) => {
-      toastManager.add({ type: "success", title: "Thread ID copied", description: threadId });
+      toastManager.add({ type: "success", title: "thread ID copied :3", description: threadId });
     },
-    onError: (error) => failureToast("Failed to copy thread ID", error),
+    onError: (error) => failureToast("failed to copy thread ID 3:", error),
   });
 
   const openMenu = useCallback(
@@ -161,21 +161,21 @@ export function useThreadActionMenu(input: {
           const result = await snoozeThread(threadRef, preset.snoozedUntil);
           if (result._tag === "Failure") {
             if (!isAtomCommandInterrupted(result)) {
-              failureToast("Failed to snooze thread", squashAtomCommandFailure(result));
+              failureToast("failed to snooze thread 3:", squashAtomCommandFailure(result));
             }
             return;
           }
           toastManager.add(
             stackedThreadToast({
               type: "success",
-              title: `Snoozed until ${snoozeWakeDescription(preset.snoozedUntil, new Date(), timestampFormat)}`,
+              title: `snoozed until ${snoozeWakeDescription(preset.snoozedUntil, new Date(), timestampFormat)} :3`,
               timeout: 5_000,
               actionProps: {
                 children: "Undo",
                 onClick: () => {
                   void unsnoozeThread(threadRef).then((undone) => {
                     if (undone._tag === "Failure" && !isAtomCommandInterrupted(undone)) {
-                      failureToast("Failed to wake thread", squashAtomCommandFailure(undone));
+                      failureToast("failed to wake thread 3:", squashAtomCommandFailure(undone));
                     }
                   });
                 },
@@ -222,24 +222,26 @@ export function useThreadActionMenu(input: {
               }),
             );
             if (result._tag === "Failure") {
-              failureToast("Could not create thread", squashAtomCommandFailure(result));
+              failureToast("could not create thread 3:", squashAtomCommandFailure(result));
             }
             return;
           }
           case "settle":
-            await reportFailure("Failed to settle thread", () => settleThread(threadRef));
+            await reportFailure("failed to settle thread 3:", () => settleThread(threadRef));
             return;
           case "unsettle":
-            await reportFailure("Failed to un-settle thread", () => unsettleThread(threadRef));
+            await reportFailure("failed to un-settle thread 3:", () => unsettleThread(threadRef));
             return;
           case "unsnooze":
-            await reportFailure("Failed to wake thread", () => unsnoozeThread(threadRef));
+            await reportFailure("failed to wake thread 3:", () => unsnoozeThread(threadRef));
             return;
           case "pin":
-            await reportFailure("Failed to pin thread", () => pinThread(threadRef));
+            await reportFailure("failed to pin thread 3:", () => pinThread(threadRef));
             return;
           case "unpin": {
-            await reportFailure("Failed to unpin thread", () => confirmAndUnpinThread(threadRef));
+            await reportFailure("failed to unpin thread 3:", () =>
+              confirmAndUnpinThread(threadRef),
+            );
             return;
           }
           case "rename":
@@ -247,7 +249,7 @@ export function useThreadActionMenu(input: {
             return;
           case "regenerate-title":
             if (isRegeneratingTitle) return;
-            await reportFailure("Failed to regenerate thread title", () =>
+            await reportFailure("failed to regenerate thread title 3:", () =>
               updateThreadMetadata({
                 environmentId: threadRef.environmentId,
                 input: { threadId: threadRef.threadId, regenerateTitle: true },
@@ -263,7 +265,7 @@ export function useThreadActionMenu(input: {
               toastManager.add(
                 stackedThreadToast({
                   type: "error",
-                  title: "Path unavailable",
+                  title: "path unavailable 3:",
                   description: "This thread does not have a workspace path to copy.",
                 }),
               );
@@ -295,7 +297,9 @@ export function useThreadActionMenu(input: {
             });
             if (result._tag === "Failure" && !isAtomCommandInterrupted(result)) {
               failureToast(
-                didArchive ? "Thread archived, but navigation failed" : "Failed to archive thread",
+                didArchive
+                  ? "thread archived, but navigation failed 3:"
+                  : "failed to archive thread 3:",
                 squashAtomCommandFailure(result),
               );
             }
@@ -320,10 +324,10 @@ export function useThreadActionMenu(input: {
               !isAtomCommandInterrupted(deleted) &&
               // A failure with the thread already gone is worktree cleanup
               // failing after a successful delete — deleteThread has toasted
-              // that itself, and "Failed to delete thread" would be a lie.
+              // that itself, and "failed to delete thread 3:" would be a lie.
               readThreadShell(threadRef) !== null
             ) {
-              failureToast("Failed to delete thread", squashAtomCommandFailure(deleted));
+              failureToast("failed to delete thread 3:", squashAtomCommandFailure(deleted));
             }
             return;
           }

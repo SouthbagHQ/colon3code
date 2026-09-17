@@ -235,7 +235,7 @@ export function resolveQuickAction(
         label: "Push",
         disabled: true,
         kind: "show_hint",
-        hint: "No local commits to push.",
+        hint: "no local commits to push",
       };
     }
     if (hasOpenPr || isDefaultRef) {

@@ -103,13 +103,13 @@ export function PullRequestStackMenu({
     if (result._tag === "Failure") {
       toastManager.add({
         type: "error",
-        title: "Stack operation did not complete",
+        title: "stack operation did not complete 3:",
         description: String(squashAtomCommandFailure(result)),
       });
     } else {
       toastManager.add({
         type: "success",
-        title: action === "merge" ? "Stack merge request completed" : "Stack rebased",
+        title: action === "merge" ? "stack merge request completed :3" : "stack rebased :3",
         description:
           action === "merge"
             ? "GitHub merged the stack or added it to its merge queue."

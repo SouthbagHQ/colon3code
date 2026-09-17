@@ -58,7 +58,7 @@ function useRunScopedPlan() {
       if (plan.unavailableReason) {
         toastManager.add({
           type: "warning",
-          title: "Setting not saved",
+          title: "setting not saved 3:",
           description: plan.unavailableReason,
         });
         return;
@@ -70,8 +70,8 @@ function useRunScopedPlan() {
             type: "error",
             title:
               savedEnvironmentCount > 0
-                ? "Setting saved on some environments"
-                : "Setting not saved",
+                ? "setting saved on some environments 3:"
+                : "setting not saved 3:",
             description: `Could not update ${failedEnvironments.map((environment) => environment.label).join(", ")}.${savedEnvironmentCount > 0 ? " The other selected environments saved the change." : ""}`,
           });
         },

@@ -35,7 +35,7 @@ function render(props: Partial<typeof baseProps>): string {
 describe("PullRequestListEmptyState", () => {
   it("asks for a project ahead of anything a search or a filter could say", () => {
     const text = render({ hasProjects: false, searching: true, query: "fix", filtered: true });
-    expect(text).toContain("No projects in this workspace");
+    expect(text).toContain("no projects in this workspace");
     expect(text).toContain("Add project");
   });
 

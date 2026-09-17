@@ -791,7 +791,7 @@ function UsageEnvironmentFilter({
             );
           })}
           {environments.length === 0 ? (
-            <p className="px-2 py-2 text-xs text-muted-foreground">No environments connected.</p>
+            <p className="px-2 py-2 text-xs text-muted-foreground">no environments connected</p>
           ) : null}
           {showUsageStatus && isPartial ? (
             <p className="px-2 py-2 text-xs text-muted-foreground">

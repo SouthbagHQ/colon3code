@@ -285,7 +285,7 @@ export function SnapShotCoordinator() {
             toastManager.add(
               stackedThreadToast({
                 type: "error",
-                title: "Snapshot taken, but no project is available",
+                title: "snapshot taken, but no project is available 3:",
                 description: "Add a project, then capture the window again.",
               }),
             );
@@ -302,7 +302,7 @@ export function SnapShotCoordinator() {
             toastManager.add(
               stackedThreadToast({
                 type: "error",
-                title: "Snapshot failed",
+                title: "snapshot failed 3:",
                 description: `Capture ${item.id}: ${
                   error instanceof Error ? error.message : "Try the capture again."
                 }`,
@@ -317,7 +317,7 @@ export function SnapShotCoordinator() {
         toastManager.add(
           stackedThreadToast({
             type: "error",
-            title: "Snapshot failed",
+            title: "snapshot failed 3:",
             description: error instanceof Error ? error.message : "Try the capture again.",
           }),
         );
@@ -376,7 +376,7 @@ export function SnapShotCoordinator() {
             toastManager.add(
               stackedThreadToast({
                 type: "error",
-                title: "Snapshot failed",
+                title: "snapshot failed 3:",
                 description: state.message ?? "Try the capture again.",
               }),
             );

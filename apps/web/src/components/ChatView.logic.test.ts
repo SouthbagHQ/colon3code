@@ -1670,11 +1670,11 @@ describe("deriveComposerSendState", () => {
 describe("buildExpiredTerminalContextToastCopy", () => {
   it("formats empty and omission guidance", () => {
     expect(buildExpiredTerminalContextToastCopy(1, "empty")).toEqual({
-      title: "Expired terminal context won't be sent",
+      title: "expired terminal context won't be sent 3:",
       description: "Remove it or re-add it to include terminal output.",
     });
     expect(buildExpiredTerminalContextToastCopy(2, "omitted")).toEqual({
-      title: "Expired terminal contexts omitted from message",
+      title: "expired terminal contexts omitted from message 3:",
       description: "Re-add it if you want that terminal output included.",
     });
   });
@@ -1740,7 +1740,7 @@ describe("getStartedThreadModelChangeBlockReason", () => {
         },
       }),
     ).toEqual({
-      title: "Start a new chat to change models",
+      title: "start a new chat to change models 3:",
       description:
         "This provider does not allow switching models after a conversation has started.",
     });

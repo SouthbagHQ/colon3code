@@ -835,14 +835,14 @@ function PullRequestCodeTab({
           if (result._tag === "Failure") {
             toastManager.add({
               type: "error",
-              title: "More comments could not be loaded",
+              title: "more comments could not be loaded 3:",
             });
             return null;
           }
           return result.value;
         }}
         onReply={(body) =>
-          runThreadCommand("Reply could not be posted", () =>
+          runThreadCommand("reply could not be posted 3:", () =>
             replyToThread({
               environmentId,
               input: { ...reference, threadId: thread.id, body },
@@ -854,7 +854,7 @@ function PullRequestCodeTab({
           canEditPullRequestComment(detail, { author: comment.author, kind: "review-comment" })
         }
         onEditComment={(commentId, body) =>
-          runThreadCommand("The comment could not be saved", () =>
+          runThreadCommand("the comment could not be saved 3:", () =>
             updateComment({
               environmentId,
               input: { ...reference, commentId, kind: "review-comment", body },
@@ -862,7 +862,7 @@ function PullRequestCodeTab({
           )
         }
         onToggleResolved={() =>
-          void runThreadCommand("The conversation could not be updated", () =>
+          void runThreadCommand("the conversation could not be updated 3:", () =>
             setThreadResolution({
               environmentId,
               input: { ...reference, threadId: thread.id, resolved: !thread.isResolved },

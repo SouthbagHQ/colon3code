@@ -115,7 +115,7 @@ describe("showDesktopUpdateDownloadedToast", () => {
     await vi.waitFor(() => {
       expect(testState.addToast).toHaveBeenLastCalledWith({
         type: "error",
-        title: "Unable to open release notes",
+        title: "unable to open release notes 3:",
       });
     });
   });

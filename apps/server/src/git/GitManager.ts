@@ -494,7 +494,7 @@ function summarizeGitActionResult(
 } {
   if (result.pr.status === "created" || result.pr.status === "opened_existing") {
     const prNumber = result.pr.number ? ` #${result.pr.number}` : "";
-    const title = `${result.pr.status === "created" ? "Created" : "Opened"} ${terms.shortLabel}${prNumber}`;
+    const title = `${result.pr.status === "created" ? "created" : "opened"} ${terms.shortLabel}${prNumber} :3`;
     return withDescription(title, truncateText(result.pr.title));
   }
 
@@ -504,18 +504,18 @@ function summarizeGitActionResult(
     const pushedCommitPart = shortSha ? ` ${shortSha}` : "";
     const branchPart = branch ? ` to ${branch}` : "";
     return withDescription(
-      `Pushed${pushedCommitPart}${branchPart}`,
+      `pushed${pushedCommitPart}${branchPart} :3`,
       truncateText(result.commit.subject),
     );
   }
 
   if (result.commit.status === "created") {
     const shortSha = shortenSha(result.commit.commitSha);
-    const title = shortSha ? `Committed ${shortSha}` : "Committed changes";
+    const title = shortSha ? `committed ${shortSha} :3` : "committed changes :3";
     return withDescription(title, truncateText(result.commit.subject));
   }
 
-  return { title: "Done" };
+  return { title: "done :3" };
 }
 
 function sanitizeCommitMessage(generated: {

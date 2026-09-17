@@ -29,19 +29,19 @@ const VERDICTS: ReadonlyArray<{
   {
     value: "comment",
     label: "Comment",
-    sent: "Review submitted",
+    sent: "review submitted :3",
     icon: <MessageSquareIcon className="size-3" />,
   },
   {
     value: "approve",
     label: "Approve",
-    sent: "Pull request approved",
+    sent: "pull request approved :3",
     icon: <CheckIcon className="size-3" />,
   },
   {
     value: "request-changes",
     label: "Request changes",
-    sent: "Changes requested",
+    sent: "changes requested :3",
     icon: <XCircleIcon className="size-3" />,
   },
 ];
@@ -94,7 +94,7 @@ export function PullRequestReviewBar({
     setPending(false);
     if (result._tag === "Failure") {
       // The draft is kept: whatever went wrong, retyping the review is not the answer.
-      toastManager.add({ type: "error", title: "The review could not be submitted" });
+      toastManager.add({ type: "error", title: "the review could not be submitted 3:" });
       return;
     }
     // More remarks may have been added while the host was accepting this snapshot. Leave those,
@@ -119,7 +119,7 @@ export function PullRequestReviewBar({
       <div className="flex items-center gap-2 text-xs text-muted-foreground">
         <span>
           {comments.length === 0
-            ? "No line comments yet"
+            ? "no line comments yet"
             : `${comments.length} ${comments.length === 1 ? "comment" : "comments"} pending`}
         </span>
         {comments.length > 0 ? (

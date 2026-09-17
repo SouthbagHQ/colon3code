@@ -23,6 +23,8 @@ import {
   type ThemeDefinition,
   type ThemeHalves,
   T3_CHAT_THEME,
+  COLON3_DARK_THEME,
+  COLON3_THEME,
   EMBER_THEME,
   GROVE_THEME,
   IRIS_THEME,
@@ -55,6 +57,8 @@ import {
 import { ThemeWireframe } from "./ThemeWireframe";
 
 const MAINTAINER_THEMES: ReadonlyArray<ThemeDefinition> = [
+  COLON3_THEME,
+  COLON3_DARK_THEME,
   T3_CHAT_THEME,
   GROVE_THEME,
   OCEAN_THEME,
@@ -547,7 +551,7 @@ export function ThemeLibrary({
     toastManager.add(
       stackedThreadToast({
         type: "error",
-        title: "Couldn’t save theme selection",
+        title: "couldn’t save theme selection 3:",
         description: "Try again.",
       }),
     );
@@ -557,7 +561,7 @@ export function ThemeLibrary({
     toastManager.add(
       stackedThreadToast({
         type: "error",
-        title: "Couldn’t remove theme",
+        title: "couldn’t remove theme 3:",
         description: "Try again.",
       }),
     );
@@ -927,8 +931,8 @@ export function ThemeLibrary({
               type: "success",
               title:
                 importedThemes.length === 1
-                  ? `${importedThemes[0]!.label} ${verb}`
-                  : `${importedThemes.length} themes ${verb}`,
+                  ? `${importedThemes[0]!.label} ${verb} :3`
+                  : `${importedThemes.length} themes ${verb} :3`,
               description: importedThemes.map((imported) => imported.label).join(", "),
             }),
           );
@@ -942,7 +946,7 @@ export function ThemeLibrary({
             toastManager.add(
               stackedThreadToast({
                 type: "success",
-                title: `${importedTheme.label} added`,
+                title: `${importedTheme.label} added :3`,
                 description: `It’s now your ${modes[0]!} theme.`,
               }),
             );
@@ -952,7 +956,7 @@ export function ThemeLibrary({
           toastManager.add(
             stackedThreadToast({
               type: "success",
-              title: `${importedTheme.label} added`,
+              title: `${importedTheme.label} added :3`,
               description: "It’s now active.",
             }),
           );

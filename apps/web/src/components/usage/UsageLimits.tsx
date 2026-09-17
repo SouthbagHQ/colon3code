@@ -196,8 +196,8 @@ export function LimitWindows({
 
 const OUTCOME_TEXT: Record<ProviderConsumeResetCreditOutcome, string> = {
   reset: "Reset applied. Your windows have cleared.",
-  nothingToReset: "Nothing to reset right now.",
-  noCredit: "No reset credit left.",
+  nothingToReset: "nothing to reset right now",
+  noCredit: "no reset credit left",
   alreadyRedeemed: "That credit was already redeemed.",
 };
 
@@ -224,7 +224,7 @@ export function useResetCredit(
     setStatus(
       "error" in result.cause && result.cause.error instanceof Error
         ? result.cause.error.message
-        : "Could not use the reset credit.",
+        : "could not use the reset credit 3:",
     );
   };
 
@@ -274,7 +274,7 @@ export function resetCreditsSummary(
   const expiresIn = credits.nextExpiresAt
     ? formatDuration(Date.parse(credits.nextExpiresAt) - now)
     : null;
-  if (credits.availableCount === 0) return "No reset credits banked";
+  if (credits.availableCount === 0) return "no reset credits banked";
   if (compact)
     return `${credits.availableCount} banked${expiresIn ? ` · expires in ${expiresIn}` : ""}`;
   return `${credits.availableCount} ${credits.availableCount === 1 ? "reset credit" : "reset credits"} banked${

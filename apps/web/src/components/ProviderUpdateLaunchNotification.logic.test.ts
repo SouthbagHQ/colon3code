@@ -284,7 +284,7 @@ describe("provider update launch notification logic", () => {
     expect(view).toMatchObject({
       phase: "initial",
       type: "warning",
-      title: "Update Available: Codex v1.1.0",
+      title: "update available: Codex v1.1.0 3:",
       description: "Install the update now or review provider settings.",
     });
   });
@@ -360,7 +360,7 @@ describe("provider update launch notification logic", () => {
     expect(view).toMatchObject({
       phase: "failed",
       type: "error",
-      title: "Provider update failed",
+      title: "provider update failed 3:",
       description: "command failed",
     });
   });
@@ -385,7 +385,7 @@ describe("provider update launch notification logic", () => {
     expect(view).toMatchObject({
       phase: "unchanged",
       type: "warning",
-      title: "Provider still needs an update",
+      title: "provider still needs an update 3:",
       description: "Cursor still appears outdated. Check provider settings for details.",
     });
   });
@@ -413,7 +413,7 @@ describe("provider update launch notification logic", () => {
     expect(view).toMatchObject({
       phase: "succeeded",
       type: "success",
-      title: "Provider updated",
+      title: "provider updated :3",
       description: "New sessions will use the updated provider.",
       dismissAfterVisibleMs: 3_000,
     });
@@ -425,7 +425,7 @@ describe("provider update launch notification logic", () => {
     expect(firstFailedProviderUpdateMessage(results)).toBe("WebSocket closed");
     expect(getProviderUpdateRejectedToastView(2, "WebSocket closed")).toMatchObject({
       phase: "failed",
-      title: "Provider updates failed",
+      title: "provider updates failed 3:",
       description: "WebSocket closed",
     });
   });
@@ -516,7 +516,7 @@ describe("provider update launch notification logic", () => {
     expect(view).toMatchObject({
       key: "failed:claudeAgent:2026-04-23T10:00:00.000Z:Update command exited with code 1.",
       tone: "error",
-      title: "Claude v1.1.0 update failed",
+      title: "Claude v1.1.0 update failed 3:",
       description: "Update command exited with code 1.",
       dismissible: true,
     });
@@ -571,7 +571,7 @@ describe("provider update launch notification logic", () => {
     expect(view).toMatchObject({
       key: "unchanged:cursor:2026-04-23T10:00:00.000Z:still old",
       tone: "warning",
-      title: "Cursor still needs an update",
+      title: "Cursor still needs an update 3:",
       dismissible: true,
     });
   });
@@ -639,7 +639,7 @@ describe("provider update launch notification logic", () => {
     expect(failureView).toMatchObject({
       key: "failed:claudeAgent:2026-04-23T10:00:00.000Z:Update command exited with code 1.",
       tone: "error",
-      title: "Claude v1.1.0 update failed",
+      title: "Claude v1.1.0 update failed 3:",
     });
   });
 
@@ -951,7 +951,7 @@ describe("provider update launch notification logic", () => {
     const succeededResult: ProviderUpdateToastView = {
       phase: "succeeded",
       type: "success",
-      title: "Provider updated",
+      title: "provider updated :3",
       description: "New sessions will use the updated provider.",
     };
     const successPill: ProviderUpdateSidebarPillView = {

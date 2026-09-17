@@ -53,7 +53,7 @@ type UpdateButtonProps = Pick<ComponentProps<typeof Button>, "variant" | "size" 
 
 function useServerUpdate() {
   const updateServer = useAtomCommand(serverEnvironment.updateServer, { reportFailure: false });
-  return async (target: ServerUpdateTarget, failureTitle = "Server update failed") => {
+  return async (target: ServerUpdateTarget, failureTitle = "server update failed 3:") => {
     const { environmentId, serverLabel, selfUpdate, targetVersion } = target;
     if (pendingUpdateEnvironmentIds.has(environmentId)) return;
     pendingUpdateEnvironmentIds.add(environmentId);
@@ -73,7 +73,7 @@ function useServerUpdate() {
       }
       toastManager.add({
         type: "success",
-        title: `${serverLabel} updated`,
+        title: `${serverLabel} updated :3`,
         description:
           selfUpdate === "desktop-managed"
             ? `Desktop app relaunched on ${result.value.targetVersion}.`
@@ -126,7 +126,7 @@ export function ServerUpdatesAction({
         if (!confirmed) return;
       }
       await Promise.all(
-        available.map((target) => update(target, `${target.serverLabel} update failed`)),
+        available.map((target) => update(target, `${target.serverLabel} update failed 3:`)),
       );
     } finally {
       pending.current = false;
@@ -210,14 +210,14 @@ export function ServerUpdateAction({
     onCopy: ({ command }) => {
       toastManager.add({
         type: "success",
-        title: "Update command copied",
+        title: "update command copied :3",
         description: `Run \`${command}\` on ${serverLabel} to update it.`,
       });
     },
     onError: (error) => {
       toastManager.add({
         type: "error",
-        title: "Could not copy update command",
+        title: "could not copy update command 3:",
         description: error.message,
       });
     },

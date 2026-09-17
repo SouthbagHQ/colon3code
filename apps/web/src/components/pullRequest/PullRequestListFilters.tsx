@@ -316,7 +316,7 @@ function PullRequestAuthorFilter({
               </span>
             </MenuRadioItem>
           ))}
-          {visible.length === 0 ? <MenuItem disabled>No authors found</MenuItem> : null}
+          {visible.length === 0 ? <MenuItem disabled>no authors found</MenuItem> : null}
         </MenuRadioGroup>
       </MenuSubPopup>
     </MenuSub>
@@ -350,7 +350,7 @@ function PullRequestLabelFilter({
       </MenuSubTrigger>
       <MenuSubPopup className="w-72">
         {visible.length === 0 ? (
-          <MenuItem disabled>No labels in this view</MenuItem>
+          <MenuItem disabled>no labels in this view</MenuItem>
         ) : (
           visible.map((option) => {
             const key = option.name.toLowerCase();

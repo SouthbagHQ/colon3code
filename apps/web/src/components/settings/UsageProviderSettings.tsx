@@ -47,7 +47,7 @@ export function UsageProviderSettings({
         }
       >
         {entries.length === 0 ? (
-          <SettingsRow title="No usage providers configured." />
+          <SettingsRow title="no usage providers configured" />
         ) : (
           entries.map(([id, source]) => {
             const label = source.label?.trim() || source.url;

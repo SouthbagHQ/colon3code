@@ -2822,7 +2822,7 @@ it.layer(GitManagerTestLayer)("GitManager", (it) => {
           },
         },
       });
-      expect(result.toast.title).toMatch(/^Committed [0-9a-f]{7}$/);
+      expect(result.toast.title).toMatch(/^committed [0-9a-f]{7} :3$/);
       expect(
         yield* runGit(repoDir, ["log", "-1", "--pretty=%s"]).pipe(
           Effect.map((result) => result.stdout.trim()),
@@ -3061,7 +3061,7 @@ it.layer(GitManagerTestLayer)("GitManager", (it) => {
         },
       });
       expect(result.toast.title).toMatch(
-        /^Pushed [0-9a-f]{7} to origin\/feature\/implement-stacked-git-actions$/,
+        /^pushed [0-9a-f]{7} to origin\/feature\/implement-stacked-git-actions :3$/,
       );
       expect(
         yield* runGit(repoDir, ["rev-parse", "--abbrev-ref", "HEAD"]).pipe(
@@ -3501,7 +3501,7 @@ it.layer(GitManagerTestLayer)("GitManager", (it) => {
       expect(result.pr.status).toBe("opened_existing");
       expect(result.pr.number).toBe(42);
       expect(result.toast).toEqual({
-        title: "Opened PR #42",
+        title: "opened PR #42 :3",
         description: "Existing PR",
         cta: {
           kind: "open_pr",
@@ -4185,7 +4185,7 @@ it.layer(GitManagerTestLayer)("GitManager", (it) => {
         expect(result.pr.status).toBe("created");
         expect(result.pr.number).toBe(188);
         expect(result.toast).toEqual({
-          title: "Created PR #188",
+          title: "created PR #188 :3",
           description: "Add stacked git actions",
           cta: {
             kind: "open_pr",

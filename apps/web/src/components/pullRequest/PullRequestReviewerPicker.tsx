@@ -78,8 +78,8 @@ export function PullRequestReviewerPicker({
       toastManager.add({
         type: "error",
         title: candidate.isRequested
-          ? `Could not take back the review request to ${candidate.login}`
-          : `Could not ask ${candidate.login} for a review`,
+          ? `could not take back the review request to ${candidate.login} 3:`
+          : `could not ask ${candidate.login} for a review 3:`,
         description: readableFailure(
           squashAtomCommandFailure(result),
           "The host refused it. Check that you have write access on this repository, and that they still have access to it.",
@@ -90,8 +90,8 @@ export function PullRequestReviewerPicker({
     toastManager.add({
       type: "success",
       title: candidate.isRequested
-        ? `Review request to ${candidate.login} taken back`
-        : `Review requested from ${candidate.login}`,
+        ? `review request to ${candidate.login} taken back :3`
+        : `review requested from ${candidate.login} :3`,
     });
   };
 

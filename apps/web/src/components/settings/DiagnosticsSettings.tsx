@@ -63,7 +63,7 @@ function formatBytes(value: number): string {
 }
 
 function formatRelative(value: DateTime.Utc | null): string {
-  if (!value) return "No trace records";
+  if (!value) return "no trace records";
   return formatRelativeTimeLabel(DateTime.formatIso(value));
 }
 
@@ -429,7 +429,7 @@ function ProcessDiagnosticsTable({
           {visibleProcesses.length === 0 ? (
             <tr>
               <td colSpan={7} className="px-4 py-4 text-xs text-muted-foreground sm:px-5">
-                {emptyLabel ?? "No live descendant processes found."}
+                {emptyLabel ?? "no live descendant processes found"}
               </td>
             </tr>
           ) : null}
@@ -840,11 +840,11 @@ export function DiagnosticsSettingsPanel() {
 
     const editor = resolveAndPersistPreferredEditor(availableEditors ?? []);
     if (!editor) {
-      setOpenLogsDirectoryError("No available editors found.");
+      setOpenLogsDirectoryError("no available editors found 3:");
       return;
     }
     if (environmentId === null) {
-      setOpenLogsDirectoryError("No environment is selected.");
+      setOpenLogsDirectoryError("no environment is selected 3:");
       return;
     }
 
@@ -893,7 +893,7 @@ export function DiagnosticsSettingsPanel() {
           clearSignaling();
           toastManager.add({
             type: "error",
-            title: "Could not confirm signal",
+            title: "could not confirm signal 3:",
             description: error instanceof Error ? error.message : `Failed to send ${signal}.`,
           });
           return;
@@ -925,7 +925,7 @@ export function DiagnosticsSettingsPanel() {
             const error = squashAtomCommandFailure(result);
             toastManager.add({
               type: "error",
-              title: `Could not send ${signal}`,
+              title: `could not send ${signal} 3:`,
               description: error instanceof Error ? error.message : `Failed to send ${signal}.`,
             });
           }
@@ -946,7 +946,7 @@ export function DiagnosticsSettingsPanel() {
 
           toastManager.add({
             type: "error",
-            title: `Could not send ${signal}`,
+            title: `could not send ${signal} 3:`,
             description: message ?? `Failed to send ${signal}.`,
           });
           return;
@@ -1026,7 +1026,7 @@ export function DiagnosticsSettingsPanel() {
           emptyLabel={
             isProcessInitialLoading
               ? "Loading live processes..."
-              : "No live descendant processes found."
+              : "no live descendant processes found"
           }
         />
       </SettingsSection>
@@ -1090,7 +1090,7 @@ export function DiagnosticsSettingsPanel() {
           emptyLabel={
             isResourcePending && resourceData === null
               ? "Collecting process resource samples..."
-              : "No process resource samples found for this window."
+              : "no process resource samples found for this window"
           }
         />
       </SettingsSection>
@@ -1203,7 +1203,7 @@ export function DiagnosticsSettingsPanel() {
             ))}
           </DiagnosticsTable>
         ) : (
-          <EmptyRows label={isInitialLoading ? "Loading failures..." : "No failed spans found."} />
+          <EmptyRows label={isInitialLoading ? "Loading failures..." : "no failed spans found"} />
         )}
       </SettingsSection>
 
@@ -1232,7 +1232,7 @@ export function DiagnosticsSettingsPanel() {
           </DiagnosticsTable>
         ) : (
           <EmptyRows
-            label={isInitialLoading ? "Loading failure groups..." : "No repeated failures found."}
+            label={isInitialLoading ? "Loading failure groups..." : "no repeated failures found"}
           />
         )}
       </SettingsSection>
@@ -1262,7 +1262,7 @@ export function DiagnosticsSettingsPanel() {
             ))}
           </DiagnosticsTable>
         ) : (
-          <EmptyRows label={isInitialLoading ? "Loading slow spans..." : "No spans found."} />
+          <EmptyRows label={isInitialLoading ? "Loading slow spans..." : "no spans found"} />
         )}
       </SettingsSection>
 
@@ -1325,7 +1325,7 @@ export function DiagnosticsSettingsPanel() {
           </ScrollArea>
         ) : (
           <EmptyRows
-            label={isInitialLoading ? "Loading recent logs..." : "No warnings or errors found."}
+            label={isInitialLoading ? "Loading recent logs..." : "no warnings or errors found"}
           />
         )}
       </SettingsSection>
@@ -1358,7 +1358,7 @@ export function DiagnosticsSettingsPanel() {
             ))}
           </DiagnosticsTable>
         ) : (
-          <EmptyRows label={isInitialLoading ? "Loading span names..." : "No spans found."} />
+          <EmptyRows label={isInitialLoading ? "Loading span names..." : "no spans found"} />
         )}
       </SettingsSection>
     </SettingsPageContainer>

@@ -8,5 +8,9 @@
   "ember-light",
   "ember-dark",
   "iris-light",
-  "iris-dark"
+  "iris-dark",
+  "colon3-light",
+  "colon3-dark",
+  "colon3-dark-light",
+  "colon3-dark-dark"
 ]

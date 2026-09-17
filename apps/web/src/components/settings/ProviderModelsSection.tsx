@@ -559,7 +559,7 @@ export function ProviderModelsSection({
       >
         {visibleModels.length === 0 ? (
           <p className="px-2 py-2 text-xs text-muted-foreground">
-            {isFiltering ? "No models match." : "No models reported for this provider yet."}
+            {isFiltering ? "no models match" : "no models reported for this provider yet"}
           </p>
         ) : null}
         {visibleModels.map((model, index) => {

@@ -329,7 +329,7 @@ function getMenuActionDisabledReason({
       return 'Add an "origin" remote before pushing.';
     }
     if (!isAhead) {
-      return "No local commits to push.";
+      return "no local commits to push";
     }
     return "Push is currently unavailable.";
   }
@@ -1205,7 +1205,7 @@ export default function GitActionsControl({
     if (!prUrl) {
       toastManager.add({
         type: "error",
-        title: "No open pull request found.",
+        title: "no open pull request found 3:",
         data: threadToastData,
       });
       return;
@@ -1215,7 +1215,7 @@ export default function GitActionsControl({
       toastManager.add(
         stackedThreadToast({
           type: "error",
-          title: "Unable to open pull request link",
+          title: "unable to open pull request link 3:",
           description: err instanceof Error ? err.message : "An error occurred.",
           ...(threadToastData !== undefined ? { data: threadToastData } : {}),
         }),
@@ -1391,7 +1391,7 @@ export default function GitActionsControl({
           resolvedProgressToastId,
           stackedThreadToast({
             type: "error",
-            title: "Action failed",
+            title: "action failed 3:",
             description: error instanceof Error ? error.message : "An error occurred.",
             ...(scopedToastData !== undefined ? { data: scopedToastData } : {}),
           }),
@@ -1532,7 +1532,7 @@ export default function GitActionsControl({
             toastId,
             stackedThreadToast({
               type: "error",
-              title: "Pull failed",
+              title: "pull failed 3:",
               description: error instanceof Error ? error.message : "An error occurred.",
               ...(threadToastData !== undefined ? { data: threadToastData } : {}),
             }),
@@ -1543,7 +1543,7 @@ export default function GitActionsControl({
         const pullResult = result.value;
         toastManager.update(toastId, {
           type: "success",
-          title: pullResult.status === "pulled" ? "Pulled" : "Already up to date",
+          title: pullResult.status === "pulled" ? "pulled :3" : "already up to date :3",
           description:
             pullResult.status === "pulled"
               ? `Updated ${pullResult.refName} from ${pullResult.upstreamRef ?? "upstream"}`
@@ -1605,7 +1605,7 @@ export default function GitActionsControl({
       if (!gitCwd) {
         toastManager.add({
           type: "error",
-          title: "Editor opening is unavailable.",
+          title: "editor opening is unavailable 3:",
           data: threadToastData,
         });
         return;
@@ -1620,7 +1620,7 @@ export default function GitActionsControl({
         toastManager.add(
           stackedThreadToast({
             type: "error",
-            title: "Unable to open file",
+            title: "unable to open file 3:",
             description: error instanceof Error ? error.message : "An error occurred.",
             ...(threadToastData !== undefined ? { data: threadToastData } : {}),
           }),
@@ -1651,7 +1651,7 @@ export default function GitActionsControl({
               toastManager.add(
                 stackedThreadToast({
                   type: "error",
-                  title: "Git initialization failed",
+                  title: "Git initialization failed 3:",
                   description: error instanceof Error ? error.message : "An error occurred.",
                   ...(threadToastData !== undefined ? { data: threadToastData } : {}),
                 }),

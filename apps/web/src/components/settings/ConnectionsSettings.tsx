@@ -682,10 +682,10 @@ const PairingLinkListRow = memo(function PairingLinkListRow({
         type: "success",
         title:
           kind === "hosted-link"
-            ? "Hosted app link copied"
+            ? "hosted app link copied :3"
             : kind === "link"
-              ? "Pairing URL copied"
-              : "Pairing code copied",
+              ? "pairing URL copied :3"
+              : "pairing code copied :3",
         description:
           kind === "hosted-link"
             ? "Open it in the browser on the device you want to connect."
@@ -704,11 +704,11 @@ const PairingLinkListRow = memo(function PairingLinkListRow({
           type: "error",
           title: canCopyToClipboard
             ? kind === "hosted-link"
-              ? "Could not copy hosted app link"
+              ? "could not copy hosted app link 3:"
               : kind === "link"
-                ? "Could not copy pairing URL"
-                : "Could not copy pairing code"
-            : "Clipboard copy unavailable",
+                ? "could not copy pairing URL 3:"
+                : "could not copy pairing code 3:"
+            : "clipboard copy unavailable 3:",
           description: canCopyToClipboard ? error.message : "Showing the full value instead.",
         }),
       );
@@ -1081,7 +1081,7 @@ const AuthorizedClientsHeaderAction = memo(function AuthorizedClientsHeaderActio
       toastManager.add(
         stackedThreadToast({
           type: "error",
-          title: "Could not create pairing URL",
+          title: "could not create pairing URL 3:",
           description: message,
         }),
       );
@@ -1282,7 +1282,7 @@ const PairingClientsList = memo(function PairingClientsList({
 
       {pairingLinks.length === 0 && clientSessions.length === 0 && !isLoading ? (
         <div className={accessRowClassName(presentation)}>
-          <p className="text-xs text-muted-foreground/60">No pairing links or client sessions.</p>
+          <p className="text-xs text-muted-foreground/60">no pairing links or client sessions</p>
         </div>
       ) : null}
     </>
@@ -1489,7 +1489,7 @@ function SavedBackendListRow({
     onCopy: ({ traceId }) => {
       toastManager.add({
         type: "success",
-        title: "Trace ID copied",
+        title: "trace ID copied :3",
         description: traceId,
       });
     },
@@ -1497,7 +1497,7 @@ function SavedBackendListRow({
       toastManager.add(
         stackedThreadToast({
           type: "error",
-          title: "Could not copy trace ID",
+          title: "could not copy trace ID 3:",
           description: error.message,
         }),
       );
@@ -1684,7 +1684,7 @@ function ConfiguredCloudLinkRow({ canManageRelay }: { readonly canManageRelay: b
       toastManager.add({
         type: "success",
         title: enabled
-          ? "T3 Connect linked"
+          ? "T3 Connect linked :3"
           : publishAgentActivity
             ? "T3 Connect tunnel disabled"
             : "T3 Connect unlinked",
@@ -1704,7 +1704,7 @@ function ConfiguredCloudLinkRow({ canManageRelay }: { readonly canManageRelay: b
     if (ok) {
       toastManager.add({
         type: "success",
-        title: enabled ? "Agent activity enabled" : "Agent activity disabled",
+        title: enabled ? "agent activity enabled :3" : "agent activity disabled :3",
         description: enabled
           ? "This environment publishes agent activity to your mobile clients."
           : "This environment will stop publishing agent activity.",
@@ -1762,7 +1762,7 @@ function EmptyRemoteEnvironments({ cloudEnabled = true }: { readonly cloudEnable
         <ChevronsLeftRightEllipsisIcon />
       </EmptyMedia>
       <EmptyHeader>
-        <EmptyTitle>No saved remote environments</EmptyTitle>
+        <EmptyTitle>no saved remote environments</EmptyTitle>
         <EmptyDescription>
           {cloudEnabled
             ? "Click “Add environment” to pair another environment, or connect one from T3 Connect."
@@ -2111,7 +2111,7 @@ export function ConnectionsSettings() {
         toastManager.add(
           stackedThreadToast({
             type: "error",
-            title: "Could not update network access",
+            title: "could not update network access 3:",
             description: message,
           }),
         );
@@ -2146,7 +2146,7 @@ export function ConnectionsSettings() {
       toastManager.add(
         stackedThreadToast({
           type: "error",
-          title: "Could not set up Tailscale HTTPS",
+          title: "could not set up Tailscale HTTPS 3:",
           description: message,
         }),
       );
@@ -2182,7 +2182,7 @@ export function ConnectionsSettings() {
       toastManager.add(
         stackedThreadToast({
           type: "error",
-          title: "Could not disable Tailscale HTTPS",
+          title: "could not disable Tailscale HTTPS 3:",
           description: message,
         }),
       );
@@ -2206,7 +2206,7 @@ export function ConnectionsSettings() {
       toastManager.add(
         stackedThreadToast({
           type: "error",
-          title: "Could not revoke pairing link",
+          title: "could not revoke pairing link 3:",
           description: message,
         }),
       );
@@ -2227,7 +2227,7 @@ export function ConnectionsSettings() {
         toastManager.add(
           stackedThreadToast({
             type: "error",
-            title: "Could not revoke client access",
+            title: "could not revoke client access 3:",
             description: message,
           }),
         );
@@ -2245,7 +2245,8 @@ export function ConnectionsSettings() {
       const revokedCount = await revokeOtherServerClientSessions();
       toastManager.add({
         type: "success",
-        title: revokedCount === 1 ? "Revoked 1 other client" : `Revoked ${revokedCount} clients`,
+        title:
+          revokedCount === 1 ? "revoked 1 other client :3" : `revoked ${revokedCount} clients :3`,
         description: "Other paired clients will need a new pairing link before reconnecting.",
       });
     } catch (error) {
@@ -2254,7 +2255,7 @@ export function ConnectionsSettings() {
       toastManager.add(
         stackedThreadToast({
           type: "error",
-          title: "Could not revoke other clients",
+          title: "could not revoke other clients 3:",
           description: message,
         }),
       );
@@ -2285,7 +2286,7 @@ export function ConnectionsSettings() {
       setAddBackendDialogOpen(false);
       toastManager.add({
         type: "success",
-        title: "Environment connected",
+        title: "environment connected :3",
         description: `${target.alias} is ready over an SSH-managed tunnel.`,
       });
       setIsAddingSavedBackend(false);
@@ -2325,7 +2326,7 @@ export function ConnectionsSettings() {
       toastManager.add(
         stackedThreadToast({
           type: "error",
-          title: "Could not add backend",
+          title: "could not add backend 3:",
           description: message,
         }),
       );
@@ -2342,7 +2343,7 @@ export function ConnectionsSettings() {
         toastManager.add(
           stackedThreadToast({
             type: "error",
-            title: "Could not add backend",
+            title: "could not add backend 3:",
             description: message,
           }),
         );
@@ -2359,7 +2360,7 @@ export function ConnectionsSettings() {
     setAddBackendDialogOpen(false);
     toastManager.add({
       type: "success",
-      title: "Backend added",
+      title: "backend added :3",
       description: "The environment is saved and will reconnect on app startup.",
     });
     setIsAddingSavedBackend(false);
@@ -2474,7 +2475,7 @@ export function ConnectionsSettings() {
         toastManager.add(
           stackedThreadToast({
             type: "error",
-            title: `Could not switch backend ${enabled ? "on" : "off"}`,
+            title: `could not switch backend ${enabled ? "on" : "off"} 3:`,
             description: message,
           }),
         );
@@ -2507,7 +2508,7 @@ export function ConnectionsSettings() {
         toastManager.add(
           stackedThreadToast({
             type: "error",
-            title: "Could not remove backend",
+            title: "could not remove backend 3:",
             description: message,
           }),
         );
@@ -2833,7 +2834,7 @@ export function ConnectionsSettings() {
         toastManager.add(
           stackedThreadToast({
             type: "error",
-            title: "Could not change WSL backend",
+            title: "could not change WSL backend 3:",
             description: message,
           }),
         );

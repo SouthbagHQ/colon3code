@@ -93,7 +93,7 @@ export function useAssistantCitationTarget({
         const cursor = loadEarlier.cursor ?? entries[0]?.id ?? "first";
         if (navigation.requestedPages.has(cursor) || navigation.requestedPages.size >= 20) {
           fail(
-            "Could not load the cited response",
+            "could not load the cited response 3:",
             "Load earlier turns, then click the citation to try again. Your saved quote is unchanged.",
           );
           return;
@@ -103,14 +103,14 @@ export function useAssistantCitationTarget({
         return;
       }
       fail(
-        "The cited response is unavailable",
+        "the cited response is unavailable 3:",
         "It may have been removed. The selected text is still saved in your citation.",
       );
       return;
     }
     if (source.kind !== "message" || source.message.role !== "assistant") {
       fail(
-        "The citation does not refer to an assistant response",
+        "the citation does not refer to an assistant response 3:",
         "The selected text is still saved in your citation.",
       );
       return;

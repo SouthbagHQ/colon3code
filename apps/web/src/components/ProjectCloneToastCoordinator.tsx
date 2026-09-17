@@ -130,7 +130,7 @@ function EnvironmentCloneToasts({ environmentId }: { environmentId: EnvironmentI
           actionProps: {
             children: "Cancel",
             onClick: () => {
-              void runCloneAction("Failed to cancel clone", () =>
+              void runCloneAction("failed to cancel clone 3:", () =>
                 cancelClone({ environmentId, input: { projectId: clone.projectId } }),
               );
             },
@@ -150,7 +150,7 @@ function EnvironmentCloneToasts({ environmentId }: { environmentId: EnvironmentI
       if (clone.phase === "done") {
         const options = stackedThreadToast({
           type: "success",
-          title: `Cloned ${name}`,
+          title: `cloned ${name} :3`,
           description: clone.destinationPath,
           timeout: 8_000,
           actionProps: {
@@ -177,13 +177,13 @@ function EnvironmentCloneToasts({ environmentId }: { environmentId: EnvironmentI
       const cancelled = clone.phase === "cancelled";
       const options = stackedThreadToast({
         type: cancelled ? "info" : "error",
-        title: cancelled ? `Cancelled cloning ${name}` : `Failed to clone ${name}`,
+        title: cancelled ? `Cancelled cloning ${name}` : `failed to clone ${name} 3:`,
         description: cancelled ? clone.destinationPath : (clone.error ?? "The clone failed."),
         timeout: 0,
         actionProps: {
           children: "Retry",
           onClick: () => {
-            void runCloneAction("Failed to retry clone", () =>
+            void runCloneAction("failed to retry clone 3:", () =>
               retryClone({ environmentId, input: { projectId: clone.projectId } }),
             );
           },

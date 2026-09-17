@@ -354,7 +354,7 @@ export function UsagePriceOverrides({
                         >
                           {selected.some((environment) => environment.prices === null)
                             ? "Some environment prices are unavailable."
-                            : "No custom prices. Add a row to override automatic pricing."}
+                            : "no custom prices. Add a row to override automatic pricing."}
                         </TableCell>
                       </TableRow>
                     ) : (

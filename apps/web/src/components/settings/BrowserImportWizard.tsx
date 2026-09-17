@@ -548,7 +548,7 @@ function DoneStep({
             ? `Imported ${cookieResultCount(imported)}`
             : skipped > 0
               ? `Skipped ${cookieResultCount(skipped)}`
-              : "No cookies found"}
+              : "no cookies found"}
         </DialogTitle>
         <DialogDescription>
           {imported > 0

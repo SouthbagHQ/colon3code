@@ -88,7 +88,7 @@ export function MediaActions({
     if (!api || menuOpen.current) return;
     menuOpen.current = true;
     setTooltipOpen(false);
-    let failureTitle = "Could not open media menu";
+    let failureTitle = "could not open media menu 3:";
     let progressToast: ReturnType<typeof toastManager.add> | undefined;
     try {
       const noun = source.kind === "image" ? "image" : "video";
@@ -117,7 +117,7 @@ export function MediaActions({
 
       const action = await api.contextMenu.show(items, position);
       if (!action) return;
-      failureTitle = `Could not ${items.find((item) => item.id === action)?.label.toLowerCase() ?? "complete media action"}`;
+      failureTitle = `could not ${items.find((item) => item.id === action)?.label.toLowerCase() ?? "complete media action"} 3:`;
       const text =
         action === "copy-full-path" && reference?.kind === "file"
           ? reference.path
@@ -130,7 +130,7 @@ export function MediaActions({
         await writeTextToClipboard(text, reference?.kind === "file" ? "file path" : "URL");
         toastManager.add({
           type: "success",
-          title: action === "copy-url" ? "URL copied" : "Path copied",
+          title: action === "copy-url" ? "URL copied :3" : "path copied :3",
         });
       } else if (action === "open-file") {
         source.onOpenFile?.();
@@ -142,7 +142,7 @@ export function MediaActions({
         await (action === "save" ? save() : copyImage());
         toastManager.update(progressToast, {
           type: "success",
-          title: action === "save" ? "Download started" : "Image copied",
+          title: action === "save" ? "download started :3" : "image copied :3",
         });
       }
     } catch (error) {

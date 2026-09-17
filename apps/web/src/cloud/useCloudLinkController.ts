@@ -57,7 +57,7 @@ export function useCloudLinkController() {
     setOperationError(traceId ? `${message} Trace ID: ${traceId}` : message);
     toastManager.add({
       type: "error",
-      title: "Could not update T3 Connect",
+      title: "could not update T3 Connect 3:",
       description: message,
       data: traceId
         ? {

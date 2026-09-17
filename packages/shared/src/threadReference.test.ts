@@ -37,7 +37,7 @@ describe("resolveThreadReferenceCopyTarget", () => {
     ).toMatchObject({
       kind: "pull-request",
       value: "https://github.com/t3/pr/14",
-      successTitle: "PR link copied",
+      successTitle: "PR link copied :3",
     });
   });
 
@@ -102,7 +102,7 @@ describe("resolveThreadReferenceCopyTarget", () => {
     ).toMatchObject({
       kind: "pull-request",
       value: "https://github.com/t3/pr/12",
-      successTitle: "PR link copied",
+      successTitle: "PR link copied :3",
     });
   });
 
@@ -111,8 +111,8 @@ describe("resolveThreadReferenceCopyTarget", () => {
       kind: "thread",
       value: "thread-1",
       clipboardTarget: "thread ID",
-      successTitle: "Thread ID copied",
-      failureTitle: "Failed to copy thread ID",
+      successTitle: "thread ID copied :3",
+      failureTitle: "failed to copy thread ID 3:",
     });
   });
 });

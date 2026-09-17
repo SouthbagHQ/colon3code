@@ -180,33 +180,33 @@ import {
 type DetailTab = "summary" | "timeline" | "code";
 
 const ACTION_SUCCESS_LABELS: Record<PullRequestAction, string> = {
-  merge: "Pull request merged",
-  ready: "Marked ready for review",
-  draft: "Converted to draft",
-  close: "Pull request closed",
-  reopen: "Pull request reopened",
-  "update-branch": "Branch updated with the base branch",
+  merge: "pull request merged :3",
+  ready: "marked ready for review :3",
+  draft: "converted to draft :3",
+  close: "pull request closed :3",
+  reopen: "pull request reopened :3",
+  "update-branch": "branch updated with the base branch :3",
   // True whichever it did: a pull request that was already mergeable merges the moment this is
   // armed, and the client has no way to tell that apart from one still waiting on something.
   "enable-auto-merge":
-    "Auto-merge turned on — merges as soon as this is ready, sooner if it already is",
-  "disable-auto-merge": "Auto-merge turned off",
-  revert: "Revert pull request opened",
-  "approve-workflows": "Workflows approved",
+    "auto-merge turned on — merges as soon as this is ready, sooner if it already is :3",
+  "disable-auto-merge": "auto-merge turned off :3",
+  revert: "revert pull request opened :3",
+  "approve-workflows": "workflows approved :3",
 };
 
 /** Said as the thing that did not happen, rather than as the operation that returned an error. */
 const ACTION_FAILURE_LABELS: Record<PullRequestAction, string> = {
-  merge: "Could not merge this pull request",
-  ready: "Could not mark this ready for review",
-  draft: "Could not convert this to a draft",
-  close: "Could not close this pull request",
-  reopen: "Could not reopen this pull request",
-  "update-branch": "Could not update this branch",
-  "enable-auto-merge": "Could not turn on auto-merge",
-  "disable-auto-merge": "Could not turn off auto-merge",
-  revert: "Could not open a revert pull request",
-  "approve-workflows": "Could not approve workflows",
+  merge: "could not merge this pull request 3:",
+  ready: "could not mark this ready for review 3:",
+  draft: "could not convert this to a draft 3:",
+  close: "could not close this pull request 3:",
+  reopen: "could not reopen this pull request 3:",
+  "update-branch": "could not update this branch 3:",
+  "enable-auto-merge": "could not turn on auto-merge 3:",
+  "disable-auto-merge": "could not turn off auto-merge 3:",
+  revert: "could not open a revert pull request 3:",
+  "approve-workflows": "could not approve workflows 3:",
 };
 
 /** What to try, for the times the host says only that it refused. */
@@ -725,11 +725,11 @@ export function PullRequestDetailPanel({
   const keybindings = useAtomValue(primaryServerKeybindingsAtom);
   const { copyToClipboard: copyReference } = useCopyToClipboard<string>({
     target: "pull request reference",
-    onCopy: (label) => toastManager.add({ type: "success", title: `${label} copied` }),
+    onCopy: (label) => toastManager.add({ type: "success", title: `${label} copied :3` }),
     onError: (error, label) =>
       toastManager.add({
         type: "error",
-        title: `Failed to copy ${label}`,
+        title: `failed to copy ${label} 3:`,
         description: error.message,
       }),
   });
@@ -1021,7 +1021,7 @@ export function PullRequestDetailPanel({
     });
     if (commentResult._tag === "Failure") {
       setPendingAction(null);
-      toastManager.add({ type: "error", title: "Could not post the comment" });
+      toastManager.add({ type: "error", title: "could not post the comment 3:" });
       return { commentPosted: false };
     }
     const actionSucceeded = await finishAction(action);
@@ -1046,7 +1046,7 @@ export function PullRequestDetailPanel({
       // rewritten is the one thing a failed save must not cost them.
       toastManager.add({
         type: "error",
-        title: "The title could not be saved",
+        title: "the title could not be saved 3:",
         description: readableFailure(
           squashAtomCommandFailure(result),
           "The host refused the new title.",
@@ -1141,7 +1141,7 @@ export function PullRequestDetailPanel({
       writeTaskToComposer(attachTarget, task);
       toastManager.add({
         type: "success",
-        title: "Added to the composer",
+        title: "added to the composer :3",
         description:
           task.prompt.length > 0
             ? "The question is in the composer — read it over, then send."
@@ -1156,14 +1156,14 @@ export function PullRequestDetailPanel({
     if (opened === null) {
       toastManager.add({
         type: "error",
-        title: "Could not open a thread",
+        title: "could not open a thread 3:",
         description: "Try again from the project, or open a thread first.",
       });
       return;
     }
     toastManager.add({
       type: "success",
-      title: "Asked in a thread",
+      title: "asked in a thread :3",
       // "Ask" leaves the composer empty on purpose, so saying the question is in it would send
       // the reader looking for something that is not there. The chips are what landed.
       description:
@@ -1189,7 +1189,7 @@ export function PullRequestDetailPanel({
       writeTaskToComposer(attachTarget, task);
       toastManager.add({
         type: "success",
-        title: "Added to the composer",
+        title: "added to the composer :3",
         description: "The task is in the composer — read it over, then send.",
       });
       return;
@@ -1219,7 +1219,7 @@ export function PullRequestDetailPanel({
       // working tree than to prepare a worktree nobody asked for.
       toastManager.update(toastId, {
         type: "error",
-        title: "Could not open a thread for the checkout",
+        title: "could not open a thread for the checkout 3:",
         description: "Try again from the project, or open a thread first.",
       });
       return;
@@ -1237,7 +1237,7 @@ export function PullRequestDetailPanel({
         prepareThread.error instanceof Error ? prepareThread.error.message : null;
       toastManager.update(toastId, {
         type: "error",
-        title: "Could not prepare the pull request checkout",
+        title: "could not prepare the pull request checkout 3:",
         ...(detailMessage ? { description: detailMessage } : {}),
       });
       return;
@@ -1259,7 +1259,7 @@ export function PullRequestDetailPanel({
       // outcome worth stopping for, since it reads as success and is not.
       toastManager.update(toastId, {
         type: "error",
-        title: "Checked out, but the thread stayed where it was",
+        title: "checked out, but the thread stayed where it was 3:",
         description: `The checkout is ready on \`${prepared.value.branch}\`. Point a thread at it from the branch picker, then ask again.`,
       });
       return;
@@ -1272,7 +1272,7 @@ export function PullRequestDetailPanel({
     // success, because everything else about the handoff did happen.
     const staleCheckoutToast = {
       type: "warning",
-      title: "Checked out, but not on the latest commits",
+      title: "checked out, but not on the latest commits 3:",
       description:
         "The checkout could not be moved onto the pull request's latest commits, so the code there is older than the pull request. Uncommitted work or local commits keep it where it is.",
     } as const;
@@ -1282,7 +1282,7 @@ export function PullRequestDetailPanel({
         prepared.value.isOnPullRequestHead
           ? {
               type: "success",
-              title: mode === "local" ? "Checked out here" : "Checked out",
+              title: mode === "local" ? "checked out here :3" : "checked out :3",
               description:
                 mode === "local"
                   ? "This repository is on the pull request's branch, with a thread open on it."
@@ -1298,7 +1298,7 @@ export function PullRequestDetailPanel({
       prepared.value.isOnPullRequestHead
         ? {
             type: "success",
-            title: "Checkout ready",
+            title: "checkout ready :3",
             description: "The task is in the composer — read it over, then send.",
           }
         : staleCheckoutToast,
@@ -2389,7 +2389,7 @@ export function PullRequestDetailPanel({
                       onError={(error) =>
                         toastManager.add({
                           type: "error",
-                          title: "Could not copy checkout command",
+                          title: "could not copy checkout command 3:",
                           description: error.message,
                         })
                       }

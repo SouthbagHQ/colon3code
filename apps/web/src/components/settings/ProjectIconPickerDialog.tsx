@@ -179,7 +179,7 @@ export function ProjectIconPickerDialog({
                 </div>
               </ScrollArea>
               {icons.length === 0 ? (
-                <p className="py-8 text-center text-sm text-muted-foreground">No icons found.</p>
+                <p className="py-8 text-center text-sm text-muted-foreground">no icons found</p>
               ) : null}
             </>
           ) : mode === "monogram" ? (

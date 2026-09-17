@@ -18,7 +18,7 @@ export async function openDesktopUpdateReleaseNotes(
   } catch {
     // Surface rejected IPC calls through the same user-visible fallback.
   }
-  toastManager.add({ type: "error", title: "Unable to open release notes" });
+  toastManager.add({ type: "error", title: "unable to open release notes 3:" });
 }
 
 function ReleaseNotesLink({
@@ -53,7 +53,7 @@ export function showDesktopUpdateDownloadedToast(
   const releaseUrl = getDesktopUpdateReleaseUrl(getDesktopUpdateDownloadedVersion(state));
   toastManager.add({
     type: "success",
-    title: "Update downloaded",
+    title: "update downloaded :3",
     description: (
       <>
         Restart the app from the update button to install it.

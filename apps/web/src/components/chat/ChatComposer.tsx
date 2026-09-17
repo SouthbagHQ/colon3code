@@ -2514,7 +2514,7 @@ export const ChatComposer = memo(function ChatComposer(props: ChatComposerProps)
         exactPullRequestLookup.isPending));
   const composerMenuEmptyState = useMemo(() => {
     if (composerTriggerKind === "skill") {
-      return "No skills found. Try / to browse provider commands.";
+      return "no skills found. Try / to browse provider commands.";
     }
     if (composerTriggerKind === "pull-request") {
       if (pullRequestProjectId === null || pullRequestRepository === null) {
@@ -2528,11 +2528,9 @@ export const ChatComposer = memo(function ChatComposer(props: ChatComposerProps)
       }
       return composerTrigger?.query
         ? `No pull request matches ${composerTrigger.query}.`
-        : "No pull requests found in this repository.";
+        : "no pull requests found in this repository";
     }
-    return composerTriggerKind === "path"
-      ? "No matching files or folders."
-      : "No matching command.";
+    return composerTriggerKind === "path" ? "no matching files or folders" : "no matching command";
   }, [
     composerTrigger,
     composerTriggerKind,
@@ -2775,7 +2773,7 @@ export const ChatComposer = memo(function ChatComposer(props: ChatComposerProps)
       const fail = (reason: string) => {
         toastManager.add({
           type: "error",
-          title: `Couldn't bring ${record.name} into this message`,
+          title: `couldn't bring ${record.name} into this message 3:`,
           description: `${reason} Remove the chip or attach the file again.`,
         });
       };
@@ -4000,7 +3998,7 @@ export const ChatComposer = memo(function ChatComposer(props: ChatComposerProps)
       if (filesToVerify.some((file) => file.environmentId !== environmentId)) {
         toastManager.add({
           type: "error",
-          title: "Stashed files belong to another environment",
+          title: "stashed files belong to another environment 3:",
           description: "Restore this prompt in the environment that received its files.",
         });
         return;
@@ -4040,7 +4038,7 @@ export const ChatComposer = memo(function ChatComposer(props: ChatComposerProps)
       if (!durable) {
         toastManager.add({
           type: "warning",
-          title: "Restored prompt may reappear in the stash",
+          title: "restored prompt may reappear in the stash 3:",
           description:
             "Browser storage rejected the update, so this entry could still be there after a reload.",
           data: { hideCopyButton: true },
@@ -4268,7 +4266,7 @@ export const ChatComposer = memo(function ChatComposer(props: ChatComposerProps)
       if (missingImageReasons.length > 0) {
         toastManager.add({
           type: "warning",
-          title: "Some attachments were not restored",
+          title: "some attachments were not restored 3:",
           description: missingImageReasons.join(" "),
         });
       }
@@ -4313,7 +4311,7 @@ export const ChatComposer = memo(function ChatComposer(props: ChatComposerProps)
       if (!durable) {
         toastManager.add({
           type: "warning",
-          title: "Stash entry may come back",
+          title: "stash entry may come back 3:",
           description:
             "Browser storage rejected the delete, so this prompt could reappear after a reload.",
           data: { hideCopyButton: true },
@@ -4365,7 +4363,7 @@ export const ChatComposer = memo(function ChatComposer(props: ChatComposerProps)
       if (composerFileNeedsReattach(file)) {
         toastManager.add({
           type: "error",
-          title: "Attach dropped files again or remove them before stashing",
+          title: "attach dropped files again or remove them before stashing 3:",
         });
         return;
       }
@@ -4373,7 +4371,7 @@ export const ChatComposer = memo(function ChatComposer(props: ChatComposerProps)
       if (upload?.status !== "ready" || upload.environmentId !== environmentId) {
         toastManager.add({
           type: "error",
-          title: "Wait for file uploads before stashing this prompt",
+          title: "wait for file uploads before stashing this prompt 3:",
         });
         return;
       }
@@ -4427,7 +4425,7 @@ export const ChatComposer = memo(function ChatComposer(props: ChatComposerProps)
       if (!written) {
         toastManager.add({
           type: "error",
-          title: "Could not stash this prompt",
+          title: "could not stash this prompt 3:",
           description:
             "Browser storage rejected the write, so the composer was left as-is. Free up site data and try again.",
           data: { hideCopyButton: true },
@@ -4440,7 +4438,7 @@ export const ChatComposer = memo(function ChatComposer(props: ChatComposerProps)
       if (!durable) {
         toastManager.add({
           type: "warning",
-          title: "Stashed prompt will not survive a reload",
+          title: "stashed prompt will not survive a reload 3:",
           description:
             "Browser storage is unavailable, so this stash is kept in memory only for this session.",
           data: { hideCopyButton: true },
@@ -4476,7 +4474,7 @@ export const ChatComposer = memo(function ChatComposer(props: ChatComposerProps)
         }
         toastManager.add({
           type: "warning",
-          title: "Oldest stashed prompt discarded",
+          title: "oldest stashed prompt discarded 3:",
           description: `The stash holds ${MAX_STASH_ENTRIES} prompts; the oldest was removed to make room.`,
           data: { hideCopyButton: true },
         });
@@ -4527,7 +4525,7 @@ export const ChatComposer = memo(function ChatComposer(props: ChatComposerProps)
         if (!imagesDurable && durable && images.length > 0) {
           toastManager.add({
             type: "warning",
-            title: "Stashed images were not saved",
+            title: "stashed images were not saved 3:",
             description:
               "The prompt was stashed, but browser storage rejected its images. They will be missing if you reload.",
             data: { hideCopyButton: true },
@@ -4539,7 +4537,7 @@ export const ChatComposer = memo(function ChatComposer(props: ChatComposerProps)
         // them evaporate.
         toastManager.add({
           type: "warning",
-          title: "Stashed images did not attach",
+          title: "stashed images did not attach 3:",
           description: `That prompt was restored or deleted before ${kept.length} image${kept.length === 1 ? "" : "s"} finished saving. Re-attach ${kept.length === 1 ? "it" : "them"} if you still need ${kept.length === 1 ? "it" : "them"}.`,
           data: { hideCopyButton: true },
         });
@@ -4890,7 +4888,7 @@ export const ChatComposer = memo(function ChatComposer(props: ChatComposerProps)
       className="shrink-0 gap-2 px-2 text-secondary-label sm:px-3"
     >
       <CircleAlertIcon className="size-4" />
-      {providerSetupInstanceId ? "Open provider settings" : "No provider available"}
+      {providerSetupInstanceId ? "Open provider settings" : "no provider available"}
     </Button>
   ) : (
     <>
@@ -5149,7 +5147,7 @@ export const ChatComposer = memo(function ChatComposer(props: ChatComposerProps)
     ) {
       toastManager.add({
         type: "error",
-        title: "This question cannot accept attachments.",
+        title: "this question cannot accept attachments 3:",
       });
       return false;
     }
@@ -5427,7 +5425,7 @@ export const ChatComposer = memo(function ChatComposer(props: ChatComposerProps)
       }
       toastManager.add({
         type: "error",
-        title: "Pasted text is too large for this message",
+        title: "pasted text is too large for this message 3:",
         description: "Remove some text or an attachment, then paste again.",
         data: { hideCopyButton: true },
       });
@@ -5449,7 +5447,7 @@ export const ChatComposer = memo(function ChatComposer(props: ChatComposerProps)
       if (!wouldExceedInputLimit) return false;
       toastManager.add({
         type: "error",
-        title: "Pasted text is too large to attach",
+        title: "pasted text is too large to attach 3:",
         description: "Reduce the clipboard contents or save a smaller excerpt as a file.",
         data: { hideCopyButton: true },
       });
@@ -5589,7 +5587,7 @@ export const ChatComposer = memo(function ChatComposer(props: ChatComposerProps)
     onInsertRejected: () => {
       toastManager.add({
         type: "error",
-        title: "Unable to add to chat",
+        title: "unable to add to chat 3:",
         description: "The composer is busy; try again once it is ready.",
       });
     },

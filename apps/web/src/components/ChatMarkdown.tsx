@@ -1877,7 +1877,7 @@ const MarkdownFileLink = memo(function MarkdownFileLink({
         toastManager.add(
           stackedThreadToast({
             type: "error",
-            title: "Unable to open file",
+            title: "unable to open file 3:",
             description: error instanceof Error ? error.message : "An error occurred.",
           }),
         );
@@ -1889,7 +1889,7 @@ const MarkdownFileLink = memo(function MarkdownFileLink({
         toastManager.add(
           stackedThreadToast({
             type: "error",
-            title: "Unable to open file",
+            title: "unable to open file 3:",
             description: cause instanceof Error ? cause.message : "An error occurred.",
           }),
         );
@@ -1927,7 +1927,7 @@ const MarkdownFileLink = memo(function MarkdownFileLink({
         toastManager.add(
           stackedThreadToast({
             type: "error",
-            title: "Unable to open file in browser",
+            title: "unable to open file in browser 3:",
             description: error instanceof Error ? error.message : "An error occurred.",
           }),
         );
@@ -1939,7 +1939,7 @@ const MarkdownFileLink = memo(function MarkdownFileLink({
         toastManager.add(
           stackedThreadToast({
             type: "error",
-            title: "Unable to open file in browser",
+            title: "unable to open file in browser 3:",
             description: cause instanceof Error ? cause.message : "An error occurred.",
           }),
         );
@@ -1965,7 +1965,7 @@ const MarkdownFileLink = memo(function MarkdownFileLink({
         toastManager.add(
           stackedThreadToast({
             type: "error",
-            title: "Unable to reveal file",
+            title: "unable to reveal file 3:",
             description: error instanceof Error ? error.message : "An error occurred.",
           }),
         );
@@ -1977,7 +1977,7 @@ const MarkdownFileLink = memo(function MarkdownFileLink({
         toastManager.add(
           stackedThreadToast({
             type: "error",
-            title: "Unable to reveal file",
+            title: "unable to reveal file 3:",
             description: cause instanceof Error ? cause.message : "An error occurred.",
           }),
         );
@@ -1991,7 +1991,7 @@ const MarkdownFileLink = memo(function MarkdownFileLink({
         toastManager.add(
           stackedThreadToast({
             type: "error",
-            title: `Failed to copy ${title.toLowerCase()}`,
+            title: `failed to copy ${title.toLowerCase()} 3:`,
             description: "Clipboard API unavailable.",
           }),
         );
@@ -2002,7 +2002,7 @@ const MarkdownFileLink = memo(function MarkdownFileLink({
         () => {
           toastManager.add({
             type: "success",
-            title: `${title} copied`,
+            title: `${title} copied :3`,
             description: value,
           });
         },
@@ -2014,7 +2014,7 @@ const MarkdownFileLink = memo(function MarkdownFileLink({
           toastManager.add(
             stackedThreadToast({
               type: "error",
-              title: `Failed to copy ${title.toLowerCase()}`,
+              title: `failed to copy ${title.toLowerCase()} 3:`,
               description: error instanceof Error ? error.message : "An error occurred.",
             }),
           );
@@ -2287,7 +2287,7 @@ function useChatMarkdownState({
           toastManager.add(
             stackedThreadToast({
               type: "error",
-              title: "Media unavailable",
+              title: "media unavailable 3:",
               description:
                 error instanceof Error
                   ? error.message
@@ -2446,7 +2446,7 @@ function useChatMarkdownState({
             toastManager.add(
               stackedThreadToast({
                 type: "error",
-                title: "Unable to open link in browser",
+                title: "unable to open link in browser 3:",
                 description: error.message,
               }),
             );
@@ -2990,8 +2990,8 @@ const CHAT_MARKDOWN_COMPONENTS = {
                       type: "error",
                       title:
                         operation === "link-pull-request-to-thread"
-                          ? "Unable to link pull request"
-                          : "Unable to unlink pull request",
+                          ? "unable to link pull request 3:"
+                          : "unable to unlink pull request 3:",
                       description: cause instanceof Error ? cause.message : "The request failed.",
                     }),
                   );

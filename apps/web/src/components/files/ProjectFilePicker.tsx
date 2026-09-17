@@ -47,7 +47,7 @@ function getEmptyStateMessage(query: string, error: string | null, isPending: bo
   if (error) return error;
   const isSearching = query.trim().length > 0;
   if (isPending) return isSearching ? "Searching workspace files…" : "Indexing workspace files…";
-  return isSearching ? "No matching files." : "No files found.";
+  return isSearching ? "no matching files" : "no files found";
 }
 
 function EmptyProjectFilePicker() {

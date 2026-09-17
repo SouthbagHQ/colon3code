@@ -44,7 +44,7 @@ function LazyChecksBody({
   if (detailQuery.data === null) {
     return (
       <p className="text-muted-foreground text-xs">
-        {detailQuery.isPending ? "Loading checks…" : "No checks reported"}
+        {detailQuery.isPending ? "Loading checks…" : "no checks reported"}
       </p>
     );
   }
@@ -60,7 +60,7 @@ function ChecksBody({
 }) {
   const openLink = useOpenLink(threadRef);
   if (checks.length === 0) {
-    return <p className="text-muted-foreground text-xs">No checks reported</p>;
+    return <p className="text-muted-foreground text-xs">no checks reported</p>;
   }
   return (
     <ul className="flex flex-col gap-1">
@@ -86,7 +86,7 @@ function ChecksBody({
                 if (!check.url) return;
                 void openLink(check.url).catch((error: unknown) => {
                   console.error(error);
-                  toastManager.add({ type: "error", title: "Unable to open check details" });
+                  toastManager.add({ type: "error", title: "unable to open check details 3:" });
                 });
               }}
             >

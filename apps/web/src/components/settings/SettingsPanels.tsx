@@ -294,7 +294,7 @@ function AboutVersionSection() {
           toastManager.add(
             stackedThreadToast({
               type: "error",
-              title: "Could not change update track",
+              title: "could not change update track 3:",
               description: error instanceof Error ? error.message : "Update track change failed.",
             }),
           );
@@ -317,7 +317,7 @@ function AboutVersionSection() {
         toastManager.add(
           stackedThreadToast({
             type: "error",
-            title: "Could not download update",
+            title: "could not download update 3:",
             description: error instanceof Error ? error.message : "Download failed.",
           }),
         );
@@ -340,7 +340,7 @@ function AboutVersionSection() {
         toastManager.add(
           stackedThreadToast({
             type: "error",
-            title: "Could not confirm update",
+            title: "could not confirm update 3:",
             description: error instanceof Error ? error.message : "Update confirmation failed.",
           }),
         );
@@ -356,7 +356,7 @@ function AboutVersionSection() {
           toastManager.add(
             stackedThreadToast({
               type: "error",
-              title: "Could not install update",
+              title: "could not install update 3:",
               description: error instanceof Error ? error.message : "Install failed.",
             }),
           );
@@ -373,7 +373,7 @@ function AboutVersionSection() {
           toastManager.add(
             stackedThreadToast({
               type: "error",
-              title: "Could not check for updates",
+              title: "could not check for updates 3:",
               description:
                 result.state.message ?? "Automatic updates are not available in this build.",
             }),
@@ -384,7 +384,7 @@ function AboutVersionSection() {
         toastManager.add(
           stackedThreadToast({
             type: "error",
-            title: "Could not check for updates",
+            title: "could not check for updates 3:",
             description: error instanceof Error ? error.message : "Update check failed.",
           }),
         );
@@ -711,7 +711,7 @@ export function useSettingsRestore(onRestored?: () => void) {
       toastManager.add(
         stackedThreadToast({
           type: "error",
-          title: "Couldn’t restore theme settings",
+          title: "couldn’t restore theme settings 3:",
           description: "Try again.",
         }),
       );
@@ -3037,7 +3037,7 @@ export function GeneralSettingsPanel() {
                     if (reason) {
                       toastManager.add({
                         type: "error",
-                        title: "Text generation model not saved",
+                        title: "text generation model not saved 3:",
                         description: reason,
                       });
                       return;
@@ -3226,7 +3226,7 @@ export function ArchivedThreadsPanel() {
           toastManager.add(
             stackedThreadToast({
               type: "error",
-              title: "Failed to unarchive thread",
+              title: "failed to unarchive thread 3:",
               description: error instanceof Error ? error.message : "An error occurred.",
             }),
           );
@@ -3243,7 +3243,7 @@ export function ArchivedThreadsPanel() {
           toastManager.add(
             stackedThreadToast({
               type: "error",
-              title: "Failed to delete thread",
+              title: "failed to delete thread 3:",
               description: error instanceof Error ? error.message : "An error occurred.",
             }),
           );
@@ -3271,8 +3271,8 @@ export function ArchivedThreadsPanel() {
                 {isLoadingArchive
                   ? "Loading archived threads"
                   : archiveError
-                    ? "Could not load archived threads"
-                    : "No archived threads"}
+                    ? "could not load archived threads 3:"
+                    : "no archived threads"}
               </span>
             }
             description={
@@ -3310,7 +3310,7 @@ export function ArchivedThreadsPanel() {
                       toastManager.add(
                         stackedThreadToast({
                           type: "error",
-                          title: "Archived thread action failed",
+                          title: "archived thread action failed 3:",
                           description:
                             error instanceof Error ? error.message : "An error occurred.",
                         }),
@@ -3346,7 +3346,7 @@ export function ArchivedThreadsPanel() {
                           toastManager.add(
                             stackedThreadToast({
                               type: "error",
-                              title: "Failed to unarchive thread",
+                              title: "failed to unarchive thread 3:",
                               description:
                                 error instanceof Error ? error.message : "An error occurred.",
                             }),

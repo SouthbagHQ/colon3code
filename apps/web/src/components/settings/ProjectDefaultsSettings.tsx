@@ -126,7 +126,7 @@ export function ProjectDefaultsSettings({ category }: { category: ProjectSetting
   const setModel = (value: ModelSelection | null) => {
     const reason = value ? modelDisabledReason(value.instanceId, value.model) : null;
     if (reason) {
-      toastManager.add({ type: "error", title: "Default model not saved", description: reason });
+      toastManager.add({ type: "error", title: "default model not saved 3:", description: reason });
       return;
     }
     updateSettings({ defaultModelSelection: value });
@@ -219,7 +219,7 @@ export function ProjectDefaultsSettings({ category }: { category: ProjectSetting
                   ) : null}
                 </div>
               ) : (
-                <span className="text-sm text-muted-foreground">No providers available</span>
+                <span className="text-sm text-muted-foreground">no providers available</span>
               )
             }
           />

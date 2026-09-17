@@ -92,7 +92,7 @@ function EmptyMobileClients() {
         <SmartphoneIcon />
       </EmptyMedia>
       <EmptyHeader>
-        <EmptyTitle className="text-[1.0625rem] leading-6">No mobile clients</EmptyTitle>
+        <EmptyTitle className="text-[1.0625rem] leading-6">no mobile clients</EmptyTitle>
         <EmptyDescription className="text-[0.8125rem] leading-[1.125rem]">
           Sign in to :3 Code on your iPhone to register it for push notifications and Live
           Activities.

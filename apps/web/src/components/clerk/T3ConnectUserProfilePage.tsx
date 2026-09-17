@@ -156,7 +156,7 @@ export function T3ConnectUserProfilePage() {
       environmentsState.refresh();
       toastManager.add({
         type: "success",
-        title: "Server deregistered",
+        title: "server deregistered :3",
         description: "T3 Connect access was revoked and a host space is now available.",
       });
       return;
@@ -174,7 +174,7 @@ export function T3ConnectUserProfilePage() {
     });
     toastManager.add({
       type: "error",
-      title: "Could not deregister server",
+      title: "could not deregister server 3:",
       description: message,
       data: traceId
         ? {

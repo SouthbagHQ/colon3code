@@ -99,7 +99,7 @@ export function GitHubRoutingSettings({
                   if (result._tag === "Failure")
                     toastManager.add({
                       type: "error",
-                      title: "Could not save GitHub routing permission",
+                      title: "could not save GitHub routing permission 3:",
                     });
                 },
               );

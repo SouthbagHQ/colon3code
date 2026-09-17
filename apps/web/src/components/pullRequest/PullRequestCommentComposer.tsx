@@ -72,7 +72,7 @@ export function PullRequestCommentComposer({
     });
     if (result._tag === "Failure") {
       setSubmitting(null);
-      toastManager.add({ type: "error", title: "Could not post the comment" });
+      toastManager.add({ type: "error", title: "could not post the comment 3:" });
       return;
     }
     setBody("");

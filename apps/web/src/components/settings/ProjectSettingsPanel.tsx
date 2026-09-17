@@ -195,7 +195,7 @@ function ProjectDetail({
     toastManager.add(
       stackedThreadToast({
         type: "error",
-        title,
+        title: `${title} 3:`,
         description: error instanceof Error ? error.message : "An error occurred.",
       }),
     );
@@ -253,7 +253,7 @@ function ProjectDetail({
     async (nextTitle: string, wasEdited: boolean) => {
       const title = nextTitle.trim();
       if (!title) {
-        toastManager.add({ type: "warning", title: "Project title cannot be empty" });
+        toastManager.add({ type: "warning", title: "project title cannot be empty 3:" });
         return;
       }
       if (
@@ -265,7 +265,7 @@ function ProjectDetail({
       ) {
         return;
       }
-      await updateAllMembers({ title }, "Failed to rename project");
+      await updateAllMembers({ title }, "failed to rename project");
     },
     [group.memberProjects, updateAllMembers],
   );
@@ -281,7 +281,7 @@ function ProjectDetail({
       savingFaviconRef.current = true;
       setIsSavingFavicon(true);
       try {
-        await updateAllMembers(input, "Failed to update project icon");
+        await updateAllMembers(input, "failed to update project icon");
       } finally {
         savingFaviconRef.current = false;
         setIsSavingFavicon(false);
@@ -351,7 +351,7 @@ function ProjectDetail({
           () => undefined,
         );
         if (result._tag === "Failure") {
-          reportFailure(`Failed to remove "${member.title}"`, result);
+          reportFailure(`failed to remove "${member.title}"`, result);
           return;
         }
         const projectRef = scopeProjectRef(member.environmentId, member.id);

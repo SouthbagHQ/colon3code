@@ -2158,7 +2158,7 @@ export default function Sidebar() {
     onCopy: ({ path }) => {
       toastManager.add({
         type: "success",
-        title: "Path copied",
+        title: "path copied :3",
         description: path,
       });
     },
@@ -2166,7 +2166,7 @@ export default function Sidebar() {
       toastManager.add(
         stackedThreadToast({
           type: "error",
-          title: "Failed to copy path",
+          title: "failed to copy path 3:",
           description: error instanceof Error ? error.message : "An error occurred.",
         }),
       );
@@ -2177,7 +2177,7 @@ export default function Sidebar() {
     onCopy: ({ branch }) => {
       toastManager.add({
         type: "success",
-        title: "Branch copied",
+        title: "branch copied :3",
         description: branch,
       });
     },
@@ -2185,7 +2185,7 @@ export default function Sidebar() {
       toastManager.add(
         stackedThreadToast({
           type: "error",
-          title: "Failed to copy branch",
+          title: "failed to copy branch 3:",
           description: error instanceof Error ? error.message : "An error occurred.",
         }),
       );
@@ -2195,7 +2195,7 @@ export default function Sidebar() {
     onCopy: ({ threadId }) => {
       toastManager.add({
         type: "success",
-        title: "Thread ID copied",
+        title: "thread ID copied :3",
         description: threadId,
       });
     },
@@ -2203,7 +2203,7 @@ export default function Sidebar() {
       toastManager.add(
         stackedThreadToast({
           type: "error",
-          title: "Failed to copy thread ID",
+          title: "failed to copy thread ID 3:",
           description: error instanceof Error ? error.message : "An error occurred.",
         }),
       );
@@ -2949,7 +2949,7 @@ export default function Sidebar() {
         const trimmed = title.trim();
         setRenamingThreadKey(null);
         if (trimmed.length === 0) {
-          toastManager.add({ type: "warning", title: "Thread title cannot be empty" });
+          toastManager.add({ type: "warning", title: "thread title cannot be empty 3:" });
           return;
         }
         if (trimmed === originalTitle) return;
@@ -2962,7 +2962,7 @@ export default function Sidebar() {
           toastManager.add(
             stackedThreadToast({
               type: "error",
-              title: "Failed to rename thread",
+              title: "failed to rename thread 3:",
               description: error instanceof Error ? error.message : "An error occurred.",
             }),
           );
@@ -3045,7 +3045,7 @@ export default function Sidebar() {
               toastManager.add(
                 stackedThreadToast({
                   type: "error",
-                  title: "Failed to settle thread",
+                  title: "failed to settle thread 3:",
                   description: error instanceof Error ? error.message : "An error occurred.",
                 }),
               );
@@ -3081,7 +3081,7 @@ export default function Sidebar() {
           toastManager.add(
             stackedThreadToast({
               type: "error",
-              title: "Failed to un-settle thread",
+              title: "failed to un-settle thread 3:",
               description: error instanceof Error ? error.message : "An error occurred.",
             }),
           );
@@ -3099,7 +3099,7 @@ export default function Sidebar() {
           toastManager.add(
             stackedThreadToast({
               type: "error",
-              title: "Failed to wake thread",
+              title: "failed to wake thread 3:",
               description: error instanceof Error ? error.message : "An error occurred.",
             }),
           );
@@ -3263,7 +3263,7 @@ export default function Sidebar() {
           toastManager.add(
             stackedThreadToast({
               type: "error",
-              title: "Failed to pin thread",
+              title: "failed to pin thread 3:",
               description: error instanceof Error ? error.message : "An error occurred.",
             }),
           );
@@ -3281,7 +3281,7 @@ export default function Sidebar() {
           toastManager.add(
             stackedThreadToast({
               type: "error",
-              title: "Failed to unpin thread",
+              title: "failed to unpin thread 3:",
               description: error instanceof Error ? error.message : "An error occurred.",
             }),
           );
@@ -3588,9 +3588,10 @@ export default function Sidebar() {
           case "settle": {
             settlingThreadKeysRef.current.add(activeKey);
             const navigateAfterSettle = planForwardNavigation(activeKey);
-            const settled = await run(settleThread(threadRef), "Failed to settle thread").finally(
-              () => settlingThreadKeysRef.current.delete(activeKey),
-            );
+            const settled = await run(
+              settleThread(threadRef),
+              "failed to settle thread 3:",
+            ).finally(() => settlingThreadKeysRef.current.delete(activeKey));
             if (
               settled &&
               shouldNavigateAfterThreadPark({
@@ -3606,14 +3607,17 @@ export default function Sidebar() {
           }
           case "move-active":
             // The drag expresses unpin intent; button/menu confirmation is unchanged.
-            if (plan.unpin && !(await run(unpinThread(threadRef), "Failed to unpin thread")))
+            if (plan.unpin && !(await run(unpinThread(threadRef), "failed to unpin thread 3:")))
               return;
             if (
               plan.unsettle &&
-              !(await run(unsettleThread(threadRef), "Failed to un-settle thread"))
+              !(await run(unsettleThread(threadRef), "failed to un-settle thread 3:"))
             )
               return;
-            if (plan.unsnooze && !(await run(unsnoozeThread(threadRef), "Failed to wake thread")))
+            if (
+              plan.unsnooze &&
+              !(await run(unsnoozeThread(threadRef), "failed to wake thread 3:"))
+            )
               return;
             break;
           case "pin":
@@ -3623,7 +3627,7 @@ export default function Sidebar() {
                   threadRef,
                   plan.orderKey === undefined ? {} : { orderKey: plan.orderKey },
                 ),
-                "Failed to pin thread",
+                "failed to pin thread 3:",
               ))
             )
               return;
@@ -3643,8 +3647,8 @@ export default function Sidebar() {
                 assignment.orderKey,
               ),
               plan.kind === "move-active"
-                ? "Failed to reorder active threads"
-                : "Failed to reorder pinned threads",
+                ? "failed to reorder active threads 3:"
+                : "failed to reorder pinned threads 3:",
             ))
           )
             return;
@@ -3728,7 +3732,7 @@ export default function Sidebar() {
           toastManager.add(
             stackedThreadToast({
               type: "error",
-              title: "Failed to snooze thread",
+              title: "failed to snooze thread 3:",
               description:
                 outcome.error instanceof Error ? outcome.error.message : "An error occurred.",
             }),
@@ -3741,7 +3745,7 @@ export default function Sidebar() {
         toastManager.add(
           stackedThreadToast({
             type: "success",
-            title: `Snoozed until ${snoozeWakeDescription(preset.snoozedUntil, new Date(), timestampFormat)}`,
+            title: `snoozed until ${snoozeWakeDescription(preset.snoozedUntil, new Date(), timestampFormat)} :3`,
             timeout: 5_000,
             actionProps: {
               children: "Undo",
@@ -3865,7 +3869,7 @@ export default function Sidebar() {
                 type: failedCount > 0 ? "warning" : "success",
                 title:
                   failedCount > 0
-                    ? `Snoozed ${snoozedCount} of ${selectedThreads.length} threads`
+                    ? `snoozed ${snoozedCount} of ${selectedThreads.length} threads 3:`
                     : `Snoozed ${snoozedCount} thread${snoozedCount === 1 ? "" : "s"}`,
                 description:
                   failedCount > 0
@@ -3885,7 +3889,7 @@ export default function Sidebar() {
             toastManager.add(
               stackedThreadToast({
                 type: "error",
-                title: "Failed to snooze threads",
+                title: "failed to snooze threads 3:",
                 description:
                   firstError instanceof Error ? firstError.message : "An error occurred.",
               }),
@@ -3914,7 +3918,7 @@ export default function Sidebar() {
             toastManager.add(
               stackedThreadToast({
                 type: "error",
-                title: "Failed to regenerate thread titles",
+                title: "failed to regenerate thread titles 3:",
                 description: error instanceof Error ? error.message : "An error occurred.",
               }),
             );
@@ -3975,7 +3979,7 @@ export default function Sidebar() {
         toastManager.add(
           stackedThreadToast({
             type: "error",
-            title: "Failed to delete threads",
+            title: "failed to delete threads 3:",
             description: firstError instanceof Error ? firstError.message : "An error occurred.",
           }),
         );
@@ -4099,7 +4103,7 @@ export default function Sidebar() {
               toastManager.add(
                 stackedThreadToast({
                   type: "error",
-                  title: "Could not create thread",
+                  title: "could not create thread 3:",
                   description: error instanceof Error ? error.message : "An error occurred.",
                 }),
               );
@@ -4135,7 +4139,7 @@ export default function Sidebar() {
               toastManager.add(
                 stackedThreadToast({
                   type: "error",
-                  title: "Failed to regenerate thread title",
+                  title: "failed to regenerate thread title 3:",
                   description: error instanceof Error ? error.message : "An error occurred.",
                 }),
               );
@@ -4150,7 +4154,7 @@ export default function Sidebar() {
               toastManager.add(
                 stackedThreadToast({
                   type: "error",
-                  title: "Path unavailable",
+                  title: "path unavailable 3:",
                   description: "This thread does not have a workspace path to copy.",
                 }),
               );
@@ -4185,8 +4189,8 @@ export default function Sidebar() {
                 stackedThreadToast({
                   type: "error",
                   title: didArchive
-                    ? "Thread archived, but navigation failed"
-                    : "Failed to archive thread",
+                    ? "thread archived, but navigation failed 3:"
+                    : "failed to archive thread 3:",
                   description: error instanceof Error ? error.message : "An error occurred.",
                 }),
               );
@@ -4213,7 +4217,7 @@ export default function Sidebar() {
               toastManager.add(
                 stackedThreadToast({
                   type: "error",
-                  title: "Failed to delete thread",
+                  title: "failed to delete thread 3:",
                   description: error instanceof Error ? error.message : "An error occurred.",
                 }),
               );
@@ -4459,7 +4463,7 @@ export default function Sidebar() {
                         })
                       }
                     />
-                    <ComboboxEmpty>No matching projects.</ComboboxEmpty>
+                    <ComboboxEmpty>no matching projects</ComboboxEmpty>
                     <ComboboxList>
                       {(item: (typeof projectScopeItems)[number]) => {
                         const project = projectGroupByScopeKey.get(item.value) ?? null;
@@ -4586,7 +4590,7 @@ export default function Sidebar() {
                 role="status"
                 className="px-2 py-6 text-center text-xs text-sidebar-muted-foreground"
               >
-                No threads found
+                no threads found
               </p>
             )
           ) : null}
@@ -4891,7 +4895,7 @@ export default function Sidebar() {
             <div className="flex flex-col items-center gap-2 px-2 py-6 text-center text-xs text-muted-foreground/60">
               {projects.length === 0 ? (
                 <>
-                  <span>No projects yet</span>
+                  <span>no projects yet</span>
                   <button
                     type="button"
                     onClick={openAddProjectCommandPalette}
@@ -4902,9 +4906,9 @@ export default function Sidebar() {
                   </button>
                 </>
               ) : scopedProjectGroup ? (
-                `No threads in ${scopedProjectGroup.displayName} yet`
+                `nothing in ${scopedProjectGroup.displayName} yet :3`
               ) : (
-                "No threads yet"
+                "nothing here yet :3"
               )}
             </div>
           ) : null}

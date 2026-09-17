@@ -103,7 +103,7 @@ export function PullRequestListEmptyState({
       <Empty className="py-16">
         <BranchMark joined={false} />
         <EmptyHeader>
-          <EmptyTitle>No projects in this workspace</EmptyTitle>
+          <EmptyTitle>no projects in this workspace</EmptyTitle>
           <EmptyDescription>
             Add a project, and the pull requests from its repository appear here.
           </EmptyDescription>
@@ -136,7 +136,7 @@ export function PullRequestListEmptyState({
         <EmptyHeader>
           {/* A pasted paragraph is still a search, but it is not a title. */}
           <EmptyTitle>
-            Nothing matches “{query.length > 48 ? `${query.slice(0, 48)}…` : query}”
+            nothing matches “{query.length > 48 ? `${query.slice(0, 48)}…` : query}”
           </EmptyTitle>
           <EmptyDescription>
             The hosts were searched for it. Try fewer words, or search by number, author or branch.
@@ -162,7 +162,9 @@ export function PullRequestListEmptyState({
     <Empty className="py-16">
       <BranchMark joined={false} />
       <EmptyHeader>
-        <EmptyTitle>{filtered ? "Nothing under these filters" : "No pull requests"}</EmptyTitle>
+        <EmptyTitle>
+          {filtered ? "nothing under these filters" : "no pull requests yet :3"}
+        </EmptyTitle>
         <EmptyDescription>
           {filtered
             ? "Widen the state, involvement or project filter to see more."

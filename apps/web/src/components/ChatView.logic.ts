@@ -963,15 +963,15 @@ export function buildExpiredTerminalContextToastCopy(
   variant: "omitted" | "empty",
 ): { title: string; description: string } {
   const count = Math.max(1, Math.floor(expiredTerminalContextCount));
-  const noun = count === 1 ? "Expired terminal context" : "Expired terminal contexts";
+  const noun = count === 1 ? "expired terminal context" : "expired terminal contexts";
   if (variant === "empty") {
     return {
-      title: `${noun} won't be sent`,
+      title: `${noun} won't be sent 3:`,
       description: "Remove it or re-add it to include terminal output.",
     };
   }
   return {
-    title: `${noun} omitted from message`,
+    title: `${noun} omitted from message 3:`,
     description: "Re-add it if you want that terminal output included.",
   };
 }
@@ -1144,7 +1144,7 @@ export function getStartedThreadModelChangeBlockReason(input: {
     return null;
   }
   return {
-    title: "Start a new chat to change models",
+    title: "start a new chat to change models 3:",
     description: "This provider does not allow switching models after a conversation has started.",
   };
 }

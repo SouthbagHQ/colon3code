@@ -77,7 +77,7 @@ describe("PreviewEmptyState", () => {
   it("keeps the original empty state when both groups are empty", () => {
     mocks.servers = [];
     const html = render([]);
-    expect(html).toContain("No preview yet");
+    expect(html).toContain("no preview yet :3");
   });
 
   it("renders an out-of-range lastVisitedAt entry without throwing", () => {

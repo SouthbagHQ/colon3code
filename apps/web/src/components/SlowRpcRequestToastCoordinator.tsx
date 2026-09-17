@@ -52,7 +52,7 @@ export function SlowRpcRequestToastCoordinator() {
       },
       description: describeSlowRequests(slowRequests),
       timeout: 0,
-      title: "Some requests are slow",
+      title: "some requests are slow 3:",
       type: "warning" as const,
     };
 

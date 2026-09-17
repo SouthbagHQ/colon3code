@@ -65,7 +65,7 @@ export function DeviceHostsSettings(props: { environmentId: EnvironmentId | null
       } else {
         toastManager.add({
           type: "error",
-          title: "Device hosts not saved on all environments",
+          title: "device hosts not saved on all environments 3:",
           description: `Could not update ${failed.map((environment) => environment.label).join(", ")}.`,
         });
       }
@@ -122,7 +122,7 @@ export function DeviceHostsSettings(props: { environmentId: EnvironmentId | null
                     toastManager.add({
                       type: failed.length ? "error" : "success",
                       title: failed.length
-                        ? `${host.label}: ${failed.length} of ${targets.length} environments failed`
+                        ? `${host.label}: ${failed.length} of ${targets.length} environments failed 3:`
                         : `${host.label}: connection checks passed`,
                       description: failed.length
                         ? `Could not connect from ${failed.map((target) => target.label).join(", ")}.`
@@ -177,7 +177,7 @@ function DeviceHostList({
   return (
     <>
       {hosts.length === 0 ? (
-        <p className="py-2 text-sm text-muted-foreground">No device hosts.</p>
+        <p className="py-2 text-sm text-muted-foreground">no device hosts</p>
       ) : null}
       {hosts.map((host) => {
         const status = state.hostStatuses[host.id];

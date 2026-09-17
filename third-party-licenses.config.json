@@ -109,6 +109,13 @@
       "sourceUrl": "https://github.com/ryanoasis/nerd-fonts"
     },
     {
+      "bundles": ["assets", "web"],
+      "license": "OFL-1.1",
+      "name": "Nunito",
+      "noticeFile": "apps/web/public/fonts/nunito/OFL.txt",
+      "sourceUrl": "https://github.com/googlefonts/nunito"
+    },
+    {
       "bundles": ["ios", "mobile"],
       "license": "MIT",
       "name": "GhosttyKit",

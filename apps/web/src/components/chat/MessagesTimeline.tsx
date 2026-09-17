@@ -2233,10 +2233,10 @@ function WorkingTimelineRow({ row }: { row: Extract<TimelineRow, { kind: "workin
             </>
           ) : row.createdAt ? (
             <>
-              Working for <WorkingTimer createdAt={row.createdAt} />
+              working for <WorkingTimer createdAt={row.createdAt} />
             </>
           ) : (
-            "Working..."
+            "working…"
           )}
         </span>
       </div>
@@ -2250,7 +2250,7 @@ function ThinkingTimelineRow() {
   return (
     <div className="min-h-7">
       {isPreparingWorktree || isCompacting ? null : (
-        <LiveActivityRow label="Thinking" iconName="brain" active shimmer />
+        <LiveActivityRow label="thinking…" iconName="brain" active shimmer />
       )}
     </div>
   );
@@ -2260,7 +2260,7 @@ function CompactingLabel() {
   return (
     <span className="inline-flex items-center gap-1.5">
       <Minimize2Icon aria-hidden="true" className="size-3" />
-      Compacting…
+      compacting…
     </span>
   );
 }
@@ -2270,7 +2270,7 @@ function CompactingLabel() {
 // does not create a React commit every second while a response is streaming.
 // ---------------------------------------------------------------------------
 
-/** Live elapsed time for the "Working for" label. */
+/** Live elapsed time for the "working for" label. */
 function WorkingTimer({ createdAt }: { createdAt: string }) {
   const textRef = useRef<HTMLSpanElement>(null);
   const initialText = formatWorkingTimerNow(createdAt);

@@ -122,7 +122,7 @@ export function CaptureShortcutConfig({
       if (!applied.warning && preview.operation === "install" && onComplete) {
         toastManager.add({
           type: "success",
-          title: "Shortcut saved",
+          title: "shortcut saved :3",
           description: `Use ${preview.shortcut} from another app.`,
         });
         await onComplete();

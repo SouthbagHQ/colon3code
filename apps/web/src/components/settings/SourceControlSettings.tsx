@@ -480,7 +480,7 @@ function EmptySourceControlDiscovery({
         </EmptyMedia>
         <EmptyHeader>
           <EmptyTitle>
-            {hasError ? "Could not scan the server environment" : "Nothing detected yet"}
+            {hasError ? "could not scan the server environment 3:" : "nothing detected yet"}
           </EmptyTitle>
           <EmptyDescription>
             {hasError

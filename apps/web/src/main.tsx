@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { createHashHistory, createBrowserHistory } from "@tanstack/react-router";
 
+import "./fonts.css";
 import "./index.css";
 
 import { isElectron } from "./env";

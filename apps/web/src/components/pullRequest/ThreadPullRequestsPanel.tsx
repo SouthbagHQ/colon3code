@@ -206,7 +206,7 @@ export function ThreadPullRequestsPanel({ threadRef }: { threadRef: ScopedThread
   if (configs.get(threadRef.environmentId)?.environment.capabilities.threadPullRequests !== true) {
     return (
       <PullRequestsUnavailableState
-        title="Linked pull requests unavailable"
+        title="linked pull requests unavailable 3:"
         error="This environment does not support multiple linked pull requests."
       />
     );
@@ -251,7 +251,7 @@ function EnabledThreadPullRequestsPanel({ threadRef }: { threadRef: ScopedThread
     return (
       <div className="flex h-full flex-col items-center justify-center gap-2 p-6 text-center">
         <LinkIcon aria-hidden className="size-6 text-muted-foreground/60" />
-        <p className="text-sm font-medium">No linked pull requests</p>
+        <p className="text-sm font-medium">no linked pull requests</p>
         <p className="max-w-60 text-xs text-muted-foreground">
           Pull requests the agent opens from this thread land here. Link one yourself from a URL or
           a number.

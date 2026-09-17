@@ -359,7 +359,7 @@ export function ThemeSearchSection({
       {results ? (
         results.length === 0 ? (
           <div className="flex min-h-40 flex-col items-center justify-center rounded-2xl border border-dashed text-center">
-            <p className="text-sm font-medium">No supported open-source themes found</p>
+            <p className="text-sm font-medium">no supported open-source themes found</p>
             <p className="mt-1 text-muted-foreground text-xs">Try a broader search.</p>
           </div>
         ) : (

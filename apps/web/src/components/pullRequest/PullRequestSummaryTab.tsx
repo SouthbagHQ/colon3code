@@ -406,7 +406,7 @@ export function PullRequestSummaryTab({
   const openCheck = (url: string) => {
     void openLink(url).catch((error: unknown) => {
       console.error(error);
-      toastManager.add({ type: "error", title: "Unable to open check details" });
+      toastManager.add({ type: "error", title: "unable to open check details 3:" });
     });
   };
 
@@ -435,7 +435,7 @@ export function PullRequestSummaryTab({
     const result = await update({ environmentId, input: { ...reference, body } });
     setBodySaving(false);
     if (result._tag === "Failure") {
-      toastManager.add({ type: "error", title: "Could not save the description" });
+      toastManager.add({ type: "error", title: "could not save the description 3:" });
       return;
     }
     setBodyScope(null);
@@ -462,7 +462,7 @@ export function PullRequestSummaryTab({
       });
       setCommentSaving(false);
       if (result._tag === "Failure") {
-        toastManager.add({ type: "error", title: "Could not save the comment" });
+        toastManager.add({ type: "error", title: "could not save the comment 3:" });
         return;
       }
       setCommentScope(null);
@@ -644,7 +644,7 @@ export function PullRequestSummaryTab({
 
       <Section key={`checks:${detail.url}`} title="Checks" defaultOpen={false}>
         {detail.checks.length === 0 ? (
-          <p className="text-xs text-muted-foreground">No checks reported.</p>
+          <p className="text-xs text-muted-foreground">no checks reported</p>
         ) : (
           detail.checks.map((check, index) => {
             const finding = { kind: "check", check } as const;
@@ -725,7 +725,7 @@ export function PullRequestSummaryTab({
               </p>
             ) : null}
             {detail.comments.length === 0 ? (
-              <p className="py-2 text-xs text-muted-foreground">No comments yet.</p>
+              <p className="py-2 text-xs text-muted-foreground">no comments yet</p>
             ) : (
               <div className="space-y-3">
                 {commentOrder === "oldest" ? showOldestCommentsButton : null}

@@ -15,12 +15,12 @@ describe("PullRequestsUnavailableState", () => {
   it("can explain an unsupported environment without offering a futile retry", () => {
     const text = textOf(
       PullRequestsUnavailableState({
-        title: "Pull requests unavailable",
+        title: "pull requests unavailable 3:",
         error: "Update this environment's :3 Code server to browse pull requests.",
       }),
     );
 
-    expect(text).toContain("Pull requests unavailable");
+    expect(text).toContain("pull requests unavailable 3:");
     expect(text).toContain("Update this environment's :3 Code server");
     expect(text).not.toContain("Retry");
   });

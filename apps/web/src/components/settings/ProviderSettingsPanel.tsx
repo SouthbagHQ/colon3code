@@ -231,8 +231,8 @@ function EnvironmentUnavailablePlaceholder({
   const title = isLoading
     ? "Loading provider settings"
     : access.kind === "error"
-      ? "Could not connect to this device"
-      : "Provider settings are unavailable";
+      ? "could not connect to this device 3:"
+      : "provider settings are unavailable 3:";
   // Keep the description to a short status; the raw failure can be a
   // multi-paragraph CLI dump, so it goes below, clamped and expandable.
   const description = isLoading
@@ -390,14 +390,14 @@ function ProviderSettingsPanelContent(target: ProviderSettingsTarget) {
         <ProviderSettingsPlaceholder
           deviceTabs={deviceTabs}
           icon={<EnvironmentMachineIcon kind={resolveEnvironmentMachineKind(null)} />}
-          title="Device unavailable"
+          title="device unavailable 3:"
           description="Reconnect this device to set up its provider, or select another device."
         />
       ) : null}
       {options.length === 0 && !targetEnvironmentMissing ? (
         <ProviderSettingsPlaceholder
           icon={<EnvironmentMachineIcon kind={resolveEnvironmentMachineKind(null)} />}
-          title={isReady ? "No connected devices" : "Loading devices"}
+          title={isReady ? "no connected devices" : "Loading devices"}
           description={
             isReady
               ? "Connect an execution environment before configuring providers."
@@ -672,7 +672,7 @@ export function EnvironmentProviderSettings({
         toastManager.add(
           stackedThreadToast({
             type: "error",
-            title: `Could not update ${PROVIDER_DISPLAY_NAMES[candidate.driver] ?? candidate.driver}`,
+            title: `could not update ${PROVIDER_DISPLAY_NAMES[candidate.driver] ?? candidate.driver} 3:`,
             description:
               error instanceof Error
                 ? error.message
@@ -1074,7 +1074,7 @@ export function EnvironmentProviderSettings({
               <div className="p-6 text-sm text-muted-foreground">
                 {targetInstanceMissing
                   ? "This provider instance is no longer available on this device."
-                  : "No providers configured."}
+                  : "no providers configured"}
               </div>
             )}
           </div>

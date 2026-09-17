@@ -133,12 +133,12 @@ function EnvironmentNotifications({
       if (!kind) continue;
       const title =
         kind === "completion"
-          ? "Thread completed"
+          ? "thread completed :3"
           : status === "approval"
-            ? "Approval needed"
+            ? "approval needed"
             : status === "failed"
-              ? "Thread failed"
-              : "Input needed";
+              ? "thread failed 3:"
+              : "input needed";
       if (hasNotificationSound(mode)) {
         void playNotificationSound(kind, () =>
           hasNotificationSound(getClientSettings().notificationMode),

@@ -298,7 +298,7 @@ function ComposerSkillDecorator(props: {
         <p>
           {skill?.description ??
             props.skillDescription ??
-            "No description is available for this skill."}
+            "no description is available for this skill"}
         </p>
         {skill?.path ? (
           <Button variant="outline" size="sm" onClick={() => actions.openMention(skill.path)}>

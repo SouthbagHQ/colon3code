@@ -56,7 +56,7 @@ const GNOME_ACCESS_COPY = {
     description: "Use Take snapshot from the command palette to choose a window.",
   },
   error: {
-    title: "Couldn't set up the extension",
+    title: "couldn't set up the extension 3:",
     description: "Check :3 Code SnapShots in GNOME Extensions, then try again.",
   },
 };

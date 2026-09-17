@@ -451,7 +451,7 @@ export function ProviderInstanceCard({
     onCopy: ({ providerName }) => {
       toastManager.add({
         type: "success",
-        title: `${providerName} update command copied`,
+        title: `${providerName} update command copied :3`,
         description: "Run it in a terminal when you are ready to update.",
       });
     },
@@ -459,7 +459,7 @@ export function ProviderInstanceCard({
       toastManager.add(
         stackedThreadToast({
           type: "error",
-          title: `Could not copy ${providerName} update command`,
+          title: `could not copy ${providerName} update command 3:`,
           description: error.message,
         }),
       );

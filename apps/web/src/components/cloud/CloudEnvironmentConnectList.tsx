@@ -129,7 +129,7 @@ export function CloudEnvironmentConnectRows({
     if (result._tag === "Success") {
       toastManager.add({
         type: "success",
-        title: "Environment added",
+        title: "environment added :3",
         description: `Connecting to ${environment.label} through T3 Connect.`,
       });
       return true;
@@ -144,7 +144,7 @@ export function CloudEnvironmentConnectRows({
     console.error("[t3-connect] Could not connect environment", { message, traceId, cause });
     toastManager.add({
       type: "error",
-      title: "Could not connect environment",
+      title: "could not connect environment 3:",
       description: message,
       data: traceId
         ? {

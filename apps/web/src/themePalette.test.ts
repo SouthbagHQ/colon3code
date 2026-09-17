@@ -28,6 +28,8 @@ import {
   subscribeToCustomThemes,
   themeAllowsSidebarArtwork,
   T3_CHAT_THEME,
+  COLON3_DARK_THEME,
+  COLON3_THEME,
   EMBER_THEME,
   GROVE_THEME,
   IRIS_THEME,
@@ -427,13 +429,21 @@ describe("theme files", () => {
   });
 
   it("includes the dual-mode maintainer themes", () => {
-    for (const theme of [T3_CHAT_THEME, GROVE_THEME, OCEAN_THEME, EMBER_THEME, IRIS_THEME]) {
+    for (const theme of [
+      T3_CHAT_THEME,
+      GROVE_THEME,
+      OCEAN_THEME,
+      EMBER_THEME,
+      IRIS_THEME,
+      COLON3_THEME,
+      COLON3_DARK_THEME,
+    ]) {
       expect(getThemeDefinition(theme.id)).toBe(theme);
       expect(getThemeModes(theme)).toEqual(["light", "dark"]);
       expect(theme.sidebarArtwork).toBe(true);
       expect(themeAllowsSidebarArtwork(theme.id)).toBe(true);
-      expect(theme.colors.accent).toMatch(/^oklch\(/);
-      expect(theme.variants?.dark?.accent).toMatch(/^oklch\(/);
+      expect(getThemeColorsForMode(theme, "light")?.accent).toMatch(/^oklch\(/);
+      expect(getThemeColorsForMode(theme, "dark")?.accent).toMatch(/^oklch\(/);
 
       for (const mode of ["light", "dark"] as const) {
         const colors = getThemeColorsForMode(theme, mode);

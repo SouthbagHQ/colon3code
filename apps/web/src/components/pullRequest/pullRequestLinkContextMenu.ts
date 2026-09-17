@@ -63,7 +63,7 @@ export async function showPullRequestLinkContextMenu({
   } catch {
     toastManager.add({
       type: "error",
-      title: action === "copy-link" ? "Could not copy the link" : "Could not open the link",
+      title: action === "copy-link" ? "could not copy the link 3:" : "could not open the link 3:",
     });
   }
 }

@@ -17,8 +17,14 @@ import {
   MIN_PROMPT_FONT_SIZE,
 } from "@t3tools/contracts";
 
+/**
+ * Faces that ship with the app (see `fonts.css`), so they render on every
+ * machine without being installed. Nunito is the interface default.
+ */
+export const BUNDLED_SANS_FONT_FAMILIES: readonly string[] = ["Nunito"];
+
 export const DEFAULT_SANS_FONT_STACK =
-  '-apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif';
+  'Nunito, -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif';
 
 // Concrete names first: some engines alias `ui-monospace` to the
 // proportional system UI font, which would break every code surface.
@@ -337,7 +343,10 @@ export function resolveDefaultFamilyLabel(stack: string): string | null {
       if (resolved !== null) return resolved;
       continue;
     }
-    if (isFontFamilyAvailable(family)) return family;
+    // A bundled face may still be loading when this runs; it always renders.
+    if (BUNDLED_SANS_FONT_FAMILIES.includes(family) || isFontFamilyAvailable(family)) {
+      return family;
+    }
   }
   return null;
 }

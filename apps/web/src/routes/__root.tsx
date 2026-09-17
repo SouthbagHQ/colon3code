@@ -379,7 +379,7 @@ function RootRouteErrorView({ error }: ErrorComponentProps) {
           {APP_DISPLAY_NAME}
         </p>
         <h1 className="mt-3 text-2xl font-semibold tracking-tight sm:text-3xl">
-          Something went wrong.
+          something went wrong 3:
         </h1>
         <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{message}</p>
 
@@ -553,7 +553,7 @@ function EventRouter({
     if (decision._tag === "Success") {
       toastManager.add({
         type: "success",
-        title: "Keybindings updated",
+        title: "keybindings updated :3",
         description: "Keybindings configuration reloaded successfully.",
       });
       return;
@@ -562,7 +562,7 @@ function EventRouter({
     toastManager.add(
       stackedThreadToast({
         type: "warning",
-        title: "Invalid keybindings configuration",
+        title: "invalid keybindings configuration 3:",
         description: decision.message,
         actionVariant: "outline",
         actionProps: {
@@ -591,7 +591,7 @@ function EventRouter({
               toastManager.add(
                 stackedThreadToast({
                   type: "error",
-                  title: "Unable to open keybindings file",
+                  title: "unable to open keybindings file 3:",
                   description:
                     error instanceof Error ? error.message : "Unknown error opening file.",
                 }),

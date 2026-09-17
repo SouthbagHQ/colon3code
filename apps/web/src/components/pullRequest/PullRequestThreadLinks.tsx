@@ -80,7 +80,9 @@ function EnabledPullRequestThreadLinks({
     } catch (error) {
       toastManager.add({
         type: "error",
-        title: remove ? "Could not unlink the pull request" : "Could not link the pull request",
+        title: remove
+          ? "could not unlink the pull request 3:"
+          : "could not link the pull request 3:",
         description: error instanceof Error ? error.message : String(error),
       });
       return;

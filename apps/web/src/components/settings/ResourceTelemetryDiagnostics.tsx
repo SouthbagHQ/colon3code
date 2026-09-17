@@ -325,7 +325,7 @@ function HealthSource({ label, health }: { label: string; health: ResourceTeleme
           {expectedInBrowser
             ? "Available when this page runs inside the desktop app."
             : Option.match(health.lastError, {
-                onNone: () => "No reported errors",
+                onNone: () => "no reported errors",
                 onSome: (error) => error,
               })}
         </div>
@@ -891,7 +891,7 @@ export function ResourceTelemetryDiagnostics({
           clearSignaling();
           toastManager.add({
             type: "error",
-            title: "Could not confirm signal",
+            title: "could not confirm signal 3:",
             description: error instanceof Error ? error.message : `Failed to send ${signal}.`,
           });
           return;
@@ -921,7 +921,7 @@ export function ResourceTelemetryDiagnostics({
           if (result.value.signaled) return;
           toastManager.add({
             type: "error",
-            title: `Could not send ${signal}`,
+            title: `could not send ${signal} 3:`,
             description: Option.getOrElse(
               result.value.message,
               () => `Failed to send ${signal} to process ${process.identity.pid}.`,
@@ -931,7 +931,7 @@ export function ResourceTelemetryDiagnostics({
         .catch((error: unknown) => {
           toastManager.add({
             type: "error",
-            title: `Could not send ${signal}`,
+            title: `could not send ${signal} 3:`,
             description: error instanceof Error ? error.message : `Failed to send ${signal}.`,
           });
         })
@@ -948,7 +948,7 @@ export function ResourceTelemetryDiagnostics({
       .catch((error: unknown) => {
         toastManager.add({
           type: "error",
-          title: "Could not restart resource monitor",
+          title: "could not restart resource monitor 3:",
           description:
             error instanceof Error ? error.message : "The resource monitor retry failed.",
         });
