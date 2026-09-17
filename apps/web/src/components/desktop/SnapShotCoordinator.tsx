@@ -285,8 +285,8 @@ export function SnapShotCoordinator() {
             toastManager.add(
               stackedThreadToast({
                 type: "error",
-                title: "snapshot taken, but no project is available 3:",
-                description: "add a project, then capture the window again :3",
+                title: "snapshot taken, but there's no project to put it in 3:",
+                description: "add a project first, then capture the window again :3",
               }),
             );
             continue;
@@ -302,9 +302,9 @@ export function SnapShotCoordinator() {
             toastManager.add(
               stackedThreadToast({
                 type: "error",
-                title: "snapshot failed 3:",
+                title: "aw, the snapshot didn't work 3:",
                 description: `capture ${item.id}: ${
-                  error instanceof Error ? error.message : "try the capture again 3:"
+                  error instanceof Error ? error.message : "want to try the capture again? 3:"
                 }`,
               }),
             );
@@ -317,8 +317,9 @@ export function SnapShotCoordinator() {
         toastManager.add(
           stackedThreadToast({
             type: "error",
-            title: "snapshot failed 3:",
-            description: error instanceof Error ? error.message : "try the capture again 3:",
+            title: "aw, the snapshot didn't work 3:",
+            description:
+              error instanceof Error ? error.message : "want to try the capture again? 3:",
           }),
         );
       })
@@ -376,8 +377,8 @@ export function SnapShotCoordinator() {
             toastManager.add(
               stackedThreadToast({
                 type: "error",
-                title: "snapshot failed 3:",
-                description: state.message ?? "try the capture again ;3",
+                title: "aw, the snapshot didn't work 3:",
+                description: state.message ?? "give the capture another try ;3",
               }),
             );
           });

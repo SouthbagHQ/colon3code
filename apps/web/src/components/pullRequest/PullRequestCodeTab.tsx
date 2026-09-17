@@ -704,7 +704,7 @@ function PullRequestCodeTab({
         >
           {diffQuery.error !== null ? (
             <>
-              <span>the rest of this diff could not be loaded 3:</span>
+              <span>aw, the rest of this diff wouldn't load 3:</span>
               <Button size="xs" variant="outline" onClick={() => diffQuery.refresh()}>
                 retry
               </Button>
@@ -835,14 +835,14 @@ function PullRequestCodeTab({
           if (result._tag === "Failure") {
             toastManager.add({
               type: "error",
-              title: "more comments could not be loaded 3:",
+              title: "hmm, couldn't load more comments 3:",
             });
             return null;
           }
           return result.value;
         }}
         onReply={(body) =>
-          runThreadCommand("reply could not be posted 3:", () =>
+          runThreadCommand("mrrp, the reply didn't post 3:", () =>
             replyToThread({
               environmentId,
               input: { ...reference, threadId: thread.id, body },
@@ -854,7 +854,7 @@ function PullRequestCodeTab({
           canEditPullRequestComment(detail, { author: comment.author, kind: "review-comment" })
         }
         onEditComment={(commentId, body) =>
-          runThreadCommand("the comment could not be saved 3:", () =>
+          runThreadCommand("aw, that comment didn't save 3:", () =>
             updateComment({
               environmentId,
               input: { ...reference, commentId, kind: "review-comment", body },
@@ -862,7 +862,7 @@ function PullRequestCodeTab({
           )
         }
         onToggleResolved={() =>
-          void runThreadCommand("the conversation could not be updated 3:", () =>
+          void runThreadCommand("hmm, couldn't update the conversation 3:", () =>
             setThreadResolution({
               environmentId,
               input: { ...reference, threadId: thread.id, resolved: !thread.isResolved },
@@ -1103,8 +1103,8 @@ function PullRequestCodeTab({
                 />
               </TooltipTrigger>
               <TooltipPopup side="bottom">
-                the host withheld part of this diff — a binary file, or a change too large to inline
-                :3
+                the host tucked part of this diff away — a binary file, or a change too large to
+                inline :3
               </TooltipPopup>
             </Tooltip>
           ) : null}
@@ -1269,9 +1269,8 @@ function PullRequestCodeTab({
     return withReviewBar(
       <p className="px-4 py-5 text-sm text-muted-foreground">
         {commit === null
-          ? "this pull request has no file changes ^w^"
-          : "this commit has no file changes :3"}{" "}
-        ;3
+          ? "this pull request doesn't change any files ^w^"
+          : "this commit doesn't change any files :3"}
       </p>,
     );
   }

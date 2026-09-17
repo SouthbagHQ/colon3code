@@ -94,8 +94,8 @@ export function CommandPaletteResults(props: CommandPaletteResultsProps) {
       <div className="py-10 text-center text-sm text-muted-foreground">
         {props.emptyStateMessage ??
           (props.isActionsOnly
-            ? "no matching actions 3:"
-            : "no matching commands, projects, or threads :3")}
+            ? "hmm, no actions matched that 3:"
+            : "hmm, nothing matched that — no commands, projects, or threads :3")}
       </div>
     );
   }

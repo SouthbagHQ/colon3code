@@ -422,7 +422,7 @@ function errorMessage(error: unknown): string {
   if (error instanceof Error && error.message.trim().length > 0) {
     return error.message;
   }
-  return "an error occurred 3:";
+  return "oops, something went wrong 3:";
 }
 
 const OVERLAY_MODE_BY_COMMAND = {
@@ -1410,7 +1410,7 @@ function OpenCommandPaletteDialog(props: {
           value: `action:add-project:${environmentId}:local`,
           searchTerms: ["local", "folder", "directory", "browse"],
           title: "local folder",
-          description: "browse a folder on disk ;3",
+          description: "peek at a folder on disk ;3",
           icon: <FolderPlusIcon className={ITEM_ICON_CLASS} />,
           keepOpen: true,
           run: async () => {
@@ -1452,7 +1452,7 @@ function OpenCommandPaletteDialog(props: {
                 }
               />
               <TooltipPopup align="end" side="left">
-                {disabledHint ?? "open settings -> source control to configure this provider ^w^"}
+                {disabledHint ?? "pop into settings -> source control to set up this provider ^w^"}
               </TooltipPopup>
             </Tooltip>
           </span>
@@ -1502,8 +1502,8 @@ function OpenCommandPaletteDialog(props: {
         toastManager.add(
           stackedThreadToast({
             type: "error",
-            title: "environment unavailable 3:",
-            description: `${environment?.label ?? "the selected environment"} is not connected ^w^`,
+            title: "hmm, that environment isn't available 3:",
+            description: `${environment?.label ?? "the selected environment"} isn't connected right now ^w^`,
           }),
         );
         return;
@@ -1936,8 +1936,8 @@ function OpenCommandPaletteDialog(props: {
         toastManager.add(
           stackedThreadToast({
             type: "error",
-            title: "environment unavailable 3:",
-            description: `${environment?.label ?? "the selected environment"} is not connected ^w^`,
+            title: "hmm, that environment isn't available 3:",
+            description: `${environment?.label ?? "the selected environment"} isn't connected right now ^w^`,
           }),
         );
         return;
@@ -1948,7 +1948,7 @@ function OpenCommandPaletteDialog(props: {
         toastManager.add(
           stackedThreadToast({
             type: "error",
-            title: "failed to add project 3:",
+            title: "aw, couldn't add that project 3:",
             description: "Windows-style paths are only supported on Windows.",
           }),
         );
@@ -1959,8 +1959,8 @@ function OpenCommandPaletteDialog(props: {
         toastManager.add(
           stackedThreadToast({
             type: "error",
-            title: "failed to add project 3:",
-            description: "relative paths require an active project ;3",
+            title: "aw, couldn't add that project 3:",
+            description: "relative paths need an active project first ;3",
           }),
         );
         return;
@@ -1995,7 +1995,7 @@ function OpenCommandPaletteDialog(props: {
             toastManager.add(
               stackedThreadToast({
                 type: "error",
-                title: "failed to open project 3:",
+                title: "aw, couldn't open that project 3:",
                 description: error instanceof Error ? error.message : "An error occurred.",
               }),
             );
@@ -2023,7 +2023,7 @@ function OpenCommandPaletteDialog(props: {
           toastManager.add(
             stackedThreadToast({
               type: "error",
-              title: "failed to add project 3:",
+              title: "aw, couldn't add that project 3:",
               description: error instanceof Error ? error.message : "An error occurred.",
             }),
           );
@@ -2039,7 +2039,7 @@ function OpenCommandPaletteDialog(props: {
         toastManager.add(
           stackedThreadToast({
             type: "error",
-            title: "failed to add project 3:",
+            title: "aw, couldn't add that project 3:",
             description: error instanceof Error ? error.message : "An error occurred.",
           }),
         );
@@ -2091,8 +2091,8 @@ function OpenCommandPaletteDialog(props: {
       toastManager.add(
         stackedThreadToast({
           type: "error",
-          title: "environment unavailable 3:",
-          description: `${browseEnvironment?.label ?? "the selected environment"} is not connected ^w^`,
+          title: "hmm, that environment isn't available 3:",
+          description: `${browseEnvironment?.label ?? "the selected environment"} isn't connected right now ^w^`,
         }),
       );
       return;
@@ -2140,7 +2140,7 @@ function OpenCommandPaletteDialog(props: {
           toastManager.add(
             stackedThreadToast({
               type: "error",
-              title: "repository lookup failed 3:",
+              title: "hmm, couldn't look up that repository 3:",
               description: errorMessage(squashAtomCommandFailure(lookupResult)),
             }),
           );
@@ -2175,7 +2175,7 @@ function OpenCommandPaletteDialog(props: {
       toastManager.add(
         stackedThreadToast({
           type: "error",
-          title: "clone failed 3:",
+          title: "mrrp, the clone didn't work 3:",
           description: "Windows-style paths are only supported on Windows.",
         }),
       );
@@ -2186,8 +2186,8 @@ function OpenCommandPaletteDialog(props: {
       toastManager.add(
         stackedThreadToast({
           type: "error",
-          title: "clone failed 3:",
-          description: "relative paths require an active project ;3",
+          title: "mrrp, the clone didn't work 3:",
+          description: "relative paths need an active project first ;3",
         }),
       );
       return;
@@ -2218,7 +2218,7 @@ function OpenCommandPaletteDialog(props: {
           toastManager.add(
             stackedThreadToast({
               type: "error",
-              title: "clone failed 3:",
+              title: "mrrp, the clone didn't work 3:",
               description: errorMessage(squashAtomCommandFailure(cloneResult)),
             }),
           );
@@ -2251,7 +2251,7 @@ function OpenCommandPaletteDialog(props: {
         toastManager.add(
           stackedThreadToast({
             type: "error",
-            title: "clone failed 3:",
+            title: "mrrp, the clone didn't work 3:",
             description: errorMessage(squashAtomCommandFailure(startResult)),
           }),
         );
@@ -2270,7 +2270,7 @@ function OpenCommandPaletteDialog(props: {
       toastManager.add(
         stackedThreadToast({
           type: "error",
-          title: "failed to open project 3:",
+          title: "aw, couldn't open that project 3:",
           description: error instanceof Error ? error.message : "An error occurred.",
         }),
       );
@@ -2519,7 +2519,7 @@ function OpenCommandPaletteDialog(props: {
       toastManager.add(
         stackedThreadToast({
           type: "error",
-          title: "unable to run command 3:",
+          title: "hmm, couldn't run that command 3:",
           description: error instanceof Error ? error.message : "An unexpected error occurred.",
         }),
       );
@@ -2608,7 +2608,7 @@ function OpenCommandPaletteDialog(props: {
         toastManager.add(
           stackedThreadToast({
             type: "error",
-            title: "could not add WSL project 3:",
+            title: "aw, couldn't add that WSL project 3:",
             description: "start the matching WSL backend, then choose the folder again.",
           }),
         );
@@ -2805,20 +2805,23 @@ function OpenCommandPaletteDialog(props: {
           ? {
               emptyStateMessage:
                 addProjectCloneFlow.source === "url"
-                  ? "enter a Git clone URL and press Enter to continue :3"
-                  : "enter a repository path and press Enter to look it up ^w^",
+                  ? "enter a Git clone URL and press Enter to keep going :3"
+                  : "enter a repository path and press Enter, we'll look it up ^w^",
             }
           : addProjectCloneFlow?.step === "confirm"
-            ? { emptyStateMessage: "choose a destination path and press Enter to clone uwu" }
+            ? {
+                emptyStateMessage:
+                  "choose a destination path, then press Enter and we'll clone it uwu",
+              }
             : relativePathNeedsActiveProject
-              ? { emptyStateMessage: "relative paths require an active project ;3" }
+              ? { emptyStateMessage: "relative paths need an active project first ;3" }
               : willCreateProjectPath
                 ? {
                     emptyStateMessage:
-                      "press Enter to create this folder and add it as a project ^w^",
+                      "press Enter and we'll create this folder and add it as a project ^w^",
                   }
                 : threadSearch.isPending
-                  ? { emptyStateMessage: "searching thread messages… :3" }
+                  ? { emptyStateMessage: "just a sec, searching thread messages… :3" }
                   : {})}
       />
     </CommandPaletteContent>

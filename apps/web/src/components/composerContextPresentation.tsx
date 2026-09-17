@@ -321,7 +321,7 @@ function UnresolvedContextChip(props: { label: string }) {
       label={props.label}
       className={COMPOSER_INLINE_CHIP_CLASS_NAME}
       labelClassName={COMPOSER_INLINE_CHIP_LABEL_CLASS_NAME}
-      tooltip="this context is no longer available. remove it or attach it again 3:"
+      tooltip="this context isn't around anymore. pop it out or attach it again 3:"
       tooltipClassName="max-w-80 leading-tight"
     />
   );

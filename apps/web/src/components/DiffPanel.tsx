@@ -687,7 +687,7 @@ export default function DiffPanel({
                     <span className="text-right">Remote</span>
                   </div>
                 </div>
-                <ComboboxEmpty>no matching refs 3:</ComboboxEmpty>
+                <ComboboxEmpty>hmm, no refs matched that 3:</ComboboxEmpty>
                 <ComboboxList className="max-h-64 min-w-0 overflow-x-hidden">
                   <ComboboxItem
                     className="h-8 w-full min-w-0 grid-cols-[1rem_minmax(0,1fr)] py-0"
@@ -896,25 +896,25 @@ export default function DiffPanel({
       {!activeThread ? (
         <div className="flex flex-1 items-center justify-center px-5 text-center text-xs text-muted-foreground/70">
           {" "}
-          select a thread to inspect turn diffs :3
+          pick a thread and we'll peek at its turn diffs :3
         </div>
       ) : !isGitRepo ? (
         <div className="flex flex-1 items-center justify-center px-5 text-center text-xs text-muted-foreground/70">
           {" "}
-          turn diffs are unavailable because this project is not a git repository 3:
+          aw, no turn diffs here — this project isn't a git repository 3:
         </div>
       ) : selectedTurnId !== null && orderedTurnDiffSummaries.length === 0 ? (
         <div className="flex flex-1 items-center justify-center px-5 text-center text-xs text-muted-foreground/70">
           {" "}
-          no completed turns yet ;3
+          no completed turns yet, it's quiet in here ;3
         </div>
       ) : (
         <>
           <div className="flex min-h-0 min-w-0 flex-1 flex-col overflow-hidden bg-background">
             {isSelectedPatchTruncated && (
               <p className="shrink-0 border-b border-border/70 bg-muted/40 px-3 py-1.5 text-[11px] text-muted-foreground">
-                this diff was truncated because it exceeded the preview limit. the changes shown are
-                incomplete 3:
+                this diff got trimmed because it went over the preview limit, so the changes shown
+                are incomplete 3:
               </p>
             )}
             {selectedPatchError && !renderablePatch && (
@@ -937,8 +937,8 @@ export default function DiffPanel({
                 <div className="flex h-full items-center justify-center px-3 py-2 text-xs text-muted-foreground/70">
                   <p>
                     {hasNoNetChanges
-                      ? "no net changes in this selection ^w^"
-                      : "no patch available for this selection 3:"}
+                      ? "no net changes in this selection, all quiet ^w^"
+                      : "hmm, no patch available for this selection 3:"}
                   </p>
                 </div>
               )

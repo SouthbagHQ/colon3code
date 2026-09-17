@@ -44,7 +44,7 @@ function formatByteSize(bytes: number): string {
 /** Returns the error to show for a file too large to be a theme, else null. */
 export function describeOversizedThemeFile(bytes: number): string | null {
   if (bytes <= MAX_THEME_FILE_BYTES) return null;
-  return `that file is ^w^ ${formatByteSize(bytes)}. theme files are only a few KB, so this one was not read (limit ${formatByteSize(MAX_THEME_FILE_BYTES)}).`;
+  return `that file is ${formatByteSize(bytes)}. theme files are only a few KB, so this one wasn't read (limit ${formatByteSize(MAX_THEME_FILE_BYTES)}) ^w^`;
 }
 
 function escapeJsonHtml(value: string): string {
@@ -198,7 +198,7 @@ export function ThemeImportDialog({
       setError(null);
     } catch {
       if (requestId !== importRequestRef.current) return;
-      setError("could not read that file 3: paste the JSON below instead.");
+      setError("hmm, couldn't read that file. paste the JSON below instead 3:");
     } finally {
       if (requestId === importRequestRef.current) setIsReading(false);
     }
@@ -406,12 +406,12 @@ export function ThemeImportDialog({
         } catch {
           // Storage is failing wholesale; the error below covers it.
         }
-        setError("theme added, but it could not be selected 3: try again.");
+        setError("theme added, but it couldn't be selected. want to try again? 3:");
         return;
       }
       onOpenChange(false);
     } catch (cause) {
-      setError(cause instanceof Error ? cause.message : "that theme file is invalid 3:");
+      setError(cause instanceof Error ? cause.message : "hmm, that theme file isn't valid 3:");
     }
   }, [json, onImported, onOpenChange]);
 
@@ -425,7 +425,7 @@ export function ThemeImportDialog({
     >
       <DialogPopup className="max-w-3xl overflow-hidden">
         <DialogHeader>
-          <DialogTitle>add a theme ^w^</DialogTitle>
+          <DialogTitle>let's add a theme, meow ^w^</DialogTitle>
         </DialogHeader>
         <DialogPanel className="space-y-5">
           <ThemeSearchSection

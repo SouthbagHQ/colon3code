@@ -396,7 +396,7 @@ export function usePrimarySettings<T = UnifiedSettings>(
 }
 
 export const PRIMARY_SETTINGS_UNAVAILABLE_MESSAGE =
-  "this setting is saved on a server, and the hosted app is not anchored to one. change it from the desktop app or from the server's own address :3";
+  "this setting lives on a server, and the hosted app isn't anchored to one. change it from the desktop app or from the server's own address :3";
 
 /**
  * Whether primary-scoped server settings have a server to live on. The
@@ -434,7 +434,7 @@ function useUpdateSettingsTarget(environmentId: EnvironmentId | null) {
         const warnUnsaved = (description = PRIMARY_SETTINGS_UNAVAILABLE_MESSAGE) =>
           toastManager.add({
             type: "warning",
-            title: "setting not saved 3:",
+            title: "aw, that setting didn't save 3:",
             description,
           });
         if (Object.keys(localPatch).length > 0) {
@@ -476,7 +476,9 @@ function useUpdateSettingsTarget(environmentId: EnvironmentId | null) {
           }
           if (!wroteToTarget) {
             warnUnsaved(
-              targets.size > 0 ? "update older servers to save this setting ^w^" : undefined,
+              targets.size > 0
+                ? "update your older servers and this setting will save ^w^"
+                : undefined,
             );
           }
         }

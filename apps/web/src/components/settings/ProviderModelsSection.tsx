@@ -226,11 +226,11 @@ export function ProviderModelsSection({
     if (driverKind === "antigravity") return;
     const normalized = normalizeCustomModelSlug(input);
     if (!normalized) {
-      setError("enter a model slug ^w^");
+      setError("pop in a model slug first ^w^");
       return;
     }
     if (models.some((model) => !model.isCustom && model.slug === normalized)) {
-      setError("that model is already built in ;3");
+      setError("that model's already built in ;3");
       return;
     }
     if (normalized.length > MAX_CUSTOM_MODEL_LENGTH) {
@@ -238,7 +238,7 @@ export function ProviderModelsSection({
       return;
     }
     if (customModels.some((entry) => entry.slug === normalized)) {
-      setError("that custom model is already saved ;3");
+      setError("that custom model's already saved ;3");
       return;
     }
 
@@ -422,7 +422,7 @@ export function ProviderModelsSection({
 
   const pickerTooltip = (model: DisplayModel, isHidden: boolean) =>
     model.isCustom
-      ? "custom models are always shown in the picker ;3"
+      ? "custom models always show up in the picker ;3"
       : isHidden
         ? "hidden from picker"
         : "shown in picker";
@@ -559,7 +559,9 @@ export function ProviderModelsSection({
       >
         {visibleModels.length === 0 ? (
           <p className="px-2 py-2 text-xs text-muted-foreground">
-            {isFiltering ? "no models match :3" : "no models reported for this provider yet ^w^"}
+            {isFiltering
+              ? "hmm, no models matched :3"
+              : "this provider hasn't reported any models yet ^w^"}
           </p>
         ) : null}
         {visibleModels.map((model, index) => {

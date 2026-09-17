@@ -301,7 +301,7 @@ function WorkflowScriptView({
             {result.value.truncated ? "\n… (truncated)" : ""}
           </pre>
         ) : result._tag === "Failure" ? (
-          <p className="text-xs text-destructive-foreground">could not load the script 3:</p>
+          <p className="text-xs text-destructive-foreground">aw, couldn't load the script 3:</p>
         ) : (
           <p className="text-xs text-muted-foreground">Loading…</p>
         )}
@@ -534,10 +534,10 @@ export function AgentsPanel({
     return (
       <div className="flex h-full flex-col items-center justify-center gap-2 p-6 text-center">
         <Bot aria-hidden className="size-6 text-muted-foreground/60" />
-        <p className="text-sm font-medium">no agents yet :3</p>
+        <p className="text-sm font-medium">no agents yet, it's quiet in here :3</p>
         <p className="max-w-56 text-xs text-muted-foreground">
-          when this thread spawns subagents or runs a workflow, they show up here with live status,
-          activity, and token usage uwu
+          when this thread spawns subagents or runs a workflow, they'll pop up here with live
+          status, activity, and token usage uwu
         </p>
       </div>
     );

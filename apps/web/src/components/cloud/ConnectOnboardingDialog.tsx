@@ -191,9 +191,9 @@ function ConfiguredConnectOnboardingDialog() {
     if (!ok) return;
     toastManager.add({
       type: "success",
-      title: "T3 Connect enabled :3",
+      title: "T3 Connect enabled, purr :3",
       description: exposeEnvironment
-        ? "this environment is available to your other devices through T3 Connect ;3"
+        ? "your other devices can now reach this environment through T3 Connect ;3"
         : "this environment publishes agent activity to your mobile clients.",
     });
     setStep("devices");
@@ -303,14 +303,14 @@ function PublishStep({
       <div className="rounded-lg border">
         <OnboardingToggleRow
           title="publish this environment"
-          description="make this environment available to your other devices through T3 Connect ^w^"
+          description="let your other devices reach this environment through T3 Connect ^w^"
           checked={exposeEnvironment}
           disabled={disabled}
           onCheckedChange={onExposeEnvironmentChange}
         />
         <OnboardingToggleRow
           title="publish agent activity"
-          description="send activity from this environment to your mobile clients for push notifications and Live Activities :3"
+          description="send this environment’s activity to your mobile clients for push notifications and Live Activities :3"
           checked={publishAgentActivity}
           disabled={disabled}
           onCheckedChange={onPublishAgentActivityChange}
@@ -367,7 +367,7 @@ function DevicesStep() {
           <p className="px-4 py-6 text-center text-sm text-muted-foreground">
             {" "}
             no other environments are published to your account yet. publish one from another device
-            and it will show up here ;3
+            and it’ll pop up here ;3
           </p>
         }
       />

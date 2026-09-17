@@ -81,8 +81,8 @@ function EnabledPullRequestThreadLinks({
       toastManager.add({
         type: "error",
         title: remove
-          ? "could not unlink the pull request 3:"
-          : "could not link the pull request 3:",
+          ? "oops, couldn't unlink the pull request 3:"
+          : "oops, couldn't link the pull request 3:",
         description: error instanceof Error ? error.message : String(error),
       });
       return;
@@ -207,12 +207,12 @@ function ThreadPicker({
     .toSorted((a, b) => b.updatedAt.localeCompare(a.updatedAt));
   return (
     <Command mode="none" value={query} onValueChange={setQuery} aria-label="choose a thread">
-      <CommandInput placeholder="search threads or projects. :3" disabled={pending} />
+      <CommandInput placeholder="search threads or projects :3" disabled={pending} />
       <CommandList className="max-h-80 overflow-y-auto">
         {candidates.length === 0 ? (
           <div className="px-3 py-6 text-center text-sm text-muted-foreground">
             {" "}
-            no active threads found ^w^
+            hmm, no active threads found ^w^
           </div>
         ) : (
           candidates.map((thread) => {

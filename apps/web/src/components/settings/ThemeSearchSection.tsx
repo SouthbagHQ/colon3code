@@ -220,7 +220,9 @@ export function ThemeSearchSection({
       try {
         installedCollection = getStoredCustomThemeCollection(extension.collectionId);
       } catch (cause) {
-        setError(cause instanceof Error ? cause.message : "installed themes could not be read 3:");
+        setError(
+          cause instanceof Error ? cause.message : "hmm, couldn't read the installed themes 3:",
+        );
         return;
       }
       const updated = installedCollection.length > 0;
@@ -244,7 +246,7 @@ export function ThemeSearchSection({
         }
       } catch (cause) {
         if (!controller.signal.aborted) {
-          setError(cause instanceof Error ? cause.message : "that theme could not be added 3:");
+          setError(cause instanceof Error ? cause.message : "aw, that theme couldn't be added 3:");
         }
       }
       if (requestRef.current === controller) {
@@ -263,7 +265,7 @@ export function ThemeSearchSection({
         </h3>
         <p className="mt-0.5 text-muted-foreground text-xs">
           {" "}
-          find open-source themes from Open VSX ^w^
+          find cozy open-source themes from Open VSX ^w^
         </p>
       </div>
       <InputGroup>
@@ -279,7 +281,7 @@ export function ThemeSearchSection({
             if (event.key === "Enter" && !isSearching && installingId === null)
               void runSearch(query.trim());
           }}
-          placeholder="search themes. ^w^"
+          placeholder="search themes… ^w^"
           size="lg"
           type="search"
           value={query}
@@ -439,7 +441,7 @@ export function ThemeSearchSection({
             <AlertDialogDescription>
               {" "}
               this replaces its installed variants, including any local edits. variants no longer in
-              the extension will be removed 3:
+              the extension get removed 3:
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>

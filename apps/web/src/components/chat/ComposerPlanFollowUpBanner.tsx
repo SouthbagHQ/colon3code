@@ -10,7 +10,7 @@ export const ComposerPlanFollowUpBanner = memo(function ComposerPlanFollowUpBann
     <ComposerBanner.Row>
       <ComposerBanner.Icon />
       <ComposerBanner.Content>
-        <span className="shrink-0 font-medium text-muted-foreground">plan ready :3</span>
+        <span className="shrink-0 font-medium text-muted-foreground">plan's ready, meow :3</span>
         {planTitle ? (
           <span className="min-w-0 flex-1 truncate text-foreground/85">{planTitle}</span>
         ) : null}

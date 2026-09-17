@@ -197,7 +197,7 @@ export function resolveQuickAction(
       label: "commit",
       disabled: true,
       kind: "show_hint",
-      hint: `create and checkout a ref before pushing or opening a ^w^ ${terminology.singular}.`,
+      hint: `let's create and check out a ref before pushing or opening a ${terminology.singular} ^w^`,
     };
   }
 
@@ -305,7 +305,7 @@ export function resolveQuickAction(
     label: "commit",
     disabled: true,
     kind: "show_hint",
-    hint: "branch is up to date. no action needed ;3",
+    hint: "the branch is up to date — nothing to do, nice ;3",
   };
 }
 
@@ -329,7 +329,7 @@ export function resolveDefaultBranchActionDialogCopy(input: {
   terminology?: ChangeRequestTerminology;
 }): DefaultBranchActionDialogCopy {
   const branchLabel = input.branchName;
-  const suffix = ` on "${branchLabel}". you can continue on this ref or create a feature ref and run the same action there ^w^`;
+  const suffix = ` on "${branchLabel}". you can keep going on this ref, or create a feature ref and run the same action there ^w^`;
   const terminology = input.terminology ?? DEFAULT_CHANGE_REQUEST_TERMINOLOGY;
 
   if (input.action === "push" || input.action === "commit_push") {

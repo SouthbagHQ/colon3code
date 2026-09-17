@@ -57,7 +57,7 @@ it("ignores a stale request after a newer request starts", () => {
 });
 
 it("reports unavailable capture support without browser globals", () => {
-  expect(snapShotUnavailableMessage(false)).toBe("only available in the desktop app ;3");
+  expect(snapShotUnavailableMessage(false)).toBe("only available in the desktop app, sorry ;3");
 });
 
 it("describes Niri setup without claiming a global shortcut is registered", () => {
@@ -86,7 +86,7 @@ it("distinguishes Hyprland helper setup, action registration, and verified short
     hyprlandHelper: { status: "not-installed", message: "install helper" },
   };
   expect(snapShotSetupButtonLabel(state)).toBe("set up Hyprland capture");
-  expect(snapShotStatus(state, false)).toBe("turn this on to set up snapshots :3");
+  expect(snapShotStatus(state, false)).toBe("turn this on and we'll set up snapshots :3");
   expect(snapShotStatus(state, true)).toContain("install the capture helper");
   expect(snapShotFeedbackUnavailableMessage(state)).toContain("install or update");
   const ready = {
@@ -99,7 +99,9 @@ it("distinguishes Hyprland helper setup, action registration, and verified short
   expect(snapShotStatus({ ...ready, shortcutActionRegistered: true }, true)).toBe(
     "use your shortcut from another app",
   );
-  expect(snapShotStatus({ ...ready, shortcutVerified: true }, true)).toBe("ready to capture :3");
+  expect(snapShotStatus({ ...ready, shortcutVerified: true }, true)).toBe(
+    "all set, ready to capture :3",
+  );
   expect(snapShotFeedbackUnavailableMessage(ready)).toBeUndefined();
   expect(snapShotAccessibilityUnavailableMessage(ready)).toBeUndefined();
 });
@@ -130,8 +132,8 @@ it.each(["gnome-extension", "niri", "screenshot-portal", "picker"] as const)(
     };
 
     expect(DEFAULT_CLIENT_SETTINGS.snapShotEnabled).toBe(false);
-    expect(snapShotStatus(state, false)).toBe("turn this on to set up snapshots :3");
-    expect(snapShotStatus(state, true)).toBe("capture needs attention ^w^");
+    expect(snapShotStatus(state, false)).toBe("turn this on and we'll set up snapshots :3");
+    expect(snapShotStatus(state, true)).toBe("capture needs a little attention ^w^");
   },
 );
 
@@ -145,10 +147,10 @@ it("distinguishes saved shortcuts from observed delivery without making users re
     message: null,
     gnomeExtension: { status: "enabled", message: "Running" },
   };
-  expect(snapShotSetupSummary(state, true)).toBe("shortcut saved :3");
+  expect(snapShotSetupSummary(state, true)).toBe("shortcut saved, purr :3");
   expect(snapShotSetupButtonLabel(state)).toBe("manage capture");
   expect(snapShotSetupSummary({ ...state, shortcutVerified: true }, true)).toBe(
-    "ready to capture :3",
+    "all set, ready to capture :3",
   );
   expect(snapShotSetupButtonLabel({ ...state, shortcutVerified: true })).toBe("manage capture");
   expect(snapShotSetupButtonLabel({ ...state, shortcutRegistered: false })).toBe("manage capture");
@@ -193,7 +195,7 @@ it("distinguishes saved shortcuts from observed delivery without making users re
       },
       true,
     ),
-  ).toBe("ready to capture :3");
+  ).toBe("all set, ready to capture :3");
 });
 
 it.each([
@@ -228,10 +230,10 @@ it("keeps picker limitations visible after shortcut verification without recomme
   expect(snapShotStatus(state, true)).toContain("manual capture only");
   expect(snapShotDescription(state)).toContain("automatic capture isn't available");
   expect(snapShotFeedbackUnavailableMessage(state)).not.toContain("GNOME");
-  expect(snapShotAccessibilityUnavailableMessage(state)).toContain("only provides a screenshot");
+  expect(snapShotAccessibilityUnavailableMessage(state)).toContain("only gives us a screenshot");
   expect(
     snapShotAccessibilityUnavailableMessage({ ...state, linuxBackend: "screenshot-portal" }),
-  ).toContain("only provides a screenshot");
+  ).toContain("only gives us a screenshot");
   expect(
     snapShotAccessibilityUnavailableMessage({ ...state, linuxBackend: "kde" }),
   ).toBeUndefined();
@@ -288,7 +290,7 @@ it("reports pending, denied, and assigned shortcuts without inferring consent fr
     shortcutLabel: "Press <Shift><Control>2",
     shortcutMessage: "Desktop shortcut: Press <Shift><Control>2",
   };
-  expect(snapShotStatus(approved, true)).toBe("ready to capture :3");
+  expect(snapShotStatus(approved, true)).toBe("all set, ready to capture :3");
   expect(snapShotShortcutStatus(approved)).toBeNull();
   expect(snapShotShortcutStatus({ ...approved, shortcutPending: true })).toContain(
     "approve the shortcut permission prompt",
@@ -320,7 +322,7 @@ it("hides macOS setup only while permissions and the shortcut are all in place",
     message: "Allow Accessibility in System Settings, then restart :3 Code.",
   };
   expect(snapShotSetupComplete(revoked, true)).toBe(false);
-  expect(snapShotStatus(revoked, true)).toBe("capture needs attention ^w^");
+  expect(snapShotStatus(revoked, true)).toBe("capture needs a little attention ^w^");
   expect(snapShotSetupButtonLabel(revoked)).toBe("continue setup");
   expect(snapShotSetupComplete({ ...revoked, message: null }, false)).toBe(true);
   expect(

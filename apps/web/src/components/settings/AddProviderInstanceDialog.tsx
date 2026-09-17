@@ -208,14 +208,14 @@ export function AddProviderInstanceDialog({
       updateSettings({ providerInstances: nextMap });
       toastManager.add({
         type: "success",
-        title: "provider instance added :3",
+        title: "provider instance added, purr :3",
         description: `${driverOption.label} instance '${instanceId}' was added.`,
       });
       onOpenChange(false);
     } catch (error) {
       toastManager.add({
         type: "error",
-        title: "could not add provider instance 3:",
+        title: "oops, couldn't add that provider instance 3:",
         description: error instanceof Error ? error.message : "update failed.",
       });
     }
@@ -225,11 +225,11 @@ export function AddProviderInstanceDialog({
     <Dialog open={open} onOpenChange={onOpenChange}>
       <WizardPopup>
         <WizardHeader
-          title="add provider instance ^w^"
+          title="let's add a provider instance ^w^"
           description={
             <>
-              configure an additional provider instance on {environmentLabel} — for example, a ^w^
-              second Codex install pointed at a different workspace.
+              set up another provider instance on {environmentLabel} — for example, a second Codex
+              install pointed at a different workspace ^w^
             </>
           }
         >
@@ -311,7 +311,7 @@ export function AddProviderInstanceDialog({
               onChange={(event) => setLabel(event.target.value)}
             />
             <span className="text-[11px] text-muted-foreground">
-              shown in the provider list. optional ;3
+              shows up in the provider list. totally optional ;3
             </span>
           </label>
 
@@ -330,7 +330,7 @@ export function AddProviderInstanceDialog({
               <span className="text-[11px] text-destructive">{instanceIdError}</span>
             ) : (
               <span className="text-[11px] text-muted-foreground">
-                routing key used by threads and sessions. letters, digits, '-', or '_' :3
+                the routing key threads and sessions use. letters, digits, '-', or '_' :3
               </span>
             )}
           </label>
@@ -378,7 +378,7 @@ export function AddProviderInstanceDialog({
               ) : null}
             </div>
             <span className="text-[11px] text-muted-foreground">
-              optional marker shown in the picker, uwu.
+              a little optional marker shown in the picker uwu
             </span>
           </div>
 
@@ -395,7 +395,7 @@ export function AddProviderInstanceDialog({
           ) : wizardStep === 2 ? (
             <div className="grid gap-2">
               <p className="text-sm text-muted-foreground">
-                this driver has no required configuration. you can add the instance now :3
+                nothing to configure for this driver — you can add the instance right away :3
               </p>
             </div>
           ) : null}

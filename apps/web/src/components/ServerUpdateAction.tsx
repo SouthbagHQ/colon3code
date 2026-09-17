@@ -53,7 +53,10 @@ type UpdateButtonProps = Pick<ComponentProps<typeof Button>, "variant" | "size" 
 
 function useServerUpdate() {
   const updateServer = useAtomCommand(serverEnvironment.updateServer, { reportFailure: false });
-  return async (target: ServerUpdateTarget, failureTitle = "server update failed 3:") => {
+  return async (
+    target: ServerUpdateTarget,
+    failureTitle = "aw, the server update didn't work 3:",
+  ) => {
     const { environmentId, serverLabel, selfUpdate, targetVersion } = target;
     if (pendingUpdateEnvironmentIds.has(environmentId)) return;
     pendingUpdateEnvironmentIds.add(environmentId);
@@ -73,7 +76,7 @@ function useServerUpdate() {
       }
       toastManager.add({
         type: "success",
-        title: `${serverLabel} updated :3`,
+        title: `${serverLabel} updated, yay :3`,
         description:
           selfUpdate === "desktop-managed"
             ? `desktop app relaunched on ${result.value.targetVersion}.`
@@ -121,12 +124,12 @@ export function ServerUpdatesAction({
       if (desktopTargets.length > 0) {
         const confirmed =
           (await requestConfirmDialog(
-            `update the :3 Code desktop apps on ${desktopTargets.map((target) => target.serverLabel).join(", ")}? they will close and relaunch on those machines ;3`,
+            `update the :3 Code desktop apps on ${desktopTargets.map((target) => target.serverLabel).join(", ")}? they'll close and pop back up on those machines ;3`,
           )) ?? true;
         if (!confirmed) return;
       }
       await Promise.all(
-        available.map((target) => update(target, `${target.serverLabel} update failed 3:`)),
+        available.map((target) => update(target, `aw, ${target.serverLabel} update failed 3:`)),
       );
     } finally {
       pending.current = false;
@@ -210,14 +213,14 @@ export function ServerUpdateAction({
     onCopy: ({ command }) => {
       toastManager.add({
         type: "success",
-        title: "update command copied :3",
+        title: "copied the update command for you :3",
         description: `run \`${command}\` on ${serverLabel} to update it.`,
       });
     },
     onError: (error) => {
       toastManager.add({
         type: "error",
-        title: "could not copy update command 3:",
+        title: "aw, couldn't copy the update command 3:",
         description: error.message,
       });
     },
@@ -233,7 +236,7 @@ export function ServerUpdateAction({
       // remote machine installs without asking anyone there.
       const confirmed =
         (await requestConfirmDialog(
-          `update the :3 Code desktop app that runs the ${serverLabel}? it will close and relaunch on that machine :3`,
+          `update the :3 Code desktop app that runs the ${serverLabel}? it'll close and pop back up on that machine :3`,
         )) ?? true;
       if (!confirmed) {
         return;

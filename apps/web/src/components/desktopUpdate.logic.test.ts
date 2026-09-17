@@ -278,7 +278,7 @@ describe("desktop update UI helpers", () => {
         downloadedVersion: "1.1.0",
       }),
     ).toBe(
-      "install update 1.1.0 and restart :3 Code?\n\nany running tasks will be interrupted. make sure you're ready before continuing.",
+      "install update 1.1.0 and restart :3 Code?\n\nany running tasks will be interrupted, so make sure you're ready before we continue.",
     );
   });
 });

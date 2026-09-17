@@ -209,12 +209,12 @@ function FirstRunRecovery({
     <main className="flex h-dvh min-h-0 items-center justify-center bg-background px-6 text-foreground">
       <div className="flex max-w-sm flex-col items-center text-center">
         <h1 className="text-lg font-semibold">
-          {settingsReadFailed ? "could not read settings 3:" : "hang on… :3"}
+          {settingsReadFailed ? "hmm, couldn't read your settings 3:" : "hang tight… :3"}
         </h1>
         <p className="mt-2 text-sm text-muted-foreground">
           {settingsReadFailed
-            ? "your saved settings could not be loaded 3:"
-            : ":3 Code couldn't confirm this workspace yet."}
+            ? "your saved settings didn't load — let's retry 3:"
+            : ":3 Code couldn't confirm this workspace yet, so let's reload."}
         </p>
         <Button
           className="mt-5"

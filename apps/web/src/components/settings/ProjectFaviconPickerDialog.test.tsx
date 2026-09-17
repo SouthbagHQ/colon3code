@@ -118,7 +118,7 @@ describe("ProjectFaviconPickerDialog", () => {
     expect(onSelect).not.toHaveBeenCalled();
     expect(toastManager.add).toHaveBeenCalledWith({
       type: "error",
-      title: "could not open image picker 3:",
+      title: "oops, couldn't open the image picker 3:",
       description: "picker failed",
     });
   });

@@ -53,8 +53,8 @@ export function ThemeEditorHost() {
           toastManager.add(
             stackedThreadToast({
               type: "error",
-              title: "could not save your theme 3:",
-              description: "browser storage is unavailable, so the change was not kept.",
+              title: "aw, couldn't save your theme 3:",
+              description: "browser storage is unavailable, so the change didn't stick.",
             }),
           );
           return false;
@@ -62,8 +62,8 @@ export function ThemeEditorHost() {
         toastManager.add(
           stackedThreadToast({
             type: "success",
-            title: `${savedTheme.label} updated :3`,
-            description: `its ${mergedAppearance} palette was added ;3`,
+            title: `${savedTheme.label} updated, purr :3`,
+            description: `its ${mergedAppearance} palette is in ;3`,
           }),
         );
         return true;
@@ -81,9 +81,7 @@ export function ThemeEditorHost() {
           stackedThreadToast({
             type: "success",
             title: `${savedTheme.label} saved :3`,
-            description: wasActive
-              ? "your changes are now active ^w^"
-              : "your changes are saved :3",
+            description: wasActive ? "your changes are live now ^w^" : "all saved :3",
           }),
         );
         return true;
@@ -93,8 +91,8 @@ export function ThemeEditorHost() {
         toastManager.add(
           stackedThreadToast({
             type: "error",
-            title: "could not save your theme 3:",
-            description: "browser storage is unavailable, so the change was not kept.",
+            title: "aw, couldn't save your theme 3:",
+            description: "browser storage is unavailable, so the change didn't stick.",
           }),
         );
         return false;
@@ -102,8 +100,8 @@ export function ThemeEditorHost() {
       toastManager.add(
         stackedThreadToast({
           type: "success",
-          title: `${savedTheme.label} created :3`,
-          description: "it’s now active :3",
+          title: `${savedTheme.label} created, yay :3`,
+          description: "it’s live now :3",
         }),
       );
       return true;

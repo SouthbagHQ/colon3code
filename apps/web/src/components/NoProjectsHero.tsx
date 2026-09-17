@@ -17,11 +17,11 @@ export function NoProjectsHero() {
             <EmptyHeader className="max-w-none">
               <EmptyTitle className="text-foreground text-2xl sm:text-3xl">
                 {" "}
-                what should we make today? :3
+                meow! what should we make today? :3
               </EmptyTitle>
               <EmptyDescription className="mt-2 text-sm text-muted-foreground/78">
                 {" "}
-                add a project to start your first thread :3
+                add a project and we'll start your first thread together :3
               </EmptyDescription>
               <div className="mt-6 flex justify-center">
                 <Button size="sm" onClick={openAddProject}>

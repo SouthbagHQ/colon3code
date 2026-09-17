@@ -26,7 +26,7 @@ export function PreviewUnreachable({ url, code, description, onReload }: Props) 
         <ErrorIcon className="mb-6 size-12 text-muted-foreground/70" />
         <h1 className="mb-3 text-2xl font-semibold leading-tight text-foreground">
           {" "}
-          this site can&rsquo;t be reached 3:
+          aw, this site can&rsquo;t be reached 3:
         </h1>
         <p className="text-sm leading-relaxed text-muted-foreground">
           <span className="font-semibold text-foreground">{host}</span>: {friendly}.
@@ -37,7 +37,7 @@ export function PreviewUnreachable({ url, code, description, onReload }: Props) 
             <p className="mb-2 font-medium text-foreground">try:</p>
             <ul className="list-disc space-y-1 pl-5 text-muted-foreground">
               <li>checking your connection</li>
-              <li>confirming the dev server is running :3</li>
+              <li>making sure the dev server is awake :3</li>
               <li>checking the proxy and the firewall</li>
             </ul>
           </div>

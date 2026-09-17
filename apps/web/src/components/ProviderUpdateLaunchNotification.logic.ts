@@ -122,8 +122,8 @@ function getProviderUpdatedTitle(provider: Pick<ServerProvider, "driver" | "vers
 
 function getProviderUpdatedDescription(providerCount: number): string {
   return providerCount === 1
-    ? "new sessions will use the updated provider ^w^"
-    : "new sessions will use the updated providers ;3";
+    ? "new sessions will pick up the updated provider ^w^"
+    : "new sessions will pick up the updated providers ;3";
 }
 
 function getProviderFailedUpdateTitle(
@@ -132,8 +132,8 @@ function getProviderFailedUpdateTitle(
   const providerName = PROVIDER_DISPLAY_NAMES[provider.driver] ?? provider.driver;
   const attemptedVersion = provider.versionAdvisory?.latestVersion;
   return attemptedVersion
-    ? `${providerName} ${formatVersion(attemptedVersion)} update failed 3:`
-    : `${providerName} update failed 3:`;
+    ? `aw, ${providerName} ${formatVersion(attemptedVersion)} update failed 3:`
+    : `aw, ${providerName} update failed 3:`;
 }
 
 export function isProviderUpdateCandidate(
@@ -240,7 +240,7 @@ export function getProviderUpdateInitialToastView(input: {
     title: getProviderUpdateInitialToastTitle(input.updateProviders),
     description:
       input.oneClickProviders.length > 0
-        ? "install the update now or review provider settings :3"
+        ? "install the update now, or take a peek at provider settings :3"
         : `${formatProviderList(input.updateProviders)} can be updated from provider settings.`,
   };
 }
@@ -254,7 +254,7 @@ function getProviderUpdateRunningToastView(providerCount: number): ProviderUpdat
     phase: "running",
     type: "loading",
     title: providerCount === 1 ? "updating provider" : "updating providers",
-    description: "running provider update command :3",
+    description: "running the provider update command, hang tight :3",
   };
 }
 
@@ -265,7 +265,7 @@ export function getProviderUpdateRejectedToastView(
   return {
     phase: "failed",
     type: "error",
-    title: providerCount === 1 ? "provider update failed 3:" : "provider updates failed 3:",
+    title: providerCount === 1 ? "aw, provider update failed 3:" : "aw, provider updates failed 3:",
     description: message,
   };
 }
@@ -281,7 +281,9 @@ export function getProviderUpdateProgressToastView(input: {
       phase: "failed",
       type: "error",
       title:
-        failedProviders.length === 1 ? "provider update failed 3:" : "provider updates failed 3:",
+        failedProviders.length === 1
+          ? "aw, provider update failed 3:"
+          : "aw, provider updates failed 3:",
       description: getFailedProviderUpdateDescription(failedProviders),
     };
   }
@@ -295,11 +297,11 @@ export function getProviderUpdateProgressToastView(input: {
       type: "warning",
       title:
         unchangedProviders.length === 1
-          ? "provider still needs an update 3:"
-          : "providers still need updates 3:",
+          ? "hmm, provider still needs an update 3:"
+          : "hmm, providers still need updates 3:",
       description: `${formatProviderList(unchangedProviders)} ${
         unchangedProviders.length === 1 ? "still appears" : "still appear"
-      } outdated. check provider settings for details :3`,
+      } outdated. peek at provider settings for details :3`,
     };
   }
 
@@ -318,7 +320,10 @@ export function getProviderUpdateProgressToastView(input: {
     return {
       phase: "succeeded",
       type: "success",
-      title: input.providerCount === 1 ? "provider updated :3" : "provider updates finished :3",
+      title:
+        input.providerCount === 1
+          ? "provider updated, purr :3"
+          : "provider updates finished, purr :3",
       description: getProviderUpdatedDescription(input.providerCount),
       dismissAfterVisibleMs: PROVIDER_UPDATE_SUCCESS_VISIBLE_MS,
     };
@@ -438,7 +443,7 @@ export function getProviderUpdateSidebarPillView(
       title:
         failedProviders.length === 1
           ? getProviderFailedUpdateTitle(failedProvider)
-          : `${failedProviders.length} provider updates failed 3:`,
+          : `aw, ${failedProviders.length} provider updates failed 3:`,
       description: getFailedProviderUpdateDescription(failedProviders),
       dismissible: true,
     });
@@ -462,11 +467,11 @@ export function getProviderUpdateSidebarPillView(
       tone: "warning",
       title:
         unchangedProviders.length === 1
-          ? `${unchangedProviderName} still needs an update 3:`
-          : `${unchangedProviders.length} providers still need updates 3:`,
+          ? `hmm, ${unchangedProviderName} still needs an update 3:`
+          : `hmm, ${unchangedProviders.length} providers still need updates 3:`,
       description: `${formatProviderList(unchangedProviders)} ${
         unchangedProviders.length === 1 ? "still appears" : "still appear"
-      } outdated. review provider settings for details :3`,
+      } outdated. peek at provider settings for details :3`,
       dismissible: true,
     });
   }
@@ -535,7 +540,7 @@ function getFailedProviderUpdateDescription(providers: ReadonlyArray<ServerProvi
       return provider.updateState.message;
     }
   }
-  return `${formatProviderList(providers)} failed to update 3: check provider settings for details`;
+  return `${formatProviderList(providers)} failed to update — peek at provider settings for details 3:`;
 }
 
 // ===========================================================================

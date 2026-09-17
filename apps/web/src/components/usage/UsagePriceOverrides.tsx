@@ -152,7 +152,7 @@ export function UsagePriceOverrides({
       (customModels.includes(draft.model.trim()) ||
         drafts.some((other) => other.id !== draft.id && other.model.trim() === draft.model.trim()))
     )
-      errors.set(draft.id, "this model already has a row. edit its prices there :3");
+      errors.set(draft.id, "this model already has a row — edit its prices there :3");
   }
   const failedDestinations =
     attempt?.destinations.filter(
@@ -250,7 +250,7 @@ export function UsagePriceOverrides({
           <DialogTitle>custom model prices :3</DialogTitle>
           <DialogDescription>
             {" "}
-            prices apply to all past and future usage on the environments you select :3
+            these prices apply to all past and future usage on the environments you pick :3
           </DialogDescription>
         </DialogHeader>
         <DialogPanel className="grid gap-4">
@@ -309,8 +309,8 @@ export function UsagePriceOverrides({
           {selected.length === 0 ? (
             <p className="text-sm text-muted-foreground">
               {environments.length === 0
-                ? "connect an environment to set model prices ^w^"
-                : "select an environment to see and change its model prices ;3"}
+                ? "connect an environment and we can set model prices ^w^"
+                : "pick an environment to peek at and change its model prices ;3"}
             </p>
           ) : (
             <>
@@ -354,8 +354,8 @@ export function UsagePriceOverrides({
                           className="py-8 text-center whitespace-normal text-muted-foreground"
                         >
                           {selected.some((environment) => environment.prices === null)
-                            ? "some environment prices are unavailable 3:"
-                            : "no custom prices yet :3 — add a row to override automatic pricing"}
+                            ? "hmm, some environment prices aren't available 3:"
+                            : "no custom prices yet — add a row to override automatic pricing :3"}
                         </TableCell>
                       </TableRow>
                     ) : (

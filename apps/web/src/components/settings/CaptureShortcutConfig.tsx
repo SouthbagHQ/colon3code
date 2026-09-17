@@ -105,7 +105,7 @@ export function CaptureShortcutConfig({
       );
     } catch (cause) {
       setError({
-        message: "couldn't prepare the changes. check advanced for help 3:",
+        message: "hmm, couldn't prepare the changes. peek at advanced for help 3:",
         ...(cause instanceof Error ? { detail: cause.message } : {}),
       });
     } finally {
@@ -122,14 +122,14 @@ export function CaptureShortcutConfig({
       if (!applied.warning && preview.operation === "install" && onComplete) {
         toastManager.add({
           type: "success",
-          title: "shortcut saved :3",
-          description: `use ${preview.shortcut} from another app ^w^`,
+          title: "shortcut saved, purr :3",
+          description: `press ${preview.shortcut} from any other app ^w^`,
         });
         await onComplete();
       }
     } catch (cause) {
       setError({
-        message: "couldn't save your shortcut 3: review the changes and try again.",
+        message: "aw, couldn't save your shortcut. review the changes and try again 3:",
         ...(cause instanceof Error ? { detail: cause.message } : {}),
       });
       setPreview(null);
@@ -148,27 +148,27 @@ export function CaptureShortcutConfig({
       ) : null}
       {recorder.recording ? (
         <p role="status" className="text-xs text-muted-foreground">
-          press your shortcut. Esc cancels ^w^
+          go ahead, press your shortcut. Esc cancels ^w^
         </p>
       ) : null}
       {result ? (
         <p role="status">
           {result.warning
-            ? "saved, but the shortcut needs attention 3: check advanced for help."
+            ? "saved, but the shortcut needs a little attention. peek at advanced for help 3:"
             : preview?.operation === "remove"
-              ? "shortcut removed ;3"
-              : `use ${preview?.shortcut} from another app to capture a window ^w^`}
+              ? "shortcut removed, all tidy ;3"
+              : `press ${preview?.shortcut} from any other app to capture a window ^w^`}
         </p>
       ) : preview ? (
         <>
           <p className="text-muted-foreground">
             {changed
               ? preview.operation === "remove"
-                ? "review the change below to remove your shortcut ^w^"
-                : "review the change below, then save your shortcut :3"
+                ? "take a peek at the change below, then we'll remove your shortcut ^w^"
+                : "take a peek at the change below, then save your shortcut :3"
               : preview.operation === "remove"
-                ? "there's no capture shortcut to remove :3"
-                : "this shortcut is already set up :3"}
+                ? "there's no capture shortcut to remove, nothing to do :3"
+                : "this shortcut is already set up, nice :3"}
           </p>
           {diff ? (
             <div
@@ -187,7 +187,7 @@ export function CaptureShortcutConfig({
           ) : null}
           {changed ? (
             <p className="text-xs text-muted-foreground">
-              only these changes will be saved. we'll keep a backup ;3
+              only these changes get saved, and we'll tuck away a backup ;3
             </p>
           ) : null}
           <div className="flex gap-2">
@@ -217,7 +217,7 @@ export function CaptureShortcutConfig({
       ) : (
         <>
           <p className="text-muted-foreground">
-            allow :3 Code to read your desktop settings. you'll review any changes here before
+            let :3 Code read your desktop settings. you'll get to review any changes here before
             saving.
           </p>
           <Button
@@ -229,7 +229,7 @@ export function CaptureShortcutConfig({
           </Button>
           {!supported ? (
             <p className="text-xs text-muted-foreground">
-              update :3 Code to finish setting up your shortcut.
+              update :3 Code and we'll finish setting up your shortcut.
             </p>
           ) : null}
         </>
@@ -243,7 +243,7 @@ export function CaptureShortcutConfig({
         <p role="status" className="text-muted-foreground">
           {state.shortcutPending
             ? "connecting to your desktop…"
-            : "restart :3 Code to finish connecting your shortcut."}
+            : "restart :3 Code and we'll finish connecting your shortcut."}
         </p>
       ) : null}
       <details className="text-xs text-muted-foreground">
@@ -262,7 +262,7 @@ export function CaptureShortcutConfig({
                 state.shortcutConfigPath ??
                 (niri ? "~/.config/niri/config.kdl" : "~/.config/hypr/hyprland.conf")}
             </p>
-            {niri ? <p>:3 Code also reads any files included by this file :3</p> : null}
+            {niri ? <p>:3 Code also peeks at any files this file includes :3</p> : null}
             {preview && preview.resolvedPath !== preview.path ? (
               <p className="break-all">linked to {preview.resolvedPath}. the link will be kept.</p>
             ) : null}
@@ -308,7 +308,7 @@ export function CaptureShortcutConfig({
             {niri
               ? "paste this inside binds { … } in your Niri config, then save."
               : "add this binding to your Hyprland config, then save."}{" "}
-            change the keys if needed ;3
+            change the keys if you like ;3
           </p>
           <pre className="max-h-40 overflow-auto whitespace-pre-wrap break-all rounded-xl bg-muted/50 p-3">
             {state.shortcutBinding}
@@ -324,8 +324,8 @@ export function CaptureShortcutConfig({
             {isCopied ? "copied" : "copy shortcut"}
           </Button>
           <p>
-            turn capture off in :3 Code to stop it. remove the shortcut from {desktop} to free up
-            the keys :3
+            turn capture off in :3 Code to stop it. remove the shortcut from {desktop} to free the
+            keys back up :3
           </p>
           {state.shortcutActionRegistered === false ? (
             <p role="status">{state.shortcutMessage}</p>

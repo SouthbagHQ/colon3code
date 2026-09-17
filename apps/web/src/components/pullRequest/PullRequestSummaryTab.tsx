@@ -405,7 +405,7 @@ export function PullRequestSummaryTab({
   const openCheck = (url: string) => {
     void openLink(url).catch((error: unknown) => {
       console.error(error);
-      toastManager.add({ type: "error", title: "unable to open check details 3:" });
+      toastManager.add({ type: "error", title: "oops, couldn't open the check details 3:" });
     });
   };
 
@@ -434,7 +434,7 @@ export function PullRequestSummaryTab({
     const result = await update({ environmentId, input: { ...reference, body } });
     setBodySaving(false);
     if (result._tag === "Failure") {
-      toastManager.add({ type: "error", title: "could not save the description 3:" });
+      toastManager.add({ type: "error", title: "aw, the description didn't save 3:" });
       return;
     }
     setBodyScope(null);
@@ -461,7 +461,7 @@ export function PullRequestSummaryTab({
       });
       setCommentSaving(false);
       if (result._tag === "Failure") {
-        toastManager.add({ type: "error", title: "could not save the comment 3:" });
+        toastManager.add({ type: "error", title: "aw, the comment didn't save 3:" });
         return;
       }
       setCommentScope(null);
@@ -611,7 +611,7 @@ export function PullRequestSummaryTab({
               environmentId={environmentId}
               threadRef={threadRef}
               label="pull request description"
-              placeholder="describe this pull request :3"
+              placeholder="tell us about this pull request :3"
               saving={bodySaving}
               onSave={(body) => void saveBody(body)}
               onCancel={() => setBodyScope(null)}
@@ -643,7 +643,7 @@ export function PullRequestSummaryTab({
 
       <Section key={`checks:${detail.url}`} title="checks" defaultOpen={false}>
         {detail.checks.length === 0 ? (
-          <p className="text-xs text-muted-foreground">no checks reported :3</p>
+          <p className="text-xs text-muted-foreground">no checks reported yet :3</p>
         ) : (
           detail.checks.map((check, index) => {
             const finding = { kind: "check", check } as const;
@@ -724,7 +724,9 @@ export function PullRequestSummaryTab({
               </p>
             ) : null}
             {detail.comments.length === 0 ? (
-              <p className="py-2 text-xs text-muted-foreground">no comments yet :3</p>
+              <p className="py-2 text-xs text-muted-foreground">
+                no comments yet, it's quiet in here :3
+              </p>
             ) : (
               <div className="space-y-3">
                 {commentOrder === "oldest" ? showOldestCommentsButton : null}

@@ -283,7 +283,7 @@ export function SettingsSidebarNav({ pathname }: { pathname: string }) {
               className="px-2 py-6 text-center text-xs text-sidebar-muted-foreground"
             >
               {" "}
-              no settings found 3:
+              hmm, no settings matched 3:
             </p>
           ) : null}
           {isSearching ? (

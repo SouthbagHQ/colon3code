@@ -14,7 +14,7 @@ import { cn } from "~/lib/utils";
 const platformName = (platform: DevicePlatform) => (platform === "ios" ? "iOS" : "Android");
 
 export const deviceHubDescription =
-  "enable this environment to open simulators and emulators, whether they run here or on a remote device host ^w^";
+  "let this environment open simulators and emulators, whether they run here or on a remote device host ^w^";
 export const agentDeviceDescription =
   "allow new agent sessions in this environment to start and control local and remote devices, with required tools set up automatically.";
 
@@ -37,7 +37,7 @@ export function platformSetupStatus(state: DeviceServiceState, platform: DeviceP
       message:
         platform === "ios"
           ? "Xcode is installed, but no iOS Simulator is available. Install a runtime in Xcode Settings → Components."
-          : "the Android SDK is installed, but no virtual device exists. create one in Android Studio → Device Manager :3",
+          : "the Android SDK is installed, but there's no virtual device yet. create one in Android Studio → Device Manager :3",
     };
   }
   return {
@@ -45,7 +45,7 @@ export function platformSetupStatus(state: DeviceServiceState, platform: DeviceP
     message:
       platform === "ios"
         ? "Xcode and iOS Simulator are available."
-        : "the Android SDK and Emulator are available :3",
+        : "the Android SDK and Emulator are ready to go :3",
   };
 }
 
@@ -78,7 +78,7 @@ export function DeviceSetup(props: {
     <>
       <WizardHeader
         title="set up devices :3"
-        description="review what runs on this environment before using simulators and emulators :3"
+        description="a quick peek at what runs on this environment before we use simulators and emulators :3"
       >
         <WizardSteps
           steps={["device hub", "simulators", "agent access"]}
@@ -147,7 +147,7 @@ export function DeviceSetup(props: {
             <AgentDeviceSetupStatus state={props.state} pending={pending === "agent"} />
             <p className="text-xs text-muted-foreground">
               {" "}
-              leave this off to keep manual device controls without giving agents access :3
+              leave this off and you keep manual device controls, without agents getting access :3
             </p>
           </section>
         ) : null}
@@ -215,7 +215,7 @@ export function DeviceHubSetupStatus({
             : compact
               ? "updating…"
               : "updating device hub…"
-        : "device hub is ready :3"}
+        : "device hub is ready, purr :3"}
     </p>
   );
 }
@@ -232,7 +232,7 @@ function DevicePlatformSetup(props: {
       <PlatformStatus platform="Android" status={platformSetupStatus(props.state, "android")} />
       <p className="text-xs text-muted-foreground">
         {" "}
-        you can use either platform fixing a missing platform does not block the other one 3:
+        you can use either platform — a missing one doesn’t block the other 3:
       </p>
       <Button size="compact" variant="outline" disabled={props.disabled} onClick={props.onCheck}>
         {props.checking ? <Spinner className="size-3" /> : null}
@@ -274,7 +274,7 @@ export function AgentDeviceSetupStatus(props: {
   ) {
     return (
       <p role="status" className="flex items-center gap-2 text-xs text-muted-foreground">
-        <Check className="size-3 text-success" /> agent tools are ready :3
+        <Check className="size-3 text-success" /> agent tools are ready to go :3
       </p>
     );
   }

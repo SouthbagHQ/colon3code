@@ -182,7 +182,9 @@ function LinkPullRequestDialog({
     try {
       await linking.changeLink(threadRef, resolved.link.url, true);
     } catch (error) {
-      setSubmitError(error instanceof Error ? error.message : "could not link the pull request 3:");
+      setSubmitError(
+        error instanceof Error ? error.message : "aw, couldn't link the pull request 3:",
+      );
       return;
     } finally {
       setPending(false);
@@ -195,7 +197,7 @@ function LinkPullRequestDialog({
     : reference.trim().length === 0
       ? "paste a pull request URL or enter 123 / #123."
       : resolved === null
-        ? "use a pull request URL, 123, or #123 ;3"
+        ? "try a pull request URL, 123, or #123 ;3"
         : "error" in resolved
           ? resolved.error
           : null;
@@ -207,8 +209,8 @@ function LinkPullRequestDialog({
           <DialogTitle>link pull request :3</DialogTitle>
           <DialogDescription>
             {" "}
-            attach a pull request to this thread. A full URL can point at any repository on a host
-            this environment has a project for :3
+            let's attach a pull request to this thread. a full URL can point at any repository on a
+            host this environment has a project for :3
           </DialogDescription>
         </DialogHeader>
         <DialogPanel className="space-y-3">

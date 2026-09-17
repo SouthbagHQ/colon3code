@@ -145,7 +145,7 @@ describe("SidebarUpdateReleaseNotes", () => {
       );
       expect(testState.addToast).toHaveBeenCalledWith({
         type: "error",
-        title: "unable to open release notes 3:",
+        title: "hmm, couldn't open the release notes 3:",
       });
     });
   });

@@ -549,7 +549,7 @@ export function UsageLimitsPooled({
       {pools.length === 0 && notices.length === 0 ? (
         <p className="text-sm text-muted-foreground">
           {" "}
-          no provider on the selected environments reports subscription limits ^w^
+          none of the providers on the selected environments report subscription limits ^w^
         </p>
       ) : null}
       {pools.map((pool) => (

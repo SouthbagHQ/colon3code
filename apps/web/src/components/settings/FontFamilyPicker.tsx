@@ -231,7 +231,7 @@ export function FontFamilyPicker({
             <ComboboxInput
               className="[&_input]:h-6.5 [&_input]:ps-5 [&_input]:font-sans [&_input]:leading-6.5"
               inputClassName="rounded-none bg-transparent text-sm"
-              placeholder="search fonts,… :3"
+              placeholder="search fonts… :3"
               showTrigger={false}
               size="sm"
               unstyled
@@ -241,7 +241,7 @@ export function FontFamilyPicker({
           </div>
         </div>
         <div className="flex min-h-0 flex-1 flex-col overflow-hidden">
-          <ComboboxEmpty>no fonts found 3:</ComboboxEmpty>
+          <ComboboxEmpty>hmm, no fonts matched 3:</ComboboxEmpty>
           <div className="relative min-h-0 max-h-72 w-full flex-1 overflow-hidden">
             <ComboboxListVirtualized className="size-full min-w-0 p-0">
               <LegendList<string>

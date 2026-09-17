@@ -310,20 +310,20 @@ function getMenuActionDisabledReason({
 
   if (item.id === "commit") {
     if (!hasChanges) {
-      return "worktree is clean. make changes before committing :3";
+      return "the worktree is clean — make some changes and then we'll commit :3";
     }
-    return "commit is currently unavailable 3:";
+    return "hmm, commit isn't available right now 3:";
   }
 
   if (item.id === "push") {
     if (!hasBranch) {
-      return "detached HEAD: check out a branch before pushing :3";
+      return "detached HEAD — let's check out a branch before pushing :3";
     }
     if (hasChanges) {
-      return "commit or stash local changes before pushing :3";
+      return "let's commit or stash your local changes before pushing :3";
     }
     if (isBehind) {
-      return "branch is behind upstream 3: pull/rebase before pushing.";
+      return "the branch is behind upstream — pull/rebase before pushing 3:";
     }
     if (!gitStatus.hasUpstream && !hasPrimaryRemote) {
       return 'add an "origin" remote before pushing.';
@@ -331,14 +331,14 @@ function getMenuActionDisabledReason({
     if (!isAhead) {
       return "no local commits to push";
     }
-    return "push is currently unavailable 3:";
+    return "hmm, push isn't available right now 3:";
   }
 
   if (hasOpenPr) {
-    return `view ${terminology.singular} is currently unavailable 3:`;
+    return `hmm, view ${terminology.singular} isn't available right now 3:`;
   }
   if (!hasBranch) {
-    return `detached HEAD: check out a branch before creating a :3 ${terminology.singular}.`;
+    return `detached HEAD — let's check out a branch before creating a ${terminology.singular} :3`;
   }
   if (hasChanges) {
     return `commit local changes before creating a ${terminology.singular}`;
@@ -347,17 +347,17 @@ function getMenuActionDisabledReason({
     return `add an "origin" remote before creating a ${terminology.singular}.`;
   }
   if (!isAhead) {
-    return `no local commits to include in a ${terminology.singular} yet :3`;
+    return `no local commits to tuck into a ${terminology.singular} yet :3`;
   }
   if (isBehind) {
-    return `branch is behind upstream 3: pull/rebase before creating a ${terminology.singular}.`;
+    return `the branch is behind upstream — pull/rebase before creating a ${terminology.singular} 3:`;
   }
-  return `create ${terminology.singular} is currently unavailable 3:`;
+  return `hmm, create ${terminology.singular} isn't available right now 3:`;
 }
 
 const COMMIT_DIALOG_TITLE = "commit changes";
 const COMMIT_DIALOG_DESCRIPTION =
-  "review and confirm your commit. leave the message blank to auto-generate one ^w^";
+  "take a peek and confirm your commit. leave the message blank and we'll write one for you ^w^";
 
 function GitActionItemIcon({
   icon,
@@ -588,7 +588,7 @@ function PublishRepositoryDialog(props: PublishRepositoryDialogProps) {
       <WizardPopup>
         <WizardHeader
           title="publish repository"
-          description="pick where to host it, then point us at a repo to push to ;3"
+          description="pick where to host it, then point us at a repo and we'll push there ;3"
         >
           <WizardSteps
             steps={publishWizardSteps}
@@ -864,13 +864,13 @@ function PublishRepositoryDialog(props: PublishRepositoryDialogProps) {
                   </span>
                   <h3 className="text-sm font-semibold text-foreground">
                     {publishResult.status === "pushed"
-                      ? "repository published :3"
-                      : "repository created :3"}
+                      ? "repository published, purr :3"
+                      : "repository created, yay :3"}
                   </h3>
                   <p className="max-w-xs text-pretty text-xs text-muted-foreground">
                     {publishResult.status === "pushed"
                       ? `${publishResult.branch} is now live on ${publishProviderLabel}`
-                      : `remote "${publishResult.remoteName}" is set up. make a commit and push it to share your code ^w^`}
+                      : `remote "${publishResult.remoteName}" is all set up. make a commit and push it to share your code ^w^`}
                   </p>
                 </div>
                 <div className="flex items-center gap-2 rounded-lg border border-input bg-muted/40 px-3 py-2 dark:border-transparent dark:bg-white/[0.035]">
@@ -893,7 +893,7 @@ function PublishRepositoryDialog(props: PublishRepositoryDialogProps) {
             ) : (
               <div className="rounded-md border border-input bg-background px-3 py-2 text-xs text-muted-foreground dark:border-transparent dark:bg-white/[0.035]">
                 {" "}
-                publish result unavailable 3:
+                hmm, the publish result isn't available 3:
               </div>
             )}
           </div>
@@ -1137,7 +1137,7 @@ export default function GitActionsControl({
     [gitStatusForActions, hasPrimaryRemote, isDefaultRef, isGitActionRunning],
   );
   const quickActionDisabledReason = quickAction.disabled
-    ? (quickAction.hint ?? "this action is currently unavailable 3:")
+    ? (quickAction.hint ?? "hmm, this action isn't available right now 3:")
     : null;
   const pendingDefaultBranchActionCopy = pendingDefaultBranchAction
     ? resolveDefaultBranchActionDialogCopy({
@@ -1206,7 +1206,7 @@ export default function GitActionsControl({
     if (!prUrl) {
       toastManager.add({
         type: "error",
-        title: "no open pull request found 3:",
+        title: "hmm, no open pull request found 3:",
         data: threadToastData,
       });
       return;
@@ -1216,7 +1216,7 @@ export default function GitActionsControl({
       toastManager.add(
         stackedThreadToast({
           type: "error",
-          title: "unable to open pull request link 3:",
+          title: "hmm, couldn't open the pull request link 3:",
           description: err instanceof Error ? err.message : "An error occurred.",
           ...(threadToastData !== undefined ? { data: threadToastData } : {}),
         }),
@@ -1392,7 +1392,7 @@ export default function GitActionsControl({
           resolvedProgressToastId,
           stackedThreadToast({
             type: "error",
-            title: "action failed 3:",
+            title: "mrrp, that action didn't work 3:",
             description: error instanceof Error ? error.message : "An error occurred.",
             ...(scopedToastData !== undefined ? { data: scopedToastData } : {}),
           }),
@@ -1533,7 +1533,7 @@ export default function GitActionsControl({
             toastId,
             stackedThreadToast({
               type: "error",
-              title: "pull failed 3:",
+              title: "aw, the pull didn't work 3:",
               description: error instanceof Error ? error.message : "An error occurred.",
               ...(threadToastData !== undefined ? { data: threadToastData } : {}),
             }),
@@ -1544,7 +1544,10 @@ export default function GitActionsControl({
         const pullResult = result.value;
         toastManager.update(toastId, {
           type: "success",
-          title: pullResult.status === "pulled" ? "pulled :3" : "already up to date :3",
+          title:
+            pullResult.status === "pulled"
+              ? "pulled, all done nya :3"
+              : "already up to date, nice :3",
           description:
             pullResult.status === "pulled"
               ? `updated ${pullResult.refName} from ${pullResult.upstreamRef ?? "upstream"}`
@@ -1606,7 +1609,7 @@ export default function GitActionsControl({
       if (!gitCwd) {
         toastManager.add({
           type: "error",
-          title: "editor opening is unavailable 3:",
+          title: "hmm, we can't open an editor here 3:",
           data: threadToastData,
         });
         return;
@@ -1621,7 +1624,7 @@ export default function GitActionsControl({
         toastManager.add(
           stackedThreadToast({
             type: "error",
-            title: "unable to open file 3:",
+            title: "hmm, couldn't open that file 3:",
             description: error instanceof Error ? error.message : "An error occurred.",
             ...(threadToastData !== undefined ? { data: threadToastData } : {}),
           }),
@@ -1652,7 +1655,7 @@ export default function GitActionsControl({
               toastManager.add(
                 stackedThreadToast({
                   type: "error",
-                  title: "Git initialization failed 3:",
+                  title: "aw, Git initialization didn't work 3:",
                   description: error instanceof Error ? error.message : "An error occurred.",
                   ...(threadToastData !== undefined ? { data: threadToastData } : {}),
                 }),
@@ -1981,7 +1984,8 @@ export default function GitActionsControl({
         <DialogPopup className="max-w-xl">
           <DialogHeader>
             <DialogTitle>
-              {pendingDefaultBranchActionCopy?.title ?? "run action on default branch? ^w^"}
+              {pendingDefaultBranchActionCopy?.title ??
+                "run this action on the default branch? ^w^"}
             </DialogTitle>
             <DialogDescription>{pendingDefaultBranchActionCopy?.description}</DialogDescription>
           </DialogHeader>

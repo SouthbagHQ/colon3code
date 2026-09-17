@@ -285,7 +285,7 @@ describe("provider update launch notification logic", () => {
       phase: "initial",
       type: "warning",
       title: "update available: Codex v1.1.0 3:",
-      description: "install the update now or review provider settings :3",
+      description: "install the update now, or take a peek at provider settings :3",
     });
   });
 
@@ -360,7 +360,7 @@ describe("provider update launch notification logic", () => {
     expect(view).toMatchObject({
       phase: "failed",
       type: "error",
-      title: "provider update failed 3:",
+      title: "aw, provider update failed 3:",
       description: "command failed",
     });
   });
@@ -385,8 +385,8 @@ describe("provider update launch notification logic", () => {
     expect(view).toMatchObject({
       phase: "unchanged",
       type: "warning",
-      title: "provider still needs an update 3:",
-      description: "Cursor still appears outdated. check provider settings for details :3",
+      title: "hmm, provider still needs an update 3:",
+      description: "Cursor still appears outdated. peek at provider settings for details :3",
     });
   });
 
@@ -413,8 +413,8 @@ describe("provider update launch notification logic", () => {
     expect(view).toMatchObject({
       phase: "succeeded",
       type: "success",
-      title: "provider updated :3",
-      description: "new sessions will use the updated provider ^w^",
+      title: "provider updated, purr :3",
+      description: "new sessions will pick up the updated provider ^w^",
       dismissAfterVisibleMs: 3_000,
     });
   });
@@ -425,7 +425,7 @@ describe("provider update launch notification logic", () => {
     expect(firstFailedProviderUpdateMessage(results)).toBe("WebSocket closed");
     expect(getProviderUpdateRejectedToastView(2, "WebSocket closed")).toMatchObject({
       phase: "failed",
-      title: "provider updates failed 3:",
+      title: "aw, provider updates failed 3:",
       description: "WebSocket closed",
     });
   });
@@ -516,7 +516,7 @@ describe("provider update launch notification logic", () => {
     expect(view).toMatchObject({
       key: "failed:claudeAgent:2026-04-23T10:00:00.000Z:Update command exited with code 1.",
       tone: "error",
-      title: "Claude v1.1.0 update failed 3:",
+      title: "aw, Claude v1.1.0 update failed 3:",
       description: "Update command exited with code 1.",
       dismissible: true,
     });
@@ -546,7 +546,7 @@ describe("provider update launch notification logic", () => {
       key: "succeeded:codex:2026-04-23T10:00:00.000Z:Provider updated.",
       tone: "success",
       title: "Codex updated: v1.1.0",
-      description: "new sessions will use the updated provider ^w^",
+      description: "new sessions will pick up the updated provider ^w^",
       dismissAfterVisibleMs: 3_000,
     });
   });
@@ -571,7 +571,7 @@ describe("provider update launch notification logic", () => {
     expect(view).toMatchObject({
       key: "unchanged:cursor:2026-04-23T10:00:00.000Z:still old",
       tone: "warning",
-      title: "Cursor still needs an update 3:",
+      title: "hmm, Cursor still needs an update 3:",
       dismissible: true,
     });
   });
@@ -639,7 +639,7 @@ describe("provider update launch notification logic", () => {
     expect(failureView).toMatchObject({
       key: "failed:claudeAgent:2026-04-23T10:00:00.000Z:Update command exited with code 1.",
       tone: "error",
-      title: "Claude v1.1.0 update failed 3:",
+      title: "aw, Claude v1.1.0 update failed 3:",
     });
   });
 
@@ -946,19 +946,19 @@ describe("provider update launch notification logic", () => {
       phase: "running",
       type: "loading",
       title: "updating providers",
-      description: "running provider update command :3",
+      description: "running the provider update command, hang tight :3",
     };
     const succeededResult: ProviderUpdateToastView = {
       phase: "succeeded",
       type: "success",
-      title: "provider updated :3",
-      description: "new sessions will use the updated provider ^w^",
+      title: "provider updated, purr :3",
+      description: "new sessions will pick up the updated provider ^w^",
     };
     const successPill: ProviderUpdateSidebarPillView = {
       key: "succeeded:codex",
       tone: "success",
       title: "Codex updated",
-      description: "new sessions will use the updated provider ^w^",
+      description: "new sessions will pick up the updated provider ^w^",
     };
 
     it("prefers a transport error", () => {

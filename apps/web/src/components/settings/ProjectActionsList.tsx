@@ -21,7 +21,7 @@ export function ProjectActionsList({
     return (
       <p className="px-3 py-2 text-base text-muted-foreground sm:px-4 sm:text-sm">
         {" "}
-        no actions configured yet :3
+        no actions yet — let's add one :3
       </p>
     );
   return scripts.map((script) => {

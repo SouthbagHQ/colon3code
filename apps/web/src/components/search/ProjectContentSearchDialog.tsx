@@ -94,7 +94,7 @@ function EmptyContentSearchDialog() {
       value=""
     >
       {" "}
-      open a project to search its files :3
+      open a project and we'll search its files together :3
     </CommandPaletteContent>
   );
 }
@@ -242,8 +242,8 @@ function OpenContentSearchDialog(props: {
       {matches.length === 0 ? (
         <div className="flex flex-1 items-center justify-center px-6 text-center text-sm text-muted-foreground">
           {search.hasQuery && !search.isPending && !search.error
-            ? "no results found 3:"
-            : "type to search across your project :3"}
+            ? "mrrp, nothing matched that 3:"
+            : "type something and we'll search across your project :3"}
         </div>
       ) : (
         <ScrollArea className="min-h-0 flex-1" scrollFade>

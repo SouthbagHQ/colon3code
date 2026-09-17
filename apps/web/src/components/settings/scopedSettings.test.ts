@@ -115,7 +115,7 @@ describe("scoped settings targets", () => {
       planScopedSettingsPatch(scope, environments, { enableProviderUpdateChecks: false }),
     ).toMatchObject({
       serverWrites: [],
-      unavailableReason: "connect Offline to save this setting ^w^",
+      unavailableReason: "connect Offline and we can save this setting ^w^",
     });
   });
 
@@ -249,8 +249,7 @@ describe("scoped settings writes", () => {
       planScopedSettingsPatch(project, environments, { enableProviderUpdateChecks: false }),
     ).toMatchObject({
       serverWrites: [],
-      unavailableReason:
-        "this setting is environment-wide and cannot be overridden by a project 3:",
+      unavailableReason: "this setting is environment-wide, so a project can't override it 3:",
     });
     const legacy = environment("Server", { projectOverrides: false });
     expect(

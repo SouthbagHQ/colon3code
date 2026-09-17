@@ -840,11 +840,11 @@ export function DiagnosticsSettingsPanel() {
 
     const editor = resolveAndPersistPreferredEditor(availableEditors ?? []);
     if (!editor) {
-      setOpenLogsDirectoryError("no available editors found 3:");
+      setOpenLogsDirectoryError("hmm, couldn't find an available editor 3:");
       return;
     }
     if (environmentId === null) {
-      setOpenLogsDirectoryError("no environment is selected 3:");
+      setOpenLogsDirectoryError("no environment is selected yet 3:");
       return;
     }
 
@@ -862,7 +862,7 @@ export function DiagnosticsSettingsPanel() {
       if (result._tag === "Failure" && !isAtomCommandInterrupted(result)) {
         const error = squashAtomCommandFailure(result);
         setOpenLogsDirectoryError(
-          error instanceof Error ? error.message : "unable to open logs folder 3:",
+          error instanceof Error ? error.message : "oops, couldn't open the logs folder 3:",
         );
       }
     })();
@@ -886,14 +886,14 @@ export function DiagnosticsSettingsPanel() {
         let confirmed = false;
         try {
           confirmed = await ensureLocalApi().dialogs.confirm(
-            `send SIGKILL to process :3 ${pid}? this cannot be handled by the process.`,
+            `send SIGKILL to process ${pid}? the process can't handle this one :3`,
             { variant: "destructive" },
           );
         } catch (error) {
           clearSignaling();
           toastManager.add({
             type: "error",
-            title: "could not confirm signal 3:",
+            title: "oops, couldn't confirm that signal 3:",
             description: error instanceof Error ? error.message : `failed to send ${signal}.`,
           });
           return;
@@ -925,7 +925,7 @@ export function DiagnosticsSettingsPanel() {
             const error = squashAtomCommandFailure(result);
             toastManager.add({
               type: "error",
-              title: `could not send ${signal} 3:`,
+              title: `oops, couldn't send ${signal} 3:`,
               description: error instanceof Error ? error.message : `failed to send ${signal}.`,
             });
           }
@@ -937,16 +937,16 @@ export function DiagnosticsSettingsPanel() {
           if (isStaleProcessSignalMessage(message)) {
             toastManager.add({
               type: "info",
-              title: "process already exited ^w^",
+              title: "that process already exited ^w^",
               description:
-                "the process is not a child of the T3 server. it might already have exited ^w^",
+                "the process isn't a child of the T3 server, so it might already have exited ^w^",
             });
             return;
           }
 
           toastManager.add({
             type: "error",
-            title: `could not send ${signal} 3:`,
+            title: `oops, couldn't send ${signal} 3:`,
             description: message ?? `failed to send ${signal}.`,
           });
           return;
@@ -991,7 +991,7 @@ export function DiagnosticsSettingsPanel() {
           <StatBlock
             label="CPU"
             value={processData ? `${processData.totalCpuPercent.toFixed(1)}%` : "..."}
-            tooltip="total CPU across live child processes of the current server process. the desktop shell and other parent processes are not included :3"
+            tooltip="total CPU across the live child processes of the current server process. the desktop shell and other parent processes aren't counted :3"
           />
           <StatBlock
             label="memory"
@@ -1025,8 +1025,8 @@ export function DiagnosticsSettingsPanel() {
           onSignal={signalProcess}
           emptyLabel={
             isProcessInitialLoading
-              ? "loading live processes. :3"
-              : "no live descendant processes found :3"
+              ? "grabbing live processes… :3"
+              : "no live descendant processes right now :3"
           }
         />
       </SettingsSection>
@@ -1057,7 +1057,7 @@ export function DiagnosticsSettingsPanel() {
           <StatBlock
             label="samples"
             value={resourceData ? formatCount(resourceData.retainedSampleCount) : "..."}
-            tooltip="in-memory process samples retained by the server. this resets when the server restarts :3"
+            tooltip="in-memory process samples the server keeps around. they reset when the server restarts :3"
           />
           <StatBlock
             label="interval"
@@ -1089,8 +1089,8 @@ export function DiagnosticsSettingsPanel() {
           processes={resourceData?.topProcesses ?? []}
           emptyLabel={
             isResourcePending && resourceData === null
-              ? "collecting process resource samples. :3"
-              : "no process resource samples found for this window :3"
+              ? "collecting process resource samples, hang tight :3"
+              : "no process resource samples in this window yet :3"
           }
         />
       </SettingsSection>
@@ -1137,7 +1137,7 @@ export function DiagnosticsSettingsPanel() {
             tooltip={
               data
                 ? `spans with a duration of ${formatDuration(data.slowSpanThresholdMs)} or longer.`
-                : "spans at or above the configured slow-span threshold ^w^"
+                : "spans at or above your slow-span threshold ^w^"
             }
             tone={data && data.slowSpanCount > 0 ? "warning" : "default"}
           />
@@ -1167,7 +1167,7 @@ export function DiagnosticsSettingsPanel() {
                 <AlertTriangleIcon className="mt-0.5 size-3.5 shrink-0" />
                 <span>
                   {traceDiagnosticsPartialFailure
-                    ? `some trace files could not be read, so diagnostics may be incomplete 3: ${traceDiagnosticsError.message}`
+                    ? `hmm, some trace files couldn't be read, so diagnostics may be incomplete: ${traceDiagnosticsError.message} 3:`
                     : traceDiagnosticsError.message}
                 </span>
               </div>
@@ -1204,7 +1204,7 @@ export function DiagnosticsSettingsPanel() {
           </DiagnosticsTable>
         ) : (
           <EmptyRows
-            label={isInitialLoading ? "loading failures..." : "no failed spans found :3"}
+            label={isInitialLoading ? "loading failures..." : "no failed spans, purr :3"}
           />
         )}
       </SettingsSection>
@@ -1234,7 +1234,11 @@ export function DiagnosticsSettingsPanel() {
           </DiagnosticsTable>
         ) : (
           <EmptyRows
-            label={isInitialLoading ? "loading failure groups..." : "no repeated failures found :3"}
+            label={
+              isInitialLoading
+                ? "loading failure groups..."
+                : "no repeated failures in sight, purr :3"
+            }
           />
         )}
       </SettingsSection>
@@ -1264,7 +1268,9 @@ export function DiagnosticsSettingsPanel() {
             ))}
           </DiagnosticsTable>
         ) : (
-          <EmptyRows label={isInitialLoading ? "loading slow spans..." : "no spans found 3:"} />
+          <EmptyRows
+            label={isInitialLoading ? "loading slow spans..." : "hmm, no spans found 3:"}
+          />
         )}
       </SettingsSection>
 
@@ -1327,7 +1333,9 @@ export function DiagnosticsSettingsPanel() {
           </ScrollArea>
         ) : (
           <EmptyRows
-            label={isInitialLoading ? "loading recent logs..." : "no warnings or errors found :3"}
+            label={
+              isInitialLoading ? "loading recent logs..." : "no warnings or errors, all quiet :3"
+            }
           />
         )}
       </SettingsSection>
@@ -1360,7 +1368,9 @@ export function DiagnosticsSettingsPanel() {
             ))}
           </DiagnosticsTable>
         ) : (
-          <EmptyRows label={isInitialLoading ? "loading span names..." : "no spans found 3:"} />
+          <EmptyRows
+            label={isInitialLoading ? "loading span names..." : "hmm, no spans found 3:"}
+          />
         )}
       </SettingsSection>
     </SettingsPageContainer>

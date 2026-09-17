@@ -1670,14 +1670,14 @@ export const ChatComposer = memo(function ChatComposer(props: ChatComposerProps)
     (questionAttachmentTarget &&
     !supportsQuestionAttachments &&
     (composerImages.length > 0 || composerFiles.length > 0)
-      ? "update this server to send files with question answers :3"
+      ? "update this server and we can send files with question answers :3"
       : null) ??
     fileCapabilityBlockReason ??
     (supportsAttachmentUploads
       ? needsReattachFileCount > 0
         ? needsReattachFileCount === 1
-          ? "attach the interrupted file again or remove it :3"
-          : "attach the interrupted files again or remove them ^w^"
+          ? "pop the interrupted file back on, or remove it :3"
+          : "pop the interrupted files back on, or remove them ^w^"
         : attachmentUploadBlockReason({
             imageIds: [...composerImages, ...composerFiles].map((attachment) => attachment.id),
             uploadsByImageId,
@@ -1854,8 +1854,7 @@ export const ChatComposer = memo(function ChatComposer(props: ChatComposerProps)
         : undefined))
     : undefined;
   const resolvedCompactDisabledReason =
-    compactDisabledReason ??
-    (noProviderAvailable ? "compacting is unavailable right now 3:" : null);
+    compactDisabledReason ?? (noProviderAvailable ? "hmm, can't compact right now 3:" : null);
   // The driver kind follows the instance that will actually run the turn,
   // which can differ from the persisted selection when that selection is
   // disabled.
@@ -2515,25 +2514,25 @@ export const ChatComposer = memo(function ChatComposer(props: ChatComposerProps)
         exactPullRequestLookup.isPending));
   const composerMenuEmptyState = useMemo(() => {
     if (composerTriggerKind === "skill") {
-      return "no skills found. try / to browse provider commands 3:";
+      return "hmm, no skills here — try / to browse provider commands 3:";
     }
     if (composerTriggerKind === "pull-request") {
       if (pullRequestProjectId === null || pullRequestRepository === null) {
-        return "pull requests are not available for this project 3:";
+        return "aw, pull requests aren't available for this project 3:";
       }
       if (
         pullRequestLookup.error !== null ||
         pullRequestLookup.data?.errors.some((error) => error.projectId === pullRequestProjectId)
       ) {
-        return "pull requests could not be read for this project 3:";
+        return "oops, couldn't read pull requests for this project 3:";
       }
       return composerTrigger?.query
         ? `no pull request matches ${composerTrigger.query}`
-        : "no pull requests found in this repository :3";
+        : "no pull requests yet, it's quiet in here :3";
     }
     return composerTriggerKind === "path"
-      ? "no matching files or folders :3"
-      : "no matching command ^w^";
+      ? "hmm, no files or folders matched :3"
+      : "hmm, no command matched ^w^";
   }, [
     composerTrigger,
     composerTriggerKind,
@@ -2776,7 +2775,7 @@ export const ChatComposer = memo(function ChatComposer(props: ChatComposerProps)
       const fail = (reason: string) => {
         toastManager.add({
           type: "error",
-          title: `couldn't bring ${record.name} into this message 3:`,
+          title: `oops, couldn't bring ${record.name} into this message 3:`,
           description: `${reason} remove the chip or attach the file again.`,
         });
       };
@@ -3734,8 +3733,8 @@ export const ChatComposer = memo(function ChatComposer(props: ChatComposerProps)
         event?.preventDefault();
         toastManager.add({
           type: "info",
-          title: "still compressing a pasted image :3",
-          description: "send again once its thumbnail appears.",
+          title: "just a sec, still squishing a pasted image :3",
+          description: "send again once its thumbnail pops up.",
         });
         return;
       }
@@ -3745,7 +3744,7 @@ export const ChatComposer = memo(function ChatComposer(props: ChatComposerProps)
         event?.preventDefault();
         toastManager.add({
           type: "info",
-          title: "still bringing a pasted attachment into this message :3",
+          title: "just a sec, still bringing a pasted attachment over :3",
           description: "send again once its chip resolves.",
         });
         return;
@@ -4001,7 +4000,7 @@ export const ChatComposer = memo(function ChatComposer(props: ChatComposerProps)
       if (filesToVerify.some((file) => file.environmentId !== environmentId)) {
         toastManager.add({
           type: "error",
-          title: "stashed files belong to another environment 3:",
+          title: "hmm, those stashed files belong to another environment 3:",
           description: "restore this prompt in the environment that received its files.",
         });
         return;
@@ -4041,7 +4040,7 @@ export const ChatComposer = memo(function ChatComposer(props: ChatComposerProps)
       if (!durable) {
         toastManager.add({
           type: "warning",
-          title: "restored prompt may reappear in the stash 3:",
+          title: "hmm, that restored prompt may pop back into the stash 3:",
           description:
             "browser storage rejected the update, so this entry could still be there after a reload.",
           data: { hideCopyButton: true },
@@ -4269,7 +4268,7 @@ export const ChatComposer = memo(function ChatComposer(props: ChatComposerProps)
       if (missingImageReasons.length > 0) {
         toastManager.add({
           type: "warning",
-          title: "some attachments were not restored 3:",
+          title: "aw, some attachments didn't come back 3:",
           description: missingImageReasons.join(" "),
         });
       }
@@ -4314,7 +4313,7 @@ export const ChatComposer = memo(function ChatComposer(props: ChatComposerProps)
       if (!durable) {
         toastManager.add({
           type: "warning",
-          title: "stash entry may come back 3:",
+          title: "hmm, that stash entry may come back 3:",
           description:
             "browser storage rejected the delete, so this prompt could reappear after a reload.",
           data: { hideCopyButton: true },
@@ -4330,7 +4329,7 @@ export const ChatComposer = memo(function ChatComposer(props: ChatComposerProps)
     if (pendingDraftWork.has(attachmentTargetKeyRef.current)) {
       toastManager.add({
         type: "info",
-        title: "still bringing a pasted attachment into this message :3",
+        title: "just a sec, still bringing a pasted attachment over :3",
         description: "stash again once its chip resolves.",
       });
       return;
@@ -4366,7 +4365,7 @@ export const ChatComposer = memo(function ChatComposer(props: ChatComposerProps)
       if (composerFileNeedsReattach(file)) {
         toastManager.add({
           type: "error",
-          title: "attach dropped files again or remove them before stashing 3:",
+          title: "pop the dropped files back on or remove them before stashing 3:",
         });
         return;
       }
@@ -4374,7 +4373,7 @@ export const ChatComposer = memo(function ChatComposer(props: ChatComposerProps)
       if (upload?.status !== "ready" || upload.environmentId !== environmentId) {
         toastManager.add({
           type: "error",
-          title: "wait for file uploads before stashing this prompt 3:",
+          title: "almost there — let the file uploads finish before stashing 3:",
         });
         return;
       }
@@ -4428,7 +4427,7 @@ export const ChatComposer = memo(function ChatComposer(props: ChatComposerProps)
       if (!written) {
         toastManager.add({
           type: "error",
-          title: "could not stash this prompt 3:",
+          title: "mrrp, couldn't stash this prompt 3:",
           description:
             "browser storage rejected the write, so the composer was left as-is. free up site data and try again.",
           data: { hideCopyButton: true },
@@ -4441,7 +4440,7 @@ export const ChatComposer = memo(function ChatComposer(props: ChatComposerProps)
       if (!durable) {
         toastManager.add({
           type: "warning",
-          title: "stashed prompt will not survive a reload 3:",
+          title: "heads up, this stashed prompt won't survive a reload 3:",
           description:
             "browser storage is unavailable, so this stash is kept in memory only for this session.",
           data: { hideCopyButton: true },
@@ -4477,7 +4476,7 @@ export const ChatComposer = memo(function ChatComposer(props: ChatComposerProps)
         }
         toastManager.add({
           type: "warning",
-          title: "oldest stashed prompt discarded 3:",
+          title: "the oldest stashed prompt had to go 3:",
           description: `the stash holds ${MAX_STASH_ENTRIES} prompts; the oldest was removed to make room.`,
           data: { hideCopyButton: true },
         });
@@ -4528,7 +4527,7 @@ export const ChatComposer = memo(function ChatComposer(props: ChatComposerProps)
         if (!imagesDurable && durable && images.length > 0) {
           toastManager.add({
             type: "warning",
-            title: "stashed images were not saved 3:",
+            title: "aw, the stashed images didn't save 3:",
             description:
               "the prompt was stashed, but browser storage rejected its images. they will be missing if you reload.",
             data: { hideCopyButton: true },
@@ -4540,7 +4539,7 @@ export const ChatComposer = memo(function ChatComposer(props: ChatComposerProps)
         // them evaporate.
         toastManager.add({
           type: "warning",
-          title: "stashed images did not attach 3:",
+          title: "aw, the stashed images didn't attach 3:",
           description: `that prompt was restored or deleted before ${kept.length} image${kept.length === 1 ? "" : "s"} finished saving. re-attach ${kept.length === 1 ? "it" : "them"} if you still need ${kept.length === 1 ? "it" : "them"}.`,
           data: { hideCopyButton: true },
         });
@@ -5150,7 +5149,7 @@ export const ChatComposer = memo(function ChatComposer(props: ChatComposerProps)
     ) {
       toastManager.add({
         type: "error",
-        title: "this question cannot accept attachments 3:",
+        title: "hmm, this question can't take attachments 3:",
       });
       return false;
     }
@@ -5195,7 +5194,7 @@ export const ChatComposer = memo(function ChatComposer(props: ChatComposerProps)
         replacedReattachMarkerIds.add(matchingReattachMarker.id);
       }
       if (!matchingReattachMarker && reservedCount >= PROVIDER_SEND_TURN_MAX_ATTACHMENTS) {
-        error = `you can attach up to ${PROVIDER_SEND_TURN_MAX_ATTACHMENTS} files per message :3`;
+        error = `that's the limit — up to ${PROVIDER_SEND_TURN_MAX_ATTACHMENTS} files per message :3`;
         // Keep scanning: a later file in this batch can still replace a
         // needs-reattach marker without needing a free slot.
         continue;
@@ -5208,7 +5207,7 @@ export const ChatComposer = memo(function ChatComposer(props: ChatComposerProps)
         acceptedImages.push(normalizeComposerImageFileMimeType(file));
       } else {
         if (fileStagingLimit === null) {
-          error = "this server does not support file attachments 3:";
+          error = "aw, this server doesn't support file attachments 3:";
           continue;
         }
         if (file.size <= 0) {
@@ -5254,7 +5253,7 @@ export const ChatComposer = memo(function ChatComposer(props: ChatComposerProps)
         const attached = storedFiles[0]!;
         toastManager.add({
           type: "info",
-          title: `large paste attached as ${attached.name} :3`,
+          title: `big paste, so we tucked it in as ${attached.name} :3`,
           description: `${formatAttachmentSize(attached.sizeBytes)} · use ${
             isMacPlatform(navigator.platform) ? "⌘⇧V" : "Ctrl+Shift+V"
           } to keep a large paste inline.`,
@@ -5283,8 +5282,8 @@ export const ChatComposer = memo(function ChatComposer(props: ChatComposerProps)
         if (!compressed.ok) {
           compressionError =
             compressed.reason === "unreadable"
-              ? `'${file.name}' could not be read as an image 3:`
-              : `'${file.name}' is too large to attach, even after compression 3:`;
+              ? `hmm, '${file.name}' couldn't be read as an image 3:`
+              : `aw, '${file.name}' is too large to attach, even after squishing it 3:`;
           continue;
         }
         const attachmentFile = compressed.file;
@@ -5428,8 +5427,8 @@ export const ChatComposer = memo(function ChatComposer(props: ChatComposerProps)
       }
       toastManager.add({
         type: "error",
-        title: "pasted text is too large for this message 3:",
-        description: "remove some text or an attachment, then paste again.",
+        title: "oops, that paste is too large for this message 3:",
+        description: "no worries — remove some text or an attachment, then paste again.",
         data: { hideCopyButton: true },
       });
       return true;
@@ -5450,7 +5449,7 @@ export const ChatComposer = memo(function ChatComposer(props: ChatComposerProps)
       if (!wouldExceedInputLimit) return false;
       toastManager.add({
         type: "error",
-        title: "pasted text is too large to attach 3:",
+        title: "oops, that paste is too large to attach 3:",
         description: "reduce the clipboard contents or save a smaller excerpt as a file.",
         data: { hideCopyButton: true },
       });
@@ -5590,8 +5589,8 @@ export const ChatComposer = memo(function ChatComposer(props: ChatComposerProps)
     onInsertRejected: () => {
       toastManager.add({
         type: "error",
-        title: "unable to add to chat 3:",
-        description: "the composer is busy; try again once it is ready.",
+        title: "mrrp, couldn't add that to the chat 3:",
+        description: "the composer is busy right now; try again once it is ready.",
       });
     },
   });
@@ -6188,13 +6187,13 @@ export const ChatComposer = memo(function ChatComposer(props: ChatComposerProps)
                 >
                   {activePendingProgress
                     ? isChoiceOnlyPendingQuestion
-                      ? "choose an option above :3"
+                      ? "pick an option above :3"
                       : activePendingProgress.customAnswer ||
-                        "type your own answer, or leave this blank to use the selected option :3"
+                        "type your own answer, or leave this blank and we'll go with the selected option :3"
                     : prompt.trim() ||
                       (showProviderUnavailable
-                        ? "enable a provider in settings 3:"
-                        : "ask anything. ;3")}
+                        ? "enable a provider in settings first 3:"
+                        : "ask me anything, nya ;3")}
                 </button>
                 {collapsedComposerImagePreviews}
                 <button
@@ -6369,8 +6368,8 @@ export const ChatComposer = memo(function ChatComposer(props: ChatComposerProps)
                                   className="max-w-64 whitespace-normal leading-tight"
                                 >
                                   {" "}
-                                  draft attachment could not be saved locally and may be lost on
-                                  navigation 3:
+                                  aw, this draft attachment couldn't be saved locally and may be
+                                  lost when you navigate away 3:
                                 </TooltipPopup>
                               </Tooltip>
                             )}
@@ -6691,20 +6690,20 @@ export const ChatComposer = memo(function ChatComposer(props: ChatComposerProps)
                     placeholder={
                       isComposerApprovalState
                         ? (activePendingApproval?.detail ??
-                          "resolve this approval request to continue ^w^")
+                          "answer this approval request and we'll keep going ^w^")
                         : activePendingProgress
                           ? isChoiceOnlyPendingQuestion
-                            ? "choose an option above :3"
-                            : "type your own answer, or leave this blank to use the selected option :3"
+                            ? "pick an option above :3"
+                            : "type your own answer, or leave this blank and we'll go with the selected option :3"
                           : showPlanFollowUpPrompt && activeProposedPlan
-                            ? "add feedback to refine the plan, or leave this blank to implement it ^w^"
+                            ? "add feedback to refine the plan, or leave this blank and we'll build it ^w^"
                             : projectSelectionRequired
-                              ? "choose a project above to start a thread ^w^"
+                              ? "pick a project above and we'll start a thread ^w^"
                               : showProviderUnavailable
-                                ? "enable a provider in settings to send a message 3:"
+                                ? "enable a provider in settings first, then we can chat 3:"
                                 : phase === "disconnected"
                                   ? DISCONNECTED_COMPOSER_PLACEHOLDER
-                                  : "ask anything, @tag files/folders, $use skills, or / for commands :3"
+                                  : "ask me anything, @tag files/folders, $use skills, or / for commands :3"
                     }
                     disabled={
                       isConnecting ||
@@ -6819,7 +6818,7 @@ export const ChatComposer = memo(function ChatComposer(props: ChatComposerProps)
                         >
                           <PaperclipIcon />
                         </TooltipTrigger>
-                        <TooltipPopup>attach files :3</TooltipPopup>
+                        <TooltipPopup>pop some files in :3</TooltipPopup>
                       </Tooltip>
                     </>
                   ) : null}

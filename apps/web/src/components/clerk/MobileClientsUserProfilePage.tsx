@@ -112,7 +112,7 @@ export function MobileClientsUserProfilePage() {
   return (
     <ClerkUserProfilePage
       title="mobile clients"
-      description="devices registered to receive T3 Connect activity from your environments ^w^"
+      description="the devices that get T3 Connect activity from your environments ^w^"
       action={
         <ClerkUserProfileRefreshButton
           isPending={devicesState.isPending}
@@ -128,7 +128,7 @@ export function MobileClientsUserProfilePage() {
           >
             <div>
               <p className="font-medium text-destructive-foreground">
-                could not load mobile clients 3:
+                hmm, couldn’t load your mobile clients 3:
               </p>
               <p className="mt-0.5 text-xs text-muted-foreground">{devicesState.error}</p>
             </div>

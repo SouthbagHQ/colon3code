@@ -272,11 +272,11 @@ function projectExpansionPreferenceKeys(project: SidebarProjectSnapshot): string
 function projectGroupingModeDescription(mode: SidebarProjectGroupingMode): string {
   switch (mode) {
     case "repository":
-      return "projects from the same repository share one sidebar row ;3";
+      return "projects from the same repository snuggle into one sidebar row ;3";
     case "repository_path":
-      return "projects group only when both the repository and repo-relative path match :3";
+      return "projects group up only when both the repository and repo-relative path match :3";
     case "separate":
-      return "every project path gets its own sidebar row ^w^";
+      return "every project path gets a sidebar row of its own ^w^";
   }
 }
 
@@ -449,7 +449,7 @@ const SidebarThreadRow = memo(function SidebarThreadRow(props: SidebarThreadRowP
         toastManager.add(
           stackedThreadToast({
             type: "error",
-            title: "unable to open preview 3:",
+            title: "hmm, couldn't open the preview 3:",
             description:
               error instanceof Error ? error.message : "The preview could not be opened.",
           }),
@@ -553,7 +553,7 @@ const SidebarThreadRow = memo(function SidebarThreadRow(props: SidebarThreadRowP
             toastManager.add(
               stackedThreadToast({
                 type: "error",
-                title: "thread action failed 3:",
+                title: "mrrp, that thread action didn't work 3:",
                 description: error instanceof Error ? error.message : "An error occurred.",
               }),
             );
@@ -577,7 +577,7 @@ const SidebarThreadRow = memo(function SidebarThreadRow(props: SidebarThreadRowP
           toastManager.add(
             stackedThreadToast({
               type: "error",
-              title: "thread action failed 3:",
+              title: "mrrp, that thread action didn't work 3:",
               description: error instanceof Error ? error.message : "An error occurred.",
             }),
           );
@@ -1047,7 +1047,7 @@ const SidebarProjectThreadList = memo(function SidebarProjectThreadList(
             data-thread-selection-safe
             className="flex h-8 w-full translate-x-0 items-center px-2 text-left text-xs text-sidebar-muted-foreground/75"
           >
-            <span>nothing here yet 3:</span>
+            <span>nothing here yet, all quiet 3:</span>
           </div>
         </SidebarMenuSubItem>
       ) : null}
@@ -1208,7 +1208,7 @@ const SidebarProjectItem = memo(function SidebarProjectItem(props: SidebarProjec
     onCopy: (ctx) => {
       toastManager.add({
         type: "success",
-        title: "thread ID copied :3",
+        title: "copied the thread ID for you :3",
         description: ctx.threadId,
       });
     },
@@ -1216,7 +1216,7 @@ const SidebarProjectItem = memo(function SidebarProjectItem(props: SidebarProjec
       toastManager.add(
         stackedThreadToast({
           type: "error",
-          title: "failed to copy thread ID 3:",
+          title: "aw, couldn't copy the thread ID 3:",
           description: error instanceof Error ? error.message : "An error occurred.",
         }),
       );
@@ -1228,7 +1228,7 @@ const SidebarProjectItem = memo(function SidebarProjectItem(props: SidebarProjec
     onCopy: (ctx) => {
       toastManager.add({
         type: "success",
-        title: "path copied :3",
+        title: "copied the path for you :3",
         description: ctx.path,
       });
     },
@@ -1236,7 +1236,7 @@ const SidebarProjectItem = memo(function SidebarProjectItem(props: SidebarProjec
       toastManager.add(
         stackedThreadToast({
           type: "error",
-          title: "failed to copy path 3:",
+          title: "aw, couldn't copy the path 3:",
           description: error instanceof Error ? error.message : "An error occurred.",
         }),
       );
@@ -1550,8 +1550,8 @@ const SidebarProjectItem = memo(function SidebarProjectItem(props: SidebarProjec
         const warningToastId = toastManager.add(
           stackedThreadToast({
             type: "warning",
-            title: "project is not empty 3:",
-            description: "delete all threads in this project before removing it :3",
+            title: "hmm, that project isn't empty 3:",
+            description: "delete all the threads in this project first, then we can remove it :3",
             actionVariant: "destructive",
             actionProps: {
               children: "delete anyway",
@@ -1579,9 +1579,9 @@ const SidebarProjectItem = memo(function SidebarProjectItem(props: SidebarProjec
                           ...(member.environmentLabel
                             ? [`environment: ${member.environmentLabel}`]
                             : []),
-                          "this permanently clears conversation history for those threads and any archived threads ;3",
+                          "this permanently clears the conversation history for those threads and any archived ones, and we can't bring it back ;3",
                           "this removes only this project entry.",
-                          "this action cannot be undone 3:",
+                          "there's no undo for this one 3:",
                         ].join("\n")
                       : [
                           `remove project "${member.title}"?`,
@@ -1589,7 +1589,7 @@ const SidebarProjectItem = memo(function SidebarProjectItem(props: SidebarProjec
                           ...(member.environmentLabel
                             ? [`environment: ${member.environmentLabel}`]
                             : []),
-                          "this permanently clears any archived conversation history :3",
+                          "this permanently clears any archived conversation history, and we can't bring it back :3",
                           "this removes only this project entry.",
                         ].join("\n"),
                     { variant: "destructive" },
@@ -1604,17 +1604,19 @@ const SidebarProjectItem = memo(function SidebarProjectItem(props: SidebarProjec
                     toastManager.add(
                       stackedThreadToast({
                         type: "error",
-                        title: `failed to remove "${member.title}" 3:`,
+                        title: `aw, couldn't remove "${member.title}" 3:`,
                         description:
                           error instanceof Error
                             ? error.message
-                            : "unknown error removing project 3:",
+                            : "something unknown went wrong removing the project 3:",
                       }),
                     );
                   }
                 })().catch((error) => {
                   const message =
-                    error instanceof Error ? error.message : "unknown error removing project 3:";
+                    error instanceof Error
+                      ? error.message
+                      : "something unknown went wrong removing the project 3:";
                   console.error("Failed to remove project", {
                     projectId: member.id,
                     environmentId: member.environmentId,
@@ -1623,7 +1625,7 @@ const SidebarProjectItem = memo(function SidebarProjectItem(props: SidebarProjec
                   toastManager.add(
                     stackedThreadToast({
                       type: "error",
-                      title: `failed to remove "${member.title}" 3:`,
+                      title: `aw, couldn't remove "${member.title}" 3:`,
                       description: message,
                     }),
                   );
@@ -1639,7 +1641,7 @@ const SidebarProjectItem = memo(function SidebarProjectItem(props: SidebarProjec
         `remove project "${member.title}"?`,
         `path: ${member.workspaceRoot}`,
         ...(member.environmentLabel ? [`environment: ${member.environmentLabel}`] : []),
-        "this permanently clears any archived conversation history :3",
+        "this permanently clears any archived conversation history, and we can't bring it back :3",
         "this removes only this project entry.",
       ].join("\n");
       const confirmed = await api.dialogs.confirm(message, { variant: "destructive" });
@@ -1651,7 +1653,9 @@ const SidebarProjectItem = memo(function SidebarProjectItem(props: SidebarProjec
       if (result._tag === "Failure" && !isAtomCommandInterrupted(result)) {
         const error = squashAtomCommandFailure(result);
         const message =
-          error instanceof Error ? error.message : "unknown error removing project 3:";
+          error instanceof Error
+            ? error.message
+            : "something unknown went wrong removing the project 3:";
         console.error("Failed to remove project", {
           projectId: member.id,
           environmentId: member.environmentId,
@@ -1660,7 +1664,7 @@ const SidebarProjectItem = memo(function SidebarProjectItem(props: SidebarProjec
         toastManager.add(
           stackedThreadToast({
             type: "error",
-            title: `failed to remove "${member.title}" 3:`,
+            title: `aw, couldn't remove "${member.title}" 3:`,
             description: message,
           }),
         );
@@ -1928,7 +1932,7 @@ const SidebarProjectItem = memo(function SidebarProjectItem(props: SidebarProjec
           toastManager.add(
             stackedThreadToast({
               type: "error",
-              title: "thread archived, but navigation failed 3:",
+              title: "thread archived, but we couldn't navigate away 3:",
               description: error instanceof Error ? error.message : "An error occurred.",
             }),
           );
@@ -1940,7 +1944,7 @@ const SidebarProjectItem = memo(function SidebarProjectItem(props: SidebarProjec
             toastManager.add(
               stackedThreadToast({
                 type: "error",
-                title: "failed to archive threads 3:",
+                title: "aw, couldn't archive those threads 3:",
                 description: error instanceof Error ? error.message : "An error occurred.",
               }),
             );
@@ -1957,7 +1961,7 @@ const SidebarProjectItem = memo(function SidebarProjectItem(props: SidebarProjec
         const confirmed = await api.dialogs.confirm(
           [
             `delete ${count} thread${count === 1 ? "" : "s"}?`,
-            "this permanently clears conversation history for these threads :3",
+            "this permanently clears the conversation history for these threads, and we can't bring it back :3",
           ].join("\n"),
           { variant: "destructive" },
         );
@@ -1974,7 +1978,7 @@ const SidebarProjectItem = memo(function SidebarProjectItem(props: SidebarProjec
         toastManager.add(
           stackedThreadToast({
             type: "error",
-            title: "failed to delete threads 3:",
+            title: "aw, couldn't delete those threads 3:",
             description: firstError instanceof Error ? firstError.message : "An error occurred.",
           }),
         );
@@ -2013,7 +2017,7 @@ const SidebarProjectItem = memo(function SidebarProjectItem(props: SidebarProjec
           toastManager.add(
             stackedThreadToast({
               type: "error",
-              title: "could not create thread 3:",
+              title: "aw, couldn't start a new thread 3:",
               description: error instanceof Error ? error.message : "An error occurred.",
             }),
           );
@@ -2055,7 +2059,7 @@ const SidebarProjectItem = memo(function SidebarProjectItem(props: SidebarProjec
           toastManager.add(
             stackedThreadToast({
               type: "error",
-              title: "could not choose environment 3:",
+              title: "oops, couldn't choose that environment 3:",
               description: error instanceof Error ? error.message : "An error occurred.",
             }),
           );
@@ -2085,7 +2089,7 @@ const SidebarProjectItem = memo(function SidebarProjectItem(props: SidebarProjec
         toastManager.add(
           stackedThreadToast({
             type: "error",
-            title: "failed to archive thread 3:",
+            title: "aw, couldn't archive that thread 3:",
             description: error instanceof Error ? error.message : "An error occurred.",
           }),
         );
@@ -2120,7 +2124,7 @@ const SidebarProjectItem = memo(function SidebarProjectItem(props: SidebarProjec
       if (trimmed.length === 0) {
         toastManager.add({
           type: "warning",
-          title: "thread title cannot be empty 3:",
+          title: "hmm, a thread needs a title 3:",
         });
         finishRename();
         return;
@@ -2141,7 +2145,7 @@ const SidebarProjectItem = memo(function SidebarProjectItem(props: SidebarProjec
         toastManager.add(
           stackedThreadToast({
             type: "error",
-            title: "failed to rename thread 3:",
+            title: "aw, couldn't rename that thread 3:",
             description: error instanceof Error ? error.message : "An error occurred.",
           }),
         );
@@ -2165,7 +2169,7 @@ const SidebarProjectItem = memo(function SidebarProjectItem(props: SidebarProjec
     if (trimmed.length === 0) {
       toastManager.add({
         type: "warning",
-        title: "project title cannot be empty 3:",
+        title: "hmm, a project needs a title 3:",
       });
       return;
     }
@@ -2189,7 +2193,7 @@ const SidebarProjectItem = memo(function SidebarProjectItem(props: SidebarProjec
       toastManager.add(
         stackedThreadToast({
           type: "error",
-          title: "failed to rename project 3:",
+          title: "aw, couldn't rename that project 3:",
           description: error instanceof Error ? error.message : "An error occurred.",
         }),
       );
@@ -2279,7 +2283,7 @@ const SidebarProjectItem = memo(function SidebarProjectItem(props: SidebarProjec
           toastManager.add(
             stackedThreadToast({
               type: "error",
-              title: "could not create thread 3:",
+              title: "aw, couldn't start a new thread 3:",
               description: error instanceof Error ? error.message : "An error occurred.",
             }),
           );
@@ -2301,8 +2305,8 @@ const SidebarProjectItem = memo(function SidebarProjectItem(props: SidebarProjec
           toastManager.add(
             stackedThreadToast({
               type: "error",
-              title: "path unavailable 3:",
-              description: "this thread does not have a workspace path to copy ^w^",
+              title: "hmm, no path here 3:",
+              description: "this thread doesn't have a workspace path we could copy ^w^",
             }),
           );
           return;
@@ -2319,7 +2323,7 @@ const SidebarProjectItem = memo(function SidebarProjectItem(props: SidebarProjec
         const confirmed = await api.dialogs.confirm(
           [
             `delete thread "${thread.title}"?`,
-            "this permanently clears conversation history for this thread ;3",
+            "this permanently clears this thread's conversation history, and we can't bring it back ;3",
           ].join("\n"),
           { variant: "destructive" },
         );
@@ -2333,7 +2337,7 @@ const SidebarProjectItem = memo(function SidebarProjectItem(props: SidebarProjec
         toastManager.add(
           stackedThreadToast({
             type: "error",
-            title: "failed to delete thread 3:",
+            title: "aw, couldn't delete that thread 3:",
             description: error instanceof Error ? error.message : "An error occurred.",
           }),
         );
@@ -2512,9 +2516,8 @@ const SidebarProjectItem = memo(function SidebarProjectItem(props: SidebarProjec
             <DialogTitle>rename project</DialogTitle>
             <DialogDescription>
               {projectRenameTarget
-                ? `update the title for ${projectRenameTarget.workspaceRoot} :3`
-                : "update the project title :3"}{" "}
-              ^w^
+                ? `give ${projectRenameTarget.workspaceRoot} a new title :3`
+                : "give this project a new title :3"}
             </DialogDescription>
           </DialogHeader>
           <DialogPanel className="space-y-4">
@@ -2560,9 +2563,8 @@ const SidebarProjectItem = memo(function SidebarProjectItem(props: SidebarProjec
             <DialogTitle>project grouping</DialogTitle>
             <DialogDescription>
               {projectGroupingTarget
-                ? `choose how ${projectGroupingTarget.workspaceRoot} should be grouped in the sidebar :3`
-                : "choose how this project should be grouped in the sidebar ;3"}{" "}
-              ^w^
+                ? `pick how ${projectGroupingTarget.workspaceRoot} should be grouped in the sidebar :3`
+                : "pick how this project should be grouped in the sidebar ;3"}
             </DialogDescription>
           </DialogHeader>
           <DialogPanel className="space-y-4">
@@ -2693,14 +2695,13 @@ function LocalSecondaryStatus() {
         <Alert variant="warning" className="rounded-2xl border-warning/40 bg-warning/8">
           <TriangleAlertIcon />
           <AlertTitle>
-            couldn't connect {failed.map((entry) => entry.label).join(", ")} 3:
+            aw, couldn't connect {failed.map((entry) => entry.label).join(", ")} 3:
           </AlertTitle>
           <AlertDescription>
             {failed
               .map((entry) => entry.error)
               .filter(Boolean)
-              .join("; ") || "the backend didn't respond ;3"}{" "}
-            ^w^
+              .join("; ") || "the backend didn't answer us ;3"}
           </AlertDescription>
         </Alert>
       ) : null}
@@ -3134,7 +3135,7 @@ const SidebarProjectsContent = memo(function SidebarProjectsContent(
 
         {projectsLength === 0 && (
           <div className="px-2 pt-4 text-center text-secondary-label text-xs">
-            no projects yet :3
+            no projects yet — let's add one :3
           </div>
         )}
       </SidebarGroup>
@@ -3690,7 +3691,7 @@ export default function LegacySidebar() {
           toastManager.add(
             stackedThreadToast({
               type: "error",
-              title: "could not download update 3:",
+              title: "aw, couldn't download the update 3:",
               description: actionError,
             }),
           );
@@ -3699,7 +3700,7 @@ export default function LegacySidebar() {
           toastManager.add(
             stackedThreadToast({
               type: "error",
-              title: "could not start update download 3:",
+              title: "aw, couldn't start the update download 3:",
               description: error instanceof Error ? error.message : "An unexpected error occurred.",
             }),
           );
@@ -3719,7 +3720,7 @@ export default function LegacySidebar() {
         toastManager.add(
           stackedThreadToast({
             type: "error",
-            title: "could not confirm update 3:",
+            title: "aw, couldn't confirm the update 3:",
             description: error instanceof Error ? error.message : "Update confirmation failed.",
           }),
         );
@@ -3738,7 +3739,7 @@ export default function LegacySidebar() {
           toastManager.add(
             stackedThreadToast({
               type: "error",
-              title: "could not install update 3:",
+              title: "aw, couldn't install the update 3:",
               description: actionError,
             }),
           );
@@ -3747,7 +3748,7 @@ export default function LegacySidebar() {
           toastManager.add(
             stackedThreadToast({
               type: "error",
-              title: "could not install update 3:",
+              title: "aw, couldn't install the update 3:",
               description: error instanceof Error ? error.message : "An unexpected error occurred.",
             }),
           );

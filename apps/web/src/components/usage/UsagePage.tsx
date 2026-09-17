@@ -504,7 +504,7 @@ export function UsagePage() {
                           <tr>
                             <td colSpan={4} className="py-6 text-center text-muted-foreground">
                               {" "}
-                              no activity in this window :3
+                              no activity in this window, all quiet :3
                             </td>
                           </tr>
                         ) : (
@@ -567,7 +567,7 @@ export function UsagePage() {
                               className="py-6 text-center text-muted-foreground"
                             >
                               {" "}
-                              no activity in this window :3
+                              no activity in this window, all quiet :3
                             </td>
                           </tr>
                         ) : (
@@ -798,7 +798,7 @@ function UsageEnvironmentFilter({
           {showUsageStatus && isPartial ? (
             <p className="px-2 py-2 text-xs text-muted-foreground">
               {" "}
-              totals are partial while selected environments scan :3
+              totals are partial while the selected environments scan — almost there :3
             </p>
           ) : null}
           {showUsageStatus ? (

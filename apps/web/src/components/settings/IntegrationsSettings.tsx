@@ -279,7 +279,7 @@ function BrowserViewportSetting({ disabled }: { readonly disabled: boolean }) {
   return (
     <SettingsRow
       {...searchableSetting("browser-default-viewport")}
-      description="tab size for you and agents. fill fits the panel; other sizes show the device toolbar ^w^"
+      description="tab size for you and your agents. fill hugs the panel; other sizes show the device toolbar ^w^"
       resetAction={
         !disabled && viewport._tag !== DEFAULT_BROWSER_VIEWPORT._tag ? (
           <SettingResetButton
@@ -388,7 +388,7 @@ function BrowserZoomSetting({ disabled }: { readonly disabled: boolean }) {
   return (
     <SettingsRow
       {...searchableSetting("browser-default-zoom")}
-      description="page zoom applied to new browser tabs :3"
+      description="the page zoom new browser tabs open with :3"
       resetAction={
         !disabled && zoomFactor !== DEFAULT_PREVIEW_ZOOM_FACTOR ? (
           <SettingResetButton
@@ -431,7 +431,7 @@ function BrowserAppearanceSetting({ disabled }: { readonly disabled: boolean }) 
   return (
     <SettingsRow
       {...searchableSetting("browser-default-appearance")}
-      description="the color scheme pages are told to prefer. system follows your OS setting ^w^"
+      description="the color scheme we tell pages to prefer. system follows your OS setting ^w^"
       resetAction={
         !disabled && appearance !== DEFAULT_PREVIEW_APPEARANCE ? (
           <SettingResetButton
@@ -477,7 +477,7 @@ function BrowserRecordingFrameRateSetting({ disabled }: { readonly disabled: boo
   return (
     <SettingsRow
       {...searchableSetting("browser-recording-frame-rate")}
-      description="maximum recording rate. 30 fps saves CPU and storage; 60 fps is smoother :3"
+      description="the top recording rate. 30 fps is easy on CPU and storage; 60 fps is smoother :3"
       resetAction={
         !disabled && frameRate !== DEFAULT_BROWSER_RECORDING_FRAME_RATE ? (
           <SettingResetButton
@@ -531,7 +531,7 @@ function BrowserLinkTargetSetting({ disabled }: { readonly disabled: boolean }) 
   return (
     <SettingsRow
       {...searchableSetting("browser-link-target")}
-      description="where links in the chat and terminal open. hold ⌘ or Ctrl while clicking a link to open it in your default browser either way :3"
+      description="where links from the chat and terminal open. hold ⌘ or Ctrl while clicking a link to pop it into your default browser either way :3"
       resetAction={
         !disabled && linkTarget !== DEFAULT_BROWSER_LINK_TARGET ? (
           <SettingResetButton
@@ -636,7 +636,7 @@ function DeviceIntegrationControls({
       if (failed.length > 0) {
         toastManager.add({
           type: "error",
-          title: "device settings not saved on all environments 3:",
+          title: "aw, device settings didn't save on every environment 3:",
           description: `could not update ${failed.map((environment) => environment.label).join(", ")}.`,
         });
       }
@@ -676,7 +676,7 @@ function DeviceIntegrationControls({
             {...searchableSetting("device-platform-support")}
             description={
               connectedEnvironments.length > 1
-                ? `status for ${connectedEnvironments.find((environment) => environment.environmentId === environmentId)?.label}select an environment to inspect its simulator support :3`
+                ? `status for ${connectedEnvironments.find((environment) => environment.environmentId === environmentId)?.label}. pick an environment to peek at its simulator support :3`
                 : undefined
             }
             status={
@@ -749,7 +749,7 @@ function BrowserAutoShowFloatingPreviewSetting({ disabled }: { readonly disabled
   return (
     <SettingsRow
       {...searchableSetting("browser-auto-show-floating-preview")}
-      description="show the floating preview when an agent opens a browser or device unless the agent says otherwise :3"
+      description="pop up the floating preview when an agent opens a browser or device, unless the agent says otherwise :3"
       resetAction={
         !disabled && autoShow !== DEFAULT_BROWSER_AUTO_SHOW_FLOATING_PREVIEW ? (
           <SettingResetButton
@@ -858,7 +858,7 @@ function BrowserProfilesSetting({ disabled }: { readonly disabled: boolean }) {
     if (!previewBridge || !environmentsReady || environments.length === 0) {
       toastManager.add({
         type: "error",
-        title: `could not clear ${name}'s data 3:`,
+        title: `oops, couldn't clear ${name}'s data 3:`,
         description: "you're not connected to a server yet ^w^",
       });
       return;
@@ -869,17 +869,20 @@ function BrowserProfilesSetting({ disabled }: { readonly disabled: boolean }) {
       id,
     )
       .then(() => {
-        toastManager.add({ type: "success", title: `cleared ${name}'s cookies and cache :3` });
+        toastManager.add({
+          type: "success",
+          title: `cleared ${name}'s cookies and cache, all tidy :3`,
+        });
       })
       .catch(() => {
-        toastManager.add({ type: "error", title: `could not clear ${name}'s data 3:` });
+        toastManager.add({ type: "error", title: `oops, couldn't clear ${name}'s data 3:` });
       });
   };
 
   const removeProfile = async (id: string) => {
     if (!settingsHydrated || importInFlightRef.current) return;
     if (!removalAvailable) {
-      setProfileRemovalError("connect to an environment before removing this profile :3");
+      setProfileRemovalError("connect to an environment first, then we can remove this profile :3");
       return;
     }
     setProfileRemovalError(null);
@@ -893,7 +896,7 @@ function BrowserProfilesSetting({ disabled }: { readonly disabled: boolean }) {
         id,
       );
     } catch {
-      setProfileRemovalError("profile data could not be deleted 3: try again.");
+      setProfileRemovalError("aw, the profile data couldn't be deleted. want to try again? 3:");
       setProfileRemovalInFlight(false);
       return;
     }
@@ -1056,7 +1059,7 @@ function BrowserProfilesSetting({ disabled }: { readonly disabled: boolean }) {
   return (
     <SettingsRow
       {...searchableSetting("browser-profiles")}
-      description="profiles separate cookies and logins. incognito data is cleared when the app closes :3"
+      description="profiles keep cookies and logins apart. incognito data is cleared when the app closes :3"
       control={
         <Menu onOpenChange={(open) => open && loadSources()}>
           <MenuTrigger
@@ -1079,7 +1082,7 @@ function BrowserProfilesSetting({ disabled }: { readonly disabled: boolean }) {
               blank profile
             </MenuItem>
             {atProfileLimit ? (
-              <MenuItem disabled>you&rsquo;ve reached the profile limit :3</MenuItem>
+              <MenuItem disabled>you&rsquo;ve reached the profile limit, that's plenty :3</MenuItem>
             ) : null}
             <MenuSeparator />
             <MenuGroup>
@@ -1087,7 +1090,7 @@ function BrowserProfilesSetting({ disabled }: { readonly disabled: boolean }) {
               {sources === null ? (
                 <MenuItem disabled>looking for browsers…</MenuItem>
               ) : importableSources.length === 0 ? (
-                <MenuItem disabled>no supported browsers found 3:</MenuItem>
+                <MenuItem disabled>hmm, no supported browsers found 3:</MenuItem>
               ) : (
                 // Every source is a plain row — running, needs-permission and
                 // ready all look the same here. The wizard picks up whatever
@@ -1247,7 +1250,7 @@ function BrowserProfilesSetting({ disabled }: { readonly disabled: boolean }) {
             <AlertDialogTitle>remove “{profilePendingRemoval?.name}”?</AlertDialogTitle>
             <AlertDialogDescription>
               {" "}
-              its cookies and logins are deleted. tabs already open in this profile stay open until
+              its cookies and logins get deleted. tabs already open in this profile stay open until
               you close them ^w^
             </AlertDialogDescription>
             {profileRemovalError ? (
@@ -1258,7 +1261,7 @@ function BrowserProfilesSetting({ disabled }: { readonly disabled: boolean }) {
             {!removalAvailable ? (
               <p className="text-sm text-muted-foreground">
                 {" "}
-                connect to an environment to remove this profile and its data ^w^
+                connect to an environment and we can remove this profile and its data ^w^
               </p>
             ) : null}
           </AlertDialogHeader>
@@ -1306,7 +1309,7 @@ function BrowserProfilesSetting({ disabled }: { readonly disabled: boolean }) {
               .catch(() => {
                 toastManager.add({
                   type: "error",
-                  title: "could not open System Settings 3:",
+                  title: "oops, couldn't open System Settings 3:",
                   description: "open Privacy & Security → Full Disk Access manually.",
                 });
               });

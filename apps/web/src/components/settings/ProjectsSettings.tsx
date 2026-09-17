@@ -25,7 +25,7 @@ export function ProjectsSettings() {
         <p className="p-8 text-sm text-muted-foreground">{scope.message}</p>
       ) : (
         <SettingsScopeNotice target="project">
-          choose a project to manage its name, icon, checkouts and actions uwu
+          pick a project and we'll look after its name, icon, checkouts and actions uwu
         </SettingsScopeNotice>
       )}
     </div>

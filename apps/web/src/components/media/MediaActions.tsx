@@ -88,7 +88,7 @@ export function MediaActions({
     if (!api || menuOpen.current) return;
     menuOpen.current = true;
     setTooltipOpen(false);
-    let failureTitle = "could not open media menu 3:";
+    let failureTitle = "hmm, couldn't open the media menu 3:";
     let progressToast: ReturnType<typeof toastManager.add> | undefined;
     try {
       const noun = source.kind === "image" ? "image" : "video";
@@ -117,7 +117,7 @@ export function MediaActions({
 
       const action = await api.contextMenu.show(items, position);
       if (!action) return;
-      failureTitle = `could not ${items.find((item) => item.id === action)?.label.toLowerCase() ?? "complete media action"} 3:`;
+      failureTitle = `oops, couldn't ${items.find((item) => item.id === action)?.label.toLowerCase() ?? "complete media action"} 3:`;
       const text =
         action === "copy-full-path" && reference?.kind === "file"
           ? reference.path
@@ -130,7 +130,7 @@ export function MediaActions({
         await writeTextToClipboard(text, reference?.kind === "file" ? "file path" : "URL");
         toastManager.add({
           type: "success",
-          title: action === "copy-url" ? "URL copied :3" : "path copied :3",
+          title: action === "copy-url" ? "URL copied for you :3" : "path copied for you :3",
         });
       } else if (action === "open-file") {
         source.onOpenFile?.();
@@ -142,14 +142,15 @@ export function MediaActions({
         await (action === "save" ? save() : copyImage());
         toastManager.update(progressToast, {
           type: "success",
-          title: action === "save" ? "download started :3" : "image copied :3",
+          title: action === "save" ? "download started, yay :3" : "image copied for you :3",
         });
       }
     } catch (error) {
       const toast = stackedThreadToast({
         type: "error",
         title: failureTitle,
-        description: error instanceof Error ? error.message : "the media action failed 3:",
+        description:
+          error instanceof Error ? error.message : "that media action didn't go through 3:",
       });
       if (progressToast) toastManager.update(progressToast, toast);
       else toastManager.add(toast);

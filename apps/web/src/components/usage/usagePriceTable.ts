@@ -70,10 +70,10 @@ export function usagePriceTableChanges(
       errors.set(
         draft.id,
         model === ""
-          ? "enter a model ID ^w^"
+          ? "pop in a model ID ^w^"
           : missing
             ? `${missing.label} is required on ${target.label}.`
-            : "use non-negative numbers for prices ^w^",
+            : "prices need to be zero or more ^w^",
       );
       continue;
     }

@@ -65,7 +65,9 @@ export function RelayClientInstallDialog() {
             <DownloadIcon aria-hidden className="size-4.5 text-muted-foreground" />
           </div>
           <DialogTitle>
-            {isInstalling ? "installing relay client… ^w^" : "install relay client? :3"}
+            {isInstalling
+              ? "installing the relay client, hang tight… ^w^"
+              : "install the relay client? :3"}
           </DialogTitle>
           <DialogDescription>
             {isInstalling

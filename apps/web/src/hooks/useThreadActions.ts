@@ -151,7 +151,7 @@ export async function requestThreadUnpinConfirmation(input: {
     confirm(
       [
         `unpin thread "${input.title}"?`,
-        "this will move the thread out of your pinned section :3",
+        "this tucks the thread back out of your pinned section :3",
       ].join("\n"),
     ),
   );
@@ -165,7 +165,7 @@ export async function navigateAfterThreadDeletion(navigate: () => Promise<void>)
     toastManager.add(
       stackedThreadToast({
         type: "error",
-        title: "thread deleted, but navigation failed 3:",
+        title: "thread deleted, but we couldn't navigate away 3:",
         description: error instanceof Error ? error.message : "an error occurred.",
       }),
     );
@@ -360,10 +360,10 @@ export function useThreadActions() {
         const confirmationResult = await settlePromise(() =>
           localApi.dialogs.confirm(
             [
-              "this thread is the only one linked to this worktree: ^w^",
+              "this is the only thread linked to this worktree: ^w^",
               displayWorktreePath ?? orphanedWorktreePath,
               "",
-              "delete the worktree too? 3:",
+              "should we delete the worktree too? 3:",
             ].join("\n"),
             { variant: "destructive" },
           ),
@@ -469,8 +469,8 @@ export function useThreadActions() {
           stackedThreadToast({
             type: "error",
             title: removalFailed
-              ? "failed to delete worktree 3:"
-              : "worktree deleted, but Git status refresh failed 3:",
+              ? "aw, couldn't delete the worktree 3:"
+              : "worktree deleted, but the Git status refresh didn't go through 3:",
             description: removalFailed
               ? `could not remove ${displayWorktreePath ?? orphanedWorktreePath}. ${message}`
               : message,
@@ -733,7 +733,7 @@ export function useThreadActions() {
           localApi.dialogs.confirm(
             [
               `delete thread "${title}"?`,
-              "this permanently clears conversation history for this thread :3",
+              "this permanently clears this thread's conversation history, so be sure :3",
             ].join("\n"),
             { variant: "destructive" },
           ),

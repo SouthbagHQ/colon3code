@@ -38,7 +38,9 @@ function StackBody({
       <PullRequestStackHeader number={stackNumber} />
       <MenuGroupLabel>
         {query.error ??
-          (query.isPending ? "loading stack… ^w^" : "this pull request is no longer in a stack 3:")}
+          (query.isPending
+            ? "grabbing the stack… ^w^"
+            : "this pull request isn't in a stack anymore 3:")}
       </MenuGroupLabel>
     </>
   );

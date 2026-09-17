@@ -22,7 +22,7 @@ import {
 } from "./versionSkew";
 
 const MISMATCH_HINT =
-  "version mismatch. try syncing the client and server to the same :3 Code version.";
+  "hmm, version mismatch — try syncing the client and server to the same :3 Code version.";
 
 describe("versionSkew", () => {
   beforeEach(() => {

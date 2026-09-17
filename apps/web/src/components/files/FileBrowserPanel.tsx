@@ -187,13 +187,13 @@ export default function FileBrowserPanel({
           await writeTextToClipboard(mention);
           toastManager.add({
             type: "success",
-            title: "mention copied :3",
+            title: "copied the mention for you :3",
             description: relativePath,
           });
         } catch (error) {
           toastManager.add({
             type: "error",
-            title: "failed to copy mention 3:",
+            title: "oops, couldn't copy the mention 3:",
             description: error instanceof Error ? error.message : "an error occurred.",
           });
         }
@@ -204,8 +204,8 @@ export default function FileBrowserPanel({
         if (!composer) {
           toastManager.add({
             type: "error",
-            title: "unable to add to chat 3:",
-            description: "open a chat for this project and try again :3",
+            title: "hmm, couldn't add that to the chat 3:",
+            description: "open a chat for this project, then try again :3",
           });
           return;
         }
@@ -213,8 +213,8 @@ export default function FileBrowserPanel({
         if (!inserted) {
           toastManager.add({
             type: "error",
-            title: "unable to add to chat 3:",
-            description: "the chat isn't ready to accept input right now :3",
+            title: "hmm, couldn't add that to the chat 3:",
+            description: "the chat isn't ready for input just yet — give it a sec :3",
           });
         }
       }
@@ -514,12 +514,12 @@ export default function FileBrowserPanel({
           onClick={handleRefresh}
           className="p-4 text-left text-xs leading-relaxed text-destructive"
         >
-          {error ?? pathSearch.error} click to retry 3:
+          {error ?? pathSearch.error} click to try again 3:
         </button>
       ) : null}
       {query.trim() && pathSearch.truncated && !pathSearch.isPending ? (
         <div className="px-3 py-1 text-xs text-muted-foreground">
-          more matches available. refine your search :3
+          there are more matches — narrow your search a little :3
         </div>
       ) : null}
       {(isPending || pathSearch.isPending) && (

@@ -13,7 +13,7 @@ export function showAnchoredCopySuccessToast(ref: RefObject<HTMLButtonElement | 
       anchor: ref.current,
     },
     timeout: ANCHORED_COPY_TOAST_TIMEOUT_MS,
-    title: "copied :3",
+    title: "copied it for you :3",
   });
 }
 
@@ -27,7 +27,7 @@ export function showAnchoredCopyErrorToast(ref: RefObject<HTMLButtonElement | nu
       anchor: ref.current,
     },
     timeout: ANCHORED_COPY_TOAST_TIMEOUT_MS,
-    title: "failed to copy 3:",
+    title: "aw, couldn't copy that 3:",
     description: error.message,
   });
 }

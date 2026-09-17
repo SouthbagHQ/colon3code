@@ -79,17 +79,17 @@ export function resolveSettingsScope(
   });
 
   if (search.checkout && !search.project) {
-    return unavailable("project-required", "select a project to choose one of its checkouts ;3");
+    return unavailable("project-required", "pick a project first, then one of its checkouts ;3");
   }
 
   const environment = environments.find((candidate) => candidate.environmentId === search.machine);
   if (search.machine && !environment) {
-    return unavailable("environment-missing", "this environment is no longer available 3:");
+    return unavailable("environment-missing", "aw, this environment isn't around anymore 3:");
   }
 
   if (search.project) {
     const group = groups.find((candidate) => candidate.projectKey === search.project);
-    if (!group) return unavailable("project-missing", "this project is no longer available 3:");
+    if (!group) return unavailable("project-missing", "aw, this project isn't around anymore 3:");
     const members = group.memberProjects.filter(
       (member) =>
         (search.machine === undefined || member.environmentId === search.machine) &&
@@ -99,8 +99,8 @@ export function resolveSettingsScope(
       return unavailable(
         "checkout-missing",
         search.checkout
-          ? "this checkout is no longer available in the selected project and environment 3:"
-          : "this project has no checkout on this environment ;3",
+          ? "aw, this checkout isn't in the selected project and environment anymore 3:"
+          : "this project has no checkout on this environment yet ;3",
       );
     }
     if (search.checkout) {
@@ -111,7 +111,7 @@ export function resolveSettingsScope(
       if (!checkoutEnvironment) {
         return unavailable(
           "environment-missing",
-          "this checkout's environment is no longer available 3:",
+          "aw, this checkout's environment isn't around anymore 3:",
         );
       }
       const sharesEnvironment = group.memberProjects.some(

@@ -101,7 +101,7 @@ export function getDesktopUpdateInstallConfirmationMessage(
   state: Pick<DesktopUpdateState, "availableVersion" | "downloadedVersion">,
 ): string {
   const version = state.downloadedVersion ?? state.availableVersion;
-  return `install update${version ? ` ${version}` : ""} and restart :3 Code?\n\nany running tasks will be interrupted. make sure you're ready before continuing.`;
+  return `install update${version ? ` ${version}` : ""} and restart :3 Code?\n\nany running tasks will be interrupted, so make sure you're ready before we continue.`;
 }
 
 export function getDesktopUpdateActionError(result: DesktopUpdateActionResult): string | null {

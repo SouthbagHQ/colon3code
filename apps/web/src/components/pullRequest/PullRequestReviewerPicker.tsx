@@ -78,11 +78,11 @@ export function PullRequestReviewerPicker({
       toastManager.add({
         type: "error",
         title: candidate.isRequested
-          ? `could not take back the review request to ${candidate.login} 3:`
-          : `could not ask ${candidate.login} for a review 3:`,
+          ? `oops, couldn't take back the review request to ${candidate.login} 3:`
+          : `aw, couldn't ask ${candidate.login} for a review 3:`,
         description: readableFailure(
           squashAtomCommandFailure(result),
-          "the host refused it. check that you have write access on this repository, and that they still have access to it 3:",
+          "the host said no. check that you have write access on this repository, and that they still have access to it 3:",
         ),
       });
       return;
@@ -90,8 +90,8 @@ export function PullRequestReviewerPicker({
     toastManager.add({
       type: "success",
       title: candidate.isRequested
-        ? `review request to ${candidate.login} taken back :3`
-        : `review requested from ${candidate.login} :3`,
+        ? `took back the review request to ${candidate.login} :3`
+        : `asked ${candidate.login} for a review, purr :3`,
     });
   };
 
@@ -100,7 +100,7 @@ export function PullRequestReviewerPicker({
       icon={<UserPlusIcon className="size-3.5" />}
       label="request a review"
       allowed={allowed}
-      disabledReason="asking someone to review needs write access on this repository ;3"
+      disabledReason="to ask someone for a review, you'll need write access on this repository ;3"
       open={open}
       onOpenChange={setOpen}
       query={query}
@@ -109,11 +109,11 @@ export function PullRequestReviewerPicker({
       isPending={candidatesQuery.isPending && candidatesQuery.data === null}
       error={candidatesQuery.data === null ? candidatesQuery.error : null}
       candidates={candidates}
-      emptyLabel="nobody else has access to this repository ^w^"
-      noMatchLabel="nobody with access matches that :3"
-      errorLabel="the people with access could not be read 3:"
+      emptyLabel="looks like nobody else has access to this repository ^w^"
+      noMatchLabel="hmm, nobody with access matches that :3"
+      errorLabel="aw, couldn't read who has access 3:"
       truncated={candidatesQuery.data?.truncated === true}
-      truncatedLabel="this repository has more people with access than are listed here. ask for the rest on the host :3"
+      truncatedLabel="there are more people with access than we can list here — ask the rest on the host :3"
       candidateKey={(candidate) => `${candidate.kind}:${candidate.id}`}
       disabled={pending !== null}
       onSelect={(candidate) => void toggle(candidate)}

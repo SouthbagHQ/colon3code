@@ -50,7 +50,7 @@ describe("mobile client presentation", () => {
       mobileClientNotificationDetail(
         device({ notifications: { ...device().notifications, enabled: false } }),
       ),
-    ).toBe("push notifications are disabled on this device :3");
+    ).toBe("push notifications are off on this device :3");
     expect(
       mobileClientNotificationDetail(
         device({
@@ -63,7 +63,7 @@ describe("mobile client presentation", () => {
           },
         }),
       ),
-    ).toBe("push notifications are enabled, but no alert types are selected ^w^");
+    ).toBe("push notifications are on, but no alert types are picked yet ^w^");
   });
 
   it("handles missing app versions and invalid update timestamps", () => {

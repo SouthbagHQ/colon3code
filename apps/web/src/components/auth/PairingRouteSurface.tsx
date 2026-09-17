@@ -29,11 +29,11 @@ export function PairingPendingSurface() {
         </p>
         <h1 className="mt-3 text-2xl font-semibold tracking-tight sm:text-3xl">
           {" "}
-          pairing with this environment :3
+          pairing with this environment, hang tight :3
         </h1>
         <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
           {" "}
-          validating the pairing link and preparing your session :3
+          checking the pairing link and getting your session ready :3
         </p>
       </section>
     </div>
@@ -175,8 +175,8 @@ export function HostedPairingRouteSurface() {
   );
   const [message, setMessage] = useState(() =>
     hostedPairingRequestRef.current
-      ? "connecting to this backend… :3"
-      : "this pairing link is missing its backend host or token 3:",
+      ? "connecting to this backend, just a sec… :3"
+      : "hmm, this pairing link is missing its backend host or token 3:",
   );
   const [canRetry, setCanRetry] = useState(false);
   const submitAttemptedRef = useRef(false);
@@ -187,22 +187,20 @@ export function HostedPairingRouteSurface() {
 
     if (!request) {
       setStatus("error");
-      setMessage("this pairing link is missing its backend host or token 3:");
+      setMessage("hmm, this pairing link is missing its backend host or token 3:");
       setCanRetry(false);
       return;
     }
 
     if (tokenSubmittedRef.current) {
       setStatus("error");
-      setMessage(
-        "this one-time pairing token was already submitted. request a new pairing link ;3",
-      );
+      setMessage("this one-time pairing token was already used — grab a fresh pairing link ;3");
       setCanRetry(false);
       return;
     }
 
     setStatus("pairing");
-    setMessage("connecting to this backend… :3");
+    setMessage("connecting to this backend, just a sec… :3");
     setCanRetry(false);
     tokenSubmittedRef.current = true;
 
@@ -212,7 +210,7 @@ export function HostedPairingRouteSurface() {
     });
     if (result._tag === "Success") {
       setStatus("paired");
-      setMessage(`${request.label || "the environment"} is saved in this browser :3`);
+      setMessage(`${request.label || "the environment"} is saved in this browser, all done :3`);
       return;
     }
 
@@ -300,7 +298,7 @@ function errorMessageFromUnknown(error: unknown): string {
     return error;
   }
 
-  return "authentication failed 3:";
+  return "aw, authentication didn't go through 3:";
 }
 
 function describeAuthGate(bootstrapMethods: ReadonlyArray<string>): string {
@@ -308,7 +306,7 @@ function describeAuthGate(bootstrapMethods: ReadonlyArray<string>): string {
     return "this environment expects a trusted pairing credential before the app can connect.";
   }
 
-  return "enter a pairing token to start a session with this environment :3";
+  return "pop in a pairing token and we'll start a session with this environment :3";
 }
 
 function describeSupportedMethods(bootstrapMethods: ReadonlyArray<string>): string {
@@ -323,5 +321,5 @@ function describeSupportedMethods(bootstrapMethods: ReadonlyArray<string>): stri
     return "this environment is desktop-managed. open it from the desktop app or paste a bootstrap credential if one was issued explicitly.";
   }
 
-  return "this environment accepts one-time pairing tokens pairing links can open this page directly, or you can paste the token here ^w^";
+  return "this environment accepts one-time pairing tokens. pairing links can open this page directly, or you can paste the token here ^w^";
 }

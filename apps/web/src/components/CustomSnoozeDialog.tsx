@@ -81,8 +81,8 @@ function CustomSnoozeDialog() {
             if (!snoozedUntil) {
               setError(
                 mode === "date"
-                  ? "choose a valid date and time in the future ^w^"
-                  : "enter a positive duration ;3",
+                  ? "hmm, choose a date and time in the future ^w^"
+                  : "hmm, the duration needs to be positive ;3",
               );
               return;
             }
@@ -92,7 +92,7 @@ function CustomSnoozeDialog() {
           <DialogHeader>
             <DialogTitle>custom snooze</DialogTitle>
             <DialogDescription>
-              choose when snoozed threads return to your inbox uwu
+              choose when these threads wake up and return to your inbox uwu
             </DialogDescription>
           </DialogHeader>
           <DialogPanel className="flex flex-col gap-4 text-base sm:text-sm">

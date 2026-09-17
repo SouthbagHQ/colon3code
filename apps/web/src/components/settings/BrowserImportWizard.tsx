@@ -105,7 +105,7 @@ export function BrowserImportWizard({
     const chosen = resolveWizardTarget(target, newProfileId.current, targetProfiles);
     if (chosen === undefined) {
       setTargetError(
-        "that profile is no longer available. choose where to import these cookies 3:",
+        "hmm, that profile isn't around anymore. pick where these cookies should go 3:",
       );
       setStep({ step: "configure" });
       return;
@@ -217,8 +217,8 @@ function QuitStep({
       <DialogHeader>
         <DialogTitle>quit {source.name} to import</DialogTitle>
         <DialogDescription>
-          {source.name} is open, so its cookies can&rsquo;t be read yet. quit it, then :3 continue
-          uwu.
+          {source.name} is open, so its cookies can&rsquo;t be read just yet. quit it, then we can
+          continue :3
         </DialogDescription>
       </DialogHeader>
       <DialogFooter>
@@ -282,7 +282,7 @@ function FullDiskAccessStep({
     setOpeningError(null);
     void Promise.resolve()
       .then(onOpenSettings)
-      .catch(() => setOpeningError("could not open System Settings 3: try allow again."))
+      .catch(() => setOpeningError("oops, couldn't open System Settings. try allow again 3:"))
       .finally(() => setOpening(false));
   };
   return (
@@ -365,16 +365,16 @@ function ConfigureStep({
   const targetFeedback =
     targetError ??
     (targetMissing
-      ? "that profile is no longer available. choose where to import these cookies 3:"
+      ? "hmm, that profile isn't around anymore. pick where these cookies should go 3:"
       : targetUncreatable
-        ? "you've reached the profile limit. choose an existing profile to import into ^w^"
+        ? "you've hit the profile limit — pick an existing profile to import into ^w^"
         : undefined);
   return (
     <>
       <DialogHeader>
-        <DialogTitle>import from {source.name} ^w^</DialogTitle>
+        <DialogTitle>let's import from {source.name} ^w^</DialogTitle>
         <DialogDescription>
-          choose which cookies to import for {destinationEnvironmentName} :3
+          pick which cookies to bring over for {destinationEnvironmentName} :3
         </DialogDescription>
       </DialogHeader>
       <DialogPanel>
@@ -490,8 +490,8 @@ function ImportingStep() {
   return (
     <>
       <DialogHeader>
-        <DialogTitle>importing cookies ^w^</DialogTitle>
-        <DialogDescription>this may take a moment ^w^</DialogDescription>
+        <DialogTitle>importing cookies, hang tight ^w^</DialogTitle>
+        <DialogDescription>this may take a little moment ^w^</DialogDescription>
       </DialogHeader>
       <DialogPanel className="flex items-center gap-3 py-6">
         <Spinner className="size-4 text-muted-foreground" />
@@ -514,9 +514,8 @@ function CheckingStep({
         <DialogTitle>checking {sourceName}</DialogTitle>
         <DialogDescription>
           {check === "fullDiskAccess"
-            ? "checking Full Disk Access ^w^"
-            : "checking whether the browser has closed :3"}{" "}
-          :3
+            ? "just a sec, checking Full Disk Access ^w^"
+            : "just a sec, checking whether the browser has closed :3"}
         </DialogDescription>
       </DialogHeader>
       <DialogPanel className="flex items-center gap-3 py-6">
@@ -552,15 +551,14 @@ function DoneStep({
             ? `imported ${cookieResultCount(imported)}`
             : skipped > 0
               ? `skipped ${cookieResultCount(skipped)}`
-              : "no cookies found 3:"}
+              : "aw, no cookies found 3:"}
         </DialogTitle>
         <DialogDescription>
           {imported > 0
-            ? `added to ${targetName} for ${destinationEnvironmentName} :3${skipped > 0 ? ` ${cookieResultCount(skipped)} skipped.` : ""}`
+            ? `tucked into ${targetName} for ${destinationEnvironmentName}${skipped > 0 ? `, ${cookieResultCount(skipped)} skipped` : ""} :3`
             : skipped > 0
-              ? `no cookies were imported for ${destinationEnvironmentName} ^w^`
-              : `there were no cookies to import for ${destinationEnvironmentName}.`}{" "}
-          :3
+              ? `no cookies were imported for ${destinationEnvironmentName} this time ^w^`
+              : `there were no cookies to import for ${destinationEnvironmentName} :3`}
         </DialogDescription>
       </DialogHeader>
       {skippedDomains.length > 0 ? (
@@ -594,7 +592,7 @@ function BlockedStep({
   return (
     <>
       <DialogHeader>
-        <DialogTitle>couldn&rsquo;t import from {source.name} 3:</DialogTitle>
+        <DialogTitle>mrrp, couldn&rsquo;t import from {source.name} 3:</DialogTitle>
         <DialogDescription>{BROWSER_IMPORT_FAILURE_COPY[reason]}</DialogDescription>
       </DialogHeader>
       <DialogFooter>

@@ -309,10 +309,12 @@ export const OpenInPicker = memo(function OpenInPicker({
         </MenuTrigger>
         <MenuPopup align="end">
           {remote.mode === "remote-unavailable" ? (
-            <MenuItem disabled>no SSH route to {environmentLabel} :3</MenuItem>
+            <MenuItem disabled>hmm, no SSH route to {environmentLabel} :3</MenuItem>
           ) : (
             <>
-              {options.length === 0 && <MenuItem disabled>no installed editors found ^w^</MenuItem>}
+              {options.length === 0 && (
+                <MenuItem disabled>hmm, no installed editors here, mrrp ^w^</MenuItem>
+              )}
               {options.map(({ label, Icon, value, kind }) => (
                 <MenuItem key={value} onClick={() => openInEditor(value)}>
                   <Icon aria-hidden="true" className={getOpenInIconClass(kind)} />

@@ -27,7 +27,7 @@ describe("resolveEnvironmentIconPickerLock", () => {
   it("locks when the session cannot operate the environment", () => {
     expect(
       resolveEnvironmentIconPickerLock({ serverConfig: config(true), operateAccess: "denied" }),
-    ).toMatch(/cannot change/);
+    ).toMatch(/can't change/);
   });
 
   it("stays open while access is still resolving so a slow session does not flicker", () => {

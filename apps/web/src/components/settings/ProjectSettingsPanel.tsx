@@ -128,8 +128,8 @@ export function ProjectSettingsPanel({
     return (
       <div className="flex flex-1 items-center justify-center p-8 text-sm text-muted-foreground">
         {groups.length === 0
-          ? "add a project from the sidebar to configure it here :3"
-          : "this project is no longer available 3:"}
+          ? "add a project from the sidebar and we'll set it up here :3"
+          : "aw, this project isn't around anymore 3:"}
       </div>
     );
   }
@@ -137,7 +137,7 @@ export function ProjectSettingsPanel({
     return (
       <p className="p-8 text-sm text-muted-foreground">
         {" "}
-        this checkout is no longer available in the selected project and environment 3:
+        aw, this checkout isn't in the selected project and environment anymore 3:
       </p>
     );
   const scopedGroup = {
@@ -196,8 +196,8 @@ function ProjectDetail({
     toastManager.add(
       stackedThreadToast({
         type: "error",
-        title: `${title} 3:`,
-        description: error instanceof Error ? error.message : "an error occurred.",
+        title: `aw, ${title} 3:`,
+        description: error instanceof Error ? error.message : "something went wrong.",
       }),
     );
   }, []);
@@ -254,7 +254,7 @@ function ProjectDetail({
     async (nextTitle: string, wasEdited: boolean) => {
       const title = nextTitle.trim();
       if (!title) {
-        toastManager.add({ type: "warning", title: "project title cannot be empty 3:" });
+        toastManager.add({ type: "warning", title: "hmm, the project title can't be empty 3:" });
         return;
       }
       if (
@@ -266,7 +266,7 @@ function ProjectDetail({
       ) {
         return;
       }
-      await updateAllMembers({ title }, "failed to rename project");
+      await updateAllMembers({ title }, "couldn't rename the project");
     },
     [group.memberProjects, updateAllMembers],
   );
@@ -282,7 +282,7 @@ function ProjectDetail({
       savingFaviconRef.current = true;
       setIsSavingFavicon(true);
       try {
-        await updateAllMembers(input, "failed to update project icon");
+        await updateAllMembers(input, "couldn't update the project icon");
       } finally {
         savingFaviconRef.current = false;
         setIsSavingFavicon(false);
@@ -322,13 +322,13 @@ function ProjectDetail({
               : [`this removes ${members.length} grouped project entries.`]),
             ...(projectThreads.length > 0
               ? [
-                  "this permanently clears conversation history for those threads and any archived threads ;3",
+                  "this clears conversation history for those threads and any archived threads, for good ;3",
                 ]
-              : ["this permanently clears any archived conversation history :3"]),
+              : ["this clears any archived conversation history, for good :3"]),
             isWholeGroup && !hasOtherMembers
               ? "this removes only the project entries, not the files on disk."
               : "other entries in this grouped project are unaffected.",
-            "this action cannot be undone 3:",
+            "there's no undo for this one 3:",
           ].join("\n"),
           { variant: "destructive" },
         ),
@@ -352,7 +352,7 @@ function ProjectDetail({
           () => undefined,
         );
         if (result._tag === "Failure") {
-          reportFailure(`failed to remove "${member.title}"`, result);
+          reportFailure(`couldn't remove "${member.title}"`, result);
           return;
         }
         const projectRef = scopeProjectRef(member.environmentId, member.id);
@@ -410,7 +410,7 @@ function ProjectDetail({
         <SettingsSection id="project-overview" title="project" hideTitle>
           <SettingsRow
             title="name"
-            description="the shared name for this project group in the sidebar and thread lists :3"
+            description="the shared name this project group goes by in the sidebar and thread lists :3"
             control={
               <Input
                 key={`${group.projectKey}:${group.displayName}`}
@@ -492,10 +492,10 @@ function ProjectDetail({
             }
             description={
               hasOtherMembers
-                ? "deletes the selected machine's checkout entries and their threads. other machines and files on disk are not touched :3"
+                ? "deletes the selected machine's checkout entries and their threads. other machines and files on disk stay untouched :3"
                 : group.memberProjects.length > 1
-                  ? `deletes all :3 ${group.memberProjects.length} checkout entries and their threads on every machine. files on disk are not touched.`
-                  : "deletes the project entry and its threads. files on disk are not touched ^w^"
+                  ? `deletes all ${group.memberProjects.length} checkout entries and their threads on every machine. files on disk stay untouched :3`
+                  : "deletes the project entry and its threads. files on disk stay untouched ^w^"
             }
             control={
               <Button

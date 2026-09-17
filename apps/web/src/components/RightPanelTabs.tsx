@@ -150,13 +150,13 @@ export function shouldOpenDefaultBrowserProfileFromMenuClick(
 
 const SURFACE_DISABLED_REASONS = {
   browser: "browser previews are only available in the :3 Code desktop app.",
-  terminal: "terminal surfaces are only available from a project thread ^w^",
-  files: "files are only available when a project is open ^w^",
-  diff: "diff is only available for server threads in Git repositories 3:",
-  pullRequest: "this thread's branch has no pull request yet ^w^",
-  pullRequests: "no linked pull requests are available for this thread 3:",
-  agents: "agents are only available from a thread :3",
-  device: "devices are only available from a thread :3",
+  terminal: "terminal surfaces only show up from a project thread ^w^",
+  files: "files show up once a project is open ^w^",
+  diff: "diff only works for server threads in Git repositories 3:",
+  pullRequest: "this thread's branch doesn't have a pull request yet ^w^",
+  pullRequests: "no linked pull requests for this thread yet 3:",
+  agents: "agents show up once you're in a thread :3",
+  device: "devices show up once you're in a thread :3",
 } as const;
 
 /** Overlays that must win over the launcher's letter shortcuts. */
@@ -173,7 +173,7 @@ const LAUNCHER_SHORTCUT_BLOCKING_LAYERS = [
 
 /** One-line unavailability hints for the empty-state rows. */
 const SURFACE_UNAVAILABLE_HINTS = {
-  browser: "only available in the desktop app ;3",
+  browser: "only in the desktop app ;3",
   terminal: "available when a project is open.",
   files: "available when a project is open.",
   diff: "available for Git repositories ^w^",
@@ -400,7 +400,7 @@ function RightPanelEmptyState(props: {
     },
     {
       label: "device",
-      description: "watch an iOS simulator or Android emulator uwu",
+      description: "peek at an iOS simulator or Android emulator uwu",
       icon: Smartphone,
       shortcut: "M",
       available: props.deviceAvailable,
@@ -507,7 +507,9 @@ function RightPanelEmptyState(props: {
       )}
     >
       <div className="w-full max-w-xs">
-        <h3 className="mb-3 text-center font-medium text-foreground text-sm"> open a surface ;3</h3>
+        <h3 className="mb-3 text-center font-medium text-foreground text-sm">
+          let's open a surface ;3
+        </h3>
         <div className="flex flex-col gap-0.5">
           {actions.map((action) =>
             action.available ? (

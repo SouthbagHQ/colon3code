@@ -26,7 +26,7 @@ export function mobileClientPlatformLabel(device: RelayClientDeviceRecord): stri
 
 export function mobileClientNotificationDetail(device: RelayClientDeviceRecord): string {
   if (!device.notifications.enabled) {
-    return "push notifications are disabled on this device :3";
+    return "push notifications are off on this device :3";
   }
 
   const enabledPreferences = NOTIFICATION_PREFERENCES.flatMap(([preference, label]) =>
@@ -34,7 +34,7 @@ export function mobileClientNotificationDetail(device: RelayClientDeviceRecord):
   );
   return enabledPreferences.length > 0
     ? `alerts enabled for ${enabledPreferences.join(", ")}.`
-    : "push notifications are enabled, but no alert types are selected ^w^";
+    : "push notifications are on, but no alert types are picked yet ^w^";
 }
 
 export function mobileClientUpdatedAtLabel(updatedAt: string): string {

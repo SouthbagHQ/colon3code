@@ -180,58 +180,58 @@ import {
 type DetailTab = "summary" | "timeline" | "code";
 
 const ACTION_SUCCESS_LABELS: Record<PullRequestAction, string> = {
-  merge: "pull request merged :3",
-  ready: "marked ready for review :3",
-  draft: "converted to draft :3",
-  close: "pull request closed :3",
-  reopen: "pull request reopened :3",
-  "update-branch": "branch updated with the base branch :3",
+  merge: "pull request merged, yay :3",
+  ready: "marked ready for review, purr :3",
+  draft: "tucked back into a draft :3",
+  close: "pull request closed, all done :3",
+  reopen: "pull request reopened, welcome back :3",
+  "update-branch": "branch caught up with the base branch :3",
   // True whichever it did: a pull request that was already mergeable merges the moment this is
   // armed, and the client has no way to tell that apart from one still waiting on something.
   "enable-auto-merge":
-    "auto-merge turned on — merges as soon as this is ready, sooner if it already is :3",
-  "disable-auto-merge": "auto-merge turned off :3",
-  revert: "revert pull request opened :3",
-  "approve-workflows": "workflows approved :3",
+    "auto-merge is on — it'll merge as soon as this is ready, or right away if it already is :3",
+  "disable-auto-merge": "auto-merge is off now :3",
+  revert: "revert pull request opened for you :3",
+  "approve-workflows": "workflows approved, off they go :3",
 };
 
 /** Said as the thing that did not happen, rather than as the operation that returned an error. */
 const ACTION_FAILURE_LABELS: Record<PullRequestAction, string> = {
-  merge: "could not merge this pull request 3:",
-  ready: "could not mark this ready for review 3:",
-  draft: "could not convert this to a draft 3:",
-  close: "could not close this pull request 3:",
-  reopen: "could not reopen this pull request 3:",
-  "update-branch": "could not update this branch 3:",
-  "enable-auto-merge": "could not turn on auto-merge 3:",
-  "disable-auto-merge": "could not turn off auto-merge 3:",
-  revert: "could not open a revert pull request 3:",
-  "approve-workflows": "could not approve workflows 3:",
+  merge: "aw, couldn't merge this pull request 3:",
+  ready: "oops, couldn't mark this ready for review 3:",
+  draft: "hmm, couldn't convert this to a draft 3:",
+  close: "oops, couldn't close this pull request 3:",
+  reopen: "aw, couldn't reopen this pull request 3:",
+  "update-branch": "mrrp, couldn't update this branch 3:",
+  "enable-auto-merge": "oops, couldn't turn on auto-merge 3:",
+  "disable-auto-merge": "oops, couldn't turn off auto-merge 3:",
+  revert: "aw, couldn't open a revert pull request 3:",
+  "approve-workflows": "hmm, couldn't approve the workflows 3:",
 };
 
 /** What to try, for the times the host says only that it refused. */
 const ACTION_FAILURE_HINTS: Record<PullRequestAction, string> = {
   merge:
-    "the host refused the merge. check that you have write access, that the checks it requires have passed, and that the branch is not conflicting 3:",
-  ready: "the host refused it. check that you have write access to this repository 3:",
-  draft: "the host refused it. check that you have write access to this repository.",
-  close: "the host refused it. check that you have write access, or that you opened it 3:",
-  reopen:
-    "the host refused it. check that you have write access, and that the branch still exists.",
+    "the host said no to the merge. check that you have write access, that its required checks have passed, and that the branch isn't conflicting 3:",
+  ready: "the host said no. check that you have write access to this repository 3:",
+  draft: "the host said no. check that you have write access to this repository.",
+  close:
+    "the host said no. check that you have write access, or that you're the one who opened it 3:",
+  reopen: "the host said no. check that you have write access, and that the branch still exists.",
   // Said for the merge commit, which is what an update is unless a rebase was asked for. The
   // rebase has its own reasons to fail and its own sentence below.
   "update-branch":
-    "the host refused it. check that you have write access to the branch — one from a fork also needs its author to allow edits from maintainers — and that it does not conflict with the base.",
+    "the host said no. check that you have write access to the branch — one from a fork also needs its author to allow edits from maintainers — and that it doesn't conflict with the base.",
   // The one refusal that is usually a repository setting rather than anything about this branch:
   // GitHub will not arm an auto-merge at all unless the repository has the feature switched on.
   "enable-auto-merge":
-    "the host refused it. check that this repository allows auto-merge, that you have write access, and that there is something left for it to wait on 3:",
+    "the host said no. check that this repository allows auto-merge, that you have write access, and that there's still something for it to wait on 3:",
   "disable-auto-merge":
-    "the host refused it. check that you have write access, and that the merge has not already happened.",
+    "the host said no. check that you have write access, and that the merge hasn't already happened.",
   revert:
-    "the host refused it. check that you have write access and that this pull request was merged on the host 3:",
+    "the host said no. check that you have write access and that this pull request was merged on the host 3:",
   "approve-workflows":
-    "the host refused it. check that you have Actions write access and that these workflow runs are still awaiting approval.",
+    "the host said no. check that you have Actions write access and that these workflow runs are still awaiting approval.",
 };
 
 /**
@@ -725,11 +725,12 @@ export function PullRequestDetailPanel({
   const keybindings = useAtomValue(primaryServerKeybindingsAtom);
   const { copyToClipboard: copyReference } = useCopyToClipboard<string>({
     target: "pull request reference",
-    onCopy: (label) => toastManager.add({ type: "success", title: `${label} copied :3` }),
+    onCopy: (label) =>
+      toastManager.add({ type: "success", title: `copied the ${label} for you :3` }),
     onError: (error, label) =>
       toastManager.add({
         type: "error",
-        title: `failed to copy ${label} 3:`,
+        title: `oops, couldn't copy the ${label} 3:`,
         description: error.message,
       }),
   });
@@ -1021,7 +1022,7 @@ export function PullRequestDetailPanel({
     });
     if (commentResult._tag === "Failure") {
       setPendingAction(null);
-      toastManager.add({ type: "error", title: "could not post the comment 3:" });
+      toastManager.add({ type: "error", title: "aw, the comment didn't post 3:" });
       return { commentPosted: false };
     }
     const actionSucceeded = await finishAction(action);
@@ -1046,10 +1047,10 @@ export function PullRequestDetailPanel({
       // rewritten is the one thing a failed save must not cost them.
       toastManager.add({
         type: "error",
-        title: "the title could not be saved 3:",
+        title: "aw, the title didn't save 3:",
         description: readableFailure(
           squashAtomCommandFailure(result),
-          "the host refused the new title 3:",
+          "the host said no to the new title 3:",
         ),
       });
       return;
@@ -1141,11 +1142,11 @@ export function PullRequestDetailPanel({
       writeTaskToComposer(attachTarget, task);
       toastManager.add({
         type: "success",
-        title: "added to the composer :3",
+        title: "popped it into the composer, nya :3",
         description:
           task.prompt.length > 0
-            ? "the question is in the composer — read it over, then send ^w^"
-            : "the pull request is in the composer — type your question, then send ^w^",
+            ? "your question is in the composer — give it a read, then send ^w^"
+            : "the pull request is in the composer — type your question, then send it off ^w^",
       });
       return;
     }
@@ -1156,20 +1157,20 @@ export function PullRequestDetailPanel({
     if (opened === null) {
       toastManager.add({
         type: "error",
-        title: "could not open a thread 3:",
-        description: "try again from the project, or open a thread first ;3",
+        title: "hmm, couldn't open a thread 3:",
+        description: "no worries — try again from the project, or open a thread first ;3",
       });
       return;
     }
     toastManager.add({
       type: "success",
-      title: "asked in a thread :3",
+      title: "asked in a thread, purr :3",
       // "Ask" leaves the composer empty on purpose, so saying the question is in it would send
       // the reader looking for something that is not there. The chips are what landed.
       description:
         task.prompt.length > 0
-          ? "the question is in the composer — read it over, then send ^w^"
-          : "the pull request is in the composer — type your question, then send ^w^",
+          ? "your question is in the composer — give it a read, then send ^w^"
+          : "the pull request is in the composer — type your question, then send it off ^w^",
     });
   };
 
@@ -1189,8 +1190,8 @@ export function PullRequestDetailPanel({
       writeTaskToComposer(attachTarget, task);
       toastManager.add({
         type: "success",
-        title: "added to the composer :3",
-        description: "the task is in the composer — read it over, then send ^w^",
+        title: "popped it into the composer, nya :3",
+        description: "the task is in the composer — give it a read, then send ^w^",
       });
       return;
     }
@@ -1200,7 +1201,7 @@ export function PullRequestDetailPanel({
     // never expires, and an explicit one would survive the update and pin the result on screen.
     const toastId = toastManager.add({
       type: "loading",
-      title: "preparing the pull request checkout. ^w^",
+      title: "hang tight, preparing the pull request checkout ^w^",
     });
     // Wherever the reader chose to act: the thread, the checkout it is pointed at and the composer
     // the task lands in are all one server's, and picking another one moves all three.
@@ -1219,8 +1220,8 @@ export function PullRequestDetailPanel({
       // working tree than to prepare a worktree nobody asked for.
       toastManager.update(toastId, {
         type: "error",
-        title: "could not open a thread for the checkout 3:",
-        description: "try again from the project, or open a thread first ;3",
+        title: "hmm, couldn't open a thread for the checkout 3:",
+        description: "no worries — try again from the project, or open a thread first ;3",
       });
       return;
     }
@@ -1237,7 +1238,7 @@ export function PullRequestDetailPanel({
         prepareThread.error instanceof Error ? prepareThread.error.message : null;
       toastManager.update(toastId, {
         type: "error",
-        title: "could not prepare the pull request checkout 3:",
+        title: "aw, couldn't prepare the pull request checkout 3:",
         ...(detailMessage ? { description: detailMessage } : {}),
       });
       return;
@@ -1259,7 +1260,7 @@ export function PullRequestDetailPanel({
       // outcome worth stopping for, since it reads as success and is not.
       toastManager.update(toastId, {
         type: "error",
-        title: "checked out, but the thread stayed where it was 3:",
+        title: "checked out, but the thread stayed put 3:",
         description: `the checkout is ready on \`${prepared.value.branch}\`. point a thread at it from the branch picker, then ask again ;3`,
       });
       return;
@@ -1272,9 +1273,9 @@ export function PullRequestDetailPanel({
     // success, because everything else about the handoff did happen.
     const staleCheckoutToast = {
       type: "warning",
-      title: "checked out, but not on the latest commits 3:",
+      title: "checked out, but it's not on the latest commits 3:",
       description:
-        "the checkout could not be moved onto the pull request's latest commits, so the code there is older than the pull request. uncommitted work or local commits keep it where it is 3:",
+        "we couldn't move the checkout onto the pull request's latest commits, so the code there is older than the pull request. uncommitted work or local commits keep it where it is 3:",
     } as const;
     if (task === null) {
       toastManager.update(
@@ -1282,11 +1283,12 @@ export function PullRequestDetailPanel({
         prepared.value.isOnPullRequestHead
           ? {
               type: "success",
-              title: mode === "local" ? "checked out here :3" : "checked out :3",
+              title:
+                mode === "local" ? "checked out right here, meow :3" : "checked out, all done :3",
               description:
                 mode === "local"
-                  ? "this repository is on the pull request's branch, with a thread open on it ;3"
-                  : "the pull request is in its own worktree, with a thread open on it :3",
+                  ? "this repository is on the pull request's branch now, with a thread open on it ;3"
+                  : "the pull request is curled up in its own worktree, with a thread open on it :3",
             }
           : staleCheckoutToast,
       );
@@ -1298,8 +1300,8 @@ export function PullRequestDetailPanel({
       prepared.value.isOnPullRequestHead
         ? {
             type: "success",
-            title: "checkout ready :3",
-            description: "the task is in the composer — read it over, then send ^w^",
+            title: "checkout ready, nya :3",
+            description: "the task is in the composer — give it a read, then send ^w^",
           }
         : staleCheckoutToast,
     );
@@ -1759,7 +1761,7 @@ export function PullRequestDetailPanel({
                         />
                       }
                     />
-                    <TooltipPopup>check out this pull request ;3</TooltipPopup>
+                    <TooltipPopup>let's check out this pull request ;3</TooltipPopup>
                   </Tooltip>
                   <MenuPopup align="end" side="bottom" className="min-w-72">
                     <MenuItem onClick={() => startCheckout("worktree")}>
@@ -1768,7 +1770,7 @@ export function PullRequestDetailPanel({
                         <span>in a separate worktree</span>
                         <span className="text-xs text-muted-foreground">
                           {" "}
-                          its own folder and thread. nothing you have open moves 3:
+                          its own folder and thread — nothing you have open moves 3:
                         </span>
                       </span>
                     </MenuItem>
@@ -1994,8 +1996,8 @@ export function PullRequestDetailPanel({
                       <span>{handoff === "ask" ? "opening..." : "ask a question"}</span>
                       <span className="text-xs text-muted-foreground">
                         {attachTarget !== null
-                          ? "adds the pull request to this thread's composer :3"
-                          : "opens a thread that knows which pull request you mean :3"}
+                          ? "pops the pull request into this thread's composer :3"
+                          : "opens a fresh thread that knows which pull request you mean :3"}
                       </span>
                     </span>
                   </MenuItem>
@@ -2390,7 +2392,7 @@ export function PullRequestDetailPanel({
                       onError={(error) =>
                         toastManager.add({
                           type: "error",
-                          title: "could not copy checkout command 3:",
+                          title: "oops, couldn't copy the checkout command 3:",
                           description: error.message,
                         })
                       }
@@ -2762,12 +2764,12 @@ export function PullRequestDetailPanel({
                   ? // The host merges this as soon as it considers the pull request ready, which
                     // may be immediately — there is no telling from here whether anything is
                     // still outstanding.
-                    `this merges #${reference.number} using ${selectedMergeMethod} as soon as the host considers it ready, which may be immediately :3`
+                    `this merges #${reference.number} using ${selectedMergeMethod} as soon as the host considers it ready — which may be right away :3`
                   : confirmAction === "revert"
                     ? `this opens a new pull request that reverses the changes merged by #${reference.number}`
                     : confirmAction === "approve-workflows"
-                      ? `this allows ${workflowApprovalsRequired} ${workflowApprovalsRequired === 1 ? "workflow" : "workflows"} from #${reference.number} to run. review the code and workflow changes first :3`
-                      : `this closes #${reference.number} without merging it :3`}
+                      ? `this allows ${workflowApprovalsRequired} ${workflowApprovalsRequired === 1 ? "workflow" : "workflows"} from #${reference.number} to run. give the code and workflow changes a look first :3`
+                      : `this closes #${reference.number} without merging it, no worries :3`}
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>

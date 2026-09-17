@@ -47,7 +47,7 @@ export function AssistantCitationCommentEditor({
         aria-label="comment on selected text"
         aria-description="Enter to save the citation comment; Cmd/Ctrl+Enter to save and send; Shift+Enter for a new line."
         aria-invalid={commentTooLong || undefined}
-        placeholder="add an optional comment. ^w^"
+        placeholder="add a little note if you like ^w^"
         rows={2}
         className="field-sizing-content block max-h-40 min-h-16 w-full resize-none bg-transparent px-1 py-1.5 text-base outline-none placeholder:text-muted-foreground sm:text-sm"
         value={comment}

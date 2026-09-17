@@ -140,7 +140,7 @@ describe("price table edits", () => {
       usagePriceTableChanges(environment, [
         { ...empty, values: { inputCostPerMillionTokens: "0" } },
       ]).errors.get(empty.id),
-    ).toBe("enter a model ID ^w^");
+    ).toBe("pop in a model ID ^w^");
   });
 
   it.each(["offline", "read-only access", "update server to edit prices"])(

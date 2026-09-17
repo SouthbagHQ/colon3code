@@ -41,8 +41,8 @@ export function PreviewEmptyState({
         <EmptyTitle>no preview yet :3</EmptyTitle>
         <EmptyDescription>
           {" "}
-          type a URL above, or run a dev script. browser-ready localhost servers will show up here
-          automatically ;3
+          type a URL above, or run a dev script. browser-ready localhost servers will pop up here on
+          their own ;3
         </EmptyDescription>
       </Empty>
     );
@@ -88,7 +88,7 @@ export function PreviewEmptyState({
             </DiscoveryList>
             <p className="px-1 text-xs text-muted-foreground">
               {" "}
-              select a live local server to open it in this browser tab :3
+              pick a live local server and we'll open it in this browser tab :3
             </p>
           </div>
         ) : null}

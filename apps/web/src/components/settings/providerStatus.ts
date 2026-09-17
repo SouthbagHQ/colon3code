@@ -33,7 +33,8 @@ export function getProviderSummary(provider: ServerProvider | undefined) {
   if (!provider) {
     return {
       headline: "checking provider status :3",
-      detail: "waiting for the server to report installation and authentication details :3",
+      detail:
+        "hang tight, waiting for the server to report installation and authentication details :3",
     };
   }
   if (!provider.enabled || provider.status === "disabled") {
@@ -59,14 +60,13 @@ export function getProviderSummary(provider: ServerProvider | undefined) {
     return {
       headline: "needs attention",
       detail:
-        provider.message ??
-        "the provider is installed, but the server could not fully verify it 3:",
+        provider.message ?? "the provider is installed, but the server couldn't fully verify it 3:",
     };
   }
   if (provider.status === "error") {
     return {
       headline: "unavailable",
-      detail: provider.message ?? "the provider failed its startup checks 3:",
+      detail: provider.message ?? "aw, the provider didn't pass its startup checks 3:",
     };
   }
   if (provider.auth.status === "authenticated") {

@@ -9,7 +9,7 @@ export function showBootError(error: unknown) {
   content.setAttribute("role", "alert");
 
   const message = document.createElement("p");
-  message.textContent = ":3 Code could not load 3:";
+  message.textContent = "oops, :3 Code couldn't load 3:";
   content.append(message);
 
   if (import.meta.env.DEV && error instanceof Error) {

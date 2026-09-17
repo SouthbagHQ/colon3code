@@ -35,7 +35,7 @@ export function useRemoveClonedProject() {
         toastManager.add(
           stackedThreadToast({
             type: "error",
-            title: "failed to remove project 3:",
+            title: "aw, couldn't remove that project 3:",
             description: error instanceof Error ? error.message : "an error occurred.",
           }),
         );

@@ -44,21 +44,21 @@ export function getProviderStatusMessage(status: ServerProvider): string {
   if (status.message) return status.message;
   const providerName = status.displayName?.trim() || formatProviderDriverKindLabel(status.driver);
   if (!status.installed && hasProviderSetup(status)) {
-    return `open provider setup to install ${formatProviderDriverKindLabel(status.driver)} on this environment ;3`;
+    return `let's open provider setup and install ${formatProviderDriverKindLabel(status.driver)} on this environment ;3`;
   }
   if (status.auth.status === "unauthenticated") {
     if (hasProviderSetup(status)) {
       return status.driver === "antigravity"
-        ? "open provider setup to sign in with Google :3"
-        : "open provider setup to sign in ^w^";
+        ? "let's open provider setup and sign in with Google :3"
+        : "let's open provider setup and sign in ^w^";
     }
-    return "sign in via the CLI to authenticate again ;3";
+    return "sign in via the CLI and we'll be authenticated again ;3";
   }
   return status.status === "ready"
-    ? "no models are available for this provider 3:"
+    ? "hmm, this provider has no models available 3:"
     : status.status === "error"
-      ? `${providerName} provider is unavailable 3:`
-      : `${providerName} provider has limited availability :3`;
+      ? `aw, the ${providerName} provider is unavailable 3:`
+      : `the ${providerName} provider is only partly available right now :3`;
 }
 
 export const ProviderStatusBanner = memo(function ProviderStatusBanner({

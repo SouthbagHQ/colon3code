@@ -297,7 +297,7 @@ function KeybindingConflictWarning({ labels }: { labels: ReadonlyArray<string> }
 
   return (
     <WarningTooltipIcon label={description}>
-      {description} the most recent matching binding wins when both conditions can apply :3
+      {description} when both conditions apply, the most recent matching binding wins :3
     </WarningTooltipIcon>
   );
 }
@@ -719,7 +719,7 @@ function WhenExpressionBuilder({
         )}
         {parseError ? (
           <div className="pointer-events-none absolute inset-0 flex items-center justify-center rounded-lg border border-destructive/30 bg-background/75 p-4 text-center text-xs text-destructive backdrop-blur-[1px]">
-            fix the expression above to continue editing visually :3
+            fix the expression above and we'll go back to visual editing :3
           </div>
         ) : null}
       </div>
@@ -1309,7 +1309,7 @@ function KeybindingsList(props: KeybindingsListProps) {
       ))}
       {rows.length === 0 && !isAddingBinding ? (
         <div className="px-4 py-12 text-center text-sm text-muted-foreground">
-          no keybindings match your search ^w^
+          mrrp, no keybindings matched your search ^w^
         </div>
       ) : null}
     </div>
@@ -1322,8 +1322,8 @@ function BrowserKeybindingNotice() {
     <div className="flex items-center gap-2 px-3 py-2.5 text-[12px] leading-[1.45] text-muted-foreground sm:px-4">
       <TriangleAlertIcon className="size-3.5 shrink-0 text-warning" aria-hidden />
       <span>
-        some shortcuts may be claimed by the browser before :3 Code sees them. use the desktop app
-        for better keybinding support :3
+        the browser may grab some shortcuts before :3 Code sees them. for better keybinding support,
+        try the desktop app :3
       </span>
     </div>
   );
@@ -1394,7 +1394,7 @@ export function KeybindingsSettingsPanel() {
       }
       const error = squashAtomCommandFailure(result);
       toastManager.add({
-        title: "unable to open keybindings file 3:",
+        title: "oops, couldn't open the keybindings file 3:",
         description:
           error instanceof Error ? error.message : "the keybindings file was not opened.",
         type: "error",
@@ -1427,7 +1427,7 @@ export function KeybindingsSettingsPanel() {
         if (!isAtomCommandInterrupted(failed)) {
           const error = squashAtomCommandFailure(failed);
           toastManager.add({
-            title: "unable to save keybinding 3:",
+            title: "mrrp, that keybinding didn't save 3:",
             description: error instanceof Error ? error.message : "the keybinding was not saved.",
             type: "error",
           });
@@ -1455,7 +1455,7 @@ export function KeybindingsSettingsPanel() {
         if (result?._tag === "Failure" && !isAtomCommandInterrupted(result)) {
           const error = squashAtomCommandFailure(result);
           toastManager.add({
-            title: "unable to remove keybinding 3:",
+            title: "aw, couldn't remove that keybinding 3:",
             description: error instanceof Error ? error.message : "the keybinding was not removed.",
             type: "error",
           });

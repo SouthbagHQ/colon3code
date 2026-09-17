@@ -114,7 +114,7 @@ describe("agent browser close confirmation", () => {
     ).toBe(
       [
         "close browser while the agent is using it?",
-        "the agent is actively controlling this browser. closing it may interrupt the current browser action :3",
+        "the agent is busy driving this browser. closing it may interrupt the current browser action :3",
       ].join("\n"),
     );
   });
@@ -1670,12 +1670,12 @@ describe("deriveComposerSendState", () => {
 describe("buildExpiredTerminalContextToastCopy", () => {
   it("formats empty and omission guidance", () => {
     expect(buildExpiredTerminalContextToastCopy(1, "empty")).toEqual({
-      title: "expired terminal context won't be sent 3:",
-      description: "remove it or re-add it to include terminal output :3",
+      title: "hmm, expired terminal context won't be sent 3:",
+      description: "pop it out, or re-add it to include the terminal output :3",
     });
     expect(buildExpiredTerminalContextToastCopy(2, "omitted")).toEqual({
-      title: "expired terminal contexts omitted from message 3:",
-      description: "re-add it if you want that terminal output included :3",
+      title: "expired terminal contexts left out of the message 3:",
+      description: "re-add it if you'd like that terminal output included :3",
     });
   });
 });
@@ -1740,9 +1740,8 @@ describe("getStartedThreadModelChangeBlockReason", () => {
         },
       }),
     ).toEqual({
-      title: "start a new chat to change models 3:",
-      description:
-        "this provider does not allow switching models after a conversation has started :3",
+      title: "pop open a new chat to change models 3:",
+      description: "this provider doesn't let us switch models once a conversation has started :3",
     });
   });
 });

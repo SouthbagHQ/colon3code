@@ -16,8 +16,8 @@ function SettingsProvidersRoute() {
     return (
       <p className="p-8 text-sm text-muted-foreground">
         {scope.kind === "environment"
-          ? `reconnect ${scope.label} to set up its providers :3`
-          : "connect an environment to set up its providers ^w^"}
+          ? `reconnect ${scope.label} and we’ll set up its providers :3`
+          : "connect an environment and we’ll set up its providers together ^w^"}
       </p>
     );
   }

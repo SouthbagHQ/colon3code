@@ -240,17 +240,16 @@ function itemSummary({
     if (auth.status === "unauthenticated") {
       return (
         <span>
-          {item.label} is not authenticated on this server. sign in or configure credentials :3
-          using the{" "}
+          {item.label} isn't authenticated on this server. sign in or set up credentials using the{" "}
           <code className="rounded bg-muted px-1 py-px text-[11px]">{item.executable}</code> tool on
-          the server host to enable change request features.
+          the server host to turn on change request features :3
         </span>
       );
     }
     const authDetail = optionLabel(auth.detail);
     return (
       <span>
-        could not verify {item.label} 3: {authDetail ?? item.installHint}
+        hmm, couldn't verify {item.label} — {authDetail ?? item.installHint} 3:
       </span>
     );
   }
@@ -368,8 +367,8 @@ function GitFetchIntervalSettings() {
           <div className="flex min-w-0 items-center gap-1">
             <span className="text-xs font-medium text-foreground">{setting.title}</span>
             <PolicyTooltip>
-              this interval is configured for Git only. the shared background activity policy still
-              decides whether Git refreshes may run when the timer fires. custom intervals appear as
+              this interval is just for Git. the shared background activity policy still decides
+              whether Git refreshes may run when the timer fires. custom intervals show up as
               advanced in general settings ^w^
             </PolicyTooltip>
             <span
@@ -481,13 +480,14 @@ function EmptySourceControlDiscovery({
         </EmptyMedia>
         <EmptyHeader>
           <EmptyTitle>
-            {hasError ? "could not scan the server environment 3:" : "nothing detected yet :3"} 3:
+            {hasError
+              ? "hmm, couldn't scan the server environment 3:"
+              : "nothing detected yet, it's quiet in here :3"}
           </EmptyTitle>
           <EmptyDescription>
             {hasError
               ? error
-              : "install Git on the server, add optional hosting integrations or credentials your workspace needs, then rescan."}{" "}
-            ^w^
+              : "install Git on the server, add any hosting integrations or credentials your workspace needs, then rescan ^w^"}
           </EmptyDescription>
         </EmptyHeader>
         <EmptyContent>
@@ -550,7 +550,8 @@ export function SourceControlSettingsPanel() {
       {environmentId === null ? (
         <SettingsSection id={searchableSetting("source-control").id} title="server environment">
           <p className="px-4 py-3 text-sm text-muted-foreground">
-            connect an environment to inspect its version control tools and hosting ;3 integrations.
+            connect an environment and we can peek at its version control tools and hosting
+            integrations ;3
           </p>
         </SettingsSection>
       ) : isInitialScanPending ? (

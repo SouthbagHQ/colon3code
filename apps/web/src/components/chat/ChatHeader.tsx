@@ -194,7 +194,7 @@ export const ChatHeader = memo(function ChatHeader({
       setRenaming(null);
       const resolution = resolveRenameCommit({ title, originalTitle: activeThreadTitle });
       if (resolution.action === "reject-empty") {
-        toastManager.add({ type: "warning", title: "thread title cannot be empty 3:" });
+        toastManager.add({ type: "warning", title: "hmm, a thread needs a title 3:" });
         return;
       }
       if (resolution.action === "noop") return;
@@ -206,8 +206,8 @@ export const ChatHeader = memo(function ChatHeader({
           const error = squashAtomCommandFailure(result);
           toastManager.add({
             type: "error",
-            title: "failed to rename thread 3:",
-            description: error instanceof Error ? error.message : "an error occurred.",
+            title: "aw, that rename didn't stick 3:",
+            description: error instanceof Error ? error.message : "something went wrong.",
           });
         }
       });

@@ -148,7 +148,7 @@ function SidebarUpdateControl() {
       ? getDesktopUpdateButtonTooltip(state)
       : "update available"
     : showCheckIcon
-      ? "checking for updates… :3"
+      ? "checking for updates, hang tight… :3"
       : "check for updates";
   const disabled = showCheckIcon
     ? true
@@ -193,7 +193,7 @@ function SidebarUpdateControl() {
           toastManager.add(
             stackedThreadToast({
               type: "error",
-              title: "could not download update 3:",
+              title: "aw, couldn't download the update 3:",
               description: actionError,
             }),
           );
@@ -202,7 +202,7 @@ function SidebarUpdateControl() {
           toastManager.add(
             stackedThreadToast({
               type: "error",
-              title: "could not start update download 3:",
+              title: "oops, couldn't start the update download 3:",
               description: error instanceof Error ? error.message : "an unexpected error occurred.",
             }),
           );
@@ -222,8 +222,11 @@ function SidebarUpdateControl() {
         toastManager.add(
           stackedThreadToast({
             type: "error",
-            title: "could not confirm update 3:",
-            description: error instanceof Error ? error.message : "update confirmation failed 3:",
+            title: "hmm, couldn't confirm the update 3:",
+            description:
+              error instanceof Error
+                ? error.message
+                : "the update confirmation didn't go through 3:",
           }),
         );
         return;
@@ -241,7 +244,7 @@ function SidebarUpdateControl() {
           toastManager.add(
             stackedThreadToast({
               type: "error",
-              title: "could not install update 3:",
+              title: "aw, couldn't install the update 3:",
               description: actionError,
             }),
           );
@@ -250,7 +253,7 @@ function SidebarUpdateControl() {
           toastManager.add(
             stackedThreadToast({
               type: "error",
-              title: "could not install update 3:",
+              title: "aw, couldn't install the update 3:",
               description: error instanceof Error ? error.message : "an unexpected error occurred.",
             }),
           );
@@ -270,7 +273,7 @@ function SidebarUpdateControl() {
         toastManager.add(
           stackedThreadToast({
             type: "error",
-            title: "could not check for updates 3:",
+            title: "hmm, couldn't check for updates 3:",
             description:
               result.state.message ?? "automatic updates are not available in this build.",
           }),
@@ -280,7 +283,7 @@ function SidebarUpdateControl() {
         toastManager.add(
           stackedThreadToast({
             type: "error",
-            title: "could not check for updates 3:",
+            title: "hmm, couldn't check for updates 3:",
             description: error instanceof Error ? error.message : "update check failed.",
           }),
         );

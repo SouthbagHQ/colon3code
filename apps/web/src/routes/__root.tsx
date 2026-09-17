@@ -119,10 +119,10 @@ function RootRouteNotFoundView() {
   return (
     <main className="flex min-h-0 min-w-0 flex-1 items-center justify-center p-6">
       <div className="flex max-w-sm flex-col items-center gap-4 text-center">
-        <h1 className="text-lg font-medium text-foreground">page not found 3:</h1>
+        <h1 className="text-lg font-medium text-foreground">hmm, page not found 3:</h1>
         <p className="text-sm text-muted-foreground">
-          this link doesn't point to a page in {APP_DISPLAY_NAME}. go home to choose a project ^w^
-          or start a thread.
+          this link doesn’t point to a page in {APP_DISPLAY_NAME}. let’s head home and pick a
+          project or start a thread ^w^
         </p>
         <Button render={<Link to="/" replace />}>go home</Button>
       </div>
@@ -379,7 +379,7 @@ function RootRouteErrorView({ error }: ErrorComponentProps) {
           {APP_DISPLAY_NAME}
         </p>
         <h1 className="mt-3 text-2xl font-semibold tracking-tight sm:text-3xl">
-          something went wrong 3:
+          oops, something went wrong 3:
         </h1>
         <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{message}</p>
 
@@ -553,8 +553,8 @@ function EventRouter({
     if (decision._tag === "Success") {
       toastManager.add({
         type: "success",
-        title: "keybindings updated :3",
-        description: "keybindings configuration reloaded successfully.",
+        title: "keybindings updated, purr :3",
+        description: "your keybindings configuration reloaded just fine.",
       });
       return;
     }
@@ -562,7 +562,7 @@ function EventRouter({
     toastManager.add(
       stackedThreadToast({
         type: "warning",
-        title: "invalid keybindings configuration 3:",
+        title: "hmm, that keybindings configuration isn't valid 3:",
         description: decision.message,
         actionVariant: "outline",
         actionProps: {
@@ -591,7 +591,7 @@ function EventRouter({
               toastManager.add(
                 stackedThreadToast({
                   type: "error",
-                  title: "unable to open keybindings file 3:",
+                  title: "oops, couldn't open the keybindings file 3:",
                   description:
                     error instanceof Error ? error.message : "unknown error opening file.",
                 }),

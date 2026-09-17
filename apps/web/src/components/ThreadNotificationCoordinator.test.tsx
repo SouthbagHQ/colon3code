@@ -136,7 +136,7 @@ describe("thread notifications", () => {
     await render();
     expect(state.add).toHaveBeenCalledTimes(1);
     const toast = state.add.mock.calls[0]?.[0];
-    expect(toast?.title).toBe("thread completed :3");
+    expect(toast?.title).toBe("thread completed, purr :3");
     expect(toast?.description).toBe("Fix the login form");
     toast?.actionProps.onClick();
     expect(state.close).toHaveBeenCalledWith("toast-1");
@@ -164,8 +164,8 @@ describe("thread notifications", () => {
   it.each([
     ["input", "input needed"],
     ["approval", "approval needed"],
-    ["sessionError", "thread failed 3:"],
-    ["turnError", "thread failed 3:"],
+    ["sessionError", "aw, thread failed 3:"],
+    ["turnError", "aw, thread failed 3:"],
   ] as const)("uses the same %s event for in-app and desktop alerts", async (event, title) => {
     state.mode = "notifications-and-sound";
     await render();
@@ -245,7 +245,7 @@ describe("thread notifications", () => {
     await render();
     await complete();
     expect(state.add).not.toHaveBeenCalled();
-    expect(state.notification).toHaveBeenCalledWith("thread completed :3", {
+    expect(state.notification).toHaveBeenCalledWith("thread completed, purr :3", {
       body: "Fix the login form",
       tag: "env-1:thread-1",
       silent: true,

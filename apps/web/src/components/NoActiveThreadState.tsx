@@ -24,11 +24,11 @@ export function NoActiveThreadState() {
             <EmptyHeader className="max-w-none">
               <EmptyTitle className="text-foreground text-xl">
                 {" "}
-                pick a thread to continue :3
+                pick a thread and let's keep going :3
               </EmptyTitle>
               <EmptyDescription className="mt-2 text-sm text-muted-foreground/78">
                 {" "}
-                select an existing thread or create a new one to get started ^w^
+                pop into an existing thread, or start a fresh one — we're ready when you are ^w^
               </EmptyDescription>
             </EmptyHeader>
           </div>

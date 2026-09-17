@@ -103,10 +103,10 @@ export function PullRequestListEmptyState({
       <Empty className="py-16">
         <BranchMark joined={false} />
         <EmptyHeader>
-          <EmptyTitle>no projects in this workspace ^w^</EmptyTitle>
+          <EmptyTitle>no projects in this workspace yet ^w^</EmptyTitle>
           <EmptyDescription>
             {" "}
-            add a project, and the pull requests from its repository appear here :3
+            add a project and its repository's pull requests will pop up here :3
           </EmptyDescription>
         </EmptyHeader>
         <EmptyContent>
@@ -141,8 +141,8 @@ export function PullRequestListEmptyState({
           </EmptyTitle>
           <EmptyDescription>
             {" "}
-            the hosts were searched for it. try fewer words, or search by number, author or branch
-            ^w^
+            we asked the hosts and came back empty. try fewer words, or search by number, author or
+            branch ^w^
           </EmptyDescription>
         </EmptyHeader>
         <EmptyContent className="flex-row flex-wrap justify-center gap-2">
@@ -166,12 +166,14 @@ export function PullRequestListEmptyState({
       <BranchMark joined={false} />
       <EmptyHeader>
         <EmptyTitle>
-          {filtered ? "nothing under these filters 3:" : "no pull requests yet :3"}
+          {filtered
+            ? "hmm, nothing under these filters 3:"
+            : "no pull requests yet, it's quiet in here :3"}
         </EmptyTitle>
         <EmptyDescription>
           {filtered
-            ? "widen the state, involvement or project filter to see more ;3"
-            : "pull requests from every project in this workspace appear here :3"}
+            ? "widen the state, involvement or project filter and more will show up ;3"
+            : "pull requests from every project in this workspace will gather here :3"}
         </EmptyDescription>
       </EmptyHeader>
       <EmptyContent className="flex-row flex-wrap justify-center gap-2">

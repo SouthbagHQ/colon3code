@@ -69,7 +69,7 @@ export function DeviceHostEditor({
             {targets.length === 1
               ? `connect from ${targets[0]?.label}.`
               : `connect from ${targets.length} selected environments.`}{" "}
-            hosts on the same machine are skipped :3
+            hosts on the same machine get skipped :3
           </DialogDescription>
         </DialogHeader>
         <DialogPanel className="space-y-4">
@@ -133,7 +133,7 @@ export function DeviceHostEditor({
               </label>
             </div>
             <p className="mt-2 text-xs text-muted-foreground">
-              optional resolved separately on each environment :3
+              optional, and resolved separately on each environment :3
             </p>
           </details>
           <div className="rounded-lg border border-border/60">
@@ -144,9 +144,8 @@ export function DeviceHostEditor({
                   : results
                     ? failed
                       ? `${failed} of ${targets.length} failed`
-                      : "connection checks passed :3"
-                    : "check access before saving ^w^"}{" "}
-                :3
+                      : "connection checks passed, purr :3"
+                    : "let's check access before saving ^w^"}
               </p>
               <Button
                 type="button"

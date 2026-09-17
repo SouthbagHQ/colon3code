@@ -20,8 +20,9 @@ import { toastManager } from "../ui/toast";
 
 function emptyMessage(query: string, error: string | null, isPending: boolean): string {
   if (error) return error;
-  if (isPending) return query.trim() ? "searching project files…" : "indexing project files,… ;3";
-  return query.trim() ? "no matching image files :3" : "no image files found 3:";
+  if (isPending)
+    return query.trim() ? "searching project files…" : "just a sec, indexing project files… ;3";
+  return query.trim() ? "hmm, no image files matched :3" : "aw, no image files found 3:";
 }
 export function canPickExternalProjectFavicon(cwd: string, platform: string): boolean {
   return !isWindowsPlatform(platform) || isWindowsAbsolutePath(cwd);
@@ -94,7 +95,7 @@ export function ProjectFaviconPickerDialog(props: {
                       .catch((error: unknown) => {
                         toastManager.add({
                           type: "error",
-                          title: "could not open image picker 3:",
+                          title: "oops, couldn't open the image picker 3:",
                           description:
                             error instanceof Error ? error.message : "an error occurred.",
                         });
@@ -106,7 +107,7 @@ export function ProjectFaviconPickerDialog(props: {
                 </CommandFooterAction>
               ) : null
             }
-            inputProps={{ placeholder: "search image files,… :3" }}
+            inputProps={{ placeholder: "search image files… :3" }}
             mode="none"
             onItemHighlighted={(value) => {
               setHighlightedItemValue(typeof value === "string" ? value : null);

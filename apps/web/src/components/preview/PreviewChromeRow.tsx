@@ -203,7 +203,7 @@ export function PreviewChromeRow({
                       inputRef.current?.blur();
                     }
                   }}
-                  placeholder="search or enter URL :3"
+                  placeholder="search or type a URL :3"
                   spellCheck={false}
                   disabled={inputDisabled}
                   data-preview-url-input
@@ -259,7 +259,7 @@ export function PreviewChromeRow({
                 ? pickDisabledReason
                 : pickActive
                   ? "cancel annotation (Esc)"
-                  : "annotate elements, regions, and drawings ^w^"}
+                  : "annotate elements, regions, and little drawings ^w^"}
             </TooltipPopup>
           </Tooltip>
         ) : null}

@@ -67,11 +67,11 @@ export function PullRequestLabelPicker({
       toastManager.add({
         type: "error",
         title: candidate.isApplied
-          ? `could not take ${candidate.name} off 3:`
-          : `could not put ${candidate.name} on 3:`,
+          ? `oops, couldn't take ${candidate.name} off 3:`
+          : `oops, couldn't put ${candidate.name} on 3:`,
         description: readableFailure(
           squashAtomCommandFailure(result),
-          "the host refused it. check that you have triage access on this repository 3:",
+          "the host said no. check that you have triage access on this repository 3:",
         ),
       });
       return;
@@ -83,7 +83,7 @@ export function PullRequestLabelPicker({
       icon={<TagIcon className="size-3.5" />}
       label="change labels"
       allowed={allowed}
-      disabledReason="changing labels needs triage access on this repository :3"
+      disabledReason="to change labels, you'll need triage access on this repository :3"
       open={open}
       onOpenChange={setOpen}
       query={query}
@@ -92,11 +92,11 @@ export function PullRequestLabelPicker({
       isPending={candidatesQuery.isPending && candidatesQuery.data === null}
       error={candidatesQuery.data === null ? candidatesQuery.error : null}
       candidates={candidates}
-      emptyLabel="this repository has no labels :3"
-      noMatchLabel="no label matches that ^w^"
-      errorLabel="the labels could not be read 3:"
+      emptyLabel="this repository has no labels yet :3"
+      noMatchLabel="hmm, no label matches that ^w^"
+      errorLabel="aw, couldn't read the labels 3:"
       truncated={candidatesQuery.data?.truncated === true}
-      truncatedLabel="this repository has more labels than are listed here. apply the rest on the host :3"
+      truncatedLabel="there are more labels than we can list here — apply the rest on the host :3"
       candidateKey={(candidate) => candidate.name}
       disabled={pending !== null}
       onSelect={(candidate) => void toggle(candidate)}

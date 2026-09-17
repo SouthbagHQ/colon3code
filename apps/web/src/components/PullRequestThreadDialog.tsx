@@ -171,9 +171,9 @@ export function PullRequestThreadDialog({
   const validationMessage = !referenceDirty
     ? null
     : reference.trim().length === 0
-      ? `paste a ${terminology.singular} URL, checkout command, or enter 123 / #123 :3`
+      ? `paste a ${terminology.singular} URL, a checkout command, or just 123 / #123 :3`
       : parsedReference === null
-        ? `use a ${terminology.singular} URL, checkout command, 123, or #123 :3`
+        ? `hmm, try a ${terminology.singular} URL, checkout command, 123, or #123 :3`
         : null;
   const errorMessage =
     validationMessage ??
@@ -182,7 +182,7 @@ export function PullRequestThreadDialog({
       : preparePullRequestThreadAction.error instanceof Error
         ? preparePullRequestThreadAction.error.message
         : preparePullRequestThreadAction.error
-          ? `failed to prepare ${terminology.singular} thread 3:`
+          ? `aw, couldn't prepare the ${terminology.singular} thread 3:`
           : null);
 
   return (
@@ -201,8 +201,8 @@ export function PullRequestThreadDialog({
             checkout {terminology.singular}
           </DialogTitle>
           <DialogDescription>
-            resolve a {sourceControlPresentation.providerName} {terminology.singular}, then create
-            the draft thread in the main repo or in a dedicated worktree :3
+            resolve a {sourceControlPresentation.providerName} {terminology.singular}, then we'll
+            create the draft thread in the main repo or in a dedicated worktree :3
           </DialogDescription>
         </DialogHeader>
         <DialogPanel className="space-y-4">

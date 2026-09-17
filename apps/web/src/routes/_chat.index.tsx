@@ -95,11 +95,11 @@ function DraftStartError({ onRetry }: { readonly onRetry: () => void }) {
         <EmptyHeader className="max-w-md">
           <EmptyTitle className="text-foreground text-xl">
             {" "}
-            couldn’t start a new thread 3:
+            hmm, couldn’t start a new thread 3:
           </EmptyTitle>
           <EmptyDescription className="mt-2 text-sm text-muted-foreground/78">
             {" "}
-            the project is still available. try opening the draft again ^w^
+            no worries, the project is still here — try opening the draft again ^w^
           </EmptyDescription>
           <div className="mt-5 flex justify-center">
             <Button size="sm" onClick={onRetry}>
@@ -121,10 +121,10 @@ function HostedStaticOnboardingState() {
   const cloudEnabled = hasCloudPublicConfig();
   const localEnvironmentOff = isLocalEnvironmentDisabled();
   const description = localEnvironmentOff
-    ? "the local environment is turned off. connect a remote environment, or turn the local environment back on in connections :3"
+    ? "the local environment is turned off right now. connect a remote environment, or turn the local one back on in connections :3"
     : cloudEnabled
       ? "enable T3 Connect on that machine, then open connections here to sign in with the same account. you can also add the machine using a pairing link."
-      : "open connections and add that machine using its pairing link. this app must be able to reach it ;3";
+      : "open connections and add that machine with its pairing link — just make sure this app can reach it ;3";
 
   return (
     <SidebarInset className="h-dvh min-h-0 overflow-hidden overscroll-y-none bg-background text-foreground">

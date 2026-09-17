@@ -47,7 +47,7 @@ function resolveConfirmDialogCopy(message: string): ConfirmationCopy {
 
   return {
     title: "confirm action",
-    description: normalizedMessage || "this action requires your confirmation ^w^",
+    description: normalizedMessage || "this action needs your okay first ^w^",
   };
 }
 

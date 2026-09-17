@@ -103,16 +103,16 @@ export function PullRequestStackMenu({
     if (result._tag === "Failure") {
       toastManager.add({
         type: "error",
-        title: "stack operation did not complete 3:",
+        title: "aw, the stack operation didn't finish 3:",
         description: String(squashAtomCommandFailure(result)),
       });
     } else {
       toastManager.add({
         type: "success",
-        title: action === "merge" ? "stack merge request completed :3" : "stack rebased :3",
+        title: action === "merge" ? "stack merge requested, purr :3" : "stack rebased, mrrp :3",
         description:
           action === "merge"
-            ? "GitHub merged the stack or added it to its merge queue ^w^"
+            ? "GitHub merged the stack or popped it into its merge queue ^w^"
             : undefined,
       });
     }
@@ -182,7 +182,7 @@ export function PullRequestStackMenu({
               {mergeHasClosed || mergeLayers.some((layer) => layer.isDraft) ? (
                 <p className="px-2 py-1 text-xs text-muted-foreground">
                   {" "}
-                  every layer being merged must be open and ready for review :3
+                  every layer we merge needs to be open and ready for review :3
                 </p>
               ) : null}
             </>
@@ -227,8 +227,8 @@ export function PullRequestStackMenu({
             </DialogTitle>
             <DialogDescription>
               {confirmation === "merge"
-                ? `merge #${reference.number} and its unmerged layers below into ${stack.base} using ${mergeMethod}GitHub checks their rules before merging or queueing them and rebases the remaining stack after merging ;3`
-                : `rebase the remote branches from bottom to top onto ${stack.base}this rewrites branch history and may restart checks. if a layer fails, earlier updates remain ^w^`}
+                ? `this merges #${reference.number} and its unmerged layers below into ${stack.base} using ${mergeMethod}. GitHub checks their rules before merging or queueing them, then rebases the rest of the stack ;3`
+                : `this rebases the remote branches from bottom to top onto ${stack.base}. it rewrites branch history and may restart checks — if a layer fails, earlier updates stay put ^w^`}
             </DialogDescription>
           </DialogHeader>
           <DialogPanel>

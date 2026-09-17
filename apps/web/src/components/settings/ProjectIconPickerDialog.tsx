@@ -109,7 +109,7 @@ export function ProjectIconPickerDialog({
       <DialogPopup className="w-full sm:w-[32rem]">
         <DialogHeader>
           <DialogTitle>choose project icon ^w^</DialogTitle>
-          <DialogDescription>choose an icon, emoji, or monogram ^w^</DialogDescription>
+          <DialogDescription>pick an icon, emoji, or monogram ^w^</DialogDescription>
         </DialogHeader>
         <DialogPanel className="flex min-h-0 flex-col gap-4">
           <ToggleGroup
@@ -203,7 +203,7 @@ export function ProjectIconPickerDialog({
                 />
                 <p id="project-monogram-hint" className="text-xs text-muted-foreground">
                   {" "}
-                  one or two letters or numbers ;3
+                  one or two letters or numbers, your pick ;3
                 </p>
               </div>
             </div>
@@ -231,7 +231,7 @@ export function ProjectIconPickerDialog({
               <div>
                 <div className="mb-2 text-xs font-medium text-muted-foreground">
                   {" "}
-                  or paste any emoji ;3
+                  or paste in any emoji you like ;3
                 </div>
                 <Input
                   value={customEmoji}

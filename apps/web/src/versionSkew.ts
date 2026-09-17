@@ -80,7 +80,7 @@ export function resolveVersionMismatch(
   return {
     clientVersion: normalizedClientVersion,
     serverVersion: normalizedServerVersion,
-    hint: "version mismatch. try syncing the client and server to the same :3 Code version.",
+    hint: "hmm, version mismatch — try syncing the client and server to the same :3 Code version.",
   };
 }
 

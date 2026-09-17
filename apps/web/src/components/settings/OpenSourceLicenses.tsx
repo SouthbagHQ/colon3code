@@ -180,7 +180,7 @@ function LicenseManifestError({ message, onRetry }: { message: string; onRetry: 
       <div className="flex flex-col gap-1">
         <h3 className="text-sm font-medium text-foreground">
           {" "}
-          open-source notices are unavailable 3:
+          hmm, the open-source notices aren't available right now 3:
         </h3>
         <p className="max-w-[70ch] text-pretty text-[13px] leading-[1.45] text-muted-foreground/80">
           {message}
@@ -209,8 +209,7 @@ export function OpenSourceLicensesPanel() {
         if (controller.signal.aborted) return;
         setState({
           status: "error",
-          message:
-            error instanceof Error ? error.message : "the license manifest could not load 3:",
+          message: error instanceof Error ? error.message : "the license manifest couldn't load 3:",
         });
       },
     );
@@ -258,7 +257,7 @@ export function OpenSourceLicensesPanel() {
             ) : (
               <p className="px-3 py-8 text-center text-sm/6 text-muted-foreground sm:px-4">
                 {" "}
-                no licenses match that search ;3
+                hmm, no licenses matched that search ;3
               </p>
             )}
           </div>
@@ -267,7 +266,7 @@ export function OpenSourceLicensesPanel() {
         ) : (
           <p className="px-3 py-5 text-sm/6 text-muted-foreground sm:px-4">
             {" "}
-            loading open-source notices,… ^w^
+            grabbing the open-source notices… ^w^
           </p>
         )}
       </SettingsSection>

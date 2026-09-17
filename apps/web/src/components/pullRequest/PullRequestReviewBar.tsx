@@ -29,13 +29,13 @@ const VERDICTS: ReadonlyArray<{
   {
     value: "comment",
     label: "comment",
-    sent: "review submitted :3",
+    sent: "review submitted, all done :3",
     icon: <MessageSquareIcon className="size-3" />,
   },
   {
     value: "approve",
     label: "approve",
-    sent: "pull request approved :3",
+    sent: "pull request approved, yay :3",
     icon: <CheckIcon className="size-3" />,
   },
   {
@@ -94,7 +94,7 @@ export function PullRequestReviewBar({
     setPending(false);
     if (result._tag === "Failure") {
       // The draft is kept: whatever went wrong, retyping the review is not the answer.
-      toastManager.add({ type: "error", title: "the review could not be submitted 3:" });
+      toastManager.add({ type: "error", title: "mrrp, the review didn't go through 3:" });
       return;
     }
     // More remarks may have been added while the host was accepting this snapshot. Leave those,
@@ -134,8 +134,8 @@ export function PullRequestReviewBar({
         value={body}
         placeholder={
           requestChangesSummaryRequired && verdicts.includes("request-changes")
-            ? "summarize your review (required to request changes) :3"
-            : "summarize your review (optional) ^w^"
+            ? "sum up your review (required to request changes) :3"
+            : "sum up your review (optional) ^w^"
         }
         aria-label="review summary"
         onChange={(event) => setSummary(reviewKey, event.target.value)}

@@ -59,8 +59,9 @@ export const ProposedPlanCard = memo(function ProposedPlanCard({
       toastManager.add(
         stackedThreadToast({
           type: "error",
-          title: "could not copy plan 3:",
-          description: error instanceof Error ? error.message : "an error occurred while copying.",
+          title: "aw, couldn't copy the plan 3:",
+          description:
+            error instanceof Error ? error.message : "something went wrong while copying.",
         }),
       );
     },
@@ -89,8 +90,8 @@ export const ProposedPlanCard = memo(function ProposedPlanCard({
       toastManager.add(
         stackedThreadToast({
           type: "error",
-          title: "workspace path is unavailable 3:",
-          description: "this thread does not have a workspace path to save into.",
+          title: "hmm, there's no workspace path 3:",
+          description: "this thread doesn't have a workspace path to save into.",
         }),
       );
       return;
@@ -107,7 +108,7 @@ export const ProposedPlanCard = memo(function ProposedPlanCard({
     if (!relativePath) {
       toastManager.add({
         type: "warning",
-        title: "enter a workspace path 3:",
+        title: "we need a workspace path first 3:",
       });
       return;
     }
@@ -127,7 +128,7 @@ export const ProposedPlanCard = memo(function ProposedPlanCard({
         setIsSaveDialogOpen(false);
         toastManager.add({
           type: "success",
-          title: "plan saved to workspace :3",
+          title: "plan saved to your workspace, purr :3",
           description: result.value.relativePath,
         });
         return;
@@ -137,8 +138,9 @@ export const ProposedPlanCard = memo(function ProposedPlanCard({
         toastManager.add(
           stackedThreadToast({
             type: "error",
-            title: "could not save plan 3:",
-            description: error instanceof Error ? error.message : "an error occurred while saving.",
+            title: "aw, that plan didn't save 3:",
+            description:
+              error instanceof Error ? error.message : "something went wrong while saving.",
           }),
         );
       }
@@ -162,7 +164,7 @@ export const ProposedPlanCard = memo(function ProposedPlanCard({
           </MenuTrigger>
           <MenuPopup align="end">
             <MenuItem onClick={handleCopyPlan}>
-              {isCopied ? "copied! :3" : "copy to clipboard"}
+              {isCopied ? "copied it for you, purr :3" : "copy to clipboard"}
             </MenuItem>
             <MenuItem onClick={handleDownload}>download as markdown</MenuItem>
             <MenuItem onClick={openSaveDialog} disabled={!workspaceRoot || isSavingToWorkspace}>
@@ -218,9 +220,9 @@ export const ProposedPlanCard = memo(function ProposedPlanCard({
       >
         <DialogPopup className="max-w-xl">
           <DialogHeader>
-            <DialogTitle>save plan to workspace :3</DialogTitle>
+            <DialogTitle>tuck this plan into your workspace :3</DialogTitle>
             <DialogDescription>
-              enter a path relative to <code>{workspaceRoot ?? "the workspace"} ^w^</code>
+              give it a path relative to <code>{workspaceRoot ?? "the workspace"}</code> ^w^
             </DialogDescription>
           </DialogHeader>
           <DialogPanel className="space-y-3">
