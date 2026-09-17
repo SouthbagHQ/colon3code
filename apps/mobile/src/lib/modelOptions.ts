@@ -1,5 +1,4 @@
 import {
-  SOUTHBAG_CODE_DEFAULT_MODEL,
   SOUTHBAG_CODE_DRIVER_KIND,
   type ModelCapabilities,
   type ModelSelection,
@@ -40,17 +39,6 @@ function providerDisplayLabel(provider: {
   if (provider.driver === "claudeAgent") return "Claude";
   if (provider.driver === SOUTHBAG_CODE_DRIVER_KIND) return "Southbag Code";
   return provider.instanceId;
-}
-
-/**
- * Southbag Code's default model is a sentinel that keeps whatever the session
- * itself is configured with, so a stored selection the catalog no longer
- * lists must not surface the raw slug.
- */
-function fallbackModelLabel(providerDriver: string, modelSlug: string): string {
-  return providerDriver === SOUTHBAG_CODE_DRIVER_KIND && modelSlug === SOUTHBAG_CODE_DEFAULT_MODEL
-    ? "session default"
-    : modelSlug;
 }
 
 function normalizeSelectionOptions(
@@ -229,7 +217,7 @@ export function buildModelOptions(
       });
       options.set(key, {
         key,
-        label: model?.name ?? fallbackModelLabel(providerDriver, fallbackModelSelection.model),
+        label: model?.name ?? fallbackModelSelection.model,
         subtitle: model?.subProvider ?? "",
         providerKey: fallbackModelSelection.instanceId,
         providerLabel,

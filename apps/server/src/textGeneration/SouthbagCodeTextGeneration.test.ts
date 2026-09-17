@@ -20,7 +20,7 @@ const __dirname = NodePath.dirname(NodeURL.fileURLToPath(import.meta.url));
 const mockAgentPath = NodePath.resolve(__dirname, "../../scripts/southbag-code-mock-agent.ts");
 const modelSelection = {
   instanceId: ProviderInstanceId.make("southbag-code"),
-  model: "southbag-default",
+  model: "southbag-agent/southbag-agent",
 };
 
 const testLayer = ServerConfig.ServerConfig.layerTest(process.cwd(), {

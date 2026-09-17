@@ -103,7 +103,7 @@ describe("mobile model options", () => {
     ]);
   });
 
-  it("labels Southbag Code and its session-default sentinel without a catalog entry", () => {
+  it("labels Southbag Code selections without a catalog entry by their slug", () => {
     const config = {
       providers: [
         {
@@ -120,23 +120,16 @@ describe("mobile model options", () => {
 
     const [option] = buildModelOptions(config, {
       instanceId: ProviderInstanceId.make("southbag-code"),
-      model: "southbag-default",
+      model: "southbag-agent/southbag-agent",
     });
 
     expect(option).toMatchObject({
-      key: "southbag-code:southbag-default",
-      label: "session default",
+      key: "southbag-code:southbag-agent/southbag-agent",
+      label: "southbag-agent/southbag-agent",
       providerLabel: "Southbag Code",
       providerDriver: "southbag-code",
     });
-
-    const [concrete] = buildModelOptions(config, {
-      instanceId: ProviderInstanceId.make("southbag-code"),
-      model: "anthropic/claude-opus-5",
-    });
-    expect(concrete?.label).toBe("anthropic/claude-opus-5");
   });
-
   it("does not materialize catalog defaults for missing stored options", () => {
     const config = {
       providers: [

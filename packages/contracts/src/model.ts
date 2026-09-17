@@ -150,8 +150,8 @@ const GROK_DRIVER_KIND = ProviderDriverKind.make("grok");
 const OPENCODE_DRIVER_KIND = ProviderDriverKind.make("opencode");
 /** Southbag Code (github.com/SouthbagHQ/code): a Pi-derived agent driven over its RPC mode. */
 export const SOUTHBAG_CODE_DRIVER_KIND = ProviderDriverKind.make("southbag-code");
-/** Keep the Southbag Code session's own configured model. Never sent to the RPC. */
-export const SOUTHBAG_CODE_DEFAULT_MODEL = "southbag-default";
+/** The one model Southbag Code ships, as `provider/modelId` from its RPC. */
+export const SOUTHBAG_CODE_DEFAULT_MODEL = "southbag-agent/southbag-agent";
 
 export const DEFAULT_MODEL = "gpt-6-astra";
 

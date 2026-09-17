@@ -186,56 +186,24 @@ describe("instance-scoped model selection", () => {
     );
   });
 
-  it("pins the Southbag Code session default ahead of the server catalog", () => {
+  it("lists exactly the Southbag Code models the server reports", () => {
     const instanceId = ProviderInstanceId.make("southbag-code");
     const providers = [
       provider({
         provider: SOUTHBAG_CODE_DRIVER_KIND,
         instanceId,
-        models: ["anthropic/claude-sonnet-4-5", "openai/gpt-5"],
+        models: [SOUTHBAG_CODE_DEFAULT_MODEL],
       }),
     ];
     const settings = settingsWithProviderInstances();
     const entry = deriveProviderInstanceEntries(providers)[0]!;
-    const options = getAppModelOptionsForInstance(settings, entry);
 
-    expect(options.map((option) => option.slug)).toEqual([
+    expect(getAppModelOptionsForInstance(settings, entry).map((option) => option.slug)).toEqual([
       SOUTHBAG_CODE_DEFAULT_MODEL,
-      "anthropic/claude-sonnet-4-5",
-      "openai/gpt-5",
     ]);
-    expect(options[0]).toMatchObject({ name: "session default", isDefault: true });
-    // The sentinel round-trips and is the fallback for a fresh thread.
-    expect(
-      resolveAppModelSelectionForInstance(
-        instanceId,
-        settings,
-        providers,
-        SOUTHBAG_CODE_DEFAULT_MODEL,
-      ),
-    ).toBe(SOUTHBAG_CODE_DEFAULT_MODEL);
     expect(resolveAppModelSelectionForInstance(instanceId, settings, providers, null)).toBe(
       SOUTHBAG_CODE_DEFAULT_MODEL,
     );
-    expect(
-      resolveAppModelSelectionForInstance(instanceId, settings, providers, "openai/gpt-5"),
-    ).toBe("openai/gpt-5");
-  });
-
-  it("does not duplicate a server-listed Southbag Code session default", () => {
-    const instanceId = ProviderInstanceId.make("southbag-code");
-    const base = provider({
-      provider: SOUTHBAG_CODE_DRIVER_KIND,
-      instanceId,
-      models: [SOUTHBAG_CODE_DEFAULT_MODEL, "openai/gpt-5"],
-    });
-    const entry = deriveProviderInstanceEntries([base])[0]!;
-
-    expect(
-      getAppModelOptionsForInstance(settingsWithProviderInstances(), entry).map(
-        (option) => option.slug,
-      ),
-    ).toEqual([SOUTHBAG_CODE_DEFAULT_MODEL, "openai/gpt-5"]);
   });
 
   it("does not inject an unknown selected slug into the stock instance list", () => {

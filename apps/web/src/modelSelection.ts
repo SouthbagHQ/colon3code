@@ -8,8 +8,6 @@ import {
   ProviderInstanceId,
   type ServerProvider,
   type ServerSettingsPatch,
-  SOUTHBAG_CODE_DEFAULT_MODEL,
-  SOUTHBAG_CODE_DRIVER_KIND,
 } from "@t3tools/contracts";
 import {
   type CustomModelDefinition,
@@ -112,30 +110,6 @@ function appendUnavailableDynamicModelSelection(
   if (options.some((option) => option.slug === slug)) return options;
 
   return [...options, { slug, name: slug, isCustom: false, isUnavailable: true }];
-}
-
-/**
- * Southbag Code keeps the session's own configured model unless the user
- * picks a concrete `provider/modelId`. That "keep it" choice is the
- * `southbag-default` sentinel: it is not a real RPC model, so it is pinned
- * here as the first, default picker row regardless of what the server
- * catalog lists or what the user hid, and the sentinel round-trips through
- * `resolveSelectableModel` like any other slug.
- */
-function withSouthbagCodeSessionDefault(
-  provider: ProviderDriverKind,
-  options: AppModelOption[],
-): AppModelOption[] {
-  if (provider !== SOUTHBAG_CODE_DRIVER_KIND) return options;
-  return [
-    {
-      slug: SOUTHBAG_CODE_DEFAULT_MODEL,
-      name: "session default",
-      isCustom: false,
-      isDefault: true,
-    },
-    ...options.filter((option) => option.slug !== SOUTHBAG_CODE_DEFAULT_MODEL),
-  ];
 }
 
 function toAppModelOption(model: ServerProvider["models"][number]): AppModelOption {
@@ -241,15 +215,12 @@ function getAppModelOptions(
   }
 
   const preferences = readInstanceModelPreferences(settings, defaultInstanceId);
-  return withSouthbagCodeSessionDefault(
+  return appendUnavailableDynamicModelSelection(
+    applyInstanceModelPreferences(options, preferences),
+    rawModels,
     provider,
-    appendUnavailableDynamicModelSelection(
-      applyInstanceModelPreferences(options, preferences),
-      rawModels,
-      provider,
-      selectedModel,
-      preferences.hiddenModels,
-    ),
+    selectedModel,
+    preferences.hiddenModels,
   );
 }
 
@@ -292,15 +263,12 @@ export function getAppModelOptionsForInstance(
   }
 
   const preferences = readInstanceModelPreferences(settings, entry.instanceId);
-  return withSouthbagCodeSessionDefault(
+  return appendUnavailableDynamicModelSelection(
+    applyInstanceModelPreferences(options, preferences),
+    entry.models,
     entry.driverKind,
-    appendUnavailableDynamicModelSelection(
-      applyInstanceModelPreferences(options, preferences),
-      entry.models,
-      entry.driverKind,
-      selectedModel,
-      preferences.hiddenModels,
-    ),
+    selectedModel,
+    preferences.hiddenModels,
   );
 }
 

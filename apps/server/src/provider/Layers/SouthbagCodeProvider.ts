@@ -87,17 +87,30 @@ const THINKING_CAPABILITIES: ModelCapabilities = createModelCapabilities({
 });
 const EMPTY_CAPABILITIES: ModelCapabilities = createModelCapabilities({ optionDescriptors: [] });
 
-/** The sentinel row: "use whatever model the session is configured with". */
+/**
+ * Southbag Code ships exactly one model, so the picker lists just that. This
+ * row stands in when the RPC listing fails (the binary is present but the
+ * model probe did not answer) so the picker is never empty.
+ */
 export const SOUTHBAG_CODE_DEFAULT_MODEL_ENTRY: ServerProviderModel = {
   slug: SOUTHBAG_CODE_DEFAULT_MODEL,
-  name: "session default",
+  name: "Southbag Agent",
   isCustom: false,
   isDefault: true,
   capabilities: THINKING_CAPABILITIES,
 };
 
-export function isSouthbagCodeDefaultModel(model: string | undefined): boolean {
-  return model === undefined || model.trim() === SOUTHBAG_CODE_DEFAULT_MODEL;
+/** Discovered rows with the shipped model (or, failing that, the first row) marked default. */
+function withSouthbagCodeDefault(
+  models: ReadonlyArray<ServerProviderModel>,
+): ReadonlyArray<ServerProviderModel> {
+  if (models.length === 0) return [SOUTHBAG_CODE_DEFAULT_MODEL_ENTRY];
+  const defaultSlug = models.some((model) => model.slug === SOUTHBAG_CODE_DEFAULT_MODEL)
+    ? SOUTHBAG_CODE_DEFAULT_MODEL
+    : models[0]!.slug;
+  return models.map((model) =>
+    model.slug === defaultSlug ? { ...model, isDefault: true } : { ...model, isDefault: false },
+  );
 }
 
 /** Split a `provider/modelId` slug for `set_model`. */
@@ -154,7 +167,7 @@ export function southbagCodeModelsFromSettings(
   discoveredModels: ReadonlyArray<ServerProviderModel> = [],
 ): ReadonlyArray<ServerProviderModel> {
   return providerModelsFromSettings(
-    [SOUTHBAG_CODE_DEFAULT_MODEL_ENTRY, ...discoveredModels],
+    withSouthbagCodeDefault(discoveredModels),
     customModels ?? [],
     THINKING_CAPABILITIES,
   );
@@ -354,14 +367,14 @@ export const checkSouthbagCodeProviderStatus = Effect.fn("checkSouthbagCodeProvi
         installed: true,
         version,
         // The binary runs, so chats work; a failed model listing only
-        // degrades the picker to the session-default row.
+        // degrades the picker to the shipped-model row.
         status: discoveredModels.length > 0 ? "ready" : "warning",
         auth: { status: "unknown" },
         ...(discoveredModels.length > 0
           ? {}
           : {
               message:
-                "southbag-code is installed but did not list any models. the session default still works :3",
+                "southbag-code is installed but did not list any models. chats still work :3",
             }),
       },
     });

@@ -44,10 +44,11 @@ not be used. Sessions are written under the server's userdata via `--session-dir
 agent's default home, so resume works from the thread record alone and does not depend on the
 user's own Southbag Code history.
 
-The model sentinel `southbag-default`
-([contracts](../../packages/contracts/src/model.ts)) means "keep the session's configured model".
-Never send it over the RPC; only concrete `provider/modelId` slugs from `get_available_models` are
-valid `set_model` arguments.
+Model slugs are `provider/modelId` exactly as `get_available_models` reports them, and only those
+are valid `set_model` arguments. Southbag Code ships a single model
+(`SOUTHBAG_CODE_DEFAULT_MODEL` in [contracts](../../packages/contracts/src/model.ts)); the provider
+lists what the RPC reports, marks that model default, and falls back to a static row for it when the
+model probe fails so the picker is never empty.
 
 The driver is registered first in [`BUILT_IN_DRIVERS`](../../apps/server/src/provider/builtInDrivers.ts)
 on purpose. The web picks the first picker-ready provider in the server's list as the default for

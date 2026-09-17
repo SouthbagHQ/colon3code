@@ -100,8 +100,8 @@ if (!args.includes("--no-session")) {
 }
 
 const models = [
-  { id: "southbag-agent", provider: "southbag", name: "Southbag Agent", reasoning: true },
-  { id: "mock-alt", provider: "southbag", name: "Mock Alt", reasoning: false },
+  { id: "southbag-agent", provider: "southbag-agent", name: "Southbag Agent", reasoning: true },
+  { id: "mock-alt", provider: "southbag-agent", name: "Mock Alt", reasoning: false },
 ];
 let currentModel = models[0]!;
 let thinkingLevel = "medium";

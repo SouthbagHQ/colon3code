@@ -74,7 +74,6 @@ import { buildRuntimeInstructions } from "../RuntimeInstructions.ts";
 import type { ProviderAdapterShape } from "../Services/ProviderAdapter.ts";
 import type { EventNdjsonLogger } from "./EventNdjsonLogger.ts";
 import {
-  isSouthbagCodeDefaultModel,
   isSouthbagCodeThinkingLevel,
   parseSouthbagCodeModelSlug,
   SOUTHBAG_CODE_THINKING_OPTION_ID,
@@ -482,8 +481,7 @@ export function makeSouthbagCodeAdapter(
       Effect.gen(function* () {
         if (!modelSelection) return;
         const requested = modelSelection.model.trim();
-        // The sentinel means "keep the session's own model": never sent to the RPC.
-        if (!isSouthbagCodeDefaultModel(requested) && requested !== ctx.currentModel) {
+        if (requested.length > 0 && requested !== ctx.currentModel) {
           const parsed = parseSouthbagCodeModelSlug(requested);
           if (!parsed) {
             return yield* new ProviderAdapterValidationError({

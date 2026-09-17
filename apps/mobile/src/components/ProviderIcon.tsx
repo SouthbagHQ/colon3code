@@ -1,5 +1,5 @@
 import { Image } from "expo-image";
-import { Circle, Path, Svg } from "react-native-svg";
+import { Path, Svg } from "react-native-svg";
 import { View } from "react-native";
 import { providerInstanceInitials } from "@t3tools/client-runtime/state/provider-instance-display";
 import { useAppearancePreferences } from "../features/settings/appearance/AppearancePreferencesProvider";
@@ -53,26 +53,13 @@ export function ProviderIcon(props: ProviderIconProps) {
     );
   }
 
-  if (props.provider === "southbag-code") {
-    // A little bag with a :3 face, drawn in the monochrome foreground so it
-    // matches the Grok/Codex glyphs in both themes.
+  if (props.provider?.trim().toLowerCase() === "southbag-code") {
     return (
-      <Svg
-        width={size}
-        height={size}
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke={mono}
-        strokeWidth={1.8}
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <Path d="M6.5 8.5h11l1 11.5a1 1 0 0 1-1 1h-11a1 1 0 0 1-1-1z" />
-        <Path d="M9 8.5V7a3 3 0 0 1 6 0v1.5" />
-        <Path d="M9.75 14.5c.5.9 1.3 1.4 2.25 1.4s1.75-.5 2.25-1.4" />
-        <Circle cx={10.2} cy={12.2} r={0.5} fill={mono} stroke="none" />
-        <Circle cx={13.8} cy={12.2} r={0.5} fill={mono} stroke="none" />
-      </Svg>
+      <Image
+        source={require("../../assets/southbag-code.png")}
+        style={{ width: size, height: size }}
+        contentFit="contain"
+      />
     );
   }
 

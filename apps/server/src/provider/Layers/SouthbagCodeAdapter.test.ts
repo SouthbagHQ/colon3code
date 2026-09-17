@@ -191,10 +191,10 @@ it.layer(adapterTestLayer)("SouthbagCodeAdapter", (it) => {
         provider: SOUTHBAG_CODE_DRIVER_KIND,
         cwd: process.cwd(),
         runtimeMode: "full-access",
-        modelSelection: { instanceId, model: "southbag-default" },
+        modelSelection: { instanceId, model: "southbag-agent/southbag-agent" },
       });
       assert.equal(session.provider, SOUTHBAG_CODE_DRIVER_KIND);
-      assert.equal(session.model, "southbag-default");
+      assert.equal(session.model, "southbag-agent/southbag-agent");
       const cursor = parseSouthbagCodeResume(session.resumeCursor);
       assert.isDefined(cursor);
       assert.equal(cursor?.sessionId, "mock-session-1");
@@ -225,7 +225,7 @@ it.layer(adapterTestLayer)("SouthbagCodeAdapter", (it) => {
       const turnStarted = collector.events.find((event) => event.type === "turn.started");
       assert.equal(turnStarted?.turnId, turn.turnId);
       if (turnStarted?.type === "turn.started") {
-        assert.equal(turnStarted.payload.model, "southbag/southbag-agent");
+        assert.equal(turnStarted.payload.model, "southbag-agent/southbag-agent");
       }
       const text = collector.events
         .filter((event) => event.type === "content.delta")
@@ -441,14 +441,14 @@ it.layer(adapterTestLayer)("SouthbagCodeAdapter", (it) => {
         threadId,
         cwd: process.cwd(),
         runtimeMode: "full-access",
-        modelSelection: { instanceId, model: "southbag-default" },
+        modelSelection: { instanceId, model: "southbag-agent/southbag-agent" },
       });
       yield* adapter.sendTurn({
         threadId,
         input: "switch",
         modelSelection: {
           instanceId,
-          model: "southbag/mock-alt",
+          model: "southbag-agent/mock-alt",
           options: [{ id: "thinkingLevel", value: "high" }],
         },
       });
@@ -458,7 +458,7 @@ it.layer(adapterTestLayer)("SouthbagCodeAdapter", (it) => {
       const setModel = requests.filter((request) => request.type === "set_model");
       assert.deepStrictEqual(
         setModel.map((request) => [request.provider, request.modelId]),
-        [["southbag", "mock-alt"]],
+        [["southbag-agent", "mock-alt"]],
       );
       assert.deepStrictEqual(
         requests.filter((request) => request.type === "set_thinking_level").map((r) => r.level),
@@ -466,10 +466,10 @@ it.layer(adapterTestLayer)("SouthbagCodeAdapter", (it) => {
       );
       const started = collector.events.find((event) => event.type === "turn.started");
       if (started?.type === "turn.started") {
-        assert.equal(started.payload.model, "southbag/mock-alt");
+        assert.equal(started.payload.model, "southbag-agent/mock-alt");
         assert.equal(started.payload.effort, "high");
       }
-      assert.equal((yield* adapter.listSessions())[0]?.model, "southbag/mock-alt");
+      assert.equal((yield* adapter.listSessions())[0]?.model, "southbag-agent/mock-alt");
       yield* adapter.stopSession(threadId);
     }),
   );

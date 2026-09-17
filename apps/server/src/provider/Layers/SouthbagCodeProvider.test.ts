@@ -56,15 +56,30 @@ describe("southbagCodeModelsFromRpc", () => {
     expect(southbagCodeModelsFromRpc({ nope: true })).toEqual([]);
   });
 
-  it("lists the sentinel first as the only default, then discovered and custom models", () => {
+  it("marks the first discovered model default, then custom models", () => {
     const models = southbagCodeModelsFromSettings(
       ["custom/one"],
       southbagCodeModelsFromRpc({ models: [{ id: "a", provider: "p" }] }),
     );
     expect(models.map((model) => [model.slug, model.isDefault ?? false, model.isCustom])).toEqual([
-      [SOUTHBAG_CODE_DEFAULT_MODEL, true, false],
-      ["p/a", false, false],
+      ["p/a", true, false],
       ["custom/one", false, true],
+    ]);
+  });
+
+  it("prefers the shipped model as default when it is among the discovered rows", () => {
+    const models = southbagCodeModelsFromSettings(
+      [],
+      southbagCodeModelsFromRpc({
+        models: [
+          { id: "other", provider: "p" },
+          { id: "southbag-agent", provider: "southbag-agent", name: "Southbag Agent" },
+        ],
+      }),
+    );
+    expect(models.map((model) => [model.slug, model.isDefault ?? false])).toEqual([
+      ["p/other", false],
+      [SOUTHBAG_CODE_DEFAULT_MODEL, true],
     ]);
   });
 });
@@ -152,9 +167,8 @@ it.layer(NodeServices.layer)("checkSouthbagCodeProviderStatus", (it) => {
       expect(snapshot.version).toBe("0.84.2");
       expect(snapshot.showInteractionModeToggle).toBe(false);
       expect(snapshot.models.map((model) => [model.slug, model.isDefault ?? false])).toEqual([
-        [SOUTHBAG_CODE_DEFAULT_MODEL, true],
-        ["southbag/southbag-agent", false],
-        ["southbag/mock-alt", false],
+        ["southbag-agent/southbag-agent", true],
+        ["southbag-agent/mock-alt", false],
       ]);
       expect(snapshot.slashCommands.map((command) => command.name)).toEqual(["compact"]);
     }),
