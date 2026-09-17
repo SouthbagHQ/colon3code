@@ -65,16 +65,16 @@ it("publishes southbag-code ahead of every other driver", () => {
   ).toEqual(["southbag-code", "codex", "claudeAgent"]);
 });
 
-it("maps the southbag-code driver kind onto the providers.southbagCode settings slot", () => {
-  expect(legacyProviderSettingsKeyForDriver(SOUTHBAG_CODE_DRIVER_KIND)).toBe("southbagCode");
+it("keeps the southbag-code driver kind as its providers settings slot", () => {
+  expect(legacyProviderSettingsKeyForDriver(SOUTHBAG_CODE_DRIVER_KIND)).toBe("southbag-code");
   expect(legacyProviderSettingsKeyForDriver(ProviderDriverKind.make("codex"))).toBe("codex");
-  expect(driverKindForLegacyProviderSettingsKey("southbagCode")).toBe(SOUTHBAG_CODE_DRIVER_KIND);
+  expect(driverKindForLegacyProviderSettingsKey("southbag-code")).toBe(SOUTHBAG_CODE_DRIVER_KIND);
   expect(driverKindForLegacyProviderSettingsKey("grok")).toBe("grok");
 });
 
-it("hydrates a southbag-code instance from providers.southbagCode", () => {
+it('hydrates a southbag-code instance from providers["southbag-code"]', () => {
   const settings = decodeServerSettings({
-    providers: { southbagCode: { binaryPath: "/opt/southbag/bin/southbag-code" } },
+    providers: { "southbag-code": { binaryPath: "/opt/southbag/bin/southbag-code" } },
   });
   const configMap = deriveProviderInstanceConfigMap(settings);
   const instance = configMap[ProviderInstanceId.make(SOUTHBAG_CODE_DRIVER_KIND)];

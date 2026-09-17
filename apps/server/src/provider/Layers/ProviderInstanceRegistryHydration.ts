@@ -85,8 +85,7 @@ export const deriveProviderInstanceConfigMap = (
     }
 
     // Only built-in drivers have a legacy mirror. The `providers` struct is
-    // keyed on the driver kind for every driver except `southbag-code`, whose
-    // slot is `southbagCode`; the key helper owns that mapping.
+    // keyed on the driver kind (clients index it the same way).
     const legacyConfig = settings.providers[legacyProviderSettingsKeyForDriver(driver.driverKind)];
     if (legacyConfig === undefined) {
       continue;

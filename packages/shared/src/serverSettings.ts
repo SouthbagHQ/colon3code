@@ -60,20 +60,11 @@ export function resolveProjectAutoPull(
 
 type LegacyProviderSettings = ServerSettings["providers"][keyof ServerSettings["providers"]];
 
-// Every legacy `providers.<key>` slot is keyed by its driver kind except
-// Southbag Code, whose kind is a hyphenated slug and whose slot is camelCase.
-// Mirrors `providerSettingsKeys.ts` on the server.
-const LEGACY_PROVIDER_SETTINGS_KEY_BY_DRIVER_KIND: Readonly<Record<string, string>> = {
-  "southbag-code": "southbagCode",
-};
-
 const getLegacyProviderSettings = (
   settings: ServerSettings,
   provider: ProviderDriverKind,
 ): LegacyProviderSettings | undefined =>
-  (settings.providers as Record<string, LegacyProviderSettings | undefined>)[
-    LEGACY_PROVIDER_SETTINGS_KEY_BY_DRIVER_KIND[provider] ?? provider
-  ];
+  (settings.providers as Record<string, LegacyProviderSettings | undefined>)[provider];
 
 export function isModelSelectionProviderEnabled(
   settings: ServerSettings,

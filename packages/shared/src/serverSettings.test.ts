@@ -383,7 +383,7 @@ describe("serverSettings helpers", () => {
     ).toBeNull();
   });
 
-  it("reads the legacy southbag-code slot from its camelCase settings key", () => {
+  it("reads the legacy southbag-code slot keyed by its driver kind", () => {
     const selection = createModelSelection(
       ProviderInstanceId.make("southbag-code"),
       "southbag-default",
@@ -395,7 +395,10 @@ describe("serverSettings helpers", () => {
           ...DEFAULT_SERVER_SETTINGS,
           providers: {
             ...DEFAULT_SERVER_SETTINGS.providers,
-            southbagCode: { ...DEFAULT_SERVER_SETTINGS.providers.southbagCode, enabled: false },
+            "southbag-code": {
+              ...DEFAULT_SERVER_SETTINGS.providers["southbag-code"],
+              enabled: false,
+            },
           },
         },
         selection,

@@ -396,7 +396,7 @@ it.layer(NodeServices.layer)("server settings", (it) => {
     }).pipe(Effect.provide(makeServerSettingsLayer())),
   );
 
-  it.effect("falls back to the southbag-code instance id from providers.southbagCode", () =>
+  it.effect("falls back to the southbag-code instance id from its providers slot", () =>
     Effect.gen(function* () {
       const serverSettings = yield* ServerSettingsModule.ServerSettingsService;
       // Every provider ahead of Southbag Code in the legacy map is disabled, and
@@ -418,8 +418,8 @@ it.layer(NodeServices.layer)("server settings", (it) => {
         instanceId: ProviderInstanceId.make(SOUTHBAG_CODE_DRIVER_KIND),
         model: SOUTHBAG_CODE_DEFAULT_MODEL,
       });
-      assert.isTrue(next.providers.southbagCode.enabled);
-      assert.equal(next.providers.southbagCode.binaryPath, "southbag-code");
+      assert.isTrue(next.providers["southbag-code"].enabled);
+      assert.equal(next.providers["southbag-code"].binaryPath, "southbag-code");
     }).pipe(Effect.provide(makeServerSettingsLayer())),
   );
 
