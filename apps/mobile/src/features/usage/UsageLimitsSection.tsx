@@ -110,7 +110,7 @@ function AccountInstanceLabel({ value }: { readonly value: string }) {
     <Pressable
       className="shrink active:opacity-60"
       accessibilityRole="button"
-      accessibilityLabel={revealed ? "Hide account label" : "Reveal account label"}
+      accessibilityLabel={revealed ? "hide account label" : "reveal account label"}
       onPress={() => setRevealed((current) => !current)}
     >
       <Text className="text-xs text-foreground-tertiary" numberOfLines={1}>
@@ -176,10 +176,10 @@ export function AccountLimits(props: {
 }
 
 const OUTCOME_TEXT: Record<ProviderConsumeResetCreditOutcome, string> = {
-  reset: "Reset applied. Your windows have cleared.",
-  nothingToReset: "Nothing to reset right now.",
-  noCredit: "No reset credit left.",
-  alreadyRedeemed: "That credit was already redeemed.",
+  reset: "reset applied. your windows have cleared.",
+  nothingToReset: "nothing to reset right now.",
+  noCredit: "no reset credit left.",
+  alreadyRedeemed: "that credit was already redeemed.",
 };
 
 /**
@@ -208,7 +208,7 @@ export function ResetCredits(props: {
     : null;
   const summary =
     credits.availableCount === 0
-      ? "No reset credits banked"
+      ? "no reset credits banked"
       : `${credits.availableCount} ${credits.availableCount === 1 ? "reset credit" : "reset credits"} banked${
           expiresIn ? ` · next expires in ${expiresIn}` : ""
         }`;
@@ -225,17 +225,17 @@ export function ResetCredits(props: {
     setStatus(
       "error" in result.cause && result.cause.error instanceof Error
         ? result.cause.error.message
-        : "Could not use the reset credit.",
+        : "could not use the reset credit.",
     );
   };
 
   const confirm = () => {
     Alert.alert(
-      "Use a reset credit?",
-      "This redeems one credit on your account and clears the current rate-limit windows. It cannot be undone.",
+      "use a reset credit?",
+      "this redeems one credit on your account and clears the current rate-limit windows. it cannot be undone.",
       [
-        { text: "Cancel", style: "cancel" },
-        { text: "Use credit", onPress: () => void redeem() },
+        { text: "cancel", style: "cancel" },
+        { text: "use credit", onPress: () => void redeem() },
       ],
     );
   };
@@ -262,7 +262,7 @@ export function ResetCredits(props: {
                 : "text-sm font-t3-medium text-foreground"
             }
           >
-            {busy ? "Using…" : "Use reset"}
+            {busy ? "using…" : "use reset"}
           </Text>
         </Pressable>
       ) : null}

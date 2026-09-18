@@ -107,21 +107,21 @@ export function ComposerEditor({
       }
       if (!insertComposerDraftContext(draftKey, result, insertion)) {
         Alert.alert(
-          "Could not paste context",
-          "Remove some attachments or context items from the draft, then paste again.",
+          "could not paste context 3:",
+          "remove some attachments or context items from the draft, then paste again.",
         );
         return;
       }
       if (result.failures.length > 0)
         Alert.alert(
-          "Some attachments could not be copied",
-          "Reconnect to the source environment and copy them again. References without their files are marked unavailable.",
+          "some attachments could not be copied",
+          "reconnect to the source environment and copy them again. references without their files are marked unavailable.",
         );
     } catch (error) {
       if (!controller.signal.aborted)
         Alert.alert(
-          "Could not paste context",
-          error instanceof Error ? error.message : "Try copying again.",
+          "could not paste context 3:",
+          error instanceof Error ? error.message : "try copying again.",
         );
     } finally {
       setComposerContextImporting(draftKey, false);
@@ -200,12 +200,12 @@ export function ComposerEditor({
         }}
       />
       {importing ? (
-        <Text className="py-2 text-xs text-foreground-muted">Copying context…</Text>
+        <Text className="py-2 text-xs text-foreground-muted">copying context…</Text>
       ) : null}
       {selected && (selectedReference || selectedSkill) ? (
         <ComposerContextSheet
           label={
-            selectedReference?.label ?? selectedSkill?.displayName ?? selectedSkill?.name ?? "Skill"
+            selectedReference?.label ?? selectedSkill?.displayName ?? selectedSkill?.name ?? "skill"
           }
           record={
             record ??

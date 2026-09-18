@@ -164,13 +164,13 @@ function CloudEnvironmentRowsContent(
         <View collapsable={false} className="items-center gap-3 rounded-[24px] bg-card p-6">
           <ActivityIndicator colorClassName={"accent-icon"} />
           <Text className="text-center text-sm leading-normal text-foreground-muted">
-            Loading linked cloud environments.
+            loading linked cloud environments.
           </Text>
         </View>
       ) : controller.relayDiscovery.error ? null : (
         <View collapsable={false} className="rounded-[24px] bg-card p-5">
           <Text className="text-sm leading-normal text-foreground-muted">
-            No additional linked cloud environments.
+            no additional linked cloud environments.
           </Text>
         </View>
       )}
@@ -182,7 +182,7 @@ function CloudEnvironmentRowsContent(
       !controller.relayDiscovery.isRefreshing ? (
         <View collapsable={false} className="gap-3 rounded-[24px] bg-card p-5">
           <Text className="text-base font-t3-bold text-foreground">
-            Could not load T3 Connect environments
+            could not load T3 Connect environments
           </Text>
           <Text className="text-sm text-foreground-muted">{controller.relayDiscovery.error}</Text>
           {controller.relayDiscovery.errorTraceId ? (
@@ -195,7 +195,7 @@ function CloudEnvironmentRowsContent(
             }}
             className="self-start rounded-full bg-subtle px-3.5 py-2 active:opacity-70"
           >
-            <Text className="text-xs font-t3-bold text-foreground">Try again</Text>
+            <Text className="text-xs font-t3-bold text-foreground">try again</Text>
           </Pressable>
         </View>
       ) : null}
@@ -222,7 +222,7 @@ function ConnectedCloudEnvironmentRow(props: {
   const enabled = props.environment.isEnabled;
   return (
     <Pressable
-      accessibilityHint="Long press to remove from this device"
+      accessibilityHint="long press to remove from this device"
       onLongPress={props.onRemove}
     >
       <CloudEnvironmentRowShell
@@ -235,7 +235,7 @@ function ConnectedCloudEnvironmentRow(props: {
         machine={resolveEnvironmentMachineKind(serverConfig)}
         onValueChange={props.onSetEnabled}
         onToggleError={props.onToggleError}
-        {...(enabled ? {} : { statusText: "Off" })}
+        {...(enabled ? {} : { statusText: "off" })}
         value={enabled}
       />
     </Pressable>
@@ -379,7 +379,7 @@ function CloudEnvironmentRowShell(props: {
               <>
                 {" Trace ID: "}
                 <Text
-                  accessibilityHint="Copies the trace ID"
+                  accessibilityHint="copies the trace ID"
                   accessibilityRole="button"
                   className={cn("text-xs underline decoration-dotted", statusClassName)}
                   onLongPress={(event) => {
@@ -433,7 +433,7 @@ function CopyTraceIdButton(props: { readonly traceId: string }) {
         tintColorClassName={"accent-icon"}
         type="monochrome"
       />
-      <Text className="text-xs font-t3-bold text-foreground">Copy trace ID</Text>
+      <Text className="text-xs font-t3-bold text-foreground">copy trace ID</Text>
     </Pressable>
   );
 }

@@ -42,7 +42,7 @@ function ResolvedFilePreview(props: {
   const onRequestClose = useEffectEvent(props.onRequestClose);
   const onResolutionError = useEffectEvent((error: unknown, fallbackMessage: string) => {
     if (props.onOpenError) props.onOpenError(error);
-    else Alert.alert("Could not open preview", fallbackMessage);
+    else Alert.alert("could not open preview 3:", fallbackMessage);
     onRequestClose();
   });
   useEffect(() => Keyboard.dismiss(), []);
@@ -61,7 +61,7 @@ function ResolvedFilePreview(props: {
         if (cancelled) return;
         onResolutionError(
           error,
-          "Reconnect to this environment and try again. The file may have been moved or deleted.",
+          "reconnect to this environment and try again. the file may have been moved or deleted.",
         );
       });
     return () => {

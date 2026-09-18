@@ -107,7 +107,7 @@ describe("resolveNewTaskBranchLabel", () => {
         startFromOrigin: false,
         workspaceMode: "worktree",
       }),
-    ).toBe("From main");
+    ).toBe("from main");
   });
 
   it("labels a remote worktree base with From origin", () => {
@@ -117,7 +117,7 @@ describe("resolveNewTaskBranchLabel", () => {
         startFromOrigin: true,
         workspaceMode: "worktree",
       }),
-    ).toBe("From origin/main");
+    ).toBe("from origin/main");
   });
 
   it("prompts when no branch is available", () => {
@@ -127,6 +127,6 @@ describe("resolveNewTaskBranchLabel", () => {
         startFromOrigin: true,
         workspaceMode: "worktree",
       }),
-    ).toBe("Choose branch");
+    ).toBe("choose branch");
   });
 });

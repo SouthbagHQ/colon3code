@@ -22,12 +22,12 @@ const ENTER_BEHAVIOR_OPTIONS: ReadonlyArray<{
 }> = [
   {
     behavior: "send",
-    label: "Send message",
+    label: "send message",
     description: "Return sends the message. Shift-Return inserts a new line.",
   },
   {
     behavior: "newline",
-    label: "Insert new line",
+    label: "insert new line",
     description: "Return inserts a new line. Command-Return sends the message.",
   },
 ];
@@ -47,7 +47,7 @@ export function SettingsKeyboardRouteScreen() {
       {Platform.OS === "android" ? (
         <>
           <NativeStackScreenOptions options={{ headerShown: false }} />
-          <AndroidScreenHeader title="Keyboard" onBack={() => navigation.goBack()} />
+          <AndroidScreenHeader title="keyboard" onBack={() => navigation.goBack()} />
         </>
       ) : null}
       <ScrollView
@@ -93,7 +93,7 @@ export function SettingsKeyboardRouteScreen() {
           ))}
         </SettingsSection>
         <Text className="px-2 text-sm text-foreground-muted">
-          Applies to the composer when a hardware keyboard is connected.
+          applies to the composer when a hardware keyboard is connected.
         </Text>
       </ScrollView>
     </View>

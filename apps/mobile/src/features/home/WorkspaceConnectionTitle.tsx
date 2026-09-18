@@ -119,7 +119,7 @@ export function WorkspaceConnectionTitle(props: {
   return (
     <StatusFadeIn grow={props.grow} maxWidth={props.maxWidth}>
       <Pressable
-        accessibilityHint="Opens environment settings"
+        accessibilityHint="opens environment settings"
         accessibilityLabel={status.label}
         accessibilityRole="button"
         disabled={props.onPress === undefined}

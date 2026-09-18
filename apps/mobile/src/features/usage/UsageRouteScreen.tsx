@@ -40,22 +40,22 @@ import { PROVIDER_LABEL, useProviderColors } from "./usageProviders";
 
 type UsageTab = "usage" | "limits";
 const TAB_OPTIONS = [
-  { value: "usage", label: "Usage" },
-  { value: "limits", label: "Limits" },
+  { value: "usage", label: "usage" },
+  { value: "limits", label: "limits" },
 ] as const satisfies readonly { value: UsageTab; label: string }[];
 
 // Labels are abbreviated to share a row with the metric toggle; screen
 // readers get the full phrase.
 const WINDOW_OPTIONS = [
-  { value: 1, label: "24h", accessibilityLabel: "Past 24 hours" },
-  { value: 7, label: "7d", accessibilityLabel: "Past 7 days" },
-  { value: 30, label: "30d", accessibilityLabel: "Past 30 days" },
-  { value: 90, label: "90d", accessibilityLabel: "Past 90 days" },
+  { value: 1, label: "24h", accessibilityLabel: "past 24 hours" },
+  { value: 7, label: "7d", accessibilityLabel: "past 7 days" },
+  { value: 30, label: "30d", accessibilityLabel: "past 30 days" },
+  { value: 90, label: "90d", accessibilityLabel: "past 90 days" },
 ] as const;
 
 const METRIC_OPTIONS = [
-  { value: "cost", label: "Cost" },
-  { value: "tokens", label: "Tokens" },
+  { value: "cost", label: "cost" },
+  { value: "tokens", label: "tokens" },
 ] as const satisfies readonly { value: UsageChartMetric; label: string }[];
 
 const CHART_HEIGHT = 180;
@@ -152,8 +152,8 @@ export function UsageRouteScreen() {
   const showEnvironmentFilter = environments.length > 0 || selectedEnvironmentIds !== null;
   const hasLoadingEnvironments = selectedEnvironments.some(isUsageLoading);
   const filterAccessibilityLabel = hasLoadingEnvironments
-    ? "Filter usage environments, some environments are loading"
-    : "Filter usage environments";
+    ? "filter usage environments, some environments are loading"
+    : "filter usage environments";
   const filterIcon =
     selectedEnvironmentIds === null
       ? "line.3.horizontal.decrease"
@@ -162,7 +162,7 @@ export function UsageRouteScreen() {
     () => [
       {
         id: "all",
-        title: "All environments",
+        title: "all environments",
         subtitle: undefined,
         state: selectedEnvironmentIds === null ? ("on" as const) : ("off" as const),
       },
@@ -196,7 +196,7 @@ export function UsageRouteScreen() {
           accessible
           accessibilityRole="button"
           accessibilityLabel={filterAccessibilityLabel}
-          title="Environments"
+          title="environments"
           actions={environmentActions}
           onPressAction={({ nativeEvent }) => selectEnvironment(nativeEvent.event)}
         >
@@ -240,7 +240,7 @@ export function UsageRouteScreen() {
         <>
           <NativeStackScreenOptions options={{ headerShown: false }} />
           <AndroidScreenHeader
-            title="Usage"
+            title="usage"
             onBack={() => navigation.goBack()}
             trailing={environmentFilter}
           />
@@ -294,19 +294,19 @@ export function UsageRouteScreen() {
               </View>
               {merged.duplicateSources.length > 0 ? (
                 <Text className="text-sm text-foreground-muted">
-                  Counted once across environments sharing a transcript directory:{" "}
+                  counted once across environments sharing a transcript directory:{" "}
                   {merged.duplicateSources.join(", ")}
                 </Text>
               ) : null}
               {isPending ? (
                 <Text className="py-16 text-center text-base text-foreground-muted">
-                  Scanning provider transcripts…
+                  scanning provider transcripts…
                 </Text>
               ) : selectedEnvironments.length === 0 ? (
                 <Text className="py-16 text-center text-base text-foreground-muted">
                   {environments.length === 0
-                    ? "Connect an environment to see usage."
-                    : "Select an environment to see usage."}
+                    ? "connect an environment to see usage."
+                    : "select an environment to see usage."}
                 </Text>
               ) : (
                 <>
@@ -352,7 +352,7 @@ function ChartCard(props: {
     <View className="gap-4 rounded-[24px] border-continuous bg-card p-4">
       <View className="gap-0.5">
         <Text className="text-sm text-foreground-muted">
-          {metric === "cost" ? "Raw token cost" : "Processed tokens"}
+          {metric === "cost" ? "raw token cost" : "processed tokens"}
         </Text>
         <Text className="text-4xl font-t3-bold tabular-nums text-foreground">
           {metric === "cost" ? `${formatUsd(merged.costUsd)}*` : formatTokens(merged.totalTokens)}
@@ -360,7 +360,7 @@ function ChartCard(props: {
         <Text className="text-sm text-foreground-muted">
           {metric === "cost"
             ? "* if billed at full API rate"
-            : `Across ${formatCount(merged.sessions)} sessions`}
+            : `across ${formatCount(merged.sessions)} sessions`}
         </Text>
       </View>
 
@@ -373,7 +373,7 @@ function ChartCard(props: {
         />
       ) : (
         <View style={{ height: CHART_HEIGHT }} className="items-center justify-center">
-          <Text className="text-base text-foreground-muted">No activity in this window.</Text>
+          <Text className="text-base text-foreground-muted">no activity in this window.</Text>
         </View>
       )}
 
@@ -421,7 +421,7 @@ function ProviderSection(props: {
   );
 
   return (
-    <SettingsSection title="Providers" card>
+    <SettingsSection title="providers" card>
       {ordered.map((provider, index) => {
         const share = metric === "cost" ? provider.costShare : provider.tokenShare;
         return (
@@ -472,15 +472,15 @@ function TotalsSection(props: { readonly merged: MergedUsage; readonly isPast24H
   const cachedShare = observedInput === 0 ? 0 : merged.cachedInputTokens / observedInput;
 
   return (
-    <SettingsSection title="Totals" card>
+    <SettingsSection title="totals" card>
       <View className="flex-row flex-wrap">
         <MetricCell
-          label="Processed tokens"
+          label="processed tokens"
           value={formatTokens(merged.totalTokens)}
           detail={`${formatTokens(periodAverage)} per active ${props.isPast24Hours ? "hour" : "day"}`}
         />
         <MetricCell
-          label="Cache savings"
+          label="cache savings"
           value={formatUsd(merged.costQuality.cacheSavingsUsd)}
           detail={
             merged.costUsd > 0
@@ -489,22 +489,22 @@ function TotalsSection(props: { readonly merged: MergedUsage; readonly isPast24H
           }
         />
         <MetricCell
-          label="Cached input"
+          label="cached input"
           value={formatTokens(merged.cachedInputTokens)}
           detail={`${formatPercent(cachedShare)} of observed input`}
         />
         <MetricCell
-          label="Uncached input"
+          label="uncached input"
           value={formatTokens(merged.uncachedInputTokens)}
           detail={`${formatTokens(merged.cacheCreationTokens)} cache writes`}
         />
         <MetricCell
-          label="Output"
+          label="output"
           value={formatTokens(merged.outputTokens)}
           detail={`incl. ${formatTokens(merged.reasoningTokens)} reasoning`}
         />
         <MetricCell
-          label="Unpriced"
+          label="unpriced"
           value={formatPercent(merged.costQuality.unpricedShare)}
           detail="of records, excluded from cost"
         />
@@ -533,7 +533,7 @@ function ModelsSection(props: { readonly merged: MergedUsage }) {
   if (merged.models.length === 0) return null;
 
   return (
-    <SettingsSection title="By model" card>
+    <SettingsSection title="by model" card>
       {merged.models.map((model, index) => (
         <View
           key={`${model.provider}:${model.model}`}
@@ -558,7 +558,7 @@ function ModelsSection(props: { readonly merged: MergedUsage }) {
             </Text>
           </View>
           <Text className="text-base tabular-nums text-foreground">
-            {isModelCostUnknown(model) ? "Unpriced" : formatUsd(model.costUsd)}
+            {isModelCostUnknown(model) ? "unpriced" : formatUsd(model.costUsd)}
           </Text>
         </View>
       ))}
@@ -580,13 +580,13 @@ function usageEnvironmentStatus(environment: EnvironmentUsageStatus): string {
     environment.summary &&
     !isCompatibleUsageContractVersion(environment.summary.contractVersion, USAGE_CONTRACT_VERSION)
   ) {
-    return "Older server · excluded from usage totals";
+    return "older server · excluded from usage totals";
   }
   if (!environment.isConnected)
-    return environment.summary ? "Disconnected · showing saved usage" : "Waiting for connection…";
+    return environment.summary ? "disconnected · showing saved usage" : "waiting for connection…";
   if (environment.error)
-    return environment.summary ? "Usage unavailable · showing saved totals" : "Usage unavailable";
+    return environment.summary ? "usage unavailable · showing saved totals" : "usage unavailable";
   if (isUsageLoading(environment))
-    return environment.summary ? "Updating usage…" : "Loading usage…";
-  return "Usage up to date";
+    return environment.summary ? "updating usage…" : "loading usage…";
+  return "usage up to date";
 }

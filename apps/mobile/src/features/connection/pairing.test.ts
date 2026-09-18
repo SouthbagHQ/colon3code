@@ -45,7 +45,7 @@ describe("extractPairingUrlFromQrPayload", () => {
   it("rejects empty qr payloads", () => {
     expect(() => extractPairingUrlFromQrPayload("   ")).toThrowError(PairingQrPayloadEmptyError);
     expect(() => extractPairingUrlFromQrPayload("   ")).toThrowError(
-      "Scanned QR code did not contain a pairing URL.",
+      "scanned QR code did not contain a pairing URL.",
     );
   });
 });

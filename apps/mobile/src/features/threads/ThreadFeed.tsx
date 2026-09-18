@@ -301,7 +301,7 @@ function MessageAttachmentImage(props: {
     <PresentationSource identifier={sourceIdentifier}>
       <Pressable
         accessibilityRole="imagebutton"
-        accessibilityLabel={`Open ${props.name}`}
+        accessibilityLabel={`open ${props.name}`}
         onPress={() =>
           // The viewer mints its own URL from the resource so the image survives a refresh.
           props.onPressPreview({
@@ -369,7 +369,7 @@ function MessageAttachmentFile(props: {
   const isPdf = isPdfFile(attachment);
   const fileTypeLabel = isPdf
     ? "PDF"
-    : (attachment.name.match(/\.([a-z0-9]{1,8})$/i)?.[1]?.toUpperCase() ?? "File");
+    : (attachment.name.match(/\.([a-z0-9]{1,8})$/i)?.[1]?.toUpperCase() ?? "file");
   const sizeLabel = formatAttachmentSize(attachment.sizeBytes);
   const thumbnailUrl = useAssetUrl(
     props.environmentId,
@@ -433,8 +433,8 @@ function MessageAttachmentFile(props: {
       } catch (error) {
         if (!controller.signal.aborted) {
           Alert.alert(
-            "Could not open attachment",
-            error instanceof Error ? error.message : "The attachment is unavailable.",
+            "could not open attachment 3:",
+            error instanceof Error ? error.message : "the attachment is unavailable.",
           );
         }
       } finally {
@@ -474,7 +474,7 @@ function MessageAttachmentFile(props: {
       >
         <Pressable
           accessibilityRole="button"
-          accessibilityLabel={`Open ${attachment.name}`}
+          accessibilityLabel={`open ${attachment.name}`}
           accessibilityValue={{ text: `${fileTypeLabel}, ${sizeLabel}` }}
           accessibilityState={{ disabled: opening || httpBaseUrl === null, busy: opening }}
           disabled={opening || httpBaseUrl === null}
@@ -748,11 +748,11 @@ function ArtifactTemplateCard(props: {
       {props.onUse ? (
         <Pressable
           accessibilityRole="button"
-          accessibilityLabel={`Use ${props.template.displayName} template`}
+          accessibilityLabel={`use ${props.template.displayName} template`}
           className="min-h-9 justify-center rounded-lg border border-border bg-subtle px-3 active:opacity-65"
           onPress={() => props.onUse?.(props.template)}
         >
-          <Text className="font-t3-bold text-xs text-foreground">Use template</Text>
+          <Text className="font-t3-bold text-xs text-foreground">use template</Text>
         </Pressable>
       ) : null}
     </View>
@@ -859,7 +859,7 @@ function MarkdownCodeBlock(props: {
           {languageLabel}
         </NativeText>
         <CopyTextButton
-          accessibilityLabel="Copy code"
+          accessibilityLabel="copy code"
           text={content}
           tintColor={props.copyTintColor}
           buttonSize={32}
@@ -1590,7 +1590,7 @@ function renderFeedEntry(
           </View>
           <View className="mt-1 flex-row items-center justify-end gap-1 pr-0.5">
             <Text className="font-t3-medium text-xs tabular-nums text-adaptive-neutral-600-400">
-              {entry.pendingMessage && !entry.acknowledged ? "Pending" : timestampLabel}
+              {entry.pendingMessage && !entry.acknowledged ? "pending" : timestampLabel}
             </Text>
             {entry.pendingMessage &&
             !entry.acknowledged &&
@@ -1598,7 +1598,7 @@ function renderFeedEntry(
             entry.pendingMessage.messageId !== props.dispatchingMessageId ? (
               <Pressable
                 accessibilityRole="button"
-                accessibilityLabel="Edit pending message"
+                accessibilityLabel="edit pending message"
                 hitSlop={8}
                 className="size-7 items-center justify-center"
                 onPress={() => {
@@ -1610,7 +1610,7 @@ function renderFeedEntry(
             ) : null}
             {message.text.trim().length > 0 ? (
               <CopyTextButton
-                accessibilityLabel="Copy message"
+                accessibilityLabel="copy message"
                 text={message.text}
                 onCopy={
                   message.context
@@ -1682,7 +1682,7 @@ function renderFeedEntry(
         {showAssistantMeta ? (
           <View className="mt-1 flex-row items-center gap-1">
             <CopyTextButton
-              accessibilityLabel="Copy message"
+              accessibilityLabel="copy message"
               text={renderedText}
               tintColor={iconSubtleColor}
               buttonSize={28}
@@ -1761,7 +1761,7 @@ function UserMessageContent(props: UserMessageContentProps) {
       });
       return;
     }
-    setSelected({ contextId: reference.contextId, label: record?.label ?? "Context unavailable" });
+    setSelected({ contextId: reference.contextId, label: record?.label ?? "context unavailable" });
   };
   return (
     <>
@@ -2870,7 +2870,7 @@ export const ThreadFeed = memo(function ThreadFeed(props: ThreadFeedProps) {
                     className="items-center py-2"
                   >
                     <Text className="text-xs text-foreground-secondary">
-                      {props.loadEarlier.loading ? "Loading earlier turns…" : "Load earlier turns"}
+                      {props.loadEarlier.loading ? "loading earlier turns…" : "load earlier turns"}
                     </Text>
                   </Pressable>
                 ) : null}
@@ -2887,8 +2887,8 @@ export const ThreadFeed = memo(function ThreadFeed(props: ThreadFeedProps) {
         props.contentPresentation.kind === "ready" ? (
           <View pointerEvents="none" style={StyleSheet.absoluteFill}>
             <ThreadFeedPlaceholder
-              title="No conversation yet"
-              detail="Ask the agent to inspect the repo, run a command, or continue the active thread."
+              title="nothing here yet :3"
+              detail="ask the agent to inspect the repo, run a command, or continue the active thread ^w^"
               topInset={topContentInset}
               bottomInset={bottomContentInset}
               horizontalPadding={horizontalPadding}

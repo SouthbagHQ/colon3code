@@ -330,8 +330,8 @@ export const ThreadComposer = memo(function ThreadComposer(props: ThreadComposer
   // or waits (for the connection, an earlier queued message, or an upload).
   const sendLabel =
     props.connectionState !== "connected" || props.queueCount > 0 || attachmentsUploading
-      ? "Queue"
-      : "Send";
+      ? "queue"
+      : "send";
   const currentModelSelection = props.selectedThread.modelSelection;
   const currentRuntimeMode = props.selectedThread.runtimeMode;
   const modelUnavailable =
@@ -378,7 +378,7 @@ export const ThreadComposer = memo(function ThreadComposer(props: ThreadComposer
     );
     onShowUsageLimits(report);
     if (!report) {
-      Alert.alert("Usage limits unavailable", "This provider does not currently report limits.");
+      Alert.alert("usage limits unavailable 3:", "this provider does not currently report limits.");
     }
     return report !== null;
   }, [currentModelSelection.instanceId, onShowUsageLimits, props.serverConfig]);
@@ -431,7 +431,7 @@ export const ThreadComposer = memo(function ThreadComposer(props: ThreadComposer
   const contextImports = useAtomValue(composerContextImportsAtom);
   const sendBlockedReason =
     props.sendBlockedReason ??
-    (pendingPastedTextAttachmentCount > 0 ? "Attaching pasted text" : null) ??
+    (pendingPastedTextAttachmentCount > 0 ? "attaching pasted text" : null) ??
     attachmentBlockReason;
   const canSend =
     hasContent &&
@@ -667,7 +667,7 @@ export const ThreadComposer = memo(function ThreadComposer(props: ThreadComposer
 
         {modelUnavailable ? (
           <Pressable accessibilityRole="button" className="px-3 py-2" onPress={openSettings}>
-            <Text className="text-xs text-foreground">Model unavailable. Open model settings.</Text>
+            <Text className="text-xs text-foreground">model unavailable. open model settings.</Text>
           </Pressable>
         ) : null}
 
@@ -818,11 +818,11 @@ export const ThreadComposer = memo(function ThreadComposer(props: ThreadComposer
                     } else {
                       Alert.alert(
                         wouldExceedInputLimit
-                          ? "Pasted text is too large for this message"
-                          : "Could not attach pasted text",
+                          ? "pasted text is too large for this message"
+                          : "could not attach pasted text",
                         wouldExceedInputLimit
-                          ? "Remove some text or an attachment, then paste again."
-                          : "Remove an attachment or use a smaller paste, then try again.",
+                          ? "remove some text or an attachment, then paste again."
+                          : "remove an attachment or use a smaller paste, then try again.",
                       );
                     }
                     return;
@@ -888,7 +888,7 @@ export const ThreadComposer = memo(function ThreadComposer(props: ThreadComposer
                 />
                 {showStopAction ? (
                   <ComposerActionButton
-                    accessibilityLabel="Stop agent"
+                    accessibilityLabel="stop agent"
                     accessibilityHint={stopBlockedHint ?? undefined}
                     icon="stop.fill"
                     variant="danger"
@@ -958,7 +958,7 @@ export const ThreadComposer = memo(function ThreadComposer(props: ThreadComposer
                     />
                     <View className="min-w-0 shrink">
                       <ComposerInlineControl
-                        accessibilityLabel="Model and reasoning settings"
+                        accessibilityLabel="model and reasoning settings"
                         emphasized
                         iconNode={
                           <ProviderIcon provider={currentModelOption?.providerDriver} size={16} />
@@ -981,7 +981,7 @@ export const ThreadComposer = memo(function ThreadComposer(props: ThreadComposer
                   />
                   {showStopAction ? (
                     <ComposerActionButton
-                      accessibilityLabel="Stop agent"
+                      accessibilityLabel="stop agent"
                       accessibilityHint={stopBlockedHint ?? undefined}
                       icon="stop.fill"
                       variant="danger"

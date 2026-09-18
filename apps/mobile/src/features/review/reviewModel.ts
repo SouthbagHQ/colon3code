@@ -8,8 +8,8 @@ import * as Order from "effect/Order";
 export type ReviewSectionKind = "turn" | "working-tree" | "branch-range";
 
 const DIRTY_WORKTREE_SECTION_ID = "git:working-tree";
-const DIRTY_WORKTREE_TITLE = "Dirty worktree";
-const DIRTY_WORKTREE_SUBTITLE = "Tracked, staged, and untracked worktree changes";
+const DIRTY_WORKTREE_TITLE = "dirty worktree";
+const DIRTY_WORKTREE_SUBTITLE = "tracked, staged, and untracked worktree changes";
 
 export interface ReviewSectionItem {
   readonly id: string;
@@ -90,13 +90,13 @@ export type ReviewParsedDiff =
     };
 
 function checkpointTitle(checkpoint: OrchestrationCheckpointSummary): string {
-  return `Turn ${checkpoint.checkpointTurnCount}`;
+  return `turn ${checkpoint.checkpointTurnCount}`;
 }
 
 function checkpointSubtitle(checkpoint: OrchestrationCheckpointSummary): string {
   const fileCount = checkpoint.files.length;
   if (checkpoint.status !== "ready") {
-    return `Diff ${checkpoint.status}`;
+    return `diff ${checkpoint.status}`;
   }
   return `${fileCount} file${fileCount === 1 ? "" : "s"} changed`;
 }
@@ -123,7 +123,7 @@ function gitSubtitle(section: ReviewDiffPreviewSource): string | null {
   if (section.baseRef) {
     return `${section.baseRef} ... ${section.headRef ?? "HEAD"}`;
   }
-  return "Base branch unavailable";
+  return "base branch unavailable";
 }
 
 function stripGitPrefix(pathValue: string | undefined): string | null {
@@ -256,8 +256,8 @@ export function getReviewFilePreviewState(file: ReviewRenderableFile): ReviewFil
     return {
       kind: "suppressed",
       reason: "non-text",
-      title: "Non-text file",
-      message: "Diff preview is not available for this file format.",
+      title: "non-text file",
+      message: "diff preview is not available for this file format.",
       actionLabel: null,
     };
   }
@@ -268,9 +268,9 @@ export function getReviewFilePreviewState(file: ReviewRenderableFile): ReviewFil
     return {
       kind: "suppressed",
       reason: "large",
-      title: "Large diff",
-      message: "Large diffs are not rendered by default.",
-      actionLabel: "Load diff",
+      title: "large diff",
+      message: "large diffs are not rendered by default.",
+      actionLabel: "load diff",
     };
   }
 
@@ -484,7 +484,7 @@ export function buildReviewParsedDiff(
   }
 
   const notice = truncated
-    ? "Diff output hit the server size cap. Showing the available excerpt."
+    ? "diff output hit the server size cap. showing the available excerpt."
     : null;
 
   try {
@@ -502,8 +502,8 @@ export function buildReviewParsedDiff(
         kind: "raw",
         text,
         reason: truncated
-          ? "Diff was truncated before it could be parsed completely. Showing the raw excerpt."
-          : "Unsupported diff format. Showing raw patch.",
+          ? "diff was truncated before it could be parsed completely. showing the raw excerpt."
+          : "unsupported diff format. showing raw patch.",
         notice,
       };
     }
@@ -521,8 +521,8 @@ export function buildReviewParsedDiff(
       kind: "raw",
       text,
       reason: truncated
-        ? "Diff was truncated before it could be parsed completely. Showing the raw excerpt."
-        : "Failed to parse patch. Showing raw patch.",
+        ? "diff was truncated before it could be parsed completely. showing the raw excerpt."
+        : "failed to parse patch. showing raw patch.",
       notice,
     };
   }

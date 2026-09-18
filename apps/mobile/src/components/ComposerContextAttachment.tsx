@@ -82,8 +82,8 @@ export function ComposerContextAttachment(props: {
       }
     } catch (cause) {
       Alert.alert(
-        "Could not open attachment",
-        cause instanceof Error ? cause.message : "Try again.",
+        "could not open attachment 3:",
+        cause instanceof Error ? cause.message : "try again.",
       );
     } finally {
       setSharing(false);
@@ -94,7 +94,7 @@ export function ComposerContextAttachment(props: {
       {record.kind === "image" && uri ? (
         <Pressable
           accessibilityRole="button"
-          accessibilityLabel={`Preview ${record.name}`}
+          accessibilityLabel={`preview ${record.name}`}
           onPress={() => setPreviewOpen(true)}
         >
           <Image
@@ -107,7 +107,7 @@ export function ComposerContextAttachment(props: {
       ) : null}
       {error || (!local && asset._tag === "Failure") ? (
         <Text className="text-foreground-muted">
-          {error ?? "Attachment unavailable. Reconnect and try again."}
+          {error ?? "attachment unavailable. reconnect and try again."}
         </Text>
       ) : null}
       <PresentationSource identifier={shareSourceIdentifier}>
@@ -118,7 +118,7 @@ export function ComposerContextAttachment(props: {
           className="rounded-xl bg-subtle p-4"
         >
           <Text className="text-foreground">
-            {sharing ? "Opening attachment…" : "Open or share attachment"}
+            {sharing ? "opening attachment…" : "open or share attachment"}
           </Text>
         </Pressable>
       </PresentationSource>

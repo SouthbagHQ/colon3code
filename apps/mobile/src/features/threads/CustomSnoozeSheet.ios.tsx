@@ -37,13 +37,13 @@ import { useAppearancePreferences } from "../settings/appearance/AppearancePrefe
 
 const durationAmounts = Array.from({ length: 99 }, (_, index) => index + 1);
 const modes = [
-  { value: "date", label: "Date and time" },
-  { value: "duration", label: "Duration" },
+  { value: "date", label: "date and time" },
+  { value: "duration", label: "duration" },
 ] as const;
 const units = [
-  { value: "minutes", label: "Minutes" },
-  { value: "hours", label: "Hours" },
-  { value: "days", label: "Days" },
+  { value: "minutes", label: "minutes" },
+  { value: "hours", label: "hours" },
+  { value: "days", label: "days" },
 ] as const;
 
 export function CustomSnoozeSheet(props: {
@@ -70,7 +70,7 @@ export function CustomSnoozeSheet(props: {
     const snoozedUntil = resolveCustomSnooze(input, new Date());
     if (!snoozedUntil) {
       setError(
-        mode === "date" ? "Choose a date and time in the future." : "Enter a positive duration.",
+        mode === "date" ? "choose a date and time in the future." : "Enter a positive duration.",
       );
       return;
     }
@@ -87,13 +87,13 @@ export function CustomSnoozeSheet(props: {
         >
           <View className="flex-row items-center justify-between gap-2">
             <Pressable accessibilityRole="button" onPress={props.onClose} hitSlop={10}>
-              <AppText className="text-base">Cancel</AppText>
+              <AppText className="text-base">cancel</AppText>
             </Pressable>
             <AppText accessibilityRole="header" className="text-base font-t3-semibold">
-              Custom snooze
+              custom snooze
             </AppText>
             <Pressable accessibilityRole="button" onPress={submit} hitSlop={10}>
-              <AppText className="text-base text-primary">Snooze</AppText>
+              <AppText className="text-base text-primary">snooze</AppText>
             </Pressable>
           </View>
           <SegmentedControl
@@ -119,7 +119,7 @@ export function CustomSnoozeSheet(props: {
                 font({ size: appearance.baseFontSize }),
               ]}
             >
-              <Text>{mode === "date" ? "Until" : "Snooze for"}</Text>
+              <Text>{mode === "date" ? "until" : "snooze for"}</Text>
               <Spacer />
               {mode === "date" ? (
                 <>
@@ -146,7 +146,7 @@ export function CustomSnoozeSheet(props: {
                         ]}
                       >
                         <Picker
-                          label="Duration"
+                          label="duration"
                           selection={amount}
                           onSelectionChange={(value: number) => {
                             setAmount(value);
@@ -167,7 +167,7 @@ export function CustomSnoozeSheet(props: {
                           ))}
                         </Picker>
                         <Button
-                          label="Done"
+                          label="done"
                           onPress={() => setAmountOpen(false)}
                           modifiers={[foregroundStyle(colors["--color-primary"])]}
                         />
@@ -177,7 +177,7 @@ export function CustomSnoozeSheet(props: {
                   <Menu
                     label={
                       <FieldLabel
-                        label={unit === "minutes" ? "Minutes" : unit === "hours" ? "Hours" : "Days"}
+                        label={unit === "minutes" ? "minutes" : unit === "hours" ? "hours" : "days"}
                       />
                     }
                   >
@@ -257,7 +257,7 @@ function SnoozeDateField(props: {
             modifiers={[datePickerStyle(props.component === "date" ? "graphical" : "wheel")]}
           />
           <Button
-            label="Done"
+            label="done"
             onPress={() => setOpen(false)}
             modifiers={[foregroundStyle(colors["--color-primary"])]}
           />

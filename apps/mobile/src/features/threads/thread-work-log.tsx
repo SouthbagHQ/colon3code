@@ -774,7 +774,7 @@ const ThreadWorkLogRow = memo(function ThreadWorkLogRow(
         accessibilityHint={
           canExpand
             ? `Double tap to ${expanded ? "hide" : "show"} full details. Long press to copy.`
-            : "Long press to copy."
+            : "long press to copy."
         }
         accessibilityState={canExpand ? { expanded } : undefined}
         hitSlop={4}
@@ -849,7 +849,7 @@ const ThreadWorkLogRow = memo(function ThreadWorkLogRow(
           <View className="shrink-0 flex-row items-center gap-px">
             {props.copied ? (
               <Text className="pr-1 font-t3-medium text-3xs text-adaptive-emerald-600-400">
-                Copied
+                copied
               </Text>
             ) : null}
             {failed && toolIcon !== undefined ? (
@@ -946,7 +946,7 @@ export function ThreadWorkGroupToggle(props: {
         accessibilityRole="button"
         accessibilityState={{ expanded: props.expanded }}
         accessibilityLabel={accessibilityLabel}
-        accessibilityHint={`Double tap to ${props.expanded ? "hide" : "show"} ${props.hiddenCount} tool ${props.hiddenCount === 1 ? "call" : "calls"}.`}
+        accessibilityHint={`double tap to ${props.expanded ? "hide" : "show"} ${props.hiddenCount} tool ${props.hiddenCount === 1 ? "call" : "calls"}.`}
         hitSlop={4}
         onPress={() => {
           void Haptics.selectionAsync();
@@ -1031,7 +1031,7 @@ export const ThreadAgentSpawnCard = memo(function ThreadAgentSpawnCard(props: {
         accessibilityHint={
           canExpand
             ? `Double tap to ${expanded ? "hide" : "show"} ${memberCount} ${memberCount === 1 ? "subagent" : "subagents"}. Long press to copy.`
-            : "Long press to copy."
+            : "long press to copy."
         }
         hitSlop={4}
         onPress={() => {
@@ -1138,7 +1138,7 @@ export function ThreadThinkingRow(props: {
   return (
     <View
       accessible
-      accessibilityLabel="Thinking"
+      accessibilityLabel="thinking"
       className="-mx-1 min-h-8 flex-row items-center px-1.5 py-0"
       style={{ minHeight: props.rowSizing.estimatedRowHeight }}
     >
@@ -1146,7 +1146,7 @@ export function ThreadThinkingRow(props: {
         key={props.rowSizing.textSizeKey}
         icon="brain"
         iconSubtleColor={props.iconSubtleColor}
-        label="Thinking"
+        label="thinking"
         showIcon
       />
     </View>

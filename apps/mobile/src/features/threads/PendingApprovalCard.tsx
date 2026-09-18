@@ -18,9 +18,9 @@ export interface PendingApprovalCardProps {
 }
 
 const DEFAULT_APPROVAL_OPTIONS: ReadonlyArray<ProviderApprovalOption> = [
-  { decision: "accept", label: "Allow once" },
-  { decision: "acceptForSession", label: "Allow session" },
-  { decision: "decline", label: "Decline" },
+  { decision: "accept", label: "allow once" },
+  { decision: "acceptForSession", label: "allow session" },
+  { decision: "decline", label: "decline" },
 ];
 
 export function PendingApprovalCard(props: PendingApprovalCardProps) {
@@ -32,7 +32,7 @@ export function PendingApprovalCard(props: PendingApprovalCardProps) {
   return (
     <View className="gap-2.5 rounded-[20px] border border-border bg-card-alt p-4">
       <Text className="font-t3-bold text-2xs uppercase tracking-[1.1px] text-foreground-secondary">
-        Approval needed
+        approval needed
       </Text>
       <Text className="font-t3-bold text-lg text-foreground">
         {props.approval.appName ?? props.approval.requestKind}

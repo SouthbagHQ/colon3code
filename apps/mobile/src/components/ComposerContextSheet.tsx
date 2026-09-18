@@ -71,7 +71,7 @@ function ContextSource(props: { source: ElementContextSource | null }) {
     : null;
   return (
     <ContextField
-      label="Source"
+      label="source"
       value={[source.functionName, location].filter(Boolean).join("\n")}
       code
     />
@@ -196,7 +196,7 @@ export function ComposerContextSheet(props: {
         {Platform.OS === "android" ? (
           <Pressable
             accessibilityRole="button"
-            accessibilityLabel="Dismiss context"
+            accessibilityLabel="dismiss context"
             onPress={props.onClose}
             style={{ position: "absolute", top: 0, right: 0, bottom: 0, left: 0 }}
           />
@@ -228,17 +228,17 @@ export function ComposerContextSheet(props: {
               </Text>
               {terminal ? (
                 <Text className="text-xs text-foreground-muted">
-                  Lines {terminal.lineStart}–{terminal.lineEnd}
+                  lines {terminal.lineStart}–{terminal.lineEnd}
                 </Text>
               ) : null}
             </View>
             <Pressable
               accessibilityRole="button"
-              accessibilityLabel="Close context"
+              accessibilityLabel="close context"
               onPress={props.onClose}
               className="p-3"
             >
-              <Text className="text-foreground">Done</Text>
+              <Text className="text-foreground">done</Text>
             </Pressable>
           </View>
           <ScrollView
@@ -252,12 +252,12 @@ export function ComposerContextSheet(props: {
           >
             {!record ? (
               <Text className="text-foreground">
-                Context unavailable. The reference was copied without its payload. Copy it again
+                context unavailable. the reference was copied without its payload. copy it again
                 from the original message or remove it.
               </Text>
             ) : "payload" in record ? (
               <Text className="text-foreground">
-                This context type is not supported by this version of the app. Its payload will be
+                this context type is not supported by this version of the app. its payload will be
                 preserved when sent.
               </Text>
             ) : (
@@ -306,12 +306,12 @@ export function ComposerContextSheet(props: {
                 ) : null}
                 {record.kind === "preview-annotation" ? (
                   <>
-                    <ContextField label="Page" value={record.pageTitle ?? record.pageUrl} />
+                    <ContextField label="page" value={record.pageTitle ?? record.pageUrl} />
                     <ContextField label="URL" value={record.pageUrl} />
-                    <ContextField label="Comment" value={record.comment} />
-                    <ContextField label="Selection" value={record.targetSummary} />
+                    <ContextField label="comment" value={record.comment} />
+                    <ContextField label="selection" value={record.targetSummary} />
                     <ContextField
-                      label="Requested changes"
+                      label="requested changes"
                       value={record.styleChanges.join("\n")}
                     />
                     {record.elements?.map((element, index) => (
@@ -320,43 +320,43 @@ export function ComposerContextSheet(props: {
                         className="gap-3"
                       >
                         <ContextField
-                          label="Element"
+                          label="element"
                           value={element.componentName ?? element.tagName}
                         />
-                        <ContextField label="Selector" value={element.selector} code />
+                        <ContextField label="selector" value={element.selector} code />
                         <ContextSource source={element.source} />
                         <ContextField label="HTML" value={element.htmlPreview} code />
-                        <ContextField label="Styles" value={element.styles} code />
+                        <ContextField label="styles" value={element.styles} code />
                       </View>
                     ))}
                   </>
                 ) : null}
                 {record.kind === "element" ? (
                   <>
-                    <ContextField label="Page" value={record.pageUrl} />
-                    <ContextField label="Element" value={record.componentName ?? record.tagName} />
-                    <ContextField label="Selector" value={record.selector} code />
+                    <ContextField label="page" value={record.pageUrl} />
+                    <ContextField label="element" value={record.componentName ?? record.tagName} />
+                    <ContextField label="selector" value={record.selector} code />
                     <ContextSource source={record.source} />
                     <ContextField label="HTML" value={record.htmlPreview} code />
-                    <ContextField label="Styles" value={record.styles} code />
+                    <ContextField label="styles" value={record.styles} code />
                   </>
                 ) : null}
                 {record.kind === "image" ? (
                   <ContextField
-                    label="File"
+                    label="file"
                     value={`${record.mimeType} · ${formatAttachmentSize(record.sizeBytes)}`}
                   />
                 ) : null}
                 {record.kind === "mention" ? (
-                  <ContextField label="Path" value={record.path} code />
+                  <ContextField label="path" value={record.path} code />
                 ) : null}
                 {record.kind === "skill" ? (
                   <View className="gap-3">
-                    <ContextField label="Skill" value={record.name} />
+                    <ContextField label="skill" value={record.name} />
                     <ContextField
-                      label="Description"
+                      label="description"
                       value={
-                        props.skillDescription ?? "No description is available for this skill."
+                        props.skillDescription ?? "no description is available for this skill."
                       }
                     />
                     {props.onOpenSkill ? (
@@ -365,7 +365,7 @@ export function ComposerContextSheet(props: {
                         onPress={props.onOpenSkill}
                         className="rounded-xl bg-subtle p-4"
                       >
-                        <Text className="text-foreground">View instructions</Text>
+                        <Text className="text-foreground">view instructions</Text>
                       </Pressable>
                     ) : null}
                   </View>
@@ -392,12 +392,12 @@ export function ComposerContextSheet(props: {
                 accessibilityRole="link"
                 onPress={() => {
                   void Linking.openURL(pullRequestUrl).catch(() =>
-                    Alert.alert("Could not open pull request", "Try again when connected."),
+                    Alert.alert("could not open pull request 3:", "try again when connected."),
                   );
                 }}
                 className="rounded-xl bg-subtle p-4"
               >
-                <Text className="text-foreground">Open pull request</Text>
+                <Text className="text-foreground">open pull request</Text>
               </Pressable>
             ) : null}
             {props.onOpenAttachment ? (
@@ -406,7 +406,7 @@ export function ComposerContextSheet(props: {
                 onPress={props.onOpenAttachment}
                 className="rounded-xl bg-subtle p-4"
               >
-                <Text className="text-foreground">Open attachment</Text>
+                <Text className="text-foreground">open attachment</Text>
               </Pressable>
             ) : null}
             {props.onOpenPullRequest ? (
@@ -415,7 +415,7 @@ export function ComposerContextSheet(props: {
                 onPress={props.onOpenPullRequest}
                 className="rounded-xl bg-subtle p-4"
               >
-                <Text className="text-foreground">Open pull request</Text>
+                <Text className="text-foreground">open pull request</Text>
               </Pressable>
             ) : null}
             {props.onRemove ? (
@@ -424,7 +424,7 @@ export function ComposerContextSheet(props: {
                 onPress={props.onRemove}
                 className="rounded-xl bg-subtle p-4"
               >
-                <Text className="text-foreground">Remove from draft</Text>
+                <Text className="text-foreground">remove from draft</Text>
               </Pressable>
             ) : null}
           </ScrollView>

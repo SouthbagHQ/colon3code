@@ -33,7 +33,7 @@ function LicenseRow(props: {
 }) {
   return (
     <Pressable
-      accessibilityHint="Opens the complete license notice"
+      accessibilityHint="opens the complete license notice"
       accessibilityLabel={`${props.entry.name}, ${props.entry.license}`}
       accessibilityRole="button"
       onPress={props.onPress}
@@ -95,12 +95,12 @@ export function SettingsOpenSourceLicensesRouteScreen() {
         {Platform.OS === "android" ? (
           <>
             <NativeStackScreenOptions options={{ headerShown: false }} />
-            <AndroidScreenHeader title="Open source licenses" onBack={() => navigation.goBack()} />
+            <AndroidScreenHeader title="open source licenses" onBack={() => navigation.goBack()} />
           </>
         ) : null}
         <View className="flex-1 items-center justify-center px-6">
           <Text className="text-center text-base text-foreground-muted">
-            License notices are unavailable in this build.
+            license notices are unavailable in this build.
           </Text>
         </View>
       </View>
@@ -112,7 +112,7 @@ export function SettingsOpenSourceLicensesRouteScreen() {
       {Platform.OS === "android" ? (
         <>
           <NativeStackScreenOptions options={{ headerShown: false }} />
-          <AndroidScreenHeader title="Open source licenses" onBack={() => navigation.goBack()} />
+          <AndroidScreenHeader title="open source licenses" onBack={() => navigation.goBack()} />
         </>
       ) : null}
       <LegendList
@@ -127,22 +127,22 @@ export function SettingsOpenSourceLicensesRouteScreen() {
         ListEmptyComponent={
           <View className="items-center px-6 py-12">
             <Text className="text-center text-base text-foreground-muted">
-              No licenses match that search.
+              no licenses match that search.
             </Text>
           </View>
         }
         ListHeaderComponent={
           <View className="gap-4 px-5 pt-4 pb-5">
             <Text className="text-base leading-normal text-foreground-muted">
-              Notices for dependencies, assets, and optional tools used by :3 Code Mobile.
+              notices for dependencies, assets, and optional tools used by :3 Code Mobile.
             </Text>
             <TextInput
-              accessibilityLabel="Search open-source licenses"
+              accessibilityLabel="search open-source licenses"
               autoCapitalize="none"
               autoCorrect={false}
               clearButtonMode="while-editing"
               onChangeText={setQuery}
-              placeholder="Search packages"
+              placeholder="search packages"
               returnKeyType="search"
               value={query}
             />
@@ -177,12 +177,12 @@ export function SettingsOpenSourceLicenseRouteScreen({ route }: LicenseDetailPro
         {Platform.OS === "android" ? (
           <>
             <NativeStackScreenOptions options={{ headerShown: false }} />
-            <AndroidScreenHeader title="License notice" onBack={() => navigation.goBack()} />
+            <AndroidScreenHeader title="license notice" onBack={() => navigation.goBack()} />
           </>
         ) : null}
         <View className="flex-1 items-center justify-center px-6">
           <Text className="text-center text-base text-foreground-muted">
-            This license notice is unavailable.
+            this license notice is unavailable.
           </Text>
         </View>
       </View>
@@ -194,7 +194,7 @@ export function SettingsOpenSourceLicenseRouteScreen({ route }: LicenseDetailPro
       {Platform.OS === "android" ? (
         <>
           <NativeStackScreenOptions options={{ headerShown: false }} />
-          <AndroidScreenHeader title="License notice" onBack={() => navigation.goBack()} />
+          <AndroidScreenHeader title="license notice" onBack={() => navigation.goBack()} />
         </>
       ) : null}
       <ScrollView
@@ -213,12 +213,12 @@ export function SettingsOpenSourceLicenseRouteScreen({ route }: LicenseDetailPro
           </Text>
           {sourceUrl ? (
             <Pressable
-              accessibilityHint="Opens the project website"
+              accessibilityHint="opens the project website"
               accessibilityRole="link"
               onPress={() => void Linking.openURL(sourceUrl)}
               className="min-h-12 flex-row items-center gap-2 self-start py-2 active:opacity-60"
             >
-              <Text className="font-t3-medium text-primary">Project source</Text>
+              <Text className="font-t3-medium text-primary">project source</Text>
               <SymbolView
                 name="arrow.up.right"
                 size={16}

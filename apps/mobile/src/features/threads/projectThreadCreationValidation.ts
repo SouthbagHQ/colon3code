@@ -22,7 +22,7 @@ export class ProjectThreadBaseBranchRequiredError extends Schema.TaggedError<Pro
   },
 ) {
   override get message(): string {
-    return "Select a base branch before creating a worktree.";
+    return "select a base branch before creating a worktree.";
   }
 }
 

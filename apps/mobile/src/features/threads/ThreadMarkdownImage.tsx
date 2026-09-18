@@ -85,15 +85,15 @@ export function ThreadMarkdownImageView(props: {
         <MediaActionsMenu media={mediaActions}>
           <Pressable
             accessibilityRole="imagebutton"
-            accessibilityLabel={props.alt ?? "Markdown image"}
+            accessibilityLabel={props.alt ?? "markdown image"}
             accessibilityHint={
-              mediaActions.actions.length > 0 ? "Touch and hold for media actions" : undefined
+              mediaActions.actions.length > 0 ? "touch and hold for media actions" : undefined
             }
             className="items-center justify-center rounded-[10px] bg-md-code-bg"
             style={frameStyle}
           >
             {failed ? (
-              <Text className="text-xs text-foreground-muted">Image unavailable</Text>
+              <Text className="text-xs text-foreground-muted">image unavailable</Text>
             ) : (
               <ActivityIndicator />
             )}
@@ -104,15 +104,15 @@ export function ThreadMarkdownImageView(props: {
           <MediaActionsMenu media={mediaActions}>
             <Pressable
               accessibilityRole="imagebutton"
-              accessibilityLabel={props.alt ?? "Markdown image"}
+              accessibilityLabel={props.alt ?? "markdown image"}
               accessibilityHint={
-                mediaActions.actions.length > 0 ? "Touch and hold for media actions" : undefined
+                mediaActions.actions.length > 0 ? "touch and hold for media actions" : undefined
               }
               onPress={() =>
                 props.onPressPreview({
                   kind: "image",
                   uri: props.uri!,
-                  name: props.actionsSource?.name ?? props.alt ?? "Image",
+                  name: props.actionsSource?.name ?? props.alt ?? "image",
                   sourceIdentifier,
                   actionsSource: props.actionsSource,
                 })
@@ -168,7 +168,7 @@ function ThreadMarkdownImageRequest(props: {
           pointerEvents="none"
           style={[StyleSheet.absoluteFill, { alignItems: "center", justifyContent: "center" }]}
         >
-          <Text className="text-xs text-foreground-muted">Loading image…</Text>
+          <Text className="text-xs text-foreground-muted">loading image…</Text>
         </View>
       )}
     </>

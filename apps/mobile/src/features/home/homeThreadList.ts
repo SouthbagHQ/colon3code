@@ -259,7 +259,7 @@ export function buildHomeThreadGroups(input: {
           {
             environmentId: pendingTask.environmentId,
             id: pendingTask.projectId,
-            title: pendingTask.projectTitle ?? "Unknown project",
+            title: pendingTask.projectTitle ?? "unknown project",
             workspaceRoot: pendingTask.projectCwd ?? String(pendingTask.projectId),
             repositoryIdentity: null,
             defaultModelSelection: null,

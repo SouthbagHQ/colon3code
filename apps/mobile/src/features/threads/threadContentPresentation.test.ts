@@ -35,8 +35,8 @@ describe("thread content presentation", () => {
       }),
     ).toEqual({
       kind: "unavailable",
-      title: "Messages not cached",
-      detail: "Reconnect this environment to load the conversation.",
+      title: "messages not cached 3:",
+      detail: "reconnect this environment to load the conversation.",
     });
   });
 
@@ -50,7 +50,7 @@ describe("thread content presentation", () => {
       }),
     ).toEqual({
       kind: "unavailable",
-      title: "Could not load conversation",
+      title: "could not load conversation 3:",
       detail: "The thread stream failed.",
     });
   });

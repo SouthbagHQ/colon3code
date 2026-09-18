@@ -23,18 +23,18 @@ const GROUPING_OPTIONS: ReadonlyArray<{
 }> = [
   {
     mode: "repository",
-    label: "Group by repository",
-    description: "Matching repositories appear as one project.",
+    label: "group by repository",
+    description: "matching repositories appear as one project.",
   },
   {
     mode: "repository_path",
-    label: "Group by repository path",
-    description: "Keep monorepo paths separate.",
+    label: "group by repository path",
+    description: "keep monorepo paths separate.",
   },
   {
     mode: "separate",
-    label: "Keep separate",
-    description: "Show every workspace as its own project.",
+    label: "keep separate",
+    description: "show every workspace as its own project.",
   },
 ];
 
@@ -53,7 +53,7 @@ export function SettingsProjectGroupingRouteScreen() {
       {Platform.OS === "android" ? (
         <>
           <NativeStackScreenOptions options={{ headerShown: false }} />
-          <AndroidScreenHeader title="Project Grouping" onBack={() => navigation.goBack()} />
+          <AndroidScreenHeader title="project grouping" onBack={() => navigation.goBack()} />
         </>
       ) : null}
       <ScrollView
@@ -63,7 +63,7 @@ export function SettingsProjectGroupingRouteScreen() {
         contentContainerClassName="gap-3 px-5 pt-4"
         contentContainerStyle={{ paddingBottom: Math.max(insets.bottom, 18) + 18 }}
       >
-        <SettingsSection title="Default grouping">
+        <SettingsSection title="default grouping">
           {GROUPING_OPTIONS.map((option, index) => (
             <Pressable
               key={option.mode}

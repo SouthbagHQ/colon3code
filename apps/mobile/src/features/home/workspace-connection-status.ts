@@ -17,18 +17,18 @@ function shouldShowWorkspaceConnectionStatus(state: WorkspaceState): boolean {
 }
 
 function workspaceConnectionStatusLabel(state: WorkspaceState): string {
-  if (state.networkStatus === "offline") return "You are offline";
+  if (state.networkStatus === "offline") return "you are offline 3:";
   if (state.connectingEnvironments.length === 1) {
-    return `Reconnecting to ${state.connectingEnvironments[0]!.environmentLabel}`;
+    return `reconnecting to ${state.connectingEnvironments[0]!.environmentLabel}`;
   }
   if (state.connectingEnvironments.length > 1) {
-    return `Reconnecting ${state.connectingEnvironments.length} environments`;
+    return `reconnecting ${state.connectingEnvironments.length} environments`;
   }
   if (state.connectionError !== null) return state.connectionError;
   if (state.hasPendingShellSnapshot) {
-    return state.hasLoadedShellSnapshot ? "Syncing threads..." : "Loading threads...";
+    return state.hasLoadedShellSnapshot ? "syncing threads…" : "loading threads…";
   }
-  return "Not connected";
+  return "not connected 3:";
 }
 
 /** Header-title presentation of the connection state, or null while connected. */

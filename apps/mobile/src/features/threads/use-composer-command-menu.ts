@@ -69,21 +69,21 @@ export function buildComposerSlashCommandItems(input: {
       type: "slash-command",
       command: "model",
       label: "/model",
-      description: "Switch model",
+      description: "switch model",
     },
     {
       id: "cmd:plan",
       type: "slash-command",
       command: "plan",
       label: "/plan",
-      description: "Switch to plan mode",
+      description: "switch to plan mode",
     },
     {
       id: "cmd:default",
       type: "slash-command",
       command: "default",
       label: "/default",
-      description: "Switch to default mode",
+      description: "switch to default mode",
     },
   ] satisfies ComposerCommandItem[];
   const items: ComposerCommandItem[] = builtIn.filter(
@@ -323,7 +323,7 @@ export function useComposerCommandMenu({
           isDraft: entry.isDraft,
         },
         label: `#${entry.number}`,
-        description: `${entry.isDraft ? "Draft" : entry.state} · ${entry.title}`,
+        description: `${entry.isDraft ? "draft" : entry.state} · ${entry.title}`,
       }));
     }
 
@@ -478,8 +478,8 @@ export function useComposerCommandMenu({
           COMPOSER_CONTEXT_MAX_RECORDS
         ) {
           Alert.alert(
-            "Too many context items",
-            "Remove some context from the draft and try again.",
+            "too many context items",
+            "remove some context from the draft and try again.",
           );
           return;
         }
@@ -548,7 +548,7 @@ export function useComposerCommandMenu({
     error:
       trigger?.kind === "pull-request"
         ? pullRequestProjectId === null || pullRequestRepository === null
-          ? "Pull requests are unavailable for this project."
+          ? "pull requests are unavailable for this project."
           : pullRequestSearch.error
         : null,
     onSelect,

@@ -91,8 +91,8 @@ import {
 } from "./threadListV2";
 
 /** The sidebar list serves both lists: v1 grouped items or, when the Thread
-    List v2 beta is on, flat v2 rows with queued tasks spliced in, and a settled
-    "Show more" pager. */
+    list v2 beta is on, flat v2 rows with queued tasks spliced in, and a settled
+    "show more" pager. */
 type SidebarListItem =
   | HomeListItem
   | ThreadListV2ListItem
@@ -630,12 +630,12 @@ function ThreadNavigationSidebarPane(
     () => [
       {
         id: "environment",
-        title: "Environment",
+        title: "environment",
         subactions: [
           {
             id: "environment:all",
-            title: "All environments",
-            subtitle: "Show threads from every environment",
+            title: "all environments",
+            subtitle: "show threads from every environment",
             state: options.selectedEnvironmentId === null ? "on" : "off",
           },
           ...environments.map((environment) => ({
@@ -653,12 +653,12 @@ function ThreadNavigationSidebarPane(
         : ([
             {
               id: "project",
-              title: "Project",
+              title: "project",
               subactions: [
                 {
                   id: "project:all",
-                  title: "All projects",
-                  subtitle: "Show threads from every project",
+                  title: "all projects",
+                  subtitle: "show threads from every project",
                   state: selectedProjectKey === null ? "on" : "off",
                 },
                 ...projectFilterOptions.map((project) => ({
@@ -677,7 +677,7 @@ function ThreadNavigationSidebarPane(
         : ([
             {
               id: "project-sort",
-              title: "Sort projects",
+              title: "sort projects",
               subactions: PROJECT_SORT_OPTIONS.map((option) => ({
                 id: `project-sort:${option.value}`,
                 title: option.label,
@@ -686,7 +686,7 @@ function ThreadNavigationSidebarPane(
             },
             {
               id: "thread-sort",
-              title: "Sort threads",
+              title: "sort threads",
               subactions: THREAD_SORT_OPTIONS.map((option) => ({
                 id: `thread-sort:${option.value}`,
                 title: option.label,
@@ -983,13 +983,13 @@ function ThreadNavigationSidebarPane(
           return (
             <Pressable
               accessibilityRole="button"
-              accessibilityLabel={`Show ${Math.min(item.hiddenCount, THREAD_LIST_V2_SETTLED_PAGE_COUNT)} more settled threads`}
+              accessibilityLabel={`show ${Math.min(item.hiddenCount, THREAD_LIST_V2_SETTLED_PAGE_COUNT)} more settled threads`}
               onPress={showMoreSettled}
               className="mx-4 mt-2 items-center rounded-lg border border-dashed border-border py-2.5"
               style={({ pressed }) => ({ opacity: pressed ? 0.6 : 1 })}
             >
               <Text className="text-xs font-t3-medium text-foreground-muted">
-                Show more ({item.hiddenCount} settled hidden)
+                show more ({item.hiddenCount} settled hidden)
               </Text>
             </Pressable>
           );
@@ -1168,14 +1168,14 @@ function ThreadNavigationSidebarPane(
   const listEmpty = (
     <Text className="px-2 py-4 text-sm text-foreground-muted">
       {catalogState.isLoadingConnections
-        ? "Loading threads…"
+        ? "loading threads…"
         : props.searchQuery.trim().length > 0
           ? threadSearch.isPending
-            ? "Searching thread messages…"
-            : "No matching threads"
+            ? "searching thread messages…"
+            : "no matching threads"
           : selectedProjectScope !== null
-            ? `No threads in ${selectedProjectScope.title}`
-            : "No threads yet"}
+            ? `no threads in ${selectedProjectScope.title}`
+            : "no threads yet"}
     </Text>
   );
 
@@ -1202,7 +1202,7 @@ function ThreadNavigationSidebarPane(
               // hidesSearchBarWhenScrolling collapses it on scroll.
               hideWhenScrolling: false,
               obscureBackground: false,
-              placeholder: "Search",
+              placeholder: "search",
               placement: "stacked",
               onCancelButtonPress: () => {
                 props.onSearchQueryChange("");
@@ -1333,7 +1333,7 @@ function ThreadNavigationSidebarPane(
           />
           <View className="flex-row items-center gap-2.5">
             <ControlPillMenu actions={listMenuActions} onPressAction={handleListMenuAction}>
-              <SidebarFilterButton accessibilityLabel="Filter and sort threads" icon={filterIcon} />
+              <SidebarFilterButton accessibilityLabel="filter and sort threads" icon={filterIcon} />
             </ControlPillMenu>
             <SidebarHeaderActions onOpenSettings={props.onOpenSettings} />
           </View>
@@ -1354,12 +1354,12 @@ function ThreadNavigationSidebarPane(
           />
           <TextInput
             ref={searchInputRef}
-            accessibilityLabel="Search threads"
+            accessibilityLabel="search threads"
             autoCapitalize="none"
             autoCorrect={false}
             clearButtonMode={materialYouStyleLayoutActive ? "never" : "while-editing"}
             onChangeText={props.onSearchQueryChange}
-            placeholder="Search"
+            placeholder="search"
             placeholderTextColorClassName={"accent-placeholder"}
             returnKeyType="search"
             className={
@@ -1371,7 +1371,7 @@ function ThreadNavigationSidebarPane(
           />
           {materialYouStyleLayoutActive && props.searchQuery.length > 0 ? (
             <Pressable
-              accessibilityLabel="Clear search"
+              accessibilityLabel="clear search"
               hitSlop={10}
               onPress={() => props.onSearchQueryChange("")}
             >

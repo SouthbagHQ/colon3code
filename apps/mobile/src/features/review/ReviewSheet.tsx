@@ -82,7 +82,7 @@ const SHOWCASE_ENABLED = process.env.EXPO_PUBLIC_SHOWCASE === "1";
 const ReviewNotice = memo(function ReviewNotice(props: { readonly notice: string }) {
   return (
     <View className="border-b border-warning-border bg-warning px-4 py-3">
-      <Text className="text-xs font-t3-bold uppercase text-warning-foreground">Partial diff</Text>
+      <Text className="text-xs font-t3-bold uppercase text-warning-foreground">partial diff</Text>
       <Text className="text-xs leading-normal text-warning-foreground">{props.notice}</Text>
     </View>
   );
@@ -310,7 +310,7 @@ function ReviewFileNavigator({
               hideShadow={false}
               navigationItemStyle="editor"
               subtitle={`${files.length} ${files.length === 1 ? "file" : "files"}`}
-              title="Changed files"
+              title="changed files"
               titleColor={foregroundColor}
               titleFontSize={17}
               titleFontWeight="700"
@@ -326,7 +326,7 @@ function ReviewFileNavigator({
     <View className="flex-1 border-l border-border bg-sheet">
       <View className="border-b border-border" style={{ paddingTop: headerInset }}>
         <View className="px-4 py-3">
-          <Text className="text-sm font-t3-bold text-foreground">Changed files</Text>
+          <Text className="text-sm font-t3-bold text-foreground">changed files</Text>
           <Text className="text-xs text-foreground-muted">
             {files.length} {files.length === 1 ? "file" : "files"}
           </Text>
@@ -542,15 +542,15 @@ export function ReviewSheet(props: ReviewSheetProps) {
       attributes: section ? undefined : { disabled: true },
     });
     const actions: MenuAction[] = [
-      sectionAction(sectionMenu.workingTree, "Working tree"),
-      sectionAction(sectionMenu.branchChanges, "Branch changes"),
-      sectionAction(sectionMenu.latestTurn, "Latest turn"),
+      sectionAction(sectionMenu.workingTree, "working tree"),
+      sectionAction(sectionMenu.branchChanges, "branch changes"),
+      sectionAction(sectionMenu.latestTurn, "latest turn"),
     ];
 
     if (sectionMenu.turns.length > 0) {
       actions.push({
         id: "turns",
-        title: "Turn",
+        title: "turn",
         subactions: sectionMenu.turns.map((section) => ({
           id: `section:${section.id}`,
           title: section.id === selectedSection?.id ? `${section.title} (selected)` : section.title,
@@ -563,7 +563,7 @@ export function ReviewSheet(props: ReviewSheetProps) {
     // stays a menu action there (iOS refreshes via pull-to-refresh instead).
     actions.push({
       id: "refresh",
-      title: "Refresh current diff",
+      title: "refresh current diff",
       attributes: {
         disabled: !selectedSection || selectedSection.isLoading,
       },
@@ -630,7 +630,7 @@ export function ReviewSheet(props: ReviewSheetProps) {
     if (error) {
       children.push(
         <View key="review-error" className="border-b border-border bg-card px-4 py-3">
-          <Text className="text-sm font-t3-bold text-foreground">Review unavailable</Text>
+          <Text className="text-sm font-t3-bold text-foreground">review unavailable</Text>
           <Text className="text-xs leading-normal text-foreground-muted">{error}</Text>
         </View>,
       );
@@ -655,7 +655,7 @@ export function ReviewSheet(props: ReviewSheetProps) {
   ]
     .filter(Boolean)
     .join(" · ");
-  const headerTitleText = selectedSection?.title ?? "Review changes";
+  const headerTitleText = selectedSection?.title ?? "review changes";
 
   return (
     <>
@@ -679,8 +679,8 @@ export function ReviewSheet(props: ReviewSheetProps) {
 
       {isAndroid ? (
         <AndroidScreenHeader
-          title="Review changes"
-          subtitle={androidHeaderSubtitle || "Select a diff"}
+          title="review changes"
+          subtitle={androidHeaderSubtitle || "select a diff"}
           onBack={handleReturnToThread}
           trailing={
             showSectionToolbar ? (
@@ -690,7 +690,7 @@ export function ReviewSheet(props: ReviewSheetProps) {
                 onPressAction={handleAndroidSectionMenuAction}
               >
                 <AndroidHeaderIconButton
-                  accessibilityLabel="Select review diff"
+                  accessibilityLabel="select review diff"
                   icon="ellipsis.circle"
                 />
               </ControlPillMenu>
@@ -701,7 +701,7 @@ export function ReviewSheet(props: ReviewSheetProps) {
 
       <WorkspaceSidebarToolbar>
         <NativeHeaderToolbar.Button
-          accessibilityLabel="Back to chat"
+          accessibilityLabel="back to chat"
           icon="chevron.left"
           onPress={handleReturnToThread}
         />
@@ -712,7 +712,7 @@ export function ReviewSheet(props: ReviewSheetProps) {
           {showChangedFilesToggle ? (
             <NativeHeaderToolbar.Button
               accessibilityLabel={
-                panes.auxiliaryPaneVisible ? "Hide changed files" : "Show changed files"
+                panes.auxiliaryPaneVisible ? "hide changed files" : "show changed files"
               }
               icon="sidebar.right"
               onPress={toggleAuxiliaryPane}
@@ -731,7 +731,7 @@ export function ReviewSheet(props: ReviewSheetProps) {
             />
           ) : null}
           {showSectionToolbar ? (
-            <NativeHeaderToolbar.Menu icon="ellipsis" title="Select diff" separateBackground>
+            <NativeHeaderToolbar.Menu icon="ellipsis" title="select diff" separateBackground>
               <NativeHeaderToolbar.Menu inline>
                 <NativeHeaderToolbar.MenuAction
                   disabled={sectionMenu.workingTree === null}
@@ -742,7 +742,7 @@ export function ReviewSheet(props: ReviewSheetProps) {
                     }
                   }}
                 >
-                  <NativeHeaderToolbar.Label>Working tree</NativeHeaderToolbar.Label>
+                  <NativeHeaderToolbar.Label>working tree</NativeHeaderToolbar.Label>
                 </NativeHeaderToolbar.MenuAction>
                 <NativeHeaderToolbar.MenuAction
                   disabled={sectionMenu.branchChanges === null}
@@ -753,7 +753,7 @@ export function ReviewSheet(props: ReviewSheetProps) {
                     }
                   }}
                 >
-                  <NativeHeaderToolbar.Label>Branch changes</NativeHeaderToolbar.Label>
+                  <NativeHeaderToolbar.Label>branch changes</NativeHeaderToolbar.Label>
                 </NativeHeaderToolbar.MenuAction>
                 <NativeHeaderToolbar.MenuAction
                   disabled={sectionMenu.latestTurn === null}
@@ -764,10 +764,10 @@ export function ReviewSheet(props: ReviewSheetProps) {
                     }
                   }}
                 >
-                  <NativeHeaderToolbar.Label>Latest turn</NativeHeaderToolbar.Label>
+                  <NativeHeaderToolbar.Label>latest turn</NativeHeaderToolbar.Label>
                 </NativeHeaderToolbar.MenuAction>
                 {sectionMenu.turns.length > 0 ? (
-                  <NativeHeaderToolbar.Menu title="Turn">
+                  <NativeHeaderToolbar.Menu title="turn">
                     {sectionMenu.turns.map((section) => (
                       <NativeHeaderToolbar.MenuAction
                         key={section.id}
@@ -790,7 +790,7 @@ export function ReviewSheet(props: ReviewSheetProps) {
         {showConnectionNotice ? (
           <View className="flex-1" style={{ paddingTop: topContentInset }}>
             <EnvironmentConnectionNotice
-              environmentLabel={environment.presentation?.entry.target.label ?? "Environment"}
+              environmentLabel={environment.presentation?.entry.target.label ?? "environment"}
               connection={
                 environment.presentation?.connection ?? {
                   phase: "available",
@@ -870,21 +870,21 @@ export function ReviewSheet(props: ReviewSheetProps) {
             {listHeader}
             {!selectedSection ? (
               <View className="border-b border-border bg-card px-4 py-5">
-                <Text className="text-sm font-t3-bold text-foreground">No review diffs</Text>
+                <Text className="text-sm font-t3-bold text-foreground">no review diffs</Text>
                 <Text className="text-xs leading-normal text-foreground-muted">
-                  This thread has no ready turn diffs and the worktree diff is empty.
+                  this thread has no ready turn diffs and the worktree diff is empty.
                 </Text>
               </View>
             ) : selectedSection.isLoading && selectedSection.diff === null ? (
               <View className="items-center gap-3 border-b border-border bg-card px-4 py-6">
                 <ActivityIndicator size="small" />
-                <Text className="text-xs text-foreground-muted">Loading diff…</Text>
+                <Text className="text-xs text-foreground-muted">loading diff…</Text>
               </View>
             ) : parsedDiff.kind === "empty" ? (
               <View className="border-b border-border bg-card px-4 py-5">
-                <Text className="text-sm font-t3-bold text-foreground">No changes</Text>
+                <Text className="text-sm font-t3-bold text-foreground">no changes</Text>
                 <Text className="text-xs leading-normal text-foreground-muted">
-                  {selectedSection.subtitle ?? "This diff is empty."}
+                  {selectedSection.subtitle ?? "this diff is empty."}
                 </Text>
               </View>
             ) : parsedDiff.kind === "raw" ? (
@@ -903,7 +903,7 @@ export function ReviewSheet(props: ReviewSheetProps) {
               // degrade to the raw patch instead of crashing the app.
               <View className="gap-3 border-b border-border bg-card px-4 py-4">
                 <Text className="text-xs leading-normal text-foreground-muted">
-                  Native diff view unavailable. Showing the raw patch.
+                  native diff view unavailable. showing the raw patch.
                 </Text>
                 <ScrollView horizontal showsHorizontalScrollIndicator={false} bounces={false}>
                   <Text selectable className="font-mono text-xs leading-relaxed text-foreground">

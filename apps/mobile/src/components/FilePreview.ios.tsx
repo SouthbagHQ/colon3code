@@ -24,12 +24,13 @@ function NativeFilePreview(props: {
   const onRequestClose = useEffectEvent(props.onRequestClose);
   const onOpenError = useEffectEvent((error: unknown) => {
     if (props.onOpenError) props.onOpenError(error);
-    else Alert.alert("Could not open preview", "The file could not be loaded. Please try again.");
+    else
+      Alert.alert("could not open preview 3:", "the file could not be loaded. please try again.");
   });
 
   useEffect(() => {
     let canceled = false;
-    void NativeControls.presentFile(uri, name ?? "Preview", sourceIdentifier ?? "", identifier)
+    void NativeControls.presentFile(uri, name ?? "preview", sourceIdentifier ?? "", identifier)
       .catch((error: unknown) => {
         if (!canceled) onOpenError(error);
       })

@@ -29,7 +29,7 @@ export function ComposerUsageLimits({
   const { height } = useWindowDimensions();
   const close = (
     <Pressable
-      accessibilityLabel="Dismiss usage limits"
+      accessibilityLabel="dismiss usage limits"
       accessibilityRole="button"
       hitSlop={12}
       onPress={onClose}
@@ -88,7 +88,7 @@ export function ComposerUsageLimits({
         {report.accounts.length === 0 ? (
           // Nothing but notices, so the close control needs a row of its own.
           <View className="flex-row items-center gap-3 px-4 pt-3">
-            <Text className="min-w-0 flex-1 text-base text-foreground">Usage limits</Text>
+            <Text className="min-w-0 flex-1 text-base text-foreground">usage limits</Text>
             {close}
           </View>
         ) : null}

@@ -279,9 +279,9 @@ export function IncomingShareProvider(props: React.PropsWithChildren) {
       return;
     }
     Alert.alert("Could not import shared content", error.message, [
-      { text: "Dismiss", style: "cancel", onPress: () => setError(null) },
+      { text: "dismiss", style: "cancel", onPress: () => setError(null) },
       {
-        text: "Retry",
+        text: "retry",
         onPress: () => {
           setError(null);
           void refresh();

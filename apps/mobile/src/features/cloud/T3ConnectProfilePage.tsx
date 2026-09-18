@@ -32,27 +32,27 @@ const linkedAtFormatter = new Intl.DateTimeFormat(undefined, { dateStyle: "mediu
 function linkedAtLabel(value: string): string {
   const linkedAt = new Date(value);
   return Number.isNaN(linkedAt.getTime())
-    ? "Link date unavailable"
-    : `Linked ${linkedAtFormatter.format(linkedAt)}`;
+    ? "link date unavailable"
+    : `linked ${linkedAtFormatter.format(linkedAt)}`;
 }
 
 function endpointLabel(environment: RelayClientEnvironmentRecord): string {
   return environment.endpoint.providerKind === "cloudflare_tunnel"
-    ? "Managed tunnel"
-    : "Activity publishing only";
+    ? "managed tunnel"
+    : "activity publishing only";
 }
 
 function confirmDeregister(environment: RelayClientEnvironmentRecord, onConfirm: () => void) {
-  const title = "Deregister server?";
+  const title = "deregister server?";
   const message = `“${environment.label}” will be removed from this account. T3 Connect access will be revoked, any managed tunnel will be removed, and a host space will become available. Local connections on your devices are not changed.`;
   if (process.env.EXPO_OS === "ios") {
     Alert.alert(title, message, [
-      { text: "Cancel", style: "cancel" },
-      { text: "Deregister", style: "destructive", onPress: onConfirm },
+      { text: "cancel", style: "cancel" },
+      { text: "deregister", style: "destructive", onPress: onConfirm },
     ]);
     return;
   }
-  showConfirmDialog({ title, message, confirmText: "Deregister", destructive: true, onConfirm });
+  showConfirmDialog({ title, message, confirmText: "deregister", destructive: true, onConfirm });
 }
 
 /**
@@ -101,7 +101,7 @@ export function T3ConnectProfilePage() {
     if (isAtomCommandInterrupted(result)) return;
 
     const cause = squashAtomCommandFailure(result);
-    const message = cause instanceof Error ? cause.message : "Could not deregister the server.";
+    const message = cause instanceof Error ? cause.message : "could not deregister the server.";
     const traceId = findErrorTraceId(cause);
     console.error("[t3-connect] Could not deregister environment", {
       environmentId: environment.environmentId,
@@ -110,12 +110,12 @@ export function T3ConnectProfilePage() {
       cause,
     });
     Alert.alert(
-      "Could not deregister server",
+      "could not deregister server 3:",
       traceId ? `${message}\n\nTrace ID: ${traceId}` : message,
       traceId
         ? [
             {
-              text: "Copy trace ID",
+              text: "copy trace ID",
               onPress: () => copyTextWithHaptic(traceId, { target: "connection-trace-id" }),
             },
             { text: "OK", style: "cancel" },
@@ -148,17 +148,17 @@ export function T3ConnectProfilePage() {
         />
       }
     >
-      <ClerkSectionHeader>Registered servers</ClerkSectionHeader>
+      <ClerkSectionHeader>registered servers</ClerkSectionHeader>
 
       {environmentsState.error ? (
         <>
           <ClerkRow
-            title="Could not load T3 Connect environments"
+            title="could not load T3 Connect environments"
             subtitle={environmentsState.error}
           />
           {errorTraceId ? (
             <ClerkButtonRow
-              label="Copy trace ID"
+              label="copy trace ID"
               onPress={() => {
                 copyTextWithHaptic(errorTraceId, { target: "connection-trace-id" });
               }}
@@ -168,7 +168,7 @@ export function T3ConnectProfilePage() {
       ) : isInitialLoad ? (
         <View className="flex-row items-center gap-3 px-6 py-4">
           <ActivityIndicator colorClassName={"accent-clerk-foreground-muted"} size="small" />
-          <Text className="text-base text-clerk-foreground-muted">Loading environments</Text>
+          <Text className="text-base text-clerk-foreground-muted">loading environments</Text>
         </View>
       ) : environments.length > 0 ? (
         environments.map((environment) => (
@@ -188,7 +188,7 @@ export function T3ConnectProfilePage() {
                   }
                 >
                   <Pressable
-                    accessibilityLabel={`Actions for ${environment.label}`}
+                    accessibilityLabel={`actions for ${environment.label}`}
                     accessibilityRole="button"
                     disabled={deregisteringEnvironmentId !== null}
                     className="size-[30px] items-center justify-center active:opacity-60 disabled:opacity-50"
@@ -209,20 +209,20 @@ export function T3ConnectProfilePage() {
         ))
       ) : (
         <ClerkRow
-          title="No servers registered"
-          subtitle="Link a server from its local Settings to reach it through T3 Connect."
+          title="no servers registered"
+          subtitle="link a server from its local Settings to reach it through T3 Connect."
         />
       )}
 
       <Text className="px-6 pt-6 text-xs leading-normal text-clerk-foreground-muted">
-        Connections on this device are managed in Settings.
+        connections on this device are managed in Settings.
       </Text>
     </ScrollView>
   );
 }
 
 const ENVIRONMENT_MENU_ACTIONS = [
-  { id: "deregister", title: "Deregister", image: "trash", attributes: { destructive: true } },
+  { id: "deregister", title: "deregister", image: "trash", attributes: { destructive: true } },
 ] satisfies MenuAction[];
 
 // Layout primitives that mirror clerk-ios ClerkKitUI's profile rows so a custom

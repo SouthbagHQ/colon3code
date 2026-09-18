@@ -21,9 +21,11 @@ export function WorkspaceEmptyDetail(props: { readonly onStartNewTask?: () => vo
           tintColorClassName={"accent-icon-subtle"}
           type="hierarchical"
         />
-        <Text className="text-center text-xl font-t3-bold">Select a thread</Text>
+        <Text className="text-center text-xl font-t3-bold">
+          pick a thread and let's keep going :3
+        </Text>
         <Text className="text-center text-base text-foreground-muted">
-          Choose a thread from the sidebar or start a new task.
+          pop into a thread from the sidebar, or start a fresh one ^w^
         </Text>
         {props.onStartNewTask ? (
           <Pressable
@@ -31,7 +33,7 @@ export function WorkspaceEmptyDetail(props: { readonly onStartNewTask?: () => vo
             className="mt-2 flex-row items-center gap-2 rounded-full bg-primary px-5 py-3 active:opacity-70"
             onPress={props.onStartNewTask}
           >
-            <Text className="text-base font-t3-bold text-primary-foreground">New Task</Text>
+            <Text className="text-base font-t3-bold text-primary-foreground">new task</Text>
           </Pressable>
         ) : null}
       </View>

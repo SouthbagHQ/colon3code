@@ -21,7 +21,7 @@ export function WorkspaceSidebarToolbar(
       {props.children}
       <NativeHeaderToolbar.Button
         accessibilityLabel={
-          panes.primarySidebarVisible ? "Maximize content" : "Show thread sidebar"
+          panes.primarySidebarVisible ? "maximize content" : "show thread sidebar"
         }
         icon={panes.primarySidebarVisible ? "arrow.up.left.and.arrow.down.right" : "sidebar.left"}
         onPress={togglePrimarySidebar}

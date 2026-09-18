@@ -33,8 +33,8 @@ describe("fileChipMenu", () => {
     expect(fileChipMenu({ fullPath: "/tmp/report.md" })).toEqual({
       title: "/tmp/report.md",
       actions: [
-        { id: "copy-full-path", title: "Copy full path" },
-        { id: "open-file", title: "Open in file viewer" },
+        { id: "copy-full-path", title: "copy full path" },
+        { id: "open-file", title: "open in file viewer" },
       ],
     });
     expect(fileChipMenu({ relativePath: "src/app.ts" }).actions.map(({ id }) => id)).toEqual([
@@ -60,7 +60,7 @@ describe("file chip downloads", () => {
     const target = resolveFileChipTarget(href, "/repo")!;
     expect(fileChipMenu(target).actions).toContainEqual({
       id: "save",
-      title: "Save or share",
+      title: "save or share",
     });
     expect(fileChipShareSource(target, threadId)).toEqual({
       name: path.split("/").at(-1),

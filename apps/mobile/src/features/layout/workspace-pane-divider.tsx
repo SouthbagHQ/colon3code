@@ -64,8 +64,8 @@ export function WorkspacePaneDivider(props: WorkspacePaneDividerProps) {
       <Pressable
         className="relative z-[100] -mx-[22px] w-11 self-stretch justify-center"
         accessibilityActions={[
-          { name: "increment", label: "Make pane wider" },
-          { name: "decrement", label: "Make pane narrower" },
+          { name: "increment", label: "make pane wider" },
+          { name: "decrement", label: "make pane narrower" },
         ]}
         accessibilityLabel={props.accessibilityLabel}
         accessibilityRole="adjustable"

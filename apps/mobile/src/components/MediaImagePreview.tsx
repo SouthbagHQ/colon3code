@@ -25,12 +25,12 @@ function ImagePreviewHeader() {
     <View className="bg-black/70" style={{ paddingTop: insets.top }}>
       <View className="flex-row items-center gap-2 px-3">
         <AppText className="flex-1 text-base text-white" numberOfLines={2}>
-          {props.source.name ?? "Image"}
+          {props.source.name ?? "image"}
         </AppText>
         <MediaActionsMenu media={mediaActions} inModal />
         <Pressable
           accessibilityRole="button"
-          accessibilityLabel="Close image"
+          accessibilityLabel="close image"
           onPress={props.onRequestClose}
           className="min-h-11 min-w-11 items-center justify-center"
         >

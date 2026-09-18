@@ -79,7 +79,7 @@ export function useReviewCommentSelectionController(input: {
       activeCommentTarget.startIndex !== activeCommentTarget.endIndex
     ) {
       return {
-        title: `Comment on ${formatReviewSelectedRangeLabel(activeCommentTarget)}`,
+        title: `comment on ${formatReviewSelectedRangeLabel(activeCommentTarget)}`,
         onOpenComment: openReviewCommentSheet,
       };
     }
@@ -89,7 +89,7 @@ export function useReviewCommentSelectionController(input: {
       pendingNativeCommentSelection.sectionTitle === selectedSection?.title
     ) {
       return {
-        title: "Select range end",
+        title: "select range end",
         onOpenComment: null,
       };
     }

@@ -21,14 +21,14 @@ export function projectThreadContentPresentation(input: {
   if (input.detailDeleted) {
     return {
       kind: "unavailable",
-      title: "Thread unavailable",
-      detail: "This thread was deleted or is no longer available.",
+      title: "thread unavailable 3:",
+      detail: "this thread was deleted or is no longer available.",
     };
   }
   if (input.detailError !== null) {
     return {
       kind: "unavailable",
-      title: "Could not load conversation",
+      title: "could not load conversation 3:",
       detail: input.detailError,
     };
   }
@@ -43,7 +43,7 @@ export function projectThreadContentPresentation(input: {
   }
   return {
     kind: "unavailable",
-    title: "Messages not cached",
-    detail: "Reconnect this environment to load the conversation.",
+    title: "messages not cached 3:",
+    detail: "reconnect this environment to load the conversation.",
   };
 }

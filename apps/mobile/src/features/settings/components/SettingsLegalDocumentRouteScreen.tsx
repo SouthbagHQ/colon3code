@@ -13,7 +13,7 @@ export function SettingsLegalDocumentCloseHeaderButton() {
 
   return (
     <Pressable
-      accessibilityLabel="Close legal document"
+      accessibilityLabel="close legal document"
       accessibilityRole="button"
       hitSlop={12}
       onPress={() => navigation.goBack()}
@@ -39,7 +39,7 @@ export function SettingsLegalDocumentExternalHeaderButton({
 
   return (
     <Pressable
-      accessibilityLabel="Open legal documents in external browser"
+      accessibilityLabel="open legal documents in external browser"
       accessibilityRole="button"
       hitSlop={12}
       onPress={() => void Linking.openURL(safeExternalUrl).catch(() => undefined)}
@@ -111,14 +111,14 @@ export function SettingsLegalDocumentRouteScreen({
             }}
             className="items-center rounded-xl bg-foreground px-4 py-3 active:opacity-80"
           >
-            <Text className="font-t3-bold text-base text-sheet">Try Again</Text>
+            <Text className="font-t3-bold text-base text-sheet">try again</Text>
           </Pressable>
           <Pressable
             accessibilityRole="link"
             onPress={() => openExternalUrl(documentUrl)}
             className="items-center rounded-xl px-4 py-3 active:bg-foreground/5"
           >
-            <Text className="font-t3-medium text-base text-foreground-muted">Open in Browser</Text>
+            <Text className="font-t3-medium text-base text-foreground-muted">open in browser</Text>
           </Pressable>
         </View>
       </View>

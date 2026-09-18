@@ -301,7 +301,7 @@ export async function buildIncomingShareDraft(input: {
           : undefined;
       const name = resolved?.originalName ?? sharedFileName ?? fallbackName(uri, index, mimeType);
       if (!uri) {
-        warnings.push("One shared file could not be read.");
+        warnings.push("one shared file could not be read.");
         continue;
       }
       let persistedFileUri: string | undefined;
@@ -316,7 +316,7 @@ export async function buildIncomingShareDraft(input: {
           sizeBytes = (await input.fileReader.readSize?.(persistedFileUri)) ?? null;
         }
         if (sizeBytes === null) {
-          warnings.push(`The size of '${name}' could not be determined.`);
+          warnings.push(`the size of '${name}' could not be determined.`);
           if (persistedFileUri) {
             await releaseOwnedFiles(input.fileReader, [persistedFileUri]);
           }
@@ -367,7 +367,7 @@ export async function buildIncomingShareDraft(input: {
         });
         retainedFileUri = persistedFileUri ?? uri;
       } catch (error) {
-        warnings.push(error instanceof Error ? error.message : `Could not read '${name}'.`);
+        warnings.push(error instanceof Error ? error.message : `could not read '${name}'.`);
         // A copy persisted before the failure has no attachment referencing
         // it; release it or it leaks in the app's attachment directory.
         if (persistedFileUri !== undefined) {
@@ -382,7 +382,7 @@ export async function buildIncomingShareDraft(input: {
       continue;
     }
     if (!uri || !mimeType.startsWith("image/")) {
-      warnings.push("One shared item was not a supported image.");
+      warnings.push("one shared item was not a supported image.");
       await releaseOwnedFiles(input.fileReader, [uri, payload.value]);
       continue;
     }
@@ -427,7 +427,7 @@ export async function buildIncomingShareDraft(input: {
         previewUri: dataUrl,
       });
     } catch {
-      warnings.push(`Could not read '${fallbackName(uri, index, mimeType)}'.`);
+      warnings.push(`could not read '${fallbackName(uri, index, mimeType)}'.`);
     } finally {
       await releaseOwnedFiles(input.fileReader, [uri, payload.value]);
     }

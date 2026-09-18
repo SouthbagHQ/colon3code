@@ -345,9 +345,9 @@ export const ThreadDetailScreen = memo(function ThreadDetailScreen(props: Thread
       case "cached":
       case "synchronizing":
         if (contentPresentationKind === "ready") {
-          return "Syncing messages...";
+          return "syncing messages...";
         }
-        return contentPresentationKind === "loading" ? "Loading messages..." : null;
+        return contentPresentationKind === "loading" ? "loading messages..." : null;
       default:
         return null;
     }
@@ -371,7 +371,7 @@ export const ThreadDetailScreen = memo(function ThreadDetailScreen(props: Thread
     if (props.creationState?.kind === "preparing") {
       return {
         kind: "preparing",
-        label: props.creationState.preparingWorktree ? "Setting up worktree…" : "Starting…",
+        label: props.creationState.preparingWorktree ? "setting up worktree…" : "starting…",
       };
     }
     if (props.creationState?.kind === "failed") {
@@ -790,8 +790,8 @@ export const ThreadDetailScreen = memo(function ThreadDetailScreen(props: Thread
       }
     } catch (error) {
       Alert.alert(
-        "Could not edit message",
-        error instanceof Error ? error.message : "Please try again.",
+        "could not edit message 3:",
+        error instanceof Error ? error.message : "please try again.",
       );
     }
   }, []);
@@ -1036,7 +1036,7 @@ export const ThreadDetailScreen = memo(function ThreadDetailScreen(props: Thread
                     editorRef={composerEditorRef}
                     draftMessage={props.draftMessage}
                     draftAttachments={props.draftAttachments}
-                    placeholder="Ask the repo agent, or run a command…"
+                    placeholder="ask the repo agent, or run a command…"
                     contentMaxWidth={contentMaxWidth}
                     connectionState={props.connectionStateLabel}
                     environmentLabel={props.environmentLabel}
@@ -1050,7 +1050,7 @@ export const ThreadDetailScreen = memo(function ThreadDetailScreen(props: Thread
                     // them against a thread id the server may still reject
                     // would strand them in the outbox.
                     sendBlockedReason={
-                      props.creationState?.kind === "preparing" ? "Starting the task…" : null
+                      props.creationState?.kind === "preparing" ? "starting the task…" : null
                     }
                     bottomInset={composerBottomInset}
                     onChangeDraftMessage={props.onChangeDraftMessage}

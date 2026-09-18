@@ -148,20 +148,25 @@ const PRE_LIQUID_GLASS_BOTTOM_TOOLBAR_HEIGHT = 44;
 function deriveEmptyState(props: {
   readonly catalogState: WorkspaceState;
   readonly projectCount: number;
-}): { readonly title: string; readonly detail: string; readonly loading: boolean } {
+}): {
+  readonly title: string;
+  readonly detail: string;
+  readonly loading: boolean;
+  readonly face?: "sad";
+} {
   const { catalogState } = props;
   if (catalogState.isLoadingConnections) {
     return {
-      title: "Loading environments",
-      detail: "Checking saved environments on this device.",
+      title: "loading environments…",
+      detail: "checking the environments saved on this device :3",
       loading: true,
     };
   }
 
   if (!catalogState.hasConnections) {
     return {
-      title: "No environments connected",
-      detail: "Add an environment to load projects and start coding sessions.",
+      title: "meow! no environments yet :3",
+      detail: "add an environment to load your projects and start coding together ^w^",
       loading: false,
     };
   }
@@ -173,11 +178,12 @@ function deriveEmptyState(props: {
     !catalogState.hasLoadedShellSnapshot
   ) {
     return {
-      title: "Environment unavailable",
+      title: "environment unavailable 3:",
       detail:
         catalogState.connectionError ??
-        "The saved environment is offline. Check the URL or start the environment, then retry.",
+        "the saved environment is offline. check the URL or start the environment, then retry.",
       loading: false,
+      face: "sad",
     };
   }
 
@@ -187,23 +193,23 @@ function deriveEmptyState(props: {
     catalogState.connectionError === null
   ) {
     return {
-      title: "Connecting to environment",
-      detail: "Loading projects and threads from the saved environment.",
+      title: "connecting to environment…",
+      detail: "loading projects and threads from the saved environment :3",
       loading: true,
     };
   }
 
   if (props.projectCount === 0 && catalogState.hasLoadedShellSnapshot) {
     return {
-      title: "No projects found",
-      detail: "The connected environment did not report any projects.",
+      title: "no projects found :3",
+      detail: "the connected environment did not report any projects.",
       loading: false,
     };
   }
 
   return {
-    title: "No threads yet",
-    detail: "Create a task to start a new coding session in one of your connected projects.",
+    title: "nothing here yet :3",
+    detail: "create a task to start a new coding session in one of your connected projects ^w^",
     loading: false,
   };
 }
@@ -1079,8 +1085,8 @@ export function HomeScreen(props: HomeScreenProps) {
 
   /* Empty states */
   // The signal must ignore the search/environment filters: an active query
-  // that matches nothing needs the in-list "No results" state, not the
-  // full-page "No threads yet". Settled threads are unarchived live shells,
+  // that matches nothing needs the in-list "no results" state, not the
+  // full-page "nothing here yet". Settled threads are unarchived live shells,
   // so the v1 check already covers v2.
   const hasAnyThreads =
     props.threads.some((thread) => thread.archivedAt === null) || props.pendingTasks.length > 0;
@@ -1115,9 +1121,10 @@ export function HomeScreen(props: HomeScreenProps) {
             <EmptyState
               title={emptyState.title}
               detail={emptyState.detail}
-              actionLabel={!props.catalogState.hasReadyEnvironment ? "Add environment" : undefined}
+              actionLabel={!props.catalogState.hasReadyEnvironment ? "add environment" : undefined}
               onAction={!props.catalogState.hasReadyEnvironment ? props.onAddConnection : undefined}
               variant="plain"
+              face={emptyState.face}
             />
             {emptyState.loading ? (
               <View className="mt-4 items-center">
@@ -1138,30 +1145,33 @@ export function HomeScreen(props: HomeScreenProps) {
 
   const listEmpty = !hasResults ? (
     hasSearchQuery && threadSearch.isPending ? null : hasSearchQuery ? (
-      <EmptyState title="No results" detail={`No threads matching "${props.searchQuery}".`} />
+      <EmptyState title="no results :3" detail={`no threads matching "${props.searchQuery}".`} />
     ) : selectedProjectScope !== null ? (
       <EmptyState
-        title={`No threads in ${selectedProjectScope.title}`}
-        detail="Choose another project or create a new task."
+        title={`no threads in ${selectedProjectScope.title} :3`}
+        detail="choose another project or create a new task ^w^"
       />
     ) : selectedEnvironmentLabel ? (
       <EmptyState
-        title={`No threads in ${selectedEnvironmentLabel}`}
-        detail="Choose another environment or create a new task."
+        title={`no threads in ${selectedEnvironmentLabel} :3`}
+        detail="choose another environment or create a new task ^w^"
       />
     ) : (
-      <EmptyState title="No threads yet" detail="Create a task to start a new coding session." />
+      <EmptyState
+        title="nothing here yet :3"
+        detail="create a task to start a new coding session ^w^"
+      />
     )
   ) : null;
   // Use the v2 project scope for its empty state. Snoozed threads need no
   // special empty state: their shelf header is a list row even while collapsed.
   const v2ListEmpty =
     hasSearchQuery && threadSearch.isPending ? null : hasSearchQuery ? (
-      <EmptyState title="No results" detail={`No threads matching "${props.searchQuery}".`} />
+      <EmptyState title="no results :3" detail={`no threads matching "${props.searchQuery}".`} />
     ) : v2ScopedProjectGroup !== null ? (
       <EmptyState
-        title={`No threads in ${v2ScopedProjectGroup.title}`}
-        detail="Choose another project or create a new task."
+        title={`no threads in ${v2ScopedProjectGroup.title} :3`}
+        detail="choose another project or create a new task ^w^"
       />
     ) : (
       listEmpty
@@ -1188,13 +1198,13 @@ export function HomeScreen(props: HomeScreenProps) {
                 settledShelfExpanded && threadListV2Layout.hiddenSettledCount > 0 ? (
                   <Pressable
                     accessibilityRole="button"
-                    accessibilityLabel={`Show ${Math.min(threadListV2Layout.hiddenSettledCount, THREAD_LIST_V2_SETTLED_PAGE_COUNT)} more settled threads`}
+                    accessibilityLabel={`show ${Math.min(threadListV2Layout.hiddenSettledCount, THREAD_LIST_V2_SETTLED_PAGE_COUNT)} more settled threads`}
                     onPress={showMoreSettled}
                     className="mx-4 mt-2 items-center rounded-lg border border-dashed border-border py-2.5"
                     style={({ pressed }) => ({ opacity: pressed ? 0.6 : 1 })}
                   >
                     <Text className="text-xs font-t3-medium text-foreground-muted">
-                      Show more ({threadListV2Layout.hiddenSettledCount} settled hidden)
+                      show more ({threadListV2Layout.hiddenSettledCount} settled hidden)
                     </Text>
                   </Pressable>
                 ) : null

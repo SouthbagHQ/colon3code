@@ -18,7 +18,7 @@ function DocumentPreview(props: {
     if (props.onOpenError) props.onOpenError(error);
     else
       Alert.alert(
-        "Could not open document",
+        "could not open document 3:",
         "A compatible viewer must be installed. Check your connection and try again.",
       );
   });
@@ -27,7 +27,7 @@ function DocumentPreview(props: {
     const input = {
       uri,
       attachment: {
-        name: name ?? "Document",
+        name: name ?? "document",
         mimeType:
           props.source.mimeType ??
           (props.source.kind === "pdf" ? "application/pdf" : "application/octet-stream"),
@@ -48,16 +48,16 @@ function DocumentPreview(props: {
     <Modal transparent animationType="fade" onRequestClose={props.onRequestClose}>
       <View className="flex-1 items-center justify-center bg-black/40 p-6">
         <View className="w-full max-w-sm gap-4 rounded-2xl bg-sheet-solid p-6">
-          <Text className="font-t3-semibold text-foreground">Opening document…</Text>
+          <Text className="font-t3-semibold text-foreground">opening document…</Text>
           <Text className="text-foreground-muted" numberOfLines={2}>
-            {name ?? "Document"}
+            {name ?? "document"}
           </Text>
           <Pressable
             accessibilityRole="button"
             onPress={props.onRequestClose}
             className="self-end p-3"
           >
-            <Text className="text-foreground">Cancel</Text>
+            <Text className="text-foreground">cancel</Text>
           </Pressable>
         </View>
       </View>

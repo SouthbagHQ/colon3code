@@ -34,16 +34,16 @@ function deriveProjectEmptyState(catalogState: WorkspaceState): {
 } {
   if (catalogState.isLoadingConnections) {
     return {
-      title: "Loading environments",
-      detail: "Checking saved environments on this device.",
+      title: "loading environments…",
+      detail: "checking the environments saved on this device :3",
       loading: true,
     };
   }
 
   if (!catalogState.hasConnections) {
     return {
-      title: "No environments connected",
-      detail: "Add an environment before creating a task.",
+      title: "meow! no environments yet :3",
+      detail: "add an environment before creating a task ^w^",
       loading: false,
     };
   }
@@ -55,10 +55,10 @@ function deriveProjectEmptyState(catalogState: WorkspaceState): {
     !catalogState.hasLoadedShellSnapshot
   ) {
     return {
-      title: "Environment unavailable",
+      title: "environment unavailable 3:",
       detail:
         catalogState.connectionError ??
-        "The saved environment is offline. Check the URL or start the environment, then retry.",
+        "the saved environment is offline. check the URL or start the environment, then retry.",
       loading: false,
     };
   }
@@ -69,15 +69,15 @@ function deriveProjectEmptyState(catalogState: WorkspaceState): {
     catalogState.connectionError === null
   ) {
     return {
-      title: "Connecting to environment",
-      detail: "Loading projects from the saved environment.",
+      title: "connecting to environment…",
+      detail: "loading projects from the saved environment :3",
       loading: true,
     };
   }
 
   return {
-    title: "No projects found",
-    detail: "The connected environment did not report any projects.",
+    title: "no projects found :3",
+    detail: "the connected environment did not report any projects.",
     loading: false,
   };
 }
@@ -97,12 +97,12 @@ export function NewTaskRouteScreen({ route }: StaticScreenProps<NewTaskRoutePara
   const incomingShare = routeShareId ? getShare(routeShareId) : null;
   const incomingShareSubtitle = incomingShare
     ? incomingShare.attachments.length === 0
-      ? "Choose a project for what you shared"
+      ? "choose a project for what you shared"
       : incomingShare.attachments.length === 1
         ? `Choose a project for the ${incomingShare.attachments[0]?.type === "image" ? "image" : "file"} you shared`
         : `Choose a project for the ${incomingShare.attachments.length} ${incomingShare.attachments.every((attachment) => attachment.type === "image") ? "images" : "files"} you shared`
     : null;
-  const screenTitle = incomingShare ? "Start a task" : "Choose project";
+  const screenTitle = incomingShare ? "start a task" : "choose project";
   const projectEmptyState = deriveProjectEmptyState(catalogState);
   const resumedDestinationKeyRef = useRef<string | null>(null);
   const reservedDestinationProject = incomingShare?.destination
@@ -119,10 +119,10 @@ export function NewTaskRouteScreen({ route }: StaticScreenProps<NewTaskRoutePara
         await releaseShareReservation(incomingShare.id, incomingShare.destination);
       } catch (error) {
         Alert.alert(
-          "Could not change project",
+          "could not change project 3:",
           error instanceof Error
             ? error.message
-            : "The shared content reservation could not be updated.",
+            : "the shared content reservation could not be updated.",
         );
         return;
       }
@@ -189,7 +189,7 @@ export function NewTaskRouteScreen({ route }: StaticScreenProps<NewTaskRoutePara
               catalogState.hasReadyEnvironment
                 ? [
                     {
-                      accessibilityLabel: "Add project",
+                      accessibilityLabel: "add project",
                       icon: "plus",
                       onPress: () => navigation.dispatch(StackActions.push("AddProject")),
                     },
@@ -209,7 +209,7 @@ export function NewTaskRouteScreen({ route }: StaticScreenProps<NewTaskRoutePara
           <NativeHeaderToolbar placement="right">
             {layout.usesSplitView ? (
               <NativeHeaderToolbar.Button
-                accessibilityLabel="Close new task"
+                accessibilityLabel="close new task"
                 icon="xmark"
                 onPress={() => navigation.goBack()}
                 separateBackground
@@ -254,7 +254,7 @@ export function NewTaskRouteScreen({ route }: StaticScreenProps<NewTaskRoutePara
                 onPress={() => navigation.navigate("ConnectionsNew")}
               >
                 <Text className="text-sm font-t3-bold text-primary-foreground">
-                  Add environment
+                  add environment
                 </Text>
               </Pressable>
             ) : (
@@ -263,7 +263,7 @@ export function NewTaskRouteScreen({ route }: StaticScreenProps<NewTaskRoutePara
                 onPress={() => navigation.dispatch(StackActions.push("AddProject"))}
               >
                 <Text className="text-sm font-t3-bold text-primary-foreground">
-                  Add new project
+                  add new project
                 </Text>
               </Pressable>
             )}

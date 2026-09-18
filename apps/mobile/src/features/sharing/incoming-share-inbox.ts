@@ -110,7 +110,7 @@ export class IncomingShareInbox {
         await this.cleanup(built.cleanup);
         this.clearNativePayloads();
         throw new Error(
-          draft.warnings[0] ?? "The shared content is not supported by the composer.",
+          draft.warnings[0] ?? "the shared content is not supported by the composer.",
         );
       }
 

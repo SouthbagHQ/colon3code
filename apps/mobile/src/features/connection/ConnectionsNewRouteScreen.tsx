@@ -97,18 +97,18 @@ export function ConnectionsNewRouteScreen({
 
     if (permission.canAskAgain) {
       Alert.alert(
-        "Camera access needed",
-        "Allow camera access to scan an environment pairing QR code.",
+        "camera access needed",
+        "allow camera access to scan an environment pairing QR code.",
       );
       return;
     }
 
     Alert.alert(
-      "Camera access needed",
-      "Camera access was denied for this app. Open Settings to enable it.",
+      "camera access needed",
+      "camera access was denied for this app. open Settings to enable it.",
       [
-        { text: "Cancel", style: "cancel" },
-        { text: "Open Settings", onPress: () => void Linking.openSettings() },
+        { text: "cancel", style: "cancel" },
+        { text: "open Settings", onPress: () => void Linking.openSettings() },
       ],
     );
   }, [cameraPermission?.granted, requestCameraPermission]);
@@ -135,8 +135,8 @@ export function ConnectionsNewRouteScreen({
         setShowScanner(false);
       } catch (error) {
         Alert.alert(
-          "Invalid QR code",
-          error instanceof Error ? error.message : "Scanned QR code was not recognized.",
+          "invalid QR code 3:",
+          error instanceof Error ? error.message : "scanned QR code was not recognized.",
         );
       } finally {
         setTimeout(() => {
@@ -186,16 +186,16 @@ export function ConnectionsNewRouteScreen({
         options={{
           // Android renders its own in-screen header below instead of the native bar.
           ...(Platform.OS === "android" ? { headerShown: false } : null),
-          title: showScanner ? "Scan QR Code" : "Add Environment",
+          title: showScanner ? "scan QR code" : "add environment",
         }}
       />
       {Platform.OS === "android" ? (
         <AndroidScreenHeader
-          title={showScanner ? "Scan QR Code" : "Add Environment"}
+          title={showScanner ? "scan QR code" : "add environment"}
           onBack={() => navigation.goBack()}
           actions={[
             {
-              accessibilityLabel: showScanner ? "Close scanner" : "Scan QR code",
+              accessibilityLabel: showScanner ? "close scanner" : "scan QR code",
               icon: showScanner ? "xmark" : "camera",
               onPress: () => {
                 if (showScanner) {
@@ -247,12 +247,12 @@ export function ConnectionsNewRouteScreen({
             ) : (
               <View className="items-center gap-3 rounded-[24px] border-continuous bg-card px-5 py-8">
                 <Text className="text-center text-sm leading-normal text-foreground-muted">
-                  Camera permission is required to scan a QR code.
+                  camera permission is required to scan a QR code.
                 </Text>
                 <ConnectionSheetButton
                   compact
                   icon="camera"
-                  label="Allow camera"
+                  label="allow camera"
                   tone="secondary"
                   onPress={() => {
                     void openScanner();
@@ -264,7 +264,7 @@ export function ConnectionsNewRouteScreen({
             <View collapsable={false} className="gap-4 rounded-[24px] bg-card p-4">
               <View collapsable={false} className="gap-1.5">
                 <Text className="text-2xs font-t3-bold tracking-[0.8px] uppercase text-foreground-muted">
-                  Host
+                  host
                 </Text>
                 <TextInput
                   autoCapitalize="none"
@@ -279,7 +279,7 @@ export function ConnectionsNewRouteScreen({
 
               <View collapsable={false} className="gap-1.5">
                 <Text className="text-2xs font-t3-bold tracking-[0.8px] uppercase text-foreground-muted">
-                  Pairing code
+                  pairing code
                 </Text>
                 <TextInput
                   autoCapitalize="none"
@@ -295,7 +295,7 @@ export function ConnectionsNewRouteScreen({
 
               <ConnectionSheetButton
                 icon="plus"
-                label={isSubmitting ? "Pairing..." : "Add environment"}
+                label={isSubmitting ? "pairing..." : "add environment"}
                 disabled={connectDisabled}
                 tone="primary"
                 onPress={() => {

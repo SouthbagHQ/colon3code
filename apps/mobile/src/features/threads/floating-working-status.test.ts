@@ -22,32 +22,32 @@ describe("connectionFloatingStatus", () => {
   it("names the environment it is retrying, and says so only after a failure", () => {
     expect(status("connecting")).toMatchObject({
       tone: "reconnecting",
-      label: "Reconnecting to Mac mini...",
+      label: "reconnecting to Mac mini...",
     });
     expect(status("reconnecting", { connectionError: "ECONNREFUSED" })).toMatchObject({
       tone: "reconnecting",
-      label: "Failed to connect. Retrying Mac mini...",
+      label: "failed to connect. retrying Mac mini...",
     });
   });
 
   it("reports why the environment is unreachable", () => {
     expect(status("offline")).toMatchObject({
       tone: "unavailable",
-      label: "You are offline",
+      label: "you are offline",
     });
     expect(status("available")).toMatchObject({
       tone: "unavailable",
       label: "Mac mini is not connected",
     });
     expect(status("error", { connectionError: "handshake timed out" })).toMatchObject({
-      label: "Failed to connect to Mac mini: handshake timed out",
+      label: "failed to connect to Mac mini: handshake timed out",
     });
-    expect(status("error")).toMatchObject({ label: "Failed to connect to Mac mini" });
+    expect(status("error")).toMatchObject({ label: "failed to connect to Mac mini" });
   });
 
   it("falls back to a generic name when the environment has no label", () => {
     expect(status("error", { environmentLabel: null })).toMatchObject({
-      label: "Failed to connect to Environment",
+      label: "failed to connect to environment",
     });
   });
 

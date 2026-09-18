@@ -3,11 +3,11 @@ type WorkspaceMode = "local" | "worktree";
 export function resolveNewTaskWorkspaceLabel(input: {
   readonly workspaceMode: WorkspaceMode;
   readonly worktreePath: string | null;
-}): "Current checkout" | "Current worktree" | "New worktree" {
+}): "current checkout" | "current worktree" | "new worktree" {
   if (input.workspaceMode === "worktree") {
-    return "New worktree";
+    return "new worktree";
   }
-  return input.worktreePath ? "Current worktree" : "Current checkout";
+  return input.worktreePath ? "current worktree" : "current checkout";
 }
 
 export function resolveNewTaskBranchWorktreePath(input: {
@@ -63,7 +63,7 @@ export function resolveNewTaskBranchLabel(input: {
   readonly workspaceMode: WorkspaceMode;
 }): string {
   if (!input.branchName) {
-    return "Choose branch";
+    return "choose branch";
   }
 
   if (input.workspaceMode === "local") {
@@ -71,7 +71,7 @@ export function resolveNewTaskBranchLabel(input: {
   }
 
   const baseRef = input.startFromOrigin ? `origin/${input.branchName}` : input.branchName;
-  return `From ${baseRef}`;
+  return `from ${baseRef}`;
 }
 
 export function shouldCheckoutNewTaskBranch(input: {

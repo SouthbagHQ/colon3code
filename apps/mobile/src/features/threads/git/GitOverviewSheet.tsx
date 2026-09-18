@@ -79,7 +79,7 @@ export function GitOverviewSheet(props: GitOverviewSheetProps) {
       : null,
   );
 
-  const currentBranchLabel = gitStatus.data?.refName ?? selectedThread?.branch ?? "Detached HEAD";
+  const currentBranchLabel = gitStatus.data?.refName ?? selectedThread?.branch ?? "detached HEAD";
   const currentStatusSummary = statusSummary(gitStatus.data);
   const currentWorktreePath = selectedThreadWorktreePath;
   const gitOperationLabel = gitState.gitOperationLabel;
@@ -114,11 +114,11 @@ export function GitOverviewSheet(props: GitOverviewSheetProps) {
   const openExistingPr = useCallback(async () => {
     const prUrl = gitStatus.data?.pr?.state === "open" ? gitStatus.data.pr.url : null;
     if (!prUrl) {
-      Alert.alert("No open PR", "This branch does not have an open pull request.");
+      Alert.alert("no open PR", "this branch does not have an open pull request.");
       return;
     }
     if (!(await tryOpenExternalUrl(prUrl, "pull-request"))) {
-      Alert.alert("Unable to open PR", "The pull request could not be opened.");
+      Alert.alert("unable to open PR 3:", "the pull request could not be opened.");
     }
   }, [gitStatus.data]);
 
@@ -261,7 +261,7 @@ export function GitOverviewSheet(props: GitOverviewSheetProps) {
             <View className="ml-12 h-px bg-border" />
             <SheetListRow
               icon="arrow.down.circle"
-              title="Pull latest"
+              title="pull latest"
               subtitle={`${behindCount} commit${behindCount === 1 ? "" : "s"} behind upstream`}
               disabled={busy || !isRepo}
               onPress={() => void gitActions.onPullSelectedThreadBranch()}
@@ -271,8 +271,8 @@ export function GitOverviewSheet(props: GitOverviewSheetProps) {
         <View className="ml-12 h-px bg-border" />
         <SheetListRow
           icon="text.bubble"
-          title="Review changes"
-          subtitle="Inspect turn diffs, worktree changes, and base branch diff"
+          title="review changes"
+          subtitle="inspect turn diffs, worktree changes, and base branch diff"
           disabled={busy || !isRepo}
           onPress={() => {
             const params = { environmentId, threadId };
@@ -286,8 +286,8 @@ export function GitOverviewSheet(props: GitOverviewSheetProps) {
         <View className="ml-12 h-px bg-border" />
         <SheetListRow
           icon="point.topleft.down.curvedto.point.bottomright.up"
-          title="Branches & worktrees"
-          subtitle="Switch branch, create branch, or move to a worktree"
+          title="branches & worktrees"
+          subtitle="switch branch, create branch, or move to a worktree"
           disabled={busy || !isRepo}
           onPress={() =>
             navigation.navigate("GitBranches", {
@@ -301,7 +301,7 @@ export function GitOverviewSheet(props: GitOverviewSheetProps) {
       {linkedPrChains.length > 0 ? (
         <View className="gap-2">
           <Text className="px-1 text-xs font-t3-bold text-foreground-muted">
-            Linked pull requests
+            linked pull requests
           </Text>
           {linkedPrChains.map((chain) => (
             <View
@@ -316,7 +316,7 @@ export function GitOverviewSheet(props: GitOverviewSheetProps) {
                     tintColorClassName="accent-foreground-muted"
                   />
                   <Text className="text-xs text-foreground-muted">
-                    {chain.kind === "native" ? "Stack" : "Branch stack"} · {chain.layers.length} PRs
+                    {chain.kind === "native" ? "stack" : "branch stack"} · {chain.layers.length} PRs
                     · bottom to top
                   </Text>
                 </View>
@@ -326,12 +326,15 @@ export function GitOverviewSheet(props: GitOverviewSheetProps) {
                   {index > 0 ? <View className="ml-12 h-px bg-border" /> : null}
                   <SheetListRow
                     icon="arrow.triangle.pull"
-                    title={`#${link.number} ${link.snapshot?.title ?? "Pull request"}`}
-                    subtitle={`${link.repository} · ${link.snapshot === null ? "Status pending" : link.snapshot.isDraft && link.snapshot.state === "open" ? "Draft" : link.snapshot.state}`}
+                    title={`#${link.number} ${link.snapshot?.title ?? "pull request"}`}
+                    subtitle={`${link.repository} · ${link.snapshot === null ? "status pending" : link.snapshot.isDraft && link.snapshot.state === "open" ? "draft" : link.snapshot.state}`}
                     onPress={() => {
                       void tryOpenExternalUrl(link.url, "pull-request").then((opened) => {
                         if (!opened)
-                          Alert.alert("Unable to open PR", "The pull request could not be opened.");
+                          Alert.alert(
+                            "unable to open PR 3:",
+                            "the pull request could not be opened.",
+                          );
                       });
                     }}
                   />
@@ -342,7 +345,7 @@ export function GitOverviewSheet(props: GitOverviewSheetProps) {
         </View>
       ) : null}
 
-      {currentWorktreePath ? <MetaCard label="Worktree" value={currentWorktreePath} /> : null}
+      {currentWorktreePath ? <MetaCard label="worktree" value={currentWorktreePath} /> : null}
     </ScrollView>
   );
 
@@ -447,7 +450,7 @@ export function GitOverviewSheet(props: GitOverviewSheetProps) {
             />
           </Pressable>
           <Text className="text-xs font-t3-bold tracking-[1px] uppercase text-foreground-muted">
-            Repository
+            repository
           </Text>
           <Text className="pr-10 text-xl font-t3-bold">{currentBranchLabel}</Text>
           <Text className="text-foreground-secondary text-sm font-medium leading-normal">
@@ -461,7 +464,7 @@ export function GitOverviewSheet(props: GitOverviewSheetProps) {
           onBack={() => navigation.goBack()}
           actions={[
             {
-              accessibilityLabel: "Refresh repository status",
+              accessibilityLabel: "refresh repository status",
               disabled: busy,
               icon: "arrow.clockwise",
               onPress: () => void gitActions.refreshSelectedThreadGitStatus(),

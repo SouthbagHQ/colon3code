@@ -65,7 +65,7 @@ describe("buildReviewSectionItems", () => {
       {
         id: "working-tree",
         kind: "working-tree",
-        title: "Dirty worktree",
+        title: "dirty worktree",
         baseRef: "HEAD",
         headRef: null,
         diff: "diff --git a/a.ts b/a.ts",
@@ -124,8 +124,8 @@ describe("buildReviewSectionItems", () => {
       expect.objectContaining({
         id: "git:working-tree",
         kind: "working-tree",
-        title: "Dirty worktree",
-        subtitle: "Tracked, staged, and untracked worktree changes",
+        title: "dirty worktree",
+        subtitle: "tracked, staged, and untracked worktree changes",
         diff: null,
         isLoading: true,
       }),
@@ -240,7 +240,7 @@ describe("buildReviewParsedDiff", () => {
     expect(preview).toMatchObject({
       kind: "suppressed",
       reason: "non-text",
-      title: "Non-text file",
+      title: "non-text file",
       actionLabel: null,
     });
   });
@@ -266,8 +266,8 @@ describe("buildReviewParsedDiff", () => {
     expect(preview).toMatchObject({
       kind: "suppressed",
       reason: "large",
-      title: "Large diff",
-      actionLabel: "Load diff",
+      title: "large diff",
+      actionLabel: "load diff",
     });
   });
 });

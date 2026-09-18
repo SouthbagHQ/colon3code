@@ -44,9 +44,9 @@ function NativeVideoPreview(props: {
   const loadError =
     resource !== null && playbackUrl === null
       ? preparedConnection._tag === "None"
-        ? "Reconnect to this environment and open the video again."
+        ? "reconnect to this environment and open the video again."
         : assetUrl._tag === "Failure"
-          ? "Could not load this video. Check the connection and try again."
+          ? "could not load this video. check the connection and try again."
           : null
       : null;
 
@@ -56,7 +56,7 @@ function NativeVideoPreview(props: {
   }, [playbackUrl, resolvedUrl]);
   useEffect(() => {
     if (!loadError) return;
-    Alert.alert("Could not open video", loadError);
+    Alert.alert("could not open video 3:", loadError);
     onRequestClose();
   }, [loadError]);
 
@@ -89,12 +89,12 @@ function NativeVideoPreview(props: {
       // AVKit gives no retry, so re-mint now; the cached URL may simply have expired.
       if (ready) void refreshAssetUrl();
       Alert.alert(
-        "Could not open video",
+        "could not open video 3:",
         ready
-          ? "This video couldn't be loaded or played. Check the connection, or touch and hold the video to save or share the original."
+          ? "this video couldn't be loaded or played. check the connection, or touch and hold the video to save or share the original."
           : error instanceof Error
             ? error.message
-            : "Could not load this video.",
+            : "could not load this video.",
       );
       onRequestClose();
     });

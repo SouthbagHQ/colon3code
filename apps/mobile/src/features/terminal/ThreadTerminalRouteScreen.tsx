@@ -91,7 +91,7 @@ class TerminalClipboardReadError extends Schema.TaggedError<TerminalClipboardRea
   { terminalId: Schema.String, cause: Schema.Defect() },
 ) {
   override get message(): string {
-    return `Failed to read the clipboard for a paste into terminal ${this.terminalId}.`;
+    return `failed to read the clipboard for a paste into terminal ${this.terminalId}.`;
   }
 }
 
@@ -999,11 +999,11 @@ export function ThreadTerminalRouteScreen(props: ThreadTerminalRouteScreenProps)
     () => [
       {
         id: "text-size",
-        title: "Text size",
+        title: "text size",
         subactions: [
           {
             id: "font-decrease",
-            title: `A- ${Math.max(MIN_TERMINAL_FONT_SIZE, fontSize - TERMINAL_FONT_SIZE_STEP).toFixed(1)} pt`,
+            title: `a- ${Math.max(MIN_TERMINAL_FONT_SIZE, fontSize - TERMINAL_FONT_SIZE_STEP).toFixed(1)} pt`,
             attributes: fontSize <= MIN_TERMINAL_FONT_SIZE ? { disabled: true } : undefined,
           },
           {
@@ -1023,9 +1023,9 @@ export function ThreadTerminalRouteScreen(props: ThreadTerminalRouteScreenProps)
       })),
       {
         id: "terminal-new",
-        title: "Open new terminal",
+        title: "open new terminal",
         image: "plus",
-        subtitle: `Start another shell in ${basename(selectedThreadProject?.workspaceRoot ?? null) ?? "this workspace"}`,
+        subtitle: `start another shell in ${basename(selectedThreadProject?.workspaceRoot ?? null) ?? "this workspace"}`,
       },
     ],
     [fontSize, selectedThreadProject?.workspaceRoot, terminalId, terminalMenuSessions],
@@ -1113,14 +1113,15 @@ export function ThreadTerminalRouteScreen(props: ThreadTerminalRouteScreenProps)
 
   if (!selectedThread) {
     if (workspaceState.isLoadingConnections) {
-      return <LoadingScreen message="Opening terminal…" />;
+      return <LoadingScreen message="opening terminal… :3" />;
     }
 
     return (
       <View className="flex-1 bg-screen">
         <EmptyState
-          title="Thread unavailable"
-          detail="This terminal route needs an active thread and workspace."
+          title="thread unavailable 3:"
+          detail="this terminal route needs an active thread and workspace."
+          face="sad"
         />
       </View>
     );
@@ -1130,15 +1131,16 @@ export function ThreadTerminalRouteScreen(props: ThreadTerminalRouteScreenProps)
     return (
       <View className="flex-1 bg-screen">
         <EmptyState
-          title="Terminal unavailable"
-          detail="This thread does not have a workspace root yet, so there is nowhere to open a shell."
+          title="terminal unavailable 3:"
+          detail="this thread does not have a workspace root yet, so there is nowhere to open a shell."
+          face="sad"
         />
       </View>
     );
   }
 
   if (!environment.isReady && environment.presentation === null) {
-    return <LoadingScreen message="Opening terminal…" />;
+    return <LoadingScreen message="opening terminal… :3" />;
   }
 
   return (
@@ -1165,7 +1167,7 @@ export function ThreadTerminalRouteScreen(props: ThreadTerminalRouteScreenProps)
           // Android draws its own in-flow header (AndroidScreenHeader below);
           // the native stack header stays iOS-only.
           headerShown: Platform.OS !== "android",
-          title: "Terminal",
+          title: "terminal",
           unstable_headerSubtitle:
             usesNativeHeaderGlass && headerSubtitle.length > 0 ? headerSubtitle : undefined,
         }}
@@ -1173,7 +1175,7 @@ export function ThreadTerminalRouteScreen(props: ThreadTerminalRouteScreenProps)
 
       {Platform.OS === "android" ? (
         <AndroidScreenHeader
-          title="Terminal"
+          title="terminal"
           subtitle={headerSubtitle}
           onBack={handleCloseTerminal}
           trailing={
@@ -1181,7 +1183,7 @@ export function ThreadTerminalRouteScreen(props: ThreadTerminalRouteScreenProps)
               {layout.usesSplitView ? (
                 <AndroidHeaderIconButton
                   accessibilityLabel={
-                    panes.primarySidebarVisible ? "Maximize terminal" : "Show threads"
+                    panes.primarySidebarVisible ? "maximize terminal" : "show threads"
                   }
                   icon={
                     panes.primarySidebarVisible
@@ -1201,7 +1203,7 @@ export function ThreadTerminalRouteScreen(props: ThreadTerminalRouteScreenProps)
                   })}
                   onPressAction={handleAndroidTerminalMenuAction}
                 >
-                  <AndroidHeaderIconButton accessibilityLabel="Terminal options" icon="terminal" />
+                  <AndroidHeaderIconButton accessibilityLabel="terminal options" icon="terminal" />
                 </ControlPillMenu>
               ) : null}
             </>
@@ -1212,13 +1214,13 @@ export function ThreadTerminalRouteScreen(props: ThreadTerminalRouteScreenProps)
       {layout.usesSplitView ? (
         <NativeHeaderToolbar placement="left">
           <NativeHeaderToolbar.Button
-            accessibilityLabel="Close terminal"
+            accessibilityLabel="close terminal"
             icon="xmark"
             onPress={handleCloseTerminal}
             separateBackground
           />
           <NativeHeaderToolbar.Button
-            accessibilityLabel={panes.primarySidebarVisible ? "Maximize terminal" : "Show threads"}
+            accessibilityLabel={panes.primarySidebarVisible ? "maximize terminal" : "show threads"}
             icon={
               panes.primarySidebarVisible ? "arrow.up.left.and.arrow.down.right" : "sidebar.left"
             }
@@ -1230,25 +1232,25 @@ export function ThreadTerminalRouteScreen(props: ThreadTerminalRouteScreenProps)
 
       {isEnvironmentReady ? (
         <NativeHeaderToolbar placement="right">
-          <NativeHeaderToolbar.Menu icon="terminal" title="Terminal options" separateBackground>
+          <NativeHeaderToolbar.Menu icon="terminal" title="terminal options" separateBackground>
             <NativeHeaderToolbar.Label>
               {getTerminalStatusLabel({
                 status: terminal.status,
                 hasRunningSubprocess: terminal.hasRunningSubprocess,
               })}
             </NativeHeaderToolbar.Label>
-            <NativeHeaderToolbar.Menu icon="textformat.size" inline title="Text size">
-              <NativeHeaderToolbar.Label>Text size</NativeHeaderToolbar.Label>
+            <NativeHeaderToolbar.Menu icon="textformat.size" inline title="text size">
+              <NativeHeaderToolbar.Label>text size</NativeHeaderToolbar.Label>
               <NativeHeaderToolbar.MenuAction
                 disabled={fontSize <= MIN_TERMINAL_FONT_SIZE}
-                discoverabilityLabel="Decrease terminal text size"
+                discoverabilityLabel="decrease terminal text size"
                 onPress={handleDecreaseFontSize}
               >
                 <NativeHeaderToolbar.Label>{`A- ${Math.max(MIN_TERMINAL_FONT_SIZE, fontSize - TERMINAL_FONT_SIZE_STEP).toFixed(1)} pt`}</NativeHeaderToolbar.Label>
               </NativeHeaderToolbar.MenuAction>
               <NativeHeaderToolbar.MenuAction
                 disabled={fontSize >= MAX_TERMINAL_FONT_SIZE}
-                discoverabilityLabel="Increase terminal text size"
+                discoverabilityLabel="increase terminal text size"
                 onPress={handleIncreaseFontSize}
               >
                 <NativeHeaderToolbar.Label>{`A+ ${Math.min(MAX_TERMINAL_FONT_SIZE, fontSize + TERMINAL_FONT_SIZE_STEP).toFixed(1)} pt`}</NativeHeaderToolbar.Label>
@@ -1272,9 +1274,9 @@ export function ThreadTerminalRouteScreen(props: ThreadTerminalRouteScreenProps)
             <NativeHeaderToolbar.MenuAction
               icon="plus"
               onPress={handleOpenNewTerminal}
-              subtitle={`Start another shell in ${basename(selectedThreadProject.workspaceRoot) ?? "this workspace"}`}
+              subtitle={`start another shell in ${basename(selectedThreadProject.workspaceRoot) ?? "this workspace"}`}
             >
-              <NativeHeaderToolbar.Label>Open new terminal</NativeHeaderToolbar.Label>
+              <NativeHeaderToolbar.Label>open new terminal</NativeHeaderToolbar.Label>
             </NativeHeaderToolbar.MenuAction>
           </NativeHeaderToolbar.Menu>
         </NativeHeaderToolbar>
@@ -1324,7 +1326,7 @@ export function ThreadTerminalRouteScreen(props: ThreadTerminalRouteScreenProps)
                 captureRequest={captureRequest}
                 onCapture={(text) => {
                   if (text.trim()) setCapturedOutput(text);
-                  else Alert.alert("No terminal output", "There is no visible output to attach.");
+                  else Alert.alert("no terminal output", "there is no visible output to attach.");
                 }}
                 onInput={handleInput}
                 onResize={handleResize}
@@ -1343,7 +1345,7 @@ export function ThreadTerminalRouteScreen(props: ThreadTerminalRouteScreenProps)
                 }}
                 className="px-4 py-2"
               >
-                <Text style={{ color: terminalTheme.foreground }}>Attach visible output</Text>
+                <Text style={{ color: terminalTheme.foreground }}>attach visible output</Text>
               </Pressable>
             ) : null}
             {isAccessoryVisible ? (
@@ -1388,7 +1390,7 @@ export function ThreadTerminalRouteScreen(props: ThreadTerminalRouteScreenProps)
                       })}
                     </ComposerToolbarScroller>
                     <ComposerToolbarButton
-                      accessibilityLabel="Dismiss keyboard"
+                      accessibilityLabel="dismiss keyboard"
                       icon={{ ios: "keyboard.chevron.compact.down", android: "keyboard_hide" }}
                       onPress={handleDismissKeyboard}
                       showChevron={false}
@@ -1398,7 +1400,7 @@ export function ThreadTerminalRouteScreen(props: ThreadTerminalRouteScreenProps)
               </KeyboardStickyView>
             ) : !keyboardState.isVisible ? (
               <Pressable
-                accessibilityLabel="Show keyboard"
+                accessibilityLabel="show keyboard"
                 accessibilityRole="button"
                 onPress={handleShowKeyboard}
                 style={({ pressed }) => ({

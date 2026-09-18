@@ -32,7 +32,7 @@ export const CopyTextButton = memo(function CopyTextButton(props: {
   return (
     <Pressable
       accessibilityRole="button"
-      accessibilityLabel={copied ? "Copied" : props.accessibilityLabel}
+      accessibilityLabel={copied ? "copied :3" : props.accessibilityLabel}
       disabled={props.text.length === 0}
       hitSlop={8}
       onPress={async () => {
@@ -40,11 +40,11 @@ export const CopyTextButton = memo(function CopyTextButton(props: {
           if (props.onCopy) await props.onCopy();
           else if (!(await tryCopyTextWithHaptic(props.text))) {
             // A refused clipboard write is the common failure, and silence reads as success.
-            Alert.alert("Could not copy", "Try again.");
+            Alert.alert("could not copy 3:", "try again.");
             return;
           }
         } catch {
-          Alert.alert("Could not copy", "Try again.");
+          Alert.alert("could not copy 3:", "try again.");
           return;
         }
         setCopied(true);

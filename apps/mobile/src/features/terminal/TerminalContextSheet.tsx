@@ -48,7 +48,7 @@ export function TerminalContextSheet(props: {
         context: { version: 1, records: [record] },
       })
     ) {
-      Alert.alert("Too many context items", "Remove some context from the draft and try again.");
+      Alert.alert("too many context items", "remove some context from the draft and try again.");
       return;
     }
     props.onAttach();
@@ -64,20 +64,20 @@ export function TerminalContextSheet(props: {
         }
       >
         <View className="flex-row items-center justify-between p-4">
-          <Text className="text-lg text-foreground">Visible terminal output</Text>
+          <Text className="text-lg text-foreground">visible terminal output</Text>
           <Pressable accessibilityRole="button" onPress={props.onClose} className="p-3">
-            <Text className="text-foreground">Cancel</Text>
+            <Text className="text-foreground">cancel</Text>
           </Pressable>
         </View>
         <Text className="px-4 pb-3 text-foreground-muted">
-          Tap the first and last line to select a range.
+          tap the first and last line to select a range.
         </Text>
         <ScrollView className="flex-1" contentContainerStyle={{ padding: 16 }}>
           {lines.map((line, index) => (
             <Pressable
               key={index}
               accessibilityRole="button"
-              accessibilityLabel={`Line ${index + 1}: ${line}`}
+              accessibilityLabel={`line ${index + 1}: ${line}`}
               accessibilityState={{ selected: index >= range.start && index <= range.end }}
               onPress={() => {
                 if (anchor === null) {
@@ -101,7 +101,7 @@ export function TerminalContextSheet(props: {
         </ScrollView>
         {tooLarge ? (
           <Text className="px-4 text-foreground-muted">
-            Select fewer lines to fit the context limit.
+            select fewer lines to fit the context limit.
           </Text>
         ) : null}
         <Pressable
@@ -110,7 +110,7 @@ export function TerminalContextSheet(props: {
           onPress={attach}
           className="m-4 mb-10 rounded-xl bg-subtle p-4"
         >
-          <Text className="text-center text-foreground">Attach selected output</Text>
+          <Text className="text-center text-foreground">attach selected output</Text>
         </Pressable>
       </View>
     </Modal>

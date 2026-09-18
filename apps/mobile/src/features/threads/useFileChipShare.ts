@@ -53,8 +53,8 @@ export function useFileChipShare(
         .catch((error: unknown) => {
           if (!request.signal.aborted) {
             Alert.alert(
-              "Could not share file",
-              error instanceof Error ? error.message : "Try again.",
+              "could not share file 3:",
+              error instanceof Error ? error.message : "try again.",
             );
           }
         })

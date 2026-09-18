@@ -105,7 +105,7 @@ function itemIcon(item: ComposerCommandItem): AppSymbolName | null {
 function groupLabel(triggerKind: ComposerTriggerKind | null): string | null {
   switch (triggerKind) {
     case "pull-request":
-      return "Pull requests";
+      return "pull requests";
     case "slash-command":
       return "Commands";
     case "skill":
@@ -119,19 +119,19 @@ function groupLabel(triggerKind: ComposerTriggerKind | null): string | null {
 
 function emptyText(triggerKind: ComposerTriggerKind | null, isLoading: boolean): string {
   if (isLoading) {
-    return triggerKind === "path" ? "Searching files…" : "Loading…";
+    return triggerKind === "path" ? "searching files…" : "Loading…";
   }
   switch (triggerKind) {
     case "pull-request":
-      return "No matching pull requests.";
+      return "no matching pull requests.";
     case "path":
-      return "No matching files or folders.";
+      return "no matching files or folders.";
     case "skill":
-      return "No skills found.";
+      return "no skills found.";
     case "slash-command":
-      return "No matching commands.";
+      return "no matching commands.";
     default:
-      return "No results.";
+      return "no results.";
   }
 }
 

@@ -127,11 +127,11 @@ export function statusSummary(
   } | null,
 ): string {
   if (!gitStatus) {
-    return "Loading branch status\u2026";
+    return "loading branch status\u2026";
   }
 
   if (!gitStatus.isRepo) {
-    return "Not a git repository";
+    return "not a git repository";
   }
 
   const parts: string[] = [];
@@ -139,7 +139,7 @@ export function statusSummary(
     const fileCount = gitStatus.workingTree?.files.length ?? 0;
     parts.push(`${fileCount} file${fileCount === 1 ? "" : "s"} changed`);
   } else {
-    parts.push("Clean");
+    parts.push("clean");
   }
   if ((gitStatus.aheadCount ?? 0) > 0) {
     parts.push(`${gitStatus.aheadCount} ahead`);

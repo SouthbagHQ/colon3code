@@ -26,9 +26,9 @@ const APPEARANCE_MODES: ReadonlyArray<{
   readonly id: MobileThemeMode;
   readonly label: string;
 }> = [
-  { id: "system", label: "System" },
-  { id: "light", label: "Light" },
-  { id: "dark", label: "Dark" },
+  { id: "system", label: "system" },
+  { id: "light", label: "light" },
+  { id: "dark", label: "dark" },
 ];
 
 const previewPercentage = (value: number) => `${value * 100}%`;
@@ -127,7 +127,7 @@ function ThemeCard(props: {
 }) {
   const choice = (appearance: MobileThemeAppearance, selected: boolean) => (
     <Pressable
-      accessibilityHint={`Sets the ${appearance} appearance only`}
+      accessibilityHint={`sets the ${appearance} appearance only`}
       accessibilityLabel={`${props.label} ${appearance} theme`}
       accessibilityRole="button"
       accessibilityState={{ disabled: props.disabled, selected }}
@@ -156,7 +156,7 @@ function ThemeCard(props: {
   return (
     <View className="min-w-36 flex-1 basis-[47%] gap-3 rounded-[24px] border border-border bg-card px-2 py-4">
       <Pressable
-        accessibilityHint="Sets both light and dark appearances"
+        accessibilityHint="sets both light and dark appearances"
         accessibilityLabel={`${props.label} theme`}
         accessibilityRole="button"
         accessibilityState={{
@@ -305,15 +305,15 @@ export function ThemeAppearanceSection() {
           <SettingsSwitchRow
             disabled={!isReady}
             icon="square.grid.2x2"
-            label="Material You Layout"
+            label="material You layout"
             onValueChange={setMaterialYouStyleLayoutEnabled}
-            subtitle="Use Material You surfaces, shapes, and component styling."
+            subtitle="use Material You surfaces, shapes, and component styling."
             value={materialYouStyleLayoutEnabled}
           />
         </SettingsSection>
       ) : null}
       <View className="gap-2">
-        <SectionLabel>Color scheme</SectionLabel>
+        <SectionLabel>color scheme</SectionLabel>
         <View accessibilityRole="radiogroup" className="flex-row gap-2">
           {APPEARANCE_MODES.map((mode) => (
             <ModeCard
@@ -330,7 +330,7 @@ export function ThemeAppearanceSection() {
       </View>
 
       <View className="gap-3">
-        <SectionLabel>Themes</SectionLabel>
+        <SectionLabel>themes</SectionLabel>
         <View className="flex-row flex-wrap gap-3">
           {MOBILE_THEME_OPTIONS.filter(
             (theme) => theme.id !== "material-you" || systemColorsAvailable,

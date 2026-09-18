@@ -26,7 +26,7 @@ export function ComposerFeedback({
           </Text>
           {submission.status !== "uploading" ? (
             <Pressable
-              accessibilityLabel="Dismiss feedback notice"
+              accessibilityLabel="dismiss feedback notice"
               accessibilityRole="button"
               hitSlop={12}
               onPress={onDismiss}
@@ -54,7 +54,7 @@ export function ComposerFeedback({
             }
             className="self-start py-1 active:opacity-60"
           >
-            <Text className="text-sm text-foreground">Copy ID</Text>
+            <Text className="text-sm text-foreground">copy ID</Text>
           </Pressable>
         ) : null}
       </View>

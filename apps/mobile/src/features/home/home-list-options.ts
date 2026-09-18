@@ -35,16 +35,16 @@ export const PROJECT_SORT_OPTIONS: ReadonlyArray<{
   readonly value: HomeProjectSortOrder;
   readonly label: string;
 }> = [
-  { value: "updated_at", label: "Last user message" },
-  { value: "created_at", label: "Created at" },
+  { value: "updated_at", label: "last user message" },
+  { value: "created_at", label: "created at" },
 ];
 
 export const THREAD_SORT_OPTIONS: ReadonlyArray<{
   readonly value: SidebarThreadSortOrder;
   readonly label: string;
 }> = [
-  { value: "updated_at", label: "Last user message" },
-  { value: "created_at", label: "Created at" },
+  { value: "updated_at", label: "last user message" },
+  { value: "created_at", label: "created at" },
 ];
 
 function defaultHomeListOptions(): HomeListOptions {

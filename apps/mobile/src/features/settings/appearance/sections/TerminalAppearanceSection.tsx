@@ -26,13 +26,13 @@ export function TerminalAppearanceSection() {
   );
 
   return (
-    <SettingsSection card title="Terminal">
+    <SettingsSection card title="terminal">
       <TerminalAppearancePreview fontSize={appearance.terminalFontSize} />
       <AppearancePreviewSeparator />
       <SettingsSwitchRow
         disabled={!isReady}
         icon="terminal"
-        label="Custom font size"
+        label="custom font size"
         onValueChange={handleToggleCustom}
         value={custom}
       />
@@ -40,7 +40,7 @@ export function TerminalAppearanceSection() {
         <FontSizeSliderRow
           disabled={!isReady}
           icon="textformat.size"
-          label="Font size"
+          label="font size"
           max={MAX_TERMINAL_FONT_SIZE}
           min={MIN_TERMINAL_FONT_SIZE}
           onChange={setTerminalFontSize}

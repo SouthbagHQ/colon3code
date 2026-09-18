@@ -112,7 +112,7 @@ function firstRouteParam(value: string | string[] | undefined): string | null {
 }
 
 function OpeningThreadLoadingScreen() {
-  return <LoadingScreen message="Opening thread…" messagePlacement="above-spinner" />;
+  return <LoadingScreen message="opening thread… :3" messagePlacement="above-spinner" />;
 }
 
 type ThreadRouteScreenRouteProps = StaticScreenProps<{
@@ -142,10 +142,11 @@ function ThreadUnavailableScreen(props: {
       className="bg-screen flex-1"
     >
       <EmptyState
-        title="Thread unavailable"
-        detail="This thread is not available in the current mobile snapshot."
+        title="thread unavailable 3:"
+        detail="this thread is not available in the current mobile snapshot."
         actionLabel={props.actionLabel}
         onAction={props.onAction}
+        face="sad"
       />
     </ScrollView>
   );
@@ -204,7 +205,7 @@ export function ThreadRouteScreen(props: ThreadRouteScreenProps) {
   return (
     <ThreadUnavailableScreen
       actionLabel={
-        routeEnvironmentRuntime === null ? "Manage environments" : "Reconnect environment"
+        routeEnvironmentRuntime === null ? "manage environments" : "reconnect environment"
       }
       onAction={() => {
         if (routeEnvironmentRuntime !== null) {
@@ -491,7 +492,7 @@ function ThreadRouteContent(
           cwd={selectedThreadCwd}
           environmentId={selectedThread.environmentId}
           headerInset={inspectorHeaderInset}
-          projectName={selectedThreadProject?.title ?? "Files"}
+          projectName={selectedThreadProject?.title ?? "files"}
           selectedPath={null}
           onSelectFile={handleSelectInspectorFile}
         />
@@ -665,7 +666,7 @@ function ThreadRouteContent(
     auxiliaryPaneControl:
       !layout.usesSplitView && fileInspector.supported && selectedThreadCwd !== null
         ? {
-            accessibilityLabel: "Toggle inspector",
+            accessibilityLabel: "toggle inspector",
             onPress: handleToggleInspector,
           }
         : undefined,
@@ -704,7 +705,7 @@ function ThreadRouteContent(
       ...(props.onReturnToThread
         ? [
             withNativeGlassHeaderItem({
-              accessibilityLabel: "Return to chat",
+              accessibilityLabel: "return to chat",
               icon: { name: "chevron.left", type: "sfSymbol" as const },
               identifier: "thread-left-return",
               onPress: props.onReturnToThread,
@@ -714,8 +715,8 @@ function ThreadRouteContent(
         : []),
       withNativeGlassHeaderItem({
         accessibilityLabel: panes.primarySidebarVisible
-          ? "Maximize content"
-          : "Show thread sidebar",
+          ? "maximize content"
+          : "show thread sidebar",
         icon: {
           name: panes.primarySidebarVisible ? "arrow.up.left.and.arrow.down.right" : "sidebar.left",
           type: "sfSymbol" as const,
@@ -725,7 +726,7 @@ function ThreadRouteContent(
         type: "button" as const,
       }),
       withNativeGlassHeaderItem({
-        accessibilityLabel: "New task",
+        accessibilityLabel: "new task",
         icon: { name: "square.and.pencil", type: "sfSymbol" as const },
         identifier: "thread-left-new-task",
         onPress: () => navigation.navigate("NewTaskSheet", { screen: "NewTask" }),
@@ -740,33 +741,33 @@ function ThreadRouteContent(
     const actions: AndroidHeaderAction[] = [];
     if (props.onReturnToThread) {
       actions.push({
-        accessibilityLabel: "Return to chat",
+        accessibilityLabel: "return to chat",
         icon: "chevron.left",
         onPress: props.onReturnToThread,
       });
     }
     if (selectedThreadCwd !== null) {
       actions.push({
-        accessibilityLabel: "Open files",
+        accessibilityLabel: "open files",
         icon: "folder",
         onPress: handleOpenFilesInspector,
       });
     }
     if (selectedThreadProject?.workspaceRoot) {
       actions.push({
-        accessibilityLabel: "Open terminal",
+        accessibilityLabel: "open terminal",
         icon: "terminal",
         onPress: () => handleOpenTerminal(null),
       });
     }
     actions.push({
-      accessibilityLabel: "Open git controls",
+      accessibilityLabel: "open git controls",
       icon: "point.topleft.down.curvedto.point.bottomright.up",
       onPress: handleOpenGitInspector,
     });
     if (fileInspector.supported && selectedThreadCwd !== null) {
       actions.push({
-        accessibilityLabel: "Toggle inspector",
+        accessibilityLabel: "toggle inspector",
         icon: "sidebar.right",
         onPress: handleToggleInspector,
       });
@@ -795,7 +796,7 @@ function ThreadRouteContent(
       await recoverFailedThreadDraft(creation);
     } catch (error) {
       Alert.alert(
-        "Could not restore draft",
+        "could not restore draft 3:",
         error instanceof Error ? error.message : String(error),
       );
       return;
@@ -853,7 +854,7 @@ function ThreadRouteContent(
   const compactHomeHeaderItems = useMemo<NativeHeaderItems>(
     () => [
       withNativeGlassHeaderItem({
-        accessibilityLabel: "Go to threads list",
+        accessibilityLabel: "go to threads list",
         icon: { name: "list.bullet", type: "sfSymbol" as const },
         identifier: "thread-left-home",
         onPress: () => navigation.dispatch(StackActions.replace("Home")),

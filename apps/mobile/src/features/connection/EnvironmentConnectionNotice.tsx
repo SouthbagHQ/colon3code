@@ -11,11 +11,11 @@ import { copyTextWithHaptic } from "../../lib/copyTextWithHaptic";
 function noticeTitle(phase: EnvironmentConnectionPhase, environmentLabel: string): string {
   switch (phase) {
     case "offline":
-      return "You are offline";
+      return "you are offline";
     case "connecting":
-      return `Connecting to ${environmentLabel}...`;
+      return `connecting to ${environmentLabel}...`;
     case "reconnecting":
-      return `Reconnecting to ${environmentLabel}...`;
+      return `reconnecting to ${environmentLabel}...`;
     case "error":
       return `${environmentLabel} is unavailable`;
     case "available":
@@ -31,18 +31,18 @@ function noticeDetail(
   error: string | null,
 ): string {
   if (error) {
-    return `The app will keep retrying automatically. ${error}`;
+    return `the app will keep retrying automatically. ${error}`;
   }
 
   switch (phase) {
     case "offline":
-      return `Cached data remains available. The ${resourceName} will load when your connection returns.`;
+      return `cached data remains available. the ${resourceName} will load when your connection returns.`;
     case "connecting":
     case "reconnecting":
-      return `The ${resourceName} will load as soon as the environment is ready.`;
+      return `the ${resourceName} will load as soon as the environment is ready.`;
     case "available":
     case "error":
-      return `Reconnect the environment to load the ${resourceName}.`;
+      return `reconnect the environment to load the ${resourceName}.`;
     case "connected":
       return "";
   }
@@ -80,7 +80,7 @@ export function EnvironmentConnectionNotice(props: {
             <>
               {" Trace ID: "}
               <Text
-                accessibilityHint="Copies the trace ID"
+                accessibilityHint="copies the trace ID"
                 accessibilityRole="button"
                 className="underline decoration-dotted"
                 onPress={() =>
@@ -101,7 +101,7 @@ export function EnvironmentConnectionNotice(props: {
             className="mt-1 rounded-full bg-subtle px-4 py-2.5 active:opacity-70"
             onPress={props.onRetry}
           >
-            <Text className="text-sm font-t3-bold text-foreground">Retry now</Text>
+            <Text className="text-sm font-t3-bold text-foreground">retry now</Text>
           </Pressable>
         ) : null}
       </View>

@@ -79,23 +79,23 @@ export function SettingsDiagnosticsRouteScreen() {
         className="flex-1"
         contentContainerClassName="gap-6 px-5 pt-4 pb-[18px]"
       >
-        <SettingsSection title="Startup crashes">
+        <SettingsSection title="startup crashes">
           {state.status === "loading" ? (
             <View className="items-center gap-3 px-6 py-8">
               <ActivityIndicator />
-              <Text className="text-center text-sm text-foreground-muted">Reading crash log…</Text>
+              <Text className="text-center text-sm text-foreground-muted">reading crash log…</Text>
             </View>
           ) : state.status === "unavailable" ? (
             <EmptyState
               icon="exclamationmark.triangle"
-              title="Crash log unavailable"
-              detail="Startup crash records are only kept in store and TestFlight builds."
+              title="crash log unavailable"
+              detail="startup crash records are only kept in store and TestFlight builds."
             />
           ) : records.length === 0 ? (
             <EmptyState
               icon="checkmark.circle"
-              title="No startup crashes"
-              detail="Nothing has taken the app down during launch in the last 7 days."
+              title="no startup crashes"
+              detail="nothing has taken the app down during launch in the last 7 days."
             />
           ) : (
             records.map((record, index) => (
@@ -105,7 +105,7 @@ export function SettingsDiagnosticsRouteScreen() {
         </SettingsSection>
 
         <View className="gap-3">
-          <SettingsSection title="Actions">
+          <SettingsSection title="actions">
             <Pressable
               accessibilityRole="button"
               disabled={state.status !== "ready"}
@@ -120,12 +120,12 @@ export function SettingsDiagnosticsRouteScreen() {
                 weight="regular"
               />
               <Text className="flex-1 text-lg text-foreground">
-                {copied ? "Copied" : "Copy crash report"}
+                {copied ? "copied :3" : "copy crash report"}
               </Text>
             </Pressable>
           </SettingsSection>
           <Text className="px-2 text-sm leading-normal text-foreground-muted">
-            Paste the report into a GitHub issue. It contains the app version, the JavaScript error
+            paste the report into a GitHub issue. it contains the app version, the JavaScript error
             message, and the component stack. Error messages can quote values from the app, so read
             it over before sharing.
           </Text>

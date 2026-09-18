@@ -75,7 +75,7 @@ describe("buildShortcutActions", () => {
 
   it("falls back to a generic label for missing titles", () => {
     const actions = buildShortcutActions([thread("a", "  ")]);
-    expect(actions[1]?.title).toBe("Thread");
+    expect(actions[1]?.title).toBe("thread");
   });
 });
 

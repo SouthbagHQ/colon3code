@@ -16,23 +16,23 @@ export const RUNTIME_MODE_CHOICES: ReadonlyArray<{
 }> = [
   {
     mode: "approval-required",
-    label: "Supervised",
-    description: "Ask before commands and file changes.",
+    label: "supervised",
+    description: "ask before commands and file changes.",
   },
   {
     mode: "auto-accept-edits",
-    label: "Auto-accept edits",
-    description: "Auto-approve edits, ask before other actions.",
+    label: "auto-accept edits",
+    description: "auto-approve edits, ask before other actions.",
   },
   {
     mode: "auto",
-    label: "Auto",
-    description: "Supported providers approve routine actions; others still ask.",
+    label: "auto",
+    description: "supported providers approve routine actions; others still ask.",
   },
   {
     mode: "full-access",
-    label: "Full access",
-    description: "Allow commands and edits without prompts.",
+    label: "full access",
+    description: "allow commands and edits without prompts.",
   },
 ];
 

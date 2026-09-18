@@ -160,21 +160,21 @@ export function CommandPalette(props: {
       {
         key: "newTask",
         kind: "action",
-        title: "New thread in…",
+        title: "new thread in…",
         searchTerms: ["new task", "chat", "create", "project"],
         run: () => navigation.navigate("NewTaskSheet", { screen: "NewTask" }),
       },
       {
         key: "addProject",
         kind: "action",
-        title: "Add project",
+        title: "add project",
         searchTerms: ["folder", "clone", "repository", "git"],
         run: () => navigation.navigate("NewTaskSheet", { screen: "AddProject" }),
       },
       {
         key: "settings",
         kind: "action",
-        title: "Open settings",
+        title: "open settings",
         searchTerms: ["preferences", "configuration"],
         run: () =>
           navigation.navigate("SettingsSheet", {
@@ -185,7 +185,7 @@ export function CommandPalette(props: {
       {
         key: "appearance",
         kind: "action",
-        title: "Appearance",
+        title: "appearance",
         searchTerms: ["theme", "colors", "dark", "light"],
         run: () =>
           navigation.navigate("SettingsSheet", {
@@ -196,7 +196,7 @@ export function CommandPalette(props: {
       {
         key: "environments",
         kind: "action",
-        title: "Manage environments",
+        title: "manage environments",
         searchTerms: ["connections", "server", "remote"],
         run: () =>
           navigation.navigate("SettingsSheet", {
@@ -207,7 +207,7 @@ export function CommandPalette(props: {
       {
         key: "usage",
         kind: "action",
-        title: "Usage",
+        title: "usage",
         searchTerms: ["limits", "accounts", "quota"],
         run: () =>
           navigation.navigate("SettingsSheet", {
@@ -218,7 +218,7 @@ export function CommandPalette(props: {
       {
         key: "archive",
         kind: "action",
-        title: "Archived threads",
+        title: "archived threads",
         searchTerms: ["restore", "history"],
         run: () =>
           navigation.navigate("SettingsSheet", {
@@ -237,7 +237,7 @@ export function CommandPalette(props: {
       actions.unshift({
         key: "newThread",
         kind: "action",
-        title: `New thread in ${activeProject.title}`,
+        title: `new thread in ${activeProject.title}`,
         searchTerms: ["new task", "chat", "create"],
         run: () =>
           navigation.navigate("NewTaskSheet", {
@@ -252,10 +252,10 @@ export function CommandPalette(props: {
     }
     if (activeThreadRef) {
       const threadActions = [
-        ["files", "Go to file", ["open", "files", "browse", "search"]],
-        ["terminal", "Open terminal", ["shell", "console"]],
-        ["review", "Review changes", ["diff", "git", "pull request"]],
-        ["copyThreadReference", "Copy PR link or thread ID", ["reference", "clipboard"]],
+        ["files", "go to file", ["open", "files", "browse", "search"]],
+        ["terminal", "open terminal", ["shell", "console"]],
+        ["review", "review changes", ["diff", "git", "pull request"]],
+        ["copyThreadReference", "copy PR link or thread ID", ["reference", "clipboard"]],
       ] as const;
       actions.push(
         ...threadActions.map(([command, title, searchTerms]) => ({
@@ -271,7 +271,7 @@ export function CommandPalette(props: {
       key: `project:${scopedProjectKey(project.environmentId, project.id)}`,
       kind: "project",
       title: project.title,
-      detail: `New thread · ${savedConnectionsById[project.environmentId]?.environmentLabel ?? project.environmentId}`,
+      detail: `new thread · ${savedConnectionsById[project.environmentId]?.environmentLabel ?? project.environmentId}`,
       searchTerms: [project.workspaceRoot, "new thread", "project"],
       run: () =>
         navigation.navigate("NewTaskSheet", {
@@ -297,7 +297,7 @@ export function CommandPalette(props: {
         return {
           key: scopedThreadKey(thread.environmentId, thread.id),
           kind: "thread",
-          title: thread.title || "Untitled thread",
+          title: thread.title || "untitled thread",
           detail: [project?.title, environment].filter(Boolean).join(" · "),
           searchTerms: [
             project?.title ?? "",
@@ -393,7 +393,7 @@ export function CommandPalette(props: {
           >
             <Pressable
               className="absolute inset-0 bg-black/15"
-              accessibilityLabel="Close command palette"
+              accessibilityLabel="close command palette"
               onPress={() => close()}
             />
             <GlassSurface
@@ -416,8 +416,8 @@ export function CommandPalette(props: {
                   />
                   <TextInput
                     ref={inputRef}
-                    accessibilityLabel="Search commands, projects, and threads"
-                    placeholder="Search commands, projects, and threads…"
+                    accessibilityLabel="search commands, projects, and threads"
+                    placeholder="search commands, projects, and threads…"
                     placeholderTextColorClassName="accent-placeholder"
                     autoCorrect={false}
                     autoCapitalize="none"
@@ -452,7 +452,7 @@ export function CommandPalette(props: {
                 contentContainerClassName="pb-2"
                 ListEmptyComponent={
                   <Text className="p-5 text-center text-foreground-muted">
-                    {search.isPending ? "Searching…" : "No results"}
+                    {search.isPending ? "searching…" : "no results"}
                   </Text>
                 }
                 renderItem={({ item, index }) => (

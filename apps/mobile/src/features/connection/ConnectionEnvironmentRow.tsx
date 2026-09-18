@@ -65,8 +65,8 @@ export function ConnectionEnvironmentRow(props: {
     }
     const error = Cause.squash(result.cause);
     Alert.alert(
-      "Could not update environment",
-      error instanceof Error ? error.message : "The environment could not be updated.",
+      "could not update environment 3:",
+      error instanceof Error ? error.message : "the environment could not be updated.",
     );
   }, [label, url, props]);
 
@@ -113,7 +113,7 @@ export function ConnectionEnvironmentRow(props: {
                 <>
                   {" Trace ID: "}
                   <Text
-                    accessibilityHint="Copies the trace ID"
+                    accessibilityHint="copies the trace ID"
                     accessibilityRole="button"
                     className="underline decoration-dotted"
                     onLongPress={(event) => {
@@ -155,18 +155,18 @@ export function ConnectionEnvironmentRow(props: {
         >
           {props.environment.isRelayManaged ? (
             <Text className="text-sm text-foreground-muted">
-              Managed by T3 Connect. Tunnel details update automatically.
+              managed by T3 Connect. tunnel details update automatically.
             </Text>
           ) : (
             <>
               <View className="gap-1.5">
                 <Text className="text-2xs font-t3-bold tracking-[0.8px] uppercase text-foreground-muted">
-                  Label
+                  label
                 </Text>
                 <TextInput
                   autoCapitalize="words"
                   autoCorrect={false}
-                  placeholder="My MacBook"
+                  placeholder="my MacBook"
                   value={label}
                   onChangeText={setLabel}
                   className="rounded-[14px] border border-input-border bg-input px-4 py-3 text-base text-foreground"
@@ -203,7 +203,7 @@ export function ConnectionEnvironmentRow(props: {
                   type="monochrome"
                 />
                 <Text className="text-xs font-t3-bold tracking-[0.8px] uppercase text-primary-foreground">
-                  Save
+                  save
                 </Text>
               </Pressable>
             )}

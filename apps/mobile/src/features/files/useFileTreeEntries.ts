@@ -87,7 +87,7 @@ export function useFileTreeEntries(input: {
           const error = Cause.squash(result.cause);
           directories.errors.set(
             directoryPath,
-            error instanceof Error ? error.message : "Files unavailable",
+            error instanceof Error ? error.message : "files unavailable",
           );
         }
         render();

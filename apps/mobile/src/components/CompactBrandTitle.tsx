@@ -41,7 +41,7 @@ export function CompactBrandTitle(
         allowFontScaling={props.allowFontScaling}
         className="font-t3-medium text-[21px] tracking-[-0.5px] text-foreground-muted"
       >
-        Code
+        code
       </Text>
       <View className="rounded-full bg-subtle px-1.5 py-0.5">
         <Text
@@ -65,7 +65,7 @@ export function getCompactBrandHeaderOptions(
   return {
     headerTitle: renderCompactBrandTitle,
     headerTitleStyle: fallbackTitleStyle,
-    title: "Threads",
+    title: "threads",
     unstable_headerLeftItems: undefined,
   };
 }

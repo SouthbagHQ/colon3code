@@ -87,7 +87,7 @@ export function SettingsRouteScreen() {
         <>
           {/* Android renders its own in-screen header instead of the native bar. */}
           <NativeStackScreenOptions options={{ headerShown: false }} />
-          <AndroidScreenHeader title="Settings" onBack={() => navigation.goBack()} />
+          <AndroidScreenHeader title="settings" onBack={() => navigation.goBack()} />
         </>
       ) : (
         <NativeStackScreenOptions
@@ -96,7 +96,7 @@ export function SettingsRouteScreen() {
               Platform.OS === "ios"
                 ? () => [
                     withNativeGlassHeaderItem({
-                      accessibilityLabel: "Close settings",
+                      accessibilityLabel: "close settings",
                       icon: { name: "xmark", type: "sfSymbol" } as const,
                       identifier: "settings-close",
                       label: "",
@@ -129,10 +129,10 @@ function LocalSettingsRouteScreen() {
           paddingBottom: Math.max(insets.bottom, 18) + 18,
         }}
       >
-        <SettingsSection title="Configuration">
+        <SettingsSection title="configuration">
           <SettingsRow
             icon="desktopcomputer"
-            label="Environments"
+            label="environments"
             value={`${environmentCount}`}
             target="SettingsEnvironments"
           />
@@ -140,8 +140,8 @@ function LocalSettingsRouteScreen() {
 
         <GeneralSettingsSection />
 
-        <SettingsSection title="Appearance">
-          <SettingsRow icon="paintbrush" label="Appearance" target="SettingsAppearance" />
+        <SettingsSection title="appearance">
+          <SettingsRow icon="paintbrush" label="appearance" target="SettingsAppearance" />
         </SettingsSection>
 
         <LegacySettingsSection />
@@ -161,7 +161,7 @@ function ConfiguredSettingsRouteScreen() {
   const agentAwarenessPlatform = resolveAgentAwarenessPlatformPresentation(Platform.OS);
   const agentAwarenessSubtitle =
     Platform.OS === "android" && !agentAwarenessPushAvailable
-      ? "Install a newer app build to enable notifications"
+      ? "install a newer app build to enable notifications"
       : agentAwarenessPlatform.subtitle;
   const insets = useSafeAreaInsets();
   const navigation = useNavigation();
@@ -178,9 +178,9 @@ function ConfiguredSettingsRouteScreen() {
   const connections = useMemo(() => Object.values(savedConnectionsById), [savedConnectionsById]);
   const environmentCount = connections.length;
   const accountLabel = useMemo(() => {
-    if (!isLoaded) return "Checking";
-    if (!isSignedIn) return "Sign in";
-    return user?.primaryEmailAddress?.emailAddress ?? "Signed in";
+    if (!isLoaded) return "checking";
+    if (!isSignedIn) return "sign in";
+    return user?.primaryEmailAddress?.emailAddress ?? "signed in";
   }, [isLoaded, isSignedIn, user?.primaryEmailAddress?.emailAddress]);
 
   const refreshNotifications = useCallback(async () => {
@@ -238,8 +238,8 @@ function ConfiguredSettingsRouteScreen() {
       if (!isAtomCommandInterrupted(result)) {
         const error = squashAtomCommandFailure(result);
         Alert.alert(
-          "Notifications unavailable",
-          error instanceof Error ? error.message : "Could not request notification permission.",
+          "notifications unavailable 3:",
+          error instanceof Error ? error.message : "could not request notification permission.",
         );
       }
       return;
@@ -249,11 +249,11 @@ function ConfiguredSettingsRouteScreen() {
       // Permission alone is not enough: the switch stays off until the relay
       // registration succeeds, so tell the user the truth about which happened.
       if (getAgentAwarenessRegistrationStatus() === "registered") {
-        Alert.alert("Notifications enabled", "Agent notifications are enabled for this device.");
+        Alert.alert("notifications enabled :3", "agent notifications are enabled for this device.");
       } else {
         Alert.alert(
-          "Couldn't finish enabling notifications",
-          "Notification access was granted, but this device could not be registered with T3 Connect. Notifications will start once registration succeeds.",
+          "couldn't finish enabling notifications 3:",
+          "notification access was granted, but this device could not be registered with T3 Connect. notifications will start once registration succeeds.",
         );
       }
       return;
@@ -261,34 +261,34 @@ function ConfiguredSettingsRouteScreen() {
     if (result.value.type === "unsupported") {
       setNotificationStatus("unsupported");
       Alert.alert(
-        "Notifications unavailable",
-        "Agent notifications are unavailable on this platform.",
+        "notifications unavailable 3:",
+        "agent notifications are unavailable on this platform.",
       );
       return;
     }
     setNotificationStatus("disabled");
     if (result.value.canAskAgain) {
-      Alert.alert("Notifications disabled", "Notifications were not enabled.");
+      Alert.alert("notifications disabled", "notifications were not enabled.");
       return;
     }
     Alert.alert(
-      "Notifications disabled",
-      "Notifications were denied for this app. Open Settings to enable them.",
+      "notifications disabled",
+      "notifications were denied for this app. open Settings to enable them.",
       [
-        { text: "Cancel", style: "cancel" },
-        { text: "Open Settings", onPress: () => void Linking.openSettings() },
+        { text: "cancel", style: "cancel" },
+        { text: "open Settings", onPress: () => void Linking.openSettings() },
       ],
     );
   }, []);
 
   const promptSignIn = useCallback(() => {
     Alert.alert(
-      "Sign in to T3 Connect",
+      "sign in to T3 Connect",
       "Live Activity updates require T3 Connect so relay can deliver updates to this device.",
       [
-        { text: "Cancel", style: "cancel" },
+        { text: "cancel", style: "cancel" },
         {
-          text: "Continue",
+          text: "continue",
           onPress: () => navigation.navigate("SettingsSheet", { screen: "SettingsAuth" }),
         },
       ],
@@ -310,19 +310,19 @@ function ConfiguredSettingsRouteScreen() {
         setLiveActivityStatus("disabled");
         const error = squashAtomCommandFailure(permission);
         Alert.alert(
-          "Ongoing activity unavailable",
-          error instanceof Error ? error.message : "Could not enable agent notifications.",
+          "ongoing activity unavailable 3:",
+          error instanceof Error ? error.message : "could not enable agent notifications.",
         );
         return;
       }
       if (permission.value.type !== "granted") {
         setLiveActivityStatus("disabled");
         Alert.alert(
-          "Notification permission needed",
-          "Enable notifications in system Settings to show ongoing agent activity.",
+          "notification permission needed",
+          "enable notifications in system Settings to show ongoing agent activity.",
           [
-            { text: "Cancel", style: "cancel" },
-            { text: "Open Settings", onPress: () => void Linking.openSettings() },
+            { text: "cancel", style: "cancel" },
+            { text: "open Settings", onPress: () => void Linking.openSettings() },
           ],
         );
         return;
@@ -334,8 +334,8 @@ function ConfiguredSettingsRouteScreen() {
       setLiveActivityStatus("disabled");
       const error = squashAtomCommandFailure(tokenResult);
       Alert.alert(
-        Platform.OS === "android" ? "Ongoing activity unavailable" : "Live Activities unavailable",
-        error instanceof Error ? error.message : "Could not enable agent activity updates.",
+        Platform.OS === "android" ? "ongoing activity unavailable" : "Live Activities unavailable",
+        error instanceof Error ? error.message : "could not enable agent activity updates.",
       );
       return;
     }
@@ -361,9 +361,9 @@ function ConfiguredSettingsRouteScreen() {
         const error = squashAtomCommandFailure(updateResult);
         Alert.alert(
           Platform.OS === "android"
-            ? "Ongoing activity unavailable"
+            ? "ongoing activity unavailable"
             : "Live Activities unavailable",
-          error instanceof Error ? error.message : "Could not enable agent activity updates.",
+          error instanceof Error ? error.message : "could not enable agent activity updates.",
         );
       }
       return;
@@ -377,15 +377,15 @@ function ConfiguredSettingsRouteScreen() {
     // Activities are live until the device is actually registered.
     if (getAgentAwarenessRegistrationStatus() === "registered") {
       Alert.alert(
-        Platform.OS === "android" ? "Ongoing activity enabled" : "Live Activities enabled",
+        Platform.OS === "android" ? "ongoing activity enabled" : "Live Activities enabled",
         environmentCount > 0
           ? `${environmentCount} environment${environmentCount === 1 ? "" : "s"} linked for agent activity updates.`
-          : "Agent activity updates are enabled. Add an environment to start receiving updates.",
+          : "agent activity updates are enabled. add an environment to start receiving updates.",
       );
     } else {
       Alert.alert(
-        "Couldn't finish enabling activity updates",
-        "This device could not be registered with T3 Connect, so activity updates won't appear yet. They'll start once registration succeeds.",
+        "couldn't finish enabling activity updates 3:",
+        "this device could not be registered with T3 Connect, so activity updates won't appear yet. they'll start once registration succeeds.",
       );
     }
   }, [
@@ -410,11 +410,11 @@ function ConfiguredSettingsRouteScreen() {
       }
 
       Alert.alert(
-        "Disable notifications",
-        "Open system Settings to disable notifications for :3 Code.",
+        "disable notifications",
+        "open system Settings to disable notifications for :3 Code.",
         [
-          { text: "Cancel", style: "cancel" },
-          { text: "Open Settings", onPress: () => void Linking.openSettings() },
+          { text: "cancel", style: "cancel" },
+          { text: "open Settings", onPress: () => void Linking.openSettings() },
         ],
       );
     },
@@ -498,7 +498,7 @@ function ConfiguredSettingsRouteScreen() {
         }}
       >
         <View className="gap-3">
-          <SettingsSection title="Account">
+          <SettingsSection title="account">
             <SettingsRow
               icon="person.crop.circle"
               label="T3 Account"
@@ -511,16 +511,16 @@ function ConfiguredSettingsRouteScreen() {
           </Text>
         </View>
 
-        <SettingsSection title="Configuration">
+        <SettingsSection title="configuration">
           <SettingsRow
             icon="desktopcomputer"
-            label="Environments"
+            label="environments"
             value={`${environmentCount}`}
             target="SettingsEnvironments"
           />
           <SettingsSwitchRow
             icon="bell.badge"
-            label="Device Notifications"
+            label="device notifications"
             disabled={
               !agentAwarenessPlatform.supported ||
               !agentAwarenessPushAvailable ||
@@ -548,8 +548,8 @@ function ConfiguredSettingsRouteScreen() {
             label={
               Platform.OS === "android"
                 ? supportsAndroidLiveUpdateSettings()
-                  ? "Agent Live Updates"
-                  : "Ongoing Agent Activity"
+                  ? "agent live updates"
+                  : "ongoing agent activity"
                 : "Live Activity Updates"
             }
             subtitle={agentAwarenessSubtitle}
@@ -569,8 +569,8 @@ function ConfiguredSettingsRouteScreen() {
               onPress={() => {
                 void openAndroidLiveUpdateSettings().catch(() => {
                   Alert.alert(
-                    "Couldn't open Settings",
-                    "Open Android Settings, select :3 Code, then enable Live Updates in Notifications.",
+                    "couldn't open Settings 3:",
+                    "open Android Settings, select :3 Code, then enable Live Updates in Notifications.",
                   );
                 });
               }}
@@ -580,8 +580,8 @@ function ConfiguredSettingsRouteScreen() {
 
         <GeneralSettingsSection />
 
-        <SettingsSection title="Appearance">
-          <SettingsRow icon="paintbrush" label="Appearance" target="SettingsAppearance" />
+        <SettingsSection title="appearance">
+          <SettingsRow icon="paintbrush" label="appearance" target="SettingsAppearance" />
         </SettingsSection>
 
         <LegacySettingsSection />
@@ -596,13 +596,13 @@ function ConfiguredSettingsRouteScreen() {
 
 function GeneralSettingsSection() {
   return (
-    <SettingsSection title="General">
-      <SettingsRow icon="folder" label="Project Grouping" target="SettingsProjectGrouping" />
+    <SettingsSection title="general">
+      <SettingsRow icon="folder" label="project grouping" target="SettingsProjectGrouping" />
       {Platform.OS === "ios" ? (
-        <SettingsRow icon="keyboard" label="Keyboard" target="SettingsKeyboard" />
+        <SettingsRow icon="keyboard" label="keyboard" target="SettingsKeyboard" />
       ) : null}
       <AutoSettleSettingsRows />
-      <SettingsRow icon="chart.bar.xaxis" label="Usage" target="SettingsUsage" />
+      <SettingsRow icon="chart.bar.xaxis" label="usage" target="SettingsUsage" />
     </SettingsSection>
   );
 }
@@ -667,14 +667,14 @@ function AutoSettleSettingsRows() {
     <>
       <SettingsSwitchRow
         icon="arrow.triangle.branch"
-        label="Auto-settle merged threads"
+        label="auto-settle merged threads"
         value={referenceSettings.sidebarAutoSettleOnMerge}
         onValueChange={(value) => writeToAll({ sidebarAutoSettleOnMerge: value })}
       />
       <SettingsSwitchRow
         icon="clock"
-        label="Auto-settle inactive threads"
-        subtitle={afterDays === null ? undefined : `After ${afterDays} days without activity`}
+        label="auto-settle inactive threads"
+        subtitle={afterDays === null ? undefined : `after ${afterDays} days without activity`}
         value={afterDays !== null}
         onValueChange={(value) =>
           writeToAll({ sidebarAutoSettleAfterDays: value ? AUTO_SETTLE_DEFAULT_DAYS : null })
@@ -682,7 +682,7 @@ function AutoSettleSettingsRows() {
       />
       {afterDays !== null ? (
         <View className="flex-row items-center gap-4 border-t border-border-subtle p-4">
-          <Text className="flex-1 text-lg text-foreground">Days before auto-settle</Text>
+          <Text className="flex-1 text-lg text-foreground">days before auto-settle</Text>
           <TextInput
             className="min-h-10 w-20 rounded-xl px-3 py-2 text-center text-base"
             keyboardType="number-pad"
@@ -691,14 +691,14 @@ function AutoSettleSettingsRows() {
             onChangeText={setDaysDraft}
             onBlur={commitDays}
             onSubmitEditing={commitDays}
-            accessibilityLabel="Days before auto-settle"
+            accessibilityLabel="days before auto-settle"
           />
         </View>
       ) : null}
       {mismatches.length > 0 ? (
         <View className="flex-row items-center gap-4 border-t border-border-subtle p-4">
           <View className="min-w-0 flex-1">
-            <Text className="text-lg text-foreground">Auto-settle defaults differ</Text>
+            <Text className="text-lg text-foreground">auto-settle defaults differ</Text>
             <Text className="text-sm text-foreground-muted">
               {mismatches.map((mismatch) => mismatch.label).join(", ")}
             </Text>
@@ -716,7 +716,7 @@ function AutoSettleSettingsRows() {
             className="rounded-full bg-subtle px-4 py-2 active:opacity-70"
           >
             <Text className="text-base font-t3-medium text-foreground">
-              Apply auto-settle defaults
+              apply auto-settle defaults
             </Text>
           </Pressable>
         </View>
@@ -739,22 +739,22 @@ function LegacySettingsSection() {
 
   return (
     <View className="gap-3">
-      <SettingsSection title="Legacy">
+      <SettingsSection title="legacy">
         <SettingsSwitchRow
           icon="sidebar.left"
-          label="Legacy Thread List"
+          label="legacy thread list"
           value={!threadListV2Enabled}
           onValueChange={(value) => savePreferences({ legacyThreadListEnabled: value })}
         />
         <SettingsSwitchRow
           icon="hammer"
-          label="Plan Mode"
+          label="plan mode"
           value={planModeEnabled}
           onValueChange={(value) => savePreferences({ planModeEnabled: value })}
         />
       </SettingsSection>
       <Text className="px-2 text-sm text-foreground-muted">
-        Opt into retired interfaces kept for compatibility. Plan Mode restores the Build/Plan
+        opt into retired interfaces kept for compatibility. plan mode restores the Build/Plan
         control; otherwise every task runs in Build mode.
       </Text>
     </View>
@@ -794,7 +794,7 @@ function AppSettingsSection() {
       // apply immediately instead of prompting.
       await runAppUpdateCheck({
         applyMode: "immediate",
-        onFailure: (message) => Alert.alert("Update failed", message),
+        onFailure: (message) => Alert.alert("update failed 3:", message),
         onStateChange: setUpdateState,
       });
     } finally {
@@ -813,17 +813,17 @@ function AppSettingsSection() {
 
   const statusLabel =
     updateState === "checking"
-      ? "Checking…"
+      ? "checking…"
       : updateState === "downloading"
-        ? "Downloading…"
+        ? "downloading…"
         : // "ready" appears only when this check joined an in-flight background-mode
           // check; that download installs at the next backgrounding.
           updateState === "ready"
-          ? "Update ready"
+          ? "update ready"
           : updateState === "restarting"
-            ? "Restarting…"
+            ? "restarting…"
             : updateState === "current"
-              ? "Up to date"
+              ? "up to date"
               : null;
 
   const versionRow = (
@@ -835,7 +835,7 @@ function AppSettingsSection() {
         type="monochrome"
         weight="regular"
       />
-      <Text className="flex-1 text-lg text-foreground">Version</Text>
+      <Text className="flex-1 text-lg text-foreground">version</Text>
       <View className="items-end">
         <Text className="text-lg text-foreground-muted">{versionLabel}</Text>
         {statusLabel ? (
@@ -846,18 +846,18 @@ function AppSettingsSection() {
   );
 
   return (
-    <SettingsSection title="App">
-      <SettingsRow icon="internaldrive" label="Client Storage" target="SettingsClientStorage" />
-      <SettingsRow icon="stethoscope" label="Diagnostics" target="SettingsDiagnostics" />
+    <SettingsSection title="app">
+      <SettingsRow icon="internaldrive" label="client storage" target="SettingsClientStorage" />
+      <SettingsRow icon="stethoscope" label="diagnostics" target="SettingsDiagnostics" />
       <SettingsRow
         icon="doc.on.doc"
-        label="Open source licenses"
+        label="open source licenses"
         target="SettingsOpenSourceLicenses"
       />
-      <SettingsRow icon="doc.text" label="Legal" fullScreenTarget="SettingsLegal" />
+      <SettingsRow icon="doc.text" label="legal" fullScreenTarget="SettingsLegal" />
       {updateCheckAvailable ? (
         <Pressable
-          accessibilityLabel={`Version ${versionLabel}`}
+          accessibilityLabel={`version ${versionLabel}`}
           accessibilityRole="text"
           disabled={busy}
           onPress={handleVersionPress}
@@ -877,8 +877,8 @@ function capitalize(value: string): string {
 
 function ArchivedThreadsSettingsSection() {
   return (
-    <SettingsSection title="Threads">
-      <SettingsRow icon="archivebox" label="Archived Threads" target="SettingsArchive" />
+    <SettingsSection title="threads">
+      <SettingsRow icon="archivebox" label="archived threads" target="SettingsArchive" />
     </SettingsSection>
   );
 }

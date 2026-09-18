@@ -104,11 +104,14 @@ export function QuestionAttachments(props: {
           (appAtomRegistry.get(questionAttachmentPreparationAtom)[key] ?? 0) > 0
         ) {
           if (append(key, images) > 0)
-            Alert.alert("Could not paste image", "Too many attachments.");
+            Alert.alert("could not paste image 3:", "too many attachments.");
         } else await releaseUnusedComposerAttachmentFiles(images);
       })
       .catch((error) =>
-        Alert.alert("Could not paste image", error instanceof Error ? error.message : "Try again."),
+        Alert.alert(
+          "could not paste image 3:",
+          error instanceof Error ? error.message : "try again.",
+        ),
       )
       .finally(() => changeQuestionAttachmentPreparation(key, -1));
   });
@@ -149,9 +152,12 @@ export function QuestionAttachments(props: {
       }
       const rejected = append(key, picked);
       if (result.error || rejected > 0)
-        Alert.alert("Could not attach file", result.error ?? "Too many attachments.");
+        Alert.alert("could not attach file 3:", result.error ?? "too many attachments.");
     } catch (error) {
-      Alert.alert("Could not attach file", error instanceof Error ? error.message : "Try again.");
+      Alert.alert(
+        "could not attach file 3:",
+        error instanceof Error ? error.message : "try again.",
+      );
     } finally {
       changeQuestionAttachmentPreparation(key, -1);
     }
@@ -197,7 +203,7 @@ export function QuestionAttachments(props: {
           onChangeText={props.onChangeText}
           onFocus={() => props.onInputFocusChange?.(true)}
           onBlur={() => props.onInputFocusChange?.(false)}
-          placeholder="Or type a custom answer"
+          placeholder="or type a custom answer"
           className="min-h-[54px] rounded-2xl border border-input-border bg-input px-3.5 py-3 font-sans text-base text-foreground"
         />
       </TextInputWrapper>

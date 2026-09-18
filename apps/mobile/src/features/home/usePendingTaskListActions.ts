@@ -31,10 +31,10 @@ export function usePendingTaskListActions(): {
 
   const confirmDeletePendingTask = useCallback((pendingTask: PendingNewTask) => {
     if (pendingTask.kind === "draft") {
-      Alert.alert("Discard draft?", `“${pendingTask.title}” will be removed.`, [
-        { text: "Cancel", style: "cancel" },
+      Alert.alert("discard draft?", `“${pendingTask.title}” will be removed.`, [
+        { text: "cancel", style: "cancel" },
         {
-          text: "Discard",
+          text: "discard",
           style: "destructive",
           onPress: () => {
             // Same reset a submit performs: the next task in this project
@@ -49,12 +49,12 @@ export function usePendingTaskListActions(): {
       return;
     }
     Alert.alert(
-      "Delete pending task?",
+      "delete pending task?",
       `“${pendingTask.title}” has not been sent yet and will be removed from the outbox.`,
       [
-        { text: "Cancel", style: "cancel" },
+        { text: "cancel", style: "cancel" },
         {
-          text: "Delete",
+          text: "delete",
           style: "destructive",
           onPress: () => {
             // Release the edit lock only after removal succeeds, and only if
@@ -64,8 +64,8 @@ export function usePendingTaskListActions(): {
               .then(() => releaseEditingQueuedMessage(pendingTask.message.messageId))
               .catch((error) => {
                 Alert.alert(
-                  "Could not delete pending task",
-                  error instanceof Error ? error.message : "The pending task could not be removed.",
+                  "could not delete pending task 3:",
+                  error instanceof Error ? error.message : "the pending task could not be removed.",
                 );
               });
           },

@@ -19,12 +19,12 @@ export function availableCloudEnvironmentPresentation(input: {
       connectionError: null,
       connectionErrorTraceId: null,
       connectionState: "available",
-      statusText: "Available · Relay online",
+      statusText: "available · relay online",
     };
   }
 
   if (input.status?.status === "offline") {
-    const connectionError = input.status.error ?? "Relay is offline.";
+    const connectionError = input.status.error ?? "relay is offline.";
     return {
       connectionError,
       connectionErrorTraceId: input.status.traceId ?? null,
@@ -47,7 +47,7 @@ export function availableCloudEnvironmentPresentation(input: {
     connectionErrorTraceId: null,
     connectionState: "available",
     statusText: input.isStatusPending
-      ? "Available · Checking relay status..."
-      : "Available · Relay status unknown",
+      ? "available · checking relay status…"
+      : "available · relay status unknown",
   };
 }

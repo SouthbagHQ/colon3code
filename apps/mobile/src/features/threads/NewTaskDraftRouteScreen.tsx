@@ -130,8 +130,8 @@ export function NewTaskDraftRouteScreen({ route }: StaticScreenProps<NewTaskDraf
     if (!isAtomCommandInterrupted(result)) {
       const error = squashAtomCommandFailure(result);
       Alert.alert(
-        "Could not switch branch",
-        error instanceof Error ? error.message : "The branch could not be checked out.",
+        "could not switch branch 3:",
+        error instanceof Error ? error.message : "the branch could not be checked out.",
       );
     }
     navigation.goBack();
@@ -151,12 +151,12 @@ export function NewTaskDraftRouteScreen({ route }: StaticScreenProps<NewTaskDraf
     <>
       <NativeStackScreenOptions
         options={{
-          title: Array.isArray(params.title) ? params.title[0] : (params.title ?? "New task"),
+          title: Array.isArray(params.title) ? params.title[0] : (params.title ?? "new task"),
         }}
       />
       {preparingBranch ? (
         <View className="flex-1 items-center justify-center bg-screen">
-          <Text className="text-foreground">Switching branch...</Text>
+          <Text className="text-foreground">switching branch...</Text>
         </View>
       ) : (
         <NewTaskDraftScreen

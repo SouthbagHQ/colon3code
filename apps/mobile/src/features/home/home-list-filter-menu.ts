@@ -52,12 +52,12 @@ export function buildHomeListFilterMenu(props: {
 
   items.push({
     type: "submenu",
-    title: "Environment",
+    title: "environment",
     items: [
       {
         type: "action",
-        title: "All environments",
-        subtitle: "Show threads from every environment",
+        title: "all environments",
+        subtitle: "show threads from every environment",
         state: props.selectedEnvironmentId === null ? "on" : "off",
         onPress: () => props.onEnvironmentChange(null),
       },
@@ -76,12 +76,12 @@ export function buildHomeListFilterMenu(props: {
   if (props.projects.length > 0) {
     items.push({
       type: "submenu",
-      title: "Project",
+      title: "project",
       items: [
         {
           type: "action",
-          title: "All projects",
-          subtitle: "Show threads from every project",
+          title: "all projects",
+          subtitle: "show threads from every project",
           state: props.selectedProjectKey === null ? "on" : "off",
           onPress: () => props.onProjectChange(null),
         },
@@ -99,7 +99,7 @@ export function buildHomeListFilterMenu(props: {
     items.push(
       {
         type: "submenu",
-        title: "Sort projects",
+        title: "sort projects",
         items: PROJECT_SORT_OPTIONS.map((option) => ({
           type: "action",
           title: option.label,
@@ -109,7 +109,7 @@ export function buildHomeListFilterMenu(props: {
       },
       {
         type: "submenu",
-        title: "Sort threads",
+        title: "sort threads",
         items: THREAD_SORT_OPTIONS.map((option) => ({
           type: "action",
           title: option.label,
@@ -121,7 +121,7 @@ export function buildHomeListFilterMenu(props: {
   }
 
   return {
-    title: "Thread list options",
+    title: "thread list options",
     items,
   };
 }

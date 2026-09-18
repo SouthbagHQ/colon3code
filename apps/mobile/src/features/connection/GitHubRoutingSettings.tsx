@@ -19,16 +19,16 @@ const options: ReadonlyArray<{
   label: string;
   description: string;
 }> = [
-  { value: "off", label: "Off", description: "Keep GitHub requests on this environment." },
+  { value: "off", label: "off", description: "keep GitHub requests on this environment." },
   {
     value: "read",
-    label: "Read PRs",
-    description: "Share PR data with other enabled environments.",
+    label: "read PRs",
+    description: "share PR data with other enabled environments.",
   },
   {
     value: "read-write",
-    label: "Read and act",
-    description: "Actions may use broader GitHub permissions than the original environment.",
+    label: "read and act",
+    description: "actions may use broader GitHub permissions than the original environment.",
   },
 ];
 
@@ -90,8 +90,8 @@ export function GitHubRoutingSettings() {
                           setSaving(false);
                           if (result._tag === "Failure")
                             Alert.alert(
-                              "Could not save GitHub routing permission",
-                              "Try again before leaving this screen.",
+                              "could not save GitHub routing permission 3:",
+                              "try again before leaving this screen.",
                             );
                         });
                       }}
@@ -118,7 +118,7 @@ export function GitHubRoutingSettings() {
         })}
       </SettingsSection>
       <Text className="px-2 text-sm text-foreground-muted">
-        Choose environments you trust to share PR data and use each other's GitHub access. Enable
+        choose environments you trust to share PR data and use each other's GitHub access. enable
         both environments. This applies only to this client.
       </Text>
     </View>
