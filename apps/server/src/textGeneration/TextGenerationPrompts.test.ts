@@ -202,6 +202,22 @@ describe("buildThreadTitlePrompt", () => {
     expect(result.prompt).toContain("The remaining issue is stale session state");
   });
 
+  it("asks both prompts for lowercase titles that keep proper noun casing", () => {
+    const initial = buildThreadTitlePrompt({ message: "Fix the login timeout bug" });
+    const regenerated = buildThreadTitlePrompt({
+      message: "USER:\nFix the login timeout bug",
+      previousTitle: "Fix Login Timeout",
+    });
+
+    for (const { prompt } of [initial, regenerated]) {
+      expect(prompt).toContain("lowercase sentence start, lowercase throughout");
+      expect(prompt).toContain("Keep the real casing of proper nouns");
+      expect(prompt).toContain("No cat noises, no emoticons");
+      expect(prompt).toContain('such as "take over PR 8588"');
+      expect(prompt).not.toContain("Take Over PR");
+    }
+  });
+
   it("keeps the latest thread contents when regeneration context is truncated", () => {
     const result = buildThreadTitlePrompt({
       message: `${"old context ".repeat(1_000)}\n\nASSISTANT:\nCurrent thread state`,

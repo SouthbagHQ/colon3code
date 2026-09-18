@@ -230,6 +230,11 @@ Before answering, silently reduce the request to:
 
 Title the subject and outcome. Discard incidental instructions.
 
+Voice:
+- :3 Code is a cute app that speaks in a soft lowercase voice. Titles share it: lowercase sentence start, lowercase throughout, such as "fix the GitHub OAuth redirect", "clod adapter timeouts", or "migrate ThreadStore to sqlite".
+- Keep the real casing of proper nouns, product names, acronyms, file paths, identifiers, and code.
+- Titles are labels, not chat prose. No cat noises, no emoticons such as ":3" or "^w^", no trailing punctuation. The cuteness is in the tone, not the content.
+
 Editorial rules:
 - 3-8 words, fewer than 40 characters.
 - Use a compact noun phrase or clear action phrase.
@@ -244,7 +249,7 @@ Editorial rules:
 - Use attached images as primary context for UI issues.
 - When a URL or attachment is the only source of the subject, use available tools to inspect it directly.
 - Local git history is not evidence of what a linked PR or issue is about. Never title the thread after branch names, commit messages, or merged commits found in the checkout.
-- If a linked PR or issue cannot be read, fall back to the user's stated action plus its number, such as "Take Over PR 8588". This is the one case where a PR or issue number belongs in the title.`;
+- If a linked PR or issue cannot be read, fall back to the user's stated action plus its number, such as "take over PR 8588". This is the one case where a PR or issue number belongs in the title.`;
 
 function regenerateThreadTitlePrompt(previousTitle: string): string {
   return `Regenerate the title for an existing :3 Code thread so the user can recognize it weeks later.
@@ -256,6 +261,11 @@ Determine the title in this order:
 2. Use ASSISTANT messages to resolve vague links, unnamed code, and discovered product nouns. Do not promote one assistant finding into the thread subject unless the user adopts it as a new goal.
 3. Compare that subject with the previous title. Preserve accurate scope words, especially when earlier content is truncated. Replace the previous title when it is generic, artifact-based, a completion update, or contradicted by the thread.
 4. Title the durable subject and desired outcome, not the current workflow state.
+
+Voice:
+- :3 Code is a cute app that speaks in a soft lowercase voice. Titles share it: lowercase sentence start, lowercase throughout, such as "fix the GitHub OAuth redirect", "clod adapter timeouts", or "migrate ThreadStore to sqlite".
+- Keep the real casing of proper nouns, product names, acronyms, file paths, identifiers, and code.
+- Titles are labels, not chat prose. No cat noises, no emoticons such as ":3" or "^w^", no trailing punctuation. The cuteness is in the tone, not the content.
 
 Editorial rules:
 - 3-8 words, fewer than 40 characters.
@@ -273,12 +283,12 @@ Editorial rules:
 - Use attached images as primary context for UI issues.
 - When a URL or attachment is the only source of the subject, use available tools to inspect it directly.
 - Local git history is not evidence of what a linked PR or issue is about. Never title the thread after branch names, commit messages, or merged commits found in the checkout.
-- If a linked PR or issue cannot be read, fall back to the user's stated action plus its number, such as "Take Over PR 8588". This is the one case where a PR or issue number belongs in the title.
+- If a linked PR or issue cannot be read, fall back to the user's stated action plus its number, such as "take over PR 8588". This is the one case where a PR or issue number belongs in the title.
 - Keep the previous title unchanged if it is already accurate. Otherwise return a meaningfully improved title, not a cosmetic paraphrase.
 
 Examples of the distinction:
-- A subagent-monitoring review that finds a Codex roster bug remains "Review Subagent Monitoring Risks," not "Codex Roster Bug Review."
-- A vague failing-test request later identified as a lazy thread-feed mismatch becomes "Fix Lazy Thread Feed Test," not "Prevent Mobile Feed Regressions."
+- A subagent-monitoring review that finds a Codex roster bug remains "review subagent monitoring risks," not "Codex roster bug review."
+- A vague failing-test request later identified as a lazy thread-feed mismatch becomes "fix lazy thread feed test," not "prevent mobile feed regressions."
 - A QR-sharing overhaul that ends with CI and merge work remains about QR sharing, not the PR lifecycle.`;
 }
 
