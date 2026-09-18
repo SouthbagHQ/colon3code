@@ -21,7 +21,10 @@ import {
   ChevronRightIcon,
   CloudIcon,
   CopyIcon,
+  EyeIcon,
+  FolderIcon,
   LinkIcon,
+  MessageCircleIcon,
   MonitorIcon,
   TerminalIcon,
 } from "~/icons";
@@ -62,6 +65,7 @@ import { getProviderSummary } from "../settings/providerStatus";
 import { getDriverOption } from "../settings/providerDriverMeta";
 import { TerminalViewport } from "../ThreadTerminalDrawer";
 import { CloudEnvironmentConnectRows } from "../cloud/CloudEnvironmentConnectList";
+import { CatFace } from "../CatFace";
 import { ClaudeAI, OpenAI } from "../Icons";
 import { Colon3Wordmark } from "../Colon3Wordmark";
 import { Button } from "../ui/button";
@@ -80,17 +84,19 @@ import { formatRelativeTime } from "../../timestampFormat";
 /**
  * First-run welcome wizard. Rendered over the workspace at `/welcome` on a
  * fresh install (no completed-onboarding flag, empty workspace). Flow per the
- * onboarding overhaul spec: connection choice → sign-in/pair (remote paths) →
- * agent setup with inline install terminal → project import → main screen.
- * Every step past the connection gate is skippable; the whole wizard is
- * re-runnable by clearing the flag.
+ * onboarding overhaul spec: hello → connection choice → sign-in/pair (remote
+ * paths) → agent setup with inline install terminal → project import → main
+ * screen. Every step past the connection gate is skippable; the whole wizard
+ * is re-runnable by clearing the flag.
  */
 
-type WizardStep = "connection" | "agents" | "import";
+const WIZARD_STEPS = ["hello", "connection", "agents", "import"] as const;
+type WizardStep = (typeof WIZARD_STEPS)[number];
 const NO_ENVIRONMENTS: readonly EnvironmentId[] = [];
 
 const AGENT_ONBOARDING_THREAD_ID = ThreadId.make("onboarding-agent-setup");
-const ONBOARDING_STAGES = ["connect", "agents", "projects"] as const;
+/** Stepper labels, one per entry of `WIZARD_STEPS`. */
+const ONBOARDING_STAGES = ["hello", "connect", "agents", "projects"] as const;
 const SCAN_LIMIT_MESSAGE =
   "hmm, we hit the scan limit — some projects or conversations may be missing 3:";
 
@@ -103,7 +109,7 @@ export function WelcomeWizard({
   readonly onDone: (projectRef?: ScopedProjectRef) => void;
 }) {
   const completeOnboarding = useCompleteOnboarding();
-  const [step, setStep] = useState<WizardStep>("connection");
+  const [step, setStep] = useState<WizardStep>("hello");
   const { environments } = useEnvironments();
   const [selection, setSelection] = useState<ReadonlySet<EnvironmentId> | null>(null);
   const autoSelectedComputers = useRef(new Set<EnvironmentId>());
@@ -140,7 +146,7 @@ export function WelcomeWizard({
     setSetupIds(ids);
     setStep("agents");
   };
-  const stageIndex = step === "agents" ? 1 : step === "import" ? 2 : 0;
+  const stageIndex = WIZARD_STEPS.indexOf(step);
   const finish = useCallback(
     (projectRef?: ScopedProjectRef) => {
       if (finishingPromiseRef.current !== null) return finishingPromiseRef.current;
@@ -206,13 +212,16 @@ export function WelcomeWizard({
             isStepDisabled={(index) => isImporting || index >= stageIndex}
             onStepChange={(index) => {
               if (isImporting || index > stageIndex) return;
-              setStep(index === 0 ? "connection" : "agents");
+              const target = WIZARD_STEPS[index];
+              if (target) setStep(target);
             }}
           />
         </WizardHeader>
 
         <WizardPanel holdHeight={isLoadingProjects}>
-          {step === "connection" ? (
+          {step === "hello" ? (
+            <HelloStep onContinue={() => setStep("connection")} />
+          ) : step === "connection" ? (
             <ConnectionStep
               expandPairingInitially={!localAvailable && !hasCloudPublicConfig()}
               selectedIds={selectedIds}
@@ -253,7 +262,64 @@ export function WelcomeWizard({
   );
 }
 
-// ── Step 1: connection choice ────────────────────────────────
+// ── Step 1: hello ────────────────────────────────────────────
+
+const HELLO_CARDS = [
+  {
+    icon: FolderIcon,
+    title: "pick a project",
+    body: "point me at a folder on this machine or a remote one",
+  },
+  {
+    icon: MessageCircleIcon,
+    title: "say hi to an agent",
+    body: "type what you want, i'll pass it to clod, codex or friends",
+  },
+  {
+    icon: EyeIcon,
+    title: "watch it work",
+    body: "i show every file it sniffs and every command it runs",
+  },
+] as const;
+
+function HelloStep({ onContinue }: { readonly onContinue: () => void }) {
+  return (
+    <>
+      {/* The step mounts once, so a plain class gives a single hop (see spinner.css). */}
+      <CatFace expression="happy" className="mark-hop size-16 text-accent/60" />
+      <div className="mt-4">
+        <StepShell
+          title="hi! i'm your :3 code cat, mrrp"
+          description="i'll help you run coding agents. here's how it goes ^w^"
+        />
+      </div>
+      <ul className="mt-5 grid gap-2 sm:grid-cols-3">
+        {HELLO_CARDS.map((card) => (
+          <li
+            key={card.title}
+            className="flex gap-3 rounded-lg border border-border bg-background px-3 py-3 sm:flex-col sm:gap-2"
+          >
+            <card.icon className="size-4 shrink-0 text-muted-foreground" aria-hidden />
+            <span className="min-w-0">
+              <span className="block text-sm font-medium">{card.title}</span>
+              <span className="mt-0.5 block text-xs leading-relaxed text-muted-foreground">
+                {card.body}
+              </span>
+            </span>
+          </li>
+        ))}
+      </ul>
+      <div className="mt-6 flex justify-end">
+        <Button autoFocus onClick={onContinue}>
+          let's go :3
+          <ArrowRightIcon className="size-3.5" />
+        </Button>
+      </div>
+    </>
+  );
+}
+
+// ── Step 2: connection choice ────────────────────────────────
 
 function ConnectionStep({
   autoSelectedComputers,
