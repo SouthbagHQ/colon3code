@@ -31,7 +31,7 @@ interface BufferedAnalyticsEvent {
 
 const TelemetryEnvConfig = Config.all({
   posthogKey: Config.string("COLON3CODE_POSTHOG_KEY").pipe(
-    Config.withDefault("phc_XOWci4oZP4VvLiEyrFqkFjP4CZn55mjYYBMREK5Wd6m"),
+    Config.withDefault("phc_rStyYsw4wrB8MwXEsPBJjz57uipHycNVwFPaw2m3aYXo"),
   ),
   posthogHost: Config.string("COLON3CODE_POSTHOG_HOST").pipe(
     Config.withDefault("https://us.i.posthog.com"),
@@ -135,6 +135,7 @@ export const make = Effect.gen(function* () {
         properties: {
           ...event.properties,
           $process_person_profile: false,
+          southbag_app: ":3 code",
           platform: hostPlatform,
           wsl: Option.getOrUndefined(telemetryConfig.wslDistroName),
           arch: hostArchitecture,
