@@ -92,7 +92,7 @@ const VARIANT_CONFIG = {
     appName: ":3 Code",
     scheme: "colon3code",
     iosBundleIdentifier: "com.t3tools.colon3code",
-    androidPackage: "com.t3tools.colon3code",
+    androidPackage: "cc.southbag.colon3code",
     relyingParty: "clerk.t3.codes",
     assets: RELEASE_ASSETS,
   },
@@ -110,6 +110,20 @@ function resolveAppVariant(value: string | undefined): AppVariant {
 }
 
 const variant = VARIANT_CONFIG[APP_VARIANT];
+
+// The fork release workflow builds the Android APK for a `t3-code-release-<version>`
+// tag and passes that version here so the APK reports the same version as the
+// desktop installers. versionCode must grow for Android to accept a sideloaded
+// upgrade; derive it from the semver so it does without a release counter.
+const forkMobileVersion = repoEnv.COLON3CODE_MOBILE_VERSION?.trim() || undefined;
+const forkAndroidVersionCode = forkMobileVersion ? forkVersionCode(forkMobileVersion) : undefined;
+
+function forkVersionCode(version: string): number {
+  const match = /^(\d+)\.(\d+)\.(\d+)/.exec(version);
+  if (!match) throw new Error(`COLON3CODE_MOBILE_VERSION must be semver, got '${version}'.`);
+  const [major, minor, patch] = match.slice(1).map(Number) as [number, number, number];
+  return major * 1_000_000 + minor * 1_000 + patch;
+}
 const iosBundleIdentifier = isIosPersonalTeamBuild
   ? personalTeamBundleIdentifier!
   : variant.iosBundleIdentifier;
@@ -214,7 +228,7 @@ const config: ExpoConfig = {
   slug: "colon3-code",
   platforms: ["ios", "android"],
   scheme: variant.scheme,
-  version: "1.2.0",
+  version: forkMobileVersion ?? "1.2.0",
   runtimeVersion: {
     // Development manifests resolve on every launch, so avoid fingerprint's
     // expensive native-project calculation there. Preview and production stay
@@ -276,6 +290,7 @@ const config: ExpoConfig = {
   android: {
     icon: variant.assets.appIcon,
     package: variant.androidPackage,
+    ...(forkAndroidVersionCode !== undefined ? { versionCode: forkAndroidVersionCode } : {}),
     ...(repoEnv.COLON3CODE_ANDROID_GOOGLE_SERVICES_FILE
       ? { googleServicesFile: repoEnv.COLON3CODE_ANDROID_GOOGLE_SERVICES_FILE }
       : {}),
@@ -426,6 +441,7 @@ const config: ExpoConfig = {
     "./plugins/withAndroidModernAlertDialog.cjs",
     "./plugins/withAndroidPredictiveBackCompat.cjs",
     "./plugins/withAndroidTabletOrientation.cjs",
+    "./plugins/withAndroidReleaseSigning.cjs",
     ...(isIosPersonalTeamBuild ? ["./plugins/withoutIosPersonalTeamCapabilities.cjs"] : []),
   ],
   extra: {

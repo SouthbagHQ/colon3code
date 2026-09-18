@@ -3,8 +3,9 @@ name: Fork release
 # The fork's release train. Upstream's release.yml needs the T3 Connect relay,
 # Clerk, npm trusted publishing, Vercel and Blacksmith runners, none of which
 # this fork has. This workflow builds the same six desktop installers and CLI
-# archives on GitHub-hosted runners, unsigned, and attaches them to a GitHub
-# Release for the pushed `t3-code-release-<version>` tag.
+# archives on GitHub-hosted runners, unsigned, plus a signed Android APK, and
+# attaches them to a GitHub Release for the pushed `t3-code-release-<version>`
+# tag. There is no iOS build: it needs a Mac runner and Apple signing.
 
 on:
   push:
@@ -240,6 +241,99 @@ jobs:
       cli_archive: true
       timeout_minutes: 90
 
+  # Builds the APK with expo prebuild + Gradle on the runner, no EAS or Expo
+  # account involved. OTA updates are disabled so the APK never pulls
+  # upstream's JS bundles from their EAS project. Signing uses the keystore in
+  # the ANDROID_KEYSTORE_* repository secrets; the keystore must stay the same
+  # across releases or Android refuses to upgrade an installed copy.
+  android:
+    name: Android APK
+    needs: [preflight]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    env:
+      APP_VARIANT: production
+      COLON3CODE_MOBILE_VERSION: ${{ needs.preflight.outputs.version }}
+      COLON3CODE_MOBILE_UPDATES_ENABLED: "0"
+      COLON3CODE_ANDROID_KEYSTORE_PATH: ${{ github.workspace }}/apps/mobile/android/release.keystore
+      COLON3CODE_ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+      COLON3CODE_ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+      COLON3CODE_ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+      EXPO_NO_GIT_STATUS: "1"
+      NODE_OPTIONS: --max-old-space-size=8192
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ needs.preflight.outputs.ref }}
+          sparse-checkout: |
+            /*
+            !/.repos/
+          sparse-checkout-cone-mode: false
+
+      - name: Setup Vite+
+        uses: voidzero-dev/setup-vp@v1
+        with:
+          node-version-file: package.json
+          cache: true
+          run-install: |
+            args:
+              - --filter=@t3tools/mobile...
+
+      - name: Expose pnpm
+        run: |
+          pnpm_version="$(node --print "require('./package.json').packageManager.split('@').pop()")"
+          vp_pnpm_bin="$HOME/.vite-plus/package_manager/pnpm/$pnpm_version/pnpm/bin"
+          echo "$vp_pnpm_bin" >> "$GITHUB_PATH"
+          "$vp_pnpm_bin/pnpm" --version
+
+      - name: Setup Java
+        uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: 17
+
+      - name: Setup Gradle cache
+        uses: gradle/actions/setup-gradle@v5
+
+      - name: Generate the Android project
+        working-directory: apps/mobile
+        run: pnpm exec expo prebuild --clean --platform android --no-install
+
+      - name: Write release keystore
+        shell: bash
+        env:
+          ANDROID_KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+        run: |
+          set -euo pipefail
+          if [[ -z "$ANDROID_KEYSTORE_BASE64" ]]; then
+            echo "ANDROID_KEYSTORE_BASE64 secret is not set." >&2
+            exit 1
+          fi
+          printf '%s' "$ANDROID_KEYSTORE_BASE64" | base64 -d > "$COLON3CODE_ANDROID_KEYSTORE_PATH"
+
+      - name: Build release APK
+        working-directory: apps/mobile/android
+        run: ./gradlew :app:assembleRelease --no-daemon
+
+      - name: Collect APK
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p release-assets
+          cp apps/mobile/android/app/build/outputs/apk/release/app-release.apk \
+            "release-assets/colon3-code-${{ needs.preflight.outputs.version }}-android.apk"
+          rm -f "$COLON3CODE_ANDROID_KEYSTORE_PATH"
+          ls -la release-assets
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v7
+        with:
+          name: android-apk
+          path: release-assets/*.apk
+          if-no-files-found: error
+          retention-days: 1
+
   release:
     name: Publish GitHub Release
     needs:
@@ -251,6 +345,7 @@ jobs:
         desktop_linux_arm64,
         desktop_win_x64,
         desktop_win_arm64,
+        android,
       ]
     runs-on: ubuntu-24.04
     timeout-minutes: 30
@@ -287,6 +382,12 @@ jobs:
         with:
           pattern: cli-*
           merge-multiple: true
+          path: release-assets
+
+      - name: Download Android APK
+        uses: actions/download-artifact@v8
+        with:
+          name: android-apk
           path: release-assets
 
       - name: Write CLI archive checksums
@@ -350,6 +451,7 @@ jobs:
             release-assets/*.blockmap
             release-assets/*.yml
             release-assets/*.tar.gz
+            release-assets/*.apk
             release-assets/SHA256SUMS
           fail_on_unmatched_files: true
           token: ${{ github.token }}
