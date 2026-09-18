@@ -13,6 +13,7 @@ import {
 import { AppState, Appearance, Platform, useColorScheme } from "react-native";
 
 import { useAtomSet, useAtomValue } from "@effect/atom-react";
+import { reportAtomCommandResult } from "@t3tools/client-runtime/state/runtime";
 import { AsyncResult } from "effect/unstable/reactivity";
 
 import { ScopedTheme, ScopedVariables, Uniwind } from "uniwind";
@@ -138,9 +139,18 @@ export function AppearancePreferencesProvider(props: { readonly children: ReactN
     () => resolveAppearance({ baseFontSize, codeFontSize, codeWordBreak, terminalFontSize }),
     [baseFontSize, codeFontSize, codeWordBreak, terminalFontSize],
   );
-  // Preference patches are optimistic. Keep controls interactive while a save is
-  // in flight so rapid theme choices can supersede one another immediately.
-  const isReady = AsyncResult.isSuccess(preferencesResult);
+  // Settled, not successful. Preference patches are optimistic, so controls stay
+  // interactive while a save is in flight; a read that *failed* has already
+  // fallen back to the defaults being rendered, so it is just as ready. Gating
+  // on success alone left a failed read indistinguishable from a read still in
+  // flight, which pinned the app behind the splash screen (see App.tsx) and
+  // disabled every appearance control, with nothing on screen to say why.
+  const isReady = AsyncResult.isNotInitial(preferencesResult);
+  useEffect(() => {
+    if (AsyncResult.isFailure(preferencesResult)) {
+      reportAtomCommandResult(preferencesResult, { label: "appearance preference load" });
+    }
+  }, [preferencesResult]);
   const runtimeState = useMemo<MobileThemeRuntimeState>(
     () => ({
       baseFontSize,
