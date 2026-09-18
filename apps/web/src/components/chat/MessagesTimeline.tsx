@@ -101,6 +101,7 @@ import {
 } from "../../lib/diffRendering";
 import { PREFERRED_HIGHLIGHTER } from "../../lib/syntaxHighlighting";
 import ChatMarkdown, { ChatMarkdownAssetImage } from "../ChatMarkdown";
+import { CatFace } from "../CatFace";
 import { Colon3Wordmark } from "../Colon3Wordmark";
 import {
   BotIcon,
@@ -242,6 +243,7 @@ import { formatChatTimestampTooltip, formatDayAwareTimestamp } from "../../times
 import { SkillInlineText } from "./SkillInlineText";
 import { deriveAgentSpawnSummary } from "./agentSpawnSummary";
 import { formatWorkspaceRelativePath } from "../../filePathDisplay";
+import { workingElapsedMs, workingLabelPrefix } from "./workingLabel";
 import {
   buildReviewCommentRenderablePatch,
   formatReviewCommentFence,
@@ -2236,9 +2238,7 @@ function WorkingTimelineRow({ row }: { row: Extract<TimelineRow, { kind: "workin
               </ActivityShimmerOverlay>
             </>
           ) : row.createdAt ? (
-            <>
-              hang tight, working for <WorkingTimer createdAt={row.createdAt} />
-            </>
+            <WorkingTimer createdAt={row.createdAt} />
           ) : (
             "working on it… ^w^"
           )}
@@ -2273,13 +2273,22 @@ function CompactingLabel() {
 // does not create a React commit every second while a response is streaming.
 // ---------------------------------------------------------------------------
 
-/** Live elapsed time for the "working for" label. */
+/** Live "working" label: the prefix shifts by elapsed bucket and the timer ticks
+ *  every second, both written straight to their text nodes. */
 function WorkingTimer({ createdAt }: { createdAt: string }) {
+  const prefixRef = useRef<HTMLSpanElement>(null);
   const textRef = useRef<HTMLSpanElement>(null);
+  const initialPrefix = workingLabelPrefixNow(createdAt);
   const initialText = formatWorkingTimerNow(createdAt);
 
   useEffect(() => {
     const updateText = () => {
+      if (prefixRef.current) {
+        const prefix = workingLabelPrefixNow(createdAt);
+        if (prefixRef.current.textContent !== prefix) {
+          prefixRef.current.textContent = prefix;
+        }
+      }
       if (textRef.current) {
         textRef.current.textContent = formatWorkingTimerNow(createdAt);
       }
@@ -2290,9 +2299,12 @@ function WorkingTimer({ createdAt }: { createdAt: string }) {
   }, [createdAt]);
 
   return (
-    <span ref={textRef} className="tabular-nums">
-      {initialText}
-    </span>
+    <>
+      <span ref={prefixRef}>{initialPrefix}</span>{" "}
+      <span ref={textRef} className="tabular-nums">
+        {initialText}
+      </span>
+    </>
   );
 }
 
@@ -3551,6 +3563,10 @@ function formatWorkingTimerNow(startIso: string): string {
   return formatWorkingTimer(startIso, new Date().toISOString()) ?? "0s";
 }
 
+function workingLabelPrefixNow(startIso: string): string {
+  return workingLabelPrefix(workingElapsedMs(startIso, Date.now()));
+}
+
 type WorkEntryIconName =
   | "bot"
   | "brain"
@@ -3568,6 +3584,7 @@ type WorkEntryIconName =
   | "terminal"
   | "pull-request"
   | "colon3-code"
+  | "sad-face"
   | "wrench"
   | "x"
   | "zap";
@@ -3789,6 +3806,8 @@ function WorkEntryIcon({ name, className }: { name: WorkEntryIconName; className
       return <CheckIcon className={className} aria-hidden />;
     case "circle-alert":
       return <CircleAlertIcon className={className} aria-hidden />;
+    case "sad-face":
+      return <CatFace expression="sad" className={className} />;
     case "eye":
       return <EyeIcon className={className} aria-hidden />;
     case "globe":
@@ -3818,7 +3837,7 @@ function workToneIcon(tone: TimelineWorkEntry["tone"]): {
 } {
   if (tone === "error") {
     return {
-      iconName: "circle-alert",
+      iconName: "sad-face",
       className: "text-foreground",
     };
   }
@@ -4194,8 +4213,11 @@ const PlainWorkEntryRow = memo(function PlainWorkEntryRow(props: {
   const showDestructiveRowStyle =
     showFailedIndicator &&
     (workEntrySignalsSevereFailure(workEntry) || !workLogEntryIsToolLike(workEntry));
-  const entryIconName =
-    showWarningIndicator || showDestructiveRowStyle ? "circle-alert" : workEntryIconName(workEntry);
+  const entryIconName = showWarningIndicator
+    ? "circle-alert"
+    : showDestructiveRowStyle
+      ? "sad-face"
+      : workEntryIconName(workEntry);
   const entryToolIcon =
     showWarningIndicator || showDestructiveRowStyle
       ? undefined

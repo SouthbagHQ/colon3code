@@ -1270,7 +1270,7 @@ describe("buildThreadFeed", () => {
       title: "Call MCP tool",
       item: { server: "colon3-code", tool: "preview_navigate" },
       status: "inProgress",
-      displayName: "Navigating the preview browser",
+      displayName: "navigating the preview browser",
       icon: "browser",
     },
     {
@@ -1279,7 +1279,7 @@ describe("buildThreadFeed", () => {
       title: "Call MCP tool",
       item: { server: "colon3-code", tool: "task_status" },
       status: "inProgress",
-      displayName: "Getting delegated task status",
+      displayName: "getting delegated task status",
       icon: "colon3-code",
     },
     {
@@ -1288,7 +1288,7 @@ describe("buildThreadFeed", () => {
       title: "mcp__colon3-code__preview_snapshot",
       item: undefined,
       status: "inProgress",
-      displayName: "Taking a snapshot of the preview page",
+      displayName: "taking a snapshot of the preview page",
       icon: "browser",
     },
     {
@@ -1297,7 +1297,7 @@ describe("buildThreadFeed", () => {
       title: undefined,
       item: undefined,
       status: "inProgress",
-      displayName: "Getting delegated task status",
+      displayName: "getting delegated task status",
       icon: "colon3-code",
     },
     {
@@ -1306,9 +1306,9 @@ describe("buildThreadFeed", () => {
       title: "Call MCP tool",
       item: { server: "colon3-code", tool: "preview_click" },
       status: undefined,
-      displayName: "Clicking in the preview browser",
-      liveDisplayName: "Clicking in the preview browser",
-      settledDisplayName: "Clicked in the preview browser",
+      displayName: "clicking in the preview browser",
+      liveDisplayName: "clicking in the preview browser",
+      settledDisplayName: "clicked in the preview browser",
       icon: "browser",
     },
     {
@@ -1317,9 +1317,9 @@ describe("buildThreadFeed", () => {
       title: "Call MCP tool",
       item: { server: "colon3-code", tool: "task_status" },
       status: undefined,
-      displayName: "Getting delegated task status",
-      liveDisplayName: "Getting delegated task status",
-      settledDisplayName: "Got delegated task status",
+      displayName: "getting delegated task status",
+      liveDisplayName: "getting delegated task status",
+      settledDisplayName: "got delegated task status",
       icon: "colon3-code",
     },
   ])(
@@ -1454,7 +1454,7 @@ describe("buildThreadFeed", () => {
       type: "activity-group",
       activities: [
         {
-          summary: "Clicked in the preview browser",
+          summary: "clicked in the preview browser",
           detail,
           workEntry: { label: "MCP tool call completed", toolTitle: "MCP tool call" },
         },
@@ -1477,7 +1477,7 @@ describe("buildThreadFeed", () => {
     ).toMatchObject([
       {
         type: "work-toggle",
-        summary: "Clicking in the preview browser",
+        summary: "clicking in the preview browser",
         summaryToolIcon: "browser",
         live: true,
       },
@@ -1487,15 +1487,15 @@ describe("buildThreadFeed", () => {
   it.each([
     {
       status: "completed",
-      displayName: "Clicked in the preview browser",
-      liveDisplayName: "Clicking in the preview browser",
+      displayName: "clicked in the preview browser",
+      liveDisplayName: "clicking in the preview browser",
       detail: "Clicked Continue",
       hasFailure: false,
     },
     {
       status: "failed",
-      displayName: "Failed to click in the preview browser",
-      liveDisplayName: "Failed to click in the preview browser",
+      displayName: "failed to click in the preview browser",
+      liveDisplayName: "failed to click in the preview browser",
       detail: "Timed out waiting for Continue",
       hasFailure: true,
     },
@@ -1555,7 +1555,7 @@ describe("buildThreadFeed", () => {
           groupId,
           hiddenCount: 1,
           expanded: true,
-          summary: "Clicking in the preview browser",
+          summary: "clicking in the preview browser",
           summaryToolIcon: "browser",
           live: true,
           shimmer: true,
@@ -1566,7 +1566,7 @@ describe("buildThreadFeed", () => {
           activities: [
             {
               id: "preview-click-started",
-              summary: "Clicking in the preview browser",
+              summary: "clicking in the preview browser",
               lifecycleStatus: "inProgress",
               live: true,
             },
@@ -1650,8 +1650,8 @@ describe("buildThreadFeed", () => {
   );
 
   it.each([
-    [0, "Used browser 3 times", "browser"],
-    [2, "Ran 2 commands and used browser 3 times", "mixed"],
+    [0, "poked the browser 3 times", "browser"],
+    [2, "pounced on 2 commands and poked the browser 3 times", "mixed"],
   ] as const)(
     "separates browser counts from %s completed commands",
     (commandCount, summary, summaryKind) => {
@@ -2031,7 +2031,7 @@ describe("buildThreadFeed", () => {
     expect(deriveThreadFeedPresentation(feed, thread.latestTurn, new Set())).toMatchObject([
       {
         type: "work-toggle",
-        summary: "Ran 2 commands",
+        summary: "pounced on 2 commands",
         hiddenCount: 2,
         hasFailure: true,
       },
@@ -2114,7 +2114,7 @@ describe("buildThreadFeed", () => {
       groupId: "work-group:activity-1",
       hiddenCount: 3,
       expanded: false,
-      summary: "Ran 3 commands",
+      summary: "pounced on 3 commands",
       toolSurface: "computer",
       toolIcon: {
         _tag: "native-app",
@@ -2657,7 +2657,7 @@ describe("buildThreadFeed", () => {
     ).toMatchObject({
       type: "work-toggle",
       hiddenCount: 2,
-      summary: "Ran 2 commands",
+      summary: "pounced on 2 commands",
       live: false,
     });
 

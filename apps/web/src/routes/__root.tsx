@@ -17,6 +17,7 @@ import { useEffect, useEffectEvent, useMemo, useRef, useState } from "react";
 import { APP_BASE_NAME, APP_DISPLAY_NAME, APP_STAGE_LABEL, APP_VERSION } from "../branding";
 import { resolveServerBackedAppDisplayName } from "../branding.logic";
 import { AppSidebarLayout } from "../components/AppSidebarLayout";
+import { CatFace } from "../components/CatFace";
 import { CommandPalette } from "../components/CommandPalette";
 import { CustomSnoozeDialogHost } from "../components/CustomSnoozeDialog";
 import { ConfirmDialogHost } from "../components/ConfirmDialogHost";
@@ -119,6 +120,7 @@ function RootRouteNotFoundView() {
   return (
     <main className="flex min-h-0 min-w-0 flex-1 items-center justify-center p-6">
       <div className="flex max-w-sm flex-col items-center gap-4 text-center">
+        <CatFace expression="sad" className="size-14 text-accent/35" aria-hidden />
         <h1 className="text-lg font-medium text-foreground">hmm, page not found 3:</h1>
         <p className="text-sm text-muted-foreground">
           this link doesn’t point to a page in {APP_DISPLAY_NAME}. let’s head home and pick a
@@ -375,9 +377,12 @@ function RootRouteErrorView({ error }: ErrorComponentProps) {
       </div>
 
       <section className="relative w-full max-w-xl rounded-2xl border border-border/80 bg-card/90 p-6 shadow-2xl shadow-black/20 backdrop-blur-md sm:p-8">
-        <p className="text-[11px] font-semibold tracking-[0.18em] text-muted-foreground uppercase">
-          {APP_DISPLAY_NAME}
-        </p>
+        <div className="flex items-center gap-3">
+          <CatFace expression="dizzy" className="size-8 text-2xl text-accent/35" />
+          <p className="text-[11px] font-semibold tracking-[0.18em] text-muted-foreground uppercase">
+            {APP_DISPLAY_NAME}
+          </p>
+        </div>
         <h1 className="mt-3 text-2xl font-semibold tracking-tight sm:text-3xl">
           oops, something went wrong 3:
         </h1>

@@ -613,6 +613,14 @@ html[data-mobile-composer-route-transition="true"]::view-transition-old(t3-mobil
   body {
     @apply text-foreground relative;
   }
+  /* Highlight and caret follow the rose accent instead of engine-default blue.
+     Selection colour is left unset so the text keeps its own foreground. */
+  ::selection {
+    background-color: color-mix(in oklab, var(--primary) 25%, transparent);
+  }
+  :where(input, textarea, [contenteditable]) {
+    caret-color: var(--primary);
+  }
 }
 
 @layer components {

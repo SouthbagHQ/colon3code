@@ -897,9 +897,9 @@ describe("deriveWorkLogEntries", () => {
   });
 
   it.each([
-    ["inProgress", "Clicking in the preview browser"],
-    ["completed", "Clicked in the preview browser"],
-    ["failed", "Failed to click in the preview browser"],
+    ["inProgress", "clicking in the preview browser"],
+    ["completed", "clicked in the preview browser"],
+    ["failed", "failed to click in the preview browser"],
   ] as const)(
     "preserves Claude MCP identity behind generic titles while %s",
     (status, displayName) => {
@@ -967,7 +967,7 @@ describe("deriveWorkLogEntries", () => {
       pageUrl: "https://example.com/result",
     });
     expect(resolveWorkEntryToolPresentation(entry!)?.displayName).toBe(
-      "Took a snapshot of the preview page",
+      "took a snapshot of the preview page",
     );
   });
 

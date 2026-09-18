@@ -162,8 +162,8 @@ describe("thread notifications", () => {
   );
 
   it.each([
-    ["input", "input needed"],
-    ["approval", "approval needed"],
+    ["input", "psst, question for you :3"],
+    ["approval", "can i? :3"],
     ["sessionError", "aw, thread failed 3:"],
     ["turnError", "aw, thread failed 3:"],
   ] as const)("uses the same %s event for in-app and desktop alerts", async (event, title) => {

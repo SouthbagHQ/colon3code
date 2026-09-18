@@ -48,8 +48,7 @@ function singleToolCallLabel(entry: WorkLogEntry): string {
   if (toolPresentation) return toolPresentation.displayName;
   const command = entry.command?.trim();
   if (command) return command;
-  const heading = normalizeCompactToolLabel(entry.toolTitle || entry.label);
-  return `${heading.charAt(0).toUpperCase()}${heading.slice(1)}`;
+  return normalizeCompactToolLabel(entry.toolTitle || entry.label);
 }
 
 export function workEntryDisplayLabel(entry: WorkLogEntry, workspaceRoot: string | undefined) {
@@ -64,8 +63,7 @@ export function workEntryDisplayLabel(entry: WorkLogEntry, workspaceRoot: string
       ? path
       : `${path} +${entry.changedFiles!.length - 1} more`;
   }
-  const heading = normalizeCompactToolLabel(entry.toolTitle || entry.label);
-  return `${heading.charAt(0).toUpperCase()}${heading.slice(1)}`;
+  return normalizeCompactToolLabel(entry.toolTitle || entry.label);
 }
 
 export function liveWorkEntryLabel(

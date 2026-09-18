@@ -75,54 +75,54 @@ const T3_MCP_TOOL_LABELS: Record<
   string,
   readonly [action: string, running: string, completed: string, detail: string]
 > = {
-  link_pull_request: ["Link", "Linking", "Linked", "a pull request"],
-  unlink_pull_request: ["Unlink", "Unlinking", "Unlinked", "a pull request"],
-  list_thread_pull_requests: ["Check", "Checking", "Checked", "linked pull requests"],
-  orchestrator_capabilities: ["Get", "Getting", "Got", "orchestration capabilities"],
-  delegate_task: ["Delegate", "Delegating", "Delegated", "a child task"],
-  task_status: ["Get", "Getting", "Got", "delegated task status"],
-  task_cancel: ["Cancel", "Canceling", "Canceled", "delegated task"],
-  schedule_task: ["Schedule", "Scheduling", "Scheduled", "a recurring task"],
-  list_scheduled_tasks: ["List", "Listing", "Listed", "scheduled tasks"],
-  update_scheduled_task: ["Update", "Updating", "Updated", "a scheduled task"],
-  delete_scheduled_task: ["Delete", "Deleting", "Deleted", "a scheduled task"],
-  create_threads: ["Create", "Creating", "Created", "T3 threads"],
-  t3_thread_start: ["Start", "Starting", "Started", "a T3 thread"],
-  t3_thread_list: ["List", "Listing", "Listed", "T3 threads"],
-  t3_thread_read: ["Read", "Reading", "Read", "a T3 thread"],
-  t3_thread_send: ["Send", "Sending", "Sent", "to a T3 thread"],
-  t3_thread_wait: ["Wait", "Waiting", "Waited", "for a T3 thread"],
-  t3_thread_interrupt: ["Interrupt", "Interrupting", "Interrupted", "a T3 thread"],
-  t3_worktree_handoff: ["Hand off", "Handing off", "Handed off", "thread to a git worktree"],
-  t3_worktree_status: ["Get", "Getting", "Got", "thread worktree status"],
-  preview_status: ["Get", "Getting", "Got", "preview browser status"],
-  preview_open: ["Open", "Opening", "Opened", "a page in the preview browser"],
-  preview_navigate: ["Navigate", "Navigating", "Navigated", "the preview browser"],
+  link_pull_request: ["link", "linking", "linked", "a pull request"],
+  unlink_pull_request: ["unlink", "unlinking", "unlinked", "a pull request"],
+  list_thread_pull_requests: ["check", "checking", "checked", "linked pull requests"],
+  orchestrator_capabilities: ["get", "getting", "got", "orchestration capabilities"],
+  delegate_task: ["delegate", "delegating", "delegated", "a child task"],
+  task_status: ["get", "getting", "got", "delegated task status"],
+  task_cancel: ["cancel", "canceling", "canceled", "delegated task"],
+  schedule_task: ["schedule", "scheduling", "scheduled", "a recurring task"],
+  list_scheduled_tasks: ["list", "listing", "listed", "scheduled tasks"],
+  update_scheduled_task: ["update", "updating", "updated", "a scheduled task"],
+  delete_scheduled_task: ["delete", "deleting", "deleted", "a scheduled task"],
+  create_threads: ["create", "creating", "created", "T3 threads"],
+  t3_thread_start: ["start", "starting", "started", "a T3 thread"],
+  t3_thread_list: ["list", "listing", "listed", "T3 threads"],
+  t3_thread_read: ["read", "reading", "read", "a T3 thread"],
+  t3_thread_send: ["send", "sending", "sent", "to a T3 thread"],
+  t3_thread_wait: ["wait", "waiting", "waited", "for a T3 thread"],
+  t3_thread_interrupt: ["interrupt", "interrupting", "interrupted", "a T3 thread"],
+  t3_worktree_handoff: ["hand off", "handing off", "handed off", "thread to a git worktree"],
+  t3_worktree_status: ["get", "getting", "got", "thread worktree status"],
+  preview_status: ["get", "getting", "got", "preview browser status"],
+  preview_open: ["open", "opening", "opened", "a page in the preview browser"],
+  preview_navigate: ["navigate", "navigating", "navigated", "the preview browser"],
   preview_snapshot: [
-    "Take a snapshot of",
-    "Taking a snapshot of",
-    "Took a snapshot of",
+    "take a snapshot of",
+    "taking a snapshot of",
+    "took a snapshot of",
     "the preview page",
   ],
-  preview_click: ["Click", "Clicking", "Clicked", "in the preview browser"],
-  preview_press: ["Press", "Pressing", "Pressed", "a key in the preview browser"],
-  preview_type: ["Type", "Typing", "Typed", "in the preview browser"],
-  preview_scroll: ["Scroll", "Scrolling", "Scrolled", "the preview browser"],
-  preview_resize: ["Resize", "Resizing", "Resized", "the preview browser"],
-  preview_evaluate: ["Evaluate", "Evaluating", "Evaluated", "script in the preview browser"],
-  preview_wait_for: ["Wait", "Waiting", "Waited", "for the preview page"],
-  preview_set_appearance: ["Set", "Setting", "Set", "preview browser appearance"],
-  preview_recording_start: ["Start", "Starting", "Started", "recording the preview browser"],
-  preview_recording_stop: ["Stop", "Stopping", "Stopped", "recording the preview browser"],
-  device_list: ["List", "Listing", "Listed", "simulators and emulators"],
-  device_open: ["Open", "Opening", "Opened", "a device in the Device panel"],
+  preview_click: ["click", "clicking", "clicked", "in the preview browser"],
+  preview_press: ["press", "pressing", "pressed", "a key in the preview browser"],
+  preview_type: ["type", "typing", "typed", "in the preview browser"],
+  preview_scroll: ["scroll", "scrolling", "scrolled", "the preview browser"],
+  preview_resize: ["resize", "resizing", "resized", "the preview browser"],
+  preview_evaluate: ["evaluate", "evaluating", "evaluated", "script in the preview browser"],
+  preview_wait_for: ["wait", "waiting", "waited", "for the preview page"],
+  preview_set_appearance: ["set", "setting", "set", "preview browser appearance"],
+  preview_recording_start: ["start", "starting", "started", "recording the preview browser"],
+  preview_recording_stop: ["stop", "stopping", "stopped", "recording the preview browser"],
+  device_list: ["list", "listing", "listed", "simulators and emulators"],
+  device_open: ["open", "opening", "opened", "a device in the device panel"],
   device_screenshot: [
-    "Take a screenshot of",
-    "Taking a screenshot of",
-    "Took a screenshot of",
+    "take a screenshot of",
+    "taking a screenshot of",
+    "took a screenshot of",
     "the device",
   ],
-  device_close: ["Close", "Closing", "Closed", "a device"],
+  device_close: ["close", "closing", "closed", "a device"],
 };
 
 const PR_TOOL_ACTIONS: Readonly<Record<string, ToolGroupAction>> = {
@@ -150,11 +150,11 @@ function resolveT3McpToolPresentation(
       : status === "completed"
         ? completed
         : status === "failed"
-          ? `Failed to ${action.toLowerCase()}`
+          ? `failed to ${action}`
           : status === "declined"
-            ? `Declined to ${action.toLowerCase()}`
+            ? `declined to ${action}`
             : status === "stopped"
-              ? `Stopped ${running.toLowerCase()}`
+              ? `stopped ${running}`
               : running;
 
   const actionKind = Object.hasOwn(PR_TOOL_ACTIONS, name) ? PR_TOOL_ACTIONS[name] : undefined;
@@ -565,33 +565,32 @@ function toolGroupActionCount(
 }
 
 function toolGroupActionLabel(action: ToolGroupAction, count: number): string {
+  const one = count === 1;
   switch (action) {
     case "link-pr":
-      return `Linked ${count} ${count === 1 ? "pull request" : "pull requests"}`;
+      return one ? "linked a pull request" : `linked ${count} pull requests`;
     case "unlink-pr":
-      return `Unlinked ${count} ${count === 1 ? "pull request" : "pull requests"}`;
+      return one ? "unlinked a pull request" : `unlinked ${count} pull requests`;
     case "list-prs":
-      return count === 1
-        ? "Checked linked pull requests"
-        : `Checked linked pull requests ${count} times`;
+      return one ? "checked linked pull requests" : `checked linked pull requests ${count} times`;
     case "read":
-      return `Read ${count} ${count === 1 ? "file" : "files"}`;
+      return one ? "sniffed a file" : `sniffed ${count} files`;
     case "edit":
-      return `Changed ${count} ${count === 1 ? "file" : "files"}`;
+      return one ? "scratched a file" : `scratched ${count} files`;
     case "command":
-      return `Ran ${count} ${count === 1 ? "command" : "commands"}`;
+      return one ? "pounced on a command" : `pounced on ${count} commands`;
     case "device":
-      return `Used device controls ${count} ${count === 1 ? "time" : "times"}`;
+      return one ? "poked the device" : `poked the device ${count} times`;
     case "browser":
-      return `Used browser ${count} ${count === 1 ? "time" : "times"}`;
+      return one ? "poked the browser" : `poked the browser ${count} times`;
     case "search":
-      return `Searched the web ${count} ${count === 1 ? "time" : "times"}`;
+      return one ? "peeked at the web" : `peeked at the web ${count} times`;
     case "code-search":
-      return `Searched code ${count} ${count === 1 ? "time" : "times"}`;
+      return one ? "prowled the code" : `prowled the code ${count} times`;
     case "other":
-      return `Used ${count} ${count === 1 ? "tool" : "tools"}`;
+      return one ? "batted at a tool" : `batted at ${count} tools`;
     case "update":
-      return `Received ${count} ${count === 1 ? "update" : "updates"}`;
+      return one ? "got an update" : `got ${count} updates`;
   }
 }
 
@@ -623,15 +622,12 @@ export function summarizeToolGroup(entries: ReadonlyArray<WorkLogPresentationEnt
           : `${sourceNames.slice(0, -1).join(", ")}, and ${sourceNames.at(-1)}`;
     const allIntegrations = sourceValues.every((source) => source.kind === "integration");
     labels.unshift(
-      `Used ${formattedNames}${allIntegrations ? ` ${sources.size === 1 ? "integration" : "integrations"}` : ""}`,
+      `used ${formattedNames}${allIntegrations ? ` ${sources.size === 1 ? "integration" : "integrations"}` : ""}`,
     );
   }
-  const sentenceLabels = labels.map((label, index) =>
-    index === 0 ? label : label.charAt(0).toLowerCase() + label.slice(1),
-  );
-  if (sentenceLabels.length < 2) return sentenceLabels[0] ?? "";
-  if (sentenceLabels.length === 2) return sentenceLabels.join(" and ");
-  return `${sentenceLabels.slice(0, -1).join(", ")}, and ${sentenceLabels.at(-1)}`;
+  if (labels.length < 2) return labels[0] ?? "";
+  if (labels.length === 2) return labels.join(" and ");
+  return `${labels.slice(0, -1).join(", ")}, and ${labels.at(-1)}`;
 }
 
 export function omitSupersededLifecycleMarkers<T>(

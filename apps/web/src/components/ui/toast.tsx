@@ -1,5 +1,6 @@
 "use client";
 
+import { CatFace } from "~/components/CatFace";
 import { Colon3Wordmark } from "~/components/Colon3Wordmark";
 import { Spinner } from "~/components/ui/spinner";
 
@@ -19,7 +20,6 @@ import {
   CheckIcon,
   ChevronDownIcon,
   ChevronUpIcon,
-  CircleAlertIcon,
   CopyIcon,
   InfoIcon,
   TriangleAlertIcon,
@@ -81,8 +81,13 @@ const anchoredToastManager = Toast.createToastManager<ThreadToastData>();
 type ToastId = ReturnType<typeof toastManager.add>;
 const threadToastVisibleTimeoutRemainingMs = new Map<ToastId, number>();
 
+/** The failure face; sized like the svg icons since the wrapper only sizes direct svg children. */
+function SadFaceToastIcon({ className }: { className?: string }) {
+  return <CatFace expression="sad" className={cn("h-lh w-4", className)} />;
+}
+
 const TOAST_ICONS = {
-  error: CircleAlertIcon,
+  error: SadFaceToastIcon,
   info: InfoIcon,
   loading: Spinner,
   success: Colon3Wordmark,

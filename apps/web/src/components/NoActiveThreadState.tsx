@@ -1,10 +1,14 @@
-import { Colon3Wordmark } from "./Colon3Wordmark";
+import { CatFace } from "./CatFace";
 import { Empty, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from "./ui/empty";
 import { SidebarInset } from "./ui/sidebar";
 import { isElectron } from "../env";
+import { usePrimaryEnvironment } from "../state/environments";
 import { WorkspacePageHeader } from "./WorkspacePageHeader";
 
 export function NoActiveThreadState() {
+  // Dozes off while the primary server is away; wakes up as soon as it is back.
+  const connected = usePrimaryEnvironment()?.connection.phase === "connected";
+
   return (
     <SidebarInset className="h-dvh min-h-0 overflow-hidden overscroll-y-none bg-background text-foreground">
       <div className="flex min-h-0 min-w-0 flex-1 flex-col overflow-x-hidden bg-background">
@@ -24,7 +28,11 @@ export function NoActiveThreadState() {
           <div className="w-full max-w-lg px-8 py-12">
             <EmptyHeader className="max-w-none">
               <EmptyMedia>
-                <Colon3Wordmark className="size-14 text-accent/35" aria-hidden />
+                {connected ? (
+                  <CatFace expression="happy" className="size-14 text-accent/35" aria-hidden />
+                ) : (
+                  <CatFace expression="sleepy" className="size-14 text-5xl text-accent/35" />
+                )}
               </EmptyMedia>
               <EmptyTitle className="text-foreground text-xl">
                 {" "}

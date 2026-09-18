@@ -692,11 +692,11 @@ describe("work entry labels", () => {
   };
 
   it.each([
-    ["inProgress", "Clicking in the preview browser"],
-    ["completed", "Clicked in the preview browser"],
-    ["failed", "Failed to click in the preview browser"],
-    ["declined", "Declined to click in the preview browser"],
-    ["stopped", "Stopped clicking in the preview browser"],
+    ["inProgress", "clicking in the preview browser"],
+    ["completed", "clicked in the preview browser"],
+    ["failed", "failed to click in the preview browser"],
+    ["declined", "declined to click in the preview browser"],
+    ["stopped", "stopped clicking in the preview browser"],
   ] as const)("uses the same friendly %s label in both views", (toolLifecycleStatus, label) => {
     const browserEntry = {
       ...entry,
@@ -713,10 +713,10 @@ describe("work entry labels", () => {
   it("uses the active summary state for legacy tools without a lifecycle status", () => {
     const browserEntry = { ...entry, toolTitle: "Colon3-code.preview_click" };
     expect(liveWorkEntryLabel(browserEntry, undefined, true)).toBe(
-      "Clicking in the preview browser",
+      "clicking in the preview browser",
     );
     expect(liveWorkEntryLabel(browserEntry, undefined, false)).toBe(
-      "Clicked in the preview browser",
+      "clicked in the preview browser",
     );
   });
 
@@ -727,16 +727,16 @@ describe("work entry labels", () => {
       toolLifecycleStatus: "completed" as const,
     };
     expect(liveWorkEntryLabel(browserEntry, undefined, true)).toBe(
-      "Clicking in the preview browser",
+      "clicking in the preview browser",
     );
     expect(liveWorkEntryLabel(browserEntry, undefined, false)).toBe(
-      "Clicked in the preview browser",
+      "clicked in the preview browser",
     );
   });
 
   it("keeps custom titles and output for unrecognized tools", () => {
     const unknownEntry = { ...entry, toolTitle: "mcp__github__search_issues" };
-    expect(liveWorkEntryLabel(unknownEntry, undefined, true)).toBe("Mcp__github__search_issues");
+    expect(liveWorkEntryLabel(unknownEntry, undefined, true)).toBe("mcp__github__search_issues");
     expect(workEntryDisplayLabel({ ...unknownEntry, detail: "Found 3 issues" }, undefined)).toBe(
       "Found 3 issues",
     );
@@ -777,8 +777,8 @@ describe("work entry labels", () => {
   );
 
   it.each([
-    ["preview_click", "Clicked in the preview browser"],
-    ["task_status", "Got delegated task status"],
+    ["preview_click", "clicked in the preview browser"],
+    ["task_status", "got delegated task status"],
   ] as const)(
     "renders a settled legacy %s call directly with its completed presentation",
     (tool, label) => {
@@ -1776,7 +1776,7 @@ describe("deriveMessagesTimelineRows", () => {
     expect(rows.at(-2)).toMatchObject({
       kind: "work-toggle",
       hiddenCount: 3,
-      summary: "Ran 3 commands",
+      summary: "pounced on 3 commands",
     });
     expect(rows.at(-1)).toMatchObject({
       kind: "assistant-meta",
@@ -2852,8 +2852,8 @@ describe("deriveMessagesTimelineRows", () => {
   });
 
   it.each([
-    ["tools", "tool", "Used 3 tools"],
-    ["tools and status updates", "info", "Used 2 tools and received 1 update"],
+    ["tools", "tool", "batted at 3 tools"],
+    ["tools and status updates", "info", "batted at 2 tools and got an update"],
   ] as const)("expands %s through the same activity group", (_, middleTone, summary) => {
     const timelineEntries = [
       {
@@ -3079,7 +3079,7 @@ describe("deriveMessagesTimelineRows", () => {
 
     expect(row).toMatchObject({
       kind: "work-toggle",
-      summary: "Used Chrome integration and ran 1 command",
+      summary: "used Chrome integration and pounced on a command",
       toolSurface: "browser",
       toolIcon: {
         _tag: "website",
@@ -3209,8 +3209,8 @@ describe("deriveMessagesTimelineRows", () => {
       expect(rows.find((row) => row.kind === "work-toggle")).toMatchObject({
         hiddenCount: statuses.some((status) => status === "error") ? 2 : 3,
         summary: statuses.some((status) => status === "error")
-          ? "Received 1 update and used 1 tool"
-          : "Used 2 tools and received 1 update",
+          ? "got an update and batted at a tool"
+          : "batted at 2 tools and got an update",
         hasFailure,
       });
       if (statuses.some((status) => status === "error")) {

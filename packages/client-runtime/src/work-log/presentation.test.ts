@@ -165,8 +165,8 @@ describe("summarizeToolGroup", () => {
           ...approvals,
           { label: "Read", tone: "tool", itemType: "dynamic_tool_call" },
         ]),
-      ).toBe("Received 3 updates and used 1 tool");
-      expect(summarizeToolGroup(approvals)).toBe("Received 3 updates");
+      ).toBe("got 3 updates and batted at a tool");
+      expect(summarizeToolGroup(approvals)).toBe("got 3 updates");
       expect(toolGroupSummaryKind(approvals)).toBe("update");
     },
   );
@@ -184,7 +184,7 @@ describe("summarizeToolGroup", () => {
           command: "git status",
         },
       ]),
-    ).toBe("Used Chrome integration and ran 1 command");
+    ).toBe("used Chrome integration and pounced on a command");
   });
 
   it("omits the integration suffix for special browser and computer sources", () => {
@@ -201,7 +201,7 @@ describe("summarizeToolGroup", () => {
           toolSource: { key: "computer-use", name: "Computer Use", kind: "computer" },
         },
       ]),
-    ).toBe("Used Browser and Computer Use");
+    ).toBe("used Browser and Computer Use");
   });
 });
 
@@ -216,7 +216,7 @@ describe("resolveWorkEntryToolPresentation", () => {
     "preview_click",
   ])("recognizes browser tool names across providers: %s", (label) => {
     expect(resolveWorkEntryToolPresentation({ label })).toEqual({
-      displayName: "Clicking in the preview browser",
+      displayName: "clicking in the preview browser",
       icon: "browser",
     });
   });
@@ -227,9 +227,9 @@ describe("resolveWorkEntryToolPresentation", () => {
         label: "mcp__colon3-code__device_open",
         toolLifecycleStatus: "completed",
       }),
-    ).toEqual({ displayName: "Opened a device in the Device panel", icon: "device" });
+    ).toEqual({ displayName: "opened a device in the device panel", icon: "device" });
     expect(resolveWorkEntryToolPresentation({ label: "colon3-code · device_screenshot" })).toEqual({
-      displayName: "Taking a screenshot of the device",
+      displayName: "taking a screenshot of the device",
       icon: "device",
     });
   });
@@ -241,16 +241,16 @@ describe("resolveWorkEntryToolPresentation", () => {
         toolTitle: "Inspect the current page",
         toolData: { server: "colon3-code", tool: "preview_snapshot", result: { title: "Example" } },
       }),
-    ).toEqual({ displayName: "Taking a snapshot of the preview page", icon: "browser" });
+    ).toEqual({ displayName: "taking a snapshot of the preview page", icon: "browser" });
   });
 
   it.each([
-    ["inProgress", "Clicking in the preview browser"],
-    ["completed", "Clicked in the preview browser"],
-    ["failed", "Failed to click in the preview browser"],
-    ["declined", "Declined to click in the preview browser"],
-    ["stopped", "Stopped clicking in the preview browser"],
-    ["unknown", "Clicking in the preview browser"],
+    ["inProgress", "clicking in the preview browser"],
+    ["completed", "clicked in the preview browser"],
+    ["failed", "failed to click in the preview browser"],
+    ["declined", "declined to click in the preview browser"],
+    ["stopped", "stopped clicking in the preview browser"],
+    ["unknown", "clicking in the preview browser"],
   ])("describes the tool's own %s state", (toolLifecycleStatus, displayName) => {
     expect(
       resolveWorkEntryToolPresentation({
@@ -263,44 +263,44 @@ describe("resolveWorkEntryToolPresentation", () => {
   it("uses the summary's state only when the provider omitted a lifecycle status", () => {
     const entry = { label: "Colon3-code.preview_click" };
     expect(resolveWorkEntryToolPresentation(entry, "inProgress")?.displayName).toBe(
-      "Clicking in the preview browser",
+      "clicking in the preview browser",
     );
     expect(resolveWorkEntryToolPresentation(entry, "completed")?.displayName).toBe(
-      "Clicked in the preview browser",
+      "clicked in the preview browser",
     );
     expect(
       resolveWorkEntryToolPresentation({ ...entry, toolLifecycleStatus: "completed" }, "inProgress")
         ?.displayName,
-    ).toBe("Clicked in the preview browser");
+    ).toBe("clicked in the preview browser");
     expect(
       resolveWorkEntryToolPresentation({ ...entry, toolLifecycleStatus: "failed" }, "completed")
         ?.displayName,
-    ).toBe("Failed to click in the preview browser");
+    ).toBe("failed to click in the preview browser");
   });
 
   it.each([
-    ["preview_type", "Typing in the preview browser", "Typed in the preview browser"],
+    ["preview_type", "typing in the preview browser", "typed in the preview browser"],
     [
       "preview_set_appearance",
-      "Setting preview browser appearance",
-      "Set preview browser appearance",
+      "setting preview browser appearance",
+      "set preview browser appearance",
     ],
     [
       "preview_snapshot",
-      "Taking a snapshot of the preview page",
-      "Took a snapshot of the preview page",
+      "taking a snapshot of the preview page",
+      "took a snapshot of the preview page",
     ],
     [
       "preview_recording_stop",
-      "Stopping recording the preview browser",
-      "Stopped recording the preview browser",
+      "stopping recording the preview browser",
+      "stopped recording the preview browser",
     ],
-    ["t3_thread_read", "Reading a T3 thread", "Read a T3 thread"],
-    ["t3_thread_send", "Sending to a T3 thread", "Sent to a T3 thread"],
+    ["t3_thread_read", "reading a T3 thread", "read a T3 thread"],
+    ["t3_thread_send", "sending to a T3 thread", "sent to a T3 thread"],
     [
       "t3_worktree_handoff",
-      "Handing off thread to a git worktree",
-      "Handed off thread to a git worktree",
+      "handing off thread to a git worktree",
+      "handed off thread to a git worktree",
     ],
   ])("preserves verb forms and the rest of %s's label", (tool, running, completed) => {
     const entry = { label: `colon3-code.${tool}` };
@@ -319,7 +319,7 @@ describe("resolveWorkEntryToolPresentation", () => {
         label: "mcp__t3_code__task_status",
         toolTitle: "Check the child task",
       }),
-    ).toEqual({ displayName: "Getting delegated task status", icon: "colon3-code" });
+    ).toEqual({ displayName: "getting delegated task status", icon: "colon3-code" });
   });
 
   it("does not brand unknown tools or another server's matching tool name", () => {
@@ -362,7 +362,7 @@ describe("browser group summaries", () => {
       toolCallId: `browser-${index}`,
     }));
     expect(summarizeToolGroup(entries)).toBe(
-      `Used browser ${count} ${count === 1 ? "time" : "times"}`,
+      count === 1 ? "poked the browser" : `poked the browser ${count} times`,
     );
     expect(toolGroupSummaryKind(entries)).toBe("browser");
   });
@@ -372,7 +372,9 @@ describe("browser group summaries", () => {
       ...Array.from({ length: 4 }, () => commandEntry),
       ...Array.from({ length: 15 }, () => browserEntry),
     ];
-    expect(summarizeToolGroup(entries)).toBe("Ran 4 commands and used browser 15 times");
+    expect(summarizeToolGroup(entries)).toBe(
+      "pounced on 4 commands and poked the browser 15 times",
+    );
     expect(toolGroupSummaryKind(entries)).toBe("mixed");
   });
 
@@ -386,7 +388,7 @@ describe("browser group summaries", () => {
           toolData: { server: "colon3-code", tool: "task_status" },
         },
       ]),
-    ).toBe("Used browser 1 time, ran 1 command, and used 1 tool");
+    ).toBe("poked the browser, pounced on a command, and batted at a tool");
   });
 
   it("recognizes Claude browser identity without treating script metadata as a shell command", () => {
@@ -398,7 +400,7 @@ describe("browser group summaries", () => {
           toolData: { toolName: "mcp__t3_code__preview_evaluate" },
         },
       ]),
-    ).toBe("Used browser 1 time");
+    ).toBe("poked the browser");
   });
 
   it("keeps foreign tools and web searches out of the browser count", () => {
@@ -412,12 +414,12 @@ describe("browser group summaries", () => {
         },
         { label: "Search", tone: "tool", itemType: "web_search" },
       ]),
-    ).toBe("Used browser 1 time, used 1 tool, and searched the web 1 time");
+    ).toBe("poked the browser, batted at a tool, and peeked at the web");
   });
 
   it("keeps browser screenshots in the browser count while preserving their image path", () => {
     const entry = { ...browserEntry, viewedImagePath: "/workspace/page.png" };
-    expect(summarizeToolGroup([entry])).toBe("Used browser 1 time");
+    expect(summarizeToolGroup([entry])).toBe("poked the browser");
     expect(workEntryViewedImagePath(entry)).toBe("/workspace/page.png");
   });
 });
@@ -595,18 +597,18 @@ describe("pull request tool presentation", () => {
   ])("recognizes the native linking tool: %s", (label) => {
     const entry = { label, tone: "tool" as const, toolLifecycleStatus: "completed" };
     expect(resolveWorkEntryToolPresentation(entry)).toMatchObject({
-      displayName: "Linked a pull request",
+      displayName: "linked a pull request",
       icon: "pull-request",
     });
     expect(toolGroupAction(entry)).toBe("link-pr");
   });
 
   it.each([
-    ["inProgress", "Linking PR #42"],
-    ["completed", "Linked PR #42"],
-    ["failed", "Failed to link PR #42"],
-    ["declined", "Declined to link PR #42"],
-    ["stopped", "Stopped linking PR #42"],
+    ["inProgress", "linking PR #42"],
+    ["completed", "linked PR #42"],
+    ["failed", "failed to link PR #42"],
+    ["declined", "declined to link PR #42"],
+    ["stopped", "stopped linking PR #42"],
   ])("describes the target and %s status", (toolLifecycleStatus, displayName) => {
     expect(
       resolveWorkEntryToolPresentation({
@@ -632,7 +634,7 @@ describe("pull request tool presentation", () => {
           rawInput: { repository: "acme/web", number: 42 },
         },
       }),
-    ).toMatchObject({ displayName: "Unlinked PR #42", icon: "pull-request", action: "unlink-pr" });
+    ).toMatchObject({ displayName: "unlinked PR #42", icon: "pull-request", action: "unlink-pr" });
   });
 
   it("summarizes native PR work separately from ordinary tools and integration metadata", () => {
@@ -648,13 +650,13 @@ describe("pull request tool presentation", () => {
       label: "Colon3-code · list_thread_pull_requests",
     };
     expect(summarizeToolGroup([link, link, list])).toBe(
-      "Linked 2 pull requests and checked linked pull requests",
+      "linked 2 pull requests and checked linked pull requests",
     );
     expect(summarizeToolGroup([{ ...link, label: "Colon3-code · unlink_pull_request" }])).toBe(
-      "Unlinked 1 pull request",
+      "unlinked a pull request",
     );
     expect(toolGroupSummaryKind([link, link, list])).toBe("pull-request");
-    expect(summarizeToolGroup([list, list])).toBe("Checked linked pull requests 2 times");
+    expect(summarizeToolGroup([list, list])).toBe("checked linked pull requests 2 times");
     expect(
       resolveWorkEntryToolPresentation({ label: "mcp__another-server__link_pull_request" }),
     ).toBeNull();
@@ -674,7 +676,7 @@ describe("device group summaries", () => {
     "recognizes %s as device controls",
     (tool) => {
       const entry = deviceEntry(tool);
-      expect(summarizeToolGroup([entry])).toBe("Used device controls 1 time");
+      expect(summarizeToolGroup([entry])).toBe("poked the device");
       expect(toolGroupSummaryKind([entry])).toBe("device");
     },
   );
@@ -686,7 +688,7 @@ describe("device group summaries", () => {
         deviceEntry("device_list"),
         deviceEntry("device_open"),
       ]),
-    ).toBe("Ran 1 command and used device controls 2 times");
+    ).toBe("pounced on a command and poked the device 2 times");
   });
 
   it("recognizes Claude tool names and preserves screenshot previews", () => {
@@ -695,7 +697,7 @@ describe("device group summaries", () => {
       toolData: { toolName: "mcp__t3_code__device_screenshot" },
       viewedImagePath: "/workspace/device.png",
     };
-    expect(summarizeToolGroup([entry])).toBe("Used device controls 1 time");
+    expect(summarizeToolGroup([entry])).toBe("poked the device");
     expect(workEntryViewedImagePath(entry)).toBe("/workspace/device.png");
   });
 
@@ -707,6 +709,6 @@ describe("device group summaries", () => {
           toolData: { server: "another-server", tool: "device_open" },
         },
       ]),
-    ).toBe("Used 1 tool");
+    ).toBe("batted at a tool");
   });
 });

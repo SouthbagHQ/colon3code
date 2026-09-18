@@ -135,10 +135,10 @@ function EnvironmentNotifications({
         kind === "completion"
           ? "thread completed, purr :3"
           : status === "approval"
-            ? "approval needed"
+            ? "can i? :3"
             : status === "failed"
               ? "aw, thread failed 3:"
-              : "input needed";
+              : "psst, question for you :3";
       if (hasNotificationSound(mode)) {
         void playNotificationSound(kind, () =>
           hasNotificationSound(getClientSettings().notificationMode),

@@ -8,7 +8,7 @@ import {
 } from "@t3tools/contracts";
 import { act, createRef, useLayoutEffect, type ReactNode, type Ref } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
-import { BrainIcon, CircleAlertIcon, MessageCircleIcon, TerminalIcon, XIcon } from "~/icons";
+import { BrainIcon, MessageCircleIcon, TerminalIcon, XIcon } from "~/icons";
 import { iconPath } from "~/test/iconMarkup";
 import { create, type ReactTestRenderer } from "react-test-renderer";
 import { beforeAll, describe, expect, it, vi } from "vite-plus/test";
@@ -1361,7 +1361,7 @@ describe("MessagesTimeline", () => {
       />,
     );
 
-    expect(markup).toContain("Changed 1 file");
+    expect(markup).toContain("scratched a file");
     expect(markup).not.toContain(
       "C:/Users/mike/dev-stuff/colon3code/apps/web/src/session-logic.ts",
     );
@@ -1402,7 +1402,7 @@ describe("MessagesTimeline", () => {
       />,
     );
 
-    expect(markup).toContain("Ran 2 commands");
+    expect(markup).toContain("pounced on 2 commands");
     expect(markup).not.toContain('aria-label="tool call failed"');
   });
 
@@ -1441,7 +1441,7 @@ describe("MessagesTimeline", () => {
       />,
     );
 
-    expect(markup).toContain("Ran 2 commands");
+    expect(markup).toContain("pounced on 2 commands");
     expect(markup).toContain(iconPath(TerminalIcon));
     expect(markup).not.toContain(iconPath(XIcon));
     expect(markup).not.toContain("text-destructive");
@@ -1551,7 +1551,7 @@ describe("MessagesTimeline", () => {
       />,
     );
 
-    expect(markup).toContain("Ran 2 commands and received 1 update");
+    expect(markup).toContain("pounced on 2 commands and got an update");
     expect(markup).not.toContain('aria-label="Hidden work includes a failure"');
   });
 
@@ -1590,7 +1590,7 @@ describe("MessagesTimeline", () => {
       />,
     );
 
-    expect(markup).toContain("working for");
+    expect(markup).toContain("deep in it, still going…");
     expect(markup).toContain("running pnpm");
   });
 
@@ -2023,7 +2023,7 @@ describe("MessagesTimeline", () => {
       />,
     );
 
-    expect(markup).toContain('aria-label="Received 1 update and used 1 tool, tool call failed"');
+    expect(markup).toContain('aria-label="got an update and batted at a tool, tool call failed"');
     // Ordinary tool failures do not use destructive row styling.
     expect(markup).not.toContain("text-destructive");
   });
@@ -2060,7 +2060,7 @@ describe("MessagesTimeline", () => {
       />,
     );
 
-    expect(markup).toContain(iconPath(CircleAlertIcon));
+    expect(markup).toContain("-scale-x-100");
     expect(markup).toContain("text-destructive");
   });
 
