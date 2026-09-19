@@ -52,11 +52,26 @@ const appLinking = {
 
 const Navigation = createStaticNavigation(RootStack);
 
+// Android keeps the splash up with an OnPreDrawListener that cancels every
+// frame until hide() runs, so anything that stops us reaching that call freezes
+// the app on the splash with no error, no log and no way out. Hiding once the
+// stored preferences settle covers a failed read; this cap covers the rest —
+// a native read (SQLite open, keystore) that never settles at all.
+const SPLASH_HIDE_TIMEOUT_MS = 5_000;
+
 function SplashScreenCoordinator() {
   const { isReady } = useAppearancePreferences();
 
   useEffect(() => {
-    if (isReady) void SplashScreen.hide();
+    if (isReady) {
+      SplashScreen.hide();
+      return;
+    }
+    const timeout = setTimeout(() => {
+      console.warn("Appearance preferences did not settle; hiding the splash screen anyway.");
+      SplashScreen.hide();
+    }, SPLASH_HIDE_TIMEOUT_MS);
+    return () => clearTimeout(timeout);
   }, [isReady]);
 
   return null;
