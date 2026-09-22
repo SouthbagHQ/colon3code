@@ -2040,6 +2040,83 @@ export const decideOrchestrationCommand = Effect.fn("decideOrchestrationCommand"
       return events;
     }
 
+    case "thread.external.mirror": {
+      const thread = yield* requireThread({
+        readModel,
+        command,
+        threadId: command.threadId,
+      });
+      // A mirror only ever reflects work that happened elsewhere. Anything
+      // that proves the thread is live locally — a running turn, a bound
+      // provider session — means this is no longer a mirror, so leave it be
+      // rather than interleaving remote messages into a real conversation.
+      if (thread.deletedAt !== null || thread.latestTurn !== null || thread.session !== null) {
+        return yield* new OrchestrationCommandInvariantError({
+          commandType: command.type,
+          detail: `Thread '${command.threadId}' is not a mirrored thread.`,
+        });
+      }
+
+      const knownMessageIds = new Set(thread.messages.map((message) => message.id));
+      const events: Array<PlannedOrchestrationEvent> = [];
+      for (const message of command.messages) {
+        if (knownMessageIds.has(message.messageId)) continue;
+        events.push({
+          ...(yield* withEventBase({
+            aggregateKind: "thread",
+            aggregateId: command.threadId,
+            occurredAt: message.createdAt,
+            commandId: command.commandId,
+            metadata: { historyImport: true },
+          })),
+          type: "thread.message-sent",
+          payload: {
+            threadId: command.threadId,
+            messageId: message.messageId,
+            role: message.role,
+            text: message.text,
+            turnId: null,
+            streaming: false,
+            createdAt: message.createdAt,
+            updatedAt: message.createdAt,
+          },
+        });
+      }
+
+      const isSettled = thread.settledAt !== null;
+      const wantsSettled = command.activity === "settled";
+      if (wantsSettled !== isSettled) {
+        events.push({
+          ...(yield* withEventBase({
+            aggregateKind: "thread",
+            aggregateId: command.threadId,
+            occurredAt: command.occurredAt,
+            commandId: command.commandId,
+            metadata: { historyImport: true },
+          })),
+          ...(wantsSettled
+            ? ({
+                type: "thread.settled",
+                payload: {
+                  threadId: command.threadId,
+                  settledAt: command.occurredAt,
+                  updatedAt: command.occurredAt,
+                },
+              } as const)
+            : ({
+                type: "thread.unsettled",
+                payload: {
+                  threadId: command.threadId,
+                  reason: "activity",
+                  updatedAt: command.occurredAt,
+                },
+              } as const)),
+        });
+      }
+
+      return events;
+    }
+
     case "thread.proposed-plan.upsert": {
       yield* requireThread({
         readModel,

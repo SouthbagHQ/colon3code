@@ -6,9 +6,18 @@ settings:
 
 catalogs:
   default:
+    '@effect/openapi-generator':
+      specifier: 4.0.0-rc.112
+      version: 4.0.0-rc.112
+    '@effect/tsgo':
+      specifier: 0.41.0
+      version: 0.41.0
     '@legendapp/list':
       specifier: 3.3.5
       version: 3.3.5
+    '@noble/curves':
+      specifier: 1.9.1
+      version: 1.9.1
     '@noble/hashes':
       specifier: 1.8.0
       version: 1.8.0
@@ -18,6 +27,9 @@ catalogs:
     jose:
       specifier: 6.2.2
       version: 6.2.2
+    typescript:
+      specifier: 7.0.2
+      version: 7.0.2
     vite-plus:
       specifier: 0.3.0
       version: 0.3.0

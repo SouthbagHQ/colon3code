@@ -911,6 +911,24 @@ export const UsageLimitSourceConfig = Schema.Struct({
 });
 export type UsageLimitSourceConfig = typeof UsageLimitSourceConfig.Type;
 
+/**
+ * Cursor Cloud connection for this environment. The API key travels in
+ * settings like provider environment secrets and the hub key above: it is
+ * redacted before reaching a client and the real value lives in the secret
+ * store. Mirroring is read-only, so one key per environment is enough.
+ */
+export const CursorCloudSettings = Schema.Struct({
+  enabled: Schema.Boolean.pipe(Schema.withDecodingDefault(Effect.succeed(true))),
+  apiKey: TrimmedString.pipe(Schema.withDecodingDefault(Effect.succeed(""))),
+});
+export type CursorCloudSettings = typeof CursorCloudSettings.Type;
+
+export const CursorCloudSettingsPatch = Schema.Struct({
+  enabled: Schema.optionalKey(Schema.Boolean),
+  apiKey: Schema.optionalKey(TrimmedString),
+});
+export type CursorCloudSettingsPatch = typeof CursorCloudSettingsPatch.Type;
+
 export const ObservabilitySettings = Schema.Struct({
   otlpTracesUrl: TrimmedString.pipe(Schema.withDecodingDefault(Effect.succeed(""))),
   otlpMetricsUrl: TrimmedString.pipe(Schema.withDecodingDefault(Effect.succeed(""))),
@@ -1214,6 +1232,7 @@ export const ServerSettings = Schema.Struct({
     Schema.withDecodingDefault(Effect.succeed({})),
   ),
   observability: ObservabilitySettings.pipe(Schema.withDecodingDefault(Effect.succeed({}))),
+  cursorCloud: CursorCloudSettings.pipe(Schema.withDecodingDefault(Effect.succeed({}))),
   // Keyed by a user-chosen id so a source keeps its rows across edits. Entries
   // this build cannot decode round-trip untouched, as provider instances do.
   usageLimitSources: Schema.Record(UsageLimitSourceId, UsageLimitSourceConfig).pipe(
@@ -1449,6 +1468,7 @@ export const ServerSettingsPatch = Schema.Struct({
       otlpMetricsUrl: Schema.optionalKey(TrimmedString),
     }),
   ),
+  cursorCloud: Schema.optionalKey(CursorCloudSettingsPatch),
   providers: Schema.optionalKey(
     Schema.Struct({
       codex: Schema.optionalKey(CodexSettingsPatch),

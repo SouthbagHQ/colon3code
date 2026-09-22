@@ -1472,6 +1472,32 @@ const ThreadHistoryImportCommand = Schema.Struct({
 });
 
 /**
+ * Incremental mirror of an agent that runs outside this environment (today:
+ * Cursor Cloud). Unlike `thread.history.import`, which seeds an empty thread
+ * once, this command is dispatched on every sync with the full set of
+ * messages the remote agent is known to have produced. The decider appends
+ * only the ids it has not seen, so a poll that returns nothing new is a
+ * no-op, and moves the thread between active and settled to match whether
+ * the remote agent is still working.
+ */
+const ThreadExternalMirrorCommand = Schema.Struct({
+  type: Schema.Literal("thread.external.mirror"),
+  commandId: CommandId,
+  threadId: ThreadId,
+  messages: Schema.Array(
+    Schema.Struct({
+      messageId: MessageId,
+      role: Schema.Literals(["user", "assistant"]),
+      text: Schema.String,
+      createdAt: IsoDateTime,
+    }),
+  ),
+  /** Whether the remote agent is still working. */
+  activity: Schema.Literals(["running", "settled"]),
+  occurredAt: IsoDateTime,
+});
+
+/**
  * Persists a user message without starting a turn. Used by worktree bootstraps
  * so the send is durable while the worktree is still being prepared; the
  * turn that follows references the same message id.
@@ -1586,6 +1612,7 @@ const InternalOrchestrationCommand = Schema.Union([
   ThreadMessageAssistantDeltaCommand,
   ThreadMessageAssistantCompleteCommand,
   ThreadHistoryImportCommand,
+  ThreadExternalMirrorCommand,
   ThreadMessageUserAppendCommand,
   ThreadProposedPlanUpsertCommand,
   ThreadTurnDiffCompleteCommand,
