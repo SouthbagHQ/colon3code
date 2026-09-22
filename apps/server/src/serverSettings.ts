@@ -151,6 +151,9 @@ function usageLimitSourceSecretName(sourceId: string): string {
   return `usage-limit-source-${Buffer.from(sourceId, "utf8").toString("base64url")}`;
 }
 
+/** One Cursor Cloud API key per environment, so a fixed secret name. */
+const CURSOR_CLOUD_API_KEY_SECRET_NAME = "cursor-cloud-api-key";
+
 function redactProviderEnvironmentVariable(
   variable: ProviderInstanceEnvironmentVariable,
 ): ProviderInstanceEnvironmentVariable {
@@ -187,7 +190,13 @@ export function redactServerSettingsForClient(settings: ServerSettings): ServerS
       },
     ]),
   );
-  return { ...settings, providerInstances, usageLimitSources };
+  // The Cursor Cloud key is a bearer secret; clients only need to know one is set.
+  const cursorCloud = {
+    ...settings.cursorCloud,
+    apiKey:
+      settings.cursorCloud.apiKey.length > 0 ? USAGE_LIMIT_SOURCE_KEY_REDACTED : "",
+  };
+  return { ...settings, providerInstances, usageLimitSources, cursorCloud };
 }
 
 export class ServerSettingsService extends Context.Service<
@@ -715,10 +724,32 @@ const make = Effect.gen(function* () {
           managementKey: Option.isSome(secret) ? textDecoder.decode(secret.value) : "",
         };
       }
+      const cursorCloudSecret =
+        settings.cursorCloud.apiKey === USAGE_LIMIT_SOURCE_KEY_REDACTED
+          ? yield* secretStore
+              .get(CURSOR_CLOUD_API_KEY_SECRET_NAME)
+              .pipe(
+                Effect.mapError(
+                  (cause) =>
+                    new ServerSettingsError({ settingsPath, operation: "read-secret", cause }),
+                ),
+              )
+          : Option.none();
+
       return {
         ...settings,
         providerInstances: providerInstances as ServerSettings["providerInstances"],
         usageLimitSources: usageLimitSources as ServerSettings["usageLimitSources"],
+        ...(settings.cursorCloud.apiKey === USAGE_LIMIT_SOURCE_KEY_REDACTED
+          ? {
+              cursorCloud: {
+                ...settings.cursorCloud,
+                apiKey: Option.isSome(cursorCloudSecret)
+                  ? textDecoder.decode(cursorCloudSecret.value)
+                  : "",
+              },
+            }
+          : {}),
       };
     });
 
@@ -887,10 +918,34 @@ const make = Effect.gen(function* () {
           );
       }
 
+      // A client that echoes the redaction marker back means "keep the key
+      // you have"; anything else replaces it, and an empty string clears it.
+      const cursorCloudApiKey = next.cursorCloud.apiKey;
+      if (cursorCloudApiKey !== USAGE_LIMIT_SOURCE_KEY_REDACTED) {
+        yield* (cursorCloudApiKey.length > 0
+          ? secretStore.set(CURSOR_CLOUD_API_KEY_SECRET_NAME, textEncoder.encode(cursorCloudApiKey))
+          : secretStore.remove(CURSOR_CLOUD_API_KEY_SECRET_NAME)
+        ).pipe(
+          Effect.mapError(
+            (cause) =>
+              new ServerSettingsError({
+                settingsPath,
+                operation: cursorCloudApiKey.length > 0 ? "write-secret" : "remove-secret",
+                cause,
+              }),
+          ),
+        );
+      }
+
       return {
         ...next,
         providerInstances: providerInstances as ServerSettings["providerInstances"],
         usageLimitSources: usageLimitSources as ServerSettings["usageLimitSources"],
+        cursorCloud: {
+          ...next.cursorCloud,
+          apiKey:
+            cursorCloudApiKey.length > 0 ? USAGE_LIMIT_SOURCE_KEY_REDACTED : "",
+        },
       };
     });
 

@@ -29,6 +29,12 @@ import {
   FilesystemBrowseError,
 } from "./filesystem.ts";
 import {
+  CursorCloudError,
+  CursorCloudGetStatusInput,
+  CursorCloudStatus,
+  CursorCloudSyncInput,
+} from "./cursorCloud.ts";
+import {
   AgentSessionImportInput,
   AgentSessionImportProjectChangedError,
   AgentSessionImportProjectNotFoundError,
@@ -287,6 +293,10 @@ export const WS_METHODS = {
   filesystemBrowse: "filesystem.browse",
   agentSessionsScan: "agentSessions.scan",
   agentSessionsImport: "agentSessions.import",
+
+  // Cursor Cloud methods
+  cursorCloudGetStatus: "cursorCloud.getStatus",
+  cursorCloudSync: "cursorCloud.sync",
   assetsCreateUrl: "assets.createUrl",
   attachmentsCreateUploadUrl: "attachments.createUploadUrl",
   attachmentsDelete: "attachments.delete",
@@ -949,6 +959,18 @@ const WsAgentSessionsImportRpc = Rpc.make(WS_METHODS.agentSessionsImport, {
   ]),
 });
 
+const WsCursorCloudGetStatusRpc = Rpc.make(WS_METHODS.cursorCloudGetStatus, {
+  payload: CursorCloudGetStatusInput,
+  success: CursorCloudStatus,
+  error: Schema.Union([CursorCloudError, EnvironmentAuthorizationError]),
+});
+
+const WsCursorCloudSyncRpc = Rpc.make(WS_METHODS.cursorCloudSync, {
+  payload: CursorCloudSyncInput,
+  success: CursorCloudStatus,
+  error: Schema.Union([CursorCloudError, EnvironmentAuthorizationError]),
+});
+
 const WsAssetsCreateUrlRpc = Rpc.make(WS_METHODS.assetsCreateUrl, {
   payload: AssetCreateUrlInput,
   success: AssetCreateUrlResult,
@@ -1435,6 +1457,8 @@ export const WsRpcGroup = RpcGroup.make(
   WsFilesystemBrowseRpc,
   WsAgentSessionsScanRpc,
   WsAgentSessionsImportRpc,
+  WsCursorCloudGetStatusRpc,
+  WsCursorCloudSyncRpc,
   WsAssetsCreateUrlRpc,
   WsAttachmentsCreateUploadUrlRpc,
   WsAttachmentsDeleteRpc,

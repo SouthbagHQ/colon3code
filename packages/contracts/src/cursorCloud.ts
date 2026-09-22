@@ -59,11 +59,7 @@ export function cursorCloudAgentUrl(agentId: string): string {
  * no API key; `error` carries the last failure so settings can show it
  * without the client having to call Cursor itself.
  */
-export const CursorCloudConnectionState = Schema.Literals([
-  "unconfigured",
-  "connected",
-  "error",
-]);
+export const CursorCloudConnectionState = Schema.Literals(["unconfigured", "connected", "error"]);
 export type CursorCloudConnectionState = typeof CursorCloudConnectionState.Type;
 
 export const CursorCloudStatus = Schema.Struct({

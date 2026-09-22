@@ -15,6 +15,7 @@ import * as ThreadPullRequestReactor from "../ThreadPullRequestReactor.ts";
 import { OrchestrationReactor } from "../Services/OrchestrationReactor.ts";
 import { makeOrchestrationReactor } from "./OrchestrationReactor.ts";
 import * as AgentAwarenessRelay from "../../relay/AgentAwarenessRelay.ts";
+import * as CursorCloudSync from "../../cursorCloud/CursorCloudSync.ts";
 
 describe("OrchestrationReactor", () => {
   let runtime: ManagedRuntime.ManagedRuntime<OrchestrationReactor, never> | null = null;
@@ -104,6 +105,24 @@ describe("OrchestrationReactor", () => {
             },
           }),
         ),
+        Layer.provideMerge(
+          Layer.succeed(CursorCloudSync.CursorCloudSync, {
+            start: () => {
+              started.push("cursor-cloud-sync");
+              return Effect.void;
+            },
+            refresh: Effect.succeed({
+              state: "unconfigured" as const,
+              mirroredAgentCount: 0,
+              unmatchedAgentCount: 0,
+            }),
+            status: Effect.succeed({
+              state: "unconfigured" as const,
+              mirroredAgentCount: 0,
+              unmatchedAgentCount: 0,
+            }),
+          }),
+        ),
       ),
     );
 
@@ -120,6 +139,7 @@ describe("OrchestrationReactor", () => {
       "thread-settlement-reactor",
       "pull-request-sync-reactor",
       "agent-awareness-relay",
+      "cursor-cloud-sync",
     ]);
 
     await Effect.runPromise(Scope.close(scope, Exit.void));
