@@ -467,6 +467,13 @@ export const SETTINGS_SEARCH_ITEMS = [
     ],
   },
   {
+    id: "cursor-cloud",
+    title: "cursor cloud",
+    to: "/settings/providers",
+    searchTerms: ["cursor cloud background agents api key mirror remote agents sync cloud agent"],
+    providerSettingsOnly: true,
+  },
+  {
     id: "usage-providers",
     title: "usage providers",
     to: "/settings/providers",

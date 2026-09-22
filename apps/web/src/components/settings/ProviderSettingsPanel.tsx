@@ -81,6 +81,7 @@ import { stackedThreadToast, toastManager } from "../ui/toast";
 import { AddProviderInstanceDialog } from "./AddProviderInstanceDialog";
 import { ExpandableText } from "./ExpandableText";
 import { ProviderInstanceCard } from "./ProviderInstanceCard";
+import { CursorCloudSettings } from "./CursorCloudSettings";
 import { UsageProviderSettings } from "./UsageProviderSettings";
 import { ProviderSetupSection, readAntigravityAuthMethod } from "./ProviderSetupSection";
 import { DRIVER_OPTIONS, getDriverOption } from "./providerDriverMeta";
@@ -1080,6 +1081,13 @@ export function EnvironmentProviderSettings({
           </div>
         </div>
       </SettingsSection>
+
+      <CursorCloudSettings
+        key={`cursor-cloud-${environmentId}`}
+        environmentId={environmentId}
+        cursorCloud={settings.cursorCloud}
+        readOnly={readOnly}
+      />
 
       <UsageProviderSettings
         key={environmentId}

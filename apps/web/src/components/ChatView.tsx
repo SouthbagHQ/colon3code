@@ -225,6 +225,7 @@ import ThreadTerminalDrawer from "./ThreadTerminalDrawer";
 import {
   AlarmClockIcon,
   CircleCheckIcon,
+  CloudIcon,
   ChevronDownIcon,
   DownloadIcon,
   GitBranchIcon,
@@ -340,7 +341,12 @@ import { resolveProviderSkillsForCwd } from "@t3tools/client-runtime/providerSki
 import { vcsEnvironment } from "../state/vcs";
 import { sourceControlEnvironment } from "../state/sourceControl";
 import { useProjectClone } from "../state/projectClones";
-import { projectCloneDisplayName, projectCloneProgressSummary } from "@t3tools/contracts";
+import {
+  cursorCloudAgentIdFromThreadId,
+  cursorCloudAgentUrl,
+  projectCloneDisplayName,
+  projectCloneProgressSummary,
+} from "@t3tools/contracts";
 import { useEnvironments, usePrimaryEnvironment } from "../state/environments";
 import {
   useProject,
@@ -6234,6 +6240,38 @@ export default function ChatView(props: ChatViewProps) {
       onDismiss: acknowledgeActiveThreadWoke,
     };
   }, [acknowledgeActiveThreadWoke, activeThread?.id, activeThreadWokeVisible]);
+  // Mirrored Cursor Cloud threads are a read-only window onto an agent this
+  // environment cannot drive, so the composer says so and points at Cursor
+  // rather than pretending a send would reach the agent.
+  const cursorCloudAgentId = useMemo(
+    () => (activeThreadId === null ? null : cursorCloudAgentIdFromThreadId(activeThreadId)),
+    [activeThreadId],
+  );
+  const cursorCloudBannerItem = useMemo<ComposerBannerStackItem | null>(() => {
+    if (cursorCloudAgentId === null) return null;
+    return {
+      id: `cursor-cloud:${cursorCloudAgentId}`,
+      variant: "info",
+      icon: <CloudIcon />,
+      title: "mirrored from cursor cloud",
+      description: "follow-ups happen in cursor; this copy keeps itself up to date",
+      actions: (
+        <Button
+          size="xs"
+          variant="ghost"
+          render={
+            <a
+              href={cursorCloudAgentUrl(cursorCloudAgentId)}
+              target="_blank"
+              rel="noreferrer noopener"
+            />
+          }
+        >
+          open in cursor
+        </Button>
+      ),
+    };
+  }, [cursorCloudAgentId]);
   const parkedThreadBannerItem = useMemo<ComposerBannerStackItem | null>(() => {
     if (!activeThreadSnoozed && !activeThreadSettled) {
       return null;
@@ -6405,11 +6443,13 @@ export default function ChatView(props: ChatViewProps) {
       resumeCompactionBannerItem === null ? [] : [resumeCompactionBannerItem];
     const wokeThreadItems = wokeThreadBannerItem === null ? [] : [wokeThreadBannerItem];
     const parkedThreadItems = parkedThreadBannerItem === null ? [] : [parkedThreadBannerItem];
+    const cursorCloudItems = cursorCloudBannerItem === null ? [] : [cursorCloudBannerItem];
     // The user asked for this one, so it leads the notice tier instead of trailing it.
     const usageLimitsItems = usageLimitsBanner === null ? [] : [usageLimitsBanner];
     const projectCloneItems = projectCloneBannerItem === null ? [] : [projectCloneBannerItem];
     if (!localCheckoutBranchMismatch || !showBranchMismatchBanner || !activeBranchMismatchKey) {
       return [
+        ...cursorCloudItems,
         ...feedbackBannerItems,
         ...usageLimitsItems,
         ...projectCloneItems,
@@ -6421,6 +6461,7 @@ export default function ChatView(props: ChatViewProps) {
       ];
     }
     return [
+      ...cursorCloudItems,
       ...feedbackBannerItems,
       ...usageLimitsItems,
       ...projectCloneItems,
@@ -9631,15 +9672,17 @@ export default function ChatView(props: ChatViewProps) {
                             isSendBusy={isSendBusy}
                             isRevertingCheckpoint={isRevertingCheckpoint}
                             sendDisabledReason={
-                              isRevertingCheckpoint
-                                ? "rewinding conversation"
-                                : feedbackUploading
-                                  ? "sending feedback"
-                                  : threadDetailLoading
-                                    ? "messages loading"
-                                    : worktreeSetupBlocksSend
-                                      ? "preparing worktree"
-                                      : projectCloneSendBlockReason
+                              cursorCloudAgentId !== null
+                                ? "mirrored from cursor cloud"
+                                : isRevertingCheckpoint
+                                  ? "rewinding conversation"
+                                  : feedbackUploading
+                                    ? "sending feedback"
+                                    : threadDetailLoading
+                                      ? "messages loading"
+                                      : worktreeSetupBlocksSend
+                                        ? "preparing worktree"
+                                        : projectCloneSendBlockReason
                             }
                             isPreparingWorktree={isPreparingWorktree}
                             bannerItems={composerBannerItems}

@@ -26,6 +26,7 @@ import type {
   UsageLimitsReport,
   UserInputQuestion,
 } from "@t3tools/contracts";
+import { isCursorCloudThreadId } from "@t3tools/contracts";
 import * as Haptics from "expo-haptics";
 import { BlurTargetView } from "expo-blur";
 import { GlassBlurTargetContext } from "../../lib/glassBlurTarget";
@@ -1050,7 +1051,14 @@ export const ThreadDetailScreen = memo(function ThreadDetailScreen(props: Thread
                     // them against a thread id the server may still reject
                     // would strand them in the outbox.
                     sendBlockedReason={
-                      props.creationState?.kind === "preparing" ? "starting the task…" : null
+                      // A Cursor Cloud mirror is a read-only copy of an agent
+                      // running outside this environment; follow-ups happen in
+                      // Cursor, so the composer never offers to send here.
+                      isCursorCloudThreadId(String(props.selectedThread.id))
+                        ? "mirrored from cursor cloud"
+                        : props.creationState?.kind === "preparing"
+                          ? "starting the task…"
+                          : null
                     }
                     bottomInset={composerBottomInset}
                     onChangeDraftMessage={props.onChangeDraftMessage}

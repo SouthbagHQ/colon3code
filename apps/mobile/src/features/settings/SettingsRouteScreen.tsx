@@ -55,6 +55,7 @@ import {
   runAppUpdateCheck,
 } from "../updates/app-updates";
 import { useSavedRemoteConnections } from "../../state/use-remote-environment-registry";
+import { CursorCloudSettingsSection } from "./CursorCloudSettingsSection";
 import { SettingsRow } from "./components/SettingsRow";
 import { SettingsSection } from "./components/SettingsSection";
 import { SettingsSwitchRow } from "./components/SettingsSwitchRow";
@@ -139,6 +140,8 @@ function LocalSettingsRouteScreen() {
         </SettingsSection>
 
         <GeneralSettingsSection />
+
+        <CursorCloudSettingsSection />
 
         <SettingsSection title="appearance">
           <SettingsRow icon="paintbrush" label="appearance" target="SettingsAppearance" />
@@ -579,6 +582,8 @@ function ConfiguredSettingsRouteScreen() {
         </SettingsSection>
 
         <GeneralSettingsSection />
+
+        <CursorCloudSettingsSection />
 
         <SettingsSection title="appearance">
           <SettingsRow icon="paintbrush" label="appearance" target="SettingsAppearance" />
