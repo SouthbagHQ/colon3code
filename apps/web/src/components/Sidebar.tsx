@@ -44,22 +44,20 @@ import {
   ChevronDownIcon,
   CircleAlertIcon,
   CircleCheckIcon,
-  CircleDashedIcon,
   ClockIcon,
-  EyeIcon,
   FolderIcon,
   GitBranchIcon,
-  MessageCircleQuestionIcon,
   PinIcon,
   PinOffIcon,
   PlusIcon,
   SettingsIcon,
-  ShieldQuestionIcon,
   SquarePenIcon,
   TerminalIcon,
   UndoIcon,
   XIcon,
 } from "~/icons";
+import { CatFace, type CatFaceExpression } from "./CatFace";
+import "./ui/spinner.css";
 import {
   memo,
   useCallback,
@@ -965,6 +963,17 @@ const dropVerbBadge: Record<SidebarDropVerb, ReactNode> = {
   ),
 };
 
+// Every status face is a glyph (`text`) so the row stays one line of type;
+// the brand SVG would not sit next to the other emoticons at this size.
+const SIDEBAR_STATUS_FACES = {
+  working: "working",
+  monitoring: "watching",
+  approval: "curious",
+  input: "curious",
+  failed: "sad",
+  done: "proud",
+} as const satisfies Record<string, CatFaceExpression>;
+
 const SidebarThreadRow = memo(function SidebarThreadRow(props: {
   thread: SidebarThreadSummary;
   variant: "card" | "slim";
@@ -1183,6 +1192,17 @@ const SidebarThreadRow = memo(function SidebarThreadRow(props: {
                     }
                   : null;
   const isWokeStatus = topStatus?.icon === "woke";
+  // Remount the done face once when a completion lands so it does a single
+  // hop (see spinner.css). Keyed on the rising edge, so a row that mounts
+  // already done (app load, virtualised rows scrolling back into view) stays
+  // still.
+  const isDoneStatus = topStatus?.icon === "done";
+  const wasDoneRef = useRef(isDoneStatus);
+  const [hopKey, setHopKey] = useState(0);
+  useEffect(() => {
+    if (isDoneStatus && !wasDoneRef.current) setHopKey((key) => key + 1);
+    wasDoneRef.current = isDoneStatus;
+  }, [isDoneStatus]);
 
   const branchMismatch = resolveLocalCheckoutBranchMismatch({
     effectiveEnvMode: thread.worktreePath === null ? "local" : "worktree",
@@ -1796,7 +1816,7 @@ const SidebarThreadRow = memo(function SidebarThreadRow(props: {
                     )}
                   >
                     {topStatus ? (
-                      isWokeStatus ? (
+                      topStatus.icon === "woke" ? (
                         <Tooltip>
                           <TooltipTrigger
                             render={
@@ -1823,19 +1843,12 @@ const SidebarThreadRow = memo(function SidebarThreadRow(props: {
                             topStatus.className,
                           )}
                         >
-                          {topStatus.icon === "working" ? (
-                            <CircleDashedIcon aria-hidden className="size-4 shrink-0" />
-                          ) : topStatus.icon === "input" ? (
-                            <MessageCircleQuestionIcon aria-hidden className="size-4 shrink-0" />
-                          ) : topStatus.icon === "approval" ? (
-                            <ShieldQuestionIcon aria-hidden className="size-4 shrink-0" />
-                          ) : topStatus.icon === "failed" ? (
-                            <CircleAlertIcon aria-hidden className="size-4 shrink-0" />
-                          ) : topStatus.icon === "monitoring" ? (
-                            <EyeIcon aria-hidden className="size-4 shrink-0" />
-                          ) : topStatus.icon === "done" ? (
-                            <CircleCheckIcon aria-hidden className="size-4 shrink-0" />
-                          ) : null}
+                          <CatFace
+                            key={hopKey}
+                            text
+                            expression={SIDEBAR_STATUS_FACES[topStatus.icon]}
+                            className={cn("min-w-4", isDoneStatus && hopKey > 0 && "mark-hop")}
+                          />
                           {/* The label alone is the live region: a role="status"
                             wrapper around the ticking duration would make
                             screen readers announce every second. */}
@@ -4441,7 +4454,7 @@ export default function Sidebar() {
                   >
                     <ComboboxSearchInput
                       aria-label="search projects"
-                      placeholder="search projects..."
+                      placeholder="search projects… :3"
                       value={projectScopeMenuState.query}
                       onKeyDown={(event) => {
                         if (
