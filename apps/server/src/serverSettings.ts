@@ -193,8 +193,7 @@ export function redactServerSettingsForClient(settings: ServerSettings): ServerS
   // The Cursor Cloud key is a bearer secret; clients only need to know one is set.
   const cursorCloud = {
     ...settings.cursorCloud,
-    apiKey:
-      settings.cursorCloud.apiKey.length > 0 ? USAGE_LIMIT_SOURCE_KEY_REDACTED : "",
+    apiKey: settings.cursorCloud.apiKey.length > 0 ? USAGE_LIMIT_SOURCE_KEY_REDACTED : "",
   };
   return { ...settings, providerInstances, usageLimitSources, cursorCloud };
 }
@@ -922,9 +921,13 @@ const make = Effect.gen(function* () {
       // you have"; anything else replaces it, and an empty string clears it.
       const cursorCloudApiKey = next.cursorCloud.apiKey;
       if (cursorCloudApiKey !== USAGE_LIMIT_SOURCE_KEY_REDACTED) {
-        yield* (cursorCloudApiKey.length > 0
-          ? secretStore.set(CURSOR_CLOUD_API_KEY_SECRET_NAME, textEncoder.encode(cursorCloudApiKey))
-          : secretStore.remove(CURSOR_CLOUD_API_KEY_SECRET_NAME)
+        yield* (
+          cursorCloudApiKey.length > 0
+            ? secretStore.set(
+                CURSOR_CLOUD_API_KEY_SECRET_NAME,
+                textEncoder.encode(cursorCloudApiKey),
+              )
+            : secretStore.remove(CURSOR_CLOUD_API_KEY_SECRET_NAME)
         ).pipe(
           Effect.mapError(
             (cause) =>
@@ -943,8 +946,7 @@ const make = Effect.gen(function* () {
         usageLimitSources: usageLimitSources as ServerSettings["usageLimitSources"],
         cursorCloud: {
           ...next.cursorCloud,
-          apiKey:
-            cursorCloudApiKey.length > 0 ? USAGE_LIMIT_SOURCE_KEY_REDACTED : "",
+          apiKey: cursorCloudApiKey.length > 0 ? USAGE_LIMIT_SOURCE_KEY_REDACTED : "",
         },
       };
     });

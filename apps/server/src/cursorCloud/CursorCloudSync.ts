@@ -81,8 +81,15 @@ export class CursorCloudSync extends Context.Service<
   }
 >()("t3/cursorCloud/CursorCloudSync") {}
 
+export interface CursorCloudSyncOptions {
+  /** Replaced in tests so a sweep can run without reaching Cursor. */
+  readonly makeClient?: (apiKey: string) => Effect.Effect<CursorCloudApiClient>;
+}
+
 /** @public Service construction is part of the canonical Effect module API. */
-export const make = Effect.gen(function* () {
+export const make = Effect.fn("CursorCloudSync.make")(function* (
+  options: CursorCloudSyncOptions = {},
+) {
   const engine = yield* OrchestrationEngine.OrchestrationEngineService;
   const snapshots = yield* ProjectionSnapshotQuery.ProjectionSnapshotQuery;
   const serverSettings = yield* ServerSettingsService;
@@ -104,8 +111,11 @@ export const make = Effect.gen(function* () {
     apiKey: string,
   ): Effect.fn.Return<CursorCloudApiClient> {
     if (cachedClient?.apiKey === apiKey) return cachedClient.client;
-    const client = yield* makeCursorCloudApiClient({ apiKey }).pipe(
-      Effect.provideService(HttpClient.HttpClient, httpClient),
+    const client = yield* (
+      options.makeClient?.(apiKey) ??
+        makeCursorCloudApiClient({ apiKey }).pipe(
+          Effect.provideService(HttpClient.HttpClient, httpClient),
+        )
     );
     cachedClient = { apiKey, client };
     return client;
@@ -136,8 +146,18 @@ export const make = Effect.gen(function* () {
     const match = matchCursorCloudProject(plan.repositoryKeys, input.projects);
     if (match === null) return "unmatched" as const;
 
-    const existing = yield* snapshots.getThreadShellById(plan.threadId);
-    if (Option.isNone(existing)) {
+    // Archiving or deleting a mirror is how someone says "stop showing me
+    // this agent". The sweep honours that instead of recreating the row a
+    // minute later.
+    const lifecycle = yield* snapshots.getThreadLifecycleById(plan.threadId);
+    if (
+      Option.isSome(lifecycle) &&
+      (lifecycle.value.deletedAt !== null || lifecycle.value.archivedAt !== null)
+    ) {
+      return "dismissed" as const;
+    }
+
+    if (Option.isNone(lifecycle)) {
       // Nothing to mirror yet and no thread to hang it on: wait for the
       // agent's first result rather than parking an empty row in the sidebar.
       if (plan.messages.length === 0) return "unmatched" as const;
@@ -253,7 +273,7 @@ export const make = Effect.gen(function* () {
   } satisfies CursorCloudSync["Service"];
 });
 
-export const layer = Layer.effect(CursorCloudSync, make);
+export const layer = Layer.effect(CursorCloudSync, make());
 
 const IDLE_STATUS: CursorCloudStatus = {
   state: "unconfigured",

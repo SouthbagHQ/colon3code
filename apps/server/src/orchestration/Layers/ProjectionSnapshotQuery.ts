@@ -204,6 +204,10 @@ const ProjectionImportedAgentSessionSourcesRowSchema = Schema.Struct({
 const ThreadIdLookupInput = Schema.Struct({
   threadId: ThreadId,
 });
+const ProjectionThreadLifecycleDbRowSchema = Schema.Struct({
+  archivedAt: Schema.NullOr(Schema.String),
+  deletedAt: Schema.NullOr(Schema.String),
+});
 const TurnStartMessageLookupInput = Schema.Struct({
   threadId: ThreadId,
   messageId: MessageId,
@@ -1238,6 +1242,20 @@ const makeProjectionSnapshotQuery = Effect.gen(function* () {
         WHERE thread_id = ${threadId}
           AND deleted_at IS NULL
           AND archived_at IS NULL
+        LIMIT 1
+      `,
+  });
+
+  const getThreadLifecycleRowById = SqlSchema.findOneOption({
+    Request: ThreadIdLookupInput,
+    Result: ProjectionThreadLifecycleDbRowSchema,
+    execute: ({ threadId }) =>
+      sql`
+        SELECT
+          archived_at AS "archivedAt",
+          deleted_at AS "deletedAt"
+        FROM projection_threads
+        WHERE thread_id = ${threadId}
         LIMIT 1
       `,
   });
@@ -3236,6 +3254,19 @@ pending_approval_requests AS (
       } satisfies OrchestrationThreadShell);
     });
 
+  const getThreadLifecycleById: ProjectionSnapshotQueryShape["getThreadLifecycleById"] = Effect.fn(
+    "ProjectionSnapshotQuery.getThreadLifecycleById",
+  )(function* (threadId) {
+    return yield* getThreadLifecycleRowById({ threadId }).pipe(
+      Effect.mapError(
+        toPersistenceSqlOrDecodeError(
+          "ProjectionSnapshotQuery.getThreadLifecycleById:query",
+          "ProjectionSnapshotQuery.getThreadLifecycleById:decodeRow",
+        ),
+      ),
+    );
+  });
+
   const getThreadRuntimeContext: ProjectionSnapshotQueryShape["getThreadRuntimeContext"] =
     Effect.fn("ProjectionSnapshotQuery.getThreadRuntimeContext")(function* (threadId) {
       const context = yield* getThreadRuntimeContextRow({ threadId }).pipe(
@@ -3742,6 +3773,7 @@ pending_approval_requests AS (
     getThreadCheckpointContext,
     getFullThreadDiffContext,
     getThreadShellById,
+    getThreadLifecycleById,
     getThreadRuntimeContext,
     getTurnStartMessage,
     getThreadDetailById,

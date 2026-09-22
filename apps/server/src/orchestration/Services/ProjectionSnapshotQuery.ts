@@ -212,6 +212,19 @@ export interface ProjectionSnapshotQueryShape {
   ) => Effect.Effect<Option.Option<ProjectionFullThreadDiffContext>, ProjectionRepositoryError>;
 
   /**
+   * Lifecycle of one thread row regardless of its state, unlike the active
+   * readers above. Callers that recreate threads from an external source need
+   * to tell "never existed" from "the user archived or deleted it", or they
+   * resurrect a row someone deliberately put away.
+   */
+  readonly getThreadLifecycleById: (
+    threadId: ThreadId,
+  ) => Effect.Effect<
+    Option.Option<{ readonly archivedAt: string | null; readonly deletedAt: string | null }>,
+    ProjectionRepositoryError
+  >;
+
+  /**
    * Read a single active thread shell row by id.
    */
   readonly getThreadShellById: (

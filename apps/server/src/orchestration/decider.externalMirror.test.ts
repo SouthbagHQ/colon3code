@@ -8,11 +8,11 @@ import {
   ProjectId,
   ProviderInstanceId,
   type OrchestrationEvent,
-  type PlannedOrchestrationEvent,
 } from "@t3tools/contracts";
 import * as Effect from "effect/Effect";
 
 import { decideOrchestrationCommand } from "./decider.ts";
+
 import { createEmptyReadModel, projectEvent } from "./projector.ts";
 
 const CREATED_AT = "2026-09-01T10:00:00.000Z";
@@ -46,13 +46,15 @@ const mirroredThreadReadModel = Effect.gen(function* () {
   });
 });
 
+type PlannedEvent = Omit<OrchestrationEvent, "sequence">;
+
 const applyEvents = Effect.fn("applyEvents")(function* (
-  readModel: Awaited<ReturnType<typeof createEmptyReadModel>>,
-  events: PlannedOrchestrationEvent | ReadonlyArray<PlannedOrchestrationEvent>,
+  readModel: ReturnType<typeof createEmptyReadModel>,
+  events: PlannedEvent | ReadonlyArray<PlannedEvent>,
   startSequence: number,
 ) {
   let projected = readModel;
-  const planned = Array.isArray(events) ? events : [events as PlannedOrchestrationEvent];
+  const planned = Array.isArray(events) ? events : [events as PlannedEvent];
   for (const [index, event] of planned.entries()) {
     projected = yield* projectEvent(projected, {
       ...event,
