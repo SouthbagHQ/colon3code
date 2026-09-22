@@ -254,6 +254,10 @@
     "./file-preview": {
       "types": "./src/filePreview.ts",
       "default": "./src/filePreview.ts"
+    },
+    "./greeting": {
+      "types": "./src/greeting.ts",
+      "default": "./src/greeting.ts"
     }
   },
   "scripts": {

@@ -75,7 +75,10 @@ import {
   formatAssistantCitationForComposer,
   replaceTextRange,
 } from "../../composer-logic";
-import { DISCONNECTED_COMPOSER_PLACEHOLDER } from "../../composerPlaceholder";
+import {
+  composerPlaceholderFor,
+  DISCONNECTED_COMPOSER_PLACEHOLDER,
+} from "../../composerPlaceholder";
 import {
   deriveComposerSendState,
   getAntigravitySendBlockReason,
@@ -6705,9 +6708,9 @@ export const ChatComposer = memo(function ChatComposer(props: ChatComposerProps)
                               ? "pick a project above and we'll start a thread ^w^"
                               : showProviderUnavailable
                                 ? "enable a provider in settings first, then we can chat 3:"
-                                : phase === "disconnected"
+                                : phase === "disconnected" || !activeThreadId
                                   ? DISCONNECTED_COMPOSER_PLACEHOLDER
-                                  : "ask me anything, @tag files/folders, $use skills, or / for commands :3"
+                                  : composerPlaceholderFor(activeThreadId)
                     }
                     disabled={
                       isConnecting ||

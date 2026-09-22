@@ -5,6 +5,7 @@ import {
   type LegendListRef,
   type LegendListRenderItemProps,
 } from "@legendapp/list/react-native";
+import { greeting } from "@t3tools/client-runtime/greeting";
 import {
   type EnvironmentProject,
   type EnvironmentThreadShell,
@@ -32,6 +33,7 @@ import { AppText as Text } from "../../components/AppText";
 import { EmptyState } from "../../components/EmptyState";
 import type { WorkspaceEnvironment, WorkspaceState } from "../../state/workspaceModel";
 import type { SavedRemoteConnection } from "../../lib/connection";
+import { HOME_HORIZONTAL_INSET } from "../../lib/layoutMetrics";
 import { scopedProjectKey } from "../../lib/scopedEntities";
 import { NATIVE_LIQUID_GLASS_SUPPORTED } from "../../native/native-glass";
 import { mobilePreferencesAtom, updateMobilePreferencesAtom } from "../../state/preferences";
@@ -138,12 +140,6 @@ interface HomeScreenProps {
 
 const ESTIMATED_THREAD_ROW_HEIGHT = 72;
 const PRE_LIQUID_GLASS_BOTTOM_TOOLBAR_HEIGHT = 44;
-/**
- * Top spacing between the list and the Android custom header. The Android
- * header (AndroidHomeHeader) is rendered in-flow above this screen and
- * already consumes the top safe-area inset, so the list only needs breathing
- * room here.
- */
 
 function deriveEmptyState(props: {
   readonly catalogState: WorkspaceState;
@@ -214,8 +210,19 @@ function deriveEmptyState(props: {
   };
 }
 
-function HomeTopContentSpacer() {
-  return <View className="h-4" />;
+/**
+ * Time-of-day hello at the top of the thread list. Doubles as the breathing
+ * room between the list and the header (the Android header is in-flow above
+ * this screen; iOS pads via automatic content insets). The clock is read once
+ * on mount; the hello does not roll over live.
+ */
+function HomeGreeting() {
+  const [hello] = useState(() => greeting(new Date()));
+  return (
+    <View className="pb-2 pt-4" style={{ paddingHorizontal: HOME_HORIZONTAL_INSET }}>
+      <Text className="text-sm font-t3-medium text-foreground-muted">{hello.text}</Text>
+    </View>
+  );
 }
 
 /* ─── Main screen ────────────────────────────────────────────────────── */
@@ -1137,7 +1144,7 @@ export function HomeScreen(props: HomeScreenProps) {
     );
   }
 
-  const listHeader = Platform.OS === "ios" ? null : <HomeTopContentSpacer />;
+  const listHeader = <HomeGreeting />;
 
   // Project scoping lives in the header filter menu (no inline chip row on
   // mobile — the menu is the one filter surface).
