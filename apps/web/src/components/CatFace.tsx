@@ -1,3 +1,8 @@
+import {
+  CAT_FACE_GLYPHS,
+  catFaceGlyph,
+  type CatFaceExpression,
+} from "@t3tools/client-runtime/catFace";
 import type { ComponentProps } from "react";
 
 import { Colon3Wordmark } from "./Colon3Wordmark";
@@ -6,25 +11,24 @@ import { cn } from "~/lib/utils";
 /**
  * The app's face. `happy` and `sad` are the brand mark (sad is the same SVG
  * mirrored, so it reads as "3:"); every other expression is a text glyph in the
- * interface font so it can sit in running copy at any size. Static by design:
- * swap the expression to react to state, never animate it.
+ * interface font so it can sit in running copy at any size. Pass `text` to
+ * render every expression as a glyph, for dense rows where the mark's SVG
+ * would not match the neighbouring emoticons. Static by design: swap the
+ * expression to react to state, never animate it.
  */
-export type CatFaceExpression = "happy" | "sad" | "wink" | "working" | "dizzy" | "sleepy" | "proud";
-
-const TEXT_GLYPHS: Record<Exclude<CatFaceExpression, "happy" | "sad">, string> = {
-  wink: ";3",
-  working: ">:3",
-  dizzy: "x3",
-  sleepy: "-w-",
-  proud: "^w^",
-};
+export type { CatFaceExpression };
+export { CAT_FACE_GLYPHS, catFaceGlyph };
 
 export function CatFace({
   expression,
+  text = false,
   className,
   ...props
-}: { readonly expression: CatFaceExpression } & Omit<ComponentProps<"span">, "children">) {
-  if (expression === "happy" || expression === "sad") {
+}: {
+  readonly expression: CatFaceExpression;
+  readonly text?: boolean;
+} & Omit<ComponentProps<"span">, "children">) {
+  if (!text && (expression === "happy" || expression === "sad")) {
     return (
       <span
         {...props}
@@ -46,7 +50,7 @@ export function CatFace({
       )}
       aria-hidden
     >
-      {TEXT_GLYPHS[expression]}
+      {CAT_FACE_GLYPHS[expression]}
     </span>
   );
 }

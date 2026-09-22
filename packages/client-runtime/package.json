@@ -258,6 +258,10 @@
     "./greeting": {
       "types": "./src/greeting.ts",
       "default": "./src/greeting.ts"
+    },
+    "./catFace": {
+      "types": "./src/catFace.ts",
+      "default": "./src/catFace.ts"
     }
   },
   "scripts": {
