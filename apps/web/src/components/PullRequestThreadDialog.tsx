@@ -250,7 +250,7 @@ export function PullRequestThreadDialog({
           {isResolving ? (
             <div className="flex items-center gap-2 text-muted-foreground text-xs">
               <Spinner className="size-3.5" />
-              resolving {terminology.singular}...
+              resolving {terminology.singular}…
             </div>
           ) : null}
 
@@ -280,7 +280,7 @@ export function PullRequestThreadDialog({
               preparePullRequestThreadAction.isPending
             }
           >
-            {preparingMode === "local" ? "preparing local..." : "local"}
+            {preparingMode === "local" ? "preparing local…" : "local"}
           </Button>
           <Button
             type="button"
@@ -295,7 +295,7 @@ export function PullRequestThreadDialog({
               preparePullRequestThreadAction.isPending
             }
           >
-            {preparingMode === "worktree" ? "preparing worktree..." : "worktree"}
+            {preparingMode === "worktree" ? "preparing worktree…" : "worktree"}
           </Button>
         </DialogFooter>
       </DialogPopup>

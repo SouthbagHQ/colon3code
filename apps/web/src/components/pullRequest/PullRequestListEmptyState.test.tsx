@@ -49,6 +49,6 @@ describe("PullRequestListEmptyState", () => {
     expect(render({ filtered: true })).toContain("check again");
     expect(render({ query: "fix" })).toContain("check again");
     expect(render({ canLoadMore: true })).toContain("load more pull requests");
-    expect(render({ refreshing: true })).toContain("checking...");
+    expect(render({ refreshing: true })).toContain("checking…");
   });
 });

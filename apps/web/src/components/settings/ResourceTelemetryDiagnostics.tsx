@@ -1017,20 +1017,20 @@ export function ResourceTelemetryDiagnostics({
             </div>
             <div className="flex items-center gap-2 text-[10px] text-muted-foreground/65">
               <span className="size-1.5 rounded-full bg-emerald-500" />
-              sampling every {snapshot ? formatSampleInterval(snapshot.sampleIntervalMs) : "..."}
+              sampling every {snapshot ? formatSampleInterval(snapshot.sampleIntervalMs) : "…"}
             </div>
           </div>
           <div className="grid grid-cols-2 divide-x divide-y divide-border/55 md:grid-cols-3">
             <IconStat
               icon={<CpuIcon className="size-3.5" />}
               label="current CPU"
-              value={allT3 ? `${allT3.currentCpuPercent.toFixed(1)}%` : "..."}
+              value={allT3 ? `${allT3.currentCpuPercent.toFixed(1)}%` : "…"}
               detail={allT3 ? `${formatCpuTime(allT3.cpuTimeMs)} observed CPU time` : undefined}
             />
             <IconStat
               icon={<MemoryStickIcon className="size-3.5" />}
               label="resident memory"
-              value={allT3 ? formatBytes(allT3.currentRssBytes) : "..."}
+              value={allT3 ? formatBytes(allT3.currentRssBytes) : "…"}
               detail={
                 allT3 ? `${formatBytes(allT3.peakRssBytes)} combined process peaks` : undefined
               }
@@ -1038,7 +1038,7 @@ export function ResourceTelemetryDiagnostics({
             <IconStat
               icon={<ActivityIcon className="size-3.5" />}
               label="process count"
-              value={allT3 ? String(allT3.processCount) : "..."}
+              value={allT3 ? String(allT3.processCount) : "…"}
               detail={
                 allT3 ? `${allT3.processStarts} starts · ${allT3.processExits} exits` : undefined
               }
@@ -1046,13 +1046,13 @@ export function ResourceTelemetryDiagnostics({
             <IconStat
               icon={<HardDriveIcon className="size-3.5" />}
               label="read throughput"
-              value={allT3 ? formatRate(allT3.ioReadBytesPerSecond) : "..."}
+              value={allT3 ? formatRate(allT3.ioReadBytesPerSecond) : "…"}
               detail={allT3 ? `${formatBytes(allT3.ioReadBytes)} observed` : undefined}
             />
             <IconStat
               icon={<DatabaseIcon className="size-3.5" />}
               label="write throughput"
-              value={allT3 ? formatRate(allT3.ioWriteBytesPerSecond) : "..."}
+              value={allT3 ? formatRate(allT3.ioWriteBytesPerSecond) : "…"}
               detail={allT3 ? `${formatBytes(allT3.ioWriteBytes)} observed` : undefined}
               tone={
                 allT3 && allT3.ioWriteBytesPerSecond >= 10 * 1_024 * 1_024
@@ -1066,7 +1066,7 @@ export function ResourceTelemetryDiagnostics({
               icon={<GaugeIcon className="size-3.5" />}
               label="CPU speed limit"
               value={
-                snapshot ? (speedLimit === null ? "unknown" : `${speedLimit.toFixed(0)}%`) : "..."
+                snapshot ? (speedLimit === null ? "unknown" : `${speedLimit.toFixed(0)}%`) : "…"
               }
               detail={snapshot ? `${snapshot.power.thermalState} thermal state` : undefined}
               tone={speedLimit !== null && speedLimit < 80 ? "warning" : "default"}

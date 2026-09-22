@@ -710,7 +710,7 @@ function PullRequestCodeTab({
               </Button>
             </>
           ) : diffQuery.isPending ? (
-            "loading more files..."
+            "loading more files…"
           ) : null}
         </div>
       ),
@@ -1233,7 +1233,7 @@ function PullRequestCodeTab({
   // Under the toolbar rather than in place of it, so choosing a commit does not take the
   // dropdown that was just used off the screen while its diff loads.
   if (diffQuery.isPending && loadedSlices.length === 0) {
-    return withReviewBar(<DiffPanelLoadingState label="loading pull request diff..." />);
+    return withReviewBar(<DiffPanelLoadingState label="loading pull request diff…" />);
   }
 
   // A slice that fails once there are files on screen is reported at the end of them instead:
@@ -1441,7 +1441,7 @@ function PullRequestCodeTab({
                       {diffQuery.error !== null
                         ? "retry"
                         : diffQuery.isPending
-                          ? "loading more files..."
+                          ? "loading more files…"
                           : "load more files"}
                     </Button>
                   </div>

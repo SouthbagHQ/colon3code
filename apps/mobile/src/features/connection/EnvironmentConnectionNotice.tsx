@@ -13,9 +13,9 @@ function noticeTitle(phase: EnvironmentConnectionPhase, environmentLabel: string
     case "offline":
       return "you are offline";
     case "connecting":
-      return `connecting to ${environmentLabel}...`;
+      return `connecting to ${environmentLabel}…`;
     case "reconnecting":
-      return `reconnecting to ${environmentLabel}...`;
+      return `reconnecting to ${environmentLabel}…`;
     case "error":
       return `${environmentLabel} is unavailable`;
     case "available":

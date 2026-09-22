@@ -345,9 +345,9 @@ export const ThreadDetailScreen = memo(function ThreadDetailScreen(props: Thread
       case "cached":
       case "synchronizing":
         if (contentPresentationKind === "ready") {
-          return "syncing messages...";
+          return "syncing messages…";
         }
-        return contentPresentationKind === "loading" ? "loading messages..." : null;
+        return contentPresentationKind === "loading" ? "loading messages…" : null;
       default:
         return null;
     }

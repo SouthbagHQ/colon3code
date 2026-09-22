@@ -1759,7 +1759,7 @@ const SidebarProjectItem = memo(function SidebarProjectItem(props: SidebarProjec
         const clicked = await api.contextMenu.show(
           [
             buildTargetedItem("rename", "rename"),
-            buildTargetedItem("grouping", "group into..."),
+            buildTargetedItem("grouping", "group into…"),
             buildTargetedItem("copy-path", "copy path"),
             { id: "project-settings", label: "project settings", icon: "settings" },
             buildTargetedItem("delete", "remove", {

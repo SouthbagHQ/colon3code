@@ -61,12 +61,12 @@ export function buildGitActionProgressStages(input: {
   terminology?: ChangeRequestTerminology;
 }): string[] {
   const terminology = input.terminology ?? DEFAULT_CHANGE_REQUEST_TERMINOLOGY;
-  const branchStages = input.featureBranch ? ["preparing feature ref..."] : [];
-  const pushStage = input.pushTarget ? `pushing to ${input.pushTarget}...` : "pushing...";
+  const branchStages = input.featureBranch ? ["preparing feature ref…"] : [];
+  const pushStage = input.pushTarget ? `pushing to ${input.pushTarget}…` : "pushing…";
   const prStages = [
-    `preparing ${terminology.shortLabel}...`,
-    `generating ${terminology.shortLabel} content...`,
-    `creating ${terminology.singular}...`,
+    `preparing ${terminology.shortLabel}…`,
+    `generating ${terminology.shortLabel} content…`,
+    `creating ${terminology.singular}…`,
   ];
 
   if (input.action === "push") {
@@ -80,8 +80,8 @@ export function buildGitActionProgressStages(input: {
   const commitStages = !shouldIncludeCommitStages
     ? []
     : input.hasCustomCommitMessage
-      ? ["committing..."]
-      : ["generating commit message...", "committing..."];
+      ? ["committing…"]
+      : ["generating commit message…", "committing…"];
   if (input.action === "commit") {
     return [...branchStages, ...commitStages];
   }

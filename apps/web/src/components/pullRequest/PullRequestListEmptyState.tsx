@@ -154,7 +154,7 @@ export function PullRequestListEmptyState({
               differently, and nothing on screen says which of the two the reader is looking at. */}
           <Button size="sm" variant="outline" disabled={refreshing} onClick={onRefresh}>
             <RefreshIcon className="size-3.5" refreshing={refreshing} />
-            {refreshing ? "checking..." : "check again"}
+            {refreshing ? "checking…" : "check again"}
           </Button>
         </EmptyContent>
       </Empty>
@@ -179,12 +179,12 @@ export function PullRequestListEmptyState({
       <EmptyContent className="flex-row flex-wrap justify-center gap-2">
         {canLoadMore ? (
           <Button size="sm" variant="outline" disabled={loadingMore} onClick={onLoadMore}>
-            {loadingMore ? "loading..." : "load more pull requests"}
+            {loadingMore ? "loading…" : "load more pull requests"}
           </Button>
         ) : null}
         <Button size="sm" variant="outline" disabled={refreshing} onClick={onRefresh}>
           <RefreshIcon className="size-3.5" refreshing={refreshing} />
-          {refreshing ? "checking..." : "check again"}
+          {refreshing ? "checking…" : "check again"}
         </Button>
       </EmptyContent>
     </Empty>

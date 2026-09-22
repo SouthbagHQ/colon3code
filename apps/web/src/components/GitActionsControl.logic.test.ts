@@ -941,7 +941,7 @@ describe("buildGitActionProgressStages", () => {
       hasWorkingTreeChanges: false,
       pushTarget: "origin/feature/test",
     });
-    assert.deepEqual(stages, ["pushing to origin/feature/test..."]);
+    assert.deepEqual(stages, ["pushing to origin/feature/test…"]);
   });
 
   it("shows push and PR progress for create-pr actions that still need a push", () => {
@@ -953,10 +953,10 @@ describe("buildGitActionProgressStages", () => {
       shouldPushBeforePr: true,
     });
     assert.deepEqual(stages, [
-      "pushing to origin/feature/test...",
-      "preparing PR...",
-      "generating PR content...",
-      "creating pull request...",
+      "pushing to origin/feature/test…",
+      "preparing PR…",
+      "generating PR content…",
+      "creating pull request…",
     ]);
   });
 
@@ -967,11 +967,7 @@ describe("buildGitActionProgressStages", () => {
       hasWorkingTreeChanges: false,
       shouldPushBeforePr: false,
     });
-    assert.deepEqual(stages, [
-      "preparing PR...",
-      "generating PR content...",
-      "creating pull request...",
-    ]);
+    assert.deepEqual(stages, ["preparing PR…", "generating PR content…", "creating pull request…"]);
   });
 
   it("includes commit stages for commit+push when working tree is dirty", () => {
@@ -982,9 +978,9 @@ describe("buildGitActionProgressStages", () => {
       pushTarget: "origin/feature/test",
     });
     assert.deepEqual(stages, [
-      "generating commit message...",
-      "committing...",
-      "pushing to origin/feature/test...",
+      "generating commit message…",
+      "committing…",
+      "pushing to origin/feature/test…",
     ]);
   });
 
@@ -996,11 +992,11 @@ describe("buildGitActionProgressStages", () => {
       pushTarget: "origin/feature/test",
     });
     assert.deepEqual(stages, [
-      "committing...",
-      "pushing to origin/feature/test...",
-      "preparing PR...",
-      "generating PR content...",
-      "creating pull request...",
+      "committing…",
+      "pushing to origin/feature/test…",
+      "preparing PR…",
+      "generating PR content…",
+      "creating pull request…",
     ]);
   });
 });

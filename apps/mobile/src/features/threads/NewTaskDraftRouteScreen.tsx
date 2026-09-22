@@ -156,7 +156,7 @@ export function NewTaskDraftRouteScreen({ route }: StaticScreenProps<NewTaskDraf
       />
       {preparingBranch ? (
         <View className="flex-1 items-center justify-center bg-screen">
-          <Text className="text-foreground">switching branch...</Text>
+          <Text className="text-foreground">switching branch…</Text>
         </View>
       ) : (
         <NewTaskDraftScreen

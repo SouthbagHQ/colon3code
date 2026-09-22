@@ -349,9 +349,9 @@ export function BranchToolbarBranchSelector({
   const [isBranchActionPending, startBranchActionTransition] = useTransition();
   const totalBranchCount = branchRefState.data?.totalCount ?? 0;
   const branchStatusText = isInitialBranchesLoadPending
-    ? "loading refs..."
+    ? "loading refs…"
     : isFetchingNextPage
-      ? "loading more refs..."
+      ? "loading more refs…"
       : hasNextPage
         ? `showing ${refs.length} of ${totalBranchCount} refs`
         : null;
@@ -829,7 +829,7 @@ export function BranchToolbarBranchSelector({
             <ComboboxInput
               className="[&_input]:h-6.5 [&_input]:ps-5 [&_input]:font-sans [&_input]:leading-6.5"
               inputClassName="rounded-none bg-transparent text-sm"
-              placeholder="search refs..."
+              placeholder="search refs… :3"
               showTrigger={false}
               size="sm"
               unstyled

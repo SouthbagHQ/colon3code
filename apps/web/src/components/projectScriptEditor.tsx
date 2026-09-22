@@ -367,7 +367,7 @@ export function ProjectScriptEditorDialog({
                   <Label htmlFor="script-keybinding">keybinding</Label>
                   <Input
                     id="script-keybinding"
-                    placeholder="press shortcut"
+                    placeholder="press a shortcut :3"
                     value={keybinding}
                     readOnly
                     onKeyDown={captureKeybinding}

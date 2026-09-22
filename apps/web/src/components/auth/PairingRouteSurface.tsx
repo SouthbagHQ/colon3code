@@ -144,7 +144,7 @@ export function PairingRouteSurface({
 
           <div className="flex flex-wrap gap-2">
             <Button disabled={isSubmitting} size="sm" type="submit">
-              {isSubmitting ? "pairing..." : "continue"}
+              {isSubmitting ? "pairing…" : "continue"}
             </Button>
             <Button
               disabled={isSubmitting}
@@ -271,7 +271,7 @@ export function HostedPairingRouteSurface() {
         <div className="mt-6 flex flex-wrap gap-2">
           {status === "pairing" ? (
             <Button disabled size="sm">
-              pairing...
+              pairing…
             </Button>
           ) : canRetry ? (
             <Button size="sm" onClick={() => void submitHostedPairingRequest()}>

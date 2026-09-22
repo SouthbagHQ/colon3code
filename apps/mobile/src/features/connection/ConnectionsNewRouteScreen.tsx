@@ -295,7 +295,7 @@ export function ConnectionsNewRouteScreen({
 
               <ConnectionSheetButton
                 icon="plus"
-                label={isSubmitting ? "pairing..." : "add environment"}
+                label={isSubmitting ? "pairing…" : "add environment"}
                 disabled={connectDisabled}
                 tone="primary"
                 onPress={() => {

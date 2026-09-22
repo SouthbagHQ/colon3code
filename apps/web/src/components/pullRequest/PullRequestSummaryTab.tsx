@@ -682,7 +682,7 @@ export function PullRequestSummaryTab({
                   >
                     <HammerIcon className="size-3" />
                     {pendingFinding === pullRequestFindingKey(finding)
-                      ? "preparing..."
+                      ? "preparing…"
                       : fixCheckLabel}
                   </Button>
                 ) : null}
@@ -813,7 +813,7 @@ export function PullRequestSummaryTab({
                           >
                             <HammerIcon className="size-3" />
                             {pendingFinding === pullRequestFindingKey(finding)
-                              ? "preparing..."
+                              ? "preparing…"
                               : fixFindingLabel}
                           </Button>
                         ) : null}

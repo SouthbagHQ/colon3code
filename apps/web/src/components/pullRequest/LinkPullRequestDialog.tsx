@@ -253,7 +253,7 @@ function LinkPullRequestDialog({
             onClick={() => void submit()}
             disabled={pending || resolved === null || "error" in resolved}
           >
-            {pending ? "linking..." : "link"}
+            {pending ? "linking…" : "link"}
           </Button>
         </DialogFooter>
       </DialogPopup>

@@ -841,7 +841,7 @@ function PublishRepositoryDialog(props: PublishRepositoryDialogProps) {
                 className="flex items-center gap-2 rounded-md border border-input bg-muted/40 px-3 py-2 text-xs text-muted-foreground dark:border-transparent dark:bg-white/[0.035]"
               >
                 <Spinner className="size-3.5" aria-hidden />
-                publishing repository to {publishProviderLabel}...
+                publishing repository to {publishProviderLabel}…
               </div>
             ) : null}
             {publishError && !publishRepositoryAction.isPending ? (
@@ -929,7 +929,7 @@ function PublishRepositoryDialog(props: PublishRepositoryDialogProps) {
                   {publishRepositoryAction.isPending ? (
                     <>
                       <Spinner className="size-3.5" aria-hidden />
-                      publishing...
+                      publishing…
                     </>
                   ) : (
                     "publish"
@@ -1284,8 +1284,8 @@ export default function GitActionsControl({
         progressToastId ??
         toastManager.add({
           type: "loading",
-          title: progressStages[0] ?? "running git action...",
-          description: "waiting for Git...",
+          title: progressStages[0] ?? "running git action…",
+          description: "waiting for Git…",
           timeout: 0,
           data: scopedToastData,
         });
@@ -1294,19 +1294,19 @@ export default function GitActionsControl({
         toastId: resolvedProgressToastId,
         toastData: scopedToastData,
         actionId,
-        title: progressStages[0] ?? "running git action...",
+        title: progressStages[0] ?? "running git action…",
         phaseStartedAtMs: null,
         hookStartedAtMs: null,
         hookName: null,
         lastOutputLine: null,
-        currentPhaseLabel: progressStages[0] ?? "running git action...",
+        currentPhaseLabel: progressStages[0] ?? "running git action…",
       };
 
       if (progressToastId) {
         toastManager.update(progressToastId, {
           type: "loading",
-          title: progressStages[0] ?? "running git action...",
-          description: "waiting for Git...",
+          title: progressStages[0] ?? "running git action…",
+          description: "waiting for Git…",
           timeout: 0,
           data: scopedToastData,
         });
@@ -1341,7 +1341,7 @@ export default function GitActionsControl({
             progress.lastOutputLine = null;
             break;
           case "hook_started":
-            progress.title = `running ${event.hookName}...`;
+            progress.title = `running ${event.hookName}…`;
             progress.hookName = event.hookName;
             progress.hookStartedAtMs = now;
             progress.lastOutputLine = null;
@@ -1350,7 +1350,7 @@ export default function GitActionsControl({
             progress.lastOutputLine = event.text;
             break;
           case "hook_finished":
-            progress.title = progress.currentPhaseLabel ?? "committing...";
+            progress.title = progress.currentPhaseLabel ?? "committing…";
             progress.hookName = null;
             progress.hookStartedAtMs = null;
             progress.lastOutputLine = null;
@@ -1517,7 +1517,7 @@ export default function GitActionsControl({
     if (quickAction.kind === "run_pull") {
       const toastId = toastManager.add({
         type: "loading",
-        title: "pulling...",
+        title: "pulling…",
         timeout: 0,
         data: threadToastData,
       });
@@ -1665,7 +1665,7 @@ export default function GitActionsControl({
         >
           <GitBranchPlusIcon className="size-3.5" aria-hidden />
           <span className="ml-0.5">
-            {initAction.isPending ? "initializing..." : "initialize Git"}
+            {initAction.isPending ? "initializing…" : "initialize Git"}
           </span>
         </Button>
       ) : (
@@ -1775,7 +1775,7 @@ export default function GitActionsControl({
                   }}
                 >
                   <CloudUploadIcon />
-                  publish repository...
+                  publish repository…
                 </MenuItem>
               ) : null}
               {gitStatusForActions?.refName === null && (
@@ -1932,7 +1932,7 @@ export default function GitActionsControl({
               <Textarea
                 value={dialogCommitMessage}
                 onChange={(event) => setDialogCommitMessage(event.target.value)}
-                placeholder="leave empty to auto-generate"
+                placeholder="leave empty and i'll name it ^w^"
                 size="sm"
               />
             </div>

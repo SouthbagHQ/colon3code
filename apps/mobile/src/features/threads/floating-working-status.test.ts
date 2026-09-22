@@ -22,11 +22,11 @@ describe("connectionFloatingStatus", () => {
   it("names the environment it is retrying, and says so only after a failure", () => {
     expect(status("connecting")).toMatchObject({
       tone: "reconnecting",
-      label: "reconnecting to Mac mini...",
+      label: "reconnecting to Mac mini…",
     });
     expect(status("reconnecting", { connectionError: "ECONNREFUSED" })).toMatchObject({
       tone: "reconnecting",
-      label: "failed to connect. retrying Mac mini...",
+      label: "failed to connect. retrying Mac mini…",
     });
   });
 

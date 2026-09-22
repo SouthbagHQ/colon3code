@@ -139,8 +139,8 @@ export function PullRequestCommentComposer({
                 )}
                 {submitting === followUpAction
                   ? followUpAction === "close"
-                    ? "closing..."
-                    : "reopening..."
+                    ? "closing…"
+                    : "reopening…"
                   : followUpAction === "close"
                     ? "close with comment"
                     : "reopen with comment"}
@@ -153,7 +153,7 @@ export function PullRequestCommentComposer({
               onClick={() => void submit("comment")}
             >
               <SendIcon className="size-3.5" />
-              {submitting === "comment" ? "posting..." : "comment"}
+              {submitting === "comment" ? "posting…" : "comment"}
             </Button>
           </div>
         </div>

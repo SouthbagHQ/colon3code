@@ -986,22 +986,19 @@ export function DiagnosticsSettingsPanel() {
         <StatsGrid>
           <StatBlock
             label="child processes"
-            value={processData ? formatCount(processData.processCount) : "..."}
+            value={processData ? formatCount(processData.processCount) : "…"}
           />
           <StatBlock
             label="CPU"
-            value={processData ? `${processData.totalCpuPercent.toFixed(1)}%` : "..."}
+            value={processData ? `${processData.totalCpuPercent.toFixed(1)}%` : "…"}
             tooltip="total CPU across the live child processes of the current server process. the desktop shell and other parent processes aren't counted :3"
           />
           <StatBlock
             label="memory"
-            value={processData ? formatBytes(processData.totalRssBytes) : "..."}
+            value={processData ? formatBytes(processData.totalRssBytes) : "…"}
             tooltip="total resident memory across live child processes of the current server process. the desktop shell and other parent processes are not included."
           />
-          <StatBlock
-            label="server PID"
-            value={processData ? String(processData.serverPid) : "..."}
-          />
+          <StatBlock label="server PID" value={processData ? String(processData.serverPid) : "…"} />
         </StatsGrid>
         {processDiagnosticsError || processError ? (
           <div className="space-y-2 border-t border-border/60 px-4 py-3 text-xs text-muted-foreground sm:px-5">
@@ -1051,21 +1048,21 @@ export function DiagnosticsSettingsPanel() {
         <StatsGrid>
           <StatBlock
             label="CPU time"
-            value={resourceData ? formatCpuTime(resourceData.totalCpuSecondsApprox) : "..."}
+            value={resourceData ? formatCpuTime(resourceData.totalCpuSecondsApprox) : "…"}
             tooltip="approximate active CPU time for the T3 server root process and its descendants during the selected window. it grows only while sampled processes use CPU and older samples leave as the window moves."
           />
           <StatBlock
             label="samples"
-            value={resourceData ? formatCount(resourceData.retainedSampleCount) : "..."}
+            value={resourceData ? formatCount(resourceData.retainedSampleCount) : "…"}
             tooltip="in-memory process samples the server keeps around. they reset when the server restarts :3"
           />
           <StatBlock
             label="interval"
-            value={resourceData ? formatDuration(resourceData.sampleIntervalMs) : "..."}
+            value={resourceData ? formatDuration(resourceData.sampleIntervalMs) : "…"}
           />
           <StatBlock
             label="processes"
-            value={resourceData ? formatCount(resourceData.topProcesses.length) : "..."}
+            value={resourceData ? formatCount(resourceData.topProcesses.length) : "…"}
           />
         </StatsGrid>
         {processResourceError || resourceError ? (
@@ -1125,15 +1122,15 @@ export function DiagnosticsSettingsPanel() {
         }
       >
         <StatsGrid>
-          <StatBlock label="spans" value={data ? formatCount(data.recordCount) : "..."} />
+          <StatBlock label="spans" value={data ? formatCount(data.recordCount) : "…"} />
           <StatBlock
             label="failures"
-            value={data ? formatCount(data.failureCount) : "..."}
+            value={data ? formatCount(data.failureCount) : "…"}
             tone={data && data.failureCount > 0 ? "danger" : "default"}
           />
           <StatBlock
             label="slow spans"
-            value={data ? formatCount(data.slowSpanCount) : "..."}
+            value={data ? formatCount(data.slowSpanCount) : "…"}
             tooltip={
               data
                 ? `spans with a duration of ${formatDuration(data.slowSpanThresholdMs)} or longer.`
@@ -1143,7 +1140,7 @@ export function DiagnosticsSettingsPanel() {
           />
           <StatBlock
             label="parse errors"
-            value={data ? formatCount(data.parseErrorCount) : "..."}
+            value={data ? formatCount(data.parseErrorCount) : "…"}
             tone={data && data.parseErrorCount > 0 ? "warning" : "default"}
           />
         </StatsGrid>
@@ -1204,7 +1201,7 @@ export function DiagnosticsSettingsPanel() {
           </DiagnosticsTable>
         ) : (
           <EmptyRows
-            label={isInitialLoading ? "loading failures..." : "no failed spans, purr :3"}
+            label={isInitialLoading ? "loading failures… :3" : "no failed spans, purr :3"}
           />
         )}
       </SettingsSection>
@@ -1236,7 +1233,7 @@ export function DiagnosticsSettingsPanel() {
           <EmptyRows
             label={
               isInitialLoading
-                ? "loading failure groups..."
+                ? "loading failure groups… :3"
                 : "no repeated failures in sight, purr :3"
             }
           />
@@ -1269,7 +1266,7 @@ export function DiagnosticsSettingsPanel() {
           </DiagnosticsTable>
         ) : (
           <EmptyRows
-            label={isInitialLoading ? "loading slow spans..." : "hmm, no spans found 3:"}
+            label={isInitialLoading ? "loading slow spans… :3" : "hmm, no spans found 3:"}
           />
         )}
       </SettingsSection>
@@ -1334,7 +1331,7 @@ export function DiagnosticsSettingsPanel() {
         ) : (
           <EmptyRows
             label={
-              isInitialLoading ? "loading recent logs..." : "no warnings or errors, all quiet :3"
+              isInitialLoading ? "loading recent logs… :3" : "no warnings or errors, all quiet :3"
             }
           />
         )}
@@ -1369,7 +1366,7 @@ export function DiagnosticsSettingsPanel() {
           </DiagnosticsTable>
         ) : (
           <EmptyRows
-            label={isInitialLoading ? "loading span names..." : "hmm, no spans found 3:"}
+            label={isInitialLoading ? "loading span names… :3" : "hmm, no spans found 3:"}
           />
         )}
       </SettingsSection>

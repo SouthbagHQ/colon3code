@@ -75,7 +75,7 @@ function AttachmentDocumentBody(props: {
     return (
       <View className="flex-1 items-center justify-center gap-3 bg-sheet px-6">
         <ActivityIndicator />
-        <Text className="text-center text-sm text-foreground-muted">opening in file viewer...</Text>
+        <Text className="text-center text-sm text-foreground-muted">opening in file viewer…</Text>
       </View>
     );
   }
@@ -83,7 +83,7 @@ function AttachmentDocumentBody(props: {
     return (
       <View className="flex-1 items-center justify-center gap-3 bg-sheet px-6">
         <ActivityIndicator />
-        <Text className="text-center text-sm text-foreground-muted">loading file...</Text>
+        <Text className="text-center text-sm text-foreground-muted">loading file…</Text>
       </View>
     );
   }

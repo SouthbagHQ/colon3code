@@ -538,7 +538,7 @@ export function getCommandPaletteInputPlaceholder(mode: CommandPaletteMode): str
     case "root-browse":
       return "enter project path (e.g. ~/projects/my-app)";
     case "submenu":
-      return "search...";
+      return "search… :3";
     case "submenu-browse":
       return "enter path (e.g. ~/projects/my-app)";
   }

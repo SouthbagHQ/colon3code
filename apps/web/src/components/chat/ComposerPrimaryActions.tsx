@@ -46,7 +46,7 @@ const formatPendingPrimaryActionLabel = (input: {
   questionIndex: number;
 }) => {
   if (input.isResponding) {
-    return "submitting...";
+    return "submitting…";
   }
   if (input.compact) {
     return input.isLastQuestion ? "submit" : "next";
@@ -215,7 +215,7 @@ export const ComposerPrimaryActions = memo(function ComposerPrimaryActions({
           {...pointerFocusProps}
           disabled={isSendBusy || isSendDisabled || isConnecting || isEnvironmentUnavailable}
         >
-          {isConnecting || isSendBusy ? "sending..." : "refine"}
+          {isConnecting || isSendBusy ? "sending…" : "refine"}
         </Button>
       );
     }
@@ -229,7 +229,7 @@ export const ComposerPrimaryActions = memo(function ComposerPrimaryActions({
           {...pointerFocusProps}
           disabled={isSendBusy || isSendDisabled || isConnecting || isEnvironmentUnavailable}
         >
-          {isConnecting || isSendBusy ? "sending..." : "implement"}
+          {isConnecting || isSendBusy ? "sending…" : "implement"}
         </Button>
         <Menu>
           <MenuTrigger

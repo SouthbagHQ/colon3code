@@ -338,7 +338,7 @@ export function ThemeSearchSection({
 
       <div className="sr-only" role="status">
         {isSearching
-          ? "searching themes..."
+          ? "searching themes…"
           : results
             ? `${results.length} supported ${results.length === 1 ? "theme" : "themes"} found :3`
             : ""}
@@ -355,7 +355,7 @@ export function ThemeSearchSection({
 
       {isSearching && results === null ? (
         <div className="flex min-h-20 items-center justify-center gap-2 text-muted-foreground text-sm">
-          <Spinner /> searching themes...
+          <Spinner /> searching themes…
         </div>
       ) : null}
 
@@ -419,7 +419,7 @@ export function ThemeSearchSection({
                       ) : (
                         <PackagePlusIcon />
                       )}
-                      {isInstalling ? `${progressAction}...` : action}
+                      {isInstalling ? `${progressAction}…` : action}
                     </Button>
                   </div>
                 </article>

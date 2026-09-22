@@ -671,7 +671,7 @@ export default function DiffPanel({
                     <ComboboxInput
                       className="[&_input]:h-6.5 [&_input]:ps-5 [&_input]:font-sans [&_input]:leading-6.5"
                       inputClassName="rounded-none bg-transparent text-sm"
-                      placeholder="search refs..."
+                      placeholder="search refs… :3"
                       showTrigger={false}
                       size="sm"
                       unstyled
@@ -927,10 +927,10 @@ export default function DiffPanel({
                 <DiffPanelLoadingState
                   label={
                     selectedTurn
-                      ? "loading checkpoint diff..."
+                      ? "loading checkpoint diff…"
                       : selectedGitScope === "unstaged"
-                        ? "loading working tree diff..."
-                        : "loading branch diff..."
+                        ? "loading working tree diff…"
+                        : "loading branch diff…"
                   }
                 />
               ) : (

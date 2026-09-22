@@ -79,9 +79,7 @@ export function WorkspaceFileImagePreview(props: {
     return (
       <View className="flex-1 items-center justify-center gap-3 bg-card px-6">
         <ActivityIndicator />
-        <Text className="text-center text-sm text-foreground-muted">
-          preparing image preview...
-        </Text>
+        <Text className="text-center text-sm text-foreground-muted">preparing image preview…</Text>
       </View>
     );
   }

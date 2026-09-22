@@ -120,7 +120,7 @@ export function PullRequestMarkdownEditor({
           cancel
         </Button>
         <Button size="xs" variant="outline" disabled={saveDisabled} onClick={() => onSave(draft)}>
-          {saving ? "saving..." : "save"}
+          {saving ? "saving…" : "save"}
         </Button>
       </div>
     </div>

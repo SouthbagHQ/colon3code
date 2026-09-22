@@ -243,7 +243,7 @@ export function ReviewThreadCard({
             onClick={onFix}
           >
             <HammerIcon className="size-3" />
-            {fixPending ? "preparing..." : fixLabel}
+            {fixPending ? "preparing…" : fixLabel}
           </Button>
         ) : null}
         {canResolve ? (
@@ -321,7 +321,7 @@ export function ReviewThreadCard({
                 disabled={loadingMore}
                 onClick={() => void loadMore()}
               >
-                {loadingMore ? "loading..." : "load more comments"}
+                {loadingMore ? "loading…" : "load more comments"}
               </Button>
             </div>
           ) : null}

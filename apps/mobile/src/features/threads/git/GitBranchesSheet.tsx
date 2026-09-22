@@ -136,9 +136,7 @@ export function GitBranchesSheet(_props: GitBranchesSheetProps) {
             existing branches
           </Text>
           {branchesLoading ? (
-            <Text className="text-foreground-secondary text-sm font-medium">
-              loading branches...
-            </Text>
+            <Text className="text-foreground-secondary text-sm font-medium">loading branches…</Text>
           ) : null}
           {!branchesLoading && availableBranches.length === 0 ? (
             <Text className="text-foreground-secondary text-sm font-medium">

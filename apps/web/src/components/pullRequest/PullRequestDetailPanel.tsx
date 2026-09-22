@@ -1745,12 +1745,12 @@ export function PullRequestDetailPanel({
                               size="xs"
                               variant="outline"
                               aria-label={
-                                handoff?.startsWith("checkout") ? "checking out..." : "check out"
+                                handoff?.startsWith("checkout") ? "checking out…" : "check out"
                               }
                             >
                               <GitBranchIcon aria-hidden className="size-3.5" />
                               <span className="@max-[35rem]/pr-header:hidden">
-                                {handoff?.startsWith("checkout") ? "checking out..." : "check out"}
+                                {handoff?.startsWith("checkout") ? "checking out…" : "check out"}
                               </span>
                               <ChevronDownIcon
                                 aria-hidden
@@ -1827,20 +1827,18 @@ export function PullRequestDetailPanel({
                           variant="destructive-outline"
                           disabled={handoff !== null}
                           onClick={startResolveConflicts}
-                          aria-label={
-                            handoff === "conflicts" ? "preparing..." : "resolve conflicts"
-                          }
+                          aria-label={handoff === "conflicts" ? "preparing…" : "resolve conflicts"}
                         >
                           <TriangleAlertIcon aria-hidden className="size-3.5" />
                           <span className="@max-[30rem]/pr-header:hidden">
-                            {handoff === "conflicts" ? "preparing..." : "resolve conflicts"}
+                            {handoff === "conflicts" ? "preparing…" : "resolve conflicts"}
                           </span>
                         </Button>
                       </span>
                     }
                   />
                   <TooltipPopup side="top">
-                    {handoff === "conflicts" ? "preparing..." : "resolve conflicts"}
+                    {handoff === "conflicts" ? "preparing…" : "resolve conflicts"}
                   </TooltipPopup>
                 </Tooltip>
               ) : primaryAction === "ready" ? (
@@ -1877,14 +1875,14 @@ export function PullRequestDetailPanel({
                           }
                           aria-label={
                             pendingAction === "enable-auto-merge"
-                              ? "enabling..."
+                              ? "enabling…"
                               : pendingAutoMergeLabel
                           }
                         >
                           <GitMergeIcon aria-hidden className="size-3.5" />
                           <span className="@max-[30rem]/pr-header:hidden">
                             {pendingAction === "enable-auto-merge"
-                              ? "enabling..."
+                              ? "enabling…"
                               : pendingAutoMergeLabel}
                           </span>
                         </Button>
@@ -1892,7 +1890,7 @@ export function PullRequestDetailPanel({
                     }
                   />
                   <TooltipPopup side="top">
-                    {pendingAction === "enable-auto-merge" ? "enabling..." : pendingAutoMergeLabel}
+                    {pendingAction === "enable-auto-merge" ? "enabling…" : pendingAutoMergeLabel}
                   </TooltipPopup>
                 </Tooltip>
               ) : primaryAction === "auto-merge-armed" ? (
@@ -1926,19 +1924,19 @@ export function PullRequestDetailPanel({
                           disabled={actionPending}
                           onClick={() => setConfirmation({ open: true, action: "merge" })}
                           aria-label={
-                            pendingAction === "merge" ? "merging..." : selectedMergeMethodLabel
+                            pendingAction === "merge" ? "merging…" : selectedMergeMethodLabel
                           }
                         >
                           <GitMergeIcon aria-hidden className="size-3.5" />
                           <span className="@max-[30rem]/pr-header:hidden">
-                            {pendingAction === "merge" ? "merging..." : selectedMergeMethodLabel}
+                            {pendingAction === "merge" ? "merging…" : selectedMergeMethodLabel}
                           </span>
                         </Button>
                       </span>
                     }
                   />
                   <TooltipPopup side="top">
-                    {pendingAction === "merge" ? "merging..." : selectedMergeMethodLabel}
+                    {pendingAction === "merge" ? "merging…" : selectedMergeMethodLabel}
                   </TooltipPopup>
                 </Tooltip>
               ) : (primaryAction === "merged" || primaryAction === "closed") &&
@@ -1993,7 +1991,7 @@ export function PullRequestDetailPanel({
                   <MenuItem disabled={handoff !== null} onClick={askAboutPullRequest}>
                     <MessageCircleQuestionIcon className="mt-0.5 size-3.5 shrink-0 self-start" />
                     <span className="flex min-w-0 flex-col">
-                      <span>{handoff === "ask" ? "opening..." : "ask a question"}</span>
+                      <span>{handoff === "ask" ? "opening…" : "ask a question"}</span>
                       <span className="text-xs text-muted-foreground">
                         {attachTarget !== null
                           ? "pops the pull request into this thread's composer :3"
@@ -2004,7 +2002,7 @@ export function PullRequestDetailPanel({
                   <MenuItem disabled={handoff !== null} onClick={explainPullRequest}>
                     <BookOpenIcon className="mt-0.5 size-3.5 shrink-0 self-start" />
                     <span className="flex min-w-0 flex-col">
-                      <span>{handoff === "explain" ? "opening..." : "explain this PR"}</span>
+                      <span>{handoff === "explain" ? "opening…" : "explain this PR"}</span>
                       <span className="text-xs text-muted-foreground">
                         A walk through the diff and what to read closely.
                       </span>
@@ -2012,7 +2010,7 @@ export function PullRequestDetailPanel({
                   </MenuItem>
                   <MenuItem disabled={handoff !== null} onClick={startFixFindings}>
                     <HammerIcon className="size-3.5" />
-                    {handoff === "findings" ? "preparing..." : handoffLabels.fixFindings}
+                    {handoff === "findings" ? "preparing…" : handoffLabels.fixFindings}
                   </MenuItem>
                   {pickableEnvironments.length > 0 ? (
                     <ActOnEnvironmentPicker
@@ -2366,7 +2364,7 @@ export function PullRequestDetailPanel({
                         disabled={titleSaving || titleDraft.trim().length === 0}
                         onClick={() => void saveTitle(titleDraft)}
                       >
-                        {titleSaving ? "saving..." : "save"}
+                        {titleSaving ? "saving…" : "save"}
                       </Button>
                     </div>
                   </div>
@@ -2501,14 +2499,14 @@ export function PullRequestDetailPanel({
                             }
                             aria-label={
                               pendingAction === "approve-workflows"
-                                ? "approving..."
+                                ? "approving…"
                                 : "approve workflows to run"
                             }
                           >
                             <PlayIcon aria-hidden className="size-3.5" />
                             <span>
                               {pendingAction === "approve-workflows"
-                                ? "approving..."
+                                ? "approving…"
                                 : "approve workflows to run"}
                             </span>
                           </Button>
@@ -2517,7 +2515,7 @@ export function PullRequestDetailPanel({
                     />
                     <TooltipPopup side="top">
                       {pendingAction === "approve-workflows"
-                        ? "approving..."
+                        ? "approving…"
                         : "approve workflows to run"}
                     </TooltipPopup>
                   </Tooltip>
@@ -2695,7 +2693,7 @@ export function PullRequestDetailPanel({
             ) : null}
             {mountedTabs.has("code") ? (
               <div className={cn("absolute inset-0", tab !== "code" && "invisible")}>
-                <Suspense fallback={<DiffPanelLoadingState label="loading pull request diff..." />}>
+                <Suspense fallback={<DiffPanelLoadingState label="loading pull request diff…" />}>
                   <PullRequestCodeTab
                     onAddToAgentSelection={addSelectionToAgent}
                     environmentId={environmentId}

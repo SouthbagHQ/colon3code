@@ -159,7 +159,7 @@ function FileContent(props: {
     return props.previewUri === null ? (
       <View className="flex-1 items-center justify-center gap-3 bg-sheet px-6">
         <ActivityIndicator />
-        <Text className="text-center text-sm text-foreground-muted">loading file...</Text>
+        <Text className="text-center text-sm text-foreground-muted">loading file…</Text>
       </View>
     ) : (
       <AudioFilePreview uri={props.previewUri} onRetry={props.onRetryPreview} />
@@ -195,7 +195,7 @@ function FileContent(props: {
     return (
       <View className="flex-1 items-center justify-center gap-3 bg-sheet px-6">
         <ActivityIndicator />
-        <Text className="text-center text-sm text-foreground-muted">loading file...</Text>
+        <Text className="text-center text-sm text-foreground-muted">loading file…</Text>
       </View>
     );
   }

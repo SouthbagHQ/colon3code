@@ -659,7 +659,7 @@ function PairingForm({
               pairing link? ^w^
             </CollapsibleTrigger>
             <Button type="submit" disabled={isPairing || pairingUrl.trim().length === 0}>
-              {isPairing ? "pairing..." : "pair"}
+              {isPairing ? "pairing…" : "pair"}
             </Button>
           </div>
           <CollapsiblePanel className="pt-3">

@@ -6206,7 +6206,7 @@ export default function ChatView(props: ChatViewProps) {
           disabled={isStoppingBackgroundWork}
           onClick={() => void handleStopBackgroundWork()}
         >
-          {isStoppingBackgroundWork ? "stopping..." : "stop"}
+          {isStoppingBackgroundWork ? "stopping…" : "stop"}
         </Button>
       ),
     };
@@ -6256,10 +6256,10 @@ export default function ChatView(props: ChatViewProps) {
         >
           {isSnoozed
             ? isUnsnoozing
-              ? "waking..."
+              ? "waking…"
               : "wake now"
             : isUnsettling
-              ? "un-settling..."
+              ? "un-settling…"
               : "un-settle"}
         </Button>
       ),
@@ -6457,7 +6457,7 @@ export default function ChatView(props: ChatViewProps) {
             disabled={isRestoringThreadBranch}
             onClick={handleRestoreThreadBranch}
           >
-            {isRestoringThreadBranch ? "restoring..." : "restore branch"}
+            {isRestoringThreadBranch ? "restoring…" : "restore branch"}
           </Button>
         ),
         dismissLabel: "dismiss branch change notice",
