@@ -18,7 +18,7 @@ import * as Effect from "effect/Effect";
 import * as Schema from "effect/Schema";
 import { HttpClient, HttpClientRequest, HttpClientResponse } from "effect/unstable/http";
 
-export const CURSOR_CLOUD_API_BASE_URL = "https://api.cursor.com";
+const CURSOR_CLOUD_API_BASE_URL = "https://api.cursor.com";
 
 /** Pages are capped by Cursor at 100; the mirror never wants more than a page. */
 const AGENT_PAGE_LIMIT = 100;
@@ -26,7 +26,7 @@ const RUN_PAGE_LIMIT = 100;
 
 const REQUEST_TIMEOUT_MS = 20_000;
 
-export type CursorCloudOperation = "getApiKeyInfo" | "listAgents" | "getAgent" | "listRuns";
+type CursorCloudOperation = "getApiKeyInfo" | "listAgents" | "getAgent" | "listRuns";
 
 export class CursorCloudApiError extends Schema.TaggedError<CursorCloudApiError>()(
   "CursorCloudApiError",
@@ -41,11 +41,6 @@ export class CursorCloudApiError extends Schema.TaggedError<CursorCloudApiError>
   override get message(): string {
     const status = this.status === undefined ? "" : ` (HTTP ${this.status})`;
     return `Cursor Cloud ${this.operation} failed${status}: ${this.detail}`;
-  }
-
-  /** 401/403 mean the key is wrong or revoked, which settings reports differently. */
-  get isAuthFailure(): boolean {
-    return this.status === 401 || this.status === 403;
   }
 }
 

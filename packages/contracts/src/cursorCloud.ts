@@ -80,9 +80,3 @@ export type CursorCloudGetStatusInput = typeof CursorCloudGetStatusInput.Type;
 
 export const CursorCloudSyncInput = Schema.Struct({});
 export type CursorCloudSyncInput = typeof CursorCloudSyncInput.Type;
-
-export class CursorCloudError extends Schema.TaggedError<CursorCloudError>()("CursorCloudError", {
-  operation: Schema.Literals(["read-settings", "call-api", "mirror-agents"]),
-  message: TrimmedNonEmptyString,
-  cause: Schema.optional(Schema.Defect()),
-}) {}

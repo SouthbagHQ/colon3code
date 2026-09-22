@@ -29,7 +29,6 @@ import {
   FilesystemBrowseError,
 } from "./filesystem.ts";
 import {
-  CursorCloudError,
   CursorCloudGetStatusInput,
   CursorCloudStatus,
   CursorCloudSyncInput,
@@ -959,16 +958,18 @@ const WsAgentSessionsImportRpc = Rpc.make(WS_METHODS.agentSessionsImport, {
   ]),
 });
 
+// A sweep reports its own failures through `CursorCloudStatus.lastError`, so
+// these calls only ever fail on authorization.
 const WsCursorCloudGetStatusRpc = Rpc.make(WS_METHODS.cursorCloudGetStatus, {
   payload: CursorCloudGetStatusInput,
   success: CursorCloudStatus,
-  error: Schema.Union([CursorCloudError, EnvironmentAuthorizationError]),
+  error: EnvironmentAuthorizationError,
 });
 
 const WsCursorCloudSyncRpc = Rpc.make(WS_METHODS.cursorCloudSync, {
   payload: CursorCloudSyncInput,
   success: CursorCloudStatus,
-  error: Schema.Union([CursorCloudError, EnvironmentAuthorizationError]),
+  error: EnvironmentAuthorizationError,
 });
 
 const WsAssetsCreateUrlRpc = Rpc.make(WS_METHODS.assetsCreateUrl, {
