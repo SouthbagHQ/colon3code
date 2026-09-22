@@ -1,3 +1,4 @@
+import { catFaceGlyph } from "@t3tools/client-runtime/catFace";
 import { formatDuration } from "@t3tools/shared/orchestrationTiming";
 import { GlassContainer, GlassView } from "expo-glass-effect";
 import { type ReactNode, useEffect, useRef, useState } from "react";
@@ -378,7 +379,9 @@ function WorkingDuration(props: {
 
   return (
     <StatusLabelRow accessibilityLabel={label} onLayout={props.onLayout}>
-      <Text className="font-t3-medium text-xs text-foreground">working for </Text>
+      <Text className="font-t3-medium text-xs text-foreground">
+        {catFaceGlyph("working")} working for{" "}
+      </Text>
       <SystemText
         className="text-xs text-foreground"
         style={{ fontVariant: ["tabular-nums"], fontWeight: "500" }}

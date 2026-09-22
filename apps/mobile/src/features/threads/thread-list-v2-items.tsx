@@ -8,6 +8,7 @@ import type {
   EnvironmentProject,
   EnvironmentThreadShell,
 } from "@t3tools/client-runtime/state/shell";
+import { catFaceGlyph } from "@t3tools/client-runtime/catFace";
 import type { EnvironmentThreadSearchMatch } from "@t3tools/client-runtime/state/thread-search";
 import type { EnvironmentMachineKind } from "@t3tools/contracts";
 import { canSnooze, resolveSnoozePresets } from "@t3tools/client-runtime/state/thread-settled";
@@ -60,10 +61,10 @@ const MONO_FONT = Platform.select({
 const STATUS_LABEL_BY_STATUS: Partial<
   Record<ThreadListV2Status, { label: string; className: string }>
 > = {
-  approval: { label: "approval", className: "text-warning-foreground" },
-  input: { label: "input", className: "text-foreground-secondary" },
-  working: { label: "working", className: "text-adaptive-sky-600-400" },
-  failed: { label: "failed", className: "text-danger-foreground" },
+  approval: { label: `${catFaceGlyph("curious")} approval`, className: "text-warning-foreground" },
+  input: { label: `${catFaceGlyph("curious")} input`, className: "text-foreground-secondary" },
+  working: { label: `${catFaceGlyph("working")} working`, className: "text-adaptive-sky-600-400" },
+  failed: { label: `${catFaceGlyph("sad")} failed`, className: "text-danger-foreground" },
 };
 
 function threadTimeLabel(thread: EnvironmentThreadShell): string {
