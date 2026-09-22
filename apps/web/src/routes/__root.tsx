@@ -1,5 +1,9 @@
 import { type ServerLifecycleWelcomePayload } from "@t3tools/contracts";
-import { scopedProjectKey, scopeProjectRef } from "@t3tools/client-runtime/environment";
+import {
+  scopedProjectKey,
+  scopedThreadKey,
+  scopeProjectRef,
+} from "@t3tools/client-runtime/environment";
 import { squashAtomCommandFailure } from "@t3tools/client-runtime/state/runtime";
 import {
   Outlet,
@@ -9,6 +13,7 @@ import {
   type ErrorComponentProps,
   useLocation,
   useNavigate,
+  useParams,
   useRouter,
 } from "@tanstack/react-router";
 import { CheckIcon, CopyIcon } from "~/icons";
@@ -28,6 +33,7 @@ import { SshPasswordPromptDialog } from "../components/desktop/SshPasswordPrompt
 import { SnapShotCoordinator } from "../components/desktop/SnapShotCoordinator";
 import { DesktopAppActivationCoordinator } from "../components/desktop/DesktopAppActivationCoordinator";
 import { ProviderUpdateLaunchNotification } from "../components/ProviderUpdateLaunchNotification";
+import { resolveSidebarThreadStatus } from "../components/Sidebar.logic";
 import { ThreadNotificationCoordinator } from "../components/ThreadNotificationCoordinator";
 import { ProjectCloneToastCoordinator } from "../components/ProjectCloneToastCoordinator";
 import { SlowRpcRequestToastCoordinator } from "../components/SlowRpcRequestToastCoordinator";
@@ -42,6 +48,7 @@ import {
   ToastProvider,
   toastManager,
 } from "../components/ui/toast";
+import { resolveDocumentTitle } from "../documentTitle";
 import { resolveAndPersistPreferredEditor } from "../editorPreferences";
 import { applyAppearanceFontVariables } from "~/appearanceFonts";
 import { applyAppearanceContrast } from "~/appearanceContrast";
@@ -52,6 +59,7 @@ import {
   derivePhysicalProjectKeyFromPath,
   selectProjectGroupingSettings,
 } from "../logicalProject";
+import { resolveThreadRouteRef } from "../threadRoutes";
 import { useUiStateStore } from "../uiStateStore";
 import { syncBrowserChromeTheme } from "../hooks/useTheme";
 import { configureClientTracing } from "../observability/clientTracing";
@@ -67,7 +75,12 @@ import {
   primaryServerConfigEventAtom,
   primaryServerWelcomeAtom,
 } from "../state/server";
-import { readProject, setActiveEnvironmentId, useActiveEnvironmentId } from "../state/entities";
+import {
+  readProject,
+  setActiveEnvironmentId,
+  useActiveEnvironmentId,
+  useThreadShell,
+} from "../state/entities";
 import {
   createKeybindingsUpdateToastController,
   type KeybindingsUpdateToastController,
@@ -320,16 +333,54 @@ function FontAppearanceSync() {
 function DocumentTitleSync() {
   const primaryServerVersion =
     useAtomValue(primaryServerConfigAtom)?.environment.serverVersion ?? null;
-  const title = resolveServerBackedAppDisplayName({
+  const appName = resolveServerBackedAppDisplayName({
     baseName: APP_BASE_NAME,
     fallbackDisplayName: APP_DISPLAY_NAME,
     fallbackStageLabel: APP_STAGE_LABEL,
     primaryServerVersion,
   });
+  const threadRef = useParams({ strict: false, select: resolveThreadRouteRef });
+  const threadKey = threadRef === null ? null : scopedThreadKey(threadRef);
+  const thread = useThreadShell(threadRef);
+  let status = thread === null ? null : resolveSidebarThreadStatus(thread);
+  if (status === "ready" && thread?.latestTurn?.state === "error") status = "failed";
+  const turnState = thread?.latestTurn?.state ?? null;
+  // "done" only after this tab watched the turn run and the user was away
+  // when it finished, so a thread opened while already idle stays plain and
+  // a completion you saw land is not announced. Held in a ref: the title is
+  // written imperatively, and clearing it on focus should not re-render.
+  const watched = useRef<{ threadKey: string; done: boolean } | null>(null);
 
   useEffect(() => {
-    document.title = title;
-  }, [title]);
+    if (watched.current?.threadKey !== threadKey) watched.current = null;
+    if (status === "working" && threadKey !== null) {
+      watched.current = { threadKey, done: false };
+    } else if (status === "ready" && turnState === "completed" && watched.current) {
+      const away = document.visibilityState !== "visible" || !document.hasFocus();
+      watched.current = { ...watched.current, done: away };
+    }
+    document.title = resolveDocumentTitle({
+      appName,
+      status,
+      recentlyCompleted: watched.current?.done ?? false,
+    });
+  }, [appName, status, threadKey, turnState]);
+
+  const clearRecentlyCompleted = useEffectEvent(() => {
+    if (!watched.current?.done || document.visibilityState !== "visible") return;
+    watched.current = null;
+    document.title = resolveDocumentTitle({ appName, status, recentlyCompleted: false });
+  });
+
+  useEffect(() => {
+    const onReturn = () => clearRecentlyCompleted();
+    window.addEventListener("focus", onReturn);
+    document.addEventListener("visibilitychange", onReturn);
+    return () => {
+      window.removeEventListener("focus", onReturn);
+      document.removeEventListener("visibilitychange", onReturn);
+    };
+  }, []);
 
   return null;
 }
