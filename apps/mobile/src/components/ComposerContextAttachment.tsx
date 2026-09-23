@@ -50,7 +50,7 @@ export function ComposerContextAttachment(props: {
         setError(null);
       })
       .catch(() => {
-        if (!controller.signal.aborted) setError("The local file is unavailable. Attach it again.");
+        if (!controller.signal.aborted) setError("the local file is unavailable. attach it again.");
       });
     return () => {
       controller.abort();

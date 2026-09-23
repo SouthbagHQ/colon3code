@@ -202,7 +202,7 @@ export function GitCommitSheet(_props: GitCommitSheetProps) {
             multiline
             value={dialogCommitMessage}
             onChangeText={setDialogCommitMessage}
-            placeholder="leave empty to auto-generate"
+            placeholder="leave empty and i'll name it ^w^"
             textAlignVertical="top"
             className="min-h-[128px] rounded-[20px] px-4 py-3.5"
           />

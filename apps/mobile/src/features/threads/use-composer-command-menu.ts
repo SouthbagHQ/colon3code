@@ -478,7 +478,7 @@ export function useComposerCommandMenu({
           COMPOSER_CONTEXT_MAX_RECORDS
         ) {
           Alert.alert(
-            "too many context items",
+            "too many context items 3:",
             "remove some context from the draft and try again.",
           );
           return;

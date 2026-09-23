@@ -1811,7 +1811,7 @@ describe("buildThreadFeed", () => {
     ]);
     expect(collapsed[1]).toMatchObject({
       type: "turn-fold",
-      label: "Worked for 17s",
+      label: "all done in 17s ^w^",
       expanded: false,
     });
 
@@ -1830,7 +1830,7 @@ describe("buildThreadFeed", () => {
     );
     expect(interrupted[1]).toMatchObject({
       type: "turn-fold",
-      label: "You stopped after 19s",
+      label: "you stopped me after 19s 3:",
       expanded: false,
     });
     const retimed = deriveThreadFeedPresentation(
@@ -1844,8 +1844,8 @@ describe("buildThreadFeed", () => {
       null,
       new Set(),
     );
-    expect(retimed[1]).toMatchObject({ type: "turn-fold", label: "Worked for 23s" });
-    expect(collapsed[1]).toMatchObject({ type: "turn-fold", label: "Worked for 17s" });
+    expect(retimed[1]).toMatchObject({ type: "turn-fold", label: "all done in 23s ^w^" });
+    expect(collapsed[1]).toMatchObject({ type: "turn-fold", label: "all done in 17s ^w^" });
   });
 
   it("folds assistant messages between the first and terminal messages", () => {
@@ -1977,7 +1977,7 @@ describe("buildThreadFeed", () => {
     const collapsed = deriveThreadFeedPresentation(feed, thread.latestTurn, new Set());
     expect(collapsed.find((entry) => entry.type === "turn-fold")).toMatchObject({
       turnId: firstTurnId,
-      label: "Worked for 12s",
+      label: "all done in 12s ^w^",
     });
   });
 
@@ -2163,11 +2163,11 @@ describe("buildThreadFeed", () => {
     ].flatMap((command) =>
       (
         [
-          { lifecycleStatus: "inProgress", summary: "Running pnpm", shimmer: true },
-          { lifecycleStatus: "completed", summary: "Running pnpm", shimmer: true },
-          { lifecycleStatus: "failed", summary: "Failed pnpm", shimmer: false },
-          { lifecycleStatus: "declined", summary: "Declined pnpm", shimmer: false },
-          { lifecycleStatus: "stopped", summary: "Stopped pnpm", shimmer: false },
+          { lifecycleStatus: "inProgress", summary: "running pnpm", shimmer: true },
+          { lifecycleStatus: "completed", summary: "running pnpm", shimmer: true },
+          { lifecycleStatus: "failed", summary: "failed pnpm", shimmer: false },
+          { lifecycleStatus: "declined", summary: "declined pnpm", shimmer: false },
+          { lifecycleStatus: "stopped", summary: "stopped pnpm", shimmer: false },
         ] as const
       ).map((state) => ({ command, ...state })),
     ),
@@ -2768,7 +2768,7 @@ describe("quiet timeline: nested agents", () => {
       expect(rows).toMatchObject([
         {
           lifecycleStatus: "inProgress",
-          summary: "Kicked off 1 subagent · 1 working",
+          summary: "kicked off 1 subagent · 1 working",
           workEntry: { agentSpawn: { workflowId: null, agentTaskIds: ["agent-1"] } },
         },
       ]);
@@ -2836,7 +2836,7 @@ describe("quiet timeline: nested agents", () => {
     // unlike progress ticks (which the server rewrites in place).
     const running = rowsFor([]);
     expect(running.map((row) => [row.id, row.summary])).toEqual([
-      ["a-start", "Kicked off 2 subagents · 2 working"],
+      ["a-start", "kicked off 2 subagents · 2 working"],
       ["shell-1", "Run tests"],
     ]);
     expect(running[0]).toMatchObject({
@@ -2848,7 +2848,7 @@ describe("quiet timeline: nested agents", () => {
     const oneDone = rowsFor([agent("a-done", "task.completed", "a", "completed", 7)]);
     expect(oneDone[0]).toMatchObject({
       id: "a-start",
-      summary: "Kicked off 2 subagents · 1 working",
+      summary: "kicked off 2 subagents · 1 working",
       lifecycleStatus: "inProgress",
     });
 
@@ -2858,7 +2858,7 @@ describe("quiet timeline: nested agents", () => {
     ]);
     expect(allDone[0]).toMatchObject({
       id: "a-start",
-      summary: "Ran 2 subagents · 1 failed",
+      summary: "ran 2 subagents · 1 failed",
       lifecycleStatus: "failed",
       status: "failure",
     });
@@ -3000,7 +3000,7 @@ describe("quiet timeline: nested agents", () => {
     expect(single.map((row) => row.type)).toEqual(["agent-spawn"]);
     expect(single[0]).toMatchObject({
       id: `agent-spawn:${turnId}`,
-      summary: { title: "Agent a", status: "Working", tone: "working" },
+      summary: { title: "Agent a", status: "working", tone: "working" },
     });
 
     // The server upserts the progress row with a new createdAt each tick;
@@ -3104,7 +3104,7 @@ describe("quiet timeline: nested agents", () => {
       expect(rows).toHaveLength(2);
       expect(rows[0]).toMatchObject({
         lifecycleStatus: status === "failed" ? "failed" : "stopped",
-        summary: `Ran 1 subagent · ${status === "failed" ? "1 failed" : "1 stopped"}`,
+        summary: `ran 1 subagent · ${status === "failed" ? "1 failed" : "1 stopped"}`,
         workEntry: {
           taskId: "trajectory:4",
           toolTitle: "Antigravity subagent batch",
@@ -3114,7 +3114,7 @@ describe("quiet timeline: nested agents", () => {
       expect(rows[0]?.getFullDetail()).toContain(detail);
       expect(rows[1]).toMatchObject({
         lifecycleStatus: "inProgress",
-        summary: "Kicked off 1 subagent · 1 working",
+        summary: "kicked off 1 subagent · 1 working",
         workEntry: { taskId: "trajectory:5" },
       });
     },
@@ -3186,7 +3186,7 @@ describe("quiet timeline: nested agents", () => {
     // The member that never reported its own end settles with the coordinator.
     expect(rows[0]).toMatchObject({
       id: "wf-progress",
-      summary: "Ran 2 subagents · completed",
+      summary: "ran 2 subagents · completed",
       lifecycleStatus: "completed",
       workEntry: {
         agentSpawn: {
@@ -3244,7 +3244,7 @@ describe("quiet timeline: nested agents", () => {
         { workflowId: "wf", agentTaskIds: ["wf"], agents: [member("review", undefined, "", 1)] },
         "inProgress",
       ),
-    ).toMatchObject({ title: "Subagents", status: "Working", tone: "working", members: [] });
+    ).toMatchObject({ title: "subagents", status: "working", tone: "working", members: [] });
   });
 
   it("treats a Codex child's idle turn end as a finished batch member", () => {
@@ -3284,7 +3284,7 @@ describe("quiet timeline: nested agents", () => {
     );
     expect(rows).toHaveLength(1);
     expect(rows[0]).toMatchObject({
-      summary: "Ran 1 subagent · completed",
+      summary: "ran 1 subagent · completed",
       lifecycleStatus: "completed",
     });
   });

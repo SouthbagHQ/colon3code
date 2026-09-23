@@ -138,7 +138,7 @@ function MediaVideoPlayerContent(props: MediaVideoPlayerProps) {
         <MediaActionsMenu media={mediaActions} inModal={props.expanded} style={{ flex: 1 }}>
           <Pressable
             accessibilityRole="button"
-            accessibilityLabel={`Play ${props.name}`}
+            accessibilityLabel={`play ${props.name}`}
             accessibilityHint={
               mediaActions.actions.length > 0 ? "touch and hold for media actions" : undefined
             }

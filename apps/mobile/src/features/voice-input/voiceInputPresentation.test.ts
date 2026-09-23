@@ -21,7 +21,7 @@ describe("resolveVoiceComposerPresentation", () => {
       leadingAction: "cancel",
       trailingAction: "confirm",
       showsSend: false,
-      statusLabel: "Preparing",
+      statusLabel: "preparing…",
       confirmationEnabled: false,
     });
     expect(
@@ -30,7 +30,7 @@ describe("resolveVoiceComposerPresentation", () => {
       leadingAction: "cancel",
       trailingAction: "confirm",
       showsSend: false,
-      statusLabel: "Recording 1:04",
+      statusLabel: "recording 1:04",
       confirmationEnabled: true,
     });
     expect(
@@ -39,7 +39,7 @@ describe("resolveVoiceComposerPresentation", () => {
         0,
       ),
     ).toMatchObject({
-      statusLabel: "Transcribing",
+      statusLabel: "transcribing…",
       confirmationEnabled: false,
     });
     expect(

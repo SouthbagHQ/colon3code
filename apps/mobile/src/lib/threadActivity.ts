@@ -1074,10 +1074,10 @@ export function agentSpawnLabel(spawn: NonNullable<WorkLogEntry["agentSpawn"]>):
   const failed = members.filter((agent) => agent.status === "failed").length;
   const stopped = members.filter((agent) => agent.status === "stopped").length;
   if (working > 0) {
-    return `Kicked off ${subjects} · ${working} working`;
+    return `kicked off ${subjects} · ${working} working`;
   }
   const status = failed > 0 ? `${failed} failed` : stopped > 0 ? `${stopped} stopped` : "completed";
-  return `Ran ${subjects} · ${status}`;
+  return `ran ${subjects} · ${status}`;
 }
 
 /** Workflow coordinators sit in their own batch but are not a member. */
@@ -1125,7 +1125,7 @@ export function agentSpawnSummary(
   // batch has none.
   const title =
     members.length === 0
-      ? "Subagents"
+      ? "subagents"
       : members.length === 1
         ? members[0]!.title
         : `${members.length} subagents`;
@@ -1140,7 +1140,7 @@ export function agentSpawnSummary(
       );
     const status =
       latest?.detail ??
-      (members.length > 1 ? `${working.length} of ${members.length} working` : "Working");
+      (members.length > 1 ? `${working.length} of ${members.length} working` : "working");
     return { title, status, tone, members };
   }
   // The batch tone covers a coordinator that failed or stopped on its own.
@@ -1721,11 +1721,11 @@ function deriveThreadFeedTurnFolds(
     const interrupted = latestTurnMatches && latestTurn.state === "interrupted";
     const label = interrupted
       ? duration
-        ? `You stopped after ${duration}`
-        : "You stopped this response"
+        ? `you stopped me after ${duration} 3:`
+        : "you stopped me before i finished 3:"
       : duration
-        ? `Worked for ${duration}`
-        : "Worked";
+        ? `all done in ${duration} ^w^`
+        : "all done ^w^";
 
     foldsByAnchorId.set(firstHiddenEntry.id, {
       turnId,
@@ -2082,14 +2082,14 @@ function liveToolActivitySummary(activity: ThreadFeedActivity, presentTense: boo
     const program = commandProgramName(command);
     const verb =
       status === "inProgress"
-        ? "Running"
+        ? "running"
         : status === "failed"
-          ? "Failed"
+          ? "failed"
           : status === "declined"
-            ? "Declined"
+            ? "declined"
             : status === "stopped"
-              ? "Stopped"
-              : "Ran";
+              ? "stopped"
+              : "ran";
     return `${verb} ${program ?? "command"}`;
   }
   return activity.detail ?? activity.summary;

@@ -6,7 +6,11 @@ import {
   type ScopedThreadRef,
   type ServerProviderModel,
 } from "@t3tools/contracts";
-import { cuteDescriptorLabel, cuteOptionDescription, cuteOptionLabel } from "./cuteTraits";
+import {
+  cuteDescriptorLabel,
+  cuteOptionDescription,
+  cuteOptionLabel,
+} from "@t3tools/client-runtime/cuteTraits";
 import {
   applyClaudePromptEffortPrefix,
   buildProviderOptionSelectionsFromDescriptors,

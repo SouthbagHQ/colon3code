@@ -2,5 +2,5 @@ import { SettingsLegalDocumentRouteScreen } from "./components/SettingsLegalDocu
 import { LEGAL_URL } from "./lib/legal-document-url";
 
 export function SettingsLegalRouteScreen() {
-  return <SettingsLegalDocumentRouteScreen documentName="Legal" documentUrl={LEGAL_URL} />;
+  return <SettingsLegalDocumentRouteScreen documentName="legal" documentUrl={LEGAL_URL} />;
 }

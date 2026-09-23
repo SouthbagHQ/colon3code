@@ -415,7 +415,7 @@ export function NewTaskBranchPickerRouteScreen() {
             autoCorrect={false}
             className="h-11 rounded-xl bg-card px-4 font-sans text-base text-foreground"
             onChangeText={flow.setBranchQuery}
-            placeholder="find a branch"
+            placeholder="search branches… :3"
             placeholderTextColorClassName={"accent-placeholder"}
             value={flow.branchQuery}
           />
@@ -435,7 +435,7 @@ export function NewTaskBranchPickerRouteScreen() {
             ? () => [
                 createNativeMailSearchToolbarItem({
                   onSearchTextChange: flow.setBranchQuery,
-                  placeholder: "find a branch",
+                  placeholder: "search branches… :3",
                   searchTextChangeId: "new-task-branch-search-text",
                   showsSearchDismissButton: true,
                 }),
@@ -448,7 +448,7 @@ export function NewTaskBranchPickerRouteScreen() {
                 autoCapitalize: "none",
                 hideNavigationBar: false,
                 obscureBackground: false,
-                placeholder: "find a branch",
+                placeholder: "search branches… :3",
                 onChangeText: (event) => {
                   flow.setBranchQuery(event.nativeEvent.text);
                 },

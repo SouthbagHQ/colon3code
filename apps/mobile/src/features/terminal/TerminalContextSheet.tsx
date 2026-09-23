@@ -48,7 +48,7 @@ export function TerminalContextSheet(props: {
         context: { version: 1, records: [record] },
       })
     ) {
-      Alert.alert("too many context items", "remove some context from the draft and try again.");
+      Alert.alert("too many context items 3:", "remove some context from the draft and try again.");
       return;
     }
     props.onAttach();

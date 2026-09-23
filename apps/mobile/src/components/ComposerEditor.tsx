@@ -114,7 +114,7 @@ export function ComposerEditor({
       }
       if (result.failures.length > 0)
         Alert.alert(
-          "some attachments could not be copied",
+          "some attachments could not be copied 3:",
           "reconnect to the source environment and copy them again. references without their files are marked unavailable.",
         );
     } catch (error) {

@@ -148,14 +148,14 @@ describe("validateDraftFileAttachments", () => {
 
   it("blocks files while config is unknown or file uploads are unsupported", () => {
     expect(validateDraftFileAttachments({ attachments: [file], serverConfig: null })).toBe(
-      "Server attachment support is still loading.",
+      "server attachment support is still loading, hang tight…",
     );
     expect(
       validateDraftFileAttachments({
         attachments: [file],
         serverConfig: { environment: { capabilities: { attachmentUploads: true } } },
       }),
-    ).toBe("This server does not support file attachments.");
+    ).toBe("this server does not support file attachments.");
   });
 
   it("uses the current clamped limit and allows valid mixed attachments", () => {

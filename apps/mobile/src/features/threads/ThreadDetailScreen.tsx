@@ -10,6 +10,7 @@ import type {
 } from "@t3tools/client-runtime/state/threads";
 import { useKeyboardChatComposerInset, useKeyboardScrollToEnd } from "@legendapp/list/keyboard";
 import { resolveProviderSkillsForCwd } from "@t3tools/client-runtime/providerSkills";
+import { composerPlaceholderFor } from "@t3tools/client-runtime/composerPlaceholder";
 import type { LegendListRef } from "@legendapp/list/react-native";
 import { HeaderHeightContext } from "@react-navigation/elements";
 import type {
@@ -1036,7 +1037,7 @@ export const ThreadDetailScreen = memo(function ThreadDetailScreen(props: Thread
                     editorRef={composerEditorRef}
                     draftMessage={props.draftMessage}
                     draftAttachments={props.draftAttachments}
-                    placeholder="ask the repo agent, or run a command…"
+                    placeholder={composerPlaceholderFor(props.selectedThread.id)}
                     contentMaxWidth={contentMaxWidth}
                     connectionState={props.connectionStateLabel}
                     environmentLabel={props.environmentLabel}

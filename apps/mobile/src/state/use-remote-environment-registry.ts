@@ -127,7 +127,7 @@ export function useRemoteConnections() {
       if (AsyncResult.isFailure(result)) {
         const error = Cause.squash(result.cause);
         const message =
-          error instanceof Error ? error.message : "Failed to pair with the environment.";
+          error instanceof Error ? error.message : "failed to pair with the environment.";
         setPendingConnectionError(message);
       } else {
         appAtomRegistry.set(connectionPairingUrlAtom, "");
@@ -163,12 +163,12 @@ export function useRemoteConnections() {
         return;
       }
       Alert.alert(
-        "Remove from this device?",
-        `Forget ${environment.environmentLabel} and its cached threads on this device. Switch it off instead to keep it saved.`,
+        "remove from this device?",
+        `forget ${environment.environmentLabel} and its cached threads on this device. switch it off instead to keep it saved.`,
         [
-          { text: "Cancel", style: "cancel" },
+          { text: "cancel", style: "cancel" },
           {
-            text: "Remove",
+            text: "remove",
             style: "destructive",
             onPress: () => {
               void controller.removeEnvironment(environmentId);

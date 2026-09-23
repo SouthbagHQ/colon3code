@@ -2,6 +2,7 @@ import { useAtomValue } from "@effect/atom-react";
 import * as Cause from "effect/Cause";
 import { AsyncResult } from "effect/unstable/reactivity";
 import { clampFileAttachmentUploadBytes } from "@t3tools/client-runtime/state/attachments";
+import { DISCONNECTED_COMPOSER_PLACEHOLDER } from "@t3tools/client-runtime/composerPlaceholder";
 import {
   nextPastedTextFileName,
   pastedTextDisposition,
@@ -758,7 +759,7 @@ export function NewTaskDraftScreen(props: {
       if (isIncomingShareUnavailable && alertedUnavailableIncomingShareIdRef.current !== shareId) {
         alertedUnavailableIncomingShareIdRef.current = shareId;
         Alert.alert(
-          "shared content unavailable",
+          "shared content unavailable 3:",
           "the shared content is no longer in the inbox. you can continue editing this task draft.",
         );
       }
@@ -848,7 +849,7 @@ export function NewTaskDraftScreen(props: {
         );
       }
       if (warnings.length > 0) {
-        Alert.alert("some shared content was skipped", warnings.join("\n"));
+        Alert.alert("some shared content was skipped 3:", warnings.join("\n"));
       }
       shareImportDraftBackupRef.current.delete(importKey);
     })()
@@ -1026,7 +1027,7 @@ export function NewTaskDraftScreen(props: {
     const maxBytes =
       selectedEnvironmentServerConfig?.environment.capabilities.fileAttachments?.maxUploadBytes;
     if (maxBytes === undefined) {
-      Alert.alert("file attachments are not available on this server.");
+      Alert.alert("file attachments are not available on this server 3:");
       return;
     }
     const insertion = flow.draftKey ? captureComposerDraftInsertion(flow.draftKey) : undefined;
@@ -1220,7 +1221,7 @@ export function NewTaskDraftScreen(props: {
     ) {
       Alert.alert(
         "usage limits",
-        "send /usage-limits inside a thread, or open Settings → Usage → Limits.",
+        "send /usage-limits inside a thread, or open settings → usage → limits :3",
       );
       return;
     }
@@ -1229,7 +1230,7 @@ export function NewTaskDraftScreen(props: {
     // and have the server reject the turn.
     if (draft.attachments.length > PROVIDER_SEND_TURN_MAX_ATTACHMENTS) {
       Alert.alert(
-        "too many attachments",
+        "too many attachments 3:",
         `remove attachments until there are at most ${PROVIDER_SEND_TURN_MAX_ATTACHMENTS}.`,
       );
       return;
@@ -1237,7 +1238,7 @@ export function NewTaskDraftScreen(props: {
 
     const contextBlockReason = composerContextSendBlockReason(draft.context);
     if (contextBlockReason) {
-      Alert.alert("too much context", contextBlockReason);
+      Alert.alert("too much context 3:", contextBlockReason);
       return;
     }
 
@@ -1404,7 +1405,7 @@ export function NewTaskDraftScreen(props: {
         onBlur={() => setIsComposerFocused(false)}
         onPasteImages={(uris) => void handleNativePasteImages(uris)}
         onPasteText={(paste) => void handleNativePasteText(paste)}
-        placeholder="ask anything…"
+        placeholder={DISCONNECTED_COMPOSER_PLACEHOLDER}
         singleLineCentered={false}
         contentInsetVertical={0}
         style={{
@@ -1687,8 +1688,8 @@ export function NewTaskDraftScreen(props: {
                     </View>
                     {flow.planModeEnabled ? (
                       <ComposerInlineControl
-                        accessibilityHint={`switches to ${flow.interactionMode === "plan" ? "Build" : "Plan"} mode`}
-                        accessibilityLabel={`interaction mode: ${flow.interactionMode === "plan" ? "Plan" : "Build"}`}
+                        accessibilityHint={`switches to ${flow.interactionMode === "plan" ? "build" : "plan"} mode`}
+                        accessibilityLabel={`interaction mode: ${flow.interactionMode === "plan" ? "plan" : "build"}`}
                         disabled={isComposerInteractionLocked}
                         emphasized
                         icon={
@@ -1696,7 +1697,7 @@ export function NewTaskDraftScreen(props: {
                             ? { ios: "list.bullet.clipboard", android: "auto_awesome" }
                             : { ios: "hammer", android: "construction" }
                         }
-                        label={flow.interactionMode === "plan" ? "Plan" : "Build"}
+                        label={flow.interactionMode === "plan" ? "plan" : "build"}
                         onPress={() =>
                           flow.setInteractionMode(
                             flow.interactionMode === "plan" ? "default" : "plan",
@@ -1736,7 +1737,7 @@ export function NewTaskDraftScreen(props: {
                               : "queue task")
                   }
                   disabled={!canStart}
-                  icon={queuesInsteadOfStarting ? "tray.and.arrow.up" : "arrow.up"}
+                  icon={queuesInsteadOfStarting ? "tray.and.arrow.up" : ":3"}
                   onPress={() => void handleStart()}
                   variant="primary"
                 />

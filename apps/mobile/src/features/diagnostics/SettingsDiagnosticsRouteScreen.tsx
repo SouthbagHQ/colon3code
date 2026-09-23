@@ -88,13 +88,13 @@ export function SettingsDiagnosticsRouteScreen() {
           ) : state.status === "unavailable" ? (
             <EmptyState
               icon="exclamationmark.triangle"
-              title="crash log unavailable"
+              title="crash log unavailable 3:"
               detail="startup crash records are only kept in store and TestFlight builds."
             />
           ) : records.length === 0 ? (
             <EmptyState
               icon="checkmark.circle"
-              title="no startup crashes"
+              title="no startup crashes :3"
               detail="nothing has taken the app down during launch in the last 7 days."
             />
           ) : (

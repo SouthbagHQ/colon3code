@@ -4,7 +4,7 @@ import {
   COMPOSER_PLACEHOLDERS,
   composerPlaceholderFor,
   DISCONNECTED_COMPOSER_PLACEHOLDER,
-} from "./composerPlaceholder";
+} from "./composerPlaceholder.ts";
 
 describe("composerPlaceholderFor", () => {
   const seeds = Array.from({ length: 40 }, (_, index) => `thread-${index}`);

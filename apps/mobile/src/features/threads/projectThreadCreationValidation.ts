@@ -10,7 +10,7 @@ export class ProjectThreadTaskRequiredError extends Schema.TaggedError<ProjectTh
   },
 ) {
   override get message(): string {
-    return "Enter a task before starting the thread.";
+    return "enter a task before starting the thread.";
   }
 }
 

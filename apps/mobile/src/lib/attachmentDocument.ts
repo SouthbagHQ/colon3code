@@ -87,7 +87,7 @@ export function useAttachmentDocument(input: {
       })
       .catch((cause: unknown) => {
         if (!cancelled)
-          setError(cause instanceof Error ? cause.message : "The attachment is unavailable.");
+          setError(cause instanceof Error ? cause.message : "the attachment is unavailable.");
       });
     return () => {
       cancelled = true;
@@ -114,7 +114,7 @@ export function useAttachmentDocument(input: {
       })
       .catch((cause: unknown) => {
         if (!controller.signal.aborted)
-          setError(cause instanceof Error ? cause.message : "The local file is unavailable.");
+          setError(cause instanceof Error ? cause.message : "the local file is unavailable.");
       });
     return () => {
       controller.abort();
@@ -161,7 +161,7 @@ export function useAttachmentDocument(input: {
       })
       .catch((cause: unknown) => {
         if (!controller.signal.aborted)
-          setContentError(cause instanceof Error ? cause.message : "Could not read this file.");
+          setContentError(cause instanceof Error ? cause.message : "could not read this file.");
       });
     return () => controller.abort();
   }, [uri, needsText, revision, sizeBytes, refresh]);
@@ -180,8 +180,8 @@ export function useAttachmentDocument(input: {
     } catch (cause) {
       if (controller.signal.aborted) return;
       Alert.alert(
-        "Could not share file",
-        cause instanceof Error ? cause.message : "Please try again.",
+        "could not share file 3:",
+        cause instanceof Error ? cause.message : "please try again.",
       );
     } finally {
       if (shareController.current === controller) shareController.current = null;

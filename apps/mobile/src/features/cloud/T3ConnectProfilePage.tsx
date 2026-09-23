@@ -153,7 +153,7 @@ export function T3ConnectProfilePage() {
       {environmentsState.error ? (
         <>
           <ClerkRow
-            title="could not load T3 Connect environments"
+            title="could not load T3 Connect environments 3:"
             subtitle={environmentsState.error}
           />
           {errorTraceId ? (
@@ -227,7 +227,7 @@ const ENVIRONMENT_MENU_ACTIONS = [
 
 // Layout primitives that mirror clerk-ios ClerkKitUI's profile rows so a custom
 // page reads as one of Clerk's own screens. System font on purpose: Clerk's
-// native views do not use the app's DM Sans.
+// native views do not use the app's Nunito.
 
 function ClerkSectionHeader(props: { readonly children: string }) {
   return (

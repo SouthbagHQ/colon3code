@@ -267,8 +267,8 @@ export function useSelectedThreadRequests() {
         )
       ) {
         Alert.alert(
-          "Attachments are not ready",
-          "Wait for uploads to finish, or retry failed uploads.",
+          "attachments aren't ready yet, hang tight…",
+          "wait for uploads to finish, or retry failed uploads.",
         );
         return;
       }

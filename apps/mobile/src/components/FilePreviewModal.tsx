@@ -84,7 +84,7 @@ function ResolvedFilePreview(props: {
       })
       .catch((error: unknown) => {
         if (controller.signal.aborted) return;
-        onResolutionError(error, "Attach the file again and retry.");
+        onResolutionError(error, "attach the file again and retry.");
       });
     return () => {
       controller.abort();

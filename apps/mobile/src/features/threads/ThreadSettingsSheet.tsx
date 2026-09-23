@@ -9,11 +9,7 @@ import type {
 import type { LegendListRenderItemProps } from "@legendapp/list/react-native";
 import { AnimatedLegendList } from "@legendapp/list/reanimated";
 import { HeaderHeightContext } from "@react-navigation/elements";
-import {
-  getProviderOptionCurrentLabel,
-  getProviderOptionCurrentValue,
-  getProviderOptionDescriptors,
-} from "@t3tools/shared/model";
+import { getProviderOptionCurrentValue, getProviderOptionDescriptors } from "@t3tools/shared/model";
 import { useNavigation, useRoute, type RouteProp } from "@react-navigation/native";
 import {
   createNativeStackNavigator,
@@ -32,6 +28,11 @@ import {
 import { Alert, Platform, Pressable, ScrollView, TextInput, View } from "react-native";
 import Animated, { FadeIn, FadeOut, LinearTransition } from "react-native-reanimated";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import {
+  cuteDescriptorLabel,
+  cuteOptionDescription,
+  cuteOptionLabel,
+} from "@t3tools/client-runtime/cuteTraits";
 
 import { SymbolView } from "../../components/AppSymbol";
 import { AppText as Text } from "../../components/AppText";
@@ -62,7 +63,11 @@ import {
   NATIVE_MAIL_SEARCH_TOOLBAR_CONTENT_INSET,
   NATIVE_MAIL_SEARCH_TOOLBAR_SUPPORTED,
 } from "../layout/native-mail-search-toolbar";
-import { RUNTIME_MODE_CHOICES, selectableChoices } from "./thread-settings-options";
+import {
+  currentOptionLabel,
+  RUNTIME_MODE_CHOICES,
+  selectableChoices,
+} from "./thread-settings-options";
 import {
   canCommitPendingModel,
   modelMatchesCatalogQuery,
@@ -734,8 +739,8 @@ function ThreadSettingsOptionsItem(props: {
                 layout={THREAD_SETTINGS_OPTIONS_LAYOUT_TRANSITION}
               >
                 <DisclosureRow
-                  label={descriptor.label}
-                  value={getProviderOptionCurrentLabel(descriptor)}
+                  label={cuteDescriptorLabel(descriptor.label)}
+                  value={currentOptionLabel(descriptor)}
                   onPress={() => props.onOpenSubmenu({ kind: "descriptor", id: descriptor.id })}
                 />
               </Animated.View>
@@ -749,7 +754,7 @@ function ThreadSettingsOptionsItem(props: {
               layout={THREAD_SETTINGS_OPTIONS_LAYOUT_TRANSITION}
             >
               <SwitchRow
-                label={descriptor.label}
+                label={cuteDescriptorLabel(descriptor.label)}
                 value={descriptor.currentValue ?? false}
                 onValueChange={(value) => session.applyOptionChange(descriptor.id, value)}
               />
@@ -824,7 +829,7 @@ function ThreadSettingsMainContent(props: {
         content = (
           <View className="items-center px-8 py-14">
             <Text className="text-center text-sm text-foreground-muted">
-              {hasActiveCatalogFilter ? "no matching models" : "no available models"}
+              {hasActiveCatalogFilter ? "hmm, no models matched 3:" : "no models available yet 3:"}
             </Text>
           </View>
         );
@@ -876,7 +881,7 @@ function ThreadSettingsMainContent(props: {
                 autoCorrect={false}
                 className="h-11 rounded-xl bg-card px-4 text-base text-foreground"
                 onChangeText={session.setSearchQuery}
-                placeholder="find a model"
+                placeholder="search models… :3"
                 placeholderTextColorClassName="accent-placeholder"
                 value={session.searchQuery}
               />
@@ -927,8 +932,8 @@ function ThreadSettingsChoiceContent(props: {
         ? {
             rows: selectableChoices(activeDescriptor).map((choice) => ({
               id: choice.id,
-              label: choice.label,
-              description: undefined,
+              label: cuteOptionLabel(choice.label),
+              description: cuteOptionDescription(activeDescriptor, choice),
               selected: choice.id === getProviderOptionCurrentValue(activeDescriptor),
               onPress: () => {
                 void Haptics.selectionAsync();
@@ -1095,7 +1100,7 @@ function ThreadSettingsModelsScreen() {
                     ? "line.3.horizontal.decrease.circle.fill"
                     : "line.3.horizontal.decrease",
                   onSearchTextChange: session.setSearchQuery,
-                  placeholder: "find a model",
+                  placeholder: "search models… :3",
                   searchTextChangeId: "thread-settings-model-search-text",
                   showsSearchDismissButton: true,
                 }),
@@ -1110,7 +1115,7 @@ function ThreadSettingsModelsScreen() {
                   obscureBackground: false,
                   onCancelButtonPress: () => session.setSearchQuery(""),
                   onChangeText: (event) => session.setSearchQuery(event.nativeEvent.text),
-                  placeholder: "find a model",
+                  placeholder: "search models… :3",
                 }
               : undefined,
         }}
@@ -1120,9 +1125,11 @@ function ThreadSettingsModelsScreen() {
           const title =
             submenu.kind === "runtime"
               ? "runtime"
-              : (session.displayedDescriptors.find(
-                  (descriptor) => descriptor.type === "select" && descriptor.id === submenu.id,
-                )?.label ?? "Option");
+              : cuteDescriptorLabel(
+                  session.displayedDescriptors.find(
+                    (descriptor) => descriptor.type === "select" && descriptor.id === submenu.id,
+                  )?.label ?? "option",
+                );
           navigation.navigate("ThreadSettingsChoice", { ...submenu, title });
         }}
       />

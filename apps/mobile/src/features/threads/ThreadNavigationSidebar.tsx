@@ -1202,7 +1202,7 @@ function ThreadNavigationSidebarPane(
               // hidesSearchBarWhenScrolling collapses it on scroll.
               hideWhenScrolling: false,
               obscureBackground: false,
-              placeholder: "search",
+              placeholder: "search ^w^",
               placement: "stacked",
               onCancelButtonPress: () => {
                 props.onSearchQueryChange("");
@@ -1359,7 +1359,7 @@ function ThreadNavigationSidebarPane(
             autoCorrect={false}
             clearButtonMode={materialYouStyleLayoutActive ? "never" : "while-editing"}
             onChangeText={props.onSearchQueryChange}
-            placeholder="search"
+            placeholder="search ^w^"
             placeholderTextColorClassName={"accent-placeholder"}
             returnKeyType="search"
             className={

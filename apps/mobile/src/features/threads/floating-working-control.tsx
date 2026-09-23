@@ -1,4 +1,5 @@
 import { catFaceGlyph } from "@t3tools/client-runtime/catFace";
+import { workingElapsedMs, workingLabelPrefix } from "@t3tools/client-runtime/workingLabel";
 import { formatDuration } from "@t3tools/shared/orchestrationTiming";
 import { GlassContainer, GlassView } from "expo-glass-effect";
 import { type ReactNode, useEffect, useRef, useState } from "react";
@@ -376,11 +377,14 @@ function WorkingDuration(props: {
 
   const duration = formatWorkingDuration(props.startedAt, nowMs);
   const label = `working for ${duration}`;
+  // Same elapsed-time rotation as the web working row; it only changes at a
+  // few bucket edges, so the pill resizes rarely.
+  const prefix = workingLabelPrefix(workingElapsedMs(props.startedAt, nowMs));
 
   return (
     <StatusLabelRow accessibilityLabel={label} onLayout={props.onLayout}>
       <Text className="font-t3-medium text-xs text-foreground">
-        {catFaceGlyph("working")} working for{" "}
+        {catFaceGlyph("working")} {prefix}{" "}
       </Text>
       <SystemText
         className="text-xs text-foreground"

@@ -107,11 +107,11 @@ function groupLabel(triggerKind: ComposerTriggerKind | null): string | null {
     case "pull-request":
       return "pull requests";
     case "slash-command":
-      return "Commands";
+      return "commands";
     case "skill":
-      return "Skills";
+      return "skills";
     case "path":
-      return "Files";
+      return "files";
     default:
       return null;
   }
@@ -119,19 +119,28 @@ function groupLabel(triggerKind: ComposerTriggerKind | null): string | null {
 
 function emptyText(triggerKind: ComposerTriggerKind | null, isLoading: boolean): string {
   if (isLoading) {
-    return triggerKind === "path" ? "searching files…" : "Loading…";
+    switch (triggerKind) {
+      case "path":
+        return "peeking through workspace files… ^w^";
+      case "skill":
+        return "peeking through workspace skills… ^w^";
+      case "pull-request":
+        return "looking for that pull request… :3";
+      default:
+        return "loading… :3";
+    }
   }
   switch (triggerKind) {
     case "pull-request":
-      return "no matching pull requests.";
+      return "hmm, no pull requests matched :3";
     case "path":
-      return "no matching files or folders.";
+      return "hmm, no files or folders matched :3";
     case "skill":
-      return "no skills found.";
+      return "hmm, no skills here — try / to browse provider commands 3:";
     case "slash-command":
-      return "no matching commands.";
+      return "hmm, no command matched ^w^";
     default:
-      return "no results.";
+      return "hmm, nothing matched :3";
   }
 }
 

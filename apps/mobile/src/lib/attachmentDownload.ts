@@ -164,8 +164,8 @@ async function createCachedAttachmentFile(attachment: AttachmentFileMetadata) {
 export function nativeViewerErrorMessage(cause: unknown): string {
   const text = cause instanceof Error ? cause.message : String(cause);
   return /ActivityNotFound|cannot be previewed/i.test(text)
-    ? "No app on this device can show this format. Save or share it to open it elsewhere."
-    : "The file could not be opened. Check the connection and try again.";
+    ? "no app on this device can show this format. save or share it to open it elsewhere."
+    : "the file could not be opened. check the connection and try again.";
 }
 
 /** Open an Android document in a viewer, retaining the cache while another app reads it. */

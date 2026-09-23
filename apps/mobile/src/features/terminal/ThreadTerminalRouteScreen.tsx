@@ -1288,7 +1288,7 @@ export function ThreadTerminalRouteScreen(props: ThreadTerminalRouteScreenProps)
             environmentLabel={
               environment.presentation?.entry.target.label ??
               selectedEnvironmentConnection?.environmentLabel ??
-              "Environment"
+              "environment"
             }
             connection={
               environment.presentation?.connection ?? {
@@ -1326,7 +1326,11 @@ export function ThreadTerminalRouteScreen(props: ThreadTerminalRouteScreenProps)
                 captureRequest={captureRequest}
                 onCapture={(text) => {
                   if (text.trim()) setCapturedOutput(text);
-                  else Alert.alert("no terminal output", "there is no visible output to attach.");
+                  else
+                    Alert.alert(
+                      "no terminal output yet :3",
+                      "there is no visible output to attach.",
+                    );
                 }}
                 onInput={handleInput}
                 onResize={handleResize}

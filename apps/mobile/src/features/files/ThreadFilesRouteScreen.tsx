@@ -462,7 +462,7 @@ export function ThreadFilesTreeScreen(props: ThreadFilesRouteScreenProps) {
             ? () => [
                 createNativeMailSearchToolbarItem({
                   onSearchTextChange: setSearchQuery,
-                  placeholder: "search files",
+                  placeholder: "search files…",
                   searchTextChangeId: "files-search-text",
                 }),
               ]
@@ -473,7 +473,7 @@ export function ThreadFilesTreeScreen(props: ThreadFilesRouteScreenProps) {
                 allowToolbarIntegration: true,
                 autoCapitalize: "none",
                 hideNavigationBar: false,
-                placeholder: "search files",
+                placeholder: "search files…",
                 onChangeText: (event) => {
                   setSearchQuery(event.nativeEvent.text);
                 },
@@ -520,7 +520,7 @@ export function ThreadFilesTreeScreen(props: ThreadFilesRouteScreenProps) {
                   ? "min-h-10 flex-1 py-2 text-sm text-foreground"
                   : "min-h-10 flex-1 rounded-xl py-2 text-sm"
               }
-              placeholder="search files"
+              placeholder="search files…"
               value={searchQuery}
               onChangeText={setSearchQuery}
             />
