@@ -128,10 +128,11 @@ const iosBundleIdentifier = isIosPersonalTeamBuild
   ? personalTeamBundleIdentifier!
   : variant.iosBundleIdentifier;
 
-const dmSansFonts = {
-  regular: "@expo-google-fonts/dm-sans/400Regular/DMSans_400Regular.ttf",
-  medium: "@expo-google-fonts/dm-sans/500Medium/DMSans_500Medium.ttf",
-  bold: "@expo-google-fonts/dm-sans/700Bold/DMSans_700Bold.ttf",
+// Nunito is the interface font on web and desktop too.
+const nunitoFonts = {
+  regular: "@expo-google-fonts/nunito/400Regular/Nunito_400Regular.ttf",
+  medium: "@expo-google-fonts/nunito/500Medium/Nunito_500Medium.ttf",
+  bold: "@expo-google-fonts/nunito/700Bold/Nunito_700Bold.ttf",
 } as const;
 
 const widgetsPlugin: NonNullable<ExpoConfig["plugins"]>[number] = [
@@ -316,21 +317,21 @@ const config: ExpoConfig = {
       "expo-font",
       {
         ios: {
-          fonts: [dmSansFonts.regular, dmSansFonts.medium, dmSansFonts.bold],
+          fonts: [nunitoFonts.regular, nunitoFonts.medium, nunitoFonts.bold],
         },
         android: {
           fonts: [
             {
-              fontFamily: "DMSans-Regular",
-              fontDefinitions: [{ path: dmSansFonts.regular, weight: 400 }],
+              fontFamily: "Nunito-Regular",
+              fontDefinitions: [{ path: nunitoFonts.regular, weight: 400 }],
             },
             {
-              fontFamily: "DMSans-Medium",
-              fontDefinitions: [{ path: dmSansFonts.medium, weight: 500 }],
+              fontFamily: "Nunito-Medium",
+              fontDefinitions: [{ path: nunitoFonts.medium, weight: 500 }],
             },
             {
-              fontFamily: "DMSans-Bold",
-              fontDefinitions: [{ path: dmSansFonts.bold, weight: 700 }],
+              fontFamily: "Nunito-Bold",
+              fontDefinitions: [{ path: nunitoFonts.bold, weight: 700 }],
             },
           ],
         },
@@ -393,11 +394,12 @@ const config: ExpoConfig = {
       {
         image: variant.assets.splashIcon,
         resizeMode: "contain",
-        backgroundColor: "#ffffff",
+        // The default theme's --color-screen, so the splash hands off without a flash.
+        backgroundColor: "#fff3f2",
         imageWidth: 220,
         dark: {
           image: variant.assets.splashIcon,
-          backgroundColor: "#0a0a0a",
+          backgroundColor: "#231521",
         },
         android: {
           // Android 12+ masks the splash icon to a circle over the central two thirds of

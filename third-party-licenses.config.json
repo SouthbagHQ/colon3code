@@ -109,7 +109,7 @@
       "sourceUrl": "https://github.com/ryanoasis/nerd-fonts"
     },
     {
-      "bundles": ["assets", "web"],
+      "bundles": ["assets", "mobile", "web"],
       "license": "OFL-1.1",
       "name": "Nunito",
       "noticeFile": "apps/web/public/fonts/nunito/OFL.txt",

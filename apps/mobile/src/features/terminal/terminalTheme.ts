@@ -5,6 +5,8 @@ import {
 } from "@t3tools/shared/themePalettes";
 
 import {
+  DEFAULT_MOBILE_PALETTE_ID,
+  DEFAULT_MOBILE_THEME_ID,
   getMobileThemeVariables,
   themeColorToNativeColor,
   type MobileThemeId,
@@ -107,11 +109,12 @@ export function getMobileTerminalTheme(
   scheme: TerminalAppearanceScheme,
 ): TerminalTheme {
   const base = getPierreTerminalTheme(scheme);
-  if (themeId === "colon3-code" || themeId === "material-you") return base;
+  if (themeId === "material-you") return base;
 
-  const theme = BUILT_IN_THEMES.find((candidate) => candidate.id === themeId) ?? T3_CHAT_THEME;
+  const paletteId = themeId === DEFAULT_MOBILE_THEME_ID ? DEFAULT_MOBILE_PALETTE_ID : themeId;
+  const theme = BUILT_IN_THEMES.find((candidate) => candidate.id === paletteId) ?? T3_CHAT_THEME;
   const palette = getThemeColorsForAppearance(theme, scheme) ?? theme.colors;
-  const colors = getMobileThemeVariables(themeId, scheme);
+  const colors = getMobileThemeVariables(paletteId, scheme);
   const background = themeColorToNativeColor(palette.terminalBackground);
   return {
     ...base,

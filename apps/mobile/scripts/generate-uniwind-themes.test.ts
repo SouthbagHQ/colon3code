@@ -5,7 +5,6 @@ import { describe, expect, it } from "vite-plus/test";
 import {
   customThemeNames,
   getGeneratedUniwindThemeOutputs,
-  readDefaultThemeVariables,
   renderUniwindThemesCSS,
 } from "./generate-uniwind-themes.mts";
 
@@ -48,12 +47,12 @@ describe("generate mobile Uniwind themes", () => {
     }
   });
 
-  it("generates the default runtime bridge from the authored CSS", () => {
-    const css = NodeFS.readFileSync(NodePath.resolve(import.meta.dirname, "../global.css"), "utf8");
-    const variables = readDefaultThemeVariables(css);
+  it("renders the default light and dark themes from the :3 palette", () => {
+    const stylesheet = renderUniwindThemesCSS();
+    const variant = (name: string) =>
+      new RegExp(`@variant ${name} \\{([\\s\\S]*?)\\n    \\}`, "u").exec(stylesheet)?.[1];
 
-    expect(variables.light["--color-screen"]).toBe("#f2f2f7");
-    expect(variables.dark["--color-screen"]).toBe("#0a0a0a");
-    expect(Object.keys(variables.light)).toEqual(Object.keys(variables.dark));
+    expect(variant("light")).toBe(variant("colon3-light"));
+    expect(variant("dark")).toBe(variant("colon3-dark"));
   });
 });

@@ -36,6 +36,8 @@ private struct ComposerThemePayload: Decodable {
   let skillBorder: String
   let skillText: String
   let fileTint: String
+  /// Caret and selection tint; the system tint when absent.
+  var selection: String? = nil
 }
 
 private struct ComposerChipStyle {
@@ -423,7 +425,7 @@ public final class T3ComposerEditorView: ExpoView, UITextViewDelegate, UITextDro
     skillText: "#a21caf",
     fileTint: "#737373"
   )
-  private var fontFamily = "DMSans-Regular"
+  private var fontFamily = "Nunito-Regular"
   private var fontSize: CGFloat = 14
   private var lineHeight: CGFloat = 20
   private var contentInsetVertical: CGFloat = 0
@@ -931,7 +933,7 @@ public final class T3ComposerEditorView: ExpoView, UITextViewDelegate, UITextDro
     // Kept in step with `T3ContextChipVectorIcon` in the markdown module: a chip drawn here and
     // the same chip drawn in a sent message have to be the same picture.
     let chipFontSize = fontSize * 0.86
-    let font = UIFont(name: "DMSans-Medium", size: chipFontSize)
+    let font = UIFont(name: "Nunito-Medium", size: chipFontSize)
       ?? UIFont.systemFont(ofSize: chipFontSize, weight: .medium)
     let fallbackIcon = Self.vectorIcon(named: iconName, size: 14, color: style.textColor)
       ?? UIImage(
@@ -943,7 +945,7 @@ public final class T3ComposerEditorView: ExpoView, UITextViewDelegate, UITextDro
     // label the way the web chip does.
     let paragraph = NSMutableParagraphStyle()
     paragraph.alignment = .left
-    let detailFont = UIFont(name: "DMSans-Medium", size: chipFontSize * 0.84)
+    let detailFont = UIFont(name: "Nunito-Medium", size: chipFontSize * 0.84)
       ?? UIFont.systemFont(ofSize: chipFontSize * 0.84, weight: .medium)
     let attributedLabel = NSMutableAttributedString(
       string: label,
@@ -1087,7 +1089,7 @@ public final class T3ComposerEditorView: ExpoView, UITextViewDelegate, UITextDro
   private func applyTheme() {
     textView.textColor = UIColor(composerHex: theme.text) ?? .label
     placeholderLabel.textColor = UIColor(composerHex: theme.placeholder) ?? .placeholderText
-    tintColor = UIColor.systemBlue
+    tintColor = theme.selection.flatMap { UIColor(composerHex: $0) } ?? .systemBlue
   }
 
   private func emitTextChange() {

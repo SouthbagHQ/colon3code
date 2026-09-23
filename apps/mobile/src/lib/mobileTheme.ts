@@ -15,6 +15,8 @@ import {
 } from "@t3tools/shared/themePreview";
 
 export const DEFAULT_MOBILE_THEME_ID = MOBILE_DEFAULT_THEME_ID;
+/** The palette behind the default theme: the blush/plum look web and desktop default to. */
+export const DEFAULT_MOBILE_PALETTE_ID = "colon3" satisfies BuiltInThemeId;
 export const MOBILE_THEME_IDS = [...SHARED_MOBILE_THEME_IDS, "material-you"] as const;
 export type MobileThemeId = SharedMobileThemeId | "material-you";
 export type MobileThemeAppearance = ThemeAppearance;
@@ -335,9 +337,9 @@ export function getMobileThemePreviewColors(
   themeId: MobileThemeId,
   appearance: MobileThemeAppearance,
 ): ThemePreviewColors {
-  if (themeId === DEFAULT_MOBILE_THEME_ID || themeId === "material-you")
-    return STANDARD_THEME_PREVIEW_COLORS[appearance];
-  const theme = BUILT_IN_THEMES.find((candidate) => candidate.id === themeId) ?? T3_CHAT_THEME;
+  if (themeId === "material-you") return STANDARD_THEME_PREVIEW_COLORS[appearance];
+  const paletteId = themeId === DEFAULT_MOBILE_THEME_ID ? DEFAULT_MOBILE_PALETTE_ID : themeId;
+  const theme = BUILT_IN_THEMES.find((candidate) => candidate.id === paletteId) ?? T3_CHAT_THEME;
   const colors = getThemeColorsForAppearance(theme, appearance) ?? theme.colors;
   return {
     canvas: themeColorToNativeColor(colors.canvas),

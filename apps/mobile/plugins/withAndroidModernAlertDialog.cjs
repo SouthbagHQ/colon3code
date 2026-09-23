@@ -12,7 +12,7 @@ const {
 // inherits the dated framework dialog chrome (square gray panel, teal
 // all-caps buttons) from the app theme. These resources restyle it with the
 // app's uniwind tokens from global.css: --color-card panel, --color-foreground
-// text, --color-primary buttons, DM Sans type. The @font resources referenced
+// text, --color-primary buttons, Nunito type. The @font resources referenced
 // here are embedded by the expo-font plugin config in app.config.ts.
 
 // AppCompat's default dialog window background is an inset rounded rect, so
@@ -32,16 +32,16 @@ const DIALOG_BACKGROUND_DRAWABLE = `<?xml version="1.0" encoding="utf-8"?>
 
 const COLORS = {
   light: {
-    background: "#FFFFFF", // --color-card
-    text: "#262626", // --color-foreground
-    secondaryText: "#525252", // --color-foreground-secondary
-    buttonText: "#262626", // --color-primary
+    background: "#FFF8F7", // --color-card
+    text: "#4C2A2D", // --color-foreground
+    secondaryText: "#906267", // --color-foreground-secondary
+    buttonText: "#D63265", // --color-primary
   },
   night: {
-    background: "#171717",
-    text: "#F5F5F5",
-    secondaryText: "#A3A3A3",
-    buttonText: "#F5F5F5",
+    background: "#332531",
+    text: "#EFE4EB",
+    secondaryText: "#9B8493",
+    buttonText: "#FA618E",
   },
 };
 
@@ -89,7 +89,7 @@ function withAlertDialogStyles(config) {
           // Theme-level fontFamily is the lowest-priority fallback in attribute
           // resolution, so it reaches every text view in the dialog that does
           // not carry its own fontFamily (the message body in particular).
-          { _: "@font/xml_dm_sans_regular", $: { name: "android:fontFamily" } },
+          { _: "@font/xml_nunito_regular", $: { name: "android:fontFamily" } },
           // AppCompat's alert title view styles itself from the framework
           // attr (?android:attr/windowTitleStyle); there is no unprefixed
           // AppCompat equivalent.
@@ -102,7 +102,7 @@ function withAlertDialogStyles(config) {
       {
         $: { name: "AppAlertDialog.Title", parent: "RtlOverlay.DialogWindowTitle.AppCompat" },
         item: [
-          { _: "@font/dm_sans_500medium", $: { name: "android:fontFamily" } },
+          { _: "@font/nunito_500medium", $: { name: "android:fontFamily" } },
           { _: "18sp", $: { name: "android:textSize" } },
           { _: "@color/alert_dialog_text", $: { name: "android:textColor" } },
         ],
@@ -116,7 +116,7 @@ function withAlertDialogStyles(config) {
           // The AppCompat button appearance hardcodes sans-serif-medium, so
           // the font must be set here rather than relying on the theme
           // fallback.
-          { _: "@font/dm_sans_500medium", $: { name: "android:fontFamily" } },
+          { _: "@font/nunito_500medium", $: { name: "android:fontFamily" } },
           { _: "@color/alert_dialog_button_text", $: { name: "android:textColor" } },
           { _: "false", $: { name: "android:textAllCaps" } },
           { _: "0", $: { name: "android:letterSpacing" } },

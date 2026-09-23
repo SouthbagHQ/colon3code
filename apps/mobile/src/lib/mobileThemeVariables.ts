@@ -1,6 +1,5 @@
-import defaultThemeVariables from "../../generated-uniwind-default-theme-variables.json";
-
 import {
+  DEFAULT_MOBILE_PALETTE_ID,
   DEFAULT_MOBILE_THEME_ID,
   getMobileThemeVariables,
   type MobileThemeAppearance,
@@ -8,20 +7,19 @@ import {
   type MobileThemeVariables,
 } from "./mobileTheme";
 
-const defaults = defaultThemeVariables as Readonly<
-  Record<MobileThemeAppearance, MobileThemeVariables>
->;
-
 /**
  * Complete palette for native and third-party APIs that cannot consume a
- * Uniwind className. The standard palette is generated from global.css; custom
- * palettes share the same source that generates their registered CSS themes.
+ * Uniwind className. Every palette, the default included, comes from the same
+ * shared source that generates the registered CSS themes.
  */
 export function getMobileThemeRuntimeVariables(
   themeId: MobileThemeId,
   appearance: MobileThemeAppearance,
 ): MobileThemeVariables {
-  return themeId === DEFAULT_MOBILE_THEME_ID || themeId === "material-you"
-    ? defaults[appearance]
-    : getMobileThemeVariables(themeId, appearance);
+  return getMobileThemeVariables(
+    themeId === DEFAULT_MOBILE_THEME_ID || themeId === "material-you"
+      ? DEFAULT_MOBILE_PALETTE_ID
+      : themeId,
+    appearance,
+  );
 }

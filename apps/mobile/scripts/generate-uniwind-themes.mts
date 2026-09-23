@@ -6,22 +6,16 @@ import tailwindColors from "tailwindcss/colors";
 import { BUILT_IN_THEME_IDS, type BuiltInThemeId } from "@t3tools/shared/themePalettes";
 
 import {
+  DEFAULT_MOBILE_PALETTE_ID,
   getMobileThemeVariables,
-  MOBILE_THEME_VARIABLE_NAMES,
   type MobileThemeAppearance,
-  type MobileThemeVariables,
 } from "../src/lib/mobileTheme.ts";
 
 const APPEARANCES = ["light", "dark"] as const;
-const GLOBAL_CSS_PATH = NodePath.resolve(import.meta.dirname, "../global.css");
 const GENERATED_CSS_PATH = NodePath.resolve(import.meta.dirname, "../generated-uniwind-themes.css");
 const GENERATED_NAMES_PATH = NodePath.resolve(
   import.meta.dirname,
   "../generated-uniwind-theme-names.json",
-);
-const GENERATED_DEFAULT_VARIABLES_PATH = NodePath.resolve(
-  import.meta.dirname,
-  "../generated-uniwind-default-theme-variables.json",
 );
 
 type TailwindColorFamily = keyof typeof tailwindColors;
@@ -163,8 +157,10 @@ const renderVariant = (name: string, variables: Readonly<Record<string, string>>
 
 export const renderUniwindThemesCSS = () => {
   const variants = [
-    renderVariant("light", adaptiveVariablesFor("light")),
-    renderVariant("dark", adaptiveVariablesFor("dark")),
+    // The plain light/dark themes are the default :3 Code look, the same palette
+    // web and desktop use when no theme is chosen.
+    renderVariant("light", variablesFor(DEFAULT_MOBILE_PALETTE_ID, "light")),
+    renderVariant("dark", variablesFor(DEFAULT_MOBILE_PALETTE_ID, "dark")),
     ...BUILT_IN_THEME_IDS.flatMap((themeId) =>
       APPEARANCES.map((appearance) =>
         renderVariant(`${themeId}-${appearance}`, variablesFor(themeId, appearance)),
@@ -182,51 +178,11 @@ export const renderUniwindThemesCSS = () => {
   ].join("\n");
 };
 
-const readVariantBody = (css: string, appearance: MobileThemeAppearance): string => {
-  const marker = `@variant ${appearance} {`;
-  const markerIndex = css.indexOf(marker);
-  if (markerIndex === -1) throw new Error(`Could not find ${marker} in global.css.`);
-
-  const openingBraceIndex = css.indexOf("{", markerIndex);
-  let depth = 0;
-  for (let index = openingBraceIndex; index < css.length; index += 1) {
-    if (css[index] === "{") depth += 1;
-    if (css[index] !== "}") continue;
-    depth -= 1;
-    if (depth === 0) return css.slice(openingBraceIndex + 1, index);
-  }
-  throw new Error(`Could not find the end of ${marker} in global.css.`);
-};
-
-export const readDefaultThemeVariables = (css: string) =>
-  Object.fromEntries(
-    APPEARANCES.map((appearance) => {
-      const body = readVariantBody(css, appearance);
-      const variables = Object.fromEntries(
-        MOBILE_THEME_VARIABLE_NAMES.map((name) => {
-          const match = new RegExp(`^\\s*${name}:\\s*([^;]+);`, "mu").exec(body);
-          if (!match?.[1]) {
-            throw new Error(`Default ${appearance} theme is missing ${name}.`);
-          }
-          return [name, match[1].trim()];
-        }),
-      ) as MobileThemeVariables;
-      return [appearance, variables];
-    }),
-  ) as Readonly<Record<MobileThemeAppearance, MobileThemeVariables>>;
-
-export const renderDefaultThemeVariablesJSON = (css: string) =>
-  `${JSON.stringify(readDefaultThemeVariables(css), null, 2)}\n`;
-
 export const getGeneratedUniwindThemeOutputs = (): ReadonlyArray<
   readonly [filename: string, contents: string]
 > => [
   [GENERATED_CSS_PATH, renderUniwindThemesCSS()],
   [GENERATED_NAMES_PATH, `${JSON.stringify(customThemeNames, null, 2)}\n`],
-  [
-    GENERATED_DEFAULT_VARIABLES_PATH,
-    renderDefaultThemeVariablesJSON(NodeFS.readFileSync(GLOBAL_CSS_PATH, "utf8")),
-  ],
 ];
 
 const writeFileAtomically = (filename: string, contents: string) => {
