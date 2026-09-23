@@ -164,7 +164,7 @@ export function CustomSnoozeSheet(props: {
                   setError(
                     mode === "date"
                       ? "choose a date and time in the future."
-                      : "Enter a positive duration.",
+                      : "enter a positive duration.",
                   );
                   return;
                 }

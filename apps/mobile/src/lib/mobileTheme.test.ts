@@ -1,6 +1,5 @@
 import { describe, expect, it } from "vite-plus/test";
 import { BUILT_IN_THEME_IDS, BUILT_IN_THEMES, T3_CHAT_THEME } from "@t3tools/shared/themePalettes";
-import { readDefaultMobileThemeVariables } from "./mobileTheme.test-support";
 
 import {
   createMobileThemePairPatch,
@@ -48,16 +47,6 @@ function compositeOver(overlay: string, background: string): string {
 }
 
 describe("mobile themes", () => {
-  it("declares every runtime theme variable in the static stylesheet", () => {
-    const generatedVariables = createMobileThemeVariables(T3_CHAT_THEME.colors, "light");
-    expect(Object.keys(readDefaultMobileThemeVariables("light")).sort()).toEqual(
-      Object.keys(generatedVariables).sort(),
-    );
-    expect(Object.keys(readDefaultMobileThemeVariables("dark")).sort()).toEqual(
-      Object.keys(generatedVariables).sort(),
-    );
-  });
-
   it("shares all built-in desktop palettes", () => {
     expect(BUILT_IN_THEMES.map((theme) => theme.id)).toEqual(BUILT_IN_THEME_IDS);
     for (const themeId of BUILT_IN_THEME_IDS) {
@@ -66,11 +55,12 @@ describe("mobile themes", () => {
     }
   });
 
-  it("preserves the existing mobile palette as the default", () => {
-    expect(readDefaultMobileThemeVariables("light")["--color-screen"]).toBe("#f2f2f7");
-    expect(readDefaultMobileThemeVariables("dark")["--color-screen"]).toBe("#0a0a0a");
-    expect(readDefaultMobileThemeVariables("light")["--color-user-bubble-skill-foreground"]).toBe(
-      "#2563eb",
+  it("previews the default theme with the :3 palette", () => {
+    expect(getMobileThemePreviewColors(DEFAULT_MOBILE_THEME_ID, "light")).toEqual(
+      getMobileThemePreviewColors("colon3", "light"),
+    );
+    expect(getMobileThemePreviewColors(DEFAULT_MOBILE_THEME_ID, "dark")).toEqual(
+      getMobileThemePreviewColors("colon3", "dark"),
     );
   });
 
@@ -84,7 +74,7 @@ describe("mobile themes", () => {
   });
 
   it("uses the same preview roles and standard artwork as desktop", () => {
-    expect(getMobileThemePreviewColors(DEFAULT_MOBILE_THEME_ID, "light")).toEqual({
+    expect(getMobileThemePreviewColors("material-you", "light")).toEqual({
       canvas: "#fcfcfc",
       accent: "#f4f4f5",
       messageAction: "#4f46e5",
@@ -216,33 +206,6 @@ describe("mobile themes", () => {
           contrastRatio(variables["--color-md-user-fence-text"], fenceSurface),
         ).toBeGreaterThanOrEqual(4.5);
       }
-    }
-  });
-
-  // The default palette lives in global.css rather than BUILT_IN_THEMES, so the loops above
-  // never reached it; it kept an unreadable hardcoded bubble until this covered it.
-  it("keeps the default user bubble readable in both appearances", () => {
-    for (const appearance of ["light", "dark"] as const) {
-      const variables = readDefaultMobileThemeVariables(appearance);
-      const bubble = variables["--color-user-bubble"];
-      expect(
-        contrastRatio(variables["--color-user-bubble-foreground"], bubble),
-      ).toBeGreaterThanOrEqual(4.5);
-      expect(
-        contrastRatio(variables["--color-user-bubble-skill-foreground"], bubble),
-      ).toBeGreaterThanOrEqual(4.5);
-      expect(variables["--color-user-bubble-skill-foreground"]).not.toBe(
-        variables["--color-user-bubble-foreground"],
-      );
-      const fenceSurface = compositeOver(variables["--color-md-user-fence-bg"], bubble);
-      expect(fenceSurface).not.toBe(bubble);
-      expect(
-        contrastRatio(variables["--color-md-user-fence-text"], fenceSurface),
-      ).toBeGreaterThanOrEqual(4.5);
-      const codeSurface = compositeOver(variables["--color-md-user-code-bg"], bubble);
-      expect(
-        contrastRatio(variables["--color-md-user-code-text"], codeSurface),
-      ).toBeGreaterThanOrEqual(4.5);
     }
   });
 });

@@ -284,7 +284,7 @@ function ConfiguredSettingsRouteScreen() {
   const promptSignIn = useCallback(() => {
     Alert.alert(
       "sign in to T3 Connect",
-      "Live Activity updates require T3 Connect so relay can deliver updates to this device.",
+      "Live Activity updates need T3 Connect so the relay can deliver updates to this device :3",
       [
         { text: "cancel", style: "cancel" },
         {
@@ -334,7 +334,9 @@ function ConfiguredSettingsRouteScreen() {
       setLiveActivityStatus("disabled");
       const error = squashAtomCommandFailure(tokenResult);
       Alert.alert(
-        Platform.OS === "android" ? "ongoing activity unavailable" : "Live Activities unavailable",
+        Platform.OS === "android"
+          ? "ongoing activity unavailable 3:"
+          : "Live Activities unavailable 3:",
         error instanceof Error ? error.message : "could not enable agent activity updates.",
       );
       return;
@@ -361,8 +363,8 @@ function ConfiguredSettingsRouteScreen() {
         const error = squashAtomCommandFailure(updateResult);
         Alert.alert(
           Platform.OS === "android"
-            ? "ongoing activity unavailable"
-            : "Live Activities unavailable",
+            ? "ongoing activity unavailable 3:"
+            : "Live Activities unavailable 3:",
           error instanceof Error ? error.message : "could not enable agent activity updates.",
         );
       }
@@ -377,7 +379,7 @@ function ConfiguredSettingsRouteScreen() {
     // Activities are live until the device is actually registered.
     if (getAgentAwarenessRegistrationStatus() === "registered") {
       Alert.alert(
-        Platform.OS === "android" ? "ongoing activity enabled" : "Live Activities enabled",
+        Platform.OS === "android" ? "ongoing activity enabled :3" : "Live Activities enabled :3",
         environmentCount > 0
           ? `${environmentCount} environment${environmentCount === 1 ? "" : "s"} linked for agent activity updates.`
           : "agent activity updates are enabled. add an environment to start receiving updates.",
@@ -550,7 +552,7 @@ function ConfiguredSettingsRouteScreen() {
                 ? supportsAndroidLiveUpdateSettings()
                   ? "agent live updates"
                   : "ongoing agent activity"
-                : "Live Activity Updates"
+                : "Live Activity updates"
             }
             subtitle={agentAwarenessSubtitle}
             // Same gate: a saved preference is meaningless until the device
@@ -565,7 +567,7 @@ function ConfiguredSettingsRouteScreen() {
           {supportsAndroidLiveUpdateSettings() ? (
             <SettingsRow
               icon="bolt.circle"
-              label="Live Update Settings"
+              label="Live Updates settings"
               onPress={() => {
                 void openAndroidLiveUpdateSettings().catch(() => {
                   Alert.alert(

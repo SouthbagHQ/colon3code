@@ -136,7 +136,7 @@ export function ThreadFileNavigatorPane(props: {
                     setSearchQuery(event.nativeEvent.text ?? "");
                   }}
                   placement="integratedButton"
-                  placeholder="search files"
+                  placeholder="search files…"
                   textColor={foregroundColor}
                   tintColor={foregroundColor}
                 />
@@ -195,7 +195,7 @@ export function ThreadFileNavigatorPane(props: {
             autoCorrect={false}
             clearButtonMode="while-editing"
             className="min-h-10 flex-1 rounded-xl py-2 text-sm"
-            placeholder="search files"
+            placeholder="search files…"
             value={searchQuery}
             onChangeText={setSearchQuery}
           />

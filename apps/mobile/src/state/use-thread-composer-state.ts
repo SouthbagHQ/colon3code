@@ -90,7 +90,7 @@ export function appendReviewCommentToDraft(input: {
       reidentifyComposerContext(upgraded.text, upgraded.records, uuidv4),
     )
   ) {
-    Alert.alert("Too many context items", "Remove some context from the draft and try again.");
+    Alert.alert("too many context items 3:", "remove some context from the draft and try again.");
     return;
   }
   if (input.attachments && input.attachments.length > 0) {
@@ -360,15 +360,15 @@ export function useThreadComposerState() {
     // here until the user removes attachments.
     if (attachments.length > PROVIDER_SEND_TURN_MAX_ATTACHMENTS) {
       Alert.alert(
-        "Too many attachments",
-        `Remove attachments until there are at most ${PROVIDER_SEND_TURN_MAX_ATTACHMENTS}.`,
+        "too many attachments 3:",
+        `remove attachments until there are at most ${PROVIDER_SEND_TURN_MAX_ATTACHMENTS}.`,
       );
       return null;
     }
 
     const contextBlockReason = composerContextSendBlockReason(draft.context);
     if (contextBlockReason) {
-      Alert.alert("Too much context", contextBlockReason);
+      Alert.alert("too much context 3:", contextBlockReason);
       return null;
     }
 
@@ -379,8 +379,8 @@ export function useThreadComposerState() {
       isModelSelectionUnavailable(serverConfig, modelSelection)
     ) {
       Alert.alert(
-        "Antigravity model unavailable",
-        "Set up Antigravity on web or desktop, or choose another model.",
+        "Antigravity model unavailable 3:",
+        "set up Antigravity on web or desktop, or choose another model.",
       );
       return null;
     }
@@ -394,7 +394,7 @@ export function useThreadComposerState() {
         : null;
     if (feedbackCommand) {
       if (thread.session === null) {
-        Alert.alert("Start a Codex thread first", "Send a message before you submit feedback.");
+        Alert.alert("start a Codex thread first :3", "send a message before you submit feedback.");
         return null;
       }
       const metadata = makeQueuedMessageMetadata();
@@ -472,7 +472,7 @@ export function useThreadComposerState() {
         });
         appendComposerDraftAttachments(threadKey, attachments, { allowOverflow: true });
         setPendingConnectionError(
-          error instanceof Error ? error.message : "Failed to save the queued message.",
+          error instanceof Error ? error.message : "failed to save the queued message.",
         );
       },
     );
@@ -520,11 +520,11 @@ export function useThreadComposerState() {
     const problems = [
       ...(result.error ? [result.error] : []),
       ...(rejectedCount > 0
-        ? [`You can attach up to ${PROVIDER_SEND_TURN_MAX_ATTACHMENTS} attachments per message.`]
+        ? [`you can attach up to ${PROVIDER_SEND_TURN_MAX_ATTACHMENTS} attachments per message.`]
         : []),
     ];
     if (problems.length > 0) {
-      Alert.alert("Could not attach photo or video", problems.join("\n\n"));
+      Alert.alert("could not attach photo or video 3:", problems.join("\n\n"));
     }
   }, [composerDrafts, selectedEnvironmentRuntime?.serverConfig, selectedThreadShell]);
 
@@ -536,7 +536,7 @@ export function useThreadComposerState() {
       selectedEnvironmentRuntime?.serverConfig?.environment.capabilities.fileAttachments
         ?.maxUploadBytes;
     if (maxBytes === undefined) {
-      Alert.alert("Could not attach file", "This server does not support file attachments.");
+      Alert.alert("could not attach file 3:", "this server does not support file attachments.");
       return;
     }
 
@@ -556,11 +556,11 @@ export function useThreadComposerState() {
     const problems = [
       ...(result.error ? [result.error] : []),
       ...(rejectedCount > 0
-        ? [`You can attach up to ${PROVIDER_SEND_TURN_MAX_ATTACHMENTS} files per message.`]
+        ? [`you can attach up to ${PROVIDER_SEND_TURN_MAX_ATTACHMENTS} files per message.`]
         : []),
     ];
     if (problems.length > 0) {
-      Alert.alert("Could not attach file", problems.join("\n\n"));
+      Alert.alert("could not attach file 3:", problems.join("\n\n"));
     }
   }, [composerDrafts, selectedEnvironmentRuntime?.serverConfig, selectedThreadShell]);
 
@@ -626,12 +626,12 @@ export function useThreadComposerState() {
           ) {
             await removePersistedComposerAttachmentFile(attachment.fileUri);
             setPendingConnectionError(
-              `You can attach up to ${PROVIDER_SEND_TURN_MAX_ATTACHMENTS} files per message.`,
+              `you can attach up to ${PROVIDER_SEND_TURN_MAX_ATTACHMENTS} files per message.`,
             );
           }
         } catch (error) {
           setPendingConnectionError(
-            error instanceof Error ? error.message : "Could not attach pasted text.",
+            error instanceof Error ? error.message : "could not attach pasted text.",
           );
         }
       } else if (shouldFold && !wouldExceedInputLimit) {
@@ -639,8 +639,8 @@ export function useThreadComposerState() {
       } else if (shouldFold) {
         setPendingConnectionError(
           wouldExceedInputLimit
-            ? "Pasted text is too large for this message. Remove some text or an attachment, then paste again."
-            : "Could not attach pasted text. Remove an attachment or use a smaller paste, then try again.",
+            ? "pasted text is too large for this message. remove some text or an attachment, then paste again."
+            : "could not attach pasted text. remove an attachment or use a smaller paste, then try again.",
         );
       } else {
         insertComposerDraftText(threadKey, result.text, insertion);
@@ -650,7 +650,7 @@ export function useThreadComposerState() {
       setPendingConnectionError(result.error);
     } else if (rejectedPasteCount > 0) {
       setPendingConnectionError(
-        `You can attach up to ${PROVIDER_SEND_TURN_MAX_ATTACHMENTS} files per message.`,
+        `you can attach up to ${PROVIDER_SEND_TURN_MAX_ATTACHMENTS} files per message.`,
       );
     }
   }, [
@@ -720,12 +720,12 @@ export function useThreadComposerState() {
         if (rejectedCount > 0) {
           await removePersistedComposerAttachmentFile(attachment.fileUri);
           setPendingConnectionError(
-            `You can attach up to ${PROVIDER_SEND_TURN_MAX_ATTACHMENTS} files per message.`,
+            `you can attach up to ${PROVIDER_SEND_TURN_MAX_ATTACHMENTS} files per message.`,
           );
         }
       } catch (error) {
         setPendingConnectionError(
-          error instanceof Error ? error.message : "Could not attach pasted text.",
+          error instanceof Error ? error.message : "could not attach pasted text.",
         );
       }
     },

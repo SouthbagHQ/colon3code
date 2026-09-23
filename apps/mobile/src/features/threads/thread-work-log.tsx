@@ -773,7 +773,7 @@ const ThreadWorkLogRow = memo(function ThreadWorkLogRow(
         accessibilityLabel={failed ? `${accessiblePreview}, tool call failed` : accessiblePreview}
         accessibilityHint={
           canExpand
-            ? `Double tap to ${expanded ? "hide" : "show"} full details. Long press to copy.`
+            ? `double tap to ${expanded ? "hide" : "show"} full details. long press to copy.`
             : "long press to copy."
         }
         accessibilityState={canExpand ? { expanded } : undefined}
@@ -1030,7 +1030,7 @@ export const ThreadAgentSpawnCard = memo(function ThreadAgentSpawnCard(props: {
         accessibilityLabel={`${summary.title}, ${summary.status}`}
         accessibilityHint={
           canExpand
-            ? `Double tap to ${expanded ? "hide" : "show"} ${memberCount} ${memberCount === 1 ? "subagent" : "subagents"}. Long press to copy.`
+            ? `double tap to ${expanded ? "hide" : "show"} ${memberCount} ${memberCount === 1 ? "subagent" : "subagents"}. long press to copy.`
             : "long press to copy."
         }
         hitSlop={4}

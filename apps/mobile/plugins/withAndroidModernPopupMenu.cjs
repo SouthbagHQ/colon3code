@@ -65,8 +65,8 @@ const SUBMENU_ARROW_DRAWABLE = `<?xml version="1.0" encoding="utf-8"?>
 `;
 
 const COLORS = {
-  light: { background: "#F7F7F7", itemText: "#262626" },
-  night: { background: "#161616", itemText: "#F5F5F5" },
+  light: { background: "#FFF8F7", itemText: "#4C2A2D" }, // --color-card, --color-foreground
+  night: { background: "#332531", itemText: "#EFE4EB" },
 };
 
 function assignStyleItem(style, name, value) {
@@ -142,9 +142,9 @@ function withPopupMenuStyles(config) {
         item: [
           { _: "15sp", $: { name: "android:textSize" } },
           { _: "@color/popup_menu_item_text", $: { name: "android:textColor" } },
-          // DM Sans (--font-sans); embedded by the expo-font plugin config in
+          // Nunito (--font-sans); embedded by the expo-font plugin config in
           // app.config.ts.
-          { _: "@font/xml_dm_sans_regular", $: { name: "android:fontFamily" } },
+          { _: "@font/xml_nunito_regular", $: { name: "android:fontFamily" } },
         ],
       },
       {
@@ -155,7 +155,7 @@ function withPopupMenuStyles(config) {
         item: [
           { _: "15sp", $: { name: "android:textSize" } },
           { _: "@color/popup_menu_item_text", $: { name: "android:textColor" } },
-          { _: "@font/xml_dm_sans_regular", $: { name: "android:fontFamily" } },
+          { _: "@font/xml_nunito_regular", $: { name: "android:fontFamily" } },
         ],
       },
       // The framework default (Widget.Material.ListMenuView) only carries

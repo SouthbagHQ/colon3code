@@ -262,6 +262,22 @@
     "./catFace": {
       "types": "./src/catFace.ts",
       "default": "./src/catFace.ts"
+    },
+    "./composerPlaceholder": {
+      "types": "./src/composerPlaceholder.ts",
+      "default": "./src/composerPlaceholder.ts"
+    },
+    "./workingLabel": {
+      "types": "./src/workingLabel.ts",
+      "default": "./src/workingLabel.ts"
+    },
+    "./cuteTraits": {
+      "types": "./src/cuteTraits.ts",
+      "default": "./src/cuteTraits.ts"
+    },
+    "./runtimeModeCopy": {
+      "types": "./src/runtimeModeCopy.ts",
+      "default": "./src/runtimeModeCopy.ts"
     }
   },
   "scripts": {

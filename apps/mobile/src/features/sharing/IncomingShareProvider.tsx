@@ -278,7 +278,7 @@ export function IncomingShareProvider(props: React.PropsWithChildren) {
     if (!error) {
       return;
     }
-    Alert.alert("Could not import shared content", error.message, [
+    Alert.alert("could not import shared content 3:", error.message, [
       { text: "dismiss", style: "cancel", onPress: () => setError(null) },
       {
         text: "retry",

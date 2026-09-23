@@ -49,7 +49,7 @@ function compactMenuStatus(gitStatus: VcsStatusResult | null): string {
   if (gitStatus.hasWorkingTreeChanges) {
     parts.push(`${gitStatus.workingTree.files.length} changed`);
   } else if (gitStatus.aheadCount === 0 && gitStatus.behindCount === 0) {
-    parts.push("Clean");
+    parts.push("clean");
   }
   if (gitStatus.aheadCount > 0) {
     parts.push(`${gitStatus.aheadCount} ahead`);
@@ -149,7 +149,10 @@ function useThreadGitControlModel(props: ThreadGitMenuProps) {
   const openExistingPr = useCallback(async () => {
     const prUrl = gitStatus?.pr?.state === "open" ? gitStatus.pr.url : null;
     if (!prUrl) {
-      Alert.alert("no open PR", "this branch does not have an open pull request.");
+      Alert.alert(
+        "hmm, no open pull request found 3:",
+        "this branch does not have an open pull request.",
+      );
       return;
     }
     if (!(await tryOpenExternalUrl(prUrl, "pull-request"))) {

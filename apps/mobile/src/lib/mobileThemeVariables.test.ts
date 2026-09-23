@@ -1,16 +1,15 @@
 import { describe, expect, it } from "vite-plus/test";
 
-import { readDefaultMobileThemeVariables } from "./mobileTheme.test-support";
 import { getMobileThemeVariables } from "./mobileTheme";
 import { getMobileThemeRuntimeVariables } from "./mobileThemeVariables";
 
 describe("mobile theme runtime variables", () => {
-  it("derives the standard runtime palette from global.css", () => {
+  it("gives the default theme the :3 palette web and desktop default to", () => {
     expect(getMobileThemeRuntimeVariables("colon3-code", "light")).toEqual(
-      readDefaultMobileThemeVariables("light"),
+      getMobileThemeVariables("colon3", "light"),
     );
     expect(getMobileThemeRuntimeVariables("colon3-code", "dark")).toEqual(
-      readDefaultMobileThemeVariables("dark"),
+      getMobileThemeVariables("colon3", "dark"),
     );
   });
 

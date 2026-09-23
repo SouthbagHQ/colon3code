@@ -56,7 +56,7 @@ export function getTerminalStatusLabel(input: {
     return "exited";
   }
   if (input.status === "error") {
-    return "Error";
+    return "error 3:";
   }
 
   return "not started";

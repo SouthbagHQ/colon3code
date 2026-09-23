@@ -299,7 +299,7 @@ describe("composer file attachments", () => {
       const result = await pickComposerImages({ existingCount: 0 });
 
       expect(result.images).toEqual([expect.objectContaining({ name: "photo.jpg" })]);
-      expect(result.error).toBe("Failed to read 'missing.gif'.");
+      expect(result.error).toBe("failed to read 'missing.gif'.");
     });
 
     it("reports a photo the native renderer cannot decode", async () => {
@@ -313,7 +313,7 @@ describe("composer file attachments", () => {
 
       await expect(pickComposerImages({ existingCount: 0 })).resolves.toEqual({
         images: [],
-        error: "Failed to read 'photo.HEIC'.",
+        error: "failed to read 'photo.HEIC'.",
       });
     });
   });
@@ -399,7 +399,7 @@ describe("composer file attachments", () => {
       const result = await pickComposerMedia({ existingCount: 0 });
 
       expect(result.attachments).toEqual([expect.objectContaining({ type: "image" })]);
-      expect(result.error).toBe("Video attachments are unavailable here.");
+      expect(result.error).toBe("video attachments are unavailable here.");
       expect(mocks.copy).not.toHaveBeenCalled();
     });
 
@@ -480,7 +480,7 @@ describe("composer file attachments", () => {
       const result = await pickComposerMedia({ existingCount: 7, maxVideoBytes: 50 * 1024 * 1024 });
 
       expect(result.attachments).toEqual([expect.objectContaining({ type: "image" })]);
-      expect(result.error).toBe("You can attach up to 8 attachments per message.");
+      expect(result.error).toBe("you can attach up to 8 attachments per message.");
       expect(mocks.pickMedia).toHaveBeenCalledWith(expect.objectContaining({ selectionLimit: 1 }));
       expect(mocks.copy).not.toHaveBeenCalled();
     });
@@ -627,7 +627,7 @@ describe("composer file attachments", () => {
   it("does not open the picker when the draft has no remaining attachment slots", async () => {
     await expect(pickComposerFiles({ existingCount: 8 })).resolves.toEqual({
       files: [],
-      error: "You can attach up to 8 files per message.",
+      error: "you can attach up to 8 files per message.",
     });
 
     expect(mocks.pickFile).not.toHaveBeenCalled();

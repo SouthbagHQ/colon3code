@@ -69,8 +69,8 @@ export function useMediaActions(source: MediaActionsSource | undefined, onOpenFi
       .catch((error: unknown) => {
         if (!request.signal.aborted) {
           Alert.alert(
-            "Could not share file",
-            error instanceof Error ? error.message : "Try again.",
+            "could not share file 3:",
+            error instanceof Error ? error.message : "try again.",
           );
         }
       })
@@ -92,7 +92,7 @@ export function useMediaActions(source: MediaActionsSource | undefined, onOpenFi
             ? [
                 {
                   id: "copy-full-path" as const,
-                  title: "Copy full path",
+                  title: "copy full path",
                   run: () => copyTextWithHaptic(reference.path),
                 },
               ]
@@ -101,7 +101,7 @@ export function useMediaActions(source: MediaActionsSource | undefined, onOpenFi
             ? [
                 {
                   id: "copy-relative-path" as const,
-                  title: "Copy relative path",
+                  title: "copy relative path",
                   run: () => copyTextWithHaptic(relativePath),
                 },
               ]
@@ -110,7 +110,7 @@ export function useMediaActions(source: MediaActionsSource | undefined, onOpenFi
             ? [
                 {
                   id: "copy-url" as const,
-                  title: "Copy URL",
+                  title: "copy URL",
                   run: () => copyTextWithHaptic(reference.url),
                 },
               ]
@@ -119,7 +119,7 @@ export function useMediaActions(source: MediaActionsSource | undefined, onOpenFi
             ? [
                 {
                   id: "open-file" as const,
-                  title: "Open in file viewer",
+                  title: "open in file viewer",
                   run: () => {
                     onOpenFile?.();
                     navigation.navigate("ThreadFile", {
@@ -133,7 +133,7 @@ export function useMediaActions(source: MediaActionsSource | undefined, onOpenFi
             : []),
           {
             id: "save" as const,
-            title: sharing ? "Opening share sheet…" : "Save or share",
+            title: sharing ? "opening share sheet…" : "save or share",
             run: share,
             disabled: sharing,
           },

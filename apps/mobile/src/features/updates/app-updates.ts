@@ -449,8 +449,8 @@ async function defaultConfirmInstallNow(): Promise<boolean> {
   const { Alert } = await import("react-native");
   return new Promise<boolean>((resolve) => {
     Alert.alert(
-      "update ready",
-      "A new version has been downloaded and installs automatically the next time you leave the app. Install it now instead?",
+      "update ready :3",
+      "a new version has been downloaded and installs automatically the next time you leave the app. install it now instead?",
       [
         { onPress: () => resolve(false), style: "cancel", text: "later" },
         { onPress: () => resolve(true), text: "install now" },

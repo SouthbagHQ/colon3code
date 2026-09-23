@@ -78,7 +78,7 @@ import {
 import {
   composerPlaceholderFor,
   DISCONNECTED_COMPOSER_PLACEHOLDER,
-} from "../../composerPlaceholder";
+} from "@t3tools/client-runtime/composerPlaceholder";
 import {
   deriveComposerSendState,
   getAntigravitySendBlockReason,

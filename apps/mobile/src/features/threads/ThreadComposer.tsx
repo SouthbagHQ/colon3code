@@ -898,7 +898,7 @@ export const ThreadComposer = memo(function ThreadComposer(props: ThreadComposer
                 ) : (
                   <ComposerActionButton
                     accessibilityLabel={sendBlockedReason ?? sendLabel}
-                    icon="arrow.up"
+                    icon=":3"
                     variant="primary"
                     disabled={!canSend}
                     onPress={handleSend}
@@ -991,7 +991,7 @@ export const ThreadComposer = memo(function ThreadComposer(props: ThreadComposer
                   ) : voicePresentation.showsSend ? (
                     <ComposerActionButton
                       accessibilityLabel={sendBlockedReason ?? sendLabel}
-                      icon="arrow.up"
+                      icon=":3"
                       variant="primary"
                       disabled={!canSend}
                       onPress={handleSend}

@@ -1,7 +1,7 @@
 const FONT_FAMILIES = {
-  regular: "DMSans-Regular",
-  medium: "DMSans-Medium",
-  bold: "DMSans-Bold",
+  regular: "Nunito-Regular",
+  medium: "Nunito-Medium",
+  bold: "Nunito-Bold",
 } as const;
 
 /**

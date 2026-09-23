@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vite-plus/test";
 
-import { workingElapsedMs, workingLabelPrefix } from "./workingLabel";
+import { workingElapsedMs, workingLabelPrefix } from "./workingLabel.ts";
 
 describe("workingLabelPrefix", () => {
   it("starts with the short label", () => {

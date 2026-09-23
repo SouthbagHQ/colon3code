@@ -417,7 +417,7 @@ export function CommandPalette(props: {
                   <TextInput
                     ref={inputRef}
                     accessibilityLabel="search commands, projects, and threads"
-                    placeholder="search commands, projects, and threads…"
+                    placeholder="search commands, projects, and threads… ^w^"
                     placeholderTextColorClassName="accent-placeholder"
                     autoCorrect={false}
                     autoCapitalize="none"

@@ -70,7 +70,7 @@ export function CustomSnoozeSheet(props: {
     const snoozedUntil = resolveCustomSnooze(input, new Date());
     if (!snoozedUntil) {
       setError(
-        mode === "date" ? "choose a date and time in the future." : "Enter a positive duration.",
+        mode === "date" ? "choose a date and time in the future." : "enter a positive duration.",
       );
       return;
     }

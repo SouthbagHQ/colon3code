@@ -14,6 +14,7 @@ import {
 import { cn } from "../lib/cn";
 import { AppText as Text } from "./AppText";
 import { SymbolView } from "./AppSymbol";
+import { Colon3Wordmark } from "./Colon3Wordmark";
 
 const COMPOSER_TOOLBAR_GAP = 8;
 const COMPOSER_TOOLBAR_FADE_WIDTH = 18;
@@ -217,11 +218,12 @@ export function ComposerToolbarScroller(props: {
   );
 }
 
+/** Round composer action. `icon=":3"` draws the brand mark (the send button) instead of a symbol. */
 export function ComposerActionButton(props: {
   readonly accessibilityLabel: string;
   readonly accessibilityHint?: string;
   readonly disabled?: boolean;
-  readonly icon: ComponentProps<typeof SymbolView>["name"];
+  readonly icon: ComponentProps<typeof SymbolView>["name"] | ":3";
   readonly onPress: () => void;
   readonly variant?: "primary" | "danger";
 }) {
@@ -247,15 +249,24 @@ export function ComposerActionButton(props: {
               : "bg-primary",
         )}
       >
-        <SymbolView
-          name={props.icon}
-          size={16}
-          weight="semibold"
-          tintColorClassName={
-            props.variant === "danger" ? "accent-danger-foreground" : "accent-primary-foreground"
-          }
-          type="monochrome"
-        />
+        {props.icon === ":3" ? (
+          <Colon3Wordmark
+            height={13}
+            colorClassName={
+              props.variant === "danger" ? "accent-danger-foreground" : "accent-primary-foreground"
+            }
+          />
+        ) : (
+          <SymbolView
+            name={props.icon}
+            size={16}
+            weight="semibold"
+            tintColorClassName={
+              props.variant === "danger" ? "accent-danger-foreground" : "accent-primary-foreground"
+            }
+            type="monochrome"
+          />
+        )}
       </View>
     </Pressable>
   );

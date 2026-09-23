@@ -19,7 +19,7 @@ function DocumentPreview(props: {
     else
       Alert.alert(
         "could not open document 3:",
-        "A compatible viewer must be installed. Check your connection and try again.",
+        "a compatible viewer must be installed. check your connection and try again.",
       );
   });
   useEffect(() => {

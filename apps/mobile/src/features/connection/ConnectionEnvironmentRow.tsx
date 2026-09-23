@@ -20,7 +20,7 @@ import { ConnectionStatusDot } from "./ConnectionStatusDot";
 
 function connectionStatusLabel(environment: ConnectedEnvironmentSummary): string | null {
   if (!environment.isEnabled) {
-    return "Off";
+    return "off";
   }
   return connectionStatusText({
     phase: environment.connectionState,

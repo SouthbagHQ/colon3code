@@ -292,7 +292,7 @@ function AndroidHomeHeader(props: HomeHeaderProps) {
               accessibilityLabel="search threads"
               autoCapitalize="none"
               onChangeText={props.onSearchQueryChange}
-              placeholder="search threads"
+              placeholder="search threads… :3"
               placeholderTextColorClassName="accent-placeholder"
               className="flex-1 py-2.5 text-base font-sans text-foreground"
               value={props.searchQuery}
@@ -374,7 +374,7 @@ function IosHomeHeader(props: HomeHeaderProps) {
                       : "line.3.horizontal.decrease",
                     onComposePress: props.onStartNewTask,
                     onSearchTextChange: props.onSearchQueryChange,
-                    placeholder: "search",
+                    placeholder: "search ^w^",
                     searchTextChangeId: "home-search-text",
                     showsSearchDismissButton: true,
                   }),
@@ -387,7 +387,7 @@ function IosHomeHeader(props: HomeHeaderProps) {
                   ref: searchBarRef,
                   autoCapitalize: "none" as const,
                   hideNavigationBar: false,
-                  placeholder: "search",
+                  placeholder: "search ^w^",
                   onCancelButtonPress: () => {
                     props.onSearchQueryChange("");
                   },

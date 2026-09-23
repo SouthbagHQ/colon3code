@@ -47,7 +47,7 @@
   "dependencies": {
     "@clerk/expo": "catalog:",
     "@effect/atom-react": "catalog:",
-    "@expo-google-fonts/dm-sans": "^0.4.2",
+    "@expo-google-fonts/nunito": "^0.4.2",
     "@expo/metro-runtime": "~57.0.14",
     "@expo/ui": "~57.0.14",
     "@legendapp/list": "catalog:",

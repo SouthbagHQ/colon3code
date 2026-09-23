@@ -123,7 +123,7 @@ describe("composer clipboard paste", () => {
     expect(await pasteComposerClipboard({ existingCount: 0 })).toEqual({
       images: [],
       text: null,
-      error: "Clipboard is empty.",
+      error: "clipboard is empty.",
     });
   });
 });

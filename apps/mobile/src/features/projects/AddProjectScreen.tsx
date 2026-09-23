@@ -602,7 +602,7 @@ function useCreateProject(environment: EnvironmentOption | null) {
         path: workspaceRoot,
       });
       if (existing) {
-        Alert.alert("project already exists", existing.title);
+        Alert.alert("project already exists :3", existing.title);
         navigation.dispatch(
           CommonActions.reset({
             index: 0,

@@ -175,7 +175,7 @@ function ArchivedThreadsHeader(props: {
                 autoCapitalize="none"
                 onChangeText={props.onSearchQueryChange}
                 value={props.searchQuery}
-                placeholder="search archived threads"
+                placeholder="search archived threads… :3"
                 placeholderTextColorClassName="accent-placeholder"
                 className="flex-1 py-2 text-base font-sans text-foreground"
               />
@@ -270,7 +270,7 @@ function ArchivedThreadsHeader(props: {
                     : "line.3.horizontal.decrease",
                   onComposePress: props.onRefresh,
                   onSearchTextChange: props.onSearchQueryChange,
-                  placeholder: "search",
+                  placeholder: "search ^w^",
                   searchTextChangeId: "archived-search-text",
                 }),
               ]
@@ -293,7 +293,7 @@ function ArchivedThreadsHeader(props: {
                 autoCapitalize: "none",
                 hideNavigationBar: false,
                 obscureBackground: false,
-                placeholder: "search archived threads",
+                placeholder: "search archived threads… :3",
                 onChangeText: (event) => {
                   props.onSearchQueryChange(event.nativeEvent.text);
                 },

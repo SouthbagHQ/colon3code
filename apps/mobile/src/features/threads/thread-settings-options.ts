@@ -1,4 +1,7 @@
+import { cuteOptionLabel } from "@t3tools/client-runtime/cuteTraits";
+import { RUNTIME_MODE_COPY } from "@t3tools/client-runtime/runtimeModeCopy";
 import type { ProviderOptionDescriptor, RuntimeMode } from "@t3tools/contracts";
+import { getProviderOptionCurrentLabel } from "@t3tools/shared/model";
 
 /**
  * Desktop-oriented effort keywords that don't belong in the phone picker.
@@ -13,28 +16,10 @@ export const RUNTIME_MODE_CHOICES: ReadonlyArray<{
   readonly mode: RuntimeMode;
   readonly label: string;
   readonly description: string;
-}> = [
-  {
-    mode: "approval-required",
-    label: "supervised",
-    description: "ask before commands and file changes.",
-  },
-  {
-    mode: "auto-accept-edits",
-    label: "auto-accept edits",
-    description: "auto-approve edits, ask before other actions.",
-  },
-  {
-    mode: "auto",
-    label: "auto",
-    description: "supported providers approve routine actions; others still ask.",
-  },
-  {
-    mode: "full-access",
-    label: "full access",
-    description: "allow commands and edits without prompts.",
-  },
-];
+}> = (Object.keys(RUNTIME_MODE_COPY) as RuntimeMode[]).map((mode) => ({
+  mode,
+  ...RUNTIME_MODE_COPY[mode],
+}));
 
 export function selectableChoices(
   descriptor: Extract<ProviderOptionDescriptor, { type: "select" }>,
@@ -43,4 +28,10 @@ export function selectableChoices(
   return descriptor.options.filter(
     (option) => !injected.has(option.id) && !HIDDEN_EFFORT_OPTION_IDS.has(option.id),
   );
+}
+
+/** The descriptor's current value in the app voice, for the disclosure row. */
+export function currentOptionLabel(descriptor: ProviderOptionDescriptor): string | undefined {
+  const label = getProviderOptionCurrentLabel(descriptor);
+  return label === undefined ? undefined : cuteOptionLabel(label);
 }

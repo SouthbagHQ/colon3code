@@ -243,7 +243,7 @@ import { formatChatTimestampTooltip, formatDayAwareTimestamp } from "../../times
 import { SkillInlineText } from "./SkillInlineText";
 import { deriveAgentSpawnSummary } from "./agentSpawnSummary";
 import { formatWorkspaceRelativePath } from "../../filePathDisplay";
-import { workingElapsedMs, workingLabelPrefix } from "./workingLabel";
+import { workingElapsedMs, workingLabelPrefix } from "@t3tools/client-runtime/workingLabel";
 import {
   buildReviewCommentRenderablePatch,
   formatReviewCommentFence,

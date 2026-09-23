@@ -114,7 +114,10 @@ export function GitOverviewSheet(props: GitOverviewSheetProps) {
   const openExistingPr = useCallback(async () => {
     const prUrl = gitStatus.data?.pr?.state === "open" ? gitStatus.data.pr.url : null;
     if (!prUrl) {
-      Alert.alert("no open PR", "this branch does not have an open pull request.");
+      Alert.alert(
+        "hmm, no open pull request found 3:",
+        "this branch does not have an open pull request.",
+      );
       return;
     }
     if (!(await tryOpenExternalUrl(prUrl, "pull-request"))) {
