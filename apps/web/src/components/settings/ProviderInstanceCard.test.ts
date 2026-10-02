@@ -118,7 +118,7 @@ describe("deriveProviderModelsForDisplay", () => {
 
     expect(markup).toContain("authenticated as");
     expect(markup).toContain('aria-label="toggle account email visibility"');
-    expect(markup).toContain("blur-[2px]");
+    expect(markup).toContain("blur-xs");
     expect(markup).not.toContain("developer@example.com");
   });
   it("surfaces a failed probe message in both the list row and the editor", () => {

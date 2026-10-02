@@ -1,5 +1,4 @@
 import { useEffect, useId, useState } from "react";
-import { Tabs } from "@base-ui/react/tabs";
 import { create } from "zustand";
 import {
   localSnoozeDate,
@@ -10,10 +9,11 @@ import {
 import { Button } from "./ui/button";
 import { CalendarIcon } from "~/icons";
 import { Calendar } from "./ui/calendar";
+import { weekStartsOn } from "../timestampFormat";
 import { Popover, PopoverTrigger, PopoverPopup } from "./ui/popover";
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
-import { toggleVariants } from "./ui/toggle";
+import { Toggle, ToggleGroup } from "./ui/toggle-group";
 import { Select, SelectTrigger, SelectValue, SelectPopup, SelectItem } from "./ui/select";
 import {
   NumberField,
@@ -95,35 +95,22 @@ function CustomSnoozeDialog() {
               choose when these threads wake up and return to your inbox uwu
             </DialogDescription>
           </DialogHeader>
-          <DialogPanel className="flex flex-col gap-4 text-base sm:text-sm">
-            <Tabs.Root
-              value={mode}
-              onValueChange={(value) => {
-                if (value === "date" || value === "duration") setMode(value);
-                setError(null);
-              }}
-              className="flex flex-col gap-4"
-            >
-              <Tabs.List
+          <DialogPanel>
+            <div className="flex flex-col gap-4">
+              <ToggleGroup
                 aria-label="schedule type"
-                className="flex gap-0.5 rounded-lg bg-input/40 p-0.5"
+                className="w-full *:flex-1"
+                value={[mode]}
+                onValueChange={(next) => {
+                  const value = next[0];
+                  if (value === "date" || value === "duration") setMode(value);
+                  setError(null);
+                }}
               >
-                {(["date", "duration"] as const).map((value) => (
-                  <Tabs.Tab
-                    key={value}
-                    value={value}
-                    data-pressed={mode === value ? "" : undefined}
-                    className={toggleVariants({
-                      variant: "segmented",
-                      size: "sm",
-                      className: "flex-1",
-                    })}
-                  >
-                    {value === "date" ? "date and time" : "duration"}
-                  </Tabs.Tab>
-                ))}
-              </Tabs.List>
-              <Tabs.Panel value={mode} className="flex flex-col gap-4">
+                <Toggle value="date">Date and time</Toggle>
+                <Toggle value="duration">Duration</Toggle>
+              </ToggleGroup>
+              <div className="flex flex-col gap-4">
                 {mode === "date" ? (
                   <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
                     <div className="flex min-w-0 flex-col gap-1.5">
@@ -134,7 +121,7 @@ function CustomSnoozeDialog() {
                             <Button
                               id={`${id}-date`}
                               variant="outline"
-                              className="w-full justify-between font-normal"
+                              className="w-full justify-between"
                             />
                           }
                         >
@@ -151,6 +138,7 @@ function CustomSnoozeDialog() {
                             required
                             selected={date}
                             defaultMonth={date}
+                            {...(weekStartsOn === undefined ? {} : { weekStartsOn })}
                             disabled={{ before: new Date(new Date().setHours(0, 0, 0, 0)) }}
                             onSelect={(selected) => {
                               setDate(selected);
@@ -161,11 +149,8 @@ function CustomSnoozeDialog() {
                         </PopoverPopup>
                       </Popover>
                     </div>
-                    <Label
-                      className="flex min-w-0 flex-col items-stretch gap-1.5"
-                      htmlFor={`${id}-time`}
-                    >
-                      time
+                    <Label className="flex min-w-0 flex-col items-stretch" htmlFor={`${id}-time`}>
+                      Time
                       <Input
                         nativeInput
                         id={`${id}-time`}
@@ -183,7 +168,6 @@ function CustomSnoozeDialog() {
                 ) : (
                   <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
                     <NumberField
-                      className="gap-1.5"
                       id={`${id}-amount`}
                       min={0}
                       step="any"
@@ -200,11 +184,8 @@ function CustomSnoozeDialog() {
                         <NumberFieldIncrement aria-label="increase duration" />
                       </NumberFieldGroup>
                     </NumberField>
-                    <Label
-                      className="flex min-w-0 flex-col items-stretch gap-1.5"
-                      htmlFor={`${id}-unit`}
-                    >
-                      unit
+                    <Label className="flex min-w-0 flex-col items-stretch" htmlFor={`${id}-unit`}>
+                      Unit
                       <Select
                         value={unit}
                         items={{ minutes: "minutes", hours: "hours", days: "days" }}
@@ -226,8 +207,8 @@ function CustomSnoozeDialog() {
                     </Label>
                   </div>
                 )}
-              </Tabs.Panel>
-            </Tabs.Root>
+              </div>
+            </div>
             {error && (
               <p role="alert" className="text-destructive">
                 {error}

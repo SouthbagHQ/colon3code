@@ -8,20 +8,7 @@ import type {
   PullRequestListState,
   SourceControlProviderKind,
 } from "@t3tools/contracts";
-import {
-  CircleCheckIcon,
-  CircleDashedIcon,
-  CircleSlashIcon,
-  CircleXIcon,
-  EyeOffIcon,
-  FolderGit2Icon,
-  GitPullRequestDraftIcon,
-  LayersIcon,
-  ListFilterIcon,
-  SearchIcon,
-  TagIcon,
-  UserRoundIcon,
-} from "~/icons";
+import { CircleCheckIcon, CircleDashedIcon, CircleSlashIcon, CircleXIcon, EyeOffIcon, FolderGit2Icon, LayersIcon, ListFilterIcon, SearchIcon, TagIcon, UserRoundIcon } from "~/icons";
 import { type ElementType, useState } from "react";
 
 import { getSourceControlPresentationForKind } from "~/sourceControlPresentation";
@@ -51,6 +38,7 @@ import {
   type PullRequestLabelFacet,
 } from "./pullRequestList.logic";
 import { PullRequestActorAvatar } from "./pullRequestPresentation";
+import { PullRequestGlyph } from "./pullRequestIcons";
 
 export interface PullRequestFilterOption<Value extends string> {
   readonly value: Value;
@@ -143,7 +131,7 @@ export const pullRequestProjectKey = (project: {
 
 const DRAFT_OPTIONS = [
   { value: UNFILTERED_VALUE, label: "all", Icon: LayersIcon },
-  { value: "only", label: "drafts only", Icon: GitPullRequestDraftIcon },
+  { value: "only", label: "drafts only", Icon: PullRequestGlyph.draft },
   { value: "hide", label: "hide drafts", Icon: EyeOffIcon },
 ] as const satisfies ReadonlyArray<PullRequestFilterOption<string>>;
 
@@ -202,9 +190,7 @@ function PullRequestFilterRadioGroup<Value extends string>({
         return (
           <Tooltip key={option.value}>
             <TooltipTrigger render={item} />
-            <TooltipPopup side="top" className="max-w-80">
-              {option.unavailable}
-            </TooltipPopup>
+            <TooltipPopup side="top">{option.unavailable}</TooltipPopup>
           </Tooltip>
         );
       })}
@@ -234,7 +220,7 @@ function PullRequestFilterRadioSubmenu<Value extends string>({
           {current.label}
         </span>
       </MenuSubTrigger>
-      <MenuSubPopup className="min-w-56">
+      <MenuSubPopup>
         <PullRequestFilterRadioGroup
           label={label}
           value={value}
@@ -279,7 +265,7 @@ function PullRequestAuthorFilter({
           {value ?? "anyone"}
         </span>
       </MenuSubTrigger>
-      <MenuSubPopup className="w-80">
+      <MenuSubPopup>
         <div className="p-1 pb-2">
           <InputGroup>
             <InputGroupAddon>
@@ -348,7 +334,7 @@ function PullRequestLabelFilter({
           {value.length === 0 ? "any" : `${value.length} selected`}
         </span>
       </MenuSubTrigger>
-      <MenuSubPopup className="w-72">
+      <MenuSubPopup>
         {visible.length === 0 ? (
           <MenuItem disabled>no labels around in this view ^w^</MenuItem>
         ) : (
@@ -359,7 +345,6 @@ function PullRequestLabelFilter({
             return (
               <MenuCheckboxItem
                 key={key}
-                className="grid-cols-[1rem_minmax(0,1fr)]"
                 checked={checked}
                 onCheckedChange={(next) =>
                   onChange(
@@ -503,14 +488,7 @@ export function PullRequestFiltersMenu({
   ];
   return (
     <Menu onOpenChange={onOpenChange}>
-      <MenuTrigger
-        render={
-          <Button
-            className={filterCount > 0 ? "[--control-icon-color:currentColor]" : undefined}
-            variant="outline"
-          />
-        }
-      >
+      <MenuTrigger render={<Button variant="outline" />}>
         <ListFilterIcon className="size-4" />
         <span>filters</span>
         {filterCount > 0 ? (
@@ -519,7 +497,7 @@ export function PullRequestFiltersMenu({
           </span>
         ) : null}
       </MenuTrigger>
-      <MenuPopup align="end" side="bottom" className="w-56">
+      <MenuPopup align="end" side="bottom">
         <PullRequestFilterRadioSubmenu
           label="state"
           value={state}

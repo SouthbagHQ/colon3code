@@ -2,11 +2,25 @@ import { cva, type VariantProps } from "class-variance-authority";
 
 import { cn } from "~/lib/utils";
 
-function Empty({ className, ...props }: React.ComponentProps<"div">) {
+// Size sets how much room the state claims and how large its title reads:
+// "compact" is a card-sized notice, "hero" fills a whole route.
+const emptySizeClassName = {
+  compact:
+    "min-h-64 gap-4 p-6 md:p-10 [&_[data-slot=empty-media]]:mb-0 [&_[data-slot=empty-title]]:text-[1.0625rem] [&_[data-slot=empty-title]]:leading-6 [&_[data-slot=empty-description]]:text-[0.8125rem] [&_[data-slot=empty-description]]:leading-[1.125rem]",
+  default: "gap-6 p-6 md:p-12",
+  hero: "gap-6 p-6 md:p-12 [&_[data-slot=empty-title]]:text-2xl sm:[&_[data-slot=empty-title]]:text-3xl",
+} as const;
+
+function Empty({
+  className,
+  size = "default",
+  ...props
+}: React.ComponentProps<"div"> & { size?: keyof typeof emptySizeClassName }) {
   return (
     <div
       className={cn(
-        "flex min-w-0 flex-1 flex-col items-center justify-center gap-6 text-balance p-6 text-center md:p-12",
+        "flex min-w-0 flex-1 flex-col items-center justify-center text-balance text-center",
+        emptySizeClassName[size],
         className,
       )}
       data-slot="empty"
@@ -75,23 +89,52 @@ function EmptyMedia({
   );
 }
 
-function EmptyTitle({ className, ...props }: React.ComponentProps<"div">) {
+// "hero" is the roomier wording a whole-route empty state gets.
+const emptyTitleVariants = cva("font-semibold", {
+  variants: {
+    variant: {
+      default: "text-xl",
+      hero: "text-foreground text-2xl sm:text-3xl",
+    },
+  },
+  defaultVariants: { variant: "default" },
+});
+
+function EmptyTitle({
+  className,
+  variant,
+  ...props
+}: React.ComponentProps<"div"> & VariantProps<typeof emptyTitleVariants>) {
   return (
     <div
-      className={cn("font-heading font-semibold text-xl", className)}
+      className={cn(emptyTitleVariants({ variant }), className)}
       data-slot="empty-title"
       {...props}
     />
   );
 }
 
-function EmptyDescription({ className, ...props }: React.ComponentProps<"p">) {
+const emptyDescriptionVariants = cva(
+  "[&>a:hover]:text-primary [&>a]:underline [&>a]:underline-offset-4 [[data-slot=empty-title]+&]:mt-1 [[data-slot=empty-description]+&]:mt-1",
+  {
+    variants: {
+      variant: {
+        default: "text-muted-foreground text-sm",
+        hero: "mt-2 text-muted-foreground/78 text-sm leading-relaxed",
+      },
+    },
+    defaultVariants: { variant: "default" },
+  },
+);
+
+function EmptyDescription({
+  className,
+  variant,
+  ...props
+}: React.ComponentProps<"p"> & VariantProps<typeof emptyDescriptionVariants>) {
   return (
     <div
-      className={cn(
-        "text-muted-foreground text-sm [&>a:hover]:text-primary [&>a]:underline [&>a]:underline-offset-4 [[data-slot=empty-title]+&]:mt-1",
-        className,
-      )}
+      className={cn(emptyDescriptionVariants({ variant }), className)}
       data-slot="empty-description"
       {...props}
     />

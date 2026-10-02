@@ -423,7 +423,7 @@ it.effect("reports implemented tools separately from locally available executabl
             account: Option.none(),
             host: Option.some("bitbucket.org"),
             detail: Option.some(
-              "Set COLON3CODE_BITBUCKET_EMAIL and COLON3CODE_BITBUCKET_API_TOKEN, or COLON3CODE_BITBUCKET_ACCESS_TOKEN.",
+              "Add a Bitbucket token in Settings → Source Control, or set the COLON3CODE_BITBUCKET_* environment variables on the server.",
             ),
           }),
         },

@@ -1,20 +1,11 @@
+import { DeviceHostUpdates } from "./DeviceHostUpdates";
 import type {
   DevicePlatform,
   DeviceServiceState,
   DeviceSummary,
   ScopedThreadRef,
 } from "@t3tools/contracts";
-import {
-  ChevronLeftIcon,
-  HomeIcon,
-  PictureInPictureIcon,
-  PowerIcon,
-  RotateCcwIcon,
-  SlidersHorizontalIcon,
-  SmartphoneIcon,
-  SquareIcon,
-  XIcon,
-} from "~/icons";
+import { SmartphoneIcon, XIcon } from "~/icons";
 import { useEffect, useMemo, useState } from "react";
 
 import { usePreviewMiniPlayerStore } from "~/previewMiniPlayerStore";
@@ -24,16 +15,13 @@ import { DiscoveryList, DiscoveryListRow } from "~/components/ui/discovery-list"
 import { Dialog } from "~/components/ui/dialog";
 import { WizardPopup } from "~/components/ui/wizard";
 import { Spinner } from "~/components/ui/spinner";
-import { Toggle } from "~/components/ui/toggle";
-import { Tooltip, TooltipPopup, TooltipTrigger } from "~/components/ui/tooltip";
 import { cn } from "~/lib/utils";
-import { deviceEnvironment, useDeviceHubAccess, useDeviceState } from "~/state/device";
+import { deviceEnvironment, useDeviceState } from "~/state/device";
 import { formatEnvironmentQueryError } from "~/state/query";
 import { useAtomCommand } from "~/state/use-atom-command";
-import { DeviceStreamView, type DeviceStreamHandle } from "./DeviceStreamView";
 import { DeviceLoadingView } from "./DeviceLoadingView";
 import { DeviceSetup } from "./DeviceSetup";
-import { DeviceToolsPanel } from "./DeviceToolsPanel";
+import { DeviceWorkspace } from "./DeviceWorkspace";
 import { PreviewPanelShell, type PreviewPanelMode } from "../preview/PreviewPanelShell";
 
 const platformLabel = (platform: DevicePlatform) =>
@@ -58,10 +46,6 @@ export function DevicePanel(props: {
   const [operationError, setOperationError] = useState<string | null>(null);
   const [pendingDevice, setPendingDevice] = useState<DeviceSummary | null>(null);
   const pendingDeviceKey = pendingDevice ? deviceKey(pendingDevice) : null;
-  const [handle, setHandle] = useState<DeviceStreamHandle | null>(null);
-  const [toolsOpen, setToolsOpen] = useState(false);
-  const [axOverlay, setAxOverlay] = useState(false);
-  const access = useDeviceHubAccess(environmentId);
 
   const hostDisabled = state.hostStatus === "disabled";
 
@@ -183,69 +167,7 @@ export function DevicePanel(props: {
 
   return (
     <PreviewPanelShell mode={props.mode}>
-      <div className="flex h-9 shrink-0 items-center gap-1.5 border-b px-2">
-        <span className="min-w-0 flex-1 truncate text-xs text-muted-foreground">
-          {props.surface.target
-            ? `${state.hosts.find((host) => host.id === props.surface.target?.hostId)?.label ?? "device host"} · ${activeDevice?.version ?? props.surface.target.platform}`
-            : (pendingDevice?.name ?? "choose a device")}
-        </span>
-        {activeDevice ? (
-          <>
-            <DeviceButton
-              label="home"
-              onClick={() => handle?.pressButton("home")}
-              disabled={!handle?.inputConnected}
-            >
-              <HomeIcon />
-            </DeviceButton>
-            {activeDevice.platform === "android" ? (
-              <>
-                <DeviceButton
-                  label="back"
-                  onClick={() => handle?.pressButton("back")}
-                  disabled={!handle?.inputConnected}
-                >
-                  <ChevronLeftIcon />
-                </DeviceButton>
-                <DeviceButton
-                  label="recents"
-                  onClick={() => handle?.pressButton("recents")}
-                  disabled={!handle?.inputConnected}
-                >
-                  <SquareIcon />
-                </DeviceButton>
-              </>
-            ) : (
-              <DeviceButton
-                label="rotate"
-                onClick={() => handle?.rotate()}
-                disabled={!handle?.inputConnected}
-              >
-                <RotateCcwIcon />
-              </DeviceButton>
-            )}
-            <Toggle
-              aria-label="tools"
-              variant="ghost"
-              size="xs"
-              pressed={toolsOpen}
-              onPressedChange={(pressed) => setToolsOpen(Boolean(pressed))}
-            >
-              <SlidersHorizontalIcon />
-            </Toggle>
-            <DeviceButton label="float device over chat" onClick={floatActive}>
-              <PictureInPictureIcon />
-            </DeviceButton>
-            <DeviceButton label="power off" onClick={() => closeActive(true)}>
-              <PowerIcon />
-            </DeviceButton>
-            <DeviceButton label="close" onClick={() => closeActive(false)}>
-              <XIcon />
-            </DeviceButton>
-          </>
-        ) : null}
-      </div>
-      {hostReady && state.hostStatusDetail ? (
+      {hostReady && !activeDevice && state.hostStatusDetail ? (
         <div
           role="status"
           className="whitespace-pre-line border-b px-3 py-2 text-xs text-muted-foreground"
@@ -253,6 +175,7 @@ export function DevicePanel(props: {
           {state.hostStatusDetail}
         </div>
       ) : null}
+      <DeviceHostUpdates state={state} environmentId={environmentId} />
       {bootingDevices.length > 0 ? (
         <div role="status" className="border-b px-3 py-2 text-xs text-muted-foreground">
           starting {bootingDevices.map((device) => device.name).join(", ")}… this can take a minute.
@@ -276,34 +199,19 @@ export function DevicePanel(props: {
       ) : null}
       <div className="@container relative flex min-h-0 flex-1">
         {activeDevice && activeSession ? (
-          <>
-            <div className="relative min-h-0 min-w-0 flex-1">
-              <DeviceStreamView
-                key={deviceKey(activeDevice)}
-                environmentId={environmentId}
-                platform={activeDevice.platform}
-                deviceName={activeDevice.name}
-                deviceDescription={`${state.hosts.find((host) => host.id === activeDevice.hostId)?.label ?? "device host"} · ${activeDevice.version}`}
-                deviceId={activeDevice.id}
-                hostId={activeDevice.hostId}
-                visible={props.visible}
-                axOverlay={axOverlay}
-                onHandle={setHandle}
-              />
-            </div>
-            {toolsOpen ? (
-              <DeviceToolsPanel
-                key={deviceKey(activeDevice)}
-                environmentId={environmentId}
-                device={activeDevice}
-                access={access}
-                axOverlay={axOverlay}
-                onAxOverlayChange={setAxOverlay}
-                onClose={() => setToolsOpen(false)}
-                className="absolute inset-y-0 right-0 z-10 w-full max-w-72 border-l shadow-lg @[560px]:static @[560px]:w-72 @[560px]:shrink-0 @[560px]:shadow-none"
-              />
-            ) : null}
-          </>
+          <DeviceWorkspace
+            key={`${environmentId}\u0000${deviceKey(activeDevice)}`}
+            environmentId={environmentId}
+            device={activeDevice}
+            hostLabel={
+              state.hosts.find((host) => host.id === activeDevice.hostId)?.label ?? "Device host"
+            }
+            hostDiagnostics={state.hostStatusDetail}
+            visible={props.visible}
+            onFloat={floatActive}
+            onClose={() => closeActive(false)}
+            onPowerOff={() => closeActive(true)}
+          />
         ) : pendingDevice || hostBusy || !loaded ? (
           <DeviceLoadingView
             name={pendingDevice?.name ?? "devices"}
@@ -319,8 +227,8 @@ export function DevicePanel(props: {
                   ? "opening your device… :3"
                   : "starting device…"
                 : state.hostStatus === "installing"
-                  ? "installing device support…"
-                  : "sniffing around for devices…"
+                  ? (state.hostStatusDetail ?? "Installing device support…")
+                  : "Finding devices…"
             }
           />
         ) : (
@@ -365,7 +273,7 @@ export function DevicePanel(props: {
                             onClick={() => void selectDevice(deviceKey(device))}
                             action={
                               pendingDeviceKey === deviceKey(device) ? (
-                                <Spinner className="size-3" />
+                                <Spinner size="xs" />
                               ) : (
                                 <span className="text-xs text-muted-foreground">
                                   {device.booted ? "open" : "start"}
@@ -403,32 +311,6 @@ export function DevicePanel(props: {
         )}
       </div>
     </PreviewPanelShell>
-  );
-}
-
-function DeviceButton(props: {
-  readonly label: string;
-  readonly onClick: () => void;
-  readonly disabled?: boolean;
-  readonly children: React.ReactNode;
-}) {
-  return (
-    <Tooltip>
-      <TooltipTrigger
-        render={
-          <Button
-            size="icon-xs"
-            variant="ghost-muted"
-            aria-label={props.label}
-            onClick={props.onClick}
-            disabled={props.disabled ?? false}
-          />
-        }
-      >
-        {props.children}
-      </TooltipTrigger>
-      <TooltipPopup>{props.label}</TooltipPopup>
-    </Tooltip>
   );
 }
 

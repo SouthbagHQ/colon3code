@@ -3,18 +3,7 @@ import type { EnvironmentId } from "@t3tools/contracts";
 import { formatAttachmentSize } from "@t3tools/client-runtime/state/attachments";
 import { readFilePreviewResponse } from "@t3tools/client-runtime/file-preview";
 import { filePreviewKind, FILE_TEXT_PREVIEW_MAX_BYTES } from "@t3tools/shared/filePreview";
-import {
-  CheckIcon,
-  ChevronRightIcon,
-  CodeIcon,
-  CopyIcon,
-  DownloadIcon,
-  EyeIcon,
-  TableIcon,
-  TrashIcon,
-  WrapTextIcon,
-  XIcon,
-} from "~/icons";
+import { CheckIcon, ChevronRightIcon, CodeIcon, CopyIcon, DownloadIcon, EyeIcon, TableIcon, TrashIcon, WrapTextIcon, XIcon } from "~/icons";
 import { lazy, Suspense, useEffect, useMemo, useRef, useState } from "react";
 
 import { useAssetUrlRefresh } from "~/assets/assetUrls";

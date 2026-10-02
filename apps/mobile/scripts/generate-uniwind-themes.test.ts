@@ -5,8 +5,10 @@ import { describe, expect, it } from "vite-plus/test";
 import {
   customThemeNames,
   getGeneratedUniwindThemeOutputs,
+  renderDefaultThemeVariablesJSON,
   renderUniwindThemesCSS,
 } from "./generate-uniwind-themes.mts";
+import { readDefaultMobileThemeVariables } from "../src/lib/mobileTheme.test-support";
 
 describe("generate mobile Uniwind themes", () => {
   it("keeps the committed outputs current", () => {
@@ -47,12 +49,49 @@ describe("generate mobile Uniwind themes", () => {
     }
   });
 
-  it("renders the default light and dark themes from the :3 palette", () => {
-    const stylesheet = renderUniwindThemesCSS();
-    const variant = (name: string) =>
-      new RegExp(`@variant ${name} \\{([\\s\\S]*?)\\n    \\}`, "u").exec(stylesheet)?.[1];
+  it("keeps the default runtime bridge and generated CSS on the same palette", () => {
+    const variables = JSON.parse(renderDefaultThemeVariablesJSON());
 
-    expect(variant("light")).toBe(variant("colon3-light"));
-    expect(variant("dark")).toBe(variant("colon3-dark"));
+    expect(variables.light).toEqual(readDefaultMobileThemeVariables("light"));
+    expect(variables.dark).toEqual(readDefaultMobileThemeVariables("dark"));
+    // The default theme is this fork's blush/plum palette.
+    expect(variables.light["--color-screen"]).toBe("#fff3f2");
+    expect(variables.light["--color-drawer"]).toBe("#fbe7e6");
+    expect(variables.dark["--color-screen"]).toBe("#231521");
+    expect(variables.dark["--color-drawer"]).toBe("#1b0f1a");
+    expect(Object.keys(variables.light)).toEqual(Object.keys(variables.dark));
+  });
+
+  it("gives every theme the same variables and a fixed Clerk palette for its appearance", () => {
+    const css =
+      NodeFS.readFileSync(NodePath.resolve(import.meta.dirname, "../global.css"), "utf8") +
+      renderUniwindThemesCSS();
+    const themes = new Map<string, Map<string, string>>(
+      ["light", "dark", ...customThemeNames].map((name) => [name, new Map()]),
+    );
+    for (const [, name, body] of css.matchAll(/@variant ([\w-]+) \{([^}]+)\}/gu)) {
+      const variables = themes.get(name!);
+      for (const [, variable, value] of body!.matchAll(/(--[\w-]+):\s*([^;]+);/gu)) {
+        variables?.set(variable!, value!.trim().toLowerCase());
+      }
+    }
+
+    const lightVariables = themes.get("light")!;
+    for (const [name, variables] of themes) {
+      expect([...variables.keys()].sort(), name).toEqual([...lightVariables.keys()].sort());
+      const isDark = name === "dark" || name.endsWith("-dark");
+      expect(
+        Object.fromEntries(
+          [...variables].filter(([variable]) => variable.startsWith("--color-clerk-")),
+        ),
+        name,
+      ).toEqual({
+        "--color-clerk-page": isDark ? "#231521" : "#fff3f2",
+        "--color-clerk-foreground": isDark ? "#efe4eb" : "#4c2a2d",
+        "--color-clerk-foreground-muted": isDark ? "#bba3b2" : "#7c4f55",
+        "--color-clerk-border": isDark ? "#392b38" : "#eed8d7",
+        "--color-clerk-danger": isDark ? "#f6a3af" : "#a11732",
+      });
+    }
   });
 });

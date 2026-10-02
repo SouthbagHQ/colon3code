@@ -1,5 +1,6 @@
 const fs = require("node:fs");
 const path = require("node:path");
+const themeVariables = require("../generated-uniwind-default-theme-variables.json");
 const {
   AndroidConfig,
   withAndroidColors,
@@ -11,9 +12,10 @@ const {
 // React Native's Alert renders an AppCompat AlertDialog on Android, which
 // inherits the dated framework dialog chrome (square gray panel, teal
 // all-caps buttons) from the app theme. These resources restyle it with the
-// app's uniwind tokens from global.css: --color-card panel, --color-foreground
-// text, --color-primary buttons, Nunito type. The @font resources referenced
-// here are embedded by the expo-font plugin config in app.config.ts.
+// generated default palette: card panel, foreground text, readable primary
+// buttons, Nunito type. Alert exposes no runtime custom-palette API, so these
+// build-time resources use the stock palette for each native appearance.
+// The fonts are embedded by the expo-font plugin config in app.config.ts.
 
 // AppCompat's default dialog window background is an inset rounded rect, so
 // the replacement keeps the same 16dp inset to preserve the dialog's margins.
@@ -30,20 +32,17 @@ const DIALOG_BACKGROUND_DRAWABLE = `<?xml version="1.0" encoding="utf-8"?>
 </inset>
 `;
 
-const COLORS = {
-  light: {
-    background: "#FFF8F7", // --color-card
-    text: "#4C2A2D", // --color-foreground
-    secondaryText: "#906267", // --color-foreground-secondary
-    buttonText: "#D63265", // --color-primary
-  },
-  night: {
-    background: "#332531",
-    text: "#EFE4EB",
-    secondaryText: "#9B8493",
-    buttonText: "#FA618E",
-  },
+const colorsFor = (appearance) => {
+  const variables = themeVariables[appearance];
+  return {
+    background: variables["--color-card"],
+    text: variables["--color-foreground"],
+    secondaryText: variables["--color-foreground-secondary"],
+    buttonText: variables["--color-primary-text"],
+  };
 };
+
+const COLORS = { light: colorsFor("light"), night: colorsFor("dark") };
 
 function assignStyleItem(style, name, value) {
   style.item = style.item ?? [];

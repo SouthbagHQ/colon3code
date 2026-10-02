@@ -23,17 +23,21 @@ We wanted something performant, remote-ready, and truly open. If we ever go the 
 > - Antigravity: enable it in Settings, then use **Install Antigravity** and **Sign in with Google**. No CLI is required.
 > - Southbag Code: install [Southbag Code](https://github.com/SouthbagHQ/code) with `npm i -g @southbag/code`. When it is installed, it is the default provider for new threads.
 
-### Try it out (install-free)
-
-The easiest way to test :3 Code is to run the server in your terminal (requires Node.js 22.16+, 23.11+, or 24.10+):
+### Command line
 
 ```bash
-npx t3@latest
+curl -fsSL https://t3.codes/install.sh | sh
 ```
 
-This will launch :3 Code's backend on your machine as well as the local web app to control your agents.
+On Windows, in PowerShell:
 
-Tip: Use `npx t3@latest --help` for the full CLI reference.
+```powershell
+irm https://t3.codes/install.ps1 | iex
+```
+
+Then run `t3` to start the server and open the local web app. `t3 service install` keeps it running in the background, `t3 update` moves to a newer release, and `t3 --help` has the full reference.
+
+To try it once without installing, run `npx t3@latest` instead.
 
 ### Desktop app
 
@@ -49,6 +53,14 @@ winget install T3Tools.Colon3Code
 
 ```bash
 brew install --cask colon3-code
+```
+
+#### Debian, Ubuntu (`.deb`)
+
+Download the `.deb` from [GitHub Releases](https://github.com/SouthbagHQ/colon3code/releases), then:
+
+```bash
+sudo apt install ./Colon3-Code-*.deb
 ```
 
 #### Arch Linux (AUR)

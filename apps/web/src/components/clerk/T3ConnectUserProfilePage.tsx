@@ -51,21 +51,16 @@ export function T3ConnectEnvironmentRow(props: {
       <Collapsible open={props.confirmationOpen} onOpenChange={props.onConfirmationChange}>
         <div className="flex items-start gap-4">
           <div className="min-w-0 flex-1">
-            <h3 className="truncate text-[0.8125rem] leading-[1.125rem] font-medium text-foreground">
+            <h3 className="truncate text-sm leading-4.5 font-medium text-foreground">
               {environment.label}
             </h3>
-            <p className="mt-1 text-xs leading-[1.125rem] text-muted-foreground">
+            <p className="mt-1 text-xs leading-4.5 text-muted-foreground">
               {linkedAtLabel(environment.linkedAt)} · {endpointLabel(environment)}
             </p>
           </div>
           <CollapsibleTrigger
             render={
-              <Button
-                size="sm"
-                variant="destructive-outline"
-                className="text-[0.8125rem]"
-                disabled={props.mutationPending}
-              >
+              <Button size="sm" variant="destructive-outline" disabled={props.mutationPending}>
                 deregister
               </Button>
             }
@@ -79,13 +74,13 @@ export function T3ConnectEnvironmentRow(props: {
               role="group"
               aria-label={`confirm deregistration of ${environment.label}`}
             >
-              <h4 className="text-[0.8125rem] leading-[1.125rem] font-semibold text-foreground">
+              <h4 className="text-sm leading-4.5 font-semibold text-foreground">
                 deregister server
               </h4>
-              <p className="mt-1 text-[0.8125rem] leading-[1.125rem] text-muted-foreground">
+              <p className="mt-1 text-xs leading-4.5 text-muted-foreground">
                 “{environment.label}” will be removed from this account.
               </p>
-              <p className="mt-4 max-w-xl text-[0.8125rem] leading-[1.125rem] text-muted-foreground">
+              <p className="mt-4 max-w-xl text-xs leading-4.5 text-muted-foreground">
                 T3 Connect access will be revoked, any managed tunnel will be removed, and a host
                 space will become available. local connections on your devices stay just as they are
                 :3
@@ -94,7 +89,6 @@ export function T3ConnectEnvironmentRow(props: {
                 <Button
                   size="sm"
                   variant="ghost"
-                  className="text-[0.8125rem]"
                   disabled={props.mutationPending}
                   onClick={() => props.onConfirmationChange(false)}
                 >
@@ -103,7 +97,6 @@ export function T3ConnectEnvironmentRow(props: {
                 <Button
                   size="sm"
                   variant="destructive"
-                  className="text-[0.8125rem]"
                   disabled={props.mutationPending}
                   onClick={() => props.onDeregister(environment)}
                 >
@@ -213,7 +206,7 @@ export function T3ConnectUserProfilePage() {
     >
       <div>
         {environmentsState.error ? (
-          <div className="mb-4 border-t border-destructive/35 py-3 text-[0.8125rem]" role="alert">
+          <div className="mb-4 border-t border-destructive/35 py-3 text-xs" role="alert">
             <p className="font-medium text-destructive-foreground">
               could not load T3 Connect environments
             </p>
@@ -222,8 +215,8 @@ export function T3ConnectUserProfilePage() {
         ) : null}
 
         {isInitialLoad ? (
-          <p className="border-t py-4 text-[0.8125rem] text-muted-foreground" role="status">
-            loading your environments, just a sec… :3
+          <p className="border-t py-4 text-xs text-muted-foreground" role="status">
+            loading environments…
           </p>
         ) : environments.length > 0 ? (
           <ul className="border-t">
@@ -241,19 +234,20 @@ export function T3ConnectUserProfilePage() {
             ))}
           </ul>
         ) : environmentsState.error ? null : (
-          <Empty className="min-h-64 gap-4 border-t px-6 py-10 md:p-10">
-            <EmptyMedia className="mb-0" variant="icon">
-              <ServerIcon />
-            </EmptyMedia>
-            <EmptyHeader>
-              <EmptyTitle className="text-[1.0625rem] leading-6">
-                no T3 Connect environments yet, it’s quiet in here :3
-              </EmptyTitle>
-              <EmptyDescription className="text-[0.8125rem] leading-[1.125rem]">
-                link an environment from its local Settings to make it available through T3 Connect
-              </EmptyDescription>
-            </EmptyHeader>
-          </Empty>
+          <div className="border-t">
+            <Empty size="compact">
+              <EmptyMedia variant="icon">
+                <ServerIcon />
+              </EmptyMedia>
+              <EmptyHeader>
+                <EmptyTitle>No T3 Connect environments</EmptyTitle>
+                <EmptyDescription>
+                  link an environment from its local Settings to make it available through T3
+                  connect.
+                </EmptyDescription>
+              </EmptyHeader>
+            </Empty>
+          </div>
         )}
       </div>
     </ClerkUserProfilePage>

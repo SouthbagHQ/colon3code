@@ -100,7 +100,7 @@ export function PullRequestListEmptyState({
   // Ahead of the search and the filters, because neither can produce a row until a project does.
   if (!hasProjects) {
     return (
-      <Empty className="py-16">
+      <Empty>
         <BranchMark joined={false} />
         <EmptyHeader>
           <EmptyTitle>no projects in this workspace yet ^w^</EmptyTitle>
@@ -132,7 +132,7 @@ export function PullRequestListEmptyState({
 
   if (query.length > 0) {
     return (
-      <Empty className="py-16">
+      <Empty>
         <BranchMark joined={false} />
         <EmptyHeader>
           {/* A pasted paragraph is still a search, but it is not a title. */}
@@ -145,7 +145,7 @@ export function PullRequestListEmptyState({
             branch ^w^
           </EmptyDescription>
         </EmptyHeader>
-        <EmptyContent className="flex-row flex-wrap justify-center gap-2">
+        <div className="flex flex-wrap justify-center gap-2">
           <Button size="sm" variant="outline" onClick={onClearQuery}>
             <SearchIcon className="size-3.5" />
             clear search
@@ -153,16 +153,16 @@ export function PullRequestListEmptyState({
           {/* The hosts answered this query once; a pull request opened since then would answer
               differently, and nothing on screen says which of the two the reader is looking at. */}
           <Button size="sm" variant="outline" disabled={refreshing} onClick={onRefresh}>
-            <RefreshIcon className="size-3.5" refreshing={refreshing} />
+            <RefreshIcon size="sm" refreshing={refreshing} />
             {refreshing ? "checking…" : "check again"}
           </Button>
-        </EmptyContent>
+        </div>
       </Empty>
     );
   }
 
   return (
-    <Empty className="py-16">
+    <Empty>
       <BranchMark joined={false} />
       <EmptyHeader>
         <EmptyTitle>
@@ -176,17 +176,17 @@ export function PullRequestListEmptyState({
             : "pull requests from every project in this workspace will gather here :3"}
         </EmptyDescription>
       </EmptyHeader>
-      <EmptyContent className="flex-row flex-wrap justify-center gap-2">
+      <div className="flex flex-wrap justify-center gap-2">
         {canLoadMore ? (
           <Button size="sm" variant="outline" disabled={loadingMore} onClick={onLoadMore}>
             {loadingMore ? "loading…" : "load more pull requests"}
           </Button>
         ) : null}
         <Button size="sm" variant="outline" disabled={refreshing} onClick={onRefresh}>
-          <RefreshIcon className="size-3.5" refreshing={refreshing} />
+          <RefreshIcon size="sm" refreshing={refreshing} />
           {refreshing ? "checking…" : "check again"}
         </Button>
-      </EmptyContent>
+      </div>
     </Empty>
   );
 }

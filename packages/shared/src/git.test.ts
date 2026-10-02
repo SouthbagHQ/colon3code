@@ -50,6 +50,38 @@ describe("normalizeGitRemoteUrl", () => {
       "bitbucket.org/workspace/repo",
     );
   });
+
+  it("gives an Azure DevOps repository the same key over SSH as over HTTPS", () => {
+    expect(normalizeGitRemoteUrl("git@ssh.dev.azure.com:v3/T3Tools/Platform/Colon3Code")).toBe(
+      "dev.azure.com/t3tools/platform/_git/colon3code",
+    );
+    expect(normalizeGitRemoteUrl("ssh://git@ssh.dev.azure.com:22/v3/T3Tools/Platform/Colon3Code")).toBe(
+      "dev.azure.com/t3tools/platform/_git/colon3code",
+    );
+    expect(
+      normalizeGitRemoteUrl("https://T3Tools@dev.azure.com/T3Tools/Platform/_git/Colon3Code"),
+    ).toBe("dev.azure.com/t3tools/platform/_git/colon3code");
+  });
+
+  it("puts the organization back in the host on the name dev.azure.com replaced", () => {
+    expect(
+      normalizeGitRemoteUrl("T3Tools@vs-ssh.visualstudio.com:v3/T3Tools/Platform/Colon3Code"),
+    ).toBe("t3tools.visualstudio.com/platform/_git/colon3code");
+    expect(normalizeGitRemoteUrl("https://T3Tools.visualstudio.com/Platform/_git/Colon3Code")).toBe(
+      "t3tools.visualstudio.com/platform/_git/colon3code",
+    );
+  });
+
+  it("leaves an Azure SSH host it cannot read as the path it was given", () => {
+    // Not `v3`, and not four segments: rewriting either would invent a repository that the web
+    // spelling has no name for, so the remote stands as it arrived.
+    expect(normalizeGitRemoteUrl("git@ssh.dev.azure.com:v4/T3Tools/Platform/Colon3Code")).toBe(
+      "ssh.dev.azure.com/v4/t3tools/platform/colon3code",
+    );
+    expect(normalizeGitRemoteUrl("git@ssh.dev.azure.com:v3/T3Tools/Colon3Code")).toBe(
+      "ssh.dev.azure.com/v3/t3tools/colon3code",
+    );
+  });
 });
 
 describe("parseOriginUrlFromGitConfig", () => {

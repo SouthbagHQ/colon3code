@@ -40,6 +40,7 @@ describe("saved cloud environment connection presentation", () => {
 
   it.each([
     ["error", "connection failed", "Connection failed. Reason: Access denied.", "error"],
+    ["unsupported", "client not supported", "Client not supported", "idle"],
     ["offline", "offline", "Offline", "idle"],
     ["available", "not connected", "Available", "idle"],
   ] as const)(

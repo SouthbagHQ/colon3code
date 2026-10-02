@@ -51,6 +51,8 @@ export function connectionFloatingStatus(input: {
       };
     case "offline":
       return unavailable("you are offline");
+    case "unsupported":
+      return unavailable("client not supported");
     case "error":
       return unavailable(
         input.connectionError

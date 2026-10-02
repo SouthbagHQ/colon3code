@@ -22,7 +22,6 @@ interface RecordedBatchRequest {
         readonly index?: number;
         readonly clientType?: string;
         readonly southbag_app?: string;
-        readonly southbag_app?: string;
         readonly serverOs?: string;
         readonly serverArch?: string;
         readonly serverAppVersion?: string;

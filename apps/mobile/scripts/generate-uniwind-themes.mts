@@ -6,8 +6,10 @@ import tailwindColors from "tailwindcss/colors";
 import { BUILT_IN_THEME_IDS, type BuiltInThemeId } from "@t3tools/shared/themePalettes";
 
 import {
-  DEFAULT_MOBILE_PALETTE_ID,
+  createMobileThemeVariables,
+  getMobileThemeColors,
   getMobileThemeVariables,
+  DEFAULT_MOBILE_THEME_ID,
   type MobileThemeAppearance,
 } from "../src/lib/mobileTheme.ts";
 
@@ -17,6 +19,11 @@ const GENERATED_NAMES_PATH = NodePath.resolve(
   import.meta.dirname,
   "../generated-uniwind-theme-names.json",
 );
+const GENERATED_DEFAULT_VARIABLES_PATH = NodePath.resolve(
+  import.meta.dirname,
+  "../generated-uniwind-default-theme-variables.json",
+);
+const GENERATED_CLERK_THEME_PATH = NodePath.resolve(import.meta.dirname, "../clerk-theme.json");
 
 type TailwindColorFamily = keyof typeof tailwindColors;
 type TailwindColorShade = 50 | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 950;
@@ -146,7 +153,46 @@ const adaptiveVariablesFor = (appearance: MobileThemeAppearance) =>
 const variablesFor = (themeId: BuiltInThemeId, appearance: MobileThemeAppearance) => ({
   ...getMobileThemeVariables(themeId, appearance),
   ...adaptiveVariablesFor(appearance),
+  ...clerkVariablesFor(appearance),
 });
+
+// Clerk's native screens use one build-time palette per appearance. Custom
+// profile pages must match it even when the rest of the app uses a named theme.
+const clerkColorsFor = (appearance: MobileThemeAppearance) => {
+  // Native authentication uses plain cards, rather than tonal settings groups.
+  const variables = createMobileThemeVariables(
+    getMobileThemeColors(DEFAULT_MOBILE_THEME_ID, appearance),
+    appearance,
+  );
+  return {
+    primary: variables["--color-primary"],
+    background: variables["--color-sheet-solid"],
+    input: variables["--color-input"],
+    danger: variables["--color-danger-foreground"],
+    success: appearance === "dark" ? "#34d399" : "#059669",
+    warning: variables["--color-warning-foreground"],
+    foreground: variables["--color-foreground"],
+    mutedForeground: variables["--color-foreground-muted"],
+    primaryForeground: variables["--color-primary-foreground"],
+    inputForeground: variables["--color-foreground"],
+    neutral: variables["--color-secondary"],
+    border: variables["--color-border"],
+    ring: variables["--color-focus"],
+    muted: variables["--color-subtle"],
+    shadow: variables["--color-primary-shadow"],
+  };
+};
+
+const clerkVariablesFor = (appearance: MobileThemeAppearance) => {
+  const colors = clerkColorsFor(appearance);
+  return {
+    "--color-clerk-page": colors.background.toLowerCase(),
+    "--color-clerk-foreground": colors.foreground.toLowerCase(),
+    "--color-clerk-foreground-muted": colors.mutedForeground.toLowerCase(),
+    "--color-clerk-border": colors.border,
+    "--color-clerk-danger": colors.danger.toLowerCase(),
+  };
+};
 
 const renderVariant = (name: string, variables: Readonly<Record<string, string>>) => {
   const declarations = Object.entries(variables)
@@ -157,10 +203,13 @@ const renderVariant = (name: string, variables: Readonly<Record<string, string>>
 
 export const renderUniwindThemesCSS = () => {
   const variants = [
-    // The plain light/dark themes are the default :3 Code look, the same palette
-    // web and desktop use when no theme is chosen.
-    renderVariant("light", variablesFor(DEFAULT_MOBILE_PALETTE_ID, "light")),
-    renderVariant("dark", variablesFor(DEFAULT_MOBILE_PALETTE_ID, "dark")),
+    ...APPEARANCES.map((appearance) =>
+      renderVariant(appearance, {
+        ...getMobileThemeVariables(DEFAULT_MOBILE_THEME_ID, appearance),
+        ...adaptiveVariablesFor(appearance),
+        ...clerkVariablesFor(appearance),
+      }),
+    ),
     ...BUILT_IN_THEME_IDS.flatMap((themeId) =>
       APPEARANCES.map((appearance) =>
         renderVariant(`${themeId}-${appearance}`, variablesFor(themeId, appearance)),
@@ -178,11 +227,28 @@ export const renderUniwindThemesCSS = () => {
   ].join("\n");
 };
 
+export const renderDefaultThemeVariablesJSON = () =>
+  `${JSON.stringify(
+    Object.fromEntries(
+      APPEARANCES.map((appearance) => [
+        appearance,
+        getMobileThemeVariables(DEFAULT_MOBILE_THEME_ID, appearance),
+      ]),
+    ),
+    null,
+    2,
+  )}\n`;
+
 export const getGeneratedUniwindThemeOutputs = (): ReadonlyArray<
   readonly [filename: string, contents: string]
 > => [
   [GENERATED_CSS_PATH, renderUniwindThemesCSS()],
   [GENERATED_NAMES_PATH, `${JSON.stringify(customThemeNames, null, 2)}\n`],
+  [GENERATED_DEFAULT_VARIABLES_PATH, renderDefaultThemeVariablesJSON()],
+  [
+    GENERATED_CLERK_THEME_PATH,
+    `${JSON.stringify({ colors: clerkColorsFor("light"), darkColors: clerkColorsFor("dark"), design: { borderRadius: 18 } }, null, 2)}\n`,
+  ],
 ];
 
 const writeFileAtomically = (filename: string, contents: string) => {

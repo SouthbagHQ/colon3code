@@ -7,20 +7,18 @@ import { buildGhosttyThemeConfig, getMobileTerminalTheme } from "./terminalTheme
 
 describe("getMobileTerminalTheme", () => {
   it("gives the default theme the :3 terminal palette, like desktop", () => {
-    const colon3 = getMobileTerminalTheme("colon3", "dark");
-    expect(getMobileTerminalTheme("colon3-code", "dark")).toEqual(colon3);
+    expect(getMobileTerminalTheme("colon3-code", "dark")).toEqual(
+      getMobileTerminalTheme("colon3", "dark"),
+    );
     expect(getMobileTerminalTheme("colon3-code", "light")).toEqual(
       getMobileTerminalTheme("colon3", "light"),
     );
   });
 
-  it("keeps the Pierre palette for Material You", () => {
-    expect(getMobileTerminalTheme("material-you", "dark")).toMatchObject({
-      background: "#0a0a0a",
-      foreground: "#adadb1",
-      cursorForeground: "#009fff",
-      cursorBackground: "#0a0a0a",
-    });
+  it("falls back to the default palette for Material You", () => {
+    expect(getMobileTerminalTheme("material-you", "dark")).toEqual(
+      getMobileTerminalTheme("colon3-code", "dark"),
+    );
   });
 
   it("applies the selected palette without replacing ANSI status colors", () => {
@@ -45,13 +43,14 @@ describe("getMobileTerminalTheme", () => {
 
 describe("buildGhosttyThemeConfig", () => {
   it("serializes theme colors into a ghostty config file", () => {
-    const config = buildGhosttyThemeConfig(getMobileTerminalTheme("material-you", "dark"));
+    const theme = getMobileTerminalTheme("material-you", "dark");
+    const config = buildGhosttyThemeConfig(theme);
 
-    expect(config).toContain("background = #0a0a0a");
-    expect(config).toContain("foreground = #adadb1");
-    expect(config).toContain("cursor-color = #009fff");
-    expect(config).toContain("palette = 0=#141415");
-    expect(config).toContain("palette = 15=#c6c6c8");
+    expect(config).toContain(`background = ${theme.background}`);
+    expect(config).toContain(`foreground = ${theme.foreground}`);
+    expect(config).toContain(`cursor-color = ${theme.cursorForeground}`);
+    expect(config).toContain(`palette = 0=${theme.palette[0]}`);
+    expect(config).toContain(`palette = 15=${theme.palette[15]}`);
     expect(config.endsWith("\n")).toBe(true);
   });
 });

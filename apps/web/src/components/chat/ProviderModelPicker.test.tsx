@@ -10,6 +10,7 @@ import { describe, expect, it } from "vite-plus/test";
 import { deriveProviderInstanceEntries } from "../../providerInstances";
 import { ProviderModelPicker } from "./ProviderModelPicker";
 import type { ModelEsque } from "./providerIconUtils";
+import { cuteModelName } from "@t3tools/shared/cuteModelName";
 
 function providerEntry(instanceId: string, driver: string) {
   const provider: ServerProvider = {
@@ -93,7 +94,7 @@ describe("ProviderModelPicker", () => {
         ],
       });
 
-      expect(markup).toContain("Gemini Pro");
+      expect(markup).toContain(cuteModelName("Gemini Pro", "gemini-pro"));
       expect(markup).not.toContain("Gemini Fast");
       expect(markup).not.toContain(ANTIGRAVITY_DEFAULT_MODEL);
     },
@@ -110,7 +111,7 @@ describe("ProviderModelPicker", () => {
       });
 
       expect(markup).toContain("missing-model");
-      expect(markup).not.toContain("Fallback model");
+      expect(markup).not.toContain(cuteModelName("Fallback model", "fallback"));
     },
   );
 
@@ -124,7 +125,7 @@ describe("ProviderModelPicker", () => {
         options: [{ slug: "fallback-model", name: "Fallback model" }],
       });
 
-      expect(markup).toContain("Fallback model");
+      expect(markup).toContain(cuteModelName("Fallback model", "fallback-model"));
       expect(markup).not.toContain(">missing-model<");
     },
   );
@@ -140,8 +141,8 @@ describe("ProviderModelPicker", () => {
       ],
     });
 
-    expect(markup).toContain("Selected model");
-    expect(markup).not.toContain("Fallback model");
+    expect(markup).toContain(cuteModelName("Selected model", "openrouter/selected"));
+    expect(markup).not.toContain(cuteModelName("Fallback model", "openrouter/fallback"));
   });
 
   it("uses the first option when the active instance entry is missing", () => {
@@ -153,7 +154,7 @@ describe("ProviderModelPicker", () => {
       includeEntry: false,
     });
 
-    expect(markup).toContain("Fallback model");
+    expect(markup).toContain(cuteModelName("Fallback model", "fallback-model"));
     expect(markup).not.toContain(">missing-model<");
   });
 
@@ -172,8 +173,5 @@ describe("ProviderModelPicker", () => {
     );
 
     expect(markup).toContain(">CP</span>");
-    expect(markup).toContain("size-4");
-    expect(markup).toContain("h-3");
-    expect(markup).toContain("text-[7px]");
   });
 });

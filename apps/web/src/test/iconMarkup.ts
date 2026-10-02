@@ -1,6 +1,6 @@
 import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
-import type { IconComponent } from "~/icons";
+import { type IconComponent } from "~/icons";
 
 /**
  * The glyph's first path, so a test can assert which icon rendered without

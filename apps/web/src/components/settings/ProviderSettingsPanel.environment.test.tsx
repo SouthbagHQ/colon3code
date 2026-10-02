@@ -58,6 +58,7 @@ vi.mock("./settingsLayout", async (importOriginal) => {
   };
 });
 
+vi.mock("./SettingsScopeSentence", () => ({ SettingsScopeSentence: () => null }));
 vi.mock("react/compiler-runtime", async () => {
   const { reactHookHarness } = await import("../../test/reactHookHarness");
   return { c: reactHookHarness.useMemoCache };
@@ -190,7 +191,8 @@ describe("EnvironmentProviderSettings routing", () => {
 
   it("routes refresh and provider update commands to the selected environment", async () => {
     atoms.providers = [provider()];
-    const panel = renderPanel();
+    // Southbag Code sorts first in this fork, so the editor has to be pointed at Codex explicitly.
+    const panel = renderPanel({ targetInstanceId: codexId });
     const refreshButton = visitElements(panel, isRefreshButton);
     expect(refreshButton).not.toBeNull();
     (refreshButton?.props.onClick as (() => void) | undefined)?.();
@@ -241,7 +243,7 @@ describe("EnvironmentProviderSettings routing", () => {
     ],
   ])("saves %s on this device without changing the selected server", (action, expected) => {
     atoms.providers = [provider()];
-    const panel = renderPanel();
+    const panel = renderPanel({ targetInstanceId: codexId });
     const editor = visitElements(
       panel,
       (element) => element.props.instanceId === codexId && element.props.mode === "editor",

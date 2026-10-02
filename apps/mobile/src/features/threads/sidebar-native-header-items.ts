@@ -45,7 +45,7 @@ export function createSidebarHeaderItems(input: {
     withNativeGlassHeaderItem({
       type: "menu",
       label: "",
-      accessibilityLabel: "filter and sort threads",
+      accessibilityLabel: "filter threads",
       icon: sfSymbolIcon(input.filterIcon),
       menu: {
         title: input.filterMenu.title,

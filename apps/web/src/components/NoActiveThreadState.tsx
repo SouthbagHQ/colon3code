@@ -15,7 +15,7 @@ export function NoActiveThreadState() {
   const [hello] = useState(() => greeting(new Date()));
 
   return (
-    <SidebarInset className="h-dvh min-h-0 overflow-hidden overscroll-y-none bg-background text-foreground">
+    <SidebarInset className="h-dvh min-h-0 overflow-hidden overscroll-y-none">
       <div className="flex min-h-0 min-w-0 flex-1 flex-col overflow-x-hidden bg-background">
         <WorkspacePageHeader electron={isElectron} className="border-b border-border">
           {isElectron ? (
@@ -39,8 +39,8 @@ export function NoActiveThreadState() {
                   aria-hidden
                 />
               </EmptyMedia>
-              <EmptyTitle className="text-foreground text-xl">{hello.text}</EmptyTitle>
-              <EmptyDescription className="mt-2 text-sm text-muted-foreground/78">
+              <EmptyTitle variant="hero">{hello.text}</EmptyTitle>
+              <EmptyDescription variant="hero">
                 {" "}
                 pop into an existing thread, or start a fresh one — we're ready when you are ^w^
               </EmptyDescription>

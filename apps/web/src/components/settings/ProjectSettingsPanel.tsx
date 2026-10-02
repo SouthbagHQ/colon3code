@@ -10,7 +10,7 @@ import { AsyncResult } from "effect/unstable/reactivity";
 import { type EnvironmentId, type ProjectIconOverride } from "@t3tools/contracts";
 import { useLocation, useNavigate } from "@tanstack/react-router";
 import * as Cause from "effect/Cause";
-import { TrashIcon } from "~/icons";
+import { InfoIcon, Trash2Icon } from "~/icons";
 import { lazy, Suspense, useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 import { useComposerDraftStore } from "../../composerDraftStore";
@@ -25,6 +25,7 @@ import { useThreadShells } from "../../state/entities";
 import { projectEnvironment } from "../../state/projects";
 import { useAtomCommand } from "../../state/use-atom-command";
 import { ProjectFavicon } from "../ProjectFavicon";
+import { Alert, AlertDescription } from "../ui/alert";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { stackedThreadToast, toastManager } from "../ui/toast";
@@ -39,6 +40,7 @@ import {
   ProjectFaviconPickerDialog,
 } from "./ProjectFaviconPickerDialog";
 import { ProjectActionsSettings } from "./ProjectActionsSettings";
+import { ProjectDefaultsSettings } from "./ProjectDefaultsSettings";
 import { projectGroupTitleNeedsUpdate } from "./ProjectSettingsPanel.logic";
 import { useSettingsProjectGroups } from "./useSettingsProjectGroups";
 
@@ -52,7 +54,8 @@ function memberKey(member: { environmentId: string; id: string }): string {
   return `${member.environmentId}:${member.id}`;
 }
 
-export type ProjectSettingsCategory = "general" | "integrations" | "source-control";
+/** `project` is the Projects page shortcut: the new-thread defaults people change most. */
+export type ProjectSettingsCategory = "general" | "integrations" | "source-control" | "project";
 
 export function ProjectSettingsPanel({
   projectKey,
@@ -407,6 +410,12 @@ function ProjectDetail({
   return (
     <>
       <SettingsPageContainer className="gap-6">
+        <Alert variant="info">
+          <InfoIcon aria-hidden />
+          <AlertDescription>
+            can't find a setting? Keep this project picked above and hop to any other settings page.
+          </AlertDescription>
+        </Alert>
         <SettingsSection id="project-overview" title="project" hideTitle>
           <SettingsRow
             title="name"
@@ -436,10 +445,12 @@ function ProjectDetail({
             title="project icon"
             description={
               projectIcon?.kind === "lucide"
-                ? `${projectIcon.monogram ?? projectIcon.name} · ${projectIcon.color}`
-                : projectIcon?.kind === "emoji"
-                  ? projectIcon.emoji
-                  : (faviconPath ?? "automatic")
+                ? `${projectIcon.name} · ${projectIcon.color}`
+                : projectIcon?.kind === "monogram"
+                  ? `${projectIcon.text} · ${projectIcon.color}`
+                  : projectIcon?.kind === "emoji"
+                    ? projectIcon.emoji
+                    : (faviconPath ?? "Automatic")
             }
             resetAction={
               group.memberProjects.some(
@@ -479,6 +490,7 @@ function ProjectDetail({
             }
           />
         </SettingsSection>
+        <ProjectDefaultsSettings category="project" />
         <ProjectActionsSettings />
         {hasMultipleCheckouts ? checkoutChoices : null}
         <SettingsSection title="danger">
@@ -503,7 +515,7 @@ function ProjectDetail({
                 variant="destructive-outline"
                 onClick={() => void removeMembers(group.memberProjects)}
               >
-                <TrashIcon />
+                <Trash2Icon />
                 {hasOtherMembers
                   ? "remove checkout"
                   : group.memberProjects.length > 1

@@ -14,9 +14,12 @@ import {
   type Ref,
 } from "react";
 import type { NativeSyntheticEvent, ViewProps } from "react-native";
-import { Image, StyleSheet } from "react-native";
+import { Image, Platform, StyleSheet } from "react-native";
 
-import { markdownFileIconSource } from "@t3tools/mobile-markdown-text/file-icons";
+import {
+  markdownFileIconSource,
+  markdownIconAssetUri,
+} from "@t3tools/mobile-markdown-text/file-icons";
 import {
   composerChipSizeSuffix,
   contextChipPresentation,
@@ -26,7 +29,7 @@ import { MOBILE_TYPOGRAPHY } from "../lib/typography";
 import { useNativePaste } from "../lib/useNativePaste";
 import { useFontFamily } from "../lib/useFontFamily";
 import { useUniwindTheme } from "../lib/useUniwindTheme";
-import { flattenThemeColor } from "../lib/mobileTheme";
+import { createNativeComposerTheme } from "../lib/nativeComposerTheme";
 import {
   acknowledgeComposerNativeEvent,
   assumeComposerControlledState,
@@ -36,6 +39,7 @@ import {
   type ComposerNativeEventSnapshot,
 } from "./composerEditorRevision";
 import type { ComposerEditorProps, ComposerEditorSelection } from "./T3ComposerEditor.types";
+import { useAppearancePreferences } from "../features/settings/appearance/AppearancePreferencesProvider";
 
 const NATIVE_MODULE_NAME = "T3ComposerEditor";
 const EMPTY_SKILLS: NonNullable<ComposerEditorProps["skills"]> = [];
@@ -109,8 +113,8 @@ function basename(path: string): string {
   return separator >= 0 ? path.slice(separator + 1) : path;
 }
 
-function fileIconUri(path: string): string {
-  return Image.resolveAssetSource(markdownFileIconSource(resolveMarkdownFileIcon(path))).uri;
+function fileIconUri(path: string): string | null {
+  return markdownIconAssetUri(markdownFileIconSource(resolveMarkdownFileIcon(path))) ?? null;
 }
 
 export function ComposerEditor({
@@ -256,19 +260,10 @@ export function ComposerEditor({
     },
     [],
   );
+  const { systemColorsActive } = useAppearancePreferences();
   const themeJson = JSON.stringify({
-    // Caret and selection follow the accent, as they do on web and desktop.
-    selection: theme["--color-primary"],
-    text: theme["--color-foreground"],
-    placeholder: theme["--color-placeholder"],
-    chipBackground: theme["--color-subtle"],
-    // Native chip drawing parses opaque hex only, and this role is translucent.
-    chipBorder: flattenThemeColor(theme["--color-border"], theme["--color-user-bubble"]),
-    chipText: theme["--color-foreground"],
-    skillBackground: theme["--color-inline-skill-background"],
-    skillBorder: theme["--color-inline-skill-border"],
-    skillText: theme["--color-inline-skill-foreground"],
-    fileTint: theme["--color-icon-muted"],
+    ...createNativeComposerTheme(theme),
+    selection: Platform.OS === "android" || systemColorsActive ? theme["--color-focus"] : null,
   });
   const resolvedTextStyle = StyleSheet.flatten(textStyle) ?? {};
   const regularFontFamily = useFontFamily("regular");

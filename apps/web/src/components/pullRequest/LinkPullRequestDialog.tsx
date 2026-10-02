@@ -213,7 +213,7 @@ function LinkPullRequestDialog({
             host this environment has a project for :3
           </DialogDescription>
         </DialogHeader>
-        <DialogPanel className="space-y-3">
+        <DialogPanel>
           <Input
             ref={inputRef}
             placeholder="pull request URL or #42"

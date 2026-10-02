@@ -1,8 +1,7 @@
 import { memo, useRef } from "react";
-import { CopyIcon, CheckIcon } from "~/icons";
+import { CheckIcon, CopyIcon } from "~/icons";
 import { Button } from "../ui/button";
 import { useCopyToClipboard } from "~/hooks/useCopyToClipboard";
-import { cn } from "~/lib/utils";
 import {
   ANCHORED_COPY_TOAST_TIMEOUT_MS,
   showAnchoredCopyErrorToast,
@@ -37,21 +36,21 @@ export const MessageCopyButton = memo(function MessageCopyButton({
       <TooltipTrigger
         render={
           <Button
-            aria-label="copy link"
+            aria-label="copy message"
             disabled={isCopied}
             onClick={() => copyToClipboard(text)}
             ref={ref}
             type="button"
             size={size}
-            variant={variant}
-            className={cn("text-muted-foreground hover:text-foreground", className)}
+            variant={variant === "ghost" ? "ghost-muted" : variant}
+            className={className}
           />
         }
       >
         {isCopied ? <CheckIcon className="size-3 text-primary" /> : <CopyIcon className="size-3" />}
       </TooltipTrigger>
       <TooltipPopup>
-        <p>copy to clipboard</p>
+        <p>copy message</p>
       </TooltipPopup>
     </Tooltip>
   );

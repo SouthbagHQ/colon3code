@@ -1,6 +1,7 @@
 import { ProviderDriverKind, ProviderInstanceId, type ServerProvider } from "@t3tools/contracts";
 import { describe, expect, it } from "vite-plus/test";
 import { deriveProviderInstanceEntries } from "../../providerInstances";
+import { cuteModelName } from "@t3tools/shared/cuteModelName";
 import {
   formatContextWindowCompactionMessage,
   hasAvailableCompactionProvider,
@@ -101,7 +102,7 @@ describe("resolveContextWindowModelDisplayName", () => {
         },
         modelOptionsByInstance,
       ),
-    ).toBe("5.6 Sol");
+    ).toBe(cuteModelName("5.6 Sol", "gpt-5.6-sol"));
   });
 
   it("falls back to the selected model slug when model metadata is unavailable", () => {

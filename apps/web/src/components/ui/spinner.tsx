@@ -1,25 +1,40 @@
-import type { LoaderCircleIcon } from "~/icons";
+import type { SVGProps } from "react";
+import { cva, type VariantProps } from "class-variance-authority";
+
 import { Colon3Wordmark } from "../Colon3Wordmark";
 import { observeVisibleAnimation } from "~/lib/visibleAnimation";
 import { cn } from "~/lib/utils";
-import "./spinner.css";
 
-/** The :3 mark doing a gentle bounce. Same box as the lucide icon it replaced (24px by default). */
+// No default size: inside a Button the parent's svg rule sizes the glyph.
+const spinnerVariants = cva("spinner-bounce", {
+  variants: {
+    size: {
+      xs: "size-3",
+      sm: "size-3.5",
+      md: "size-4",
+      lg: "size-5",
+    },
+    tone: {
+      current: "",
+      muted: "text-muted-foreground",
+    },
+  },
+  defaultVariants: { tone: "current" },
+});
+
+/** The :3 mark doing a gentle bounce, in the same box as the lucide spinner it replaced. */
 function Spinner({
   className,
-  size = 24,
-  color = "currentColor",
+  size,
+  tone,
   ...props
-}: React.ComponentPropsWithoutRef<typeof LoaderCircleIcon>) {
+}: SVGProps<SVGSVGElement> & VariantProps<typeof spinnerVariants>) {
   return (
     <Colon3Wordmark
       aria-label="loading"
       ref={observeVisibleAnimation}
-      className={cn("spinner-bounce", className)}
+      className={cn(spinnerVariants({ size, tone }), className)}
       role="status"
-      width={size}
-      height={size}
-      color={color}
       {...props}
     />
   );

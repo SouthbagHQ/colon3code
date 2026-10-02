@@ -489,6 +489,24 @@ describe("resolveEffectiveEnvMode", () => {
       }),
     ).toBe("worktree");
   });
+
+  it("keeps a server thread in worktree mode while its worktree is still being created", () => {
+    expect(
+      resolveEffectiveEnvMode({
+        activeWorktreePath: null,
+        hasServerThread: true,
+        draftThreadEnvMode: undefined,
+        preparingWorktree: true,
+      }),
+    ).toBe("worktree");
+    expect(
+      resolveEffectiveEnvMode({
+        activeWorktreePath: null,
+        hasServerThread: true,
+        draftThreadEnvMode: undefined,
+      }),
+    ).toBe("local");
+  });
 });
 
 describe("resolveEnvModeLabel", () => {
@@ -512,11 +530,17 @@ describe("resolveCurrentWorkspaceLabel", () => {
 
 describe("resolveLockedWorkspaceLabel", () => {
   it("uses a shorter label for the main repo checkout", () => {
-    expect(resolveLockedWorkspaceLabel(null)).toBe("local checkout");
+    expect(resolveLockedWorkspaceLabel(null, "local")).toBe("local checkout");
   });
 
   it("uses a shorter label for an attached worktree", () => {
-    expect(resolveLockedWorkspaceLabel("/repo/.colon3code/worktrees/feature-a")).toBe("worktree");
+    expect(resolveLockedWorkspaceLabel("/repo/.colon3code/worktrees/feature-a", "worktree")).toBe(
+      "worktree",
+    );
+  });
+
+  it("describes a worktree that is still being created as a new worktree", () => {
+    expect(resolveLockedWorkspaceLabel(null, "worktree")).toBe("new worktree");
   });
 });
 

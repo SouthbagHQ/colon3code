@@ -14,6 +14,7 @@ import { useEnvironmentSettings, useUpdateEnvironmentSettings } from "../../hook
 import { cn } from "../../lib/utils";
 import { normalizeProviderAccentColor } from "../../providerInstances";
 import { Button } from "../ui/button";
+import { ChatGptConnectionButton } from "./ChatGptConnectionButton";
 import { ACPRegistryIcon, Gemini, GithubCopilotIcon, PiAgentIcon, type Icon } from "../Icons";
 import { Dialog } from "../ui/dialog";
 import { Badge } from "../ui/badge";
@@ -21,6 +22,7 @@ import { Input } from "../ui/input";
 import { RadioGroup } from "../ui/radio-group";
 import { toastManager } from "../ui/toast";
 import { DRIVER_OPTION_BY_VALUE, DRIVER_OPTIONS } from "./providerDriverMeta";
+import { ProviderAccentColorPicker } from "./ProviderAccentColorPicker";
 import { ProviderSettingsForm, deriveProviderSettingsFields } from "./ProviderSettingsForm";
 import { WizardPanel, WizardPopup, WizardHeader, WizardFooter } from "../ui/wizard";
 import {
@@ -29,6 +31,7 @@ import {
   type WizardNavigation,
 } from "./AddProviderInstanceDialog.logic";
 import { AddProviderInstanceWizardSteps } from "./AddProviderInstanceWizardSteps";
+import { AddManagedCodexAccountDialog } from "./CodexSetupSection";
 
 const PROVIDER_ACCENT_SWATCHES = [
   "#2563eb",
@@ -125,6 +128,7 @@ export function AddProviderInstanceDialog({
   const updateSettings = useUpdateEnvironmentSettings(environmentId);
 
   const [wizardStep, setWizardStep] = useState(0);
+  const [addingChatGptAccount, setAddingChatGptAccount] = useState(false);
   const [driver, setDriver] = useState<ProviderDriverKind>(DEFAULT_DRIVER_KIND);
   const [label, setLabel] = useState("");
   const [accentColor, setAccentColor] = useState<string>("");
@@ -184,7 +188,10 @@ export function AddProviderInstanceDialog({
     setHasAttemptedSubmit(true);
     if (instanceIdError !== null) return;
 
-    const config = configByDriver[driver] ?? {};
+    const config =
+      driver === "codex"
+        ? { ...configByDriver[driver], setupMode: "existing" }
+        : (configByDriver[driver] ?? {});
     const hasConfig = Object.keys(config).length > 0;
     const normalizedAccentColor = normalizeProviderAccentColor(accentColor);
 
@@ -221,17 +228,21 @@ export function AddProviderInstanceDialog({
     }
   };
 
+  if (addingChatGptAccount) {
+    return (
+      <AddManagedCodexAccountDialog
+        environmentId={environmentId}
+        onClose={() => onOpenChange(false)}
+      />
+    );
+  }
+
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <WizardPopup>
+      <WizardPopup size="wide">
         <WizardHeader
-          title="let's add a provider instance ^w^"
-          description={
-            <>
-              set up another provider instance on {environmentLabel} — for example, a second Codex
-              install pointed at a different workspace ^w^
-            </>
-          }
+          title="add provider instance"
+          description={<>Add an account or configure a provider on {environmentLabel}.</>}
         >
           <AddProviderInstanceWizardSteps
             currentStep={wizardStep}
@@ -250,7 +261,7 @@ export function AddProviderInstanceDialog({
               value={driver}
               onValueChange={(value) => setDriver(ProviderDriverKind.make(value))}
               aria-labelledby="add-instance-driver-label"
-              className="grid grid-cols-1 gap-2 sm:grid-cols-2"
+              className="grid grid-cols-1 sm:grid-cols-2"
             >
               {DRIVER_OPTIONS.map((option) => {
                 const IconComponent = option.icon;
@@ -258,8 +269,7 @@ export function AddProviderInstanceDialog({
                   <RadioPrimitive.Root
                     key={option.value}
                     value={option.value}
-                    title={option.description}
-                    className="relative flex cursor-pointer items-center gap-3 rounded-lg bg-card px-3 py-3 text-left text-muted-foreground outline-none ring-1 ring-black/5 hover:bg-zinc-50 focus-visible:ring-2 focus-visible:ring-ring data-checked:bg-primary/8 data-checked:text-foreground data-checked:ring-2 data-checked:ring-primary data-checked:hover:bg-primary/8 dark:bg-white/3 dark:ring-white/5 dark:hover:bg-white/5 dark:data-checked:bg-primary/15 dark:data-checked:ring-primary dark:data-checked:hover:bg-primary/15"
+                    className="relative flex cursor-pointer items-center gap-3 rounded-lg bg-card px-3 py-3 text-left text-muted-foreground outline-none ring-1 ring-black/5 hover:bg-accent focus-visible:ring-2 focus-visible:ring-ring data-checked:bg-primary/8 data-checked:text-foreground data-checked:ring-2 data-checked:ring-primary data-checked:hover:bg-primary/8 dark:bg-white/3 dark:ring-white/5 dark:hover:bg-white/5 dark:data-checked:bg-primary/15 dark:data-checked:ring-primary dark:data-checked:hover:bg-primary/15"
                   >
                     <IconComponent className="size-4 shrink-0" aria-hidden />
                     <span className="min-w-0 flex-1 truncate text-sm font-medium text-foreground">
@@ -287,7 +297,7 @@ export function AddProviderInstanceDialog({
                     value={option.value}
                     disabled
                     className={cn(
-                      "relative flex cursor-not-allowed items-center gap-3 rounded-lg bg-card/60 px-3 py-3 text-left opacity-55 outline-none ring-1 ring-black/5 dark:bg-white/2 dark:ring-white/5",
+                      "relative flex cursor-not-allowed items-center gap-3 rounded-lg bg-card/60 px-3 py-3 text-left opacity-64 outline-none ring-1 ring-black/5 dark:bg-white/2 dark:ring-white/5",
                     )}
                   >
                     <IconComponent className="size-4 shrink-0 text-muted-foreground" aria-hidden />
@@ -306,20 +316,18 @@ export function AddProviderInstanceDialog({
           <label className={cn("grid gap-2", wizardStep !== 1 && "hidden")}>
             <span className="text-xs font-medium text-foreground">label</span>
             <Input
-              className="bg-background"
-              placeholder="e.g. work"
+              placeholder="e.g. Work"
               value={label}
               onChange={(event) => setLabel(event.target.value)}
             />
-            <span className="text-[11px] text-muted-foreground">
-              shows up in the provider list. totally optional ;3
+            <span className="text-2xs text-muted-foreground">
+              shown in the provider list. Optional.
             </span>
           </label>
 
           <label className={cn("grid gap-2", wizardStep !== 1 && "hidden")}>
             <span className="text-xs font-medium text-foreground">instance ID</span>
             <Input
-              className="bg-background"
               placeholder={`${driver}_work`}
               value={instanceId}
               onChange={(event) => {
@@ -328,10 +336,10 @@ export function AddProviderInstanceDialog({
               aria-invalid={showInstanceIdError}
             />
             {showInstanceIdError ? (
-              <span className="text-[11px] text-destructive">{instanceIdError}</span>
+              <span className="text-2xs text-destructive">{instanceIdError}</span>
             ) : (
-              <span className="text-[11px] text-muted-foreground">
-                the routing key threads and sessions use. letters, digits, '-', or '_' :3
+              <span className="text-2xs text-muted-foreground">
+                routing key used by threads and sessions. Letters, digits, '-', or '_'.
               </span>
             )}
           </label>
@@ -339,12 +347,11 @@ export function AddProviderInstanceDialog({
           <div className={cn("grid gap-2", wizardStep !== 1 && "hidden")}>
             <span className="text-xs font-medium text-foreground">accent color</span>
             <div className="flex min-w-0 flex-wrap items-center gap-2">
-              <input
-                type="color"
-                value={normalizeProviderAccentColor(accentColor) ?? PROVIDER_ACCENT_SWATCHES[0]}
-                onChange={(event) => setAccentColor(event.target.value)}
-                aria-label="provider instance accent color"
-                className="h-8 w-10 cursor-pointer rounded-xl border border-input bg-background p-0.5"
+              <ProviderAccentColorPicker
+                displayName={label || driverOption.label}
+                value={accentColor || undefined}
+                onCommit={setAccentColor}
+                layout="inline"
               />
               <div className="flex flex-wrap gap-1.5">
                 {PROVIDER_ACCENT_SWATCHES.map((swatch) => {
@@ -370,16 +377,15 @@ export function AddProviderInstanceDialog({
                 <Button
                   type="button"
                   size="xs"
-                  variant="ghost"
-                  className="text-muted-foreground"
+                  variant="ghost-muted"
                   onClick={() => setAccentColor("")}
                 >
                   clear
                 </Button>
               ) : null}
             </div>
-            <span className="text-[11px] text-muted-foreground">
-              a little optional marker shown in the picker uwu
+            <span className="text-2xs text-muted-foreground">
+              optional marker shown in the picker.
             </span>
           </div>
 
@@ -404,7 +410,7 @@ export function AddProviderInstanceDialog({
 
         <WizardFooter>
           <Button
-            variant="outline"
+            variant={wizardStep === 0 ? "ghost-muted" : "outline"}
             onClick={() => {
               if (wizardStep === 0) {
                 onOpenChange(false);
@@ -415,8 +421,15 @@ export function AddProviderInstanceDialog({
           >
             {wizardStep === 0 ? "cancel" : "back"}
           </Button>
-          {wizardStep < ADD_PROVIDER_WIZARD_STEPS.length - 1 ? (
-            <Button onClick={() => navigateToStep(wizardStep + 1)}>next</Button>
+          {wizardStep === 0 && driver === "codex" ? (
+            <>
+              <Button variant="outline" onClick={() => navigateToStep(1)}>
+                configure manually
+              </Button>
+              <ChatGptConnectionButton onClick={() => setAddingChatGptAccount(true)} />
+            </>
+          ) : wizardStep < ADD_PROVIDER_WIZARD_STEPS.length - 1 ? (
+            <Button onClick={() => navigateToStep(wizardStep + 1)}>Next</Button>
           ) : (
             <Button onClick={handleSave}>add instance uwu</Button>
           )}

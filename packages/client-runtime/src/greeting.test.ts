@@ -1,3 +1,4 @@
+// @effect-diagnostics globalDate:off - greeting() reads a wall-clock hour, so the fixtures are plain local Dates.
 import { describe, expect, it } from "vite-plus/test";
 
 import { greeting } from "./greeting.ts";

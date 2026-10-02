@@ -1,6 +1,6 @@
 import { RUNTIME_MODE_COPY } from "@t3tools/client-runtime/runtimeModeCopy";
 import type { RuntimeMode } from "@t3tools/contracts";
-import { type IconComponent, LockIcon, LockOpenIcon, PenLineIcon, SparklesIcon } from "~/icons";
+import { LockIcon, LockOpenIcon, PenLineIcon, SparklesIcon, type IconComponent } from "~/icons";
 
 export const runtimeModeConfig: Record<
   RuntimeMode,

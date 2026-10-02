@@ -9,20 +9,14 @@ import type {
   PullRequestThreadCommentsResult,
   PullRequestThreadComment,
 } from "@t3tools/contracts";
-import {
-  CircleCheckIcon,
-  CircleIcon,
-  HammerIcon,
-  MessageSquareIcon,
-  PencilIcon,
-  TrashIcon,
-} from "~/icons";
+import { CheckCircle2Icon, CircleCheckIcon, CircleIcon, HammerIcon, MessageSquareIcon, Trash2Icon } from "~/icons";
 import { useRef, useState } from "react";
 
 import { formatRelativeTimeLabel } from "~/timestampFormat";
 import { cn } from "~/lib/utils";
 
 import { Button } from "../ui/button";
+import { PullRequestEditButton } from "./PullRequestEditButton";
 import { Textarea } from "../ui/textarea";
 import { isCommentSubmitShortcut } from "../diffs/commentSubmitShortcut";
 import {
@@ -81,7 +75,7 @@ export function PendingReviewCommentCard({
           aria-label="discard this comment"
           onClick={onRemove}
         >
-          <TrashIcon className="size-3.5" />
+          <Trash2Icon className="size-3.5" />
         </Button>
       </div>
       <p className="mt-2 whitespace-pre-wrap leading-relaxed">{comment.body}</p>
@@ -220,7 +214,7 @@ export function ReviewThreadCard({
     >
       <div className="flex items-center gap-2 text-xs text-muted-foreground">
         {thread.isResolved ? (
-          <CircleCheckIcon className="size-3.5 text-emerald-600 dark:text-emerald-500" />
+          <CheckCircle2Icon className="size-3.5 text-success-foreground" />
         ) : (
           <CircleIcon className="size-3.5" />
         )}
@@ -264,9 +258,18 @@ export function ReviewThreadCard({
           <div className="mt-2 space-y-3">
             {comments.map((comment) => (
               <article key={comment.id} className="group min-w-0">
-                <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                  <PullRequestActorLabel actor={comment.author} className="text-foreground" />
+                <div className="flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
+                  <PullRequestActorLabel actor={comment.author} />
                   <span>{formatRelativeTimeLabel(comment.createdAt)}</span>
+                  <PullRequestReactionBar
+                    className="ml-auto justify-end"
+                    reactions={comment.reactions ?? []}
+                    canReact={canReact}
+                    subjectId={comment.id}
+                    environmentId={environmentId}
+                    reference={reference}
+                    onRefresh={onReacted}
+                  />
                 </div>
                 {editingId === comment.id ? (
                   <PullRequestMarkdownEditor
@@ -288,27 +291,13 @@ export function ReviewThreadCard({
                       environmentId={environmentId}
                     />
                     {canEditComment(comment) ? (
-                      <Button
-                        size="icon-xs"
-                        variant="ghost"
-                        className="shrink-0 text-muted-foreground opacity-0 transition-opacity group-focus-within:opacity-100 group-hover:opacity-100 focus-visible:opacity-100"
+                      <PullRequestEditButton
                         aria-label="edit comment"
                         onClick={() => setEditingId(comment.id)}
-                      >
-                        <PencilIcon className="size-3" />
-                      </Button>
+                      />
                     ) : null}
                   </div>
                 )}
-                <PullRequestReactionBar
-                  className="mt-1.5"
-                  reactions={comment.reactions ?? []}
-                  canReact={canReact}
-                  subjectId={comment.id}
-                  environmentId={environmentId}
-                  reference={reference}
-                  onRefresh={onReacted}
-                />
               </article>
             ))}
           </div>
@@ -317,7 +306,6 @@ export function ReviewThreadCard({
               <Button
                 size="xs"
                 variant="ghost"
-                className="px-1"
                 disabled={loadingMore}
                 onClick={() => void loadMore()}
               >
@@ -357,13 +345,8 @@ export function ReviewThreadCard({
                 </div>
               </div>
             ) : (
-              <Button
-                size="xs"
-                variant="ghost"
-                className="mt-2 px-1"
-                onClick={() => setReplying(true)}
-              >
-                reply
+              <Button size="xs" variant="ghost" className="mt-2" onClick={() => setReplying(true)}>
+                Reply
               </Button>
             )
           ) : null}

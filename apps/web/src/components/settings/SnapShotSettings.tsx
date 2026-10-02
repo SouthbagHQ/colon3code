@@ -7,10 +7,8 @@ import {
   type DesktopSnapShotSetupAction,
   type SnapShotShortcut,
 } from "@t3tools/contracts";
-import { ChevronDownIcon, PlayIcon } from "~/icons";
+import { PlayIcon } from "~/icons";
 import { useCallback, useEffect, useRef, useState } from "react";
-
-import { cn } from "~/lib/utils";
 
 import { useClientSettings, useUpdateClientSettings } from "../../hooks/useSettings";
 import { getDesktopSnapShotBridge } from "../../lib/desktopSnapShot";
@@ -44,7 +42,7 @@ import {
 import { searchableSetting } from "./settingsSearch";
 import { Button } from "../ui/button";
 import { Menu, MenuItem, MenuPopup, MenuRadioGroup, MenuRadioItem, MenuTrigger } from "../ui/menu";
-import { selectTriggerVariants } from "../ui/select";
+import { SelectButton } from "../ui/select";
 import { Switch } from "../ui/switch";
 import { toastManager } from "../ui/toast";
 import { SnapShotSetupDialog } from "./SnapShotSetupDialog";
@@ -56,10 +54,7 @@ import {
   type CaptureSetupStep,
 } from "./SnapShotSetupDialog.logic";
 
-const soundOptionRowClassName =
-  "grid grid-cols-[1fr_auto] rounded-sm has-data-checked:bg-foreground/[0.08]";
-const soundOptionItemClassName = "data-checked:bg-transparent";
-const soundPreviewClassName = "min-h-7 w-7 justify-center px-0";
+const soundOptionRowClassName = "grid grid-cols-[1fr_auto]";
 
 function captureSettingsError(title: string, error: unknown) {
   return { title, message: error instanceof Error ? error.message : "try again." };
@@ -498,21 +493,19 @@ export function SnapShotSettings() {
                   <Menu>
                     <MenuTrigger
                       aria-label={"snapshot sound: " + soundLabel}
-                      className={cn(selectTriggerVariants({ size: "sm" }), "w-auto min-w-0")}
+                      render={<SelectButton size="sm" />}
+                      className="w-auto min-w-0"
                       disabled={!captureAvailable}
                     >
-                      <span className="min-w-0 flex-1 truncate text-left">
-                        {soundSelection === "off" ? (
-                          "off"
-                        ) : soundSelection === "soft-pop" ? (
-                          <>
-                            whoosh <span className="text-muted-foreground">(default)</span>
-                          </>
-                        ) : (
-                          "click"
-                        )}
-                      </span>
-                      <ChevronDownIcon className="-me-1 size-3 shrink-0 opacity-50" />
+                      {soundSelection === "off" ? (
+                        "Off"
+                      ) : soundSelection === "soft-pop" ? (
+                        <>
+                          Whoosh <span className="text-muted-foreground">(Default)</span>
+                        </>
+                      ) : (
+                        "Click"
+                      )}
                     </MenuTrigger>
                     <MenuPopup align="end">
                       <MenuRadioGroup
@@ -525,16 +518,11 @@ export function SnapShotSettings() {
                           off
                         </MenuRadioItem>
                         <div className={soundOptionRowClassName}>
-                          <MenuRadioItem
-                            className={soundOptionItemClassName}
-                            closeOnClick
-                            value="soft-pop"
-                          >
-                            whoosh <span className="text-muted-foreground">(default)</span>
+                          <MenuRadioItem closeOnClick value="soft-pop">
+                            Whoosh <span className="text-muted-foreground">(Default)</span>
                           </MenuRadioItem>
                           <MenuItem
-                            aria-label="play whoosh"
-                            className={soundPreviewClassName}
+                            aria-label="play Whoosh"
                             closeOnClick={false}
                             onClick={() => playSnapShotSound("soft-pop")}
                           >
@@ -542,16 +530,11 @@ export function SnapShotSettings() {
                           </MenuItem>
                         </div>
                         <div className={soundOptionRowClassName}>
-                          <MenuRadioItem
-                            className={soundOptionItemClassName}
-                            closeOnClick
-                            value="camera-shutter"
-                          >
-                            click
+                          <MenuRadioItem closeOnClick value="camera-shutter">
+                            Click
                           </MenuRadioItem>
                           <MenuItem
-                            aria-label="play click"
-                            className={soundPreviewClassName}
+                            aria-label="play Click"
                             closeOnClick={false}
                             onClick={() => playSnapShotSound("camera-shutter")}
                           >

@@ -13,31 +13,6 @@
   }
 }
 
-/* ─── Clerk native profile ──────────────────────────────────────────── */
-/* Fixed palette for custom pages inside Clerk's native user profile. Mirrors
-   clerk-theme.json, which themes the SDK's own screens, so ours match them.
-   Kept out of the runtime palette above on purpose: custom themes must not
-   restyle Clerk's chrome. Keep in sync with clerk-theme.json. */
-@layer theme {
-  :root {
-    @variant light {
-      --color-clerk-page: #fff3f2;
-      --color-clerk-foreground: #4c2a2d;
-      --color-clerk-foreground-muted: #906267;
-      --color-clerk-border: rgba(238, 216, 215, 0.6);
-      --color-clerk-danger: #a11732;
-    }
-
-    @variant dark {
-      --color-clerk-page: #231521;
-      --color-clerk-foreground: #efe4eb;
-      --color-clerk-foreground-muted: #9b8493;
-      --color-clerk-border: rgba(57, 43, 56, 0.6);
-      --color-clerk-danger: #f6a3af;
-    }
-  }
-}
-
 /* ─── Typography ────────────────────────────────────────────────────── */
 @theme {
   /* Keep these native family names aligned with app.config.ts. */

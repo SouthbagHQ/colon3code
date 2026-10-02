@@ -1,11 +1,4 @@
-import {
-  ChevronDownIcon,
-  ChevronUpIcon,
-  MousePointerIcon,
-  PaintbrushIcon,
-  PlusIcon,
-  XIcon,
-} from "~/icons";
+import { ChevronDownIcon, ChevronUpIcon, MousePointerIcon, PaintbrushIcon, PlusIcon, XIcon } from "~/icons";
 import {
   useCallback,
   useEffect,
@@ -947,11 +940,7 @@ export function ThemeEditorPanel({
     // A locked mode stays hoverable so the tooltip can say why it is off;
     // a real disabled attribute would swallow the pointer events.
     const button = (
-      <Toggle
-        aria-disabled={lockReason !== null}
-        value={appearance}
-        className={lockReason !== null ? "opacity-50" : undefined}
-      >
+      <Toggle aria-disabled={lockReason !== null} value={appearance}>
         {appearance === "light" ? "light" : "dark"}
       </Toggle>
     );

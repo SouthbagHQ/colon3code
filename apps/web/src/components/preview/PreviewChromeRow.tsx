@@ -1,12 +1,5 @@
 import { RefreshIcon } from "~/components/ui/refresh-icon";
-import {
-  ArrowLeftIcon,
-  ArrowRightIcon,
-  CameraIcon,
-  ExternalLinkIcon,
-  MousePointerClickIcon,
-  PictureInPictureIcon,
-} from "~/icons";
+import { ArrowLeftIcon, ArrowRightIcon, CameraIcon, ExternalLinkIcon, MousePointerClickIcon, PictureInPictureIcon } from "~/icons";
 import {
   type FormEvent,
   type KeyboardEvent,
@@ -181,11 +174,6 @@ export function PreviewChromeRow({
                 <InputGroupInput
                   ref={inputRef}
                   value={inputFocused ? draft : url}
-                  className={cn(
-                    onOpenInBrowser &&
-                      !inputFocused &&
-                      "group-hover/address:pe-7 transition-[padding]",
-                  )}
                   onChange={(event) => setDraft(event.target.value)}
                   onFocus={() => {
                     setDraft(url);
@@ -213,26 +201,26 @@ export function PreviewChromeRow({
             />
           </Tooltip>
           {onOpenInBrowser && !inputFocused ? (
-            <InputGroupAddon
-              align="inline-end"
-              className="pointer-events-none absolute inset-y-0 right-0 opacity-0 transition-opacity group-hover/address:pointer-events-auto group-hover/address:opacity-100"
-            >
-              <Tooltip>
-                <TooltipTrigger
-                  render={
-                    <Button
-                      variant="ghost"
-                      size="icon-xs"
-                      onClick={onOpenInBrowser}
-                      aria-label="open in system browser"
-                      type="button"
-                    />
-                  }
-                >
-                  <ExternalLinkIcon />
-                </TooltipTrigger>
-                <TooltipPopup>open in system browser</TooltipPopup>
-              </Tooltip>
+            <InputGroupAddon align="inline-end">
+              {/* Revealed on hover so a resting address bar reads as plain text. */}
+              <span className="pointer-events-none flex opacity-0 transition-opacity focus-within:pointer-events-auto focus-within:opacity-100 group-hover/address:pointer-events-auto group-hover/address:opacity-100">
+                <Tooltip>
+                  <TooltipTrigger
+                    render={
+                      <Button
+                        variant="ghost"
+                        size="icon-xs"
+                        onClick={onOpenInBrowser}
+                        aria-label="Open in system browser"
+                        type="button"
+                      />
+                    }
+                  >
+                    <ExternalLinkIcon />
+                  </TooltipTrigger>
+                  <TooltipPopup>Open in system browser</TooltipPopup>
+                </Tooltip>
+              </span>
             </InputGroupAddon>
           ) : null}
         </InputGroup>

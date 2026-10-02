@@ -222,8 +222,9 @@ export const makeRelayTraceLayer = (input: {
     OtlpTracer.make({
       url: input.tracesEndpoint,
       resource: {
-        serviceName: "colon3-code-relay-worker",
+        serviceName: "colon3code-relay",
         attributes: {
+          "service.namespace": "colon3code",
           "service.runtime": "cloudflare-worker",
           "service.component": "relay",
         },
