@@ -123,7 +123,7 @@ export function SettingsEnvironmentsRouteScreen() {
           >
             {(open) => (
               <AndroidHeaderIconButton
-                accessibilityLabel="Environment options"
+                accessibilityLabel="environment options"
                 icon="ellipsis"
                 onPress={open}
               />
@@ -133,7 +133,7 @@ export function SettingsEnvironmentsRouteScreen() {
       }
       actions={[
         {
-          accessibilityLabel: "Add environment",
+          accessibilityLabel: "add environment",
           icon: "plus",
           tintColor: headerIconColor,
           onPress: () =>

@@ -131,7 +131,7 @@ const KEYBINDING_SEARCH_ITEMS = STATIC_KEYBINDING_COMMANDS.toSorted((left, right
 export const SETTINGS_SEARCH_ITEMS = [
   {
     id: "storage-worktrees",
-    title: "Worktree cleanup",
+    title: "worktree cleanup",
     to: "/settings/storage",
     scope: "project-defaults",
     searchTerms: [
@@ -140,7 +140,7 @@ export const SETTINGS_SEARCH_ITEMS = [
   },
   {
     id: "storage-artifacts",
-    title: "Artifacts and logs",
+    title: "artifacts and logs",
     to: "/settings/storage",
     scope: "environment-defaults",
     searchTerms: ["disk storage browser screenshots captures rotated logs cleanup retention"],
@@ -213,7 +213,7 @@ export const SETTINGS_SEARCH_ITEMS = [
   },
   {
     id: "chat-width",
-    title: "Chat width",
+    title: "chat width",
     to: "/settings/appearance",
     searchTerms: ["wide full width column layout messages composer monitor"],
   },
@@ -275,7 +275,7 @@ export const SETTINGS_SEARCH_ITEMS = [
   },
   {
     id: "working-shelf",
-    title: "Working section (beta)",
+    title: "working section (beta)",
     to: "/settings/general",
     searchTerms: ["hide fold running monitoring threads inbox sidebar shelf"],
   },
@@ -361,7 +361,7 @@ export const SETTINGS_SEARCH_ITEMS = [
   },
   {
     id: "composer-rich-text",
-    title: "Rich text composer",
+    title: "rich text composer",
     to: "/settings/general",
     searchTerms: ["composer rich text tiptap bold italic markdown styled wysiwyg"],
   },
@@ -373,7 +373,7 @@ export const SETTINGS_SEARCH_ITEMS = [
   },
   {
     id: "send-shortcut",
-    title: "Send shortcut",
+    title: "send shortcut",
     to: "/settings/general",
     searchTerms: ["enter return command ctrl multiline prompt new line composer"],
   },
@@ -419,7 +419,7 @@ export const SETTINGS_SEARCH_ITEMS = [
   },
   {
     id: "worktree-submodules",
-    title: "Submodules",
+    title: "submodules",
     to: "/settings/general",
     scope: "project-defaults",
     searchTerms: ["git submodule init recursive top-level none worktree t3.json"],
@@ -648,13 +648,13 @@ export const SETTINGS_SEARCH_ITEMS = [
   },
   {
     id: "browser-recording-key-presses",
-    title: "Show key presses in recordings",
+    title: "show key presses in recordings",
     to: "/settings/integrations",
     searchTerms: ["browser preview keyboard shortcuts keystrokes overlay capture"],
   },
   {
     id: "browser-recording-mouse-presses",
-    title: "Show mouse presses in recordings",
+    title: "show mouse presses in recordings",
     to: "/settings/integrations",
     searchTerms: ["browser preview clicks buttons drag overlay capture"],
   },

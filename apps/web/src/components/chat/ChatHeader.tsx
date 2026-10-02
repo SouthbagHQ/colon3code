@@ -508,7 +508,7 @@ export const ChatHeader = memo(function ChatHeader({
                 ? undefined
                 : "hidden"
             }
-            render={<Button size="icon-sm" variant="ghost" aria-label="More header actions" />}
+            render={<Button size="icon-sm" variant="ghost" aria-label="more header actions" />}
           >
             <EllipsisIcon className="size-4" />
           </MenuTrigger>
@@ -516,7 +516,7 @@ export const ChatHeader = memo(function ChatHeader({
           <MenuPopup
             data-chat-header-actions
             keepMounted
-            aria-label="Header actions"
+            aria-label="header actions"
             align="end"
             finalFocus={actionsCollapsed ? undefined : false}
           >

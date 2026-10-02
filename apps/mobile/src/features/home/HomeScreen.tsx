@@ -944,7 +944,7 @@ export function HomeScreen(props: HomeScreenProps) {
               action={
                 Platform.OS === "android" && !props.catalogState.hasReadyEnvironment ? (
                   <MaterialFloatingActionButton
-                    label="Add environment"
+                    label="add environment"
                     icon="plus"
                     variant="extended"
                     tone="primary"

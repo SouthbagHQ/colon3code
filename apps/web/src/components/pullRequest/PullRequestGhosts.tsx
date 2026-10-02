@@ -36,9 +36,9 @@ function GhostBar({ className }: { className?: string | undefined }) {
 const TITLE_WIDTHS = ["w-3/5", "w-2/5", "w-1/2", "w-2/3", "w-2/5", "w-3/5", "w-1/2"];
 const META_WIDTHS = ["w-2/5", "w-1/3", "w-2/5", "w-1/4", "w-1/3", "w-2/5", "w-1/3"];
 const DEFAULT_DETAIL_TABS = [
-  { value: "summary", label: "Summary" },
-  { value: "timeline", label: "Timeline" },
-  { value: "code", label: "Code" },
+  { value: "summary", label: "summary" },
+  { value: "timeline", label: "timeline" },
+  { value: "code", label: "code" },
 ] as const;
 
 /** Rows in the list's own grid — glyph, title over meta, time over diffstat. */
@@ -149,7 +149,7 @@ export function PullRequestDetailGhost({
                 variant="ghost-muted"
                 className="-ml-1.5"
                 onClick={onBack}
-                aria-label="Back to this thread's pull requests"
+                aria-label="back to this thread's pull requests"
               >
                 <ArrowLeftIcon aria-hidden className="size-3.5" />
               </Button>
@@ -175,14 +175,14 @@ export function PullRequestDetailGhost({
         </div>
         <div className="mr-4 flex h-7 shrink-0 items-center justify-end gap-1">
           {actions ?? <GhostBar className="h-6 w-16 rounded-md" />}
-          <Button size="icon-xs" variant="ghost" disabled aria-label="Pull request actions loading">
+          <Button size="icon-xs" variant="ghost" disabled aria-label="pull request actions loading">
             <EllipsisIcon aria-hidden className="size-4" />
           </Button>
           {onClose ? (
             <Button
               size="icon-xs"
               variant="ghost"
-              aria-label="Collapse pull request panel"
+              aria-label="collapse pull request panel"
               onClick={onClose}
             >
               <PanelRightIcon aria-hidden className="size-3.5" />
@@ -287,7 +287,7 @@ export function PullRequestDetailGhost({
 
         <nav
           className="col-span-2 flex min-w-0 flex-wrap items-center gap-2 border-t border-border/60 px-4 py-2"
-          aria-label="Pull request tabs"
+          aria-label="pull request tabs"
           inert
         >
           <ToggleGroup
@@ -328,7 +328,7 @@ export function PullRequestDetailGhost({
               </span>
               <span className="flex min-w-0 items-center gap-1.5 text-foreground">
                 <GhostBar className="h-3 w-10" />
-                <Button size="icon-xs" variant="ghost" disabled aria-label="Reviewers loading">
+                <Button size="icon-xs" variant="ghost" disabled aria-label="reviewers loading">
                   <UserPlusIcon aria-hidden className="size-3.5" />
                 </Button>
               </span>
@@ -358,7 +358,7 @@ export function PullRequestDetailGhost({
                     <GhostBar className="h-4.5 w-20" />
                   </>
                 )}
-                <Button size="icon-xs" variant="ghost" disabled aria-label="Labels loading">
+                <Button size="icon-xs" variant="ghost" disabled aria-label="labels loading">
                   <TagIcon aria-hidden className="size-3.5" />
                 </Button>
               </span>

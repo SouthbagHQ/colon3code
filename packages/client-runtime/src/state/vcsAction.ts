@@ -454,7 +454,7 @@ export function createVcsActionManager<R, E>(
           stateAtom,
           beginVcsActionState({
             operation: "run_change_request",
-            label: "Running source control action",
+            label: "running source control action",
             actionId: input.actionId,
           }),
         );

@@ -79,7 +79,7 @@ export function PullRequestMarkdownEditor({
       }}
     >
       <ToggleGroup
-        aria-label="Markdown editor mode"
+        aria-label="markdown editor mode"
         variant="segmented"
         value={[preview ? "preview" : "write"]}
         disabled={saving}

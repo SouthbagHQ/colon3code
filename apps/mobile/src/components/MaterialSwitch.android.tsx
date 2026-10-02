@@ -18,7 +18,7 @@ export function MaterialSwitch(props: ThemedSwitchProps) {
       accessibilityHint={props.accessibilityHint}
       accessibilityRole="switch"
       accessibilityState={{ checked: Boolean(props.value), disabled: Boolean(props.disabled) }}
-      accessibilityActions={[{ name: "activate", label: "Toggle" }]}
+      accessibilityActions={[{ name: "activate", label: "toggle" }]}
       onAccessibilityAction={toggle}
       style={props.style}
       testID={props.testID}

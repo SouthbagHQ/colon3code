@@ -106,7 +106,7 @@ function NewTaskHeader(props: {
       subtitle={props.subtitle ?? undefined}
       sidebar={false}
       backInSplitView={{
-        accessibilityLabel: "Go back",
+        accessibilityLabel: "go back",
         icon: "chevron.left",
       }}
       options={{ headerBackVisible: !layout.usesSplitView }}
@@ -116,7 +116,7 @@ function NewTaskHeader(props: {
         props.canAddProject
           ? [
               {
-                accessibilityLabel: "Add project",
+                accessibilityLabel: "add project",
                 icon: "plus",
                 onPress: () => navigation.dispatch(StackActions.push("AddProject")),
               },
@@ -126,7 +126,7 @@ function NewTaskHeader(props: {
       search={{
         value: props.searchText,
         onChangeText: props.onSearchTextChange,
-        placeholder: "Search projects",
+        placeholder: "search projects",
       }}
     />
   );
@@ -316,8 +316,8 @@ export function NewTaskRouteScreen({ route }: StaticScreenProps<NewTaskRoutePara
             Platform.OS === "android" ? (
               <View collapsable={false} className="overflow-hidden rounded-[28px] bg-card">
                 <MaterialListRow
-                  title="No project"
-                  subtitle="Start a task without a project"
+                  title="no project"
+                  subtitle="start a task without a project"
                   onPress={() => void startScratch()}
                   leading={
                     <SymbolView
@@ -333,7 +333,7 @@ export function NewTaskRouteScreen({ route }: StaticScreenProps<NewTaskRoutePara
               <View collapsable={false} className="overflow-hidden rounded-[24px] bg-card">
                 <Pressable
                   accessibilityRole="button"
-                  accessibilityLabel="No project"
+                  accessibilityLabel="no project"
                   onPress={() => void startScratch()}
                   className="flex-row items-center gap-3 bg-card px-4 py-3.5"
                 >
@@ -348,7 +348,7 @@ export function NewTaskRouteScreen({ route }: StaticScreenProps<NewTaskRoutePara
                   <View className="min-w-0 flex-1">
                     <Text className="text-base font-t3-bold leading-snug">No project</Text>
                     <Text className="text-xs leading-snug text-foreground-muted" numberOfLines={1}>
-                      Start a task without a project
+                      start a task without a project
                     </Text>
                   </View>
                   <SymbolView
@@ -391,7 +391,7 @@ export function NewTaskRouteScreen({ route }: StaticScreenProps<NewTaskRoutePara
                   />
                   {canStartScratch ? (
                     <MaterialButton
-                      label="Start without a project"
+                      label="start without a project"
                       tone="secondary"
                       onPress={() => void startScratch()}
                     />
@@ -403,7 +403,7 @@ export function NewTaskRouteScreen({ route }: StaticScreenProps<NewTaskRoutePara
                   onPress={() => navigation.navigate("ConnectionsNew")}
                 >
                   <Text className="text-sm font-t3-bold text-primary-foreground">
-                    Add environment
+                    add environment
                   </Text>
                 </Pressable>
               ) : (
@@ -413,7 +413,7 @@ export function NewTaskRouteScreen({ route }: StaticScreenProps<NewTaskRoutePara
                     onPress={() => navigation.dispatch(StackActions.push("AddProject"))}
                   >
                     <Text className="text-sm font-t3-bold text-primary-foreground">
-                      Add new project
+                      add new project
                     </Text>
                   </Pressable>
                   {canStartScratch ? (
@@ -422,7 +422,7 @@ export function NewTaskRouteScreen({ route }: StaticScreenProps<NewTaskRoutePara
                       onPress={() => void startScratch()}
                     >
                       <Text className="text-sm font-t3-bold text-foreground">
-                        Start without a project
+                        start without a project
                       </Text>
                     </Pressable>
                   ) : null}
@@ -432,10 +432,10 @@ export function NewTaskRouteScreen({ route }: StaticScreenProps<NewTaskRoutePara
           ) : visibleScopes.length === 0 ? (
             <View className="items-center gap-2 px-6 py-8">
               <Text className="text-center text-lg font-t3-bold text-foreground">
-                No matching projects
+                no matching projects
               </Text>
               <Text className="text-center text-sm leading-normal text-foreground-muted">
-                Try a different project name or workspace path.
+                try a different project name or workspace path.
               </Text>
             </View>
           ) : (

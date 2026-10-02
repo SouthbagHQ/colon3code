@@ -68,7 +68,7 @@ function FilesBrowserHeader(props: {
 }) {
   return (
     <ScreenHeader
-      title="Files"
+      title="files"
       subtitle={props.projectName}
       onBack={props.onBack}
       hideBottomBorder
@@ -76,7 +76,7 @@ function FilesBrowserHeader(props: {
       search={{
         value: props.searchQuery,
         onChangeText: props.onSearchQueryChange,
-        placeholder: "Search files",
+        placeholder: "search files",
         closeAccessibilityLabel: "Close file search",
         clearAccessibilityLabel: "Clear file search",
       }}
@@ -84,9 +84,9 @@ function FilesBrowserHeader(props: {
         Platform.OS === "android"
           ? [
               {
-                title: "File options",
+                title: "file options",
                 icon: "ellipsis",
-                items: [{ id: "refresh", title: "Refresh files", onPress: props.onRefresh }],
+                items: [{ id: "refresh", title: "refresh files", onPress: props.onRefresh }],
               },
             ]
           : undefined
@@ -123,7 +123,7 @@ function FileHeader(props: {
       backInSplitView={
         props.fileInspectorSupported
           ? {
-              accessibilityLabel: "Return to chat",
+              accessibilityLabel: "return to chat",
               icon: "chevron.left",
               onPress: props.onReturnToThread,
             }
@@ -145,7 +145,7 @@ function FileHeader(props: {
       }
       menus={[
         {
-          title: "File actions",
+          title: "file actions",
           icon: "ellipsis",
           separateBackground: false,
           items: [

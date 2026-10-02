@@ -1430,7 +1430,7 @@ type SavedBackendListRowProps = {
 };
 
 /**
- * Status word for a row subtitle: "Reconnecting: <reason>" instead of the
+ * Status word for a row subtitle: "reconnecting: <reason>" instead of the
  * long-form sentence, since the row has one line and the full text is one
  * hover away.
  */

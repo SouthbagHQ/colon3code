@@ -337,7 +337,7 @@ export function CaptureShortcutConfig({
               disabled={actionBusy || state.shortcutActionRegistered === false}
               onClick={() => void onComplete()}
             >
-              I've added the shortcut
+              i've added the shortcut
             </Button>
           ) : null}
         </div>

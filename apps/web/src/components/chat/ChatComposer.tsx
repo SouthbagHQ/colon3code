@@ -5886,7 +5886,7 @@ export const ChatComposer = memo(function ChatComposer(props: ChatComposerProps)
         if (target === "remote") {
           toastManager.add({
             type: "error",
-            title: "Folders can't be dropped into remote environments",
+            title: "folders can't be dropped into remote environments",
           });
           return;
         }
@@ -5896,7 +5896,7 @@ export const ChatComposer = memo(function ChatComposer(props: ChatComposerProps)
             toastManager.add({
               type: "error",
               title: `Couldn't get the path of "${folder.name}"`,
-              description: "Type the folder path with @ instead.",
+              description: "type the folder path with @ instead.",
             });
             continue;
           }

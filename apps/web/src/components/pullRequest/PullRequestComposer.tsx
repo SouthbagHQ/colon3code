@@ -106,12 +106,12 @@ export function PullRequestComposer({
         sideOffset={8}
         width="lg"
         initialFocus={mode === "review" ? reviewRef : commentRef}
-        aria-label="Pull request composer"
+        aria-label="pull request composer"
       >
         <div className="mb-3 flex items-center justify-between gap-2">
           {canComment && verdicts.length > 0 ? (
             <ToggleGroup
-              aria-label="Composer mode"
+              aria-label="composer mode"
               variant="segmented"
               value={[mode]}
               onValueChange={(next) => {
@@ -134,8 +134,8 @@ export function PullRequestComposer({
               <Button
                 size="icon-xs"
                 variant="ghost"
-                aria-label="Discard pending line comments"
-                title="Discard pending line comments"
+                aria-label="discard pending line comments"
+                title="discard pending line comments"
                 disabled={reviewPending}
                 onClick={() => clearComments(reviewKey)}
               >
@@ -144,7 +144,7 @@ export function PullRequestComposer({
             ) : null}
             <PopoverClose
               render={<Button size="icon-xs" variant="ghost" />}
-              aria-label="Close composer"
+              aria-label="close composer"
             >
               <XIcon className="size-3.5" />
             </PopoverClose>

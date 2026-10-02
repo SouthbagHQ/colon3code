@@ -1482,17 +1482,17 @@ export function NewTaskDraftScreen(props: {
   const hero = flow.isScratchDraft ? (
     <View className="items-center gap-2 px-6" testID="new-task-hero">
       <Text className="text-center text-2xl font-t3-medium tracking-tight text-foreground">
-        What should we work on?
+        what should we work on?
       </Text>
       {/* Wraps onto two lines only when a long machine name leaves no room. */}
       <View className="flex-row flex-wrap items-center justify-center gap-x-1">
         <ComposerInlineControl
-          accessibilityHint="Opens the project picker"
-          accessibilityLabel="Choose a project"
+          accessibilityHint="opens the project picker"
+          accessibilityLabel="choose a project"
           chevronDirection="right"
           disabled={isComposerInteractionLocked}
           icon="folder"
-          label="Choose a project"
+          label="choose a project"
           onPress={chooseProject}
         />
         {environmentControl}
@@ -1507,7 +1507,7 @@ export function NewTaskDraftScreen(props: {
         <View className="max-w-full flex-row items-center justify-center">
           <Text className="text-2xl font-t3-medium tracking-tight text-foreground">in </Text>
           <Pressable
-            accessibilityHint="Opens the project picker"
+            accessibilityHint="opens the project picker"
             accessibilityLabel={selectedProject.title}
             accessibilityRole="button"
             disabled={isComposerInteractionLocked}

@@ -100,7 +100,7 @@ export function ScreenHeader(props: ScreenHeaderProps) {
           <View className="flex-row items-center gap-2" style={{ minHeight: buttonSize }}>
             {props.onBack ? (
               <Pressable
-                accessibilityLabel="Navigate up"
+                accessibilityLabel="navigate up"
                 accessibilityRole="button"
                 hitSlop={8}
                 onPress={props.onBack}

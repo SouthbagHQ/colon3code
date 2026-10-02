@@ -890,7 +890,7 @@ export function ProviderInstanceCard({
     />
   ) : (
     <SettingsRow
-      title="Driver"
+      title="driver"
       description={
         <span>
           This instance uses <code className="text-foreground">{String(instance.driver)}</code>,

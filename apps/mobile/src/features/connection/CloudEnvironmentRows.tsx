@@ -220,7 +220,7 @@ function ConnectedCloudEnvironmentRow(props: {
   }
   return (
     <Pressable
-      accessibilityHint="Long press to remove from this device"
+      accessibilityHint="long press to remove from this device"
       accessibilityRole={props.onOpen ? "button" : undefined}
       accessibilityLabel={props.onOpen ? `Manage ${props.environment.environmentLabel}` : undefined}
       onPress={props.onOpen}
@@ -239,7 +239,7 @@ function ConnectedCloudEnvironmentRow(props: {
         onValueChange={props.onSetEnabled}
         onToggleError={props.onToggleError}
         disabled={unsupported}
-        {...(enabled || unsupported ? {} : { statusText: "Off" })}
+        {...(enabled || unsupported ? {} : { statusText: "off" })}
         value={enabled}
       />
     </Pressable>

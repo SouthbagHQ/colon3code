@@ -167,7 +167,7 @@ export function WelcomeWizard({
           if (importWarning) {
             toastManager.add({
               type: "warning",
-              title: "Some history was not imported",
+              title: "some history was not imported",
               description: importWarning,
               timeout: 0,
             });
@@ -860,7 +860,7 @@ function ConnectedAgentsStep({
       ) ? (
         <div className="mt-3">
           <Button size="xs" variant="ghost-muted" onClick={() => setAddingAccount(true)}>
-            Connect another ChatGPT account
+            connect another ChatGPT account
           </Button>
         </div>
       ) : null}

@@ -4356,7 +4356,7 @@ export default function Sidebar() {
               toastManager.add(
                 stackedThreadToast({
                   type: "error",
-                  title: "Failed to update auto-settle",
+                  title: "failed to update auto-settle",
                   description: error instanceof Error ? error.message : "An error occurred.",
                 }),
               );

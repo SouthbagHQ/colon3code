@@ -307,7 +307,7 @@ function FullDiskAccessStep({
                   aria-hidden="true"
                 />
               ),
-              title: "Full Disk Access",
+              title: "full disk access",
               description: `read ${source.name}'s cookies for this import.`,
               granted: permission.status.fullDiskAccess,
               onAllow: () => void allow(),

@@ -495,7 +495,7 @@ export function UsagePage() {
                                   <PopoverTrigger
                                     openOnHover
                                     render={<InlineButton tone="muted" />}
-                                    aria-label="Unpriced usage details"
+                                    aria-label="unpriced usage details"
                                   >
                                     <InfoIcon className="size-3" aria-hidden />
                                   </PopoverTrigger>

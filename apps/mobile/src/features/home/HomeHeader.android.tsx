@@ -20,11 +20,11 @@ export function HomeHeader(props: HomeHeaderProps) {
     () => [
       {
         id: "environment",
-        title: "Environment",
+        title: "environment",
         subactions: [
           {
             id: "environment:all",
-            title: "All environments",
+            title: "all environments",
             state: checkedMenuState(props.selectedEnvironmentId === null),
           },
           ...props.environments.map((environment) => ({
@@ -39,11 +39,11 @@ export function HomeHeader(props: HomeHeaderProps) {
         : ([
             {
               id: "project",
-              title: "Project",
+              title: "project",
               subactions: [
                 {
                   id: "project:all",
-                  title: "All projects",
+                  title: "all projects",
                   state: checkedMenuState(props.selectedProjectKey === null),
                 },
                 ...props.projects.map((project) => ({

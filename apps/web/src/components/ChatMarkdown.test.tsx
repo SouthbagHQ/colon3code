@@ -199,14 +199,14 @@ describe("ChatMarkdown streaming", () => {
       expect(
         mounted.root
           .findAllByType(Button)
-          .some((button) => button.props["aria-label"] === "Run in terminal"),
+          .some((button) => button.props["aria-label"] === "run in terminal"),
       ).toBe(false);
 
       await act(async () => {
         mounted.update(message("```bash\necho hello\n```"));
       });
       await act(async () => {
-        codeButton(mounted, "Run in terminal").onClick?.({} as never);
+        codeButton(mounted, "run in terminal").onClick?.({} as never);
       });
       expect(onRunShellCommand).toHaveBeenCalledExactlyOnceWith("echo hello");
 
@@ -218,7 +218,7 @@ describe("ChatMarkdown streaming", () => {
         await act(async () => {
           mounted.update(message(text));
         });
-        expect(codeButton(mounted, "Run in terminal")).toBeDefined();
+        expect(codeButton(mounted, "run in terminal")).toBeDefined();
       }
 
       for (const text of [
@@ -239,7 +239,7 @@ describe("ChatMarkdown streaming", () => {
         expect(
           mounted.root
             .findAllByType(Button)
-            .some((button) => button.props["aria-label"] === "Run in terminal"),
+            .some((button) => button.props["aria-label"] === "run in terminal"),
         ).toBe(false);
       }
     } finally {

@@ -535,7 +535,7 @@ export function AddProjectSourceScreen() {
   );
 
   return (
-    <AddProjectShell title="Add project">
+    <AddProjectShell title="add project">
       {selectedEnvironment === null ? <EmptyEnvironmentState /> : null}
 
       {environmentOptions.length > 1 ? (
@@ -587,8 +587,8 @@ export function AddProjectSourceScreen() {
           <ListSection>
             {selectedEnvironment.newProjectsRoot !== null ? (
               <ListRow
-                title="New project"
-                subtitle="Start a new Git repository from a name"
+                title="new project"
+                subtitle="start a new Git repository from a name"
                 icon={
                   <SymbolView
                     name="plus"
@@ -1068,7 +1068,7 @@ export function AddProjectNewScreen(props: { readonly environmentId?: string | s
   };
 
   return (
-    <AddProjectShell title="New project">
+    <AddProjectShell title="new project">
       {error ? <ErrorBanner message={error} /> : null}
       {environment ? (
         <>
@@ -1078,7 +1078,7 @@ export function AddProjectNewScreen(props: { readonly environmentId?: string | s
             onChangeText={setName}
             autoCorrect={false}
             autoFocus
-            placeholder="Project name"
+            placeholder="project name"
             returnKeyType="done"
             onSubmitEditing={() => void submit()}
           />
@@ -1094,7 +1094,7 @@ export function AddProjectNewScreen(props: { readonly environmentId?: string | s
           {githubTarget !== null ? (
             <ListSection>
               <ListRow
-                title="Create private repository on GitHub"
+                title="create private repository on GitHub"
                 subtitle={
                   trimmedName.length > 0 && pathPreview !== null
                     ? getNewProjectGitHubRepository(githubTarget, pathPreview)
@@ -1110,7 +1110,7 @@ export function AddProjectNewScreen(props: { readonly environmentId?: string | s
                 isFirst
                 right={
                   <ThemedSwitch
-                    accessibilityLabel="Create private repository on GitHub"
+                    accessibilityLabel="create private repository on GitHub"
                     value={publishesToGitHub}
                     onValueChange={setPublishesToGitHub}
                   />
@@ -1120,15 +1120,15 @@ export function AddProjectNewScreen(props: { readonly environmentId?: string | s
             </ListSection>
           ) : null}
           <PrimaryActionButton
-            label="Create project"
+            label="create project"
             disabled={isSubmitting || trimmedName.length === 0}
             onPress={() => void submit()}
             loading={isSubmitting}
           />
           <ListSection>
             <ListRow
-              title="Add existing project"
-              subtitle="Open a folder or clone a repository"
+              title="add existing project"
+              subtitle="open a folder or clone a repository"
               icon={
                 <SymbolView
                   name="folder.badge.plus"
@@ -1187,7 +1187,7 @@ export function AddProjectLocalFolderScreen(props: { readonly environmentId?: st
   }, [createProject, environment, isBrowseNavigating, isSubmitting, pathInput]);
 
   return (
-    <AddProjectShell title="Local folder">
+    <AddProjectShell title="local folder">
       {error ? <ErrorBanner message={error} /> : null}
       {environment ? (
         <>
@@ -1330,7 +1330,7 @@ export function AddProjectDestinationScreen(props: {
   ]);
 
   return (
-    <AddProjectShell title="Clone destination">
+    <AddProjectShell title="clone destination">
       {error ? <ErrorBanner message={error} /> : null}
       {repositoryTitle ? (
         <View className="rounded-[24px] bg-card px-4 py-3">

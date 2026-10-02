@@ -44,13 +44,13 @@ type Props = Parameters<typeof SharedCustomSnoozeSheet>[0];
 const roundedCorner = Shape.RoundedCorner;
 
 const modes = [
-  { value: "date", label: "Date and time" },
-  { value: "duration", label: "Duration" },
+  { value: "date", label: "date and time" },
+  { value: "duration", label: "duration" },
 ] as const;
 const units = [
-  { value: "minutes", label: "Minutes" },
-  { value: "hours", label: "Hours" },
-  { value: "days", label: "Days" },
+  { value: "minutes", label: "minutes" },
+  { value: "hours", label: "hours" },
+  { value: "days", label: "days" },
 ] as const;
 
 function systemUses24HourClock() {

@@ -23,12 +23,12 @@ const ENTER_BEHAVIOR_OPTIONS: ReadonlyArray<{
   {
     behavior: "send",
     label: "send message",
-    description: "Return sends the message. Shift-Return inserts a new line.",
+    description: "return sends the message. Shift-Return inserts a new line.",
   },
   {
     behavior: "newline",
     label: "insert new line",
-    description: "Return inserts a new line. Command-Return sends the message.",
+    description: "return inserts a new line. Command-Return sends the message.",
   },
 ];
 
@@ -57,7 +57,7 @@ export function SettingsKeyboardRouteScreen() {
         contentContainerClassName="gap-3 px-5 pt-4"
         contentContainerStyle={{ paddingBottom: Math.max(insets.bottom, 18) + 18 }}
       >
-        <SettingsSection title="Return key">
+        <SettingsSection title="return key">
           {ENTER_BEHAVIOR_OPTIONS.map((option, index) => (
             <Pressable
               key={option.behavior}

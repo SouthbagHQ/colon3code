@@ -218,7 +218,7 @@ export function FontFamilyPicker({
       </ComboboxTrigger>
       <ComboboxPopup align="end" className="flex w-72 flex-col">
         <ComboboxSearchInput
-          placeholder="Search fonts…"
+          placeholder="search fonts…"
           value={query}
           onChange={(event) => setQuery(event.target.value)}
         />

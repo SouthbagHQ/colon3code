@@ -46,7 +46,7 @@ describe("available cloud environment presentation", () => {
       }),
     ).toMatchObject({
       connectionState: "unsupported",
-      statusText: "Client not supported",
+      statusText: "client not supported",
     });
   });
 

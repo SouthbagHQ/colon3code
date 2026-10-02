@@ -40,10 +40,10 @@ export interface DescriptorPreset {
 }
 
 const EFFORT_CHOICES = [
-  { id: "low", label: "Low" },
-  { id: "medium", label: "Medium", isDefault: true },
-  { id: "high", label: "High" },
-  { id: "xhigh", label: "Extra High" },
+  { id: "low", label: "low" },
+  { id: "medium", label: "medium", isDefault: true },
+  { id: "high", label: "high" },
+  { id: "xhigh", label: "extra high" },
 ] as const;
 
 /**
@@ -55,66 +55,66 @@ export const DESCRIPTOR_PRESETS_BY_KIND: Partial<
   Record<ProviderDriverKind, ReadonlyArray<DescriptorPreset>>
 > = {
   [ProviderDriverKind.make("codex")]: [
-    { id: "reasoningEffort", label: "Reasoning", type: "select", choices: EFFORT_CHOICES },
+    { id: "reasoningEffort", label: "reasoning", type: "select", choices: EFFORT_CHOICES },
     {
       id: "serviceTier",
-      label: "Speed",
+      label: "speed",
       type: "select",
       choices: [
-        { id: "default", label: "Standard", isDefault: true },
-        { id: "fast", label: "Fast" },
+        { id: "default", label: "standard", isDefault: true },
+        { id: "fast", label: "fast" },
       ],
     },
   ],
   [ProviderDriverKind.make("claudeAgent")]: [
     {
       id: "effort",
-      label: "Reasoning",
+      label: "reasoning",
       type: "select",
       choices: [
-        { id: "low", label: "Low" },
-        { id: "medium", label: "Medium" },
-        { id: "high", label: "High", isDefault: true },
-        { id: "xhigh", label: "Extra High" },
-        { id: "max", label: "Max" },
+        { id: "low", label: "low" },
+        { id: "medium", label: "medium" },
+        { id: "high", label: "high", isDefault: true },
+        { id: "xhigh", label: "extra high" },
+        { id: "max", label: "max" },
       ],
     },
-    { id: "fastMode", label: "Fast Mode", type: "boolean" },
-    { id: "thinking", label: "Thinking", type: "boolean" },
+    { id: "fastMode", label: "fast mode", type: "boolean" },
+    { id: "thinking", label: "thinking", type: "boolean" },
   ],
   [ProviderDriverKind.make("cursor")]: [
-    { id: "reasoning", label: "Reasoning", type: "select", choices: EFFORT_CHOICES },
-    { id: "fastMode", label: "Fast Mode", type: "boolean" },
-    { id: "thinking", label: "Thinking", type: "boolean" },
+    { id: "reasoning", label: "reasoning", type: "select", choices: EFFORT_CHOICES },
+    { id: "fastMode", label: "fast mode", type: "boolean" },
+    { id: "thinking", label: "thinking", type: "boolean" },
   ],
   [ProviderDriverKind.make("grok")]: [
-    { id: "reasoningEffort", label: "Reasoning", type: "select", choices: EFFORT_CHOICES },
+    { id: "reasoningEffort", label: "reasoning", type: "select", choices: EFFORT_CHOICES },
   ],
   [SOUTHBAG_CODE_DRIVER_KIND]: [
     // Mirrors the RPC `set_thinking_level` levels.
     {
       id: "thinkingLevel",
-      label: "Thinking",
+      label: "thinking",
       type: "select",
       choices: [
-        { id: "off", label: "Off" },
-        { id: "minimal", label: "Minimal" },
-        { id: "low", label: "Low" },
-        { id: "medium", label: "Medium", isDefault: true },
-        { id: "high", label: "High" },
-        { id: "xhigh", label: "Extra High" },
+        { id: "off", label: "off" },
+        { id: "minimal", label: "minimal" },
+        { id: "low", label: "low" },
+        { id: "medium", label: "medium", isDefault: true },
+        { id: "high", label: "high" },
+        { id: "xhigh", label: "extra high" },
       ],
     },
   ],
   [ProviderDriverKind.make("opencode")]: [
-    { id: "variant", label: "Reasoning", type: "select", choices: EFFORT_CHOICES },
+    { id: "variant", label: "reasoning", type: "select", choices: EFFORT_CHOICES },
     {
       id: "agent",
-      label: "Agent",
+      label: "agent",
       type: "select",
       choices: [
-        { id: "build", label: "Build", isDefault: true },
-        { id: "plan", label: "Plan" },
+        { id: "build", label: "build", isDefault: true },
+        { id: "plan", label: "plan" },
       ],
     },
   ],

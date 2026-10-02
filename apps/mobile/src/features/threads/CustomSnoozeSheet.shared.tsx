@@ -41,16 +41,16 @@ export function CustomSnoozeSheet(props: {
           contentContainerStyle={{ padding: 24, paddingBottom: 24, gap: 20 }}
         >
           <AppText accessibilityRole="header" className="text-xl font-t3-semibold">
-            Custom snooze
+            custom snooze
           </AppText>
           <AppText className="text-base text-foreground-secondary">
-            Choose when snoozed threads return to your inbox.
+            choose when snoozed threads return to your inbox.
           </AppText>
           <SegmentedControl
             options={
               [
-                { value: "date", label: "Date and time" },
-                { value: "duration", label: "Duration" },
+                { value: "date", label: "date and time" },
+                { value: "duration", label: "duration" },
               ] as const
             }
             selected={mode}
@@ -104,7 +104,7 @@ export function CustomSnoozeSheet(props: {
             <View className="gap-3">
               <AppText>Snooze for</AppText>
               <TextInput
-                accessibilityLabel="Duration"
+                accessibilityLabel="duration"
                 className="min-h-12 rounded-xl bg-subtle px-3 text-base text-foreground"
                 keyboardType="decimal-pad"
                 value={amount}

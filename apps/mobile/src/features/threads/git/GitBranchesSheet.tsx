@@ -76,7 +76,7 @@ export function GitBranchesSheet(_props: GitBranchesSheetProps) {
       ) : null}
       {Platform.OS === "android" ? (
         <AndroidSheetHeader
-          title="Branches & worktrees"
+          title="branches & worktrees"
           onBack={() => navigation.goBack()}
           hideBottomBorder
         />
@@ -96,18 +96,18 @@ export function GitBranchesSheet(_props: GitBranchesSheetProps) {
         >
           <View className="bg-card android:gap-3 android:rounded-[20px] android:p-4 ios:gap-2 ios:rounded-[18px] ios:border ios:border-border ios:px-4 ios:py-4">
             <Text className="android:text-foreground android:text-base android:font-t3-medium ios:text-foreground-secondary ios:text-2xs ios:font-t3-bold ios:tracking-[1px] ios:uppercase">
-              New branch
+              new branch
             </Text>
             <TextInput
               value={newBranchName}
               onChangeText={setNewBranchName}
               placeholder="feature/mobile-polish"
-              accessibilityLabel="New branch name"
+              accessibilityLabel="new branch name"
               className="android:rounded-xl android:bg-sheet-solid ios:rounded-[18px]"
             />
             <SheetActionButton
               icon="plus"
-              label="Create & checkout"
+              label="create & checkout"
               tone="primary"
               disabled={busy || newBranchName.trim().length === 0}
               onPress={() => {
@@ -123,7 +123,7 @@ export function GitBranchesSheet(_props: GitBranchesSheetProps) {
 
           <View className="bg-card android:gap-3 android:rounded-[20px] android:p-4 ios:gap-2 ios:rounded-[18px] ios:border ios:border-border ios:px-4 ios:py-4">
             <Text className="android:text-foreground android:text-base android:font-t3-medium ios:text-foreground-secondary ios:text-2xs ios:font-t3-bold ios:tracking-[1px] ios:uppercase">
-              New worktree
+              new worktree
             </Text>
             {Platform.OS === "android" ? (
               <Text className="text-foreground-secondary text-sm">Base branch</Text>
@@ -132,7 +132,7 @@ export function GitBranchesSheet(_props: GitBranchesSheetProps) {
               value={worktreeBaseBranch}
               onChangeText={setWorktreeBaseBranch}
               placeholder="main"
-              accessibilityLabel="Worktree base branch"
+              accessibilityLabel="worktree base branch"
               className="android:rounded-xl android:bg-sheet-solid ios:rounded-[18px]"
             />
             {Platform.OS === "android" ? (
@@ -142,12 +142,12 @@ export function GitBranchesSheet(_props: GitBranchesSheetProps) {
               value={worktreeBranchName}
               onChangeText={setWorktreeBranchName}
               placeholder="feature/mobile-thread"
-              accessibilityLabel="Worktree branch name"
+              accessibilityLabel="worktree branch name"
               className="android:rounded-xl android:bg-sheet-solid ios:rounded-[18px]"
             />
             <SheetActionButton
               icon="square.split.2x1"
-              label="Create worktree"
+              label="create worktree"
               tone="primary"
               disabled={
                 busy ||
@@ -170,16 +170,16 @@ export function GitBranchesSheet(_props: GitBranchesSheetProps) {
 
           <View className="gap-2">
             <Text className="text-foreground-secondary android:px-4 android:pb-1 android:pt-3 android:text-sm android:font-t3-medium ios:text-2xs ios:font-t3-bold ios:tracking-[1px] ios:uppercase">
-              Existing branches
+              existing branches
             </Text>
             {branchesLoading ? (
               <Text className="text-foreground-secondary text-sm font-medium android:px-4">
-                Loading branches...
+                loading branches…
               </Text>
             ) : null}
             {!branchesLoading && availableBranches.length === 0 ? (
               <Text className="text-foreground-secondary text-sm font-medium android:px-4">
-                No local branches found.
+                no local branches found.
               </Text>
             ) : null}
             {availableBranches.map((branch) => {

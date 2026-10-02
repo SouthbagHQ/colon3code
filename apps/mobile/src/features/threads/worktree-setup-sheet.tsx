@@ -40,7 +40,7 @@ export function WorktreeSetupSheet({ children, height, onClose }: WorktreeSetupS
           >
             {children}
             <NativeHeader
-              title="Worktree setup"
+              title="worktree setup"
               titleColorClassName="accent-foreground"
               tintColorClassName="accent-foreground"
               backgroundColorClassName="bg-sheet-solid"
@@ -50,9 +50,9 @@ export function WorktreeSetupSheet({ children, height, onClose }: WorktreeSetupS
               headerRightBarButtonItems={[
                 {
                   type: "button",
-                  title: "Done",
+                  title: "done",
                   variant: "done",
-                  accessibilityLabel: "Close setup details",
+                  accessibilityLabel: "close setup details",
                   identifier: "worktree-setup-done",
                   onPress: onClose,
                 },

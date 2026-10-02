@@ -431,7 +431,7 @@ export function ThreadGitControls(props: ThreadGitControlsProps) {
       ) : null}
       {showActionControls ? (
         <NativeHeaderToolbar.Menu
-          accessibilityLabel="Open terminal"
+          accessibilityLabel="open terminal"
           icon="terminal"
           disabled={!props.canOpenTerminal}
           separateBackground
@@ -544,17 +544,17 @@ function threadGitMenuDefinition(
       },
       {
         id: "git-review",
-        title: "Review changes",
+        title: "review changes",
         icon: "text.bubble",
         disabled: !model.isRepo,
-        subtitle: "Turn diffs and worktree changes",
+        subtitle: "turn diffs and worktree changes",
         onPress: model.openReview,
       },
       {
         id: "git-more",
-        title: "More",
+        title: "more",
         icon: "ellipsis",
-        subtitle: "Commit, files, branches",
+        subtitle: "commit, files, branches",
         onPress: model.openGitInspector,
       },
     ],

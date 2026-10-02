@@ -9,28 +9,28 @@ describe("resolvePullRequestState", () => {
       "open",
       { state: "open", isDraft: false },
       PullRequestGlyph.pullRequest,
-      "Open",
+      "open",
       "text-emerald-600 dark:text-emerald-300/90",
     ],
     [
       "draft",
       { state: "open", isDraft: true },
       PullRequestGlyph.draft,
-      "Draft",
+      "draft",
       "text-zinc-500 dark:text-zinc-400/80",
     ],
     [
       "closed",
       { state: "closed", isDraft: false },
       PullRequestGlyph.closed,
-      "Closed",
+      "closed",
       "text-red-600 dark:text-red-300/90",
     ],
     [
       "merged",
       { state: "merged", isDraft: false },
       PullRequestGlyph.merged,
-      "Merged",
+      "merged",
       "text-violet-600 dark:text-violet-300/90",
     ],
   ] as const)(
@@ -47,14 +47,14 @@ describe("resolvePullRequestState", () => {
   it("keeps a merged pull request merged when stale draft metadata is also present", () => {
     expect(resolvePullRequestState({ state: "merged", isDraft: true })).toMatchObject({
       Icon: PullRequestGlyph.merged,
-      label: "Merged",
+      label: "merged",
     });
   });
 
   it("keeps a closed pull request closed when stale draft metadata is also present", () => {
     expect(resolvePullRequestState({ state: "closed", isDraft: true })).toMatchObject({
       Icon: PullRequestGlyph.closed,
-      label: "Closed",
+      label: "closed",
     });
   });
 
@@ -68,7 +68,7 @@ describe("resolvePullRequestState", () => {
 
     expect(resolvePullRequestState(input)).toMatchObject({
       Icon: PullRequestGlyph.pullRequest,
-      label: "Open",
+      label: "open",
     });
     expect(resolvePullRequestConflict(input)).toMatchObject({
       Icon: PullRequestGlyph.conflicting,

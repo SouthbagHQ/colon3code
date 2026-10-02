@@ -33,14 +33,14 @@ export function codexFeedbackNotice(submission: CodexFeedbackSubmission) {
     case "interrupted":
       return null;
     case "uploading":
-      return { title: "Sending feedback to OpenAI...", description: undefined };
+      return { title: "sending feedback to OpenAI...", description: undefined };
     case "sent":
       return {
-        title: "Feedback sent to OpenAI",
+        title: "feedback sent to OpenAI",
         description: `Thread ID: ${submission.feedbackId}`,
       };
     case "failed":
-      return { title: "Could not send feedback to OpenAI", description: submission.errorMessage };
+      return { title: "could not send feedback to OpenAI", description: submission.errorMessage };
   }
 }
 

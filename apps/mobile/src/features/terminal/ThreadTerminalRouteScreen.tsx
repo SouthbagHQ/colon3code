@@ -96,24 +96,24 @@ function TerminalHeader(props: {
 }) {
   return (
     <ScreenHeader
-      title="Terminal"
+      title="terminal"
       subtitle={props.subtitle}
       onBack={props.onCloseTerminal}
       backInSplitView={{
-        accessibilityLabel: "Back to chat",
+        accessibilityLabel: "back to chat",
         icon: "chevron.left",
       }}
       menus={
         props.isEnvironmentReady
           ? [
               {
-                title: "Terminal options",
+                title: "terminal options",
                 icon: "terminal",
                 status: getTerminalStatusLabel(props.status),
                 items: [
                   {
                     id: "text-size",
-                    title: "Text size",
+                    title: "text size",
                     icon: "textformat.size",
                     inline: true,
                     items: [
@@ -149,7 +149,7 @@ function TerminalHeader(props: {
                   })),
                   {
                     id: "terminal-new",
-                    title: "Open new terminal",
+                    title: "open new terminal",
                     icon: "plus",
                     subtitle: `Start another shell in ${basename(props.workspaceRoot) ?? "this workspace"}`,
                     onPress: props.onOpenNewTerminal,
@@ -1279,7 +1279,7 @@ export function ThreadTerminalRouteScreen(props: ThreadTerminalRouteScreenProps)
                   ) : null}
                   <View className="flex-1" />
                   <MaterialIconButton
-                    accessibilityLabel="Show keyboard"
+                    accessibilityLabel="show keyboard"
                     icon="keyboard"
                     onPress={handleShowKeyboard}
                   />
@@ -1338,7 +1338,7 @@ export function ThreadTerminalRouteScreen(props: ThreadTerminalRouteScreenProps)
                         })}
                       </ComposerToolbarScroller>
                       <ComposerToolbarButton
-                        accessibilityLabel="Dismiss keyboard"
+                        accessibilityLabel="dismiss keyboard"
                         icon={{ ios: "keyboard.chevron.compact.down", android: "keyboard_hide" }}
                         onPress={handleDismissKeyboard}
                         showChevron={false}
@@ -1348,7 +1348,7 @@ export function ThreadTerminalRouteScreen(props: ThreadTerminalRouteScreenProps)
                 </KeyboardStickyView>
               ) : !keyboardState.isVisible && Platform.OS !== "android" ? (
                 <Pressable
-                  accessibilityLabel="Show keyboard"
+                  accessibilityLabel="show keyboard"
                   accessibilityRole="button"
                   onPress={handleShowKeyboard}
                   style={({ pressed }) => ({

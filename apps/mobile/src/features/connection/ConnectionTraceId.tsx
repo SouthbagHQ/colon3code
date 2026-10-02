@@ -22,7 +22,7 @@ export function ConnectionTraceId({
         }
         accessibilityLabel={`Copy trace ID ${traceId}`}
         accessibilityRole="button"
-        accessibilityActions={[{ name: "activate", label: "Copy trace ID" }]}
+        accessibilityActions={[{ name: "activate", label: "copy trace ID" }]}
         onAccessibilityAction={(event) => {
           event.stopPropagation();
           if (event.nativeEvent.actionName === "activate") copy();

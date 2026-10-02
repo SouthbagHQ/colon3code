@@ -1060,8 +1060,8 @@ function ThreadSettingsModelsScreen() {
   }, [presentation, session]);
   const providerFilters = useMemo(
     () => [
-      { id: "all-providers", title: "All providers", value: null },
-      { id: "favorites", title: "Favorites", value: FAVORITES_PROVIDER_FILTER },
+      { id: "all-providers", title: "all providers", value: null },
+      { id: "favorites", title: "favorites", value: FAVORITES_PROVIDER_FILTER },
       ...session.providerGroups.map((group) => ({
         id: `provider:${group.providerKey}`,
         title: group.providerLabel,

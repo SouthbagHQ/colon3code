@@ -28,7 +28,7 @@ function errorDetails(error: unknown, componentStack?: string): string {
   try {
     description = error instanceof Error ? (error.stack ?? error.message) : String(error);
   } catch {
-    description = "Unknown render error";
+    description = "unknown render error";
   }
   return componentStack ? `${description}\nComponent stack:\n${componentStack}` : description;
 }
@@ -101,15 +101,15 @@ export function RenderFailureView(
         {title}
       </Text>
       <Text className="text-center text-sm text-foreground-muted">
-        Try again. If it keeps happening, copy the details for a bug report.
+        try again. If it keeps happening, copy the details for a bug report.
       </Text>
       <Text selectable className="text-center font-mono text-xs text-danger-foreground">
         {props.details.split("\n", 1)[0]?.slice(0, 300)}
       </Text>
       <View className="w-full max-w-xs gap-2">
-        <MaterialButton label="Try again" onPress={props.retry} tone="primary" fullWidth />
+        <MaterialButton label="try again" onPress={props.retry} tone="primary" fullWidth />
         <MaterialButton
-          label="Copy details"
+          label="copy details"
           onPress={() => copyTextWithHaptic(props.details, { target: "error details" })}
           fullWidth
         />

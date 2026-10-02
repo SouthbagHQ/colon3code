@@ -59,13 +59,13 @@ function useDeviceRegistered(): boolean {
 export function SettingsNotificationsRouteScreen() {
   if (!hasCloudPublicConfig()) {
     return (
-      <SettingsScreen title="Notifications">
+      <SettingsScreen title="notifications">
         <ScrollView
           contentInsetAdjustmentBehavior="automatic"
           contentContainerClassName="px-5 pt-4"
         >
           <Text className="text-base text-foreground-muted">
-            Notifications require T3 Connect in this app build.
+            notifications require T3 Connect in this app build.
           </Text>
         </ScrollView>
       </SettingsScreen>
@@ -416,7 +416,7 @@ function ConfiguredSettingsNotificationsRouteScreen() {
   );
 
   return (
-    <SettingsScreen title="Notifications">
+    <SettingsScreen title="notifications">
       <ScrollView
         contentInsetAdjustmentBehavior="automatic"
         showsVerticalScrollIndicator={false}
@@ -426,10 +426,10 @@ function ConfiguredSettingsNotificationsRouteScreen() {
           paddingBottom: Math.max(insets.bottom, 18) + 18,
         }}
       >
-        <SettingsSection title="Agent activity">
+        <SettingsSection title="agent activity">
           <SettingsSwitchRow
             icon="bell.badge"
-            label="Device Notifications"
+            label="device notifications"
             disabled={
               !agentAwarenessPlatform.supported ||
               !agentAwarenessPushAvailable ||
@@ -474,7 +474,7 @@ function ConfiguredSettingsNotificationsRouteScreen() {
           {liveActivityStatus === "signed-out" && canClearLiveActivitiesPreference ? (
             <SettingsRow
               icon="bolt.circle"
-              label="Turn off Live Activity preference"
+              label="turn off Live Activity preference"
               onPress={() => handleLiveActivitiesChange(false)}
             />
           ) : null}

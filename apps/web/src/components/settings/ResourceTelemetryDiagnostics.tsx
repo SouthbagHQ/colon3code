@@ -594,7 +594,7 @@ function ProcessTable({
             {visible.length === 0 ? (
               <tr>
                 <td colSpan={11} className="px-4 py-5 text-xs text-muted-foreground sm:px-5">
-                  Waiting for the native process monitor.
+                  waiting for the native process monitor.
                 </td>
               </tr>
             ) : null}
@@ -695,7 +695,7 @@ function HistoryProcessTable({
             {processes.length === 0 ? (
               <tr>
                 <td colSpan={9} className="px-4 py-5 text-xs text-muted-foreground sm:px-5">
-                  No retained process samples in this window.
+                  no retained process samples in this window.
                 </td>
               </tr>
             ) : null}

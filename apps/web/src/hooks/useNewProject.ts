@@ -55,7 +55,7 @@ export function useNewProject() {
           toastManager.add(
             stackedThreadToast({
               type: "error",
-              title: "Could not create the GitHub repository",
+              title: "could not create the GitHub repository",
               description: `${errorMessage(squashAtomCommandFailure(result))} Use Publish Repository in the Git menu to try again.`,
             }),
           );
@@ -65,7 +65,7 @@ export function useNewProject() {
       toastManager.add(
         stackedThreadToast({
           type: "success",
-          title: "Published to GitHub",
+          title: "published to GitHub",
           description: result.value.repository.nameWithOwner,
         }),
       );
@@ -88,7 +88,7 @@ export function useNewProject() {
           toastManager.add(
             stackedThreadToast({
               type: "error",
-              title: "Could not create the project",
+              title: "could not create the project",
               description: errorMessage(squashAtomCommandFailure(result)),
             }),
           );
@@ -124,7 +124,7 @@ export function useNewProject() {
         toastManager.add(
           stackedThreadToast({
             type: "error",
-            title: "Failed to open project",
+            title: "failed to open project",
             description: `${errorMessage(error)} It will appear in the sidebar once this client catches up.`,
           }),
         );
@@ -135,7 +135,7 @@ export function useNewProject() {
         toastManager.add(
           stackedThreadToast({
             type: "error",
-            title: "Failed to open project",
+            title: "failed to open project",
             description: errorMessage(error),
           }),
         );

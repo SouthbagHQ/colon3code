@@ -746,7 +746,7 @@ export function PullRequestDetailPanel({
   const onCheckoutCommandError = useCallback((error: Error) => {
     toastManager.add({
       type: "error",
-      title: "Could not copy checkout command",
+      title: "could not copy checkout command",
       description: error.message,
     });
   }, []);
@@ -1552,7 +1552,7 @@ export function PullRequestDetailPanel({
             <span className="flex min-w-0 flex-col">
               <span>In a separate worktree</span>
               <span className="text-xs text-muted-foreground">
-                Its own folder and thread. Nothing you have open moves.
+                its own folder and thread. Nothing you have open moves.
               </span>
             </span>
           </MenuItem>
@@ -2031,7 +2031,7 @@ export function PullRequestDetailPanel({
                     <span className="flex min-w-0 flex-col">
                       <span>{handoff === "explain" ? "opening…" : "explain this PR"}</span>
                       <span className="text-xs text-muted-foreground">
-                        A walk through the diff and what to read closely.
+                        a walk through the diff and what to read closely.
                       </span>
                     </span>
                   </MenuItem>
@@ -2257,7 +2257,7 @@ export function PullRequestDetailPanel({
                       >
                         {isStackedPullRequest ? (
                           <PullRequestGlyph.stack
-                            aria-label="Stacked pull request"
+                            aria-label="stacked pull request"
                             className="size-3 shrink-0"
                           />
                         ) : null}
@@ -2272,7 +2272,7 @@ export function PullRequestDetailPanel({
                             <span className="inline-flex min-w-0 max-w-[40%] shrink-0 items-center gap-1">
                               {isStackedPullRequest ? (
                                 <PullRequestGlyph.stack
-                                  aria-label="Stacked pull request"
+                                  aria-label="stacked pull request"
                                   className="size-3 shrink-0"
                                 />
                               ) : null}
@@ -2444,7 +2444,7 @@ export function PullRequestDetailPanel({
                       >
                         {isStackedPullRequest ? (
                           <PullRequestGlyph.stack
-                            aria-label="Stacked pull request"
+                            aria-label="stacked pull request"
                             className="size-3 shrink-0"
                           />
                         ) : null}
@@ -2459,7 +2459,7 @@ export function PullRequestDetailPanel({
                             <span className="inline-flex min-w-0 max-w-[40%] shrink-0 items-center gap-1">
                               {isStackedPullRequest ? (
                                 <PullRequestGlyph.stack
-                                  aria-label="Stacked pull request"
+                                  aria-label="stacked pull request"
                                   className="size-3 shrink-0"
                                 />
                               ) : null}

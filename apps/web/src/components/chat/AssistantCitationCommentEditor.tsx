@@ -47,7 +47,7 @@ export function AssistantCitationCommentEditor({
       <textarea
         ref={inputRef}
         aria-label="comment on selected text"
-        aria-description="Enter to save the citation comment; Cmd/Ctrl+Enter to save and send; Shift+Enter for a new line."
+        aria-description="enter to save the citation comment; Cmd/Ctrl+Enter to save and send; Shift+Enter for a new line."
         aria-invalid={commentTooLong || undefined}
         placeholder="add a little note if you like ^w^"
         rows={2}

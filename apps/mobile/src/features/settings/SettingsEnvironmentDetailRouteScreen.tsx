@@ -152,11 +152,11 @@ function EnvironmentDetail({ environmentId }: { readonly environmentId: Environm
       >
         {!environment ? (
           <Text className="text-base text-foreground-muted">
-            This environment is no longer saved on this device.
+            this environment is no longer saved on this device.
           </Text>
         ) : (
           <>
-            <SettingsSection title="Connection">
+            <SettingsSection title="connection">
               <ConnectionEnvironmentRow
                 environment={environment}
                 expanded={connectionExpanded}
@@ -169,7 +169,7 @@ function EnvironmentDetail({ environmentId }: { readonly environmentId: Environm
             </SettingsSection>
             {!connected ? (
               <Text className="px-2 text-sm text-foreground-muted">
-                Connect this environment to manage it.
+                connect this environment to manage it.
               </Text>
             ) : !allowed ? (
               <Text className="px-2 text-sm text-foreground-muted">
@@ -219,7 +219,7 @@ function EnvironmentDetail({ environmentId }: { readonly environmentId: Environm
                   </View>
                   <SettingsActionRow
                     icon="arrow.clockwise"
-                    label="Check for updates"
+                    label="check for updates"
                     disabled={disabled}
                     loading={pending === "check"}
                     onPress={() => {
@@ -255,10 +255,10 @@ function EnvironmentDetail({ environmentId }: { readonly environmentId: Environm
                     />
                   ) : null}
                 </SettingsSection>
-                <SettingsSection title="Providers">
+                <SettingsSection title="providers">
                   <SettingsActionRow
                     icon="arrow.clockwise"
-                    label="Refresh providers"
+                    label="refresh providers"
                     disabled={disabled}
                     loading={pending === "refresh"}
                     onPress={() => {
@@ -315,7 +315,7 @@ function EnvironmentDetail({ environmentId }: { readonly environmentId: Environm
                           {provider.versionAdvisory?.status === "behind_latest" &&
                           !provider.versionAdvisory.canUpdate ? (
                             <Text className="text-sm text-foreground-muted">
-                              Update this provider on the environment's machine.
+                              update this provider on the environment's machine.
                             </Text>
                           ) : null}
                         </View>

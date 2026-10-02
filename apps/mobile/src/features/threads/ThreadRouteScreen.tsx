@@ -111,7 +111,7 @@ function ThreadHeader(
     const actions: ScreenHeaderAction[] = [];
     if (props.onReturnToThread) {
       actions.push({
-        accessibilityLabel: "Return to chat",
+        accessibilityLabel: "return to chat",
         icon: "chevron.left",
         onPress: props.onReturnToThread,
       });
@@ -127,13 +127,13 @@ function ThreadHeader(
     }
     if (props.hasWorkspaceRoot) {
       actions.push({
-        accessibilityLabel: "Open terminal",
+        accessibilityLabel: "open terminal",
         icon: "terminal",
         onPress: () => onOpenTerminal(null),
       });
     }
     actions.push({
-      accessibilityLabel: "Open git controls",
+      accessibilityLabel: "open git controls",
       icon: "point.topleft.down.curvedto.point.bottomright.up",
       onPress: props.onOpenGitInspector,
     });

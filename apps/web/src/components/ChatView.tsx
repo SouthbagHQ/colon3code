@@ -7421,7 +7421,7 @@ export default function ChatView(props: ChatViewProps) {
       toastManager.add(
         stackedThreadToast({
           type: "warning",
-          title: "Choose models and a base branch",
+          title: "choose models and a base branch",
           description:
             "Multiple models need a new thread in a Git project. Each gets its own worktree.",
         }),
@@ -8149,7 +8149,7 @@ export default function ChatView(props: ChatViewProps) {
             const recoveryToastId = toastManager.add(
               stackedThreadToast({
                 type: "error",
-                title: "A background prompt could not be sent",
+                title: "a background prompt could not be sent",
                 description:
                   "Your newer draft is unchanged. Restore the failed prompt when this composer is empty.",
                 timeout: 0,

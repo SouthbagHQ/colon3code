@@ -75,7 +75,7 @@ export function buildMenuItems(
   return [
     {
       id: "commit",
-      label: "Commit",
+      label: "commit",
       disabled: !canCommit,
       icon: "commit",
       kind: "open_dialog",
@@ -83,7 +83,7 @@ export function buildMenuItems(
     },
     {
       id: "push",
-      label: "Push",
+      label: "push",
       disabled: !canPush,
       icon: "push",
       kind: "open_dialog",
@@ -92,14 +92,14 @@ export function buildMenuItems(
     hasOpenPr
       ? {
           id: "pr",
-          label: "View PR",
+          label: "view PR",
           disabled: !canOpenPr,
           icon: "pr",
           kind: "open_pr",
         }
       : {
           id: "pr",
-          label: "Create PR",
+          label: "create PR",
           disabled: !canCreatePr,
           icon: "pr",
           kind: "open_dialog",
@@ -115,12 +115,12 @@ export function resolveQuickAction(
   hasOriginRemote = true,
 ): GitQuickAction {
   if (isBusy) {
-    return { label: "Commit", disabled: true, kind: "show_hint", hint: "Git action in progress." };
+    return { label: "commit", disabled: true, kind: "show_hint", hint: "Git action in progress." };
   }
 
   if (!gitStatus) {
     return {
-      label: "Commit",
+      label: "commit",
       disabled: true,
       kind: "show_hint",
       hint: "Git status is unavailable.",
@@ -136,7 +136,7 @@ export function resolveQuickAction(
 
   if (!hasBranch) {
     return {
-      label: "Commit",
+      label: "commit",
       disabled: true,
       kind: "show_hint",
       hint: "Create and checkout a branch before pushing or opening a PR.",
@@ -145,13 +145,13 @@ export function resolveQuickAction(
 
   if (hasChanges) {
     if (!gitStatus.hasUpstream && !hasOriginRemote) {
-      return { label: "Commit", disabled: false, kind: "run_action", action: "commit" };
+      return { label: "commit", disabled: false, kind: "run_action", action: "commit" };
     }
     if (hasOpenPr || isDefaultBranch) {
-      return { label: "Commit & push", disabled: false, kind: "run_action", action: "commit_push" };
+      return { label: "commit & push", disabled: false, kind: "run_action", action: "commit_push" };
     }
     return {
-      label: "Commit, push & PR",
+      label: "commit, push & PR",
       disabled: false,
       kind: "run_action",
       action: "commit_push_pr",
@@ -161,10 +161,10 @@ export function resolveQuickAction(
   if (!gitStatus.hasUpstream) {
     if (!hasOriginRemote) {
       if (hasOpenPr && !isAhead) {
-        return { label: "View PR", disabled: false, kind: "open_pr" };
+        return { label: "view PR", disabled: false, kind: "open_pr" };
       }
       return {
-        label: "Push",
+        label: "push",
         disabled: true,
         kind: "show_hint",
         hint: 'Add an "origin" remote before pushing or creating a PR.',
@@ -172,10 +172,10 @@ export function resolveQuickAction(
     }
     if (!isAhead) {
       if (hasOpenPr) {
-        return { label: "View PR", disabled: false, kind: "open_pr" };
+        return { label: "view PR", disabled: false, kind: "open_pr" };
       }
       return {
-        label: "Push",
+        label: "push",
         disabled: true,
         kind: "show_hint",
         hint: "No local commits to push.",
@@ -183,14 +183,14 @@ export function resolveQuickAction(
     }
     if (hasOpenPr || isDefaultBranch) {
       return {
-        label: "Push",
+        label: "push",
         disabled: false,
         kind: "run_action",
         action: isDefaultBranch ? "commit_push" : "push",
       };
     }
     return {
-      label: "Push & create PR",
+      label: "push & create PR",
       disabled: false,
       kind: "run_action",
       action: "create_pr",
@@ -199,7 +199,7 @@ export function resolveQuickAction(
 
   if (isDiverged) {
     return {
-      label: "Sync branch",
+      label: "sync branch",
       disabled: true,
       kind: "show_hint",
       hint: "Branch has diverged from upstream. Rebase/merge first.",
@@ -208,7 +208,7 @@ export function resolveQuickAction(
 
   if (isBehind) {
     return {
-      label: "Pull",
+      label: "pull",
       disabled: false,
       kind: "run_pull",
     };
@@ -217,14 +217,14 @@ export function resolveQuickAction(
   if (isAhead) {
     if (hasOpenPr || isDefaultBranch) {
       return {
-        label: "Push",
+        label: "push",
         disabled: false,
         kind: "run_action",
         action: isDefaultBranch ? "commit_push" : "push",
       };
     }
     return {
-      label: "Push & create PR",
+      label: "push & create PR",
       disabled: false,
       kind: "run_action",
       action: "create_pr",
@@ -232,11 +232,11 @@ export function resolveQuickAction(
   }
 
   if (hasOpenPr && gitStatus.hasUpstream) {
-    return { label: "View PR", disabled: false, kind: "open_pr" };
+    return { label: "view PR", disabled: false, kind: "open_pr" };
   }
 
   return {
-    label: "Commit",
+    label: "commit",
     disabled: true,
     kind: "show_hint",
     hint: "Branch is up to date. No action needed.",
@@ -331,13 +331,13 @@ export function resolveDefaultBranchActionDialogCopy(input: {
   if (input.action === "push" || input.action === "commit_push") {
     if (input.includesCommit) {
       return {
-        title: "Commit & push to default branch?",
+        title: "commit & push to default branch?",
         description: `This action will commit and push changes${suffix}`,
         continueLabel: `Commit & push to ${branchLabel}`,
       };
     }
     return {
-      title: "Push to default branch?",
+      title: "push to default branch?",
       description: `This action will push local commits${suffix}`,
       continueLabel: `Push to ${branchLabel}`,
     };
@@ -345,13 +345,13 @@ export function resolveDefaultBranchActionDialogCopy(input: {
 
   if (input.includesCommit) {
     return {
-      title: "Commit, push & create PR from default branch?",
+      title: "commit, push & create PR from default branch?",
       description: `This action will commit, push, and create a PR${suffix}`,
       continueLabel: "Commit, push & create PR",
     };
   }
   return {
-    title: "Push & create PR from default branch?",
+    title: "push & create PR from default branch?",
     description: `This action will push local commits and create a PR${suffix}`,
     continueLabel: "Push & create PR",
   };

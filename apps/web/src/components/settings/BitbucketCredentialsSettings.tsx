@@ -22,7 +22,7 @@ const METHODS: Record<
   }
 > = {
   "access-token": {
-    label: "Access token",
+    label: "access token",
     description:
       "Scoped to one repository, project, or workspace. Create it in that item's Bitbucket settings.",
     link: "https://support.atlassian.com/bitbucket-cloud/docs/access-tokens/",

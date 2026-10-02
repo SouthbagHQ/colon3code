@@ -23,22 +23,22 @@ export interface PullRequestStatePresentation {
 
 export const PULL_REQUEST_STATE_PRESENTATION = {
   open: {
-    label: "Open",
+    label: "open",
     toneClassName: "text-emerald-600 dark:text-emerald-300/90",
     Icon: PullRequestGlyph.pullRequest,
   },
   draft: {
-    label: "Draft",
+    label: "draft",
     toneClassName: "text-zinc-500 dark:text-zinc-400/80",
     Icon: PullRequestGlyph.draft,
   },
   closed: {
-    label: "Closed",
+    label: "closed",
     toneClassName: "text-red-600 dark:text-red-300/90",
     Icon: PullRequestGlyph.closed,
   },
   merged: {
-    label: "Merged",
+    label: "merged",
     toneClassName: "text-violet-600 dark:text-violet-300/90",
     Icon: PullRequestGlyph.merged,
   },

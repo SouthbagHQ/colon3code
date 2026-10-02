@@ -18,7 +18,7 @@ function reportScratchFailure(error: unknown) {
   toastManager.add(
     stackedThreadToast({
       type: "error",
-      title: "Could not start without a project",
+      title: "could not start without a project",
       description: error instanceof Error ? error.message : "An error occurred.",
     }),
   );

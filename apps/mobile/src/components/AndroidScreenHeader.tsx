@@ -110,7 +110,7 @@ export function AndroidScreenHeader(props: {
           >
             {(open) => (
               <MaterialIconButton
-                accessibilityLabel="More actions"
+                accessibilityLabel="more actions"
                 icon="ellipsis"
                 tintColorClassName="accent-header-foreground"
                 onPress={open}

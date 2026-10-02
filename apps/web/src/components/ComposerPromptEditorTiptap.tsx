@@ -305,7 +305,7 @@ function ComposerSkillNodeView({ node }: NodeViewProps) {
           </p>
           {skill?.path ? (
             <Button variant="outline" size="sm" onClick={() => actions.openMention(skill.path)}>
-              View instructions
+              view instructions
             </Button>
           ) : null}
         </div>

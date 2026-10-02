@@ -139,7 +139,7 @@ function DevicePreviewScreen({
       ? [
           {
             id: "check-device-tools",
-            title: "Check device tool versions",
+            title: "check device tool versions",
             icon: "arrow.clockwise" as const,
             onPress: () => {
               void retryHost({ environmentId, input: { inspectOnly: true } });
@@ -149,7 +149,7 @@ function DevicePreviewScreen({
       : []),
     {
       id: "device-tools",
-      title: "Device tool versions",
+      title: "device tool versions",
       icon: "info.circle",
       onPress: () =>
         Alert.alert(
@@ -172,7 +172,7 @@ function DevicePreviewScreen({
     },
     {
       id: "reload",
-      title: "Reload stream",
+      title: "reload stream",
       icon: "arrow.clockwise" as const,
       disabled: !preview || shuttingDown,
       onPress: () => {
@@ -184,7 +184,7 @@ function DevicePreviewScreen({
       ? [
           {
             id: "back",
-            title: "Back",
+            title: "back",
             icon: "arrow.left",
             disabled: !inputConnected,
             onPress: () => streamRef.current?.back(),
@@ -193,7 +193,7 @@ function DevicePreviewScreen({
       : []),
     {
       id: "app-switcher",
-      title: "App switcher",
+      title: "app switcher",
       icon: "square.on.square",
       disabled: !inputConnected,
       onPress: () => streamRef.current?.appSwitcher(),
@@ -202,7 +202,7 @@ function DevicePreviewScreen({
       ? [
           {
             id: "rotate",
-            title: "Rotate device",
+            title: "rotate device",
             icon: "arrow.clockwise" as const,
             disabled: !inputConnected,
             onPress: () => streamRef.current?.rotate(),
@@ -226,7 +226,7 @@ function DevicePreviewScreen({
         options={{ headerBackVisible: false }}
         actions={[
           {
-            accessibilityLabel: "Home",
+            accessibilityLabel: "home",
             icon: "house",
             disabled: !inputConnected,
             onPress: () => streamRef.current?.home(),
@@ -234,14 +234,14 @@ function DevicePreviewScreen({
         ]}
         menus={[
           {
-            title: "Device options",
+            title: "device options",
             icon: "ellipsis",
             items: [
               ...(previews.length > 1
                 ? [
                     {
                       id: "devices",
-                      title: "Devices",
+                      title: "devices",
                       inline: true,
                       items: previews.map((device) => ({
                         id: device.key,
@@ -262,7 +262,7 @@ function DevicePreviewScreen({
         <NativeHeaderToolbar placement="left">
           <NativeHeaderToolbar.Button
             icon="xmark"
-            accessibilityLabel="Close device preview"
+            accessibilityLabel="close device preview"
             onPress={onClose}
             separateBackground
           />

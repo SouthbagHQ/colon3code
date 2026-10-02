@@ -71,9 +71,9 @@ export function MaterialThreadListToolbar(props: {
   const searchField = (
     <MaterialSearchField
       inputRef={searchRef}
-      accessibilityLabel="Search threads"
+      accessibilityLabel="search threads"
       clearAccessibilityLabel="Clear search"
-      placeholder="Search"
+      placeholder="search"
       value={props.searchQuery}
       onChangeText={onSearchQueryChange}
     />
@@ -92,7 +92,7 @@ export function MaterialThreadListToolbar(props: {
           {searching ? (
             <>
               <AndroidHeaderIconButton
-                accessibilityLabel="Close search"
+                accessibilityLabel="close search"
                 icon="arrow.left"
                 onPress={closeSearch}
               />
@@ -109,12 +109,12 @@ export function MaterialThreadListToolbar(props: {
                 />
               </View>
               <AndroidHeaderIconButton
-                accessibilityLabel="Search threads"
+                accessibilityLabel="search threads"
                 icon="magnifyingglass"
                 onPress={openSearch}
               />
               <AndroidHeaderIconButton
-                accessibilityLabel="Open settings"
+                accessibilityLabel="open settings"
                 icon="gearshape"
                 onPress={props.onOpenSettings}
               />
@@ -136,7 +136,7 @@ export function MaterialThreadListToolbar(props: {
           <AndroidAnchoredMenu actions={props.filterActions} onPressAction={props.onFilterAction}>
             {(open) => (
               <MaterialFloatingActionButton
-                label="Filter threads"
+                label="filter threads"
                 icon={filterIcon}
                 onPress={open}
               />

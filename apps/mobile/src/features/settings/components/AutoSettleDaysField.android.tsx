@@ -28,7 +28,7 @@ export function AutoSettleDaysField(props: AutoSettleDaysFieldProps) {
       />
       <MaterialIconButton
         icon="minus"
-        accessibilityLabel="Decrease days before auto-settle"
+        accessibilityLabel="decrease days before auto-settle"
         disabled={props.disabled || props.value <= MIN_SIDEBAR_AUTO_SETTLE_AFTER_DAYS}
         onPress={() => adjust(-1)}
       />
@@ -42,7 +42,7 @@ export function AutoSettleDaysField(props: AutoSettleDaysFieldProps) {
       </AppText>
       <MaterialIconButton
         icon="plus"
-        accessibilityLabel="Increase days before auto-settle"
+        accessibilityLabel="increase days before auto-settle"
         disabled={props.disabled || props.value >= MAX_SIDEBAR_AUTO_SETTLE_AFTER_DAYS}
         onPress={() => adjust(1)}
       />

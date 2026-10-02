@@ -18,7 +18,7 @@ export function ProcessSignalActions({
           render={
             <InlineButton
               disabled={disabled}
-              aria-label="Send SIGINT"
+              aria-label="send SIGINT"
               tone="muted"
               onClick={() => onSignal("SIGINT")}
             >
@@ -33,7 +33,7 @@ export function ProcessSignalActions({
           render={
             <InlineButton
               disabled={disabled}
-              aria-label="Send SIGKILL"
+              aria-label="send SIGKILL"
               tone="destructive"
               onClick={() => onSignal("SIGKILL")}
             >

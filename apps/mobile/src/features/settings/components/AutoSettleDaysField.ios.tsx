@@ -60,7 +60,7 @@ export function AutoSettleDaysField(props: AutoSettleDaysFieldProps) {
             ]}
           >
             <Picker
-              label="Days before auto-settle"
+              label="days before auto-settle"
               selection={draft}
               onSelectionChange={setDraft}
               modifiers={[pickerStyle("wheel"), frame({ height: 180 })]}
@@ -76,12 +76,12 @@ export function AutoSettleDaysField(props: AutoSettleDaysFieldProps) {
             </Picker>
             <HStack spacing={24}>
               <Button
-                label="Cancel"
+                label="cancel"
                 onPress={() => setOpen(false)}
                 modifiers={[foregroundStyle(colors["--color-primary-text"])]}
               />
               <Button
-                label="Done"
+                label="done"
                 onPress={() => {
                   setOpen(false);
                   if (!props.disabled && draft !== props.value) props.onValueChange(draft);

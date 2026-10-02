@@ -26,7 +26,7 @@ export function availableCloudEnvironmentPresentation(input: {
       connectionError: compatibilityError.message,
       connectionErrorTraceId: null,
       connectionState: "unsupported",
-      statusText: "Client not supported",
+      statusText: "client not supported",
     };
   }
   if (input.status?.status === "online") {

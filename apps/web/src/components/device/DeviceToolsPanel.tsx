@@ -53,7 +53,7 @@ const IOS_PERMISSIONS: ReadonlyArray<{ value: DevicePermission; label: string }>
   { value: "notifications", label: "notifications" },
   { value: "motion", label: "motion" },
   { value: "media-library", label: "media library" },
-  { value: "faceid", label: "Face ID" },
+  { value: "faceid", label: "face ID" },
 ];
 
 const ANDROID_PERMISSIONS: ReadonlyArray<{ value: DevicePermission; label: string }> = [

@@ -912,7 +912,7 @@ export const ThreadDetailScreen = memo(function ThreadDetailScreen(props: Thread
             renderFallback={(fallback) => (
               <RenderFailureView
                 {...fallback}
-                title="The conversation couldn't be displayed"
+                title="the conversation couldn't be displayed"
                 bottomInset={estimatedOverlayHeight}
               />
             )}

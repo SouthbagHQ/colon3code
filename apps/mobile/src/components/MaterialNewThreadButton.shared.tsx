@@ -14,7 +14,7 @@ export function MaterialNewThreadButton(props: {
 }) {
   return (
     <Pressable
-      accessibilityLabel="New thread"
+      accessibilityLabel="new thread"
       accessibilityRole="button"
       onPress={props.onPress}
       className={cn(

@@ -26,7 +26,7 @@ export function ChatGptUsageLimitNotice({
         <Text className="text-sm font-t3-medium text-foreground">ChatGPT usage limit reached</Text>
       </View>
       <Text className="text-xs text-foreground-muted">
-        Review your usage settings in ChatGPT to continue.
+        review your usage settings in ChatGPT to continue.
       </Text>
       <Pressable
         accessibilityRole="link"

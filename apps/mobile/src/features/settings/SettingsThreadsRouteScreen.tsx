@@ -35,7 +35,7 @@ export function SettingsThreadsRouteScreen() {
   return (
     <>
       <SettingsEnvironmentFilterHeader />
-      <SettingsScreen title="Thread behavior" trailing={<AndroidSettingsEnvironmentFilter />}>
+      <SettingsScreen title="thread behavior" trailing={<AndroidSettingsEnvironmentFilter />}>
         <ScrollView
           contentInsetAdjustmentBehavior="automatic"
           showsVerticalScrollIndicator={false}
@@ -162,17 +162,17 @@ function AutoSettleSettingsRows() {
           onClear={clearProjectOverrides}
         />
       ) : null}
-      <SettingsSection title="Auto-settle">
+      <SettingsSection title="auto-settle">
         <SettingsSwitchRow
           icon="arrow.triangle.branch"
-          label="Auto-settle merged threads"
+          label="auto-settle merged threads"
           value={referenceSettings.sidebarAutoSettleOnMerge}
           disabled={disabled}
           onValueChange={(value) => writeToAll({ sidebarAutoSettleOnMerge: value })}
         />
         <SettingsSwitchRow
           icon="clock"
-          label="Auto-settle inactive threads"
+          label="auto-settle inactive threads"
           value={afterDays !== null}
           disabled={disabled}
           onValueChange={(value) =>
@@ -192,7 +192,7 @@ function AutoSettleSettingsRows() {
         ) : null}
       </SettingsSection>
       {pendingWrites === 0 && mismatches.length > 0 ? (
-        <SettingsSection title="Across environments">
+        <SettingsSection title="across environments">
           <View className="gap-3 p-4">
             <Text className="text-base text-foreground">Auto-settle defaults differ</Text>
             <Text className="text-sm text-foreground-muted">
@@ -205,7 +205,7 @@ function AutoSettleSettingsRows() {
               className="self-start rounded-full bg-subtle px-4 py-2 active:opacity-70"
             >
               <Text className="text-sm font-t3-medium text-foreground">
-                Apply auto-settle defaults
+                apply auto-settle defaults
               </Text>
             </Pressable>
           </View>
@@ -228,10 +228,10 @@ function LegacySettingsSection() {
 
   return (
     <View className="gap-3">
-      <SettingsSection title="Legacy">
+      <SettingsSection title="legacy">
         <SettingsSwitchRow
           icon="hammer"
-          label="Plan Mode"
+          label="plan mode"
           value={planModeEnabled}
           onValueChange={(value) => savePreferences({ planModeEnabled: value })}
         />

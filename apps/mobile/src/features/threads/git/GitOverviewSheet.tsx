@@ -433,11 +433,11 @@ export function GitOverviewSheet(props: GitOverviewSheetProps) {
 
   const refreshMenu = (
     <AndroidAnchoredMenu
-      title="Repository options"
+      title="repository options"
       actions={[
         {
           id: "refresh",
-          title: "Refresh repository status",
+          title: "refresh repository status",
           attributes: { disabled: busy || isPullRefreshing },
         },
       ]}
@@ -447,7 +447,7 @@ export function GitOverviewSheet(props: GitOverviewSheetProps) {
     >
       {(open) => (
         <AndroidHeaderIconButton
-          accessibilityLabel="Repository options"
+          accessibilityLabel="repository options"
           icon="ellipsis"
           onPress={open}
         />

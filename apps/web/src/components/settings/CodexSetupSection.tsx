@@ -110,14 +110,14 @@ export function CodexSetupSection(props: CodexSetupSectionProps) {
                 props.onModeChange("managed");
               }}
             >
-              Continue with ChatGPT
+              continue with ChatGPT
             </ChatGptConnectionButton>
           )
         }
         secondaryControl={
           !existingAuthenticated && !existingReady && !existingChecking ? (
             <Button size="sm" variant="ghost-muted" onClick={() => props.onModeChange("existing")}>
-              Use existing CLI
+              use existing CLI
             </Button>
           ) : null
         }
@@ -129,7 +129,7 @@ export function CodexSetupSection(props: CodexSetupSectionProps) {
           description={<CodexSignInDescription />}
           control={
             <Button size="sm" variant="outline" className="min-w-44" disabled>
-              Open sign-in page
+              open sign-in page
             </Button>
           }
           secondaryControl={
@@ -139,7 +139,7 @@ export function CodexSetupSection(props: CodexSetupSectionProps) {
           }
         />
       ) : (
-        <SettingsRow title="ChatGPT account" description="Preparing sign-in." />
+        <SettingsRow title="ChatGPT account" description="preparing sign-in." />
       )
     ) : (
       <ManagedCodexSetup
@@ -674,7 +674,7 @@ function ManagedCodexSetup({
               aria-label="ChatGPT sign-in redirect URL"
               type="password"
               autoComplete="off"
-              placeholder="Paste the URL from the sign-in tab"
+              placeholder="paste the URL from the sign-in tab"
               value={callbackUrl}
               maxLength={16_384}
               disabled={pending || readOnly}
@@ -698,7 +698,7 @@ function ManagedCodexSetup({
               variant="ghost-muted"
               onClick={() => void ensureLocalApi().shell.openExternal(url)}
             >
-              Try sign-in in your browser
+              try sign-in in your browser
               <ExternalLinkIcon className="size-3.5" />
             </Button>
           </div>
@@ -707,7 +707,7 @@ function ManagedCodexSetup({
           <details>
             <summary className="cursor-pointer">Other ways to connect</summary>
             <Button className="mt-2" size="sm" variant="outline" render={<a href={handoffUrl} />}>
-              Use T3 desktop for automatic return
+              use T3 desktop for automatic return
             </Button>
           </details>
         ) : null}
@@ -724,7 +724,7 @@ function ManagedCodexSetup({
   ) : callbackCompletion ? (
     <div className="space-y-3 text-xs leading-relaxed text-muted-foreground">
       <CodexSignInDescription
-        label="Having trouble signing in?"
+        label="having trouble signing in?"
         expanded={callbackHelpOpen}
         controls={callbackHelpId}
         onToggle={() => setCallbackHelpOpen((open) => !open)}
@@ -860,7 +860,7 @@ function ManagedCodexSetup({
                 disabled={unavailable || busy}
                 onClick={() => void setup("chatgpt-change-account")}
               >
-                Use a different account
+                use a different account
               </Button>
             ) : !authActive && !authenticated && allowExistingCli ? (
               <Button
@@ -869,7 +869,7 @@ function ManagedCodexSetup({
                 disabled={readOnly || busy}
                 onClick={() => onModeChange("existing")}
               >
-                Use existing CLI
+                use existing CLI
               </Button>
             ) : null
           }
@@ -938,7 +938,7 @@ function ManagedCodexSetup({
                   disabled={unavailable || busy}
                   onClick={() => setAccountPickerOpen(true)}
                 >
-                  Change account
+                  change account
                 </Button>
                 <Button
                   size="sm"
@@ -976,7 +976,7 @@ function ManagedCodexSetup({
                     disabled={unavailable || busy}
                     onClick={() => void setup("chatgpt-change-account")}
                   >
-                    Use a different account
+                    use a different account
                   </Button>
                 ) : null}
               </>
@@ -1027,8 +1027,8 @@ export function CodexManagedRuntimeFields({
   return (
     <>
       <SettingsRow
-        title="Binary path"
-        description="Selected by :3 Code."
+        title="binary path"
+        description="selected by :3 Code."
         control={
           <div className="w-full sm:w-80">
             <Input
@@ -1043,21 +1043,21 @@ export function CodexManagedRuntimeFields({
       />
       <SettingsRow
         title="CODEX_HOME path"
-        description="Shared Codex config, sessions, and state."
+        description="shared Codex config, sessions, and state."
         control={
           <div className="w-full sm:w-80">
             <Input
               aria-label="Codex home path"
               value={provider?.runtimePaths?.homePath ?? ""}
               title={provider?.runtimePaths?.homePath}
-              placeholder="Unavailable"
+              placeholder="unavailable"
               disabled
             />
           </div>
         }
       />
       <SettingsRow
-        title="Shadow home path"
+        title="shadow home path"
         description={
           provider?.runtimePaths?.shadowHomePath
             ? "Account-specific home sharing the Codex state above."
@@ -1080,7 +1080,7 @@ export function CodexManagedRuntimeFields({
 }
 
 function CodexSignInDescription({
-  label = "Complete sign-in in your browser.",
+  label = "complete sign-in in your browser.",
   expanded = false,
   controls,
   onToggle,
@@ -1095,7 +1095,7 @@ function CodexSignInDescription({
     <button
       type="button"
       className="inline-flex items-center gap-1.5 rounded-sm text-left leading-relaxed outline-none focus-visible:ring-2 focus-visible:ring-ring"
-      aria-label="Having trouble signing in?"
+      aria-label="having trouble signing in?"
       aria-expanded={expanded}
       aria-controls={controls}
       onClick={onToggle}

@@ -186,7 +186,7 @@ export function ConnectionEnvironmentRow(props: {
               {props.environment.isRelayManaged ? null : (
                 <View className="flex-1">
                   <MaterialButton
-                    label="Save"
+                    label="save"
                     tone="primary"
                     fullWidth
                     onPress={() => {
@@ -196,14 +196,14 @@ export function ConnectionEnvironmentRow(props: {
                 </View>
               )}
               <MaterialIconButton
-                accessibilityLabel="Reconnect environment"
+                accessibilityLabel="reconnect environment"
                 icon="arrow.clockwise"
                 variant="tonal"
                 disabled={!enabled}
                 onPress={() => props.onReconnect(props.environment.environmentId)}
               />
               <MaterialIconButton
-                accessibilityLabel="Remove environment"
+                accessibilityLabel="remove environment"
                 icon="trash"
                 variant="danger"
                 onPress={() => props.onRemove(props.environment.environmentId)}

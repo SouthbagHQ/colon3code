@@ -31,14 +31,14 @@ export function ProviderAuthCallbackCoordinator() {
           toastManager.add({
             type: "error",
             title: "ChatGPT sign-in couldn't finish",
-            description: "Return to the provider and try again.",
+            description: "return to the provider and try again.",
           });
       })
       .catch(() =>
         toastManager.add({
           type: "error",
           title: "ChatGPT sign-in couldn't finish",
-          description: "Reconnect to the environment and try again.",
+          description: "reconnect to the environment and try again.",
         }),
       )
       .finally(() => {

@@ -52,7 +52,7 @@ it("only offers notice details when the description cannot fit", async () => {
     get clientWidth() {
       return (
         availableWidth -
-        (renderer?.root.findAllByProps({ "aria-label": "Show notice details" }).length ? 28 : 0)
+        (renderer?.root.findAllByProps({ "aria-label": "show notice details" }).length ? 28 : 0)
       );
     },
     scrollWidth: 80,
@@ -76,7 +76,7 @@ it("only offers notice details when the description cannot fit", async () => {
       },
     );
   });
-  const details = () => renderer.root.findAllByProps({ "aria-label": "Show notice details" });
+  const details = () => renderer.root.findAllByProps({ "aria-label": "show notice details" });
   expect(details()).toHaveLength(0);
   text.scrollWidth = 300;
   await act(() => resize());

@@ -211,7 +211,7 @@ export function PreviewChromeRow({
                         variant="ghost"
                         size="icon-xs"
                         onClick={onOpenInBrowser}
-                        aria-label="Open in system browser"
+                        aria-label="open in system browser"
                         type="button"
                       />
                     }

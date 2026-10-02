@@ -295,7 +295,7 @@ function NoticeDescription({ children, compact }: { children: ReactNode; compact
                 ref={detailsRef}
                 size="icon-xs"
                 variant="ghost-muted"
-                aria-label="Show notice details"
+                aria-label="show notice details"
                 className="flex-none"
               />
             }
@@ -303,7 +303,7 @@ function NoticeDescription({ children, compact }: { children: ReactNode; compact
             <InfoIcon />
           </PopoverTrigger>
           <PopoverPopup
-            aria-label="Notice details"
+            aria-label="notice details"
             tooltipStyle
             side="top"
             className="max-w-80 whitespace-normal wrap-anywhere"

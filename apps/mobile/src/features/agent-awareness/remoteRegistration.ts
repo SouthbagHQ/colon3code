@@ -535,7 +535,7 @@ function armAgentAwarenessLiveActivityForLocalWorkNow(input: {
     const activity = startAgentLiveActivity(
       {
         title: ":3 Code",
-        subtitle: "Agent work in progress",
+        subtitle: "agent work in progress",
         activeCount: 1,
         updatedAt: nowIso,
         activities: [

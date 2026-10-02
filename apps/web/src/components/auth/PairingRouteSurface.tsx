@@ -128,7 +128,7 @@ export function PairingRouteSurface({
             size="sm"
             variant="outline"
           >
-            Reload app
+            reload app
           </Button>
         </div>
       </form>
@@ -231,7 +231,7 @@ export function HostedPairingRouteSurface() {
 
       {status === "error" ? (
         <div className="mt-5 rounded-lg border border-destructive/30 bg-destructive/6 px-3 py-2 text-sm text-destructive">
-          Verify the backend is reachable from this browser, supports CORS for hosted clients, and
+          verify the backend is reachable from this browser, supports CORS for hosted clients, and
           is served over HTTPS when opening this page from HTTPS.
         </div>
       ) : null}
@@ -243,7 +243,7 @@ export function HostedPairingRouteSurface() {
           </Button>
         ) : canRetry ? (
           <Button size="sm" onClick={() => void submitHostedPairingRequest()}>
-            Try again
+            try again
           </Button>
         ) : null}
         {status === "paired" ? (

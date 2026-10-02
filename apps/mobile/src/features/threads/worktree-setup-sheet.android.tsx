@@ -26,11 +26,11 @@ export function WorktreeSetupSheet({ children, height, onClose }: WorktreeSetupS
             }}
           >
             <AndroidSheetHeader
-              title="Worktree setup"
+              title="worktree setup"
               trailing={
                 <Pressable
                   accessibilityRole="button"
-                  accessibilityLabel="Close setup details"
+                  accessibilityLabel="close setup details"
                   onPress={onClose}
                   className="min-h-11 justify-center px-2"
                 >

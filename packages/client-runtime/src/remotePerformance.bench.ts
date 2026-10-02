@@ -25,7 +25,7 @@ const runOptions = { warmupTime: 1_000, time: 1_500 };
 const thread: OrchestrationThread = {
   id: ThreadId.make("thread-1"),
   projectId: ProjectId.make("project-1"),
-  title: "Remote thread",
+  title: "remote thread",
   modelSelection: { instanceId: ProviderInstanceId.make("codex"), model: "gpt-5.4" },
   runtimeMode: "full-access",
   interactionMode: "default",
@@ -55,7 +55,7 @@ const thread: OrchestrationThread = {
 };
 const target = new PrimaryConnectionTarget({
   environmentId: EnvironmentId.make("remote-1"),
-  label: "Remote",
+  label: "remote",
   httpBaseUrl: "https://remote.example.test",
   wsBaseUrl: "wss://remote.example.test/ws",
 });

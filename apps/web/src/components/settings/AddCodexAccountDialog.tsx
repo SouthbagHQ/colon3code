@@ -88,14 +88,14 @@ export function AddCodexAccountDialog({
       <WizardPopup size="wide">
         <WizardHeader
           title={instanceId ? displayName : "Add ChatGPT account"}
-          description="Each account has its own Codex instance and sign-in. Choose the other account on the sign-in page."
+          description="each account has its own Codex instance and sign-in. Choose the other account on the sign-in page."
         />
         <WizardPanel>
           {instanceId ? (
             provider?.setup ? (
               renderSetup(instanceId, provider)
             ) : (
-              <SettingsRow title="Codex runtime" description="Preparing managed setup." />
+              <SettingsRow title="Codex runtime" description="preparing managed setup." />
             )
           ) : (
             <form
@@ -106,11 +106,11 @@ export function AddCodexAccountDialog({
               }}
             >
               <SettingsRow
-                title="Account name"
-                description="Shown in the provider list and model picker."
+                title="account name"
+                description="shown in the provider list and model picker."
                 control={
                   <Input
-                    aria-label="Account name"
+                    aria-label="account name"
                     value={name}
                     disabled={pending}
                     onChange={(event) => setName(event.target.value)}
@@ -124,7 +124,7 @@ export function AddCodexAccountDialog({
         <WizardFooter>
           {instanceId ? (
             <Button variant="outline" onClick={onClose}>
-              Finish later
+              finish later
             </Button>
           ) : (
             <>

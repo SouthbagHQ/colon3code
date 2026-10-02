@@ -139,7 +139,7 @@ export function ProjectDefaultsSettings({ category }: { category: ProjectSetting
       settingKeys={["defaultModelSelection"]}
       mixed={mixedModel}
       id="default-model"
-      title="Model"
+      title="model"
       description={
         isProjectScope
           ? "Model for new threads in this project."
@@ -209,7 +209,7 @@ export function ProjectDefaultsSettings({ category }: { category: ProjectSetting
       settingKeys={["defaultThreadEnvMode"]}
       mixed={mixedWorkspace}
       id={searchableSetting("new-threads").id}
-      title="Workspace"
+      title="workspace"
       description={
         isProjectScope
           ? "Where new threads in this project start."
@@ -231,7 +231,7 @@ export function ProjectDefaultsSettings({ category }: { category: ProjectSetting
               updateSettings({ defaultThreadEnvMode: value });
           }}
         >
-          <SelectTrigger size="sm" aria-label="Default workspace">
+          <SelectTrigger size="sm" aria-label="default workspace">
             <SelectValue>
               {(value: string | null) =>
                 value === "local" || value === "worktree"

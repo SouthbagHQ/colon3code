@@ -45,29 +45,29 @@ export function MaterialFilesHeader(props: {
         style={{ opacity: searching ? 0 : 1 }}
       >
         <AndroidScreenHeader
-          title="Files"
+          title="files"
           subtitle={props.projectName}
           hideBottomBorder
           onBack={props.onBack}
           leading={props.leading}
           actions={[
             {
-              accessibilityLabel: "Search files",
+              accessibilityLabel: "search files",
               icon: "magnifyingglass",
               onPress: () => setSearchOpen(true),
             },
           ]}
           trailing={
             <AndroidAnchoredMenu
-              title="File options"
-              actions={[{ id: "refresh", title: "Refresh files" }]}
+              title="file options"
+              actions={[{ id: "refresh", title: "refresh files" }]}
               onPressAction={({ nativeEvent }) => {
                 if (nativeEvent.event === "refresh") props.onRefresh();
               }}
             >
               {(open) => (
                 <AndroidHeaderIconButton
-                  accessibilityLabel="File options"
+                  accessibilityLabel="file options"
                   icon="ellipsis"
                   onPress={open}
                 />
@@ -80,15 +80,15 @@ export function MaterialFilesHeader(props: {
         <View className="absolute inset-0 bg-header px-2" style={{ paddingTop, paddingBottom }}>
           <View className="flex-1 flex-row items-center gap-1">
             <AndroidHeaderIconButton
-              accessibilityLabel="Close file search"
+              accessibilityLabel="close file search"
               icon="arrow.left"
               onPress={closeSearch}
             />
             <MaterialSearchField
               inputRef={searchRef}
-              accessibilityLabel="Search files"
+              accessibilityLabel="search files"
               clearAccessibilityLabel="Clear file search"
-              placeholder="Search files"
+              placeholder="search files"
               value={props.searchQuery}
               onChangeText={onSearchQueryChange}
             />

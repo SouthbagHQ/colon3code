@@ -32,7 +32,7 @@ function ConnectCliAuthMessage({
 }
 
 const invalidLinkMessage = {
-  eyebrow: "Authorization request",
+  eyebrow: "authorization request",
   title: "hmm, this connect link is incomplete 3:",
   description:
     "this link is missing its authorization request — re-run `t3 connect` in your terminal and open the freshly printed URL 3:",

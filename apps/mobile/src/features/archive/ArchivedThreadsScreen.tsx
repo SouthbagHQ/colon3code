@@ -92,11 +92,11 @@ function ArchivedThreadsHeader(props: {
             },
             {
               id: "sort",
-              title: "Sort by archived date",
+              title: "sort by archived date",
               items: [
                 {
                   id: "sort:newest",
-                  title: "Newest first",
+                  title: "newest first",
                   selected: props.sortOrder === "newest",
                   onPress: () => props.onSortOrderChange("newest"),
                 },

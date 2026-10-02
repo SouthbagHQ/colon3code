@@ -60,16 +60,16 @@ const SUBMODULE_CHOICES: ReadonlyArray<{
   // Only offered at environment scope; a project falls back through "Use defaults".
   {
     mode: null,
-    label: "Inherit",
-    description: "Use the repository's t3.json, or initialize recursively.",
+    label: "inherit",
+    description: "use the repository's t3.json, or initialize recursively.",
   },
-  { mode: "recursive", label: "Recursive", description: "Initialize nested submodules too." },
+  { mode: "recursive", label: "recursive", description: "initialize nested submodules too." },
   {
     mode: "top-level",
-    label: "Top level only",
-    description: "Skip submodules declared inside other submodules.",
+    label: "top level only",
+    description: "skip submodules declared inside other submodules.",
   },
-  { mode: "none", label: "Skip", description: "Leave submodules empty for a setup script." },
+  { mode: "none", label: "skip", description: "leave submodules empty for a setup script." },
 ];
 
 const WORKSPACE_CHOICES: ReadonlyArray<{
@@ -80,18 +80,18 @@ const WORKSPACE_CHOICES: ReadonlyArray<{
   // Only offered at environment scope; a project falls back through "Use defaults".
   {
     mode: null,
-    label: "Inherit",
-    description: "Use the repository's t3.json, or the current checkout.",
+    label: "inherit",
+    description: "use the repository's t3.json, or the current checkout.",
   },
   {
     mode: "local",
-    label: "Current checkout",
-    description: "Start new threads in the existing workspace.",
+    label: "current checkout",
+    description: "start new threads in the existing workspace.",
   },
   {
     mode: "worktree",
-    label: "New worktree",
-    description: "Give each new thread a separate checkout.",
+    label: "new worktree",
+    description: "give each new thread a separate checkout.",
   },
 ];
 
@@ -102,18 +102,18 @@ const STREAMING_CHOICES: ReadonlyArray<{
 }> = [
   {
     mode: "turn",
-    label: "After the turn",
-    description: "Show the answer when the agent finishes.",
+    label: "after the turn",
+    description: "show the answer when the agent finishes.",
   },
   {
     mode: "paragraph",
-    label: "Finished paragraphs",
-    description: "Show each paragraph or code block as it completes.",
+    label: "finished paragraphs",
+    description: "show each paragraph or code block as it completes.",
   },
   {
     mode: "token",
-    label: "Token by token (legacy)",
-    description: "Repaint for every token; this can be slower.",
+    label: "token by token (legacy)",
+    description: "repaint for every token; this can be slower.",
   },
 ];
 
@@ -251,7 +251,7 @@ function ServerSettingsDetail(props: { readonly page: SettingsPage }) {
               {props.page === "new-threads" ? (
                 <>
                   <SettingsSection
-                    title="Default workspace"
+                    title="default workspace"
                     trailing={
                       pendingWrites === 0 && isMixed("defaultThreadEnvMode") ? (
                         <MixedValuesLabel projectSelected={projectSelected} />
@@ -276,7 +276,7 @@ function ServerSettingsDetail(props: { readonly page: SettingsPage }) {
                     ))}
                   </SettingsSection>
                   <SettingsSection
-                    title="Worktree submodules"
+                    title="worktree submodules"
                     trailing={
                       pendingWrites === 0 && isMixed("worktreeSubmodules") ? (
                         <MixedValuesLabel projectSelected={projectSelected} />
@@ -301,7 +301,7 @@ function ServerSettingsDetail(props: { readonly page: SettingsPage }) {
                     ))}
                   </SettingsSection>
                   <SettingsSection
-                    title="Default permissions"
+                    title="default permissions"
                     trailing={
                       pendingWrites === 0 && uniform("defaultRuntimeMode") === null ? (
                         <MixedValuesLabel projectSelected={projectSelected} />
@@ -325,21 +325,21 @@ function ServerSettingsDetail(props: { readonly page: SettingsPage }) {
 
               {props.page === "source-control" ? (
                 <>
-                  <SettingsSection title="Default branch">
+                  <SettingsSection title="default branch">
                     <FanoutSwitchRow
                       icon="arrow.down.circle"
-                      label="Automatically pull"
-                      subtitle="Keep the default branch current when there are no local changes."
+                      label="automatically pull"
+                      subtitle="keep the default branch current when there are no local changes."
                       value={uniform("defaultAutoPull")}
                       disabled={disabledFor("defaultAutoPull")}
                       onValueChange={(value) => write({ defaultAutoPull: value })}
                     />
                   </SettingsSection>
-                  <SettingsSection title="Worktrees">
+                  <SettingsSection title="worktrees">
                     <FanoutSwitchRow
                       icon="arrow.triangle.branch"
-                      label="Start from origin"
-                      subtitle="Base new worktrees on the remote branch."
+                      label="start from origin"
+                      subtitle="base new worktrees on the remote branch."
                       value={uniform("newWorktreesStartFromOrigin")}
                       disabled={disabledFor("newWorktreesStartFromOrigin")}
                       onValueChange={(value) => write({ newWorktreesStartFromOrigin: value })}
@@ -351,7 +351,7 @@ function ServerSettingsDetail(props: { readonly page: SettingsPage }) {
               {props.page === "agent-behavior" ? (
                 <>
                   <SettingsSection
-                    title="Response streaming"
+                    title="response streaming"
                     trailing={
                       pendingWrites === 0 && uniform("responseStreamingMode") === null ? (
                         <MixedValuesLabel projectSelected={projectSelected} />
@@ -386,11 +386,11 @@ function ServerSettingsDetail(props: { readonly page: SettingsPage }) {
                       />
                     ))}
                   </SettingsSection>
-                  <SettingsSection title="Preview browser">
+                  <SettingsSection title="preview browser">
                     <FanoutSwitchRow
                       icon="globe"
-                      label="Agent browser access"
-                      subtitle="Allow agents to use the in-app preview browser."
+                      label="agent browser access"
+                      subtitle="allow agents to use the in-app preview browser."
                       value={uniform("enableAgentBrowserAccess")}
                       disabled={disabledFor("enableAgentBrowserAccess")}
                       onValueChange={(value) => write({ enableAgentBrowserAccess: value })}
@@ -402,7 +402,7 @@ function ServerSettingsDetail(props: { readonly page: SettingsPage }) {
               {props.page === "maintenance" ? (
                 <>
                   {!projectSelected ? (
-                    <SettingsSection title="Manage environments">
+                    <SettingsSection title="manage environments">
                       {selectedTargets.map((target) => (
                         <SettingsRow
                           key={target.environmentId}
@@ -422,10 +422,10 @@ function ServerSettingsDetail(props: { readonly page: SettingsPage }) {
                       ))}
                     </SettingsSection>
                   ) : null}
-                  <SettingsSection title="Updates">
+                  <SettingsSection title="updates">
                     <FanoutSwitchRow
                       icon="arrow.clockwise"
-                      label="Check provider updates"
+                      label="check provider updates"
                       subtitle={
                         projectSelected
                           ? "Environment-wide setting. Select All projects to change it."
@@ -438,7 +438,7 @@ function ServerSettingsDetail(props: { readonly page: SettingsPage }) {
                     <View className="border-t border-border-subtle">
                       <FanoutSwitchRow
                         icon="arrow.uturn.forward"
-                        label="Continue after restart"
+                        label="continue after restart"
                         subtitle={
                           supportsContinuation
                             ? "Resume interrupted threads after an update or restart."

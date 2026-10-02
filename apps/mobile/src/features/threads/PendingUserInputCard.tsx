@@ -327,7 +327,7 @@ export function PendingUserInputCard(props: PendingUserInputCardProps) {
         })}
       </ScrollView>
       <RequestActionButton
-        label="Submit answers"
+        label="submit answers"
         size="large"
         tone={props.answers ? "primary" : "secondary"}
         disabled={

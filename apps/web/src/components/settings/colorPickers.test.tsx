@@ -88,9 +88,9 @@ describe("shared color controls in settings", () => {
         <ProviderAccentColorPicker displayName="Codex" value="#ff0000" onCommit={onCommit} />,
       );
     });
-    const hue = "Accent color hue";
-    const saturation = "Accent color saturation";
-    const brightness = "Accent color brightness";
+    const hue = "accent color hue";
+    const saturation = "accent color saturation";
+    const brightness = "accent color brightness";
     expect(await key(hue, "ArrowLeft")).toHaveBeenCalledOnce();
     expect(slider(hue).props["aria-valuenow"]).toBe(359);
     await key(hue, "ArrowRight");
@@ -128,8 +128,8 @@ describe("shared color controls in settings", () => {
         <ProviderAccentColorPicker displayName="Codex" value="#ff0000" onCommit={onCommit} />,
       );
     });
-    const saturation = "Accent color saturation";
-    const brightness = "Accent color brightness";
+    const saturation = "accent color saturation";
+    const brightness = "accent color brightness";
     await key(saturation, "Home");
     await key(saturation, "ArrowLeft");
     expect(slider(saturation).props.value).toBe(0);
@@ -240,7 +240,7 @@ describe("shared color controls in settings", () => {
         />,
       );
     });
-    const hue = "Accent color hue";
+    const hue = "accent color hue";
     await key(hue, "ArrowRight", true);
     await key(hue, "ArrowRight", true);
     expect(onCommit).not.toHaveBeenCalled();

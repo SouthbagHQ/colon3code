@@ -215,13 +215,13 @@ export function resolveSnoozePresets(now: Date): ReadonlyArray<SnoozePreset> {
   const presets: SnoozePreset[] = [
     {
       id: "hour",
-      label: "In 1 hour",
+      label: "in 1 hour",
       whenLabel: snoozeTimeOfDayLabel(inAnHour),
       snoozedUntil: inAnHour.toISOString(),
     },
     {
       id: "three-hours",
-      label: "In 3 hours",
+      label: "in 3 hours",
       whenLabel: snoozeTimeOfDayLabel(inThreeHours),
       snoozedUntil: inThreeHours.toISOString(),
     },
@@ -231,7 +231,7 @@ export function resolveSnoozePresets(now: Date): ReadonlyArray<SnoozePreset> {
   if (evening.getTime() - now.getTime() > HOUR_MS) {
     presets.push({
       id: "evening",
-      label: "This evening",
+      label: "this evening",
       whenLabel: snoozeTimeOfDayLabel(evening),
       snoozedUntil: evening.toISOString(),
     });
@@ -240,7 +240,7 @@ export function resolveSnoozePresets(now: Date): ReadonlyArray<SnoozePreset> {
   const tomorrow = snoozeAtHour(addSnoozeDays(now, 1), MORNING_HOUR);
   presets.push({
     id: "tomorrow",
-    label: "Tomorrow",
+    label: "tomorrow",
     whenLabel: snoozeTimeOfDayLabel(tomorrow),
     snoozedUntil: tomorrow.toISOString(),
   });
@@ -250,7 +250,7 @@ export function resolveSnoozePresets(now: Date): ReadonlyArray<SnoozePreset> {
   if (nextWeek.getTime() !== tomorrow.getTime()) {
     presets.push({
       id: "next-week",
-      label: "Next week",
+      label: "next week",
       whenLabel: `${nextWeek.toLocaleDateString(undefined, { weekday: "short" })} ${snoozeTimeOfDayLabel(nextWeek)}`,
       snoozedUntil: nextWeek.toISOString(),
     });

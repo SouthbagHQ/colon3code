@@ -33,14 +33,14 @@ function ProviderCustomColorPanel(props: {
   return (
     <div className="w-56 bg-popover">
       <ColorSaturationValuePlane
-        label="Accent color"
+        label="accent color"
         value={hsv}
         onChange={commitHsv}
         variant="edge"
       />
       <div className="grid gap-3 p-3">
         <ColorHueSlider
-          label="Accent color hue"
+          label="accent color hue"
           value={hsv.h}
           onChange={(h) => commitHsv({ ...hsv, h })}
         />

@@ -41,7 +41,7 @@ export function ChatGptAccountPicker({
         <DialogHeader>
           <DialogTitle>Reconnect ChatGPT</DialogTitle>
           <DialogDescription>
-            On OpenAI, sign in with the account you choose here.
+            on OpenAI, sign in with the account you choose here.
           </DialogDescription>
         </DialogHeader>
         <div className="px-6 pb-6">

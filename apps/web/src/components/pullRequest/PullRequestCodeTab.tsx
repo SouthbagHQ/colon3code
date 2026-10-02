@@ -843,7 +843,7 @@ function PullRequestCodeTab({
                   Changed
                 </TooltipTrigger>
                 <TooltipPopup side="bottom">
-                  This file has been pushed to since you marked it viewed.
+                  this file has been pushed to since you marked it viewed.
                 </TooltipPopup>
               </Tooltip>
             ) : (
@@ -1128,12 +1128,12 @@ function PullRequestCodeTab({
                 <Tooltip>
                   <TooltipTrigger render={<span className="flex shrink-0 items-center" />}>
                     <InfoIcon
-                      aria-label="These ticks are kept here, not on the host"
+                      aria-label="these ticks are kept here, not on the host"
                       className="text-muted-foreground size-3.5"
                     />
                   </TooltipTrigger>
                   <TooltipPopup side="bottom">
-                    This host keeps no shared record of which files you have read, so these ticks
+                    this host keeps no shared record of which files you have read, so these ticks
                     are kept by this environment. They follow you between the apps connected to it,
                     but the host's own web UI will not show them.
                   </TooltipPopup>
@@ -1143,12 +1143,12 @@ function PullRequestCodeTab({
                 <Tooltip>
                   <TooltipTrigger render={<span className="flex shrink-0 items-center" />}>
                     <TriangleAlertIcon
-                      aria-label="Your ticks could not be read"
+                      aria-label="your ticks could not be read"
                       className="size-3.5 text-warning-foreground"
                     />
                   </TooltipTrigger>
                   <TooltipPopup side="bottom">
-                    The boxes below are whatever was last read, and empty if nothing has been read
+                    the boxes below are whatever was last read, and empty if nothing has been read
                     yet. {filesViewed.error}
                   </TooltipPopup>
                 </Tooltip>
@@ -1157,12 +1157,12 @@ function PullRequestCodeTab({
                 <Tooltip>
                   <TooltipTrigger render={<span className="flex shrink-0 items-center" />}>
                     <TriangleAlertIcon
-                      aria-label="This count covers only part of the change"
+                      aria-label="this count covers only part of the change"
                       className="size-3.5 text-warning-foreground"
                     />
                   </TooltipTrigger>
                   <TooltipPopup side="bottom">
-                    This change has more files than the host will report ticks for in one read, so
+                    this change has more files than the host will report ticks for in one read, so
                     the count is short and some boxes below start empty.
                   </TooltipPopup>
                 </Tooltip>

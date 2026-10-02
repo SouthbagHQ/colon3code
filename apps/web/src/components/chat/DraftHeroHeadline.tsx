@@ -274,7 +274,7 @@ export function DraftHeroHeadline({
                 >
                   <MessageSquareDashedIcon className="size-full" />
                 </span>
-                No project
+                no project
               </span>
             </MenuRadioItem>
           )}

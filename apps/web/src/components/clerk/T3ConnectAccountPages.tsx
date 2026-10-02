@@ -9,7 +9,7 @@ import { T3ConnectUserProfilePage } from "./T3ConnectUserProfilePage";
 /** Custom pages in the Clerk account modal, in menu order. */
 export const T3_CONNECT_ACCOUNT_PAGES = [
   {
-    label: "Mobile clients",
+    label: "mobile clients",
     url: "mobile-clients",
     icon: <SmartphoneIcon className="size-4" />,
     content: <MobileClientsUserProfilePage />,

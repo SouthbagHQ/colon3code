@@ -998,7 +998,7 @@ function MarkdownCodeBlock({
             theme={theme}
           />
         </span>
-        <span className="flex items-center gap-0.5" role="toolbar" aria-label="Code block actions">
+        <span className="flex items-center gap-0.5" role="toolbar" aria-label="code block actions">
           <Tooltip>
             <TooltipTrigger
               render={
@@ -1025,7 +1025,7 @@ function MarkdownCodeBlock({
                     variant="ghost-muted"
                     size="icon-xs"
                     onClick={() => onRunShellCommand(command)}
-                    aria-label="Run in terminal"
+                    aria-label="run in terminal"
                   />
                 }
               >

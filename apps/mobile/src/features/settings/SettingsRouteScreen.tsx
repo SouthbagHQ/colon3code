@@ -32,7 +32,7 @@ export function SettingsRouteScreen() {
       {Platform.OS === "ios" && layout.usesSplitView ? (
         <NativeHeaderToolbar placement="left">
           <NativeHeaderToolbar.Button
-            accessibilityLabel="Go back"
+            accessibilityLabel="go back"
             icon="chevron.left"
             onPress={() => navigation.goBack()}
           />
@@ -86,7 +86,7 @@ function ConfiguredSettingsRouteScreen() {
             valuePosition="trailing"
             target="SettingsEnvironments"
           />
-          <SettingsRow icon="bell.badge" label="Notifications" target="SettingsNotifications" />
+          <SettingsRow icon="bell.badge" label="notifications" target="SettingsNotifications" />
         </SettingsSection>
 
         <SettingsIndexSections />
@@ -153,18 +153,18 @@ function SettingsIndexSections() {
         ) : null}
       </SettingsSection>
 
-      <SettingsSection title="Projects & threads">
+      <SettingsSection title="projects & threads">
         {selectedProjectKey !== null ? (
           <SettingsRow
             icon="folder"
-            label="Overview"
+            label="overview"
             value={projectLabel}
             target="SettingsProjectOverview"
           />
         ) : null}
-        <SettingsRow icon="folder" label="Organization" target="SettingsOrganization" />
-        <SettingsRow icon="text.bubble" label="Thread behavior" target="SettingsThreads" />
-        <SettingsRow icon="archivebox" label="Archived Threads" target="SettingsArchive" />
+        <SettingsRow icon="folder" label="organization" target="SettingsOrganization" />
+        <SettingsRow icon="text.bubble" label="thread behavior" target="SettingsThreads" />
+        <SettingsRow icon="archivebox" label="archived threads" target="SettingsArchive" />
       </SettingsSection>
 
       <SettingsSection title="server settings">
