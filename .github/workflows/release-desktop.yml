@@ -79,9 +79,11 @@ on:
         required: false
         default: true
         type: boolean
+      # Windows waits for the Linux CLI archive inside its own budget (see
+      # "Wait for Linux CLI archive"), so its callers pass more than 30.
       timeout_minutes:
         required: false
-        default: 0
+        default: 30
         type: number
       clerk_publishable_key:
         required: true
@@ -105,10 +107,7 @@ jobs:
   build:
     name: Build ${{ inputs.label }}
     runs-on: ${{ inputs.runner }}
-    # 0 means "use the per-platform default". Windows waits for the Linux CLI
-    # archive inside its own budget (see "Wait for Linux CLI archive"), so it
-    # gets that wait on top of the usual 30.
-    timeout-minutes: ${{ inputs.timeout_minutes > 0 && inputs.timeout_minutes || (inputs.platform == 'win' && 70 || 30) }}
+    timeout-minutes: ${{ inputs.timeout_minutes }}
     env:
       COLON3CODE_CLERK_PUBLISHABLE_KEY: ${{ inputs.clerk_publishable_key }}
       COLON3CODE_CLERK_JWT_TEMPLATE: ${{ inputs.clerk_jwt_template }}

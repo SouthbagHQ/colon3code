@@ -25,6 +25,9 @@ on:
     types: [closed, unlabeled]
 
 permissions:
+  # release-desktop.yml reads this run's artifact list; a called workflow cannot
+  # ask for more than the caller grants.
+  actions: read
   contents: read
 
 jobs:
