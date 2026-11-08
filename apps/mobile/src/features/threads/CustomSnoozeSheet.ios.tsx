@@ -1,3 +1,4 @@
+import { SheetHeader } from "../../components/ui/SheetHeader";
 import {
   DatePicker,
   Host,
@@ -28,16 +29,12 @@ import {
   type CustomSnoozeInput,
 } from "@t3tools/client-runtime/state/thread-settled";
 import { useState, type ReactNode } from "react";
-import { NavigationContainer, NavigationIndependentTree } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { StandaloneStack } from "../layout/nested-stacks";
 import { ScrollView, useWindowDimensions, View } from "react-native";
-import { useMobileNavigationTheme } from "../../lib/useMobileNavigationTheme";
-import { NativeHeaderToolbar } from "../../native/StackHeader";
-import { NATIVE_LIQUID_GLASS_SUPPORTED } from "../../native/native-glass";
+
 import { useAppearancePreferences } from "../settings/appearance/AppearancePreferencesProvider";
 
 const durationAmounts = Array.from({ length: 99 }, (_, index) => index + 1);
-const SnoozeStack = createNativeStackNavigator<{ CustomSnooze: undefined }>();
 const modes = [
   { value: "date", label: "date and time" },
   { value: "duration", label: "duration" },
@@ -214,7 +211,6 @@ export function CustomSnoozeSheet(props: {
   );
 }
 
-/** The popover owns a native navigation bar, just like the app's sheet screens. */
 function SnoozePopoverNavigation(props: {
   readonly width: number;
   readonly height: number;
@@ -222,55 +218,24 @@ function SnoozePopoverNavigation(props: {
   readonly onSubmit: () => void;
   readonly children: ReactNode;
 }) {
-  const navigationTheme = useMobileNavigationTheme();
-  const { themeVariables: colors } = useAppearancePreferences();
-
   return (
     <VStack modifiers={[frame({ width: props.width, height: props.height })]}>
       <RNHostView>
         <View style={{ width: props.width, height: props.height }}>
-          <NavigationIndependentTree>
-            <NavigationContainer theme={navigationTheme}>
-              <SnoozeStack.Navigator
-                screenOptions={{
-                  contentStyle: { backgroundColor: "transparent" },
-                  headerShadowVisible: false,
-                  headerStyle: {
-                    backgroundColor: NATIVE_LIQUID_GLASS_SUPPORTED
-                      ? "transparent"
-                      : colors["--color-card"],
-                  },
-                  headerTintColor: colors["--color-foreground"],
-                  headerTitleStyle: { fontSize: 17, fontWeight: "700" },
-                  headerTransparent: NATIVE_LIQUID_GLASS_SUPPORTED,
-                  title: "custom snooze",
-                }}
-              >
-                <SnoozeStack.Screen name="CustomSnooze">
-                  {() => (
-                    <>
-                      <NativeHeaderToolbar placement="left">
-                        <NativeHeaderToolbar.Button
-                          accessibilityLabel="cancel custom snooze"
-                          icon="xmark"
-                          onPress={props.onClose}
-                        />
-                      </NativeHeaderToolbar>
-                      <NativeHeaderToolbar placement="right">
-                        <NativeHeaderToolbar.Button label="snooze" onPress={props.onSubmit} />
-                      </NativeHeaderToolbar>
-                      <ScrollView
-                        contentInsetAdjustmentBehavior="automatic"
-                        showsVerticalScrollIndicator={false}
-                      >
-                        {props.children}
-                      </ScrollView>
-                    </>
-                  )}
-                </SnoozeStack.Screen>
-              </SnoozeStack.Navigator>
-            </NavigationContainer>
-          </NavigationIndependentTree>
+          <StandaloneStack>
+            <SheetHeader
+              title="custom snooze"
+              onCancel={props.onClose}
+              accessibilityLabel="cancel custom snooze"
+              confirm={{ label: "snooze", onPress: props.onSubmit }}
+            />
+            <ScrollView
+              contentInsetAdjustmentBehavior="automatic"
+              showsVerticalScrollIndicator={false}
+            >
+              {props.children}
+            </ScrollView>
+          </StandaloneStack>
         </View>
       </RNHostView>
     </VStack>

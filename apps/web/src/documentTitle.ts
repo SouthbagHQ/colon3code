@@ -21,14 +21,18 @@ function resolveStatusLabel(
   recentlyCompleted: boolean,
 ): string | null {
   switch (status) {
+    case "preparing":
     case "working":
       return `${catFaceGlyph("working")} working`;
     case "approval":
     case "input":
+    case "request":
       return `${catFaceGlyph("curious")} needs you`;
     case "failed":
       return `${catFaceGlyph("sad")} failed`;
-    case "monitoring":
+    case "limited":
+      return `${catFaceGlyph("sad")} rate limited`;
+    case "waiting":
       return `${catFaceGlyph("watching")} watching`;
     case "ready":
       return recentlyCompleted ? `${catFaceGlyph("proud")} done` : null;

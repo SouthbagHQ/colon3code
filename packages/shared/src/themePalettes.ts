@@ -8,22 +8,11 @@ export const BUILT_IN_THEME_IDS = [
   "colon3-dark",
 ] as const;
 
-/** The standard :3 Code palette, kept separate from the optional built-in theme library. */
 export const MOBILE_DEFAULT_THEME_ID = "colon3-code";
 
-/**
- * Every palette the mobile app can render. Declared here so host-side tooling
- * (the app-store screenshot harness) can validate a requested theme without
- * importing React Native application code.
- */
 export const MOBILE_THEME_IDS = [MOBILE_DEFAULT_THEME_ID, ...BUILT_IN_THEME_IDS] as const;
 
-/**
- * Ids a theme may not take: the appearance keywords a stored preference uses,
- * every built-in, and the legacy aliases older saves still carry. Taking one
- * would either be shadowed by the built-in or capture clients that never chose
- * it, so the client library and the publish path both consult this set.
- */
+/** Reserve appearance keywords, built-ins, and legacy aliases so custom themes cannot capture stored preferences. */
 export const RESERVED_THEME_IDS: ReadonlySet<string> = new Set([
   "system",
   "light",
@@ -36,12 +25,7 @@ export const RESERVED_THEME_IDS: ReadonlySet<string> = new Set([
   "t3-iris",
 ]);
 
-/**
- * Additionally closed to a machine publishing a theme: the mobile default is
- * not a web or desktop built-in, so a saved theme may legitimately carry that
- * id, but no client that follows published themes can resolve it -- publishing
- * it would report success and change nothing.
- */
+/** The mobile default id is valid in saved themes but cannot be published because web/desktop cannot resolve it. */
 export const UNPUBLISHABLE_THEME_IDS: ReadonlySet<string> = new Set([
   ...RESERVED_THEME_IDS,
   MOBILE_DEFAULT_THEME_ID,
@@ -51,7 +35,6 @@ export type BuiltInThemeId = (typeof BUILT_IN_THEME_IDS)[number];
 export type MobileThemeId = (typeof MOBILE_THEME_IDS)[number];
 export type ThemeAppearance = "light" | "dark";
 
-/** Product roles shared by web CSS, React Native tokens, and native surfaces. */
 export const THEME_COLOR_ROLES = [
   "canvas",
   "chrome",
@@ -96,6 +79,10 @@ export const THEME_COLOR_ROLES = [
   "messageActionHover",
   "codeBackground",
   "codeForeground",
+  "searchMatchBackground",
+  "searchMatchForeground",
+  "searchMatchActiveBackground",
+  "searchMatchActiveForeground",
   "sidebar",
   "sidebarForeground",
   "sidebarMutedForeground",
@@ -121,22 +108,16 @@ export type ThemeDefinition = Readonly<{
   appearance: ThemeAppearance;
   colors: ThemeColors;
   variants?: ThemeVariants;
-  /** Groups related imported variants into one library card. */
   collection?: Readonly<{ id: string; label: string }>;
-  /** Allows reviewed built-ins to render product artwork over their sidebar. */
   sidebarArtwork?: boolean;
-  /** Generated from the guided editor's canvas and accent roles. */
   managed?: boolean;
 }>;
 
-/**
- * The palette :3 Code wears with no theme installed, captured from the app's
- * stock tokens (index.css) so a draft seeded from the default look paints the
- * pixels the user is already seeing. Alpha-bearing tokens are flattened over
- * their real backdrops (canvas, or the sidebar for its rows) because theme
- * colors are stored as opaque OKLCH tokens.
- */
 export const T3_CODE_LIGHT_THEME_COLORS: ThemeColors = {
+  searchMatchBackground: "#ffde8b",
+  searchMatchForeground: "#21180a",
+  searchMatchActiveBackground: "#eea52b",
+  searchMatchActiveForeground: "#21180a",
   canvas: "#fcfcfc",
   chrome: "#fcfcfc",
   toolbar: "#fcfcfc",
@@ -197,6 +178,10 @@ export const T3_CODE_LIGHT_THEME_COLORS: ThemeColors = {
 };
 
 export const T3_CODE_DARK_THEME_COLORS: ThemeColors = {
+  searchMatchBackground: "#8c6c1f",
+  searchMatchForeground: "#f5f5f5",
+  searchMatchActiveBackground: "#eea52b",
+  searchMatchActiveForeground: "#21180a",
   canvas: "#0a0a0a",
   chrome: "#0a0a0a",
   toolbar: "#0a0a0a",
@@ -304,6 +289,10 @@ export const T3_CHAT_THEME: ThemeDefinition = {
     messageActionHover: "oklch(0.539042 0.197866 0.305)",
     codeBackground: "oklch(0.953855 0.019695 315.668)",
     codeForeground: "oklch(0.445128 0.13005 307.026)",
+    searchMatchBackground: "oklch(0.915 0.11 85)",
+    searchMatchForeground: "oklch(0.216164 0.028283 77.423)",
+    searchMatchActiveBackground: "oklch(0.774202 0.151946 74.331)",
+    searchMatchActiveForeground: "oklch(0.216164 0.028283 77.423)",
     sidebar: "oklch(0.928886 0.031178 322.592)",
     sidebarForeground: "oklch(0.396296 0.025134 285.196)",
     sidebarMutedForeground: "oklch(0.494754 0.190937 354.544)",
@@ -364,6 +353,10 @@ export const T3_CHAT_THEME: ThemeDefinition = {
       messageActionHover: "oklch(0.458754 0.184639 3.857)",
       codeBackground: "oklch(0.22813 0.020366 307.469)",
       codeForeground: "oklch(0.848703 0.064239 306.645)",
+      searchMatchBackground: "oklch(0.55 0.1 85)",
+      searchMatchForeground: "oklch(0.970151 0 0)",
+      searchMatchActiveBackground: "oklch(0.774202 0.151946 74.331)",
+      searchMatchActiveForeground: "oklch(0.216164 0.028283 77.423)",
       sidebar: "oklch(0.185778 0.019368 322.159)",
       sidebarForeground: "oklch(0.967434 0.001326 286.375)",
       sidebarMutedForeground: "oklch(0.880303 0.03077 342.696)",
@@ -431,6 +424,10 @@ export const GROVE_THEME: ThemeDefinition = {
     messageActionHover: "oklch(0.488753 0.096536 77.829)",
     codeBackground: "oklch(0.955888 0.004783 158.391)",
     codeForeground: "oklch(0.222003 0.03479 328.979)",
+    searchMatchBackground: "oklch(0.915 0.11 85)",
+    searchMatchForeground: "oklch(0.216164 0.028283 77.423)",
+    searchMatchActiveBackground: "oklch(0.774202 0.151946 74.331)",
+    searchMatchActiveForeground: "oklch(0.216164 0.028283 77.423)",
     sidebar: "oklch(0.936464 0.014601 163.554)",
     sidebarForeground: "oklch(0.222003 0.03479 328.979)",
     sidebarMutedForeground: "oklch(0.515606 0.011938 318.897)",
@@ -491,6 +488,10 @@ export const GROVE_THEME: ThemeDefinition = {
       messageActionHover: "oklch(0.815227 0.117902 84.21)",
       codeBackground: "oklch(0.312979 0.018942 164.082)",
       codeForeground: "oklch(0.990339 0.008411 325.64)",
+      searchMatchBackground: "oklch(0.55 0.1 85)",
+      searchMatchForeground: "oklch(0.970151 0 0)",
+      searchMatchActiveBackground: "oklch(0.774202 0.151946 74.331)",
+      searchMatchActiveForeground: "oklch(0.216164 0.028283 77.423)",
       sidebar: "oklch(0.309925 0.032827 160.944)",
       sidebarForeground: "oklch(0.990339 0.008411 325.64)",
       sidebarMutedForeground: "oklch(0.711387 0.007643 175.89)",
@@ -558,6 +559,10 @@ export const OCEAN_THEME: ThemeDefinition = {
     messageActionHover: "oklch(0.45151 0.074407 201.516)",
     codeBackground: "oklch(0.957684 0.002906 253.68)",
     codeForeground: "oklch(0.222003 0.03479 328.979)",
+    searchMatchBackground: "oklch(0.915 0.11 85)",
+    searchMatchForeground: "oklch(0.216164 0.028283 77.423)",
+    searchMatchActiveBackground: "oklch(0.774202 0.151946 74.331)",
+    searchMatchActiveForeground: "oklch(0.216164 0.028283 77.423)",
     sidebar: "oklch(0.939254 0.01193 241.729)",
     sidebarForeground: "oklch(0.222003 0.03479 328.979)",
     sidebarMutedForeground: "oklch(0.517366 0.018944 311.433)",
@@ -618,6 +623,10 @@ export const OCEAN_THEME: ThemeDefinition = {
       messageActionHover: "oklch(0.815308 0.096174 199.862)",
       codeBackground: "oklch(0.29661 0.021883 251.968)",
       codeForeground: "oklch(0.990339 0.008411 325.64)",
+      searchMatchBackground: "oklch(0.55 0.1 85)",
+      searchMatchForeground: "oklch(0.970151 0 0)",
+      searchMatchActiveBackground: "oklch(0.774202 0.151946 74.331)",
+      searchMatchActiveForeground: "oklch(0.216164 0.028283 77.423)",
       sidebar: "oklch(0.290387 0.032043 247.274)",
       sidebarForeground: "oklch(0.990339 0.008411 325.64)",
       sidebarMutedForeground: "oklch(0.69099 0.01395 266.424)",
@@ -685,6 +694,10 @@ export const EMBER_THEME: ThemeDefinition = {
     messageActionHover: "oklch(0.471223 0.145843 24.688)",
     codeBackground: "oklch(0.959965 0.002668 47.512)",
     codeForeground: "oklch(0.222003 0.03479 328.979)",
+    searchMatchBackground: "oklch(0.915 0.11 85)",
+    searchMatchForeground: "oklch(0.216164 0.028283 77.423)",
+    searchMatchActiveBackground: "oklch(0.774202 0.151946 74.331)",
+    searchMatchActiveForeground: "oklch(0.216164 0.028283 77.423)",
     sidebar: "oklch(0.942267 0.01151 50.785)",
     sidebarForeground: "oklch(0.222003 0.03479 328.979)",
     sidebarMutedForeground: "oklch(0.519146 0.019214 343.427)",
@@ -745,6 +758,10 @@ export const EMBER_THEME: ThemeDefinition = {
       messageActionHover: "oklch(0.775116 0.117953 29.014)",
       codeBackground: "oklch(0.299662 0.017229 39.973)",
       codeForeground: "oklch(0.990339 0.008411 325.64)",
+      searchMatchBackground: "oklch(0.55 0.1 85)",
+      searchMatchForeground: "oklch(0.970151 0 0)",
+      searchMatchActiveBackground: "oklch(0.774202 0.151946 74.331)",
+      searchMatchActiveForeground: "oklch(0.216164 0.028283 77.423)",
       sidebar: "oklch(0.293349 0.029554 46.882)",
       sidebarForeground: "oklch(0.990339 0.008411 325.64)",
       sidebarMutedForeground: "oklch(0.691874 0.012538 24.638)",
@@ -812,6 +829,10 @@ export const IRIS_THEME: ThemeDefinition = {
     messageActionHover: "oklch(0.471003 0.16748 340.687)",
     codeBackground: "oklch(0.95997 0.004338 306.542)",
     codeForeground: "oklch(0.222003 0.03479 328.979)",
+    searchMatchBackground: "oklch(0.915 0.11 85)",
+    searchMatchForeground: "oklch(0.216164 0.028283 77.423)",
+    searchMatchActiveBackground: "oklch(0.774202 0.151946 74.331)",
+    searchMatchActiveForeground: "oklch(0.216164 0.028283 77.423)",
     sidebar: "oklch(0.941387 0.014687 300.474)",
     sidebarForeground: "oklch(0.222003 0.03479 328.979)",
     sidebarMutedForeground: "oklch(0.518417 0.023683 320.681)",
@@ -872,6 +893,10 @@ export const IRIS_THEME: ThemeDefinition = {
       messageActionHover: "oklch(0.813537 0.114101 337.23)",
       codeBackground: "oklch(0.281873 0.028308 295.193)",
       codeForeground: "oklch(0.990339 0.008411 325.64)",
+      searchMatchBackground: "oklch(0.55 0.1 85)",
+      searchMatchForeground: "oklch(0.970151 0 0)",
+      searchMatchActiveBackground: "oklch(0.774202 0.151946 74.331)",
+      searchMatchActiveForeground: "oklch(0.216164 0.028283 77.423)",
       sidebar: "oklch(0.266743 0.044689 294.138)",
       sidebarForeground: "oklch(0.990339 0.008411 325.64)",
       sidebarMutedForeground: "oklch(0.668773 0.021522 302.949)",
@@ -955,6 +980,10 @@ const COLON3_BLUSH_COLORS: ThemeColors = {
   terminalSelection: "oklch(0.88 0.05 15)",
   terminalScrollbar: "oklch(0.86 0.035 18)",
   terminalScrollbarHover: "oklch(0.8 0.05 15)",
+  searchMatchBackground: "oklch(0.8 0.12 340)",
+  searchMatchForeground: "oklch(0.25 0.05 15)",
+  searchMatchActiveBackground: "oklch(0.65 0.18 340)",
+  searchMatchActiveForeground: "oklch(0.2 0.04 15)",
 };
 
 const COLON3_PLUM_COLORS: ThemeColors = {
@@ -1015,6 +1044,10 @@ const COLON3_PLUM_COLORS: ThemeColors = {
   terminalSelection: "oklch(0.36 0.06 340)",
   terminalScrollbar: "oklch(0.34 0.04 335)",
   terminalScrollbarHover: "oklch(0.42 0.04 335)",
+  searchMatchBackground: "oklch(0.55 0.16 10)",
+  searchMatchForeground: "oklch(0.97 0.015 340)",
+  searchMatchActiveBackground: "oklch(0.75 0.14 10)",
+  searchMatchActiveForeground: "oklch(0.2 0.04 15)",
 };
 
 export const COLON3_THEME: ThemeDefinition = {

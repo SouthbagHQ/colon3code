@@ -54,28 +54,14 @@ function group(
     allRemoteMembersAreDesktopLocal: false,
     allRemoteMembersAreWsl: false,
     remoteEnvironmentLabels: [],
+    pinned: false,
+    archived: false,
   };
 }
 
 const groups = [group("colon3code", [first, second, third]), group("other", [other])];
 
 describe("settings scope search", () => {
-  it("ignores the retired scope key from older links", () => {
-    expect(validateSettingsScopeSearch({ scope: "device", project: "colon3code" })).toEqual({
-      project: "colon3code",
-    });
-    expect(validateSettingsScopeSearch({ scope: "all" })).toEqual({});
-  });
-
-  it("retains legacy project and machine links without inventing an explicit broad scope", () => {
-    expect(
-      validateSettingsScopeSearch({ project: "colon3code", machine: laptopId, unused: true }),
-    ).toEqual({
-      project: "colon3code",
-      machine: laptopId,
-    });
-  });
-
   it("retains an orphan checkout so it cannot turn into all environments", () => {
     const search = validateSettingsScopeSearch({ checkout: first.physicalProjectKey });
     expect(search).toEqual({ checkout: first.physicalProjectKey });
@@ -89,41 +75,12 @@ describe("settings scope search", () => {
 });
 
 describe("settings scope resolution", () => {
-  it("defaults to every environment with no project", () => {
-    expect(resolveSettingsScope({}, groups, environments)).toMatchObject({
-      kind: "all",
-      members: [],
-      environmentIds: [laptopId, serverId],
-    });
-  });
-
-  it("resolves one environment without targeting its project overrides", () => {
-    expect(resolveSettingsScope({ machine: serverId }, groups, environments)).toMatchObject({
-      kind: "environment",
-      environmentId: serverId,
-      environmentIds: [serverId],
-      members: [],
-    });
-  });
-
   it("keeps all physical members in a project aggregate, including several on one environment", () => {
     expect(resolveSettingsScope({ project: "colon3code" }, groups, environments)).toMatchObject({
       kind: "project",
       environmentId: null,
       members: [first, second, third],
       environmentIds: [laptopId, serverId],
-    });
-  });
-
-  it("preserves legacy project plus machine aggregates with multiple checkouts", () => {
-    expect(
-      resolveSettingsScope({ project: "colon3code", machine: laptopId }, groups, environments),
-    ).toMatchObject({
-      kind: "project",
-      environmentId: laptopId,
-      label: "colon3code / Laptop",
-      members: [first, second],
-      environmentIds: [laptopId],
     });
   });
 

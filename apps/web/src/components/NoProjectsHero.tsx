@@ -1,15 +1,13 @@
+import { workspaceAreaProps } from "../lib/workspaceFocus";
 import { MessageSquareDashedIcon, PlusIcon } from "~/icons";
-import { useCallback } from "react";
 
 import { openCommandPalette } from "../commandPaletteBus";
-import { isElectron } from "../env";
 import { useScratchProject } from "../hooks/useScratchProject";
 import { usePrimaryEnvironmentId } from "../state/environments";
 import { Button } from "./ui/button";
 import { CatFace } from "./CatFace";
 import { Empty, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from "./ui/empty";
 import { SidebarInset } from "./ui/sidebar";
-import { WorkspacePageHeader } from "./WorkspacePageHeader";
 
 // Both faces are pre-rendered; hovering or focusing the add button swaps which
 // one is shown purely in CSS, so the wink costs no React state or repaint loop.
@@ -19,13 +17,17 @@ const WINK_FACE_CLASS =
   "hidden size-16 text-6xl text-accent/35 sm:size-20 sm:text-7xl group-has-[button:hover]/hero:inline-flex group-has-[button:focus-visible]/hero:inline-flex";
 
 export function NoProjectsHero() {
-  const openAddProject = useCallback(() => openCommandPalette({ open: "add-project" }), []);
+  const contentArea = workspaceAreaProps("home", 1, "Home");
   const primaryEnvironmentId = usePrimaryEnvironmentId();
   const { scratchEnvironmentId, startScratchThread } = useScratchProject();
   const scratchTargetEnvironmentId = scratchEnvironmentId(primaryEnvironmentId);
 
   return (
-    <SidebarInset className="h-dvh min-h-0 overflow-hidden overscroll-y-none">
+    <SidebarInset
+      {...contentArea}
+      role="main"
+      className="h-dvh min-h-0 overflow-hidden overscroll-y-none"
+    >
       <div className="flex min-h-0 min-w-0 flex-1 flex-col overflow-x-hidden bg-background">
         <Empty className="flex-1">
           <div className="group/hero w-full max-w-lg px-8 py-12">
@@ -34,16 +36,13 @@ export function NoProjectsHero() {
                 <CatFace expression="happy" className={HAPPY_FACE_CLASS} aria-hidden />
                 <CatFace expression="wink" className={WINK_FACE_CLASS} />
               </EmptyMedia>
-              <EmptyTitle variant="hero">
-                {" "}
-                meow! what should we make today? :3
-              </EmptyTitle>
+              <EmptyTitle variant="hero"> meow! what should we make today? :3</EmptyTitle>
               <EmptyDescription variant="hero">
                 {" "}
                 add a project and we'll start your first thread together :3
               </EmptyDescription>
               <div className="mt-6 flex justify-center gap-2">
-                <Button size="sm" onClick={openAddProject}>
+                <Button size="sm" onClick={() => openCommandPalette({ open: "add-project" })}>
                   <PlusIcon className="size-4" />
                   add project
                 </Button>

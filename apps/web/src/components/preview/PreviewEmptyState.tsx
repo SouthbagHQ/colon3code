@@ -40,16 +40,15 @@ export function PreviewEmptyState({
         </EmptyMedia>
         <EmptyTitle>no preview yet :3</EmptyTitle>
         <EmptyDescription>
-          {" "}
-          type a URL above, or run a dev script. browser-ready localhost servers will pop up here on
-          their own ;3
+          Type a URL above, or run a dev script. Local servers this thread starts will pop up here
+          on their own ;3
         </EmptyDescription>
       </Empty>
     );
   }
 
   return (
-    <div className="flex h-full min-h-0 overflow-y-auto px-5 py-8">
+    <div className="scrollbar-gutter-both flex h-full min-h-0 overflow-y-auto px-5 py-8">
       <div className="mx-auto flex w-full max-w-xl flex-col gap-6">
         {recents.length > 0 ? (
           <div className="flex flex-col gap-3">

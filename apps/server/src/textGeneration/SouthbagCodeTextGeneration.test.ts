@@ -12,7 +12,7 @@ import * as Schema from "effect/Schema";
 import { ProviderInstanceId, SouthbagCodeSettings } from "@t3tools/contracts";
 
 import * as ServerConfig from "../config.ts";
-import { execScriptSource, writeFakeCli } from "../testUtils/fakeCli.ts";
+import { execScriptSource, writeFakeCli } from "@t3tools/provider-testing/fakeCli";
 import { makeSouthbagCodeTextGeneration } from "./SouthbagCodeTextGeneration.ts";
 
 const decodeSettings = Schema.decodeSync(SouthbagCodeSettings);

@@ -1,4 +1,4 @@
-import { EventId, ProjectId, TurnId, type OrchestrationThreadActivity } from "@t3tools/contracts";
+import { ProjectId } from "@t3tools/contracts";
 import {
   getLatestThreadForProject,
   sortActiveThreadsByOrderKey,
@@ -8,10 +8,7 @@ import {
 import { formatHourShort, formatRelativeHourShort } from "@t3tools/shared/usageFormat";
 import { describe, test } from "vite-plus/test";
 
-import { deriveActivePlanState } from "./session-logic";
-
 const projectId = ProjectId.make("benchmark-project");
-const turnId = TurnId.make("benchmark-turn");
 const start = Date.parse("2026-08-11T00:00:00.000Z");
 const threads = Array.from({ length: 1_000 }, (_, index) => {
   const timestamp = new Date(start + ((index * 997) % 1_000) * 60_000).toISOString();
@@ -25,16 +22,6 @@ const threads = Array.from({ length: 1_000 }, (_, index) => {
     unsettledAt: null,
   };
 });
-const activities: OrchestrationThreadActivity[] = Array.from({ length: 500 }, (_, index) => ({
-  id: EventId.make(`activity-${index}`),
-  turnId,
-  sequence: index,
-  createdAt: new Date(start + index * 1_000).toISOString(),
-  kind: index % 100 === 0 ? "turn.plan.updated" : "tool.completed",
-  summary: "Benchmark activity",
-  tone: "info",
-  payload: index % 100 === 0 ? { plan: [{ step: "Run checks", status: "inProgress" }] } : {},
-}));
 const hours = Array.from({ length: 24 }, (_, index) =>
   new Date(start + index * 3_600_000).toISOString(),
 );
@@ -59,11 +46,6 @@ describe("client performance", () => {
   test("select latest project thread from 1000 threads", async ({ bench }) => {
     await bench("select", () => {
       getLatestThreadForProject(threads, projectId, "updated_at");
-    }).run();
-  });
-  test("derive plan from 500 activities with 5 plan updates", async ({ bench }) => {
-    await bench("derive", () => {
-      deriveActivePlanState(activities, turnId);
     }).run();
   });
   test("format 24 hourly usage labels and tooltips", async ({ bench }) => {

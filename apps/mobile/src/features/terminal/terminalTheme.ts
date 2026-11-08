@@ -15,7 +15,6 @@ export interface TerminalTheme {
   readonly border: string;
   readonly cursorForeground: string;
   readonly cursorBackground: string;
-  /** The 16 ANSI colors, in order. A fixed tuple so indexed reads are never undefined. */
   readonly palette: TerminalPalette;
 }
 
@@ -39,7 +38,6 @@ type TerminalPalette = readonly [
 ];
 
 const PIERRE_LIGHT_THEME: TerminalTheme = {
-  // Pierre terminal palette with the app's shared screen background.
   background: "#fcfcfc",
   foreground: "#6C6C71",
   mutedForeground: "#8E8E95",
@@ -67,7 +65,6 @@ const PIERRE_LIGHT_THEME: TerminalTheme = {
 };
 
 const PIERRE_DARK_THEME: TerminalTheme = {
-  // Pierre terminal palette with the app's shared screen background.
   background: "#0a0a0a",
   foreground: "#adadb1",
   mutedForeground: "#8E8E95",

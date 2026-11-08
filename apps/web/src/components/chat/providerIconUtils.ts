@@ -1,25 +1,6 @@
-import { ProviderDriverKind, SOUTHBAG_CODE_DRIVER_KIND } from "@t3tools/contracts";
+import type { ProviderDriverKind } from "@t3tools/contracts";
+import { resolveModelShortName } from "@t3tools/client-runtime/provider-clients";
 import { cuteModelName } from "@t3tools/shared/cuteModelName";
-import {
-  AntigravityIcon,
-  ClaudeAI,
-  CursorIcon,
-  GrokIcon,
-  Icon,
-  OpenAI,
-  OpenCodeIcon,
-  SouthbagCodeIcon,
-} from "../Icons";
-
-export const PROVIDER_ICON_BY_PROVIDER: Partial<Record<ProviderDriverKind, Icon>> = {
-  [ProviderDriverKind.make("codex")]: OpenAI,
-  [ProviderDriverKind.make("claudeAgent")]: ClaudeAI,
-  [ProviderDriverKind.make("opencode")]: OpenCodeIcon,
-  [ProviderDriverKind.make("cursor")]: CursorIcon,
-  [ProviderDriverKind.make("grok")]: GrokIcon,
-  [ProviderDriverKind.make("antigravity")]: AntigravityIcon,
-  [SOUTHBAG_CODE_DRIVER_KIND]: SouthbagCodeIcon,
-};
 
 export type ModelEsque = {
   slug: string;
@@ -55,10 +36,10 @@ export function getDisplayModelName(
   return cuteModelName(stripLeadingQualifier(name, model.subProvider), model.slug);
 }
 
-export function getTriggerDisplayModelName(model: ModelEsque): string {
-  return getDisplayModelName(model, { preferShortName: true });
-}
-
-export function getTriggerDisplayModelLabel(model: ModelEsque): string {
-  return getTriggerDisplayModelName(model);
+export function getTriggerDisplayModelName(
+  model: ModelEsque,
+  driverKind: ProviderDriverKind | null | undefined,
+): string {
+  const shortName = resolveModelShortName(model, driverKind);
+  return getDisplayModelName({ ...model, shortName }, { preferShortName: true });
 }

@@ -1,16 +1,9 @@
 import type { ModelSelection, ProviderDriverKind, ProviderInstanceId } from "@t3tools/contracts";
 import {
-  CLAUDE_RESUME_COMPACTION_NEVER_ANSWER,
-  isClaudeResumeCompactionQuestion,
-} from "@t3tools/shared/claudeCompaction";
-import {
   resolveSelectableProviderInstanceEntry,
   type ProviderInstanceEntry,
 } from "../../providerInstances";
-import { getTriggerDisplayModelName, type ModelEsque } from "./providerIconUtils";
-
-const CLAUDE_RESUME_COMPACTION_MINUTES = 70;
-const CLAUDE_RESUME_COMPACTION_TOKENS = 100_000;
+import { getDisplayModelName, type ModelEsque } from "./providerIconUtils";
 
 export function providerSupportsManualCompaction(
   provider: ProviderInstanceEntry | null | undefined,
@@ -42,46 +35,6 @@ export function hasAvailableCompactionProvider(input: {
   );
 }
 
-export function hasDismissedResumeCompaction(
-  activities: ReadonlyArray<{ readonly kind: string; readonly payload: unknown }>,
-): boolean {
-  return activities.some((activity) => {
-    if (activity.kind !== "user-input.resolved") return false;
-    const payload = activity.payload;
-    if (!payload || typeof payload !== "object") return false;
-    const answers = (payload as { readonly answers?: unknown }).answers;
-    if (!answers || typeof answers !== "object" || Array.isArray(answers)) return false;
-
-    return Object.entries(answers).some(
-      ([question, answer]) =>
-        isClaudeResumeCompactionQuestion(question) &&
-        answer === CLAUDE_RESUME_COMPACTION_NEVER_ANSWER,
-    );
-  });
-}
-
-export function shouldOfferResumeCompaction(input: {
-  readonly provider: string | null | undefined;
-  readonly usedTokens: number | null | undefined;
-  readonly updatedAt: string | null | undefined;
-  readonly now: string;
-}): boolean {
-  if (
-    input.provider !== "claudeAgent" ||
-    (input.usedTokens ?? 0) < CLAUDE_RESUME_COMPACTION_TOKENS
-  ) {
-    return false;
-  }
-
-  const updatedAt = Date.parse(input.updatedAt ?? "");
-  const now = Date.parse(input.now);
-  return (
-    Number.isFinite(updatedAt) &&
-    Number.isFinite(now) &&
-    now - updatedAt >= CLAUDE_RESUME_COMPACTION_MINUTES * 60_000
-  );
-}
-
 export function resolveContextWindowModelDisplayName(
   selection: ModelSelection | null | undefined,
   modelOptionsByInstance: ReadonlyMap<ProviderInstanceId, ReadonlyArray<ModelEsque>>,
@@ -94,7 +47,7 @@ export function resolveContextWindowModelDisplayName(
     .get(selection.instanceId)
     ?.find((model) => model.slug === selection.model);
 
-  return selectedModel ? getTriggerDisplayModelName(selectedModel) : selection.model;
+  return selectedModel ? getDisplayModelName(selectedModel) : selection.model;
 }
 
 export function formatContextWindowCompactionMessage(
@@ -102,30 +55,17 @@ export function formatContextWindowCompactionMessage(
   autoCompactThreshold?: number | null,
 ): string {
   if (typeof autoCompactThreshold === "number" && autoCompactThreshold > 0) {
-    return `compacts automatically at ${autoCompactThreshold.toLocaleString("en-US")} tokens.`;
+    return `compacts automatically at about ${autoCompactThreshold.toLocaleString("en-US")} tokens.`;
   }
   return modelDisplayName
     ? `context for ${modelDisplayName} compacts automatically when needed.`
     : "context compacts automatically when needed.";
 }
 
-/**
- * Whether the footer should hold the meter's slot before a snapshot exists.
- *
- * The snapshot comes from thread activities, which load after the shell.
- * Reserving the slot while the detail loads, for a started thread, keeps the
- * attach button still until the meter mounts. Once the detail is in, a
- * missing snapshot means there is no usage to show and nothing is reserved.
- *
- * The meter renders from stored activities whatever the provider's state, so
- * only a provider known not to stream usage skips the reservation. An unknown
- * provider (catalog still loading, or the thread's provider disabled) reserves.
- */
 export function shouldReserveContextWindowMeter(input: {
   readonly meterEnabled: boolean;
   readonly detailLoading: boolean;
   readonly threadStarted: boolean;
-  /** `null` while the thread's provider is not in the catalog. */
   readonly providerReportsContextWindow: boolean | null;
 }): boolean {
   return (
@@ -134,4 +74,12 @@ export function shouldReserveContextWindowMeter(input: {
     input.threadStarted &&
     input.providerReportsContextWindow !== false
   );
+}
+
+export function formatContextWindowCost(cost: {
+  readonly amount: number;
+  readonly currency: string;
+}): string {
+  const fractionDigits = Math.abs(cost.amount) > 0 && Math.abs(cost.amount) < 0.01 ? 4 : 2;
+  return `${cost.currency} ${cost.amount.toFixed(fractionDigits)}`;
 }

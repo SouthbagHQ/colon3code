@@ -2,12 +2,13 @@ import { StatusBar, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useAppearancePreferences } from "../features/settings/appearance/AppearancePreferencesProvider";
 
-import { AppText as Text } from "./AppText";
+import { AppText as Text } from "./ui/AppText";
 import { BrandMark } from "./BrandMark";
 import { Colon3Spinner } from "./Colon3Spinner";
 
 export function LoadingScreen(props: {
   readonly message: string;
+  readonly embedded?: boolean;
   readonly messagePlacement?: "above-spinner" | "below-spinner";
 }) {
   const { themeAppearance: colorScheme } = useAppearancePreferences();
@@ -15,7 +16,10 @@ export function LoadingScreen(props: {
   const messagePlacement = props.messagePlacement ?? "below-spinner";
 
   return (
-    <View className="flex-1 bg-screen" style={{ paddingTop: insets.top }}>
+    <View
+      className={props.embedded ? "flex-1" : "flex-1 bg-screen"}
+      style={{ paddingTop: props.embedded ? 0 : insets.top }}
+    >
       <StatusBar barStyle={colorScheme === "dark" ? "light-content" : "dark-content"} />
       <View className="flex-1 items-center justify-center gap-5 px-6">
         <BrandMark compact />

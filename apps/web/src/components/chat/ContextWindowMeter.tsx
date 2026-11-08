@@ -1,7 +1,11 @@
 import { Button } from "../ui/button";
-import { type ContextWindowSnapshot, formatContextWindowTokens } from "~/lib/contextWindow";
+import type { ContextWindowSnapshot } from "@t3tools/client-runtime/state/context-window";
+import { formatContextWindowTokens } from "~/lib/contextWindow";
 import { Popover, PopoverPopup, PopoverTrigger } from "../ui/popover";
-import { formatContextWindowCompactionMessage } from "./ContextWindowMeter.logic";
+import {
+  formatContextWindowCompactionMessage,
+  formatContextWindowCost,
+} from "./ContextWindowMeter.logic";
 import { MinimizeIcon } from "~/icons";
 import { composerFloatingLayerProps } from "./composerEventScope";
 
@@ -133,6 +137,14 @@ export function ContextWindowMeter(props: {
               </span>
             </div>
           ) : null}
+          {usage.cost != null ? (
+            <div className="flex items-center justify-between gap-3 text-2xs leading-4">
+              <span className="text-secondary-label">Cost</span>
+              <span className="font-medium tabular-nums text-secondary-label">
+                {formatContextWindowCost(usage.cost)}
+              </span>
+            </div>
+          ) : null}
           {usage.compactsAutomatically ? (
             <div className="mt-1 text-pretty text-secondary-label text-2xs font-medium">
               {formatContextWindowCompactionMessage(modelDisplayName, usage.autoCompactThreshold)}
@@ -163,7 +175,6 @@ export function ContextWindowMeter(props: {
   );
 }
 
-/** Holds the meter's footprint while a thread's activities are still loading. */
 export function ContextWindowMeterPlaceholder() {
   return <span aria-hidden="true" className="size-7 shrink-0" />;
 }

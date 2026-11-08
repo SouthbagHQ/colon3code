@@ -6,7 +6,6 @@ import {
 } from "@t3tools/contracts";
 import { type CustomModelDefinition, createModelCapabilities } from "@t3tools/shared/model";
 
-/** Editable mirror of a `ProviderOptionChoice`. `key` is only a React key. */
 export interface EditorChoice {
   readonly key: string;
   readonly id: string;
@@ -15,7 +14,6 @@ export interface EditorChoice {
   readonly description?: string;
 }
 
-/** Editable mirror of a `ProviderOptionDescriptor`. `key` is only a React key. */
 export interface EditorDescriptor {
   readonly key: string;
   readonly type: "select" | "boolean";
@@ -46,11 +44,6 @@ const EFFORT_CHOICES = [
   { id: "xhigh", label: "extra high" },
 ] as const;
 
-/**
- * Option ids each adapter actually reads off a turn's model selection, with
- * the usual choices pre-filled. Anything else the user types is stored
- * verbatim but will be ignored by the driver.
- */
 export const DESCRIPTOR_PRESETS_BY_KIND: Partial<
   Record<ProviderDriverKind, ReadonlyArray<DescriptorPreset>>
 > = {
@@ -106,6 +99,22 @@ export const DESCRIPTOR_PRESETS_BY_KIND: Partial<
       ],
     },
   ],
+  [ProviderDriverKind.make("pi")]: [
+    {
+      id: "thinking",
+      label: "Thinking",
+      type: "select",
+      choices: [
+        { id: "off", label: "Off" },
+        { id: "minimal", label: "Minimal" },
+        { id: "low", label: "Low" },
+        { id: "medium", label: "Medium", isDefault: true },
+        { id: "high", label: "High" },
+        { id: "xhigh", label: "Extra High" },
+        { id: "max", label: "Max" },
+      ],
+    },
+  ],
   [ProviderDriverKind.make("opencode")]: [
     { id: "variant", label: "reasoning", type: "select", choices: EFFORT_CHOICES },
     {
@@ -152,11 +161,8 @@ export function emptyEditorChoice(): EditorChoice {
   return { key: newEditorKey(), id: "", label: "", isDefault: false };
 }
 
-/**
- * Prompt-injected choices (Claude's `ultrathink`) are delivered as prompt text
- * by built-in runtime profiles a custom entry does not have, so they are
- * dropped rather than stored as a plain option value.
- */
+/** Custom entries lack runtime profiles for prompt-injected choices, so do not store them as ordinary
+ * options. */
 function descriptorToEditor(descriptor: ProviderOptionDescriptor): EditorDescriptor {
   const promptInjected = new Set(
     descriptor.type === "select" ? (descriptor.promptInjectedValues ?? []) : [],
@@ -205,10 +211,6 @@ export function descriptorsFromCapabilities(
     .map(descriptorToEditor);
 }
 
-/**
- * Validate the draft before saving. Returns the first problem in reading
- * order so the message is actionable, or `null` when the draft is sound.
- */
 export function validateDraft(draft: CustomModelDraft): string | null {
   const seenIds = new Set<string>();
   for (const [index, descriptor] of draft.descriptors.entries()) {
@@ -234,7 +236,6 @@ export function validateDraft(draft: CustomModelDraft): string | null {
   return null;
 }
 
-/** Convert a validated draft back into a definition. Blank name → slug. */
 export function definitionFromDraft(draft: CustomModelDraft): CustomModelDefinition {
   const descriptors: ProviderOptionDescriptor[] = draft.descriptors.map((descriptor) => {
     const id = descriptor.id.trim();

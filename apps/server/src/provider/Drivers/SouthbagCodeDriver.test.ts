@@ -1,32 +1,29 @@
 import * as NodeServices from "@effect/platform-node/NodeServices";
 import { expect, it } from "@effect/vitest";
 import {
+  DEFAULT_SERVER_SETTINGS,
   ProviderDriverKind,
   ProviderInstanceId,
   SOUTHBAG_CODE_DRIVER_KIND,
   type ServerProvider,
-  ServerSettings,
 } from "@t3tools/contracts";
+import * as IdAllocator from "@t3tools/provider-core/server/IdAllocator";
+import * as McpProviderSessions from "@t3tools/provider-core/server/McpProviderSessions";
+import * as ProviderLatestVersions from "@t3tools/provider-core/server/ProviderLatestVersions";
+import * as TestProviderHost from "@t3tools/provider-testing/TestProviderHost";
 import * as Effect from "effect/Effect";
 import * as Layer from "effect/Layer";
-import * as Schema from "effect/Schema";
-import { HttpClient } from "effect/unstable/http";
-import * as ChildProcessSpawner from "effect/unstable/process/ChildProcessSpawner";
+import * as HttpClient from "effect/http/HttpClient";
+import * as ChildProcessSpawner from "effect/process/ChildProcessSpawner";
 
-import * as BackgroundPolicy from "../../background/BackgroundPolicy.ts";
-import { ServerConfig } from "../../config.ts";
-import { ServerSettingsService } from "../../serverSettings.ts";
 import { BUILT_IN_DRIVERS } from "../builtInDrivers.ts";
-import { NoOpProviderEventLoggers, ProviderEventLoggers } from "../Layers/ProviderEventLoggers.ts";
-import { deriveProviderInstanceConfigMap } from "../Layers/ProviderInstanceRegistryHydration.ts";
-import {
-  driverKindForLegacyProviderSettingsKey,
-  legacyProviderSettingsKeyForDriver,
-} from "../providerSettingsKeys.ts";
 import { orderProviderSnapshots } from "../providerStatusCache.ts";
+import {
+  SOUTHBAG_CODE_BINARY,
+  southbagCodeLaunchArgs,
+  southbagCodePiSettings,
+} from "../SouthbagCodeAdapter.ts";
 import { SOUTHBAG_CODE_NPM_PACKAGE, SouthbagCodeDriver } from "./SouthbagCodeDriver.ts";
-
-const decodeServerSettings = Schema.decodeUnknownSync(ServerSettings);
 
 it("registers Southbag Code as the first built-in driver", () => {
   // The web defaults new threads to the first picker-ready provider in the
@@ -65,44 +62,30 @@ it("publishes southbag-code ahead of every other driver", () => {
   ).toEqual(["southbag-code", "codex", "claudeAgent"]);
 });
 
-it("keeps the southbag-code driver kind as its providers settings slot", () => {
-  expect(legacyProviderSettingsKeyForDriver(SOUTHBAG_CODE_DRIVER_KIND)).toBe("southbag-code");
-  expect(legacyProviderSettingsKeyForDriver(ProviderDriverKind.make("codex"))).toBe("codex");
-  expect(driverKindForLegacyProviderSettingsKey("southbag-code")).toBe(SOUTHBAG_CODE_DRIVER_KIND);
-  expect(driverKindForLegacyProviderSettingsKey("grok")).toBe("grok");
+it("runs the Pi-family adapter with Southbag's binary and the app's voice", () => {
+  expect(southbagCodePiSettings({ enabled: true, binaryPath: "", customModels: [] })).toMatchObject(
+    { binaryPath: SOUTHBAG_CODE_BINARY, launchArgs: "" },
+  );
+  const args = southbagCodeLaunchArgs();
+  expect(args[0]).toBe("--append-system-prompt");
+  expect(args[1]).toContain("through the Southbag Code harness");
+  expect(args[1]).toContain("<voice>");
 });
 
-it('hydrates a southbag-code instance from providers["southbag-code"]', () => {
-  const settings = decodeServerSettings({
-    providers: { "southbag-code": { binaryPath: "/opt/southbag/bin/southbag-code" } },
-  });
-  const configMap = deriveProviderInstanceConfigMap(settings);
-  const instance = configMap[ProviderInstanceId.make(SOUTHBAG_CODE_DRIVER_KIND)];
-  expect(instance?.driver).toBe(SOUTHBAG_CODE_DRIVER_KIND);
-  expect(instance?.config).toMatchObject({
-    enabled: true,
-    binaryPath: "/opt/southbag/bin/southbag-code",
-  });
-});
-
-const testLayer = ServerConfig.layerTest(process.cwd(), {
-  prefix: "t3-southbag-driver-",
-}).pipe(
-  Layer.provideMerge(NodeServices.layer),
-  Layer.provideMerge(ServerSettingsService.layerTest()),
-  Layer.provideMerge(
-    Layer.mock(BackgroundPolicy.BackgroundPolicy)({
-      shouldRunScopeWork: () => Effect.succeed(false),
-    }),
+const testLayer = Layer.mergeAll(
+  TestProviderHost.layer({
+    cwd: "/machine",
+    settings: { ...DEFAULT_SERVER_SETTINGS, enableProviderUpdateChecks: false },
+    runBackgroundWork: false,
+  }),
+  IdAllocator.layer,
+  McpProviderSessions.layer,
+  ProviderLatestVersions.layer,
+  Layer.succeed(
+    HttpClient.HttpClient,
+    HttpClient.make(() => Effect.die("Disabled Southbag Code must not make an HTTP request")),
   ),
-  Layer.provideMerge(Layer.succeed(ProviderEventLoggers, NoOpProviderEventLoggers)),
-  Layer.provideMerge(
-    Layer.succeed(
-      HttpClient.HttpClient,
-      HttpClient.make(() => Effect.die("Disabled Southbag Code must not make an HTTP request")),
-    ),
-  ),
-);
+).pipe(Layer.provideMerge(NodeServices.layer));
 
 it.layer(testLayer)("SouthbagCodeDriver", (it) => {
   it.effect("builds a disabled instance without spawning and names the npm package", () =>
@@ -115,8 +98,7 @@ it.layer(testLayer)("SouthbagCodeDriver", (it) => {
         config: { ...SouthbagCodeDriver.defaultConfig(), binaryPath: "/nope/southbag-code" },
       });
       expect(instance.driverKind).toBe(SOUTHBAG_CODE_DRIVER_KIND);
-      expect(instance.adapter.provider).toBe(SOUTHBAG_CODE_DRIVER_KIND);
-      expect(instance.adapter.capabilities.sessionModelSwitch).toBe("in-session");
+      expect(instance.orchestrationAdapter?.driver).toBe(SOUTHBAG_CODE_DRIVER_KIND);
       const capabilities = yield* instance.snapshot.resolveMaintenance();
       expect(capabilities.packageName).toBe(SOUTHBAG_CODE_NPM_PACKAGE);
       expect(capabilities.update).toBeNull();

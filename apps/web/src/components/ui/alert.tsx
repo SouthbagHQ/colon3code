@@ -10,7 +10,6 @@ const alertVariants = cva("relative rounded-xl border px-4 py-3.5 text-card-fore
     variant: "default",
   },
   variants: {
-    // "glass" floats the alert over content; alert-glass tints from data-variant.
     surface: {
       default: "",
       glass: "alert-glass",

@@ -2,7 +2,7 @@
   "uuid": "snap-shot@t3.codes",
   "name": ":3 Code SnapShots",
   "description": "Allows :3 Code to capture the focused window, identify it for optional accessibility text, and animate it into :3 Code. Disable this extension to revoke access.",
-  "shell-version": ["45", "46", "47", "48", "49", "50"],
-  "version": 2,
+  "shell-version": ["45", "46", "47", "48", "49", "50", "51"],
+  "version": 3,
   "url": "https://github.com/SouthbagHQ/colon3code"
 }

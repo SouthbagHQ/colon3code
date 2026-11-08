@@ -1,45 +1,55 @@
+import {
+  getPromptControlledTraits,
+  getTraitSelectChange,
+} from "@t3tools/client-runtime/model-traits";
+import * as Dialog from "../../components/ui/Dialog";
+import { createV5StackNavigator as createNativeStackNavigator } from "../../native/createV5StackNavigator";
+import { useSheetStackOptions } from "../layout/nested-stacks";
+import { DEFAULT_SERVER_SETTINGS } from "@t3tools/contracts";
+import {
+  modelPreferencesMigrationPatch,
+  resolveModelPreferences,
+} from "@t3tools/shared/serverSettings";
 import type {
   EnvironmentId,
   ModelSelection,
+  ProjectId,
   ProviderInstanceId,
   ProviderOptionDescriptor,
   ProviderOptionSelection,
   RuntimeMode,
+  ServerSettings,
+  ThreadId,
 } from "@t3tools/contracts";
 import type { LegendListRenderItemProps } from "@legendapp/list/react-native";
-import { useAtomSet, useAtomValue } from "@effect/atom-react";
+import { RegistryContext, useAtomValue } from "@effect/atom-react";
 import { AnimatedLegendList } from "@legendapp/list/reanimated";
+import { getProviderOptionCurrentValue, getProviderOptionDescriptors } from "@t3tools/shared/model";
 import {
-  getProviderOptionCurrentLabel,
-  getProviderOptionCurrentValue,
-  getProviderOptionDescriptors,
-} from "@t3tools/shared/model";
-import { useNavigation, useRoute, type RouteProp } from "@react-navigation/native";
-import {
-  createNativeStackNavigator,
-  type NativeStackNavigationProp,
-} from "@react-navigation/native-stack";
+  useNavigation,
+  useRoute,
+  type RouteProp,
+  type StaticScreenProps,
+} from "@react-navigation/native";
+import { type NativeStackNavigationProp } from "@react-navigation/native-stack";
 import * as Haptics from "expo-haptics";
-import { AsyncResult } from "effect/unstable/reactivity";
+import { AsyncResult } from "effect/reactivity";
 import {
   createContext,
   use,
-  useCallback,
   useEffect,
-  useMemo,
+  useEffectEvent,
+  useRef,
   useState,
   type ReactNode,
 } from "react";
-import {
-  Alert,
-  Platform,
-  Pressable,
-  RefreshControl,
-  ScrollView,
-  TextInput,
-  View,
-} from "react-native";
-import Animated, { FadeIn, FadeOut, LinearTransition } from "react-native-reanimated";
+import { Platform, Pressable, RefreshControl, ScrollView, View } from "react-native";
+import Animated, {
+  FadeIn,
+  FadeOut,
+  LinearTransition,
+  useReducedMotion,
+} from "react-native-reanimated";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import {
   cuteDescriptorLabel,
@@ -47,44 +57,59 @@ import {
   cuteOptionLabel,
 } from "@t3tools/client-runtime/cuteTraits";
 
-import { SymbolView } from "../../components/AppSymbol";
-import { AppText as Text } from "../../components/AppText";
-import { AndroidScreenHeader } from "../../components/AndroidScreenHeader";
-import { AndroidAnchoredMenu } from "../../components/AndroidAnchoredMenu";
-import { MaterialButton } from "../../components/MaterialButton";
-import { MaterialIconButton } from "../../components/MaterialIconButton";
+import { SymbolView } from "../../components/ui/AppSymbol";
+import { AppText as Text } from "../../components/ui/AppText";
+import { AppBar } from "../../components/ui/AppBar";
 import { ProviderIcon } from "../../components/ProviderIcon";
-import { ThemedSwitch } from "../../components/ThemedSwitch";
+import { ThemedSwitch } from "../../components/ui/ThemedSwitch";
 import { cn } from "../../lib/cn";
-import type { ModelOption, ProviderGroup } from "../../lib/modelOptions";
+import { useReduceMotionEnabled } from "../../lib/appState";
+import {
+  buildModelOptions,
+  groupByProvider,
+  type ModelOption,
+  type ProviderGroup,
+} from "../../lib/modelOptions";
 import { applyProviderOptionSelection } from "../../lib/providerOptions";
 import { resolveProviderOptionDescriptors } from "../../lib/providerOptions";
-import { useUniwindTheme } from "../../lib/useUniwindTheme";
 import {
-  NativeHeaderToolbar,
-  NativeStackScreenOptions,
-  nativeHeaderScrollEdgeEffects,
-} from "../../native/StackHeader";
-import { NATIVE_LIQUID_GLASS_SUPPORTED } from "../../native/native-glass";
+  rememberModelOptions,
+  withRememberedModelOptions,
+} from "../../state/use-model-option-memory";
 import { ChatGptSharingStatus } from "./ChatGptSharingStatus";
+import { environmentCatalog } from "../../connection/catalog";
+import { useEnvironmentQuery } from "../../state/query";
+import { scopedThreadKey } from "../../lib/scopedEntities";
+import { useThreadReportedModelSelection } from "../../state/entities";
+import {
+  setComposerDraftText,
+  updateComposerDraftSettings,
+  useComposerDraft,
+  useComposerDraftSettings,
+} from "../../state/use-composer-drafts";
+import { useQuietThreadStructure } from "../../state/use-thread-detail";
+import { activeComposerDraftKey, useQueuedRunEdit } from "../../state/queued-run-edit";
+import { updateThreadDraftModelSelection } from "../../state/use-thread-composer-state";
+import { useThreadSelection } from "../../state/use-thread-selection";
+import { threadAllowsProviderSwitch } from "../../state/thread-provider-switching";
 import { environmentServerConfigsAtom, serverEnvironment } from "../../state/server";
-import { mobilePreferencesAtom, updateMobilePreferencesAtom } from "../../state/preferences";
+import { mobilePreferencesAtom } from "../../state/preferences";
 import { useAtomCommand } from "../../state/use-atom-command";
 import { useNewTaskFlow } from "./new-task-flow-provider";
-import { MaterialScreenContent } from "../../components/MaterialScreenContent";
+import { ScreenContent } from "../../components/ui/ScreenContent";
 import {
   createProviderCatalogRefreshRunner,
   providerCatalogRefreshError,
 } from "./provider-catalog-refresh";
-import {
-  createNativeMailSearchToolbarItem,
-  NATIVE_MAIL_SEARCH_TOOLBAR_CONTENT_INSET,
-  NATIVE_MAIL_SEARCH_TOOLBAR_SUPPORTED,
-} from "../layout/native-mail-search-toolbar";
+import { useSearchToolbarInset } from "../../components/ui/useBarInset";
+import type { AppBarSearch } from "../../components/ui/AppBar";
 import { ModelRow, ChoiceRow } from "./ThreadSettingsRows";
 import {
-  RUNTIME_MODE_CHOICES,
+  compatibleRuntimeModeForChoices,
   currentOptionLabel,
+  runtimeModeChoicesForSupportedModes,
+  withManagedRuntimeModeLimits,
+  type RuntimeModeChoice,
   selectableChoices,
 } from "./thread-settings-options";
 import {
@@ -94,24 +119,16 @@ import {
   modelMatchesCatalogQuery,
   pendingModelAfterPress,
   providerSectionIsCollapsed,
-  toggleModelFavorite,
 } from "./thread-settings-sheet-state";
+import { formatProviderUpdateRequiredNotice } from "@t3tools/client-runtime/providerUpdateRequiredModels";
 
-/**
- * Everyday harnesses start expanded; every other provider (OpenRouter catalogs
- * and friends) starts folded so a 300-model catalog cannot bury the list. All
- * provider headers remain user-collapsible.
- */
 const PRIMARY_PROVIDER_DRIVERS: ReadonlySet<string> = new Set([
   "claudeAgent",
   "codex",
   "antigravity",
   "southbag-code",
 ]);
-/**
- * Keep measured row changes stable, but let catalog mutations use the list's
- * native bounds so a filtered catalog that underflows returns to the top.
- */
+/** Keep measured size changes stable; let catalog mutations return underflowing filtered lists to the top. */
 const THREAD_SETTINGS_MAINTAIN_VISIBLE_CONTENT_POSITION = {
   data: false,
   size: true,
@@ -122,18 +139,16 @@ const THREAD_SETTINGS_CATALOG_EXIT_TRANSITION = FadeOut.duration(120);
 const THREAD_SETTINGS_OPTIONS_LAYOUT_TRANSITION = LinearTransition.duration(180);
 const THREAD_SETTINGS_OPTION_ENTER_TRANSITION = FadeIn.duration(140);
 const THREAD_SETTINGS_OPTION_EXIT_TRANSITION = FadeOut.duration(100);
-const THREAD_SETTINGS_HEADER_SCROLL_EDGE_EFFECTS = nativeHeaderScrollEdgeEffects(
-  Platform.OS,
-  Platform.Version,
-);
 const EMPTY_MODEL_FAVORITES: ReadonlyArray<{
   readonly provider: ProviderInstanceId;
   readonly model: string;
 }> = [];
 const FAVORITES_PROVIDER_FILTER = "@favorites";
-/** Provider catalog header with its harness logo and disclosure state. */
+// Servers that predate `migrateModelPreferences` drop it and keep reporting null favorites.
+const attemptedMigrationGenerations = new Map<EnvironmentId, number>();
 function ProviderHeader(props: {
   readonly driver: string | undefined;
+  readonly iconUrl: string | undefined;
   readonly label: string;
   readonly collapsible: boolean;
   readonly collapsed: boolean;
@@ -142,7 +157,7 @@ function ProviderHeader(props: {
 }) {
   const content = (
     <>
-      <ProviderIcon provider={props.driver} size={15} />
+      <ProviderIcon iconUrl={props.iconUrl} provider={props.driver} size={15} />
       <Text className="text-sm font-t3-medium text-foreground-muted">{props.label}</Text>
       {props.collapsible ? (
         <>
@@ -184,7 +199,6 @@ function ProviderHeader(props: {
   );
 }
 
-/** Compact row that opens a single-choice submenu panel. */
 function DisclosureRow(props: {
   readonly label: string;
   readonly value: string | undefined;
@@ -196,7 +210,7 @@ function DisclosureRow(props: {
       accessibilityRole="button"
       onPress={props.onPress}
       className={cn(
-        "min-h-11 flex-row items-center gap-2 bg-card px-4 py-2 active:bg-subtle android:min-h-14",
+        "min-h-11 flex-row items-center gap-2 bg-grouped-card px-4 py-2 active:bg-subtle android:min-h-14",
         !props.isLast && "border-b border-border-subtle",
       )}
     >
@@ -226,7 +240,7 @@ function SwitchRow(props: {
   return (
     <View
       className={cn(
-        "min-h-11 flex-row items-center justify-between bg-card px-4 py-1",
+        "min-h-11 flex-row items-center justify-between bg-grouped-card px-4 py-1",
         !props.isLast && "border-b border-border-subtle",
       )}
     >
@@ -246,56 +260,28 @@ type ThreadSettingsSubmenuPage =
 
 type ThreadSettingsSessionProps = {
   readonly environmentId: EnvironmentId | null;
+  readonly projectId: ProjectId | null;
   readonly providerInstanceId?: ProviderInstanceId;
+  readonly lockedProviderInstanceId?: ProviderInstanceId;
   readonly providerGroups: ReadonlyArray<ProviderGroup>;
   readonly selectedModel: ModelSelection | null;
+  readonly prompt: string;
+  readonly onPromptChange: (prompt: string) => void;
+  readonly reportedModelSelection?: ModelSelection | null;
   readonly onSelectModel: (option: ModelOption) => void;
+  readonly restoreSelection?: (selection: ModelSelection) => ModelSelection;
   readonly optionDescriptors: ReadonlyArray<ProviderOptionDescriptor>;
   readonly onUpdateOptionSelections: (selections: ReadonlyArray<ProviderOptionSelection>) => void;
   readonly runtimeMode: RuntimeMode;
   readonly onUpdateRuntimeMode: (mode: RuntimeMode) => void;
 };
 
-export type ExistingThreadSettingsRouteSession = ThreadSettingsSessionProps & {
-  readonly ownerId: string;
+/** The composer draft the sheet edits: the thread's own, or a queued message being edited. */
+export type ExistingThreadSettingsRouteParams = {
+  readonly environmentId: EnvironmentId;
+  readonly threadId: ThreadId;
+  readonly draftKey: string;
 };
-
-type ExistingThreadSettingsRouteContextValue = {
-  readonly session: ExistingThreadSettingsRouteSession | null;
-  readonly present: (session: ExistingThreadSettingsRouteSession) => void;
-  readonly clear: (ownerId: string) => void;
-};
-
-const ExistingThreadSettingsRouteContext =
-  createContext<ExistingThreadSettingsRouteContextValue | null>(null);
-
-/** Bridges the active thread's settings state into the root native sheet route. */
-export function ExistingThreadSettingsRouteProvider(props: { readonly children: ReactNode }) {
-  const [session, setSession] = useState<ExistingThreadSettingsRouteSession | null>(null);
-  const present = useCallback((nextSession: ExistingThreadSettingsRouteSession) => {
-    setSession(nextSession);
-  }, []);
-  const clear = useCallback((ownerId: string) => {
-    setSession((current) => (current?.ownerId === ownerId ? null : current));
-  }, []);
-  const value = useMemo(() => ({ session, present, clear }), [clear, present, session]);
-
-  return (
-    <ExistingThreadSettingsRouteContext.Provider value={value}>
-      {props.children}
-    </ExistingThreadSettingsRouteContext.Provider>
-  );
-}
-
-export function useExistingThreadSettingsRoutePresentation() {
-  const value = use(ExistingThreadSettingsRouteContext);
-  if (!value) {
-    throw new Error(
-      "useExistingThreadSettingsRoutePresentation must be used inside ExistingThreadSettingsRouteProvider.",
-    );
-  }
-  return value;
-}
 
 type ThreadSettingsSessionValue = {
   readonly environmentId: EnvironmentId | null;
@@ -304,9 +290,17 @@ type ThreadSettingsSessionValue = {
   readonly favoriteKeys: ReadonlySet<string>;
   readonly favoritesLoaded: boolean;
   readonly toggleFavorite: (option: ModelOption) => void;
+  readonly toggleHidden: (option: ModelOption) => void;
+  readonly pendingHiddenKeys: ReadonlySet<string>;
+  readonly manageHidden: boolean;
+  readonly setManageHidden: (value: boolean) => void;
   readonly runtimeMode: RuntimeMode;
+  readonly runtimeModeChoices: ReadonlyArray<RuntimeModeChoice>;
   readonly onUpdateRuntimeMode: (mode: RuntimeMode) => void;
   readonly displayedDescriptors: ReadonlyArray<ProviderOptionDescriptor>;
+  readonly promptTraits: ReturnType<typeof getPromptControlledTraits>;
+  readonly displayedModelSelection: ModelSelection | null;
+  readonly reportedModelSelection: ModelSelection | null;
   readonly providerExpansionOverrides: ReadonlySet<string>;
   readonly hasLegacyModels: boolean;
   readonly pendingModel: ModelOption | null;
@@ -326,38 +320,159 @@ type ThreadSettingsSessionValue = {
 
 const ThreadSettingsSessionContext = createContext<ThreadSettingsSessionValue | null>(null);
 
-/** Owns the staged model and option state for one picker presentation. */
 function ThreadSettingsSessionProvider(
   props: ThreadSettingsSessionProps & { readonly children: ReactNode },
 ) {
+  const registry = use(RegistryContext);
   const preferences = useAtomValue(mobilePreferencesAtom);
-  const savePreferences = useAtomSet(updateMobilePreferencesAtom);
-  const favoritesLoaded = AsyncResult.isSuccess(preferences);
-  const modelFavorites = favoritesLoaded
+  const configs = useAtomValue(environmentServerConfigsAtom);
+  const config = props.environmentId ? configs.get(props.environmentId) : undefined;
+  const settings = config?.settings;
+  const connection = useEnvironmentQuery(
+    props.environmentId ? environmentCatalog.stateAtom(props.environmentId) : null,
+  ).data;
+  const connectionGeneration = connection?.phase === "connected" ? connection.generation : null;
+  const [manageHidden, setManageHidden] = useState(false);
+  const pendingHidden = useRef(new Set<string>());
+  const pendingFavorites = useRef(
+    new Map<string, { favorite: boolean; settings: ServerSettings; pending: boolean }>(),
+  );
+  const [pendingHiddenKeys, setPendingHiddenKeys] = useState<ReadonlySet<string>>(() => new Set());
+  const providerGroups =
+    manageHidden && config
+      ? groupByProvider(
+          buildModelOptions(
+            config,
+            props.selectedModel,
+            props.lockedProviderInstanceId,
+            props.projectId,
+            true,
+          ),
+        )
+      : props.providerGroups;
+  const legacyFavorites = AsyncResult.isSuccess(preferences)
     ? (preferences.value.modelFavorites ?? EMPTY_MODEL_FAVORITES)
     : EMPTY_MODEL_FAVORITES;
-  const favoriteKeys = useMemo(
-    () =>
-      new Set(
-        modelFavorites.map((favorite) => modelFavoriteKey(favorite.provider, favorite.model)),
-      ),
-    [modelFavorites],
+  const favoritesLoaded =
+    settings !== undefined && (settings.favorites !== null || AsyncResult.isSuccess(preferences));
+  const modelFavorites = resolveModelPreferences(settings ?? DEFAULT_SERVER_SETTINGS, {
+    favorites: legacyFavorites,
+  }).favorites;
+  const saveSettings = useAtomCommand(serverEnvironment.updateSettings, "model favorites update");
+  // oxlint-disable-next-line colon3code/no-unreasoned-state-sync -- writes the one-time legacy model favorites migration to server settings once per connection
+  useEffect(() => {
+    if (
+      !props.environmentId ||
+      !settings ||
+      !AsyncResult.isSuccess(preferences) ||
+      connectionGeneration === null ||
+      attemptedMigrationGenerations.get(props.environmentId) === connectionGeneration
+    )
+      return;
+    const patch = modelPreferencesMigrationPatch(settings, { favorites: legacyFavorites });
+    if (!patch) return;
+    attemptedMigrationGenerations.set(props.environmentId, connectionGeneration);
+    void saveSettings({ environmentId: props.environmentId, input: { patch } });
+  }, [
+    connectionGeneration,
+    legacyFavorites,
+    preferences,
+    props.environmentId,
+    saveSettings,
+    settings,
+  ]);
+  const favoriteKeys = new Set(
+    modelFavorites.map((favorite) => modelFavoriteKey(favorite.provider, favorite.model)),
   );
-  const toggleFavorite = useCallback(
-    (option: ModelOption) => {
-      if (!favoritesLoaded) return;
-      void Haptics.selectionAsync();
-      savePreferences({
-        transform: (current) => ({
-          modelFavorites: toggleModelFavorite(
-            current.modelFavorites ?? EMPTY_MODEL_FAVORITES,
-            option,
-          ),
-        }),
-      });
-    },
-    [favoritesLoaded, savePreferences],
-  );
+  const toggleFavorite = async (option: ModelOption) => {
+    const environmentId = props.environmentId;
+    if (!favoritesLoaded || !environmentId) return;
+    const currentSettings = registry.get(environmentServerConfigsAtom).get(environmentId)?.settings;
+    if (!currentSettings) return;
+    const favorites = resolveModelPreferences(currentSettings, {
+      favorites: legacyFavorites,
+    }).favorites;
+    const key = JSON.stringify([
+      environmentId,
+      option.selection.instanceId,
+      option.selection.model,
+    ]);
+    const previous = pendingFavorites.current.get(key);
+    const previousFavorite =
+      previous && (previous.pending || previous.settings.favorites === currentSettings.favorites)
+        ? previous.favorite
+        : favorites.some(
+            (favorite) =>
+              favorite.provider === option.selection.instanceId &&
+              favorite.model === option.selection.model,
+          );
+    const pending = { favorite: !previousFavorite, settings: currentSettings, pending: true };
+    pendingFavorites.current.set(key, pending);
+    void Haptics.selectionAsync();
+    const result = await saveSettings({
+      environmentId: environmentId,
+      input: {
+        patch: {
+          setModelFavorites: [
+            {
+              provider: option.selection.instanceId,
+              model: option.selection.model,
+              favorite: pending.favorite,
+            },
+          ],
+          ...(currentSettings.favorites === null ? { migrateModelPreferences: { favorites } } : {}),
+        },
+      },
+    });
+    if (
+      AsyncResult.isSuccess(result) &&
+      registry.get(environmentServerConfigsAtom).get(environmentId)?.settings.favorites ===
+        currentSettings.favorites
+    ) {
+      pending.pending = false;
+    }
+    if (pending.pending && pendingFavorites.current.get(key) === pending) {
+      if (
+        previous &&
+        !previous.pending &&
+        registry.get(environmentServerConfigsAtom).get(environmentId)?.settings.favorites ===
+          previous.settings.favorites
+      ) {
+        pendingFavorites.current.set(key, previous);
+      } else {
+        pendingFavorites.current.delete(key);
+      }
+    }
+  };
+  const toggleHidden = (option: ModelOption) => {
+    if (
+      !settings ||
+      !props.environmentId ||
+      !option.canHide ||
+      pendingHidden.current.has(option.key)
+    )
+      return;
+    pendingHidden.current.add(option.key);
+    setPendingHiddenKeys(new Set(pendingHidden.current));
+    void Haptics.selectionAsync();
+    void saveSettings({
+      environmentId: props.environmentId,
+      input: {
+        patch: {
+          setModelsHidden: [
+            {
+              provider: option.selection.instanceId,
+              model: option.selection.model,
+              hidden: !option.isHidden,
+            },
+          ],
+        },
+      },
+    }).then(() => {
+      pendingHidden.current.delete(option.key);
+      setPendingHiddenKeys(new Set(pendingHidden.current));
+    });
+  };
   const [showLegacyToggle, setShowLegacyToggle] = useState(false);
   const [providerFilter, setProviderFilter] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
@@ -365,43 +480,44 @@ function ThreadSettingsSessionProvider(
     () => new Set(),
   );
   const [pendingModel, setPendingModel] = useState<ModelOption | null>(null);
+  const [pendingPrompt, setPendingPrompt] = useState<string | null>(null);
+  const displayedPrompt = pendingModel ? (pendingPrompt ?? props.prompt) : props.prompt;
 
-  const isApplied = useCallback(
-    (option: ModelOption) =>
-      option.selection.instanceId === props.selectedModel?.instanceId &&
-      option.selection.model === props.selectedModel.model,
-    [props.selectedModel],
+  const isApplied = (option: ModelOption) =>
+    option.selection.instanceId === props.selectedModel?.instanceId &&
+    option.selection.model === props.selectedModel.model;
+  const isDisplayed = (option: ModelOption) =>
+    pendingModel ? option.key === pendingModel.key : isApplied(option);
+
+  const displayedDescriptors = pendingModel
+    ? pendingModel.capabilities
+      ? getProviderOptionDescriptors({
+          caps: pendingModel.capabilities,
+          selections: pendingModel.selection.options,
+        })
+      : []
+    : props.optionDescriptors;
+  const promptTraits = getPromptControlledTraits(displayedDescriptors, displayedPrompt);
+  const displayedModel =
+    pendingModel ??
+    props.providerGroups.flatMap((group) => group.models).find((option) => isApplied(option)) ??
+    null;
+  const runtimeModeChoices = withManagedRuntimeModeLimits(
+    runtimeModeChoicesForSupportedModes(displayedModel?.supportedRuntimeModes),
+    [config?.managedPolicy],
   );
-  // The list highlights the staged pick; Save turns it into the applied one.
-  const isDisplayed = useCallback(
-    (option: ModelOption) => (pendingModel ? option.key === pendingModel.key : isApplied(option)),
-    [isApplied, pendingModel],
+  const compatibleRuntimeMode = compatibleRuntimeModeForChoices(
+    props.runtimeMode,
+    runtimeModeChoices,
   );
 
-  // While a model is staged, the settings rows describe and edit the staged
-  // model's options (kept on its pending selection); Save applies model and
-  // options together. Otherwise they edit the applied selection directly.
-  const displayedDescriptors = useMemo(
-    () =>
-      pendingModel
-        ? pendingModel.capabilities
-          ? getProviderOptionDescriptors({
-              caps: pendingModel.capabilities,
-              selections: pendingModel.selection.options,
-            })
-          : []
-        : props.optionDescriptors,
-    [pendingModel, props.optionDescriptors],
+  const hasLegacyModels = props.providerGroups.some((group) =>
+    group.models.some((model) => model.isLegacy),
   );
-
-  const hasLegacyModels = useMemo(
-    () => props.providerGroups.some((group) => group.models.some((model) => model.isLegacy)),
-    [props.providerGroups],
-  );
-  const commitPendingModel = useCallback(() => {
+  const commitPendingModel = () => {
     if (pendingModel) {
       if (!canCommitPendingModel(pendingModel, props.providerGroups)) {
-        Alert.alert(
+        Dialog.alert(
           "model unavailable 3:",
           "set up this provider on web or desktop, or select another model.",
         );
@@ -409,29 +525,52 @@ function ThreadSettingsSessionProvider(
       }
       void Haptics.selectionAsync();
       props.onSelectModel(pendingModel);
+      if (pendingPrompt !== null && pendingPrompt !== props.prompt) {
+        props.onPromptChange(pendingPrompt);
+      }
     }
     return true;
-  }, [pendingModel, props.onSelectModel, props.providerGroups]);
+  };
 
-  const applyOptionChange = useCallback(
-    (id: string, value: string | boolean) => {
-      const next = applyProviderOptionSelection(displayedDescriptors, { id, value });
-      if (!next) {
-        return;
+  const applyOptionChange = (id: string, value: string | boolean) => {
+    const descriptor = displayedDescriptors.find((entry) => entry.id === id);
+    const change =
+      descriptor?.type === "select" && typeof value === "string"
+        ? getTraitSelectChange(
+            { ...promptTraits, descriptors: displayedDescriptors },
+            descriptor,
+            displayedPrompt,
+            value,
+          )
+        : null;
+    if (descriptor?.type === "select") {
+      if (!change) return;
+      if (change.prompt !== displayedPrompt) {
+        if (pendingModel) {
+          setPendingPrompt(change.prompt);
+        } else {
+          props.onPromptChange(change.prompt);
+        }
       }
-      if (pendingModel) {
-        setPendingModel({
-          ...pendingModel,
-          selection: { ...pendingModel.selection, options: next },
-        });
-      } else {
-        props.onUpdateOptionSelections(next);
-      }
-    },
-    [displayedDescriptors, pendingModel, props.onUpdateOptionSelections],
-  );
+    }
+    const next = change
+      ? (change.modelOptions ?? [])
+      : applyProviderOptionSelection(displayedDescriptors, { id, value });
+    if (!next) {
+      return;
+    }
+    if (pendingModel) {
+      rememberModelOptions(pendingModel.selection.instanceId, pendingModel.selection.model, next);
+      setPendingModel({
+        ...pendingModel,
+        selection: { ...pendingModel.selection, options: next },
+      });
+    } else {
+      props.onUpdateOptionSelections(next);
+    }
+  };
 
-  const toggleProvider = useCallback((providerKey: string) => {
+  const toggleProvider = (providerKey: string) => {
     setProviderExpansionOverrides((current) => {
       const next = new Set(current);
       if (!next.delete(providerKey)) {
@@ -439,73 +578,57 @@ function ThreadSettingsSessionProvider(
       }
       return next;
     });
-  }, []);
+  };
 
-  const pressModel = useCallback(
-    (option: ModelOption) => {
-      void Haptics.selectionAsync();
-      setPendingModel((current) =>
-        pendingModelAfterPress({
-          current,
-          pressed: option,
-          pressedIsApplied: isApplied(option),
-        }),
-      );
-    },
-    [isApplied],
-  );
+  const pressModel = (option: ModelOption) => {
+    void Haptics.selectionAsync();
+    if (isApplied(option) || option.key !== pendingModel?.key) {
+      setPendingPrompt(null);
+    }
+    setPendingModel((current) =>
+      pendingModelAfterPress({
+        current,
+        pressed: option,
+        pressedIsApplied: isApplied(option),
+        restoreSelection: props.restoreSelection,
+      }),
+    );
+  };
 
-  const value = useMemo<ThreadSettingsSessionValue>(
-    () => ({
-      environmentId: props.environmentId,
-      providerInstanceId: props.providerInstanceId,
-      providerGroups: props.providerGroups,
-      runtimeMode: props.runtimeMode,
-      onUpdateRuntimeMode: props.onUpdateRuntimeMode,
-      displayedDescriptors,
-      favoriteKeys,
-      favoritesLoaded,
-      providerExpansionOverrides,
-      hasLegacyModels,
-      pendingModel,
-      providerFilter,
-      searchQuery,
-      showLegacy: showLegacyToggle,
-      applyOptionChange,
-      commitPendingModel,
-      isApplied,
-      isDisplayed,
-      pressModel,
-      setProviderFilter,
-      setSearchQuery,
-      setShowLegacy: setShowLegacyToggle,
-      toggleProvider,
-      toggleFavorite,
-    }),
-    [
-      applyOptionChange,
-      commitPendingModel,
-      displayedDescriptors,
-      favoriteKeys,
-      favoritesLoaded,
-      providerExpansionOverrides,
-      hasLegacyModels,
-      isApplied,
-      isDisplayed,
-      props.environmentId,
-      props.providerInstanceId,
-      pendingModel,
-      pressModel,
-      providerFilter,
-      props.onUpdateRuntimeMode,
-      props.providerGroups,
-      props.runtimeMode,
-      searchQuery,
-      showLegacyToggle,
-      toggleProvider,
-      toggleFavorite,
-    ],
-  );
+  const value = {
+    environmentId: props.environmentId,
+    providerInstanceId: props.providerInstanceId,
+    providerGroups,
+    manageHidden,
+    setManageHidden,
+    toggleHidden,
+    pendingHiddenKeys,
+    runtimeMode: compatibleRuntimeMode,
+    runtimeModeChoices,
+    onUpdateRuntimeMode: props.onUpdateRuntimeMode,
+    displayedDescriptors,
+    promptTraits,
+    displayedModelSelection: pendingModel?.selection ?? props.selectedModel,
+    reportedModelSelection: pendingModel ? null : (props.reportedModelSelection ?? null),
+    favoriteKeys,
+    favoritesLoaded,
+    providerExpansionOverrides,
+    hasLegacyModels,
+    pendingModel,
+    providerFilter,
+    searchQuery,
+    showLegacy: showLegacyToggle,
+    applyOptionChange,
+    commitPendingModel,
+    isApplied,
+    isDisplayed,
+    pressModel,
+    setProviderFilter,
+    setSearchQuery,
+    setShowLegacy: setShowLegacyToggle,
+    toggleProvider,
+    toggleFavorite,
+  } satisfies ThreadSettingsSessionValue;
 
   return (
     <ThreadSettingsSessionContext.Provider value={value}>
@@ -525,6 +648,7 @@ function useThreadSettingsSession() {
 type ThreadSettingsProviderCatalog = {
   readonly key: string;
   readonly driver: string | undefined;
+  readonly iconUrl: string | undefined;
   readonly label: string;
   readonly collapsible: boolean;
   readonly collapsed: boolean;
@@ -546,6 +670,11 @@ type ThreadSettingsCatalogItem =
       readonly isLast: boolean;
     }
   | {
+      readonly kind: "notice";
+      readonly key: string;
+      readonly text: string;
+    }
+  | {
       readonly kind: "empty";
       readonly key: "empty";
     }
@@ -560,10 +689,7 @@ function ThreadSettingsModelListRow(props: {
   readonly isLast: boolean;
 }) {
   const session = useThreadSettingsSession();
-  const onPress = useCallback(
-    () => session.pressModel(props.option),
-    [props.option, session.pressModel],
-  );
+  const onPress = () => session.pressModel(props.option);
 
   return (
     <ModelRow
@@ -573,6 +699,12 @@ function ThreadSettingsModelListRow(props: {
       isFavorite={session.favoriteKeys.has(props.option.key)}
       favoritesLoaded={session.favoritesLoaded}
       onToggleFavorite={() => session.toggleFavorite(props.option)}
+      onToggleHidden={
+        session.manageHidden && props.option.canHide
+          ? () => session.toggleHidden(props.option)
+          : undefined
+      }
+      hiddenUpdatePending={session.pendingHiddenKeys.has(props.option.key)}
       option={props.option}
       selected={session.isDisplayed(props.option)}
     />
@@ -583,16 +715,14 @@ function ThreadSettingsProviderListHeader(props: {
   readonly provider: ThreadSettingsProviderCatalog;
 }) {
   const session = useThreadSettingsSession();
-  const onToggle = useCallback(
-    () => session.toggleProvider(props.provider.key),
-    [props.provider.key, session.toggleProvider],
-  );
+  const onToggle = () => session.toggleProvider(props.provider.key);
 
   return (
     <ProviderHeader
       collapsible={props.provider.collapsible}
       collapsed={props.provider.collapsed}
       driver={props.provider.driver}
+      iconUrl={props.provider.iconUrl}
       label={props.provider.label}
       modelCount={props.provider.modelCount}
       onToggle={onToggle}
@@ -600,96 +730,95 @@ function ThreadSettingsProviderListHeader(props: {
   );
 }
 
-function useThreadSettingsCatalogItems(
+function buildThreadSettingsCatalogItems(
   session: ThreadSettingsSessionValue,
 ): ReadonlyArray<ThreadSettingsCatalogItem> {
-  return useMemo(
-    () =>
-      session.providerGroups.flatMap((group) => {
-        if (
-          session.providerFilter !== null &&
-          session.providerFilter !== FAVORITES_PROVIDER_FILTER &&
-          group.providerKey !== session.providerFilter
-        ) {
-          return [];
-        }
-        const driver = group.models[0]?.providerDriver ?? group.providerKey;
-        const catalogModels =
-          session.showLegacy || session.providerFilter === FAVORITES_PROVIDER_FILTER
-            ? group.models
-            : group.models.filter(
-                (model) =>
-                  !model.isLegacy ||
-                  session.isDisplayed(model) ||
-                  session.favoriteKeys.has(model.key),
-              );
-        const visibleModels = favoritesFirst(
-          catalogModels.filter(
+  return session.providerGroups.flatMap((group) => {
+    if (
+      session.providerFilter !== null &&
+      session.providerFilter !== FAVORITES_PROVIDER_FILTER &&
+      group.providerKey !== session.providerFilter
+    ) {
+      return [];
+    }
+    const driver = group.models[0]?.providerDriver ?? group.providerKey;
+    const catalogModels =
+      session.manageHidden ||
+      session.showLegacy ||
+      session.providerFilter === FAVORITES_PROVIDER_FILTER
+        ? group.models
+        : group.models.filter(
             (model) =>
-              (session.providerFilter !== FAVORITES_PROVIDER_FILTER ||
-                session.favoriteKeys.has(model.key)) &&
-              modelMatchesCatalogQuery({
-                model,
-                providerLabel: group.providerLabel,
-                query: session.searchQuery,
-              }),
-          ),
-          session.favoriteKeys,
-        );
-        if (visibleModels.length === 0) {
-          return [];
-        }
-        const isPrimary = driver !== undefined && PRIMARY_PROVIDER_DRIVERS.has(driver);
-        // Staging a model must not change disclosure state. The applied model
-        // stays stable for the lifetime of this picker (Save closes it), so it
-        // is safe to use as the initial selected-provider default.
-        const containsAppliedSelection = group.models.some(session.isApplied);
-        const isNarrowed = session.providerFilter !== null || session.searchQuery.trim().length > 0;
-        const collapsible = !isNarrowed;
-        const collapsed = providerSectionIsCollapsed({
-          defaultExpanded: isPrimary || containsAppliedSelection,
-          hasExpansionOverride: session.providerExpansionOverrides.has(group.providerKey),
-          isNarrowed,
-        });
-        const provider: ThreadSettingsProviderCatalog = {
-          key: group.providerKey,
-          driver,
-          label: group.providerLabel,
-          collapsible,
-          collapsed,
-          modelCount: visibleModels.length,
-          models: collapsed ? [] : visibleModels,
-        };
-        return [
-          {
-            kind: "provider" as const,
-            key: `provider:${group.providerKey}`,
-            provider,
-          },
-          ...provider.models.map((option, index) => ({
-            kind: "model" as const,
-            key: `model:${option.key}`,
-            option,
-            isFirst: index === 0,
-            isLast: index === provider.models.length - 1,
-          })),
-        ];
-      }),
-    [
-      session.isApplied,
-      session.isDisplayed,
+              !model.isLegacy || session.isDisplayed(model) || session.favoriteKeys.has(model.key),
+          );
+    const visibleModels = favoritesFirst(
+      catalogModels.filter(
+        (model) =>
+          (session.providerFilter !== FAVORITES_PROVIDER_FILTER ||
+            session.favoriteKeys.has(model.key)) &&
+          modelMatchesCatalogQuery({
+            model,
+            providerLabel: group.providerLabel,
+            query: session.searchQuery,
+          }),
+      ),
       session.favoriteKeys,
-      session.providerExpansionOverrides,
-      session.providerFilter,
-      session.providerGroups,
-      session.searchQuery,
-      session.showLegacy,
-    ],
-  );
+    );
+    const updateRequiredNotice =
+      group.updateRequired && session.providerFilter !== FAVORITES_PROVIDER_FILTER
+        ? formatProviderUpdateRequiredNotice(group.updateRequired, session.searchQuery)
+        : null;
+    if (visibleModels.length === 0 && !updateRequiredNotice) {
+      return [];
+    }
+    const isPrimary = driver !== undefined && PRIMARY_PROVIDER_DRIVERS.has(driver);
+    const containsAppliedSelection = group.models.some(session.isApplied);
+    const isNarrowed = session.providerFilter !== null || session.searchQuery.trim().length > 0;
+    const collapsible = !isNarrowed;
+    const collapsed = providerSectionIsCollapsed({
+      defaultExpanded: isPrimary || containsAppliedSelection,
+      hasExpansionOverride: session.providerExpansionOverrides.has(group.providerKey),
+      isNarrowed,
+    });
+    const provider: ThreadSettingsProviderCatalog = {
+      key: group.providerKey,
+      driver,
+      iconUrl: group.models[0]?.providerIconUrl,
+      label: group.providerLabel,
+      collapsible,
+      collapsed,
+      modelCount: visibleModels.length,
+      models: collapsed ? [] : visibleModels,
+    };
+    return [
+      {
+        kind: "provider" as const,
+        key: `provider:${group.providerKey}`,
+        provider,
+      },
+      ...provider.models.map((option, index) => ({
+        kind: "model" as const,
+        key: `model:${option.key}`,
+        option,
+        isFirst: index === 0,
+        isLast: index === provider.models.length - 1,
+      })),
+      ...(!collapsed && updateRequiredNotice
+        ? [
+            {
+              kind: "notice" as const,
+              key: `notice:${group.providerKey}`,
+              text: updateRequiredNotice,
+            },
+          ]
+        : []),
+    ];
+  });
 }
 
 function ThreadSettingsOptionsItem(props: {
   readonly animationsReady: boolean;
+  readonly bottomInset: number;
   readonly onOpenSubmenu: (submenu: ThreadSettingsSubmenuPage) => void;
 }) {
   const insets = useSafeAreaInsets();
@@ -700,17 +829,13 @@ function ThreadSettingsOptionsItem(props: {
         .get(session.environmentId)
         ?.providers.find((provider) => provider.instanceId === session.providerInstanceId) ?? null)
     : null;
-  const bottomToolbarInset =
-    Platform.OS === "ios" && NATIVE_MAIL_SEARCH_TOOLBAR_SUPPORTED
-      ? NATIVE_MAIL_SEARCH_TOOLBAR_CONTENT_INSET
-      : 0;
 
   return (
-    <View style={{ paddingBottom: insets.bottom + bottomToolbarInset + 12 }}>
+    <View style={{ paddingBottom: insets.bottom + props.bottomInset + 12 }}>
       <ChatGptSharingStatus provider={selectedProvider} />
       <Text className="px-5 pb-2 pt-2 text-sm font-t3-medium text-foreground-muted">Options</Text>
       <Animated.View
-        className="mx-4 overflow-hidden rounded-2xl bg-card"
+        className="mx-4 overflow-hidden rounded-2xl bg-grouped-card"
         layout={THREAD_SETTINGS_OPTIONS_LAYOUT_TRANSITION}
       >
         {session.displayedDescriptors.map((descriptor) => {
@@ -726,7 +851,16 @@ function ThreadSettingsOptionsItem(props: {
               >
                 <DisclosureRow
                   label={cuteDescriptorLabel(descriptor.label)}
-                  value={currentOptionLabel(descriptor)}
+                  value={
+                    session.promptTraits.ultrathinkPromptControlled &&
+                    descriptor.id === session.promptTraits.primarySelectDescriptor?.id
+                      ? "ultrathink"
+                      : currentOptionLabel(
+                          descriptor,
+                          session.displayedModelSelection,
+                          session.reportedModelSelection,
+                        )
+                  }
                   onPress={() => props.onOpenSubmenu({ kind: "descriptor", id: descriptor.id })}
                 />
               </Animated.View>
@@ -752,122 +886,110 @@ function ThreadSettingsOptionsItem(props: {
             isLast
             label="runtime"
             value={
-              RUNTIME_MODE_CHOICES.find((choice) => choice.mode === session.runtimeMode)?.label
+              session.runtimeModeChoices.find((choice) => choice.mode === session.runtimeMode)
+                ?.label
             }
             onPress={() => props.onOpenSubmenu({ kind: "runtime" })}
           />
         </Animated.View>
       </Animated.View>
 
-      {Platform.OS !== "ios" && session.hasLegacyModels ? (
-        <>
-          <Text className="px-5 pb-2 pt-7 text-sm font-t3-medium text-foreground-muted">
-            catalog
-          </Text>
-          <View className="mx-4 overflow-hidden rounded-2xl bg-card">
-            <SwitchRow
-              isLast
-              label="legacy models"
-              onValueChange={session.setShowLegacy}
-              value={session.showLegacy}
-            />
-          </View>
-        </>
-      ) : null}
+      <Text className="px-5 pb-2 pt-7 text-sm font-t3-medium text-foreground-muted">catalog</Text>
+      <View className="mx-4 overflow-hidden rounded-2xl bg-grouped-card">
+        <SwitchRow
+          label="manage hidden models"
+          value={session.manageHidden}
+          onValueChange={session.setManageHidden}
+          isLast
+        />
+      </View>
     </View>
   );
 }
 
-/** One native scroll owner for the model catalog and its related settings. */
 function ThreadSettingsMainContent(props: {
+  readonly bottomInset: number;
   readonly onOpenSubmenu: (submenu: ThreadSettingsSubmenuPage) => void;
 }) {
   const session = useThreadSettingsSession();
   const refreshProvidersCommand = useAtomCommand(serverEnvironment.refreshProviders, {
     reportFailure: false,
   });
-  const refreshProviderCatalog = useMemo(
-    () => createProviderCatalogRefreshRunner(refreshProvidersCommand),
-    [refreshProvidersCommand],
-  );
+  const refreshProviderCatalog = createProviderCatalogRefreshRunner(refreshProvidersCommand);
   const [isRefreshingProviders, setIsRefreshingProviders] = useState(false);
-  const refreshProviders = useCallback(() => {
+  const refreshProviders = () => {
     if (!session.environmentId || isRefreshingProviders) return;
     setIsRefreshingProviders(true);
     void refreshProviderCatalog(session.environmentId).then((result) => {
       setIsRefreshingProviders(false);
       const error = providerCatalogRefreshError(result);
-      if (error) Alert.alert("Could not refresh models", error);
+      if (error) Dialog.alert("Could not refresh models", error);
     });
-  }, [isRefreshingProviders, refreshProviderCatalog, session.environmentId]);
-  const catalogItems = useThreadSettingsCatalogItems(session);
-  const [animationsReady, setAnimationsReady] = useState(false);
+  };
+  const [listLoaded, setListLoaded] = useState(false);
+  // Android can drop the first frame of a reduced-motion fade, leaving rows invisible.
+  const reducedMotion = useReducedMotion();
+  const reduceMotionEnabled = useReduceMotionEnabled();
+  const animationsReady = listLoaded && !reducedMotion && !reduceMotionEnabled;
+  const catalogItems = buildThreadSettingsCatalogItems(session);
   const hasActiveCatalogFilter =
     session.providerFilter !== null || session.searchQuery.trim().length > 0;
-  const listItems = useMemo<ReadonlyArray<ThreadSettingsCatalogItem>>(
-    () => [
-      ...(catalogItems.length === 0 ? ([{ kind: "empty", key: "empty" }] as const) : catalogItems),
-      { kind: "options", key: "options" },
-    ],
-    [catalogItems],
-  );
-  const renderCatalogItem = useCallback(
-    (itemProps: LegendListRenderItemProps<ThreadSettingsCatalogItem>) => {
-      const item = itemProps.item;
-      let content: ReactNode;
+  const listItems = [
+    ...(catalogItems.length === 0 ? ([{ kind: "empty", key: "empty" }] as const) : catalogItems),
+    { kind: "options", key: "options" },
+  ] satisfies ReadonlyArray<ThreadSettingsCatalogItem>;
+  const renderCatalogItem = (itemProps: LegendListRenderItemProps<ThreadSettingsCatalogItem>) => {
+    const item = itemProps.item;
+    let content: ReactNode;
 
-      if (item.kind === "provider") {
-        content = <ThreadSettingsProviderListHeader provider={item.provider} />;
-      } else if (item.kind === "model") {
-        content = (
-          <ThreadSettingsModelListRow
-            isFirst={item.isFirst}
-            isLast={item.isLast}
-            option={item.option}
-          />
-        );
-      } else if (item.kind === "empty") {
-        content = (
-          <View className="items-center px-8 py-14">
-            <Text className="text-center text-sm text-foreground-muted">
-              {session.providerFilter === FAVORITES_PROVIDER_FILTER &&
-              session.searchQuery.trim().length === 0
-                ? "No favorite models"
-                : hasActiveCatalogFilter
-                  ? "No matching models"
-                  : "No available models"}
-            </Text>
-          </View>
-        );
-      } else {
-        content = (
-          <ThreadSettingsOptionsItem
-            animationsReady={animationsReady}
-            onOpenSubmenu={props.onOpenSubmenu}
-          />
-        );
-      }
-
-      return (
-        <Animated.View
-          key={item.key}
-          entering={animationsReady ? THREAD_SETTINGS_CATALOG_ENTER_TRANSITION : undefined}
-          exiting={animationsReady ? THREAD_SETTINGS_CATALOG_EXIT_TRANSITION : undefined}
-        >
-          {content}
-        </Animated.View>
+    if (item.kind === "provider") {
+      content = <ThreadSettingsProviderListHeader provider={item.provider} />;
+    } else if (item.kind === "model") {
+      content = (
+        <ThreadSettingsModelListRow
+          isFirst={item.isFirst}
+          isLast={item.isLast}
+          option={item.option}
+        />
       );
-    },
-    [
-      animationsReady,
-      hasActiveCatalogFilter,
-      props.onOpenSubmenu,
-      session.providerFilter,
-      session.searchQuery,
-    ],
-  );
+    } else if (item.kind === "notice") {
+      content = <Text className="mx-8 mt-2 text-xs text-foreground-muted">{item.text}</Text>;
+    } else if (item.kind === "empty") {
+      content = (
+        <View className="items-center px-8 py-14">
+          <Text className="text-center text-sm text-foreground-muted">
+            {session.providerFilter === FAVORITES_PROVIDER_FILTER &&
+            session.searchQuery.trim().length === 0
+              ? "No favorite models"
+              : hasActiveCatalogFilter
+                ? "No matching models"
+                : "No available models"}
+          </Text>
+        </View>
+      );
+    } else {
+      content = (
+        <ThreadSettingsOptionsItem
+          animationsReady={animationsReady}
+          bottomInset={props.bottomInset}
+          onOpenSubmenu={props.onOpenSubmenu}
+        />
+      );
+    }
+
+    return (
+      <Animated.View
+        key={item.key}
+        entering={animationsReady ? THREAD_SETTINGS_CATALOG_ENTER_TRANSITION : undefined}
+        exiting={animationsReady ? THREAD_SETTINGS_CATALOG_EXIT_TRANSITION : undefined}
+      >
+        {content}
+      </Animated.View>
+    );
+  };
 
   return (
+    // oxlint-disable-next-line colon3code/require-registered-list-scroll -- Sheet content; sheets sit outside workspace columns and keep their own header handling.
     <AnimatedLegendList
       alwaysBounceVertical
       automaticallyAdjustsScrollIndicatorInsets
@@ -888,61 +1010,19 @@ function ThreadSettingsMainContent(props: {
       keyboardDismissMode="on-drag"
       keyboardShouldPersistTaps="handled"
       maintainVisibleContentPosition={THREAD_SETTINGS_MAINTAIN_VISIBLE_CONTENT_POSITION}
-      ListHeaderComponent={
-        <>
-          {Platform.OS === "android" ? (
-            <View className="px-4 pb-2 pt-3">
-              <View
-                className="flex-row items-center rounded-full bg-input px-2"
-                style={{ minHeight: 56 }}
-              >
-                <View pointerEvents="none" className="px-2">
-                  <SymbolView
-                    name="magnifyingglass"
-                    size={24}
-                    tintColorClassName="accent-icon-subtle"
-                  />
-                </View>
-                <TextInput
-                  accessibilityLabel="find a model"
-                  autoCapitalize="none"
-                  autoCorrect={false}
-                  className="min-w-0 flex-1 px-2 py-0 text-base text-foreground"
-                  style={{ minHeight: 56, includeFontPadding: false, textAlignVertical: "center" }}
-                  onChangeText={session.setSearchQuery}
-                  placeholder="find a model"
-                  placeholderTextColorClassName="accent-placeholder"
-                  selectionColorClassName="accent-focus/32"
-                  cursorColorClassName="accent-focus"
-                  selectionHandleColorClassName="accent-focus"
-                  value={session.searchQuery}
-                />
-                {session.searchQuery.length > 0 ? (
-                  <MaterialIconButton
-                    accessibilityLabel="clear model search"
-                    icon="xmark"
-                    onPress={() => session.setSearchQuery("")}
-                  />
-                ) : null}
-              </View>
-            </View>
-          ) : null}
-        </>
-      }
       recycleItems
       refreshControl={
         session.environmentId ? (
           <RefreshControl refreshing={isRefreshingProviders} onRefresh={refreshProviders} />
         ) : undefined
       }
-      onLoad={() => setAnimationsReady(true)}
+      onLoad={() => setListLoaded(true)}
       renderItem={renderCatalogItem}
       showsVerticalScrollIndicator={false}
     />
   );
 }
 
-/** Compact choice page pushed by the picker navigator. */
 function ThreadSettingsChoiceContent(props: {
   readonly submenu: ThreadSettingsSubmenuPage;
   readonly onSelected: () => void;
@@ -961,10 +1041,11 @@ function ThreadSettingsChoiceContent(props: {
   const submenuContent =
     props.submenu.kind === "runtime"
       ? {
-          rows: RUNTIME_MODE_CHOICES.map((choice) => ({
+          rows: session.runtimeModeChoices.map((choice) => ({
             id: choice.mode,
             label: choice.label,
-            description: choice.description,
+            description: choice.disabledReason ?? choice.description,
+            disabled: choice.disabledReason !== undefined,
             selected: choice.mode === session.runtimeMode,
             onPress: () => {
               void Haptics.selectionAsync();
@@ -979,9 +1060,29 @@ function ThreadSettingsChoiceContent(props: {
               id: choice.id,
               label: cuteOptionLabel(choice.label),
               description: cuteOptionDescription(activeDescriptor, choice),
-              selected: choice.id === getProviderOptionCurrentValue(activeDescriptor),
+              disabled: false,
+              selected:
+                choice.id ===
+                (session.promptTraits.ultrathinkPromptControlled &&
+                activeDescriptor.id === session.promptTraits.primarySelectDescriptor?.id
+                  ? "ultrathink"
+                  : getProviderOptionCurrentValue(
+                      activeDescriptor,
+                      session.displayedModelSelection,
+                      session.reportedModelSelection,
+                    )),
               onPress: () => {
                 void Haptics.selectionAsync();
+                if (
+                  session.promptTraits.ultrathinkInBodyText &&
+                  activeDescriptor.id === session.promptTraits.primarySelectDescriptor?.id
+                ) {
+                  Dialog.alert(
+                    "Reasoning controlled by prompt",
+                    'Your prompt contains "ultrathink" in the text. Remove it to change this option.',
+                  );
+                  return;
+                }
                 session.applyOptionChange(activeDescriptor.id, choice.id);
                 props.onSelected();
               },
@@ -1009,7 +1110,7 @@ function ThreadSettingsChoiceContent(props: {
       contentInsetAdjustmentBehavior="automatic"
       showsVerticalScrollIndicator={false}
     >
-      <View className="overflow-hidden rounded-2xl bg-card">
+      <View className="overflow-hidden rounded-2xl bg-grouped-card">
         {submenuContent.rows.map((row, index) => (
           <ChoiceRow
             key={row.id}
@@ -1017,6 +1118,7 @@ function ThreadSettingsChoiceContent(props: {
             isLast={index === submenuContent.rows.length - 1}
             label={row.label}
             selected={row.selected}
+            disabled={row.disabled}
             onPress={row.onPress}
           />
         ))}
@@ -1052,147 +1154,82 @@ function ThreadSettingsModelsScreen() {
   const session = useThreadSettingsSession();
   const presentation = useThreadSettingsPickerPresentation();
   const navigation = useNavigation<NativeStackNavigationProp<ThreadSettingsPickerStackParams>>();
-  const usesNativeMailSearchToolbar = Platform.OS === "ios" && NATIVE_MAIL_SEARCH_TOOLBAR_SUPPORTED;
   const hasCustomCatalogFilter = session.providerFilter !== null || session.showLegacy;
-  const commitAndClose = useCallback(() => {
+  const commitAndClose = useEffectEvent(() => {
     if (!session.commitPendingModel()) return;
     presentation.onClose();
-  }, [presentation, session]);
-  const providerFilters = useMemo(
-    () => [
-      { id: "all-providers", title: "all providers", value: null },
-      { id: "favorites", title: "favorites", value: FAVORITES_PROVIDER_FILTER },
-      ...session.providerGroups.map((group) => ({
-        id: `provider:${group.providerKey}`,
-        title: group.providerLabel,
-        value: group.providerKey,
-      })),
-    ],
-    [session.providerGroups],
-  );
-  const filterMenu = useMemo(
-    () => ({
-      title: "model filters",
-      items: [
-        {
-          type: "submenu" as const,
-          title: "provider",
-          items: providerFilters.map((filter) => ({
-            type: "action" as const,
-            title: filter.title,
-            state: session.providerFilter === filter.value ? ("on" as const) : ("off" as const),
-            onPress: () => session.setProviderFilter(filter.value),
-          })),
-        },
-        ...(session.hasLegacyModels
-          ? [
-              {
-                type: "action" as const,
-                title: "show legacy models",
-                state: session.showLegacy ? ("on" as const) : ("off" as const),
-                onPress: () => session.setShowLegacy(!session.showLegacy),
-              },
-            ]
-          : []),
-      ],
-    }),
-    [providerFilters, session],
-  );
+  });
+  const search: AppBarSearch = {
+    value: session.searchQuery,
+    onChangeText: session.setSearchQuery,
+    placeholder: "search models… :3",
+    clearAccessibilityLabel: "clear model search",
+    mode: "inline",
+    compactToolbar: true,
+  };
+  const searchToolbarInset = useSearchToolbarInset(search);
+  const providerFilters = [
+    { id: "all-providers", title: "all providers", value: null },
+    { id: "favorites", title: "favorites", value: FAVORITES_PROVIDER_FILTER },
+    ...session.providerGroups.map((group) => ({
+      id: `provider:${group.providerKey}`,
+      title: group.providerLabel,
+      value: group.providerKey,
+    })),
+  ];
 
   return (
     <>
-      {Platform.OS === "android" ? (
-        <AndroidScreenHeader
-          trailing={
-            <View className="flex-row items-center">
-              <AndroidAnchoredMenu
-                title="model filters"
-                actions={[
-                  {
-                    title: "provider",
-                    subactions: providerFilters.map((filter) => ({
-                      id: filter.id,
-                      title: filter.title,
-                      state: session.providerFilter === filter.value ? "on" : "off",
-                    })),
-                  },
-                  ...(session.hasLegacyModels
-                    ? [
-                        {
-                          id: "show-legacy",
-                          title: "show legacy models",
-                          state: session.showLegacy ? ("on" as const) : ("off" as const),
-                        },
-                      ]
-                    : []),
-                ]}
-                onPressAction={({ nativeEvent }) => {
-                  if (nativeEvent.event === "show-legacy") {
-                    session.setShowLegacy(!session.showLegacy);
-                  } else {
-                    const filter = providerFilters.find((item) => item.id === nativeEvent.event);
-                    if (filter) session.setProviderFilter(filter.value);
-                  }
-                }}
-              >
-                {(open) => (
-                  <MaterialIconButton
-                    accessibilityLabel="filter models"
-                    icon="line.3.horizontal.decrease"
-                    selected={hasCustomCatalogFilter}
-                    variant={hasCustomCatalogFilter ? "tonal" : "standard"}
-                    onPress={open}
-                  />
-                )}
-              </AndroidAnchoredMenu>
-              {session.pendingModel ? (
-                <MaterialButton label="save" tone="text" onPress={commitAndClose} />
-              ) : null}
-            </View>
-          }
-          onBack={presentation.onClose}
-          title="thread settings"
-          hideBottomBorder
-        />
-      ) : null}
-      <NativeStackScreenOptions
+      <AppBar
+        title="thread settings"
+        onClose={presentation.onClose}
+        closeAccessibilityLabel="cancel thread settings"
+        search={search}
+        menus={[
+          {
+            title: "model filters",
+            icon: hasCustomCatalogFilter
+              ? "line.3.horizontal.decrease.circle.fill"
+              : "line.3.horizontal.decrease",
+            items: [
+              {
+                id: "provider",
+                title: "provider",
+                items: providerFilters.map((filter) => ({
+                  id: filter.id,
+                  title: filter.title,
+                  selected: session.providerFilter === filter.value,
+                  onPress: () => session.setProviderFilter(filter.value),
+                })),
+              },
+              ...(session.hasLegacyModels
+                ? [
+                    {
+                      id: "show-legacy",
+                      title: "show legacy models",
+                      selected: session.showLegacy,
+                      onPress: () => session.setShowLegacy(!session.showLegacy),
+                    },
+                  ]
+                : []),
+            ],
+          },
+        ]}
         optionsVersion={[
           session.providerFilter,
           session.providerGroups.map((group) => group.providerKey),
           session.showLegacy,
+          session.hasLegacyModels,
         ]}
-        options={{
-          unstable_headerToolbarItems: usesNativeMailSearchToolbar
-            ? () => [
-                createNativeMailSearchToolbarItem({
-                  filterButtonId: "thread-settings-model-filter",
-                  filterMenu,
-                  filterSystemImageName: hasCustomCatalogFilter
-                    ? "line.3.horizontal.decrease.circle.fill"
-                    : "line.3.horizontal.decrease",
-                  onSearchTextChange: session.setSearchQuery,
-                  placeholder: "search models… :3",
-                  searchTextChangeId: "thread-settings-model-search-text",
-                  showsSearchDismissButton: true,
-                }),
-              ]
-            : undefined,
-          headerShown: Platform.OS !== "android",
-          headerSearchBarOptions:
-            Platform.OS === "ios" && !usesNativeMailSearchToolbar
-              ? {
-                  autoCapitalize: "none",
-                  hideNavigationBar: false,
-                  obscureBackground: false,
-                  onCancelButtonPress: () => session.setSearchQuery(""),
-                  onChangeText: (event) => session.setSearchQuery(event.nativeEvent.text),
-                  placeholder: "search models… :3",
-                }
-              : undefined,
+        confirm={{
+          label: session.pendingModel ? "save" : "done",
+          onPress: commitAndClose,
         }}
+        hideBottomBorder
       />
-      <MaterialScreenContent>
+      <ScreenContent>
         <ThreadSettingsMainContent
+          bottomInset={searchToolbarInset}
           onOpenSubmenu={(submenu) => {
             const title =
               submenu.kind === "runtime"
@@ -1203,68 +1240,7 @@ function ThreadSettingsModelsScreen() {
             navigation.navigate("ThreadSettingsChoice", { ...submenu, title });
           }}
         />
-      </MaterialScreenContent>
-      <NativeHeaderToolbar placement="left">
-        <NativeHeaderToolbar.Button
-          accessibilityLabel="cancel thread settings"
-          label="cancel"
-          onPress={presentation.onClose}
-        />
-      </NativeHeaderToolbar>
-      <NativeHeaderToolbar placement="right">
-        <NativeHeaderToolbar.Button
-          accessibilityLabel={session.pendingModel ? "save thread settings" : "done"}
-          label={session.pendingModel ? "Save" : "Done"}
-          onPress={commitAndClose}
-        />
-      </NativeHeaderToolbar>
-      {Platform.OS === "ios" && !usesNativeMailSearchToolbar ? (
-        <NativeHeaderToolbar placement="bottom">
-          <NativeHeaderToolbar.Menu
-            accessibilityLabel="filter models"
-            icon={
-              hasCustomCatalogFilter
-                ? "line.3.horizontal.decrease.circle.fill"
-                : "line.3.horizontal.decrease.circle"
-            }
-            separateBackground
-            title="model filters"
-          >
-            <NativeHeaderToolbar.Menu title="provider">
-              <NativeHeaderToolbar.Label>provider</NativeHeaderToolbar.Label>
-              <NativeHeaderToolbar.MenuAction
-                isOn={session.providerFilter === null}
-                onPress={() => session.setProviderFilter(null)}
-              >
-                all providers
-              </NativeHeaderToolbar.MenuAction>
-              <NativeHeaderToolbar.MenuAction
-                isOn={session.providerFilter === FAVORITES_PROVIDER_FILTER}
-                onPress={() => session.setProviderFilter(FAVORITES_PROVIDER_FILTER)}
-              >
-                Favorites
-              </NativeHeaderToolbar.MenuAction>
-              {session.providerGroups.map((group) => (
-                <NativeHeaderToolbar.MenuAction
-                  key={group.providerKey}
-                  isOn={session.providerFilter === group.providerKey}
-                  onPress={() => session.setProviderFilter(group.providerKey)}
-                >
-                  {group.providerLabel}
-                </NativeHeaderToolbar.MenuAction>
-              ))}
-            </NativeHeaderToolbar.Menu>
-            {session.hasLegacyModels ? (
-              <NativeHeaderToolbar.MenuAction
-                isOn={session.showLegacy}
-                onPress={() => session.setShowLegacy(!session.showLegacy)}
-              >
-                show legacy models
-              </NativeHeaderToolbar.MenuAction>
-            ) : null}
-          </NativeHeaderToolbar.Menu>
-        </NativeHeaderToolbar>
-      ) : null}
+      </ScreenContent>
     </>
   );
 }
@@ -1275,57 +1251,28 @@ function ThreadSettingsChoiceScreen() {
 
   return (
     <>
-      <NativeStackScreenOptions options={{ headerShown: Platform.OS !== "android" }} />
-      {Platform.OS === "android" ? (
-        <AndroidScreenHeader
-          title={route.params.title}
-          onBack={() => navigation.goBack()}
-          hideBottomBorder
-        />
-      ) : null}
-      <MaterialScreenContent>
+      <AppBar title={route.params.title} onBack={() => navigation.goBack()} hideBottomBorder />
+      <ScreenContent>
         <ThreadSettingsChoiceContent
           submenu={route.params}
           onSelected={() => navigation.goBack()}
         />
-      </MaterialScreenContent>
+      </ScreenContent>
     </>
   );
 }
 
 function ThreadSettingsPickerNavigator(props: ThreadSettingsPickerPresentation) {
-  const theme = useUniwindTheme();
-  const solidSheetBackground = theme["--color-sheet-solid"];
-  const foreground = theme["--color-foreground"];
-  const presentation = useMemo(
-    () => ({
-      onClose: props.onClose,
-    }),
-    [props.onClose],
-  );
+  const screenOptions = useSheetStackOptions();
+  const presentation = {
+    onClose: props.onClose,
+  };
 
   return (
     <ThreadSettingsPickerPresentationContext.Provider value={presentation}>
       <ThreadSettingsPickerStack.Navigator
         initialRouteName="ThreadSettingsModels"
-        screenOptions={{
-          animation: Platform.OS === "android" ? "default" : "slide_from_right",
-          contentStyle: { backgroundColor: solidSheetBackground },
-          gestureEnabled: true,
-          headerBackButtonDisplayMode: "minimal",
-          headerBackTitle: "",
-          headerShown: Platform.OS !== "android",
-          headerShadowVisible: false,
-          headerStyle: {
-            backgroundColor: NATIVE_LIQUID_GLASS_SUPPORTED ? "transparent" : solidSheetBackground,
-          },
-          headerTransparent: NATIVE_LIQUID_GLASS_SUPPORTED,
-          headerTintColor: foreground,
-          headerTitleStyle: { fontSize: 17, fontWeight: "700" },
-          scrollEdgeEffects: NATIVE_LIQUID_GLASS_SUPPORTED
-            ? THREAD_SETTINGS_HEADER_SCROLL_EDGE_EFFECTS
-            : undefined,
-        }}
+        screenOptions={screenOptions}
       >
         <ThreadSettingsPickerStack.Screen
           name="ThreadSettingsModels"
@@ -1342,63 +1289,113 @@ function ThreadSettingsPickerNavigator(props: ThreadSettingsPickerPresentation) 
   );
 }
 
-/** Existing-thread model picker hosted by the root RNS form-sheet route. */
-export function ExistingThreadSettingsRouteScreen() {
-  const navigation = useNavigation<NativeStackNavigationProp<Record<string, object | undefined>>>();
-  const presentation = useExistingThreadSettingsRoutePresentation();
-  const session = presentation.session;
-
-  useEffect(() => {
-    if (session) {
-      return;
-    }
-
-    navigation.goBack();
-  }, [navigation, session]);
-
-  if (!session) {
-    return <View className="flex-1 bg-sheet" />;
-  }
-
-  const { ownerId: _ownerId, ...settings } = session;
-
+export function ThreadSettingsPickerScreen(
+  props: ThreadSettingsSessionProps & { readonly onClose: () => void },
+) {
   return (
-    <ThreadSettingsSessionProvider {...settings}>
-      <ThreadSettingsPickerNavigator onClose={() => navigation.goBack()} />
+    <ThreadSettingsSessionProvider {...props}>
+      <ThreadSettingsPickerNavigator onClose={props.onClose} />
     </ThreadSettingsSessionProvider>
   );
 }
 
-/**
- * Native stack hosted by the New Task navigator's form-sheet route. Keeping
- * the sheet presentation in RNS gives UIKit ownership of nested dismissal,
- * while Reasoning and Runtime remain regular pushes inside this navigator.
- */
+export function ExistingThreadSettingsRouteScreen({
+  route,
+}: StaticScreenProps<ExistingThreadSettingsRouteParams>) {
+  const navigation = useNavigation<NativeStackNavigationProp<Record<string, object | undefined>>>();
+  // Reads the same environmentId/threadId params as the Thread route beneath it.
+  const { selectedThread, selectedThreadDetailRef, selectedEnvironmentRuntime } =
+    useThreadSelection();
+  // Streamed text would otherwise re-render the whole model picker on every delta.
+  const structure = useQuietThreadStructure(selectedThreadDetailRef);
+  const reportedModelSelection = useThreadReportedModelSelection(selectedThreadDetailRef);
+  const threadKey = scopedThreadKey(route.params.environmentId, route.params.threadId);
+  const draftSettings = useComposerDraftSettings(threadKey);
+  const queuedRunEdit = useQueuedRunEdit(threadKey);
+  // A queued edit can end while the sheet is open; the prompt then belongs to the thread's draft.
+  const draftKey = activeComposerDraftKey(threadKey, route.params.draftKey, queuedRunEdit);
+  const prompt = useComposerDraft(draftKey).text;
+
+  if (!selectedThread) {
+    return <View className="flex-1 bg-sheet" />;
+  }
+
+  const serverConfig = selectedEnvironmentRuntime?.serverConfig ?? null;
+  const modelSelection = draftSettings.modelSelection ?? selectedThread.modelSelection;
+  const lockedProviderInstanceId = threadAllowsProviderSwitch({
+    thread: selectedThread,
+    projection: structure?.projection,
+  })
+    ? undefined
+    : modelSelection.instanceId;
+  const modelOptions = buildModelOptions(
+    serverConfig,
+    modelSelection,
+    lockedProviderInstanceId,
+    selectedThread.projectId,
+  );
+  const currentModelOption =
+    modelOptions.find(
+      (option) =>
+        option.selection.instanceId === modelSelection.instanceId &&
+        option.selection.model === modelSelection.model,
+    ) ?? null;
+  const updateModelSelection = (selection: ModelSelection) =>
+    updateThreadDraftModelSelection(threadKey, selection, serverConfig?.providers ?? []);
+
+  return (
+    <ThreadSettingsPickerScreen
+      environmentId={selectedThread.environmentId}
+      projectId={selectedThread.projectId}
+      providerInstanceId={modelSelection.instanceId}
+      {...(lockedProviderInstanceId ? { lockedProviderInstanceId } : {})}
+      providerGroups={groupByProvider(modelOptions)}
+      selectedModel={modelSelection}
+      prompt={prompt}
+      onPromptChange={(text) => setComposerDraftText(draftKey, text)}
+      reportedModelSelection={reportedModelSelection}
+      onSelectModel={(option) => updateModelSelection(withRememberedModelOptions(option.selection))}
+      restoreSelection={withRememberedModelOptions}
+      optionDescriptors={resolveProviderOptionDescriptors({
+        capabilities: currentModelOption?.capabilities,
+        selections: modelSelection.options,
+      })}
+      onUpdateOptionSelections={(options) => {
+        rememberModelOptions(modelSelection.instanceId, modelSelection.model, options ?? []);
+        updateModelSelection({ ...modelSelection, options });
+      }}
+      runtimeMode={draftSettings.runtimeMode ?? selectedThread.runtimeMode}
+      onUpdateRuntimeMode={(runtimeMode) => updateComposerDraftSettings(threadKey, { runtimeMode })}
+      onClose={() => navigation.goBack()}
+    />
+  );
+}
+
+/** RNS owns nested sheet dismissal; Reasoning and Runtime remain ordinary pushes. */
 export function NewTaskThreadSettingsRouteScreen() {
   const flow = useNewTaskFlow();
   const navigation = useNavigation<NativeStackNavigationProp<Record<string, object | undefined>>>();
-  const optionDescriptors = useMemo(
-    () =>
-      resolveProviderOptionDescriptors({
-        capabilities: flow.selectedModelOption?.capabilities,
-        selections: flow.selectedModel?.options,
-      }),
-    [flow.selectedModel?.options, flow.selectedModelOption?.capabilities],
-  );
+  const optionDescriptors = resolveProviderOptionDescriptors({
+    capabilities: flow.selectedModelOption?.capabilities,
+    selections: flow.selectedModel?.options,
+  });
 
   return (
-    <ThreadSettingsSessionProvider
+    <ThreadSettingsPickerScreen
       environmentId={flow.selectedEnvironmentId}
+      projectId={flow.selectedProject?.id ?? null}
       {...(flow.selectedModel ? { providerInstanceId: flow.selectedModel.instanceId } : {})}
       providerGroups={flow.providerGroups}
       selectedModel={flow.selectedModel}
+      prompt={flow.prompt}
+      onPromptChange={flow.setPrompt}
       onSelectModel={(option) => flow.setSelectedModelKey(option.key, option.selection.options)}
+      restoreSelection={withRememberedModelOptions}
       optionDescriptors={optionDescriptors}
       onUpdateOptionSelections={flow.setSelectedModelOptions}
       runtimeMode={flow.runtimeMode}
       onUpdateRuntimeMode={flow.setRuntimeMode}
-    >
-      <ThreadSettingsPickerNavigator onClose={() => navigation.goBack()} />
-    </ThreadSettingsSessionProvider>
+      onClose={() => navigation.goBack()}
+    />
   );
 }

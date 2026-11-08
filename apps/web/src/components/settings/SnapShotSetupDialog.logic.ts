@@ -60,12 +60,12 @@ export function captureSetupCheckMessage(state: DesktopSnapShotState): string {
   )
     return "hmm, still can't check access. see advanced for help 3:";
   if (captureSetupBackend(state) === "picker")
-    return "all ready — you'll choose a window each time :3";
+    return "all ready, you'll choose a window each time :3";
   if (gnome && state.gnomeExtension?.status === "restart-required")
     return "still waiting for you to sign out and back in, take your time :3";
   return captureSetupAccessReady(state)
-    ? "all ready — next, let's choose your shortcut :3"
-    : "almost there — finish the step above first ^w^";
+    ? "all ready! next, let's choose your shortcut :3"
+    : "almost there, finish the step above first ^w^";
 }
 
 export function captureSetupShortcutReady(state: DesktopSnapShotState, unsaved: boolean): boolean {
@@ -82,8 +82,8 @@ export function captureSetupInitialStep(
 ): CaptureSetupStep {
   if (!captureSetupAccessReady(state)) return "access";
   if (requested === "resume") {
-    // A disabled native backend hasn't checked system permissions yet. A picker
-    // still needs its explanation; neither is proof of active-window access.
+    // Disabled backends have not checked permissions; pickers need an explanation, not an active-window
+    // access claim.
     if (
       (state.mode === "direct" && !state.shortcutRegistered) ||
       captureSetupBackend(state) === "picker"

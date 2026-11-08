@@ -2,7 +2,7 @@
 
 :3 Code is an "agent harness control surface" (＾• ω •＾) — it lets you pet, poke, and direct every agent on your machine from a best-in-class mobile app ([iOS](https://apps.apple.com/us/app/colon3-code-remote-claude-more/id6787819824), [Android](https://play.google.com/store/apps/details?id=com.t3tools.colon3code)), [web app](https://app.t3.codes) and [Electron-based desktop app](https://t3.codes).
 
-Works with your subscriptions on Claude Code, Codex, Cursor, Grok Build, OpenCode, Google Antigravity, and Southbag Code. If they're set up on your computer, :3 Code can control them.
+Works with your subscriptions on Claude Code, Codex, Cursor, Grok Build, OpenCode, Google Antigravity, fx, and Southbag Code. If they're set up on your computer, :3 Code can control them.
 
 ## "wait, what are you selling me?"
 
@@ -13,7 +13,7 @@ We wanted something performant, remote-ready, and truly open. If we ever go the 
 ## installation
 
 > [!WARNING]
-> :3 Code currently supports Codex, Claude, Cursor, Grok Build, OpenCode, Antigravity, and Southbag Code. Install and authenticate at least one provider before use:
+> :3 Code currently supports Codex, Claude, Cursor, Grok Build, OpenCode, Antigravity, fx, and Southbag Code. Install and authenticate at least one provider before use:
 >
 > - Codex: install [Codex CLI](https://developers.openai.com/codex/cli) and run `codex login`
 > - Claude: install [Claude Code](https://claude.com/product/claude-code) and run `claude auth login`
@@ -21,6 +21,7 @@ We wanted something performant, remote-ready, and truly open. If we ever go the 
 > - Grok Build: install [Grok Build CLI](https://x.ai/cli) and run `grok login`
 > - OpenCode: install [OpenCode](https://opencode.ai) and run `opencode auth login`
 > - Antigravity: enable it in Settings, then use **Install Antigravity** and **Sign in with Google**. No CLI is required.
+> - fx: install [fx](https://fx.sh) and run `fx login` on the machine running the :3 Code server ([setup guide](./docs/user/providers-fx.md))
 > - Southbag Code: install [Southbag Code](https://github.com/SouthbagHQ/code) with `npm i -g @southbag/code`. When it is installed, it is the default provider for new threads.
 
 ### command line
@@ -47,6 +48,12 @@ Install the latest version of the desktop app from [GitHub Releases](https://git
 
 ```bash
 winget install T3Tools.Colon3Code
+```
+
+#### Windows (`scoop`)
+
+```bash
+scoop install extras/colon3code
 ```
 
 #### macOS (Homebrew)
@@ -89,11 +96,14 @@ We are (mostly) not accepting contributions yet. Small fixes may be considered. 
 
 Full docs live in [docs/](./docs). There's no docs site yet.
 
+- [FAQ](./docs/user/faq.md)
 - [Install and first run](./docs/user/install.md)
 - [Permission modes](./docs/user/permission-modes.md)
 - [Keyboard shortcuts](./docs/user/keybindings.md)
 - [Project settings](./docs/user/project-settings.md)
+- [Appearance preferences](./docs/user/appearance.md)
 - [Remote access from a phone or another machine](./docs/user/remote-access.md)
+- [Connect Claude Code, Codex, ChatGPT and other agents over MCP](./docs/user/outside-agents.md)
 - [Keeping app and server in sync](./docs/user/updating.md)
 - [Source control integrations](./docs/user/source-control.md)
 - Multiple accounts: [Codex](./docs/user/providers-codex.md) · [Claude](./docs/user/providers-claude.md)

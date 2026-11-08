@@ -8,7 +8,7 @@ import {
 export const SOUTHBAG_CODE_STOP_HINT = "southbag code doesn't do stopping. kevin is watching :3";
 
 type StopActionThread = {
-  readonly session: {
+  readonly session?: {
     readonly providerName: string | null;
     readonly providerInstanceId?: ProviderInstanceId | undefined;
   } | null;

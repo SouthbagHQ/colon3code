@@ -42,7 +42,7 @@ export function NoActiveThreadState() {
               <EmptyTitle variant="hero">{hello.text}</EmptyTitle>
               <EmptyDescription variant="hero">
                 {" "}
-                pop into an existing thread, or start a fresh one — we're ready when you are ^w^
+                pop into an existing thread, or start a fresh one, we're ready when you are ^w^
               </EmptyDescription>
             </EmptyHeader>
           </div>

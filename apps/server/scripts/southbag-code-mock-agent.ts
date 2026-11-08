@@ -1,11 +1,8 @@
 #!/usr/bin/env node
 // @effect-diagnostics nodeBuiltinImport:off preferSchemaOverJson:off globalTimers:off globalDate:off - plain-Node stand-in for the `southbag-code` binary used by adapter and provider tests.
 /**
- * Mock `southbag-code` for tests. Speaks the JSONL RPC protocol documented in
- * the Southbag Code repo (`packages/coding-agent/docs/rpc.md`) with canned
- * events, and also answers `--version` and print mode so one stub can stand
- * in for the whole binary. Behaviour is driven by `T3_SOUTHBAG_*` environment
- * variables and the CLI flags it is launched with.
+ * Mock `southbag-code` for tests: canned JSONL RPC events plus `--version` and print mode,
+ * driven by `T3_SOUTHBAG_*` env vars and the CLI flags it is launched with.
  */
 import * as NodeFS from "node:fs";
 import * as NodePath from "node:path";
@@ -81,10 +78,6 @@ if (mode !== "rpc") {
   process.stdout.write(`${printOutput}\n`);
   process.exit(0);
 }
-
-// ---------------------------------------------------------------------------
-// RPC mode
-// ---------------------------------------------------------------------------
 
 const sessionDir = flagValue("--session-dir") ?? process.cwd();
 const sessionFile = flagValue("--session") ?? NodePath.join(sessionDir, "mock-session.jsonl");

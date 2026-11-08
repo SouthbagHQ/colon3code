@@ -9,15 +9,12 @@ import { Colon3Wordmark } from "./Colon3Wordmark";
 import { cn } from "~/lib/utils";
 
 /**
- * The app's face. `happy` and `sad` are the brand mark (sad is the same SVG
- * mirrored, so it reads as "3:"); every other expression is a text glyph in the
- * interface font so it can sit in running copy at any size. Pass `text` to
- * render every expression as a glyph, for dense rows where the mark's SVG
- * would not match the neighbouring emoticons. Static by design: swap the
- * expression to react to state, never animate it.
+ * The app's face. `happy`/`sad` are the brand mark SVG (sad is mirrored, "3:");
+ * other expressions are text glyphs; `text` forces glyphs for dense rows.
+ * Static by design: swap the expression to react to state, never animate it.
  */
 export type { CatFaceExpression };
-export { CAT_FACE_GLYPHS, catFaceGlyph };
+export { catFaceGlyph };
 
 export function CatFace({
   expression,

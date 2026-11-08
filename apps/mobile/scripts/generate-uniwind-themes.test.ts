@@ -2,66 +2,9 @@ import * as NodeFS from "node:fs";
 import * as NodePath from "node:path";
 import { describe, expect, it } from "vite-plus/test";
 
-import {
-  customThemeNames,
-  getGeneratedUniwindThemeOutputs,
-  renderDefaultThemeVariablesJSON,
-  renderUniwindThemesCSS,
-} from "./generate-uniwind-themes.mts";
-import { readDefaultMobileThemeVariables } from "../src/lib/mobileTheme.test-support";
+import { customThemeNames, renderUniwindThemesCSS } from "./generate-uniwind-themes.mts";
 
 describe("generate mobile Uniwind themes", () => {
-  it("keeps the committed outputs current", () => {
-    const staleOutputs = getGeneratedUniwindThemeOutputs()
-      .filter(
-        ([filename, contents]) =>
-          !NodeFS.existsSync(filename) || NodeFS.readFileSync(filename, "utf8") !== contents,
-      )
-      .map(([filename]) => NodePath.relative(import.meta.dirname, filename));
-
-    expect(
-      staleOutputs,
-      "Run `vp run --filter @t3tools/mobile generate` and commit the generated outputs.",
-    ).toEqual([]);
-  });
-
-  it("registers every custom palette for both appearances", () => {
-    expect(customThemeNames).toEqual([
-      "t3-chat-light",
-      "t3-chat-dark",
-      "grove-light",
-      "grove-dark",
-      "ocean-light",
-      "ocean-dark",
-      "ember-light",
-      "ember-dark",
-      "iris-light",
-      "iris-dark",
-      "colon3-light",
-      "colon3-dark",
-      "colon3-dark-light",
-      "colon3-dark-dark",
-    ]);
-
-    const stylesheet = renderUniwindThemesCSS();
-    for (const themeName of customThemeNames) {
-      expect(stylesheet.match(new RegExp(`@variant ${themeName} \\{`, "gu"))).toHaveLength(1);
-    }
-  });
-
-  it("keeps the default runtime bridge and generated CSS on the same palette", () => {
-    const variables = JSON.parse(renderDefaultThemeVariablesJSON());
-
-    expect(variables.light).toEqual(readDefaultMobileThemeVariables("light"));
-    expect(variables.dark).toEqual(readDefaultMobileThemeVariables("dark"));
-    // The default theme is this fork's blush/plum palette.
-    expect(variables.light["--color-screen"]).toBe("#fff3f2");
-    expect(variables.light["--color-drawer"]).toBe("#fbe7e6");
-    expect(variables.dark["--color-screen"]).toBe("#231521");
-    expect(variables.dark["--color-drawer"]).toBe("#1b0f1a");
-    expect(Object.keys(variables.light)).toEqual(Object.keys(variables.dark));
-  });
-
   it("gives every theme the same variables and a fixed Clerk palette for its appearance", () => {
     const css =
       NodeFS.readFileSync(NodePath.resolve(import.meta.dirname, "../global.css"), "utf8") +

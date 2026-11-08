@@ -30,7 +30,7 @@ describe("resolveDocumentTitle", () => {
     expect(resolveDocumentTitle({ appName, status: "failed", recentlyCompleted: false })).toBe(
       "3: failed · :3 Code",
     );
-    expect(resolveDocumentTitle({ appName, status: "monitoring", recentlyCompleted: false })).toBe(
+    expect(resolveDocumentTitle({ appName, status: "waiting", recentlyCompleted: false })).toBe(
       "o.o watching · :3 Code",
     );
   });

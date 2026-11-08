@@ -34,20 +34,23 @@ export function Colon3Spinner(props: {
   const reduceMotion = useReducedMotion();
   const progress = useSharedValue(0);
 
+  // oxlint-disable-next-line colon3code/no-unreasoned-state-sync -- drives the Reanimated shared value on the UI thread while mounted and cancels it on unmount
   useEffect(() => {
     if (reduceMotion) return;
-    progress.value = withRepeat(
-      withSequence(
-        withTiming(1, { duration: BOUNCE_DURATION_MS * 0.4, easing: BOUNCE_EASING }),
-        withTiming(2, { duration: BOUNCE_DURATION_MS * 0.35, easing: BOUNCE_EASING }),
-        withTiming(3, { duration: BOUNCE_DURATION_MS * 0.25, easing: BOUNCE_EASING }),
+    progress.set(
+      withRepeat(
+        withSequence(
+          withTiming(1, { duration: BOUNCE_DURATION_MS * 0.4, easing: BOUNCE_EASING }),
+          withTiming(2, { duration: BOUNCE_DURATION_MS * 0.35, easing: BOUNCE_EASING }),
+          withTiming(3, { duration: BOUNCE_DURATION_MS * 0.25, easing: BOUNCE_EASING }),
+        ),
+        -1,
+        false,
       ),
-      -1,
-      false,
     );
     return () => {
       cancelAnimation(progress);
-      progress.value = 0;
+      progress.set(0);
     };
   }, [progress, reduceMotion]);
 

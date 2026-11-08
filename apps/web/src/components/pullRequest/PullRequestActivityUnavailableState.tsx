@@ -6,10 +6,13 @@ import { Button } from "../ui/button";
 
 export function PullRequestActivityUnavailableState({
   error,
+  term,
   onRetry,
   compact = false,
 }: {
   error: string;
+  /** The host's word for a change request, as in "pull request". */
+  term: string;
   onRetry: () => void;
   compact?: boolean;
 }) {
@@ -21,8 +24,7 @@ export function PullRequestActivityUnavailableState({
       )}
     >
       <p className="text-sm font-medium text-foreground">
-        {" "}
-        oops, couldn't load the pull request activity 3:
+        oops, couldn't load the {term} activity 3:
       </p>
       <p className="max-w-md text-xs text-muted-foreground">{error}</p>
       <Button size="sm" variant="outline" onClick={onRetry}>

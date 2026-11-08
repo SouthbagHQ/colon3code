@@ -1,10 +1,8 @@
 const { withAppBuildGradle } = require("expo/config-plugins");
 
-// The Expo template signs release builds with the debug keystore. When
-// COLON3CODE_ANDROID_KEYSTORE_PATH is set at prebuild time, point the release
-// build type at a keystore instead. Only the env var names are written into
-// build.gradle; Gradle reads the path, passwords and alias from the
-// environment at build time, so the generated project never holds secrets.
+// When COLON3CODE_ANDROID_KEYSTORE_PATH is set at prebuild, sign release builds with
+// that keystore instead of the debug one. Only env var names go into build.gradle;
+// Gradle reads the values at build time, so the generated project holds no secrets.
 const ENV = {
   storeFile: "COLON3CODE_ANDROID_KEYSTORE_PATH",
   storePassword: "COLON3CODE_ANDROID_KEYSTORE_PASSWORD",

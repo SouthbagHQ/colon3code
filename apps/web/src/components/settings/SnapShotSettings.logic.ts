@@ -27,7 +27,7 @@ export function snapShotSetupSummary(state: DesktopSnapShotState, enabled: boole
       ? "check capture access in setup"
       : "install the capture helper to continue";
   if (captureSetupBackend(state) === "picker")
-    return "manual capture only — you'll choose a window each time";
+    return "manual capture only: you'll choose a window each time";
   if (!enabled) return "enable capture to continue";
   if (state.shortcutPending)
     return state.linuxBackend === "hyprland"
@@ -58,10 +58,6 @@ export function snapShotSetupButtonLabel(state: DesktopSnapShotState | null): st
   return desktop ? `set up ${desktop} capture` : "continue setup";
 }
 
-// Windows needs no permissions or setup: turning capture on is enough. macOS setup
-// has nothing left to manage once permissions and the shortcut are in place; the
-// shortcut row stays editable inline. Revoking a permission brings the button back
-// as "Continue setup" through the state message.
 export function snapShotSetupComplete(
   state: DesktopSnapShotState | null,
   includeAccessibility: boolean,
