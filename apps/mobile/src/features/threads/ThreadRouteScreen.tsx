@@ -136,7 +136,7 @@ function ThreadRouteFallbackLayout(props: { readonly children: ReactNode }) {
     <ThreadScreenFallback
       header={
         inspectorHeaderShown ? undefined : (
-          <AppBar title="Thread" onBackToList={goBack} hideBottomBorder />
+          <AppBar title="thread" onBackToList={goBack} hideBottomBorder />
         )
       }
     >
@@ -680,7 +680,7 @@ function ThreadRouteContent(
     if (result._tag === "Failure" && !isAtomCommandInterrupted(result)) {
       const error = squashAtomCommandFailure(result);
       Dialog.alert(
-        "Could not resume thread",
+        "could not resume thread 3:",
         error instanceof Error ? error.message : "Try again.",
       );
     }

@@ -176,10 +176,10 @@ function PairingForm({
 
   return (
     <SettingsScreen
-      title="Add environment"
+      title="add environment"
       actions={[
         {
-          accessibilityLabel: connecting ? "Connecting" : "Add environment",
+          accessibilityLabel: connecting ? "connecting" : "add environment",
           loading: connecting,
           icon: "checkmark",
           tintColor: headerIconColor,
@@ -272,7 +272,7 @@ function PairingScanCard(props: {
   return (
     <Pressable
       accessibilityRole={props.cameraActive ? undefined : "button"}
-      accessibilityLabel={props.cameraActive ? undefined : "Scan QR code"}
+      accessibilityLabel={props.cameraActive ? undefined : "scan QR code"}
       disabled={props.cameraActive}
       onPress={props.onScanPress}
       className={cn(
@@ -337,7 +337,7 @@ function PairingScanCard(props: {
               <Text
                 className={cn("font-t3-medium text-sm", light ? "text-black/70" : "text-white/80")}
               >
-                Tap to scan
+                tap to scan
               </Text>
             </>
           )}
@@ -363,7 +363,7 @@ function T3ConnectSection() {
   return (
     <View collapsable={false} className="gap-2">
       <Text className="px-4 text-sm font-t3-medium text-foreground-muted">
-        Or use the managed relay
+        or use the managed relay
       </Text>
       {isSignedIn ? (
         <CloudEnvironmentRows
@@ -374,7 +374,7 @@ function T3ConnectSection() {
         />
       ) : (
         <ListRow
-          label="Sign in to T3 Connect"
+          label="sign in to T3 Connect"
           description="Reach your machines from anywhere, no network setup."
           disabled={!isLoaded}
           onPress={() => navigation.navigate("SettingsAuth")}

@@ -370,7 +370,7 @@ export function BranchToolbarBranchSelector({
       toastManager.add(
         stackedThreadToast({
           type: "error",
-          title: "Action unavailable",
+          title: "action unavailable",
           description: "This connection cannot change the thread's branch.",
         }),
       );
@@ -748,7 +748,7 @@ export function BranchToolbarBranchSelector({
             status={displayedPrStatus}
             project={activeProject}
             label={panelPrLabel}
-            openAriaLabel={prUrl ?? `Open ${sourceControlPresentation.terminology.singular}`}
+            openAriaLabel={prUrl ?? `open ${sourceControlPresentation.terminology.singular}`}
             onOpen={(event) => openPrLink(event, prUrl)}
             onActed={() => branchStatusQuery.refresh()}
           />

@@ -420,7 +420,7 @@ export function McpAppFrame(props: {
             setClosed(false);
           }}
         >
-          Show app
+          show app
         </Button>
       </div>
     );
@@ -452,7 +452,7 @@ export function McpAppFrame(props: {
           >
             <span className="truncate">{app.server}</span>
             <Button
-              aria-label="Exit full screen"
+              aria-label="exit full screen"
               size="icon-sm"
               variant="ghost"
               onClick={() => setDisplayMode("inline")}

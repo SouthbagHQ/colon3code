@@ -300,7 +300,7 @@ function ServerSettingsDetail(props: { readonly page: SettingsPage }) {
             <ManagedPolicyNotice targets={targets} />
             {projectSelected ? (
               <SettingsProjectOverridesSection
-                projectLabel={selectedProject?.label ?? "Unavailable project"}
+                projectLabel={selectedProject?.label ?? "unavailable project"}
                 hasOverrides={targets.some((target) =>
                   PAGE_PROJECT_KEYS[props.page].some((key) => target.sources[key] === "project"),
                 )}
@@ -381,10 +381,10 @@ function ServerSettingsDetail(props: { readonly page: SettingsPage }) {
                     />
                   ))}
                 </SettingsSection>
-                <SettingsSection title="Preview browser">
+                <SettingsSection title="preview browser">
                   <SettingsSwitchRow
                     icon="globe"
-                    label="Agent browser access"
+                    label="agent browser access"
                     subtitle={managedSubtitle(
                       "enableAgentBrowserAccess",
                       "Allow agents to use the in-app preview browser.",
@@ -406,10 +406,10 @@ function ServerSettingsDetail(props: { readonly page: SettingsPage }) {
                     canWrite={(environmentId) => writableEnvironments.has(environmentId)}
                   />
                 )}
-                <SettingsSection title="Pull requests">
+                <SettingsSection title="pull requests">
                   <SettingsSwitchRow
                     icon={PullRequestGlyph.merged}
-                    label="Remove agent credits when merging"
+                    label="remove agent credits when merging"
                     subtitle={managedSubtitle(
                       "removeAgentCreditsOnMerge",
                       "Remove recognized agent credits from merge and squash messages on hosts that support it, keeping human co-authors. Includes auto-merge. Excludes merge queues, stack merges, and existing commits.",
@@ -419,23 +419,23 @@ function ServerSettingsDetail(props: { readonly page: SettingsPage }) {
                     onValueChange={(value) => write({ removeAgentCreditsOnMerge: value })}
                   />
                 </SettingsSection>
-                <SettingsSection title="Default branch">
+                <SettingsSection title="default branch">
                   <SettingsSwitchRow
                     icon="arrow.down.circle"
-                    label="Automatically pull"
+                    label="automatically pull"
                     subtitle={managedSubtitle(
                       "defaultAutoPull",
-                      "Keep the default branch current when there are no local changes.",
+                      "keep the default branch current when there are no local changes.",
                     )}
                     value={uniform("defaultAutoPull")}
                     disabled={disabledFor("defaultAutoPull")}
                     onValueChange={(value) => write({ defaultAutoPull: value })}
                   />
                 </SettingsSection>
-                <SettingsSection title="Clones">
+                <SettingsSection title="clones">
                   <SettingsSwitchRow
                     icon="folder"
-                    label="Clone into host folders"
+                    label="clone into host folders"
                     subtitle="Clones go to github.com/owner/repo under the Add project folder, like ghq."
                     value={uniform("ghqCloneLayout")}
                     disabled={disabledFor("ghqCloneLayout")}
@@ -518,7 +518,7 @@ function ServerSettingsDetail(props: { readonly page: SettingsPage }) {
                         key={target.environmentId}
                         icon="server.rack"
                         label={target.label}
-                        value="Server and provider updates"
+                        value="server and provider updates"
                         onPress={() =>
                           navigation.navigate("SettingsEnvironmentDetail", {
                             environmentId: target.environmentId,

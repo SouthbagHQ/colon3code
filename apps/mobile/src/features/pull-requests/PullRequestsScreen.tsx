@@ -340,15 +340,15 @@ export function PullRequestsScreen(
             <View className="items-center py-5">
               <AppActivityIndicator
                 colorClassName="accent-icon"
-                accessibilityLabel="Loading more pull requests"
+                accessibilityLabel="loading more pull requests"
               />
             </View>
           ) : result.loadMoreError ? (
             <View className="items-center gap-2 px-8 py-4">
               <Text className="text-xs text-foreground-muted">{result.loadMoreError}</Text>
               <Button
-                label="Try again"
-                accessibilityLabel="Retry loading more pull requests"
+                label="try again"
+                accessibilityLabel="retry loading more pull requests"
                 onPress={() => void result.loadMore(true)}
               />
             </View>
@@ -356,8 +356,8 @@ export function PullRequestsScreen(
             // A filtered page can be too short to scroll, which leaves nothing to reach the end of.
             <View className="items-center py-4">
               <Button
-                label="Load more"
-                accessibilityLabel="Load more pull requests"
+                label="load more"
+                accessibilityLabel="load more pull requests"
                 onPress={() => void result.loadMore()}
               />
             </View>
@@ -375,12 +375,12 @@ export function PullRequestsScreen(
                   result.error
                     ? "Couldn't load pull requests"
                     : targets.length && connectedTargets.length === 0
-                      ? "Environment offline"
+                      ? "environment offline"
                       : targets.length
                         ? query
-                          ? "No results"
-                          : "No matching pull requests"
-                        : "Connect an environment"
+                          ? "no results"
+                          : "no matching pull requests"
+                        : "connect an environment"
                 }
                 detail={
                   result.error ??

@@ -113,20 +113,20 @@ function hostStatus(
   state: DeviceServiceState | undefined,
   hostId: string,
 ): SourceStatus | undefined {
-  if (!state) return { tone: "pending", label: "Loading" };
+  if (!state) return { tone: "pending", label: "loading…" };
   const status = state.hostStatuses[hostId];
   switch (status?.status) {
     case "ready": {
       const incomplete = incompleteListings(status);
       if (incomplete.length === 0) return undefined;
-      const list = incomplete.length > 1 ? "Device" : incomplete[0] === "ios" ? "iOS" : "Android";
+      const list = incomplete.length > 1 ? "device" : incomplete[0] === "ios" ? "iOS" : "Android";
       return { tone: "warning", label: `${list} list may be incomplete`, detail: status.detail };
     }
     case "installing":
     case "starting":
-      return { tone: "pending", label: "Starting", detail: status.detail };
+      return { tone: "pending", label: "starting", detail: status.detail };
     case "failed":
-      return { tone: "error", label: "Failed", detail: status.detail };
+      return { tone: "error", label: "failed", detail: status.detail };
     default:
       return undefined;
   }
@@ -232,13 +232,13 @@ export function DeviceSourcesSettings(props: {
               ),
             },
           })),
-        remove ? "Device host not removed everywhere" : "Device host not saved everywhere",
+        remove ? "device host not removed everywhere 3:" : "device host not saved everywhere 3:",
       );
       if (saved) setEditing(null);
     } catch (error) {
       toastManager.add({
         type: "error",
-        title: "Device host not saved",
+        title: "device host not saved 3:",
         description: error instanceof Error ? error.message : String(error),
       });
     }
@@ -283,7 +283,7 @@ export function DeviceSourcesSettings(props: {
         environmentId: patch.environmentId,
         patch: { simlockDeviceHosts: patch.hosts },
       })),
-      "Simlock host not saved everywhere",
+      "Simlock host not saved everywhere 3:",
     );
     if (saved) setEditing(null);
   };
@@ -295,7 +295,7 @@ export function DeviceSourcesSettings(props: {
           environmentId: environment.environmentId,
           patch: { simlockDeviceHosts: updateSimlockDeviceHosts(environment.hosts, host, true) },
         })),
-      "Simlock host not removed everywhere",
+      "Simlock host not removed everywhere 3:",
     );
 
   const [testing, setTesting] = useState<ReadonlySet<string>>(new Set());
@@ -332,12 +332,12 @@ export function DeviceSourcesSettings(props: {
   const rowActions = (onEdit: () => void, onRemove: () => void, extra?: ReactNode) => (
     <>
       <Button size="sm" variant="outline" disabled={disabled} onClick={onEdit}>
-        Edit
+        edit
       </Button>
       <Menu>
         <MenuTrigger
           render={
-            <Button size="icon-sm" variant="ghost-muted" disabled={disabled} aria-label="More" />
+            <Button size="icon-sm" variant="ghost-muted" disabled={disabled} aria-label="more" />
           }
         >
           <MoreVertical />
@@ -345,7 +345,7 @@ export function DeviceSourcesSettings(props: {
         <MenuPopup align="end">
           {extra}
           <MenuItem variant="destructive" onClick={onRemove}>
-            Remove
+            remove
           </MenuItem>
         </MenuPopup>
       </Menu>
@@ -357,7 +357,7 @@ export function DeviceSourcesSettings(props: {
   rows.push({
     key: "local",
     shared: false,
-    title: "Local simulators",
+    title: "local simulators",
     description:
       members.length > 1
         ? "Simulators and emulators installed on each environment's own machine."
@@ -375,7 +375,7 @@ export function DeviceSourcesSettings(props: {
             ? {
                 ...status,
                 action: {
-                  label: "Refresh",
+                  label: "refresh",
                   run: () => void list({ environmentId: member.environmentId, input: {} }),
                 },
               }
@@ -416,7 +416,7 @@ export function DeviceSourcesSettings(props: {
         if (!held)
           return { environmentId: member.environmentId, label: member.label, added: false };
         const status = testing.has(host.id)
-          ? ({ tone: "pending", label: "Testing connection" } as const)
+          ? ({ tone: "pending", label: "testing connection…" } as const)
           : hostStatus(member.state, held.host.id);
         return {
           environmentId: member.environmentId,
@@ -427,8 +427,8 @@ export function DeviceSourcesSettings(props: {
             status?.tone === "error" && member.state?.supportsHostRetry
               ? {
                   ...status,
-                  label: "Can't connect",
-                  action: { label: "Retry", run: () => retry(member.environmentId, held.host.id) },
+                  label: "can't connect",
+                  action: { label: "retry", run: () => retry(member.environmentId, held.host.id) },
                 }
               : status,
         };
@@ -437,7 +437,7 @@ export function DeviceSourcesSettings(props: {
         () =>
           setEditing({ kind: "ssh", host, original: host, ...(grouped ? {} : { only: holders }) }),
         () => void saveSsh(host, true, host, holders),
-        <MenuItem onClick={() => void testSsh(host)}>Test connection</MenuItem>,
+        <MenuItem onClick={() => void testSsh(host)}>test connection</MenuItem>,
       ),
     });
   }
@@ -524,7 +524,7 @@ export function DeviceSourcesSettings(props: {
       <MenuTrigger
         render={<Button size="sm" variant="outline" disabled={disabled || editing !== null} />}
       >
-        <PlusIcon className="size-3.5" /> Add source
+        <PlusIcon className="size-3.5" /> add source
         <ChevronDownIcon className="size-3.5" />
       </MenuTrigger>
       <MenuPopup align="end">
@@ -537,7 +537,7 @@ export function DeviceSourcesSettings(props: {
             })
           }
         >
-          Machine over SSH
+          machine over SSH
         </MenuItem>
         {props.supportsEas ? (
           <MenuItem
@@ -568,7 +568,7 @@ export function DeviceSourcesSettings(props: {
   );
 
   return (
-    <SettingsSection id="device-sources" title="Device sources" headerAction={addMenu}>
+    <SettingsSection id="device-sources" title="device sources" headerAction={addMenu}>
       {rows.map((row) => (
         <DeviceSourceRow key={row.key} row={row} />
       ))}
@@ -687,12 +687,12 @@ function PlatformIcon(props: {
                 {(
                   [
                     ...(uniform
-                      ? ([["Connected", connected]] as const)
+                      ? ([["connected", connected]] as const)
                       : ([
-                          ["Available", availableOn],
-                          ["Not available", unavailableOn],
+                          ["available", availableOn],
+                          ["not available", unavailableOn],
                         ] as const)),
-                    ["Not added", notAdded],
+                    ["not added", notAdded],
                   ] as const
                 ).map(([heading, environments]) =>
                   environments.length > 0 ? (
@@ -700,7 +700,7 @@ function PlatformIcon(props: {
                       <dt className="text-muted-foreground">{heading}</dt>
                       {environments.map((environment) => {
                         const reason =
-                          heading === "Not available"
+                          heading === "not available"
                             ? availability(environment)?.reason
                             : undefined;
                         return (
@@ -726,7 +726,7 @@ function PlatformIcon(props: {
                 <Fragment key={environment.environmentId}>
                   <dt className="text-muted-foreground">{environment.label}</dt>
                   <dd className={entry?.available ? "" : "text-muted-foreground"}>
-                    {entry?.available ? "Available" : (entry?.reason ?? "Not available")}
+                    {entry?.available ? "available" : (entry?.reason ?? "not available")}
                   </dd>
                 </Fragment>
               );
@@ -780,7 +780,7 @@ function DeviceSourceRow(props: { row: SourceRow }) {
             </span>
             {environment.status.tone === "warning" && environment.status.detail ? (
               <Popover>
-                <PopoverTrigger render={<InlineButton />}>Details</PopoverTrigger>
+                <PopoverTrigger render={<InlineButton />}>details</PopoverTrigger>
                 <PopoverPopup side="bottom" align="start" width="lg" padding="compact">
                   <p className="whitespace-pre-wrap break-words font-mono text-xs text-muted-foreground">
                     {environment.status.detail}

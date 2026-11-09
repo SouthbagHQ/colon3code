@@ -62,14 +62,14 @@ export function usageLimitRecoveryBannerItem(props: RecoveryProps): ComposerBann
       : resetAt;
   const resetDescription = displayAt
     ? `${resumes ? "Resumes" : "Resets"} ${formatUpcomingTimestamp(displayAt, timestampFormat)}`
-    : "Reset time unavailable; retry manually";
+    : "reset time unavailable; retry manually";
   if (!chatGptLimit) {
     return {
       id: `usage-limit-recovery:${runId}`,
       variant: "warning",
       group: "environment",
       icon: <GaugeIcon />,
-      title: "Usage limit reached",
+      title: "usage limit reached",
       description: resetDescription,
       actions: recoveryActions,
     };
@@ -89,7 +89,7 @@ export function usageLimitRecoveryBannerItem(props: RecoveryProps): ComposerBann
         {recoveryActions}
         {workspaceLimit ? (
           <Button size="xs" variant="ghost" onClick={copyAdminRequest}>
-            Copy request for admin
+            copy request for admin
           </Button>
         ) : (
           <ChatGptUsageButton size="xs" variant="ghost" />
@@ -114,7 +114,7 @@ function RecoveryActions({ runId, resetAt, recovery, snoozedUntil, onChange }: R
     if (action === "snooze" && !snoozed && Date.parse(resetAt) <= Date.now()) {
       toastManager.add({
         type: "error",
-        title: "Could not snooze thread",
+        title: "couldn't snooze that thread",
         description: "The reset time has passed. Retry the thread manually.",
       });
       // The deadline timer can lag after a throttled tab or sleep; disable now.
@@ -131,7 +131,7 @@ function RecoveryActions({ runId, resetAt, recovery, snoozedUntil, onChange }: R
     } catch (cause) {
       toastManager.add({
         type: "error",
-        title: action === "resume" ? "Could not change auto-resume" : "Could not snooze thread",
+        title: action === "resume" ? "couldn't change auto-resume" : "couldn't snooze that thread",
         description: cause instanceof Error ? cause.message : "An error occurred.",
       });
     }
@@ -141,14 +141,14 @@ function RecoveryActions({ runId, resetAt, recovery, snoozedUntil, onChange }: R
   return (
     <span className="flex flex-wrap items-center gap-x-3 gap-y-1 px-1">
       <InlineButton touchTarget="padded" disabled={pending} onClick={() => void toggle("resume")}>
-        {pending ? "Saving..." : scheduled ? "Cancel auto-resume" : "Resume at reset"}
+        {pending ? "saving…" : scheduled ? "cancel auto-resume" : "resume at reset"}
       </InlineButton>
       <InlineButton
         touchTarget="padded"
         disabled={pending || (!snoozed && resetPassed)}
         onClick={() => void toggle("snooze")}
       >
-        {pending ? "Saving..." : snoozed ? "Wake now" : "Snooze until reset"}
+        {pending ? "saving…" : snoozed ? "wake now" : "snooze until reset"}
       </InlineButton>
     </span>
   );

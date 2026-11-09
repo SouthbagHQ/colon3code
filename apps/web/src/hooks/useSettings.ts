@@ -445,7 +445,7 @@ export function useUpdateEnvironmentModelPreferences(environmentId: EnvironmentI
     } catch {
       toastManager.add({
         type: "error",
-        title: "Model preferences not saved",
+        title: "aw, model preferences not saved 3:",
         description: "Could not load saved model preferences. Try again.",
       });
       return;
@@ -472,7 +472,7 @@ export function useToggleEnvironmentModelFavorite(environmentId: EnvironmentId |
       } catch {
         toastManager.add({
           type: "error",
-          title: "Favorites not saved",
+          title: "aw, favorites not saved 3:",
           description: "Could not load saved model preferences. Try again.",
         });
         return;

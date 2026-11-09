@@ -136,17 +136,17 @@ export function PullRequestReviewersScreen({ route }: StaticScreenProps<PullRequ
         compactToolbar: true,
         value: query,
         onChangeText: search,
-        placeholder: "Search reviewers",
+        placeholder: "search reviewers",
       }
     : undefined;
   const searchToolbarInset = useSearchToolbarInset(reviewerSearch);
   return (
     <View className="flex-1 bg-sheet">
       <AppBar
-        title="Request review"
+        title="request review"
         subtitle={`#${route.params.number} · ${route.params.repository}`}
         onClose={() => navigation.goBack()}
-        closeAccessibilityLabel="Close request review"
+        closeAccessibilityLabel="close request review"
         search={reviewerSearch}
       />
       {listCandidates ? (
@@ -182,7 +182,7 @@ export function PullRequestReviewersScreen({ route }: StaticScreenProps<PullRequ
             return (
               <Pressable
                 accessibilityRole="button"
-                accessibilityLabel={`${item.isRequested ? "Remove review request from" : "Request review from"} ${item.login}${item.kind === "team" ? " team" : ""}`}
+                accessibilityLabel={`${item.isRequested ? "remove review request from" : "request review from"} ${item.login}${item.kind === "team" ? " team" : ""}`}
                 accessibilityState={{ disabled: !allowed || pending !== null }}
                 disabled={!allowed || pending !== null}
                 onPress={() => void update(item)}
@@ -202,7 +202,7 @@ export function PullRequestReviewersScreen({ route }: StaticScreenProps<PullRequ
                   <AppActivityIndicator />
                 ) : item.isRequested ? (
                   <View className="flex-row items-center gap-1.5">
-                    <Text className="text-xs text-foreground-muted">Requested</Text>
+                    <Text className="text-xs text-foreground-muted">requested</Text>
                     <SymbolView name="checkmark" size={14} tintColorClassName="accent-icon" />
                   </View>
                 ) : (
@@ -221,15 +221,15 @@ export function PullRequestReviewersScreen({ route }: StaticScreenProps<PullRequ
                     queryError
                       ? "Couldn't load reviewers"
                       : query.trim()
-                        ? "No matching reviewers"
-                        : "No reviewers available"
+                        ? "no matching reviewers"
+                        : "no reviewers available"
                   }
                   detail={queryError ?? "Search people and teams with access to this repository."}
                   variant="plain"
                 />
                 {queryError ? (
                   <Button
-                    label="Retry"
+                    label="retry"
                     onPress={result.error ? result.refresh : searchResult.refresh}
                   />
                 ) : null}
@@ -265,8 +265,8 @@ export function PullRequestReviewersScreen({ route }: StaticScreenProps<PullRequ
                 This provider accepts a reviewer ID but cannot list candidates.
               </Text>
               <TextInput
-                accessibilityLabel="Reviewer ID"
-                placeholder="Reviewer login or ID"
+                accessibilityLabel="reviewer ID"
+                placeholder="reviewer login or ID"
                 placeholderTextColorClassName="accent-foreground-muted"
                 value={query}
                 onChangeText={search}
@@ -275,13 +275,13 @@ export function PullRequestReviewersScreen({ route }: StaticScreenProps<PullRequ
                 className="min-h-12 rounded-xl bg-grouped-card px-3 text-base"
               />
               <Button
-                label="Request review"
+                label="request review"
                 fullWidth
                 disabled={!allowed || !query.trim() || pending !== null}
                 onPress={() => void update({ id: query.trim(), kind: "user", isRequested: false })}
               />
               <Button
-                label="Remove review request"
+                label="remove review request"
                 fullWidth
                 tone="text"
                 disabled={!allowed || !query.trim() || pending !== null}

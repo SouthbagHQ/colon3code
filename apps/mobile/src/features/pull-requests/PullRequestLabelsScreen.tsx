@@ -71,10 +71,10 @@ export function PullRequestLabelsScreen({ route }: StaticScreenProps<PullRequest
   };
   return (
     <PullRequestSearchSheet
-      title="Labels"
-      placeholder="Search labels"
-      closeAccessibilityLabel="Close labels"
-      clearAccessibilityLabel="Clear label search"
+      title="labels"
+      placeholder="search labels"
+      closeAccessibilityLabel="close labels"
+      clearAccessibilityLabel="clear label search"
       query={query}
       onQueryChange={setQuery}
     >
@@ -127,8 +127,8 @@ export function PullRequestLabelsScreen({ route }: StaticScreenProps<PullRequest
                     result.error
                       ? "Couldn't load labels"
                       : needle
-                        ? "No matching labels"
-                        : "This repository has no labels"
+                        ? "no matching labels"
+                        : "this repository has no labels"
                   }
                   detail={
                     result.error ??
@@ -138,7 +138,7 @@ export function PullRequestLabelsScreen({ route }: StaticScreenProps<PullRequest
                   }
                   variant="plain"
                 />
-                {result.error ? <Button label="Retry" onPress={result.refresh} /> : null}
+                {result.error ? <Button label="retry" onPress={result.refresh} /> : null}
               </View>
             )
           }

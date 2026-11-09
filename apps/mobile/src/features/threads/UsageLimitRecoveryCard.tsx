@@ -99,7 +99,7 @@ export function UsageLimitRecoveryCard({
   }
   const action = workspaceLimit
     ? {
-        label: "Copy request for admin",
+        label: "copy request for admin",
         role: "button" as const,
         run: () => {
           setError(null);
@@ -114,7 +114,7 @@ export function UsageLimitRecoveryCard({
         },
       }
     : {
-        label: "Manage usage",
+        label: "manage usage",
         role: "link" as const,
         run: () => {
           setError(null);
@@ -169,12 +169,12 @@ export function UsageLimitRecoveryCard({
             {canSchedule ? (
               <>
                 <RecoveryAction
-                  label={scheduled ? "Cancel auto-resume" : "Resume at reset"}
+                  label={scheduled ? "cancel auto-resume" : "resume at reset"}
                   disabled={pending}
                   onPress={() => void toggle("resume")}
                 />
                 <RecoveryAction
-                  label={snoozed ? "Wake now" : "Snooze until reset"}
+                  label={snoozed ? "wake now" : "snooze until reset"}
                   disabled={pending || (!snoozed && resetPassed)}
                   onPress={() => void toggle("snooze")}
                 />

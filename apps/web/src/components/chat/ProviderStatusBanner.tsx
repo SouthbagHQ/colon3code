@@ -106,7 +106,7 @@ export const ProviderStatusBanner = memo(function ProviderStatusBanner({
 }) {
   const canRefresh = useAtomValue(serverEnvironment.refreshProviders.permissionAtom(environmentId));
   const refreshProviders = useAtomCommand(serverEnvironment.refreshProviders, {
-    label: "Refresh provider status",
+    label: "refresh provider status",
   });
   const refreshingRef = useRef(false);
   const [isRefreshing, setIsRefreshing] = useState(false);
@@ -171,7 +171,7 @@ export const ProviderStatusBanner = memo(function ProviderStatusBanner({
                 variant="outline"
               >
                 <RefreshIcon />
-                {isRefreshing ? "Refreshing..." : "Refresh"}
+                {isRefreshing ? "refreshing…" : "refresh"}
               </Button>
             </div>
           </div>

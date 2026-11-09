@@ -8287,9 +8287,9 @@ it.layer(layerTest)("ProjectionStoreV2", (it) => {
       });
       const link = {
         host: "github.com",
-        repository: "SouthbagHQ/colon3code",
+        repository: "southbaghq/colon3code",
         number: 7,
-        url: "https://github.com/SouthbagHQ/colon3code/pull/7",
+        url: "https://github.com/southbaghq/colon3code/pull/7",
         source: "agent" as const,
         linkedAt: DateTime.formatIso(at),
         snapshot: null,
@@ -8333,7 +8333,7 @@ it.layer(layerTest)("ProjectionStoreV2", (it) => {
       ]);
       assert.deepEqual((yield* store.getThreadShell(threadId))?.pendingBackgroundTasks, [
         {
-          taskId: "pull-request-watch:github.com/SouthbagHQ/colon3code#7",
+          taskId: "pull-request-watch:github.com/southbaghq/colon3code#7",
           description: "Watching pull request #7",
           kind: "monitor",
           awaited: true,

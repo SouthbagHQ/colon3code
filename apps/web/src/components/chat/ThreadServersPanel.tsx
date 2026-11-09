@@ -83,12 +83,12 @@ function ThreadServersList(props: ThreadServersPanelProps) {
       const url = resolveDiscoveredServerUrl(props.environmentId, server.url);
       await readLocalApi()
         ?.shell.openExternal(url)
-        .catch((error: unknown) => reportFailure("Unable to open in browser", error));
+        .catch((error: unknown) => reportFailure("couldn't open that in the browser", error));
       return;
     }
     const result = await openDiscoveredPort({ threadRef, port: server, openPreview });
     if (result._tag === "Failure" && !isAtomCommandInterrupted(result)) {
-      reportFailure("Unable to open preview", squashAtomCommandFailure(result));
+      reportFailure("couldn't open the preview", squashAtomCommandFailure(result));
     }
   };
 
@@ -101,12 +101,12 @@ function ThreadServersList(props: ThreadServersPanelProps) {
     });
     setStoppingKey(null);
     if (result._tag === "Failure" && !isAtomCommandInterrupted(result)) {
-      reportFailure("Could not stop server", squashAtomCommandFailure(result));
+      reportFailure("couldn't stop that server", squashAtomCommandFailure(result));
     }
   };
 
   return (
-    <ThreadDetailsSection headingId="thread-details-servers-heading" title="Servers">
+    <ThreadDetailsSection headingId="thread-details-servers-heading" title="servers">
       <ul className="m-0 list-none p-0">
         {servers.slice(0, visibleCount).map((server, index) => {
           const key = serverKey(server);
@@ -139,7 +139,7 @@ function ThreadServersList(props: ThreadServersPanelProps) {
                       localhost:{server.port}
                     </span>
                     <span className="truncate text-2xs font-normal leading-4 text-muted-foreground">
-                      {[server.terminal === null ? "Agent" : "Terminal", server.processName]
+                      {[server.terminal === null ? "agent" : "terminal", server.processName]
                         .filter(Boolean)
                         .join(" · ")}
                     </span>
@@ -159,7 +159,7 @@ function ThreadServersList(props: ThreadServersPanelProps) {
                           variant="ghost"
                           part="icon"
                           tone="destructive"
-                          aria-label={`Stop localhost:${server.port}`}
+                          aria-label={`stop localhost:${server.port}`}
                           disabled={stoppingKey !== null}
                           onClick={() => void stop(server)}
                         />
@@ -171,7 +171,7 @@ function ThreadServersList(props: ThreadServersPanelProps) {
                         <SquareIcon aria-hidden className="size-3 fill-current" />
                       )}
                     </TooltipTrigger>
-                    <TooltipPopup side="left">Stop server</TooltipPopup>
+                    <TooltipPopup side="left">stop server</TooltipPopup>
                   </Tooltip>
                 </div>
               ) : null}
@@ -195,7 +195,7 @@ function ThreadServersList(props: ThreadServersPanelProps) {
             className="size-4 shrink-0"
             icon={hiddenCount > 0 ? ChevronDown : ChevronUp}
           />
-          {hiddenCount > 0 ? `Show ${Math.min(hiddenCount, SERVER_PAGE_COUNT)} more` : "Show less"}
+          {hiddenCount > 0 ? `show ${Math.min(hiddenCount, SERVER_PAGE_COUNT)} more` : "show less"}
         </ThreadDetailsControl>
       ) : null}
     </ThreadDetailsSection>

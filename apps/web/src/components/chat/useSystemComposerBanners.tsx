@@ -227,7 +227,7 @@ export function useSystemComposerBanners(input: SystemComposerBannersInput) {
         variant: updateFailed ? "error" : "default",
         group: "environment",
         icon: <ComposerServerUpdateIcon status={serverUpdateState.status} />,
-        title: `${updateFailed ? "Could not update" : "Updating"} ${versionMismatchServerLabel}`,
+        title: `${updateFailed ? "couldn't update" : "updating"} ${versionMismatchServerLabel}`,
         description:
           serverUpdateState.status === "failed"
             ? serverUpdateState.message
@@ -244,7 +244,7 @@ export function useSystemComposerBanners(input: SystemComposerBannersInput) {
             installation={versionMismatchInstallation}
             desktopAppUpdate={versionMismatchDesktopAppUpdate}
             targetVersion={versionMismatch.clientVersion}
-            label="Retry"
+            label="retry"
             variant="ghost"
           />
         ),

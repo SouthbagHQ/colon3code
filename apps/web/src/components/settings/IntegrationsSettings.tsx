@@ -700,7 +700,7 @@ const SEARCH_ENGINE_LABELS: Readonly<Record<BrowserSearchEngine, string>> = {
   brave: "Brave Search",
   kagi: "Kagi",
   ecosia: "Ecosia",
-  custom: "Custom",
+  custom: "custom",
 };
 
 function BrowserSearchEngineSetting() {
@@ -736,7 +736,7 @@ function BrowserSearchEngineSetting() {
               }
             }}
           >
-            <SelectTrigger size="sm" className="w-full sm:w-40" aria-label="Search engine">
+            <SelectTrigger size="sm" className="w-full sm:w-40" aria-label="search engine">
               <SelectValue>{SEARCH_ENGINE_LABELS[engine]}</SelectValue>
             </SelectTrigger>
             <SelectPopup align="end" alignItemWithTrigger={false}>
@@ -751,7 +751,7 @@ function BrowserSearchEngineSetting() {
       />
       {engine === "custom" ? (
         <SettingsRow
-          title="Custom search URL"
+          title="custom search URL"
           description="Use %s where the search terms go."
           status={
             isValidSearchUrlTemplate(customUrl)
@@ -763,7 +763,7 @@ function BrowserSearchEngineSetting() {
               nativeInput
               size="sm"
               className="w-full sm:w-64"
-              aria-label="Custom search URL"
+              aria-label="custom search URL"
               placeholder="https://example.com/search?q=%s"
               autoCapitalize="none"
               spellCheck={false}
@@ -800,7 +800,7 @@ export function PullRequestLinksOpenInAppSetting() {
           onCheckedChange={(checked) =>
             updateSettings({ pullRequestLinksOpenInApp: Boolean(checked) })
           }
-          aria-label="Open pull requests in :3 Code"
+          aria-label="open pull requests in :3 Code"
         />
       }
     />
@@ -885,7 +885,7 @@ function DeviceIntegrationControls({
     if (failed.length > 0) {
       toastManager.add({
         type: "error",
-        title: "Device settings not saved on all environments",
+        title: "device settings not saved on all environments 3:",
         description: `Could not update ${failed.map((environment) => environment.label).join(", ")}.`,
       });
     }
@@ -917,7 +917,7 @@ function DeviceIntegrationControls({
                   .finally(() => setPending(null));
               }}
             >
-              {pending === `update-${tool}` ? "Updating…" : "Update"}
+              {pending === `update-${tool}` ? "updating…" : "update"}
             </Button>
           ) : null}
           {state.supportsToolInspection ? (
@@ -1064,7 +1064,7 @@ function AgentBrowserAccessSetting() {
       control={
         <ScopedSwitch
           settingKeys={["enableAgentBrowserAccess"]}
-          aria-label="Agent browser access"
+          aria-label="agent browser access"
           checked={settings.enableAgentBrowserAccess}
           onCheckedChange={(enabled) => updateSettings({ enableAgentBrowserAccess: enabled })}
         />
@@ -1533,7 +1533,7 @@ function BrowserProfilesSetting({ disabled }: { readonly disabled: boolean }) {
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogClose render={<Button variant="outline" />}>Cancel</AlertDialogClose>
+            <AlertDialogClose render={<Button variant="outline" />}>cancel</AlertDialogClose>
             <Button
               variant="destructive"
               onClick={() => {
@@ -1542,7 +1542,7 @@ function BrowserProfilesSetting({ disabled }: { readonly disabled: boolean }) {
                 setProfilePendingClear(null);
               }}
             >
-              Clear data
+              clear data
             </Button>
           </AlertDialogFooter>
         </AlertDialogPopup>
@@ -1611,7 +1611,7 @@ export function BrowserSettingsPanel() {
           </SettingsUnavailableGroup>
         </AdvancedSettings>
       </SettingsSection>
-      <SettingsSection id="browser-recordings" title="Recordings">
+      <SettingsSection id="browser-recordings" title="recordings">
         <SettingsUnavailableGroup message={desktopOnlyMessage}>
           <BrowserRecordingFrameRateSetting disabled={desktopOnly} />
           <BrowserRecordingInputSettings disabled={desktopOnly} />

@@ -8,8 +8,8 @@ const REPEAT_FAILURE_MS = 5 * 60_000;
 const MAX_CAUSES = 3;
 const MAX_ERROR_CHARS = 6_000;
 const COPY_BLOCKED = "Copy was blocked. The text is selected so you can copy it manually.";
-const UPDATE_DOWNLOAD_FAILED = "The update download failed. Try Download update again.";
-const UPDATE_INSTALL_FAILED = "The update install failed. Try Restart to update again.";
+const UPDATE_DOWNLOAD_FAILED = "The update download failed. Try “download update” again.";
+const UPDATE_INSTALL_FAILED = "The update install failed. Try “restart to update” again.";
 
 /** The Windows launcher is a `.cmd` run from PowerShell, which needs `&` to run a quoted path. */
 function launcherCommand(launcherPath: string) {
@@ -190,7 +190,7 @@ function copyText(target: HTMLElement, onCopied: () => void, onBlocked: (hint: s
     selectContents(target);
     if (copySelection()) return onCopied();
     onBlocked(
-      /Mac|iPhone|iPad/.test(navigator.platform) ? "Press ⌘C to copy" : "Press Ctrl+C to copy",
+      /Mac|iPhone|iPad/.test(navigator.platform) ? "press ⌘C to copy" : "press Ctrl+C to copy",
     );
   };
   const clipboard = window.isSecureContext ? navigator.clipboard : undefined;
@@ -210,10 +210,10 @@ function mountUpdateButton(
     button.hidden = action === null;
     // aria-disabled keeps keyboard focus on the button while the download runs.
     button.setAttribute("aria-disabled", String(action?.kind === "downloading"));
-    if (action?.kind === "download") button.textContent = "Download update";
+    if (action?.kind === "download") button.textContent = "download update";
     if (action?.kind === "downloading")
-      button.textContent = `Downloading update (${action.percent}%)`;
-    if (action?.kind === "install") button.textContent = "Restart to update";
+      button.textContent = `downloading update (${action.percent}%)`;
+    if (action?.kind === "install") button.textContent = "restart to update";
     const failure = !action
       ? ""
       : state.errorContext === "download"
@@ -297,17 +297,17 @@ export function showBootError(error: unknown) {
   const copyCommand = element("button", {
     className: "boot-error-icon",
     type: "button",
-    title: "Copy command",
+    title: "copy command",
     innerHTML: COPY_ICON,
   });
-  copyCommand.setAttribute("aria-label", "Copy command");
+  copyCommand.setAttribute("aria-label", "copy command");
   copyCommand.addEventListener("click", () =>
     copyText(
       command,
       () => {
         copyCommand.innerHTML = CHECK_ICON;
-        copyCommand.title = "Copied";
-        copyCommand.setAttribute("aria-label", "Copied");
+        copyCommand.title = "copied";
+        copyCommand.setAttribute("aria-label", "copied");
         announce("Copied to clipboard.");
       },
       (hint) => {
@@ -327,12 +327,12 @@ export function showBootError(error: unknown) {
     console.warn("Could not describe the startup error.", reportError);
   }
   const details = element("pre", { id: "boot-error-details", tabIndex: 0, textContent: report });
-  const copyDetails = element("button", { type: "button", textContent: "Copy error details" });
+  const copyDetails = element("button", { type: "button", textContent: "copy error details" });
   copyDetails.addEventListener("click", () =>
     copyText(
       details,
       () => {
-        copyDetails.textContent = "Copied";
+        copyDetails.textContent = "copied";
         announce("Copied to clipboard.");
       },
       (hint) => {
@@ -353,14 +353,14 @@ export function showBootError(error: unknown) {
   const nightly = environment.channel === "nightly";
 
   const more = element("details", { open: isRepeatFailure(Date.now()) }, [
-    element("summary", { textContent: "More options if it keeps failing" }),
+    element("summary", { textContent: "more options if it keeps failing" }),
     ...(bridge
       ? [
           link(
             nightly ? `${DOWNLOAD_URL}?channel=nightly` : DOWNLOAD_URL,
             nightly
-              ? "Download and reinstall the latest nightly build"
-              : "Download and reinstall :3 Code",
+              ? "download and reinstall the latest nightly build"
+              : "download and reinstall :3 Code",
           ),
         ]
       : []),
@@ -378,7 +378,7 @@ export function showBootError(error: unknown) {
       }),
       element("div", { id: "boot-error-report" }, [
         copyDetails,
-        link(issue.href, "File a bug report on GitHub"),
+        link(issue.href, "file a bug report on GitHub"),
       ]),
     ]),
   ]);

@@ -118,8 +118,8 @@ function PendingLinkRequest(props: {
       <div className="flex min-w-0 flex-col gap-1">
         <p className="text-sm font-medium text-foreground">
           {picksMachine(item)
-            ? "Link a machine to this environment"
-            : `Link ${target} to this environment`}
+            ? "link a machine to this environment"
+            : `link ${target} to this environment`}
         </p>
         {item.reason.trim() ? <p className="text-sm text-muted-foreground">{item.reason}</p> : null}
         {item.label !== undefined && item.url !== undefined ? (
@@ -143,7 +143,7 @@ function PendingLinkRequest(props: {
             Decline
           </Button>
           <Button type="button" size="xs" disabled={declining} onClick={() => setOpen(true)}>
-            {picksMachine(item) ? "Choose machine…" : "Review link…"}
+            {picksMachine(item) ? "choose machine…" : "review link…"}
           </Button>
         </div>
       ) : (
@@ -330,7 +330,7 @@ function LinkRequestDialog(props: {
     >
       <WizardPopup>
         <WizardHeader
-          title={pickMachine ? "Link a machine" : `Link ${targetName}`}
+          title={pickMachine ? "link a machine" : `link ${targetName}`}
           description="Agents here can then launch, message and wait on threads there. Revoke it in that machine's Connections."
         >
           {steps.length > 1 && !useExisting ? (
@@ -401,12 +401,12 @@ function LinkRequestDialog(props: {
                     {canMint ? null : (
                       <label className="block space-y-1.5">
                         <span className="block text-xs font-medium text-foreground">
-                          Pairing code
+                          pairing code
                         </span>
                         <Input
                           value={pairingCode}
                           onChange={(event) => setPairingCode(event.target.value)}
-                          placeholder="Paste the code"
+                          placeholder="paste the code"
                           disabled={busy}
                           autoComplete="one-time-code"
                           nativeInput
@@ -447,11 +447,11 @@ function LinkRequestDialog(props: {
                 setError(null);
               }}
             >
-              Back
+              back
             </Button>
           ) : (
             <Button variant="outline" type="button" disabled={busy} onClick={close}>
-              Cancel
+              cancel
             </Button>
           )}
           <Button
@@ -459,7 +459,7 @@ function LinkRequestDialog(props: {
             type="submit"
             disabled={busy || (finishesHere ? !ready : !machineReady)}
           >
-            {busy ? "Linking…" : useExisting ? "Use this link" : finishesHere ? "Link" : "Continue"}
+            {busy ? "linking…" : useExisting ? "use this link" : finishesHere ? "link" : "continue"}
           </Button>
         </WizardFooter>
       </WizardPopup>
@@ -502,7 +502,7 @@ function MachinePicker(props: {
         ))}
         <label className="flex cursor-pointer items-center gap-2.5 rounded-lg border px-3 py-2 text-sm">
           <Radio value={ANOTHER_ADDRESS} />
-          <span className="min-w-0 flex-1 font-medium">Another address…</span>
+          <span className="min-w-0 flex-1 font-medium">another address…</span>
         </label>
       </RadioGroup>
     </div>

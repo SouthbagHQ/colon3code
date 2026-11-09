@@ -222,7 +222,7 @@ function ModelPickerProviderNotices({
                   onOpenProviderSetup?.(entry.instanceId);
                 }}
               >
-                {setupEntries.length > 1 ? `Set up ${entry.displayName}` : "Open provider setup"}
+                {setupEntries.length > 1 ? `set up ${entry.displayName}` : "open provider setup"}
               </InlineButton>
             </div>
           ))}
@@ -242,7 +242,7 @@ function ModelPickerProviderNotices({
               void navigate({ to: "/settings/providers" });
             }}
           >
-            Provider settings
+            provider settings
           </InlineButton>
         </p>
       ))}
@@ -830,7 +830,7 @@ export const ModelPickerContent = memo(function ModelPickerContent(props: {
     const name = flatModels.find(
       (item) => item.slug === selectedSlug && item.instanceId === model.instanceId,
     )?.name;
-    announce(`Model: ${name ?? selectedSlug}`, "model-picker");
+    announce(`model: ${name ?? selectedSlug}`, "model-picker");
   };
 
   return (
@@ -1023,7 +1023,7 @@ export const ModelPickerContent = memo(function ModelPickerContent(props: {
                       className="group w-full cursor-pointer"
                     >
                       <span className="text-sm leading-snug text-muted-foreground group-hover:text-foreground group-data-highlighted:text-foreground">
-                        {legacySection.isExpanded ? "Show less" : "Show more"}
+                        {legacySection.isExpanded ? "show less" : "show more"}
                       </span>
                     </ComboboxItem>
                   );
@@ -1069,8 +1069,8 @@ export const ModelPickerContent = memo(function ModelPickerContent(props: {
               updateRequiredNotices={updateRequiredNotices}
               emptyLabel={
                 selectedInstanceId === "favorites" && !isSearching
-                  ? "No favorites yet"
-                  : "No models found"
+                  ? "no favorites yet"
+                  : "no models found"
               }
               onRequestClose={onRequestClose}
               onOpenProviderSetup={onOpenProviderSetup}

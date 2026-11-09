@@ -179,7 +179,7 @@ export function AddEnvironmentDialog({
     handleOpenChange(false);
     toastManager.add({
       type: "success",
-      title: routeTarget ? "Route added" : "Environment connected",
+      title: routeTarget ? "route added :3" : "environment connected :3",
       description: routeTarget
         ? `${routeTarget.label} can now be reached over SSH ${target.alias}.`
         : `${target.alias} is ready over an SSH-managed tunnel.`,
@@ -219,7 +219,7 @@ export function AddEnvironmentDialog({
       toastManager.add(
         stackedThreadToast({
           type: "error",
-          title: "Could not add backend",
+          title: "couldn't add backend 3:",
           description: message,
         }),
       );
@@ -239,7 +239,7 @@ export function AddEnvironmentDialog({
         toastManager.add(
           stackedThreadToast({
             type: "error",
-            title: "Could not add backend",
+            title: "couldn't add backend 3:",
             description: message,
           }),
         );
@@ -253,12 +253,12 @@ export function AddEnvironmentDialog({
       routeTarget
         ? {
             type: "success",
-            title: "Route added",
+            title: "route added :3",
             description: `${routeTarget.label} now has another way to connect.`,
           }
         : {
             type: "success",
-            title: "Backend added",
+            title: "backend added :3",
             description: "The environment is saved and will reconnect on app startup.",
           },
     );
@@ -393,7 +393,7 @@ export function AddEnvironmentDialog({
     <div className="space-y-3">
       <div className="grid gap-3 sm:grid-cols-[minmax(0,1fr)_10rem]">
         <label className="block">
-          <span className="mb-1.5 block text-xs font-medium text-foreground">Host</span>
+          <span className="mb-1.5 block text-xs font-medium text-foreground">host</span>
           <Input
             value={savedBackendHost}
             onChange={(event) => handleSavedBackendHostChange(event.target.value)}
@@ -403,7 +403,7 @@ export function AddEnvironmentDialog({
           />
         </label>
         <label className="block">
-          <span className="mb-1.5 block text-xs font-medium text-foreground">Pairing code</span>
+          <span className="mb-1.5 block text-xs font-medium text-foreground">pairing code</span>
           <Input
             value={savedBackendPairingCode}
             onChange={(event) => setSavedBackendPairingCode(event.target.value)}
@@ -448,7 +448,7 @@ export function AddEnvironmentDialog({
     handleOpenChange(false);
     toastManager.add({
       type: "success",
-      title: "Route added",
+      title: "route added :3",
       description: `${routeTarget.label} falls back to T3 Connect when its other routes are unreachable.`,
     });
   };
@@ -478,7 +478,7 @@ export function AddEnvironmentDialog({
         onClick={() => void handleAddSavedBackend()}
       >
         <PlusIcon className="size-3.5" />
-        {isAddingSavedBackend ? "Adding…" : routeTarget ? "Add route" : "Add environment"}
+        {isAddingSavedBackend ? "adding…" : routeTarget ? "add route" : "add environment"}
       </Button>
     </div>
   );
@@ -514,14 +514,14 @@ export function AddEnvironmentDialog({
             <AutocompleteInput
               id="saved-backend-ssh-host"
               onKeyDown={handleSavedBackendSshHostKeyDown}
-              placeholder="Search hosts or type devbox"
+              placeholder="search hosts or type devbox"
               disabled={isAddingSavedBackend}
               spellCheck={false}
             />
             {hasSshHostSuggestionContent ? (
               <AutocompletePopup>
                 {isLoadingDiscoveredSshHosts ? (
-                  <div className="px-3 py-2 text-xs text-muted-foreground">Loading hosts…</div>
+                  <div className="px-3 py-2 text-xs text-muted-foreground">loading hosts…</div>
                 ) : filteredDiscoveredSshHosts.length > 0 ? (
                   <AutocompleteList className="max-h-72">
                     {filteredDiscoveredSshHosts.map((target, index) => {
@@ -564,7 +564,7 @@ export function AddEnvironmentDialog({
         </div>
         <div className="grid gap-3 sm:grid-cols-[minmax(0,1fr)_7rem]">
           <label className="block">
-            <span className="mb-1.5 block text-xs font-medium text-foreground">Username</span>
+            <span className="mb-1.5 block text-xs font-medium text-foreground">username</span>
             <Input
               value={savedBackendSshUsername}
               onChange={(event) => setSavedBackendSshUsername(event.target.value)}
@@ -575,7 +575,7 @@ export function AddEnvironmentDialog({
             />
           </label>
           <label className="block">
-            <span className="mb-1.5 block text-xs font-medium text-foreground">Port</span>
+            <span className="mb-1.5 block text-xs font-medium text-foreground">port</span>
             <Input
               value={savedBackendSshPort}
               onChange={(event) => setSavedBackendSshPort(event.target.value)}
@@ -599,7 +599,7 @@ export function AddEnvironmentDialog({
           onClick={() => void handleAddSavedBackend()}
         >
           <PlusIcon className="size-3.5" />
-          {isAddingSavedBackend ? "Adding…" : routeTarget ? "Add route" : "Add environment"}
+          {isAddingSavedBackend ? "adding…" : routeTarget ? "add route" : "add environment"}
         </Button>
       </div>
     </div>
@@ -612,20 +612,20 @@ export function AddEnvironmentDialog({
           render={
             <DialogTrigger
               render={
-                <Button size="xs" variant="ghost-muted" aria-label="Add environment">
+                <Button size="xs" variant="ghost-muted" aria-label="add environment">
                   <PlusIcon className="size-3" />
-                  <span>Add environment</span>
+                  <span>add environment</span>
                 </Button>
               }
             />
           }
         />
-        <TooltipPopup side="top">Add environment</TooltipPopup>
+        <TooltipPopup side="top">add environment</TooltipPopup>
       </Tooltip>
       <DialogPopup className="max-h-[80dvh] sm:max-w-3xl">
         <DialogHeader>
           <DialogTitle>
-            {routeTarget ? `Add a route to ${routeTarget.label}` : "Add Environment"}
+            {routeTarget ? `add a route to ${routeTarget.label}` : "add environment"}
           </DialogTitle>
           <DialogDescription>
             {routeTarget
@@ -638,7 +638,7 @@ export function AddEnvironmentDialog({
             <div className="grid gap-3 sm:grid-cols-2">
               {renderConnectionModeCard({
                 mode: "remote",
-                title: "Remote link",
+                title: "remote link",
                 description: "Enter a backend host and pairing code.",
                 icon: <ChevronsLeftRightEllipsisIcon aria-hidden className="size-4" />,
               })}

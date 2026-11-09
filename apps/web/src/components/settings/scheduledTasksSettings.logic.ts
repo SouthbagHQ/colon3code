@@ -113,11 +113,11 @@ export function scheduleDraftErrors(draft: DraftState) {
   if (draft.scheduleMode === "once") {
     const runAt = new Date(draft.runAt);
     if (Number.isNaN(runAt.getTime()))
-      return [{ title: "Invalid run time", description: "Pick a date and time." }];
+      return [{ title: "invalid run time", description: "Pick a date and time." }];
     // A time skipped by a daylight saving change parses to a different clock time.
     if (toDateTimeLocalValue(runAt) !== draft.runAt)
       return [
-        { title: "Invalid run time", description: "That time does not exist in your time zone." },
+        { title: "invalid run time", description: "That time does not exist in your time zone." },
       ];
     return [];
   }
@@ -125,7 +125,7 @@ export function scheduleDraftErrors(draft: DraftState) {
   if (parseMaxDeliveryAge(draft.maxDeliveryAgeMinutes) === undefined)
     return [
       {
-        title: "Invalid age limit",
+        title: "invalid age limit",
         description: `Enter whole minutes from 1 to ${MAX_WEBHOOK_DELIVERY_AGE_MINUTES}, or leave it blank.`,
       },
     ];
@@ -136,14 +136,14 @@ export function scheduleDraftErrors(draft: DraftState) {
   ] as const) {
     if (value.trim() && !isWebhookDedupeTemplate(value.trim()))
       errors.push({
-        title: "Invalid webhook settings",
+        title: "invalid webhook settings",
         description: `${label} must contain a valid request placeholder.`,
       });
   }
   const window = draft.coalesceWindowSeconds.trim();
   if (window && (!Number.isInteger(Number(window)) || Number(window) < 10 || Number(window) > 3600))
     errors.push({
-      title: "Invalid webhook settings",
+      title: "invalid webhook settings",
       description: "Coalesce window must be whole seconds from 10 to 3600.",
     });
   return errors;
@@ -153,16 +153,16 @@ export function webhookDeliveryLabel(delivery: {
   readonly outcome: string;
   readonly pendingWindow?: boolean | undefined;
 }) {
-  if (delivery.outcome === "accepted") return delivery.pendingWindow ? "Opened window" : "Ran";
+  if (delivery.outcome === "accepted") return delivery.pendingWindow ? "opened window" : "ran";
   const labels: Record<string, string> = {
-    dispatch_failed: "Run failed",
-    duplicate: "Duplicate",
-    coalesced: "Coalesced",
-    filtered: "Filtered",
-    rejected_signature: "Bad signature",
-    disabled: "Task paused",
-    rate_limited: "Rate limited",
-    expired: "Too old",
+    dispatch_failed: "run failed",
+    duplicate: "duplicate",
+    coalesced: "coalesced",
+    filtered: "filtered",
+    rejected_signature: "bad signature",
+    disabled: "task paused",
+    rate_limited: "rate limited",
+    expired: "too old",
   };
   return labels[delivery.outcome] ?? delivery.outcome.replaceAll("_", " ");
 }

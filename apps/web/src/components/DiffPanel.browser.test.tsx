@@ -214,12 +214,14 @@ it.each([
       </RegistryContext.Provider>,
     );
     await expect.element(screen.getByText(errorMessage, { exact: true })).toBeVisible();
-    const selector = screen.getByRole("combobox", { name: /Change comparison target/ });
+    const selector = screen.getByRole("combobox", { name: /change comparison target/ });
     await vi.waitFor(() => expect(selector.query()).not.toBeNull());
     await userEvent.click(selector);
     await expect.element(page.getByRole("option", { name: "main", exact: true })).toBeVisible();
     await userEvent.click(page.getByRole("option", { name: recovery, exact: true }));
-    await expect.element(screen.getByText("No net changes in this selection.")).toBeVisible();
+    await expect
+      .element(screen.getByText("no net changes in this selection, all quiet ^w^"))
+      .toBeVisible();
     await expect.element(screen.getByText(errorMessage, { exact: true })).not.toBeInTheDocument();
     const key = scopedThreadKey(context.threadRef);
     await vi.waitFor(() => {
@@ -249,7 +251,7 @@ it.each([false, true])(
         </div>
       </RegistryContext.Provider>,
     );
-    const toggle = screen.getByRole("button", { name: `Expand ${path}`, exact: true });
+    const toggle = screen.getByRole("button", { name: `expand ${path}`, exact: true });
     await expect.element(toggle).toHaveAttribute("aria-expanded", "false");
     await userEvent.click(toggle);
     await act(() =>
@@ -261,7 +263,7 @@ it.each([false, true])(
         }),
       ),
     );
-    const loadedToggle = screen.getByRole("button", { name: `Collapse ${path}`, exact: true });
+    const loadedToggle = screen.getByRole("button", { name: `collapse ${path}`, exact: true });
     await expect.element(loadedToggle).toHaveAttribute("aria-expanded", "true");
     await expect.element(screen.getByText("after", { exact: true })).toBeVisible();
     await userEvent.click(loadedToggle);

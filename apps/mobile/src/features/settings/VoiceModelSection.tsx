@@ -83,12 +83,12 @@ export function useVoiceModels(environmentId: EnvironmentId, label: string) {
     download: (model: EnvironmentSpeechModel) => {
       if (!ready) return;
       Dialog.confirm({
-        title: `Download ${model.name}?`,
+        title: `download ${model.name}?`,
         message: `${label} will download ${formatBytes(model.size)} and use it as its transcription model.`,
         confirmText: "Download",
         onConfirm: () =>
           void run(
-            "Could not download the model",
+            "could not download the model 3:",
             async () => {
               await runSpeech(downloadEnvironmentSpeechModel(connection, model.id));
               if (model.id !== status.modelId)
@@ -100,13 +100,13 @@ export function useVoiceModels(environmentId: EnvironmentId, label: string) {
     },
     select: (model: EnvironmentSpeechModel) => {
       if (!ready || model.active) return;
-      void run("Could not select the model", () =>
+      void run("could not select the model 3:", () =>
         runSpeech(selectEnvironmentSpeechModel(connection, model.id)),
       );
     },
     cancel: (model: EnvironmentSpeechModel) => {
       if (!ready) return;
-      void run("Could not cancel the download", () =>
+      void run("could not cancel the download 3:", () =>
         runSpeech(cancelEnvironmentSpeechModelDownload(connection, model.id)),
       );
     },
@@ -242,7 +242,7 @@ export function VoiceModelRow(props: {
           label={model.name}
           description={
             model.state === "verifying"
-              ? "Verifying download…"
+              ? "verifying download…"
               : `${Math.round((progress ?? 0) * 100)}% downloaded · Tap to cancel`
           }
           disabled={!voice.canManage || voice.busy}
@@ -277,7 +277,7 @@ export function VoiceModelSection(props: {
   const voice = useVoiceModels(props.environmentId, props.label);
   const { status } = voice;
   if (!voice.connection || !status) return null;
-  const title = `Transcription model on ${props.label}`;
+  const title = `transcription model on ${props.label}`;
   if (!status.supported) {
     return (
       <SettingsSection title={title} footer={status.reason}>
@@ -300,7 +300,7 @@ export function VoiceModelSection(props: {
       }
     >
       <ListRow
-        label={active?.model ?? "No model selected"}
+        label={active?.model ?? "no model selected"}
         description={
           pending
             ? pending.state === "verifying"

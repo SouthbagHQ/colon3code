@@ -225,7 +225,7 @@ function AddProjectToMachineDialog({ request }: { request: AddProjectToMachineRe
           }}
         >
           <DialogHeader>
-            <DialogTitle>Add to another machine</DialogTitle>
+            <DialogTitle>add to another machine</DialogTitle>
             <DialogDescription>
               Clone {project?.repositoryIdentity?.displayName ?? project?.title} and bring the local
               files git does not track.
@@ -239,7 +239,7 @@ function AddProjectToMachineDialog({ request }: { request: AddProjectToMachineRe
                     kind={resolveEnvironmentMachineKind(source?.serverConfig ?? null)}
                     className="size-3.5 shrink-0"
                   />
-                  <span className="truncate">{source?.label ?? "This machine"}</span>
+                  <span className="truncate">{source?.label ?? "this machine"}</span>
                 </span>
                 <span className="flex min-w-0 font-mono text-muted-foreground text-xs">
                   <MiddleTruncate value={project?.workspaceRoot ?? ""} />
@@ -266,7 +266,7 @@ function AddProjectToMachineDialog({ request }: { request: AddProjectToMachineRe
                     }}
                     items={targets.map((t) => ({ value: t.environmentId, label: t.label }))}
                   >
-                    <SelectTrigger size="sm" aria-label="Machine to add the project to">
+                    <SelectTrigger size="sm" aria-label="machine to add the project to">
                       {target ? (
                         <EnvironmentMachineIcon kind={target.machine} className="size-3.5" />
                       ) : null}
@@ -288,7 +288,7 @@ function AddProjectToMachineDialog({ request }: { request: AddProjectToMachineRe
                     {target ? (
                       <EnvironmentMachineIcon kind={target.machine} className="size-3.5 shrink-0" />
                     ) : null}
-                    <span className="truncate">{target?.label ?? "No machine available"}</span>
+                    <span className="truncate">{target?.label ?? "no machine available"}</span>
                   </span>
                 )}
                 <span className="flex min-w-0 font-mono text-muted-foreground text-xs">
@@ -298,10 +298,10 @@ function AddProjectToMachineDialog({ request }: { request: AddProjectToMachineRe
             </div>
 
             <div className="flex flex-col gap-1.5">
-              <Label>Clone over</Label>
+              <Label>clone over</Label>
               {sshUrl && httpsUrl ? (
                 <ToggleGroup
-                  aria-label="Clone protocol"
+                  aria-label="clone protocol"
                   value={protocol ? [protocol] : []}
                   onValueChange={(next) => {
                     const value = next[0];
@@ -331,7 +331,7 @@ function AddProjectToMachineDialog({ request }: { request: AddProjectToMachineRe
             {canListFiles ? (
               <div className="flex flex-col gap-1.5">
                 <div className="flex items-center gap-2">
-                  <Label className="flex-1">Copy ignored files</Label>
+                  <Label className="flex-1">copy ignored files</Label>
                   {copyable.length > 0 ? (
                     <>
                       <span className="text-muted-foreground text-xs">
@@ -360,8 +360,8 @@ function AddProjectToMachineDialog({ request }: { request: AddProjectToMachineRe
                 ) : files.length === 0 ? (
                   <p className="text-muted-foreground text-xs">
                     {ignoredFiles.isSuccess
-                      ? "No ignored files to copy."
-                      : "Finding ignored files…"}
+                      ? "no ignored files to copy."
+                      : "finding ignored files…"}
                   </p>
                 ) : (
                   <div className="max-h-52 overflow-y-auto rounded-md border">
@@ -391,10 +391,10 @@ function AddProjectToMachineDialog({ request }: { request: AddProjectToMachineRe
           </DialogPanel>
           <DialogFooter>
             <Button type="button" variant="outline" onClick={close}>
-              Cancel
+              cancel
             </Button>
             <Button type="submit" disabled={unavailable || submitting}>
-              {submitting ? "Starting…" : `Clone to ${target?.label ?? "machine"}`}
+              {submitting ? "starting…" : `clone to ${target?.label ?? "machine"}`}
             </Button>
           </DialogFooter>
         </form>
@@ -441,7 +441,7 @@ function IgnoredFileRow({
       <Checkbox checked={checked} disabled={tooLarge} onCheckedChange={onCheckedChange} />
       <span className="min-w-0 flex-1 truncate font-mono text-xs">{file.path}</span>
       <span className="shrink-0 text-muted-foreground text-xs tabular-nums">
-        {tooLarge ? "Over 1 MB" : formatBytes(file.byteLength)}
+        {tooLarge ? "over 1 MB" : formatBytes(file.byteLength)}
       </span>
     </label>
   );

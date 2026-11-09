@@ -9,11 +9,11 @@ import { Tooltip, TooltipPopup, TooltipTrigger } from "../ui/tooltip";
 import { PullRequestDiffStat } from "./pullRequestPresentation";
 
 const KIND_LABELS = {
-  code: "Code",
-  tests: "Tests",
-  mocks: "Mocks",
-  generated: "Generated",
-  docs: "Docs",
+  code: "code",
+  tests: "tests",
+  mocks: "mocks",
+  generated: "generated",
+  docs: "docs",
 } satisfies Record<keyof NonNullable<PullRequestChangeBreakdown>, string>;
 
 type DiffTotals = { additions: number; deletions: number };
@@ -64,7 +64,7 @@ export function PullRequestChangeBreakdownStat({
           <ChangeBreakdownGrid breakdown={breakdown} total={{ additions, deletions }} />
         </TooltipPopup>
       ) : query.isPending ? (
-        <TooltipPopup side="bottom">Loading breakdown</TooltipPopup>
+        <TooltipPopup side="bottom">loading breakdown…</TooltipPopup>
       ) : null}
     </Tooltip>
   );
@@ -117,7 +117,7 @@ function ChangeBreakdownGrid({
       {total ? (
         <>
           <div className="col-span-3 border-t border-border" />
-          <BreakdownRow label="Total" additions={total.additions} deletions={total.deletions} />
+          <BreakdownRow label="total" additions={total.additions} deletions={total.deletions} />
         </>
       ) : null}
     </div>

@@ -64,7 +64,7 @@ export function PullRequestToolbar(props: {
       search={{
         value: tab.query,
         onChangeText: (query) => dispatch({ type: "query", tab: "pullRequests", query }),
-        placeholder: "Search pull requests",
+        placeholder: "search pull requests",
         active: searching,
         onOpen: openSearch,
         onClose: closeSearch,
@@ -73,7 +73,7 @@ export function PullRequestToolbar(props: {
         filters
           ? [
               {
-                title: "Filter pull requests",
+                title: "filter pull requests",
                 icon: filters.customized
                   ? "line.3.horizontal.decrease.circle.fill"
                   : "line.3.horizontal.decrease.circle",

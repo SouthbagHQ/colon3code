@@ -1,11 +1,44 @@
 import type { ProviderDriverKind, ProviderReplayTranscript } from "@t3tools/contracts";
 
-import { buildRuntimeInstructions } from "@t3tools/provider-core/server/runtimeInstructions";
+import {
+  buildRuntimeInstructions,
+  VOICE_INSTRUCTIONS,
+} from "@t3tools/provider-core/server/runtimeInstructions";
+
+const RUNTIME_INFO_END = "</runtime_info>";
+
+/**
+ * Upstream recordings predate the fork's voice block, so a prompt that already carries
+ * `<runtime_info>` gets the voice inserted right after it, where the app sends it.
+ */
+function withVoiceInstructions(value: unknown): unknown {
+  if (typeof value === "string") {
+    const end = value.indexOf(RUNTIME_INFO_END);
+    if (end === -1 || value.includes("<voice>")) return value;
+    const at = end + RUNTIME_INFO_END.length;
+    return `${value.slice(0, at)}\n\n${VOICE_INSTRUCTIONS}${value.slice(at)}`;
+  }
+  if (Array.isArray(value)) return value.map(withVoiceInstructions);
+  if (typeof value === "object" && value !== null) {
+    return Object.fromEntries(
+      Object.entries(value).map(([key, inner]) => [key, withVoiceInstructions(inner)]),
+    );
+  }
+  return value;
+}
 
 export function materializeReplayTranscriptRuntimeInstructions(
-  transcript: ProviderReplayTranscript,
+  recorded: ProviderReplayTranscript,
   runtime: { readonly driver: ProviderDriverKind; readonly model: string },
 ): ProviderReplayTranscript {
+  const transcript: ProviderReplayTranscript = {
+    ...recorded,
+    entries: recorded.entries.map((entry) =>
+      entry.type === "expect_outbound"
+        ? ({ ...entry, frame: withVoiceInstructions(entry.frame) } as typeof entry)
+        : entry,
+    ),
+  };
   const harness =
     runtime.driver === "cursor"
       ? "Cursor"

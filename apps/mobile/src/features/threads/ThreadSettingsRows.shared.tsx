@@ -81,7 +81,7 @@ export function ModelRowContent(
               </View>
             ) : null}
             {props.option.isHidden ? (
-              <Text className="text-xs text-foreground-muted">Hidden</Text>
+              <Text className="text-xs text-foreground-muted">hidden</Text>
             ) : null}
             {props.option.isUnavailable ? (
               <Text className="text-xs text-foreground">Unavailable</Text>

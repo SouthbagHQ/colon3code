@@ -291,7 +291,7 @@ function UsageScreen(props: {
                 ) : null}
                 {isPending ? (
                   <Text className="py-16 text-center text-base text-foreground-muted">
-                    Scanning provider transcripts…
+                    scanning provider transcripts…
                   </Text>
                 ) : selectedEnvironments.length === 0 ? (
                   <Text className="py-16 text-center text-base text-foreground-muted">
@@ -641,30 +641,30 @@ function CostSection(props: { readonly merged: MergedUsage; readonly wide: boole
   const { categoryCost, speedCost } = props.merged;
   const colors = useUsageMixColors();
   const byType = [
-    { label: "Input", value: categoryCost.input, color: colors.input },
-    { label: "Cache read", value: categoryCost.cacheRead, color: colors.cacheRead },
-    { label: "Cache write", value: categoryCost.cacheWrite, color: colors.cacheWrite },
-    { label: "Output", value: categoryCost.output, color: colors.output },
+    { label: "input", value: categoryCost.input, color: colors.input },
+    { label: "cache read", value: categoryCost.cacheRead, color: colors.cacheRead },
+    { label: "cache write", value: categoryCost.cacheWrite, color: colors.cacheWrite },
+    { label: "output", value: categoryCost.output, color: colors.output },
     // Reported cost with no rates to split it, or from older servers. Below a
     // cent it is rounding, not usage.
     {
-      label: "Other",
+      label: "other",
       value: categoryCost.unsplit >= 0.005 ? categoryCost.unsplit : 0,
       color: colors.other,
     },
   ];
   const bySpeed = [
-    { label: "Standard", value: speedCost.standard, color: colors.standard },
-    { label: "Fast", value: speedCost.fast, color: colors.fast },
-    { label: "Ultrafast", value: speedCost.ultrafast, color: colors.ultrafast },
+    { label: "standard", value: speedCost.standard, color: colors.standard },
+    { label: "fast", value: speedCost.fast, color: colors.fast },
+    { label: "ultrafast", value: speedCost.ultrafast, color: colors.ultrafast },
   ];
   if (props.merged.costUsd <= 0) return null;
 
   return (
-    <SettingsSection title="Cost">
+    <SettingsSection title="cost">
       <View className={props.wide ? "flex-row" : undefined}>
         <View className={props.wide ? "min-w-0 flex-1" : undefined}>
-          <ShareBar label="By type" segments={byType} />
+          <ShareBar label="by type" segments={byType} />
         </View>
         {speedCost.fast + speedCost.ultrafast > 0 ? (
           <View
@@ -675,7 +675,7 @@ function CostSection(props: { readonly merged: MergedUsage; readonly wide: boole
             }
           >
             <ShareBar
-              label="By speed"
+              label="by speed"
               segments={bySpeed}
               aside={`${formatUsd(speedCost.premium)} premium`}
             />

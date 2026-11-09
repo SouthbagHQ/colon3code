@@ -49,17 +49,17 @@ export function UpdateTrackSwitchDialog({
     <AlertDialog open onOpenChange={(open) => !open && onClose()}>
       <AlertDialogPopup>
         <AlertDialogHeader>
-          <AlertDialogTitle>Switch to {label}</AlertDialogTitle>
+          <AlertDialogTitle>switch to {label}</AlertDialogTitle>
           <AlertDialogDescription>
             {AsyncResult.isFailure(release)
               ? npmReleaseFailureMessage(release.cause)
               : AsyncResult.isSuccess(release)
                 ? `Could not find the latest ${label} release in this environment's npm registry.`
-                : "Checking releases…"}
+                : "checking releases…"}
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogClose render={<Button variant="outline" />}>Cancel</AlertDialogClose>
+          <AlertDialogClose render={<Button variant="outline" />}>cancel</AlertDialogClose>
         </AlertDialogFooter>
       </AlertDialogPopup>
     </AlertDialog>
@@ -100,7 +100,11 @@ function SwitchPlan({
     setChecking(true);
     const fail = (description: string) =>
       toastManager.add(
-        stackedThreadToast({ type: "error", title: `Could not switch to ${label}`, description }),
+        stackedThreadToast({
+          type: "error",
+          title: `aw, couldn't switch to ${label} 3:`,
+          description,
+        }),
       );
     const prepared = await prepareLocalTrackSwitch(bridge, {
       channel: release.channel,
@@ -132,7 +136,7 @@ function SwitchPlan({
                   !acceptsTrackSwitchRelease(downloadedVersion, release.channel, release.version)
                 ) {
                   reportError(
-                    "Could not install update",
+                    "aw, couldn't install the update 3:",
                     `This app downloaded ${downloadedVersion ?? "nothing"}, not ${release.version} or newer.`,
                   );
                   return false;
@@ -152,7 +156,7 @@ function SwitchPlan({
     <UpdateEverythingDialog
       open
       onOpenChange={(open) => !open && !checking && onClose()}
-      title={`Switch to ${label}?`}
+      title={`switch to ${label}?`}
       version={release.version}
       providerCount={0}
       rows={everything.rows}
@@ -168,7 +172,7 @@ function SwitchPlan({
           : []),
       ]}
       restarts={everything.restarts}
-      confirmLabel={checking ? "Checking…" : `Switch to ${label}`}
+      confirmLabel={checking ? "checking…" : `switch to ${label}`}
       busy={checking}
       disabledReason={
         !switchesLocal || localBlocked === null ? null : `This app cannot switch: ${localBlocked}.`

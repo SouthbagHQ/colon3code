@@ -295,10 +295,10 @@ function NativeReviewDiffView(props: NativeReviewDiffViewProps) {
         ],
       },
       createElement(EmptyState, {
-        title: "Could not display diff",
+        title: "could not display diff",
         detail: "Try loading the diff view again.",
         variant: "plain",
-        actionLabel: "Retry diff",
+        actionLabel: "retry diff",
         onAction: () => {
           props.onDebug?.({
             nativeEvent: { message: "surface-retry" },

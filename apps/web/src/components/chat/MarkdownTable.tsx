@@ -20,7 +20,7 @@ export function MarkdownTable({ children, ...props }: ComponentProps<"table">) {
     onError: (cause, format) =>
       reportMarkdownActionFailure({ operation: "copy-table", format }, cause),
   });
-  const copyLabel = copied ? "Copied" : "Copy table";
+  const copyLabel = copied ? "copied" : "copy table";
 
   const handleCopy = (format: "markdown" | "csv") => {
     const table = containerRef.current?.querySelector("table");
@@ -61,8 +61,8 @@ export function MarkdownTable({ children, ...props }: ComponentProps<"table">) {
             <TooltipPopup side="top">{copyLabel}</TooltipPopup>
           </Tooltip>
           <MenuPopup align="end">
-            <MenuItem onClick={() => handleCopy("markdown")}>Copy as Markdown</MenuItem>
-            <MenuItem onClick={() => handleCopy("csv")}>Copy as CSV</MenuItem>
+            <MenuItem onClick={() => handleCopy("markdown")}>copy as Markdown</MenuItem>
+            <MenuItem onClick={() => handleCopy("csv")}>copy as CSV</MenuItem>
           </MenuPopup>
         </Menu>
       </div>

@@ -21,7 +21,7 @@ import { firstManagedDenial, usePrimaryManagedPolicy } from "~/state/managedPoli
 export function LabsSettingsPanel() {
   return (
     <SettingsPageContainer>
-      <SettingsSection id="beta" title="Beta">
+      <SettingsSection id="beta" title="beta">
         <BoringSidebarRow />
         <BoringSidebarMultilineRow />
         <ToolCallVisibilityRow />
@@ -49,7 +49,7 @@ function BoringSidebarRow() {
           onCheckedChange={(checked) =>
             updateSettings({ boringSidebarEnabled: Boolean(checked), legacySidebarEnabled: false })
           }
-          aria-label="Boring sidebar (group by project)"
+          aria-label="boring sidebar (group by project)"
         />
       }
     />
@@ -69,7 +69,7 @@ function BoringSidebarMultilineRow() {
           onCheckedChange={(checked) =>
             updateSettings({ boringSidebarMultilineRows: Boolean(checked) })
           }
-          aria-label="Two-line folder rows"
+          aria-label="two-line folder rows"
         />
       }
     />
@@ -77,10 +77,10 @@ function BoringSidebarMultilineRow() {
 }
 
 const TOOL_CALL_VISIBILITY_LABELS: Record<ToolCallVisibility, string> = {
-  showAll: "Show all",
-  hideSuccessful: "Hide successful",
-  hideAll: "Hide all",
-  zen: "Zen",
+  showAll: "show all",
+  hideSuccessful: "hide successful",
+  hideAll: "hide all",
+  zen: "zen",
 };
 
 const isToolCallVisibility = Schema.is(ToolCallVisibility);
@@ -100,14 +100,14 @@ function ToolCallVisibilityRow() {
               if (isToolCallVisibility(value)) updateSettings({ toolCallVisibility: value });
             }}
           >
-            <SelectTrigger size="sm" className="w-full min-w-0" aria-label="Tool calls in chat">
+            <SelectTrigger size="sm" className="w-full min-w-0" aria-label="tool calls in chat">
               <SelectValue>{TOOL_CALL_VISIBILITY_LABELS[settings.toolCallVisibility]}</SelectValue>
             </SelectTrigger>
             <SelectPopup align="end" alignItemWithTrigger={false}>
-              <SelectItem value="showAll">Show all</SelectItem>
-              <SelectItem value="hideSuccessful">Hide successful</SelectItem>
-              <SelectItem value="hideAll">Hide all</SelectItem>
-              <SelectItem value="zen">Zen</SelectItem>
+              <SelectItem value="showAll">show all</SelectItem>
+              <SelectItem value="hideSuccessful">hide successful</SelectItem>
+              <SelectItem value="hideAll">hide all</SelectItem>
+              <SelectItem value="zen">zen</SelectItem>
             </SelectPopup>
           </Select>
         </div>
@@ -128,7 +128,7 @@ function GuestLinksRowWithSignIn() {
       description="Share a thread with a guest who watches it live in a browser and sends messages you approve. Sign in to T3 Connect to use guest links."
       control={
         <Button size="sm" variant="outline" onClick={openAuthPrompt}>
-          Sign in
+          sign in
         </Button>
       }
     />
@@ -169,7 +169,7 @@ function GuestLinksRow() {
           settingKeys={["guestSharingEnabled"]}
           checked={settings.guestSharingEnabled}
           onCheckedChange={(checked) => updateSettings({ guestSharingEnabled: Boolean(checked) })}
-          aria-label="Guest links"
+          aria-label="guest links"
         />
       }
     />
@@ -189,7 +189,7 @@ function LinkedEnvironmentsRow() {
           Let agents here work on your other machines, and theirs here. Turn it on for each machine,
           then link them in{" "}
           <Link to="/settings/connections" className="underline underline-offset-2">
-            Connections
+            environments
           </Link>
           . While off, nothing new starts over a link; running tasks finish.
         </>
@@ -201,7 +201,7 @@ function LinkedEnvironmentsRow() {
           onCheckedChange={(checked) =>
             updateSettings({ linkedEnvironmentsEnabled: Boolean(checked) })
           }
-          aria-label="Linked environments"
+          aria-label="linked environments"
         />
       }
     />
@@ -229,7 +229,7 @@ function SimlockHostsRow() {
           </a>{" "}
           pool, added in{" "}
           <Link to="/settings/devices" className="underline underline-offset-2">
-            Devices
+            devices
           </Link>
           . An alpha that may change or break. :3 Code never installs Simlock.
         </>

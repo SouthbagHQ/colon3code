@@ -144,9 +144,9 @@ export function CustomSnoozeSheet(props: {
             </AppText>
           )}
           <View className="flex-row justify-end gap-3">
-            <Button label="Cancel" tone="text" onPress={props.onClose} />
+            <Button label="cancel" tone="text" onPress={props.onClose} />
             <Button
-              label="Snooze"
+              label="snooze"
               tone="secondary"
               onPress={() => {
                 const input: CustomSnoozeInput =

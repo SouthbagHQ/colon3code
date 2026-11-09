@@ -83,7 +83,7 @@ it("keeps an unsaved citation comment when a question takes the composer", async
       insertedSpaces: { before: false, after: true },
     }),
   );
-  const comment = page.getByLabelText("Comment on selected text");
+  const comment = page.getByLabelText("comment on selected text");
   await expect.element(comment).toBeVisible();
   await comment.click();
   await userEvent.keyboard("check this");
@@ -95,5 +95,5 @@ it("keeps an unsaved citation comment when a question takes the composer", async
   expect(drafts()?.prompt).toBe(
     `See ${serializeAssistantCitation(withAssistantCitationComment(citation, "check this"))} `,
   );
-  await expect.element(page.getByLabelText("Edit citation comment")).toBeInTheDocument();
+  await expect.element(page.getByLabelText("edit citation comment")).toBeInTheDocument();
 });

@@ -68,12 +68,12 @@ export function LinkedEnvironmentsSettings({
       headerAction={canLink ? <LinkEnvironmentAction environmentId={environmentId} /> : null}
     >
       {links.error ? (
-        <SettingsRow title="Could not load linked environments" description={links.error} />
+        <SettingsRow title="couldn't load linked environments 3:" description={links.error} />
       ) : !links.data ? (
-        <SettingsRow title="Loading linked environments…" role="status" />
+        <SettingsRow title="loading linked environments…" role="status" />
       ) : links.data.links.length === 0 ? (
         <SettingsRow
-          title="No linked environments"
+          title="no linked environments :3"
           description="Link another machine running :3 Code, such as a VPS, so agents here can launch and drive threads there."
         />
       ) : (
@@ -103,7 +103,7 @@ function LinkedEnvironmentRow({
   const [busy, setBusy] = useState(false);
   const forget = async () => {
     const confirmed = await (requestConfirmDialog(
-      `Forget ${link.label}? Agents here stop working there. Revoke ":3 Code · …" in ${link.label}'s Connections to end the session there too.`,
+      `forget ${link.label}? Agents here stop working there. Revoke ":3 Code · …" in ${link.label}'s environments settings to end the session there too.`,
       { variant: "destructive" },
     ) ?? Promise.resolve(false));
     if (!confirmed) return;
@@ -111,7 +111,7 @@ function LinkedEnvironmentRow({
     const result = await unlink({ environmentId, input: { environmentId: link.environmentId } });
     setBusy(false);
     if (result._tag === "Failure" && !isAtomCommandInterrupted(result)) {
-      failureToast("Could not forget the link", String(squashAtomCommandFailure(result)));
+      failureToast("couldn't forget the link 3:", String(squashAtomCommandFailure(result)));
     }
   };
   const status =
@@ -123,7 +123,7 @@ function LinkedEnvironmentRow({
           ? health.detail
           : health.expiresInDays !== null
             ? `Expires in ${health.expiresInDays} ${health.expiresInDays === 1 ? "day" : "days"}. Link it again to renew.`
-            : "Reachable";
+            : "reachable";
   return (
     <div className={ITEM_ROW_CLASSNAME}>
       <div className={ITEM_ROW_INNER_CLASSNAME}>
@@ -157,7 +157,7 @@ function LinkedEnvironmentRow({
               disabled={busy}
               onClick={() => void forget()}
             >
-              {busy ? "Forgetting…" : "Forget"}
+              {busy ? "forgetting…" : "forget"}
             </Button>
           </div>
         ) : null}
@@ -211,7 +211,7 @@ function LinkEnvironmentAction({ environmentId }: { readonly environmentId: Envi
     const minted = await mintPairingCodeOn(targetId, access);
     if (Result.isSuccess(minted)) return minted.success;
     setMintFailed((failed) => new Set(failed).add(targetId));
-    failureToast("Could not link the environment", linkRequestFailureMessage(minted.failure));
+    failureToast("couldn't link the environment 3:", linkRequestFailureMessage(minted.failure));
     return null;
   };
   const submit = async () => {
@@ -240,10 +240,10 @@ function LinkEnvironmentAction({ environmentId }: { readonly environmentId: Envi
     setBusy(false);
     if (result === null) return;
     if (result._tag === "Success") {
-      toastManager.add({ type: "success", title: `Linked ${result.value.label}` });
+      toastManager.add({ type: "success", title: `linked ${result.value.label} :3` });
       handleOpenChange(false);
     } else if (!isAtomCommandInterrupted(result)) {
-      failureToast("Could not link the environment", String(squashAtomCommandFailure(result)));
+      failureToast("couldn't link the environment 3:", String(squashAtomCommandFailure(result)));
     }
   };
   return (
@@ -258,13 +258,13 @@ function LinkEnvironmentAction({ environmentId }: { readonly environmentId: Envi
         render={
           <Button size="xs" variant="default">
             <PlusIcon className="size-3" />
-            Link
+            link
           </Button>
         }
       />
       <DialogPopup className="max-w-md">
         <DialogHeader>
-          <DialogTitle>Link an environment</DialogTitle>
+          <DialogTitle>link an environment</DialogTitle>
           <DialogDescription>
             Agents here can then launch, message and wait on threads there. It appears in that
             environment's Connections, where it can be revoked.
@@ -295,7 +295,7 @@ function LinkEnvironmentAction({ environmentId }: { readonly environmentId: Envi
             ) : null}
             {needsAddress ? (
               <label className="block space-y-1.5">
-                <span className="block text-xs font-medium text-foreground">Address</span>
+                <span className="block text-xs font-medium text-foreground">address</span>
                 <Input
                   value={address}
                   onChange={(event) => {
@@ -319,14 +319,14 @@ function LinkEnvironmentAction({ environmentId }: { readonly environmentId: Envi
             ) : null}
             {selected === null || canMint ? null : (
               <label className="block space-y-1.5">
-                <span className="block text-xs font-medium text-foreground">Pairing code</span>
+                <span className="block text-xs font-medium text-foreground">pairing code</span>
                 <Input
                   value={pairingCode}
                   onChange={(event) => setPairingCode(event.target.value)}
                   placeholder={
                     machine === null
-                      ? "From that environment's Connections, or t3 pair there"
-                      : "Paste the code"
+                      ? "from that environment's environments settings, or t3 pair there"
+                      : "paste the code"
                   }
                   disabled={busy}
                   autoComplete="one-time-code"
@@ -335,7 +335,7 @@ function LinkEnvironmentAction({ environmentId }: { readonly environmentId: Envi
                 />
                 {machine !== null ? (
                   <span className="block text-xs text-muted-foreground">
-                    Create a link on {machine.label}: Settings → Connections → Create link, then
+                    Create a link on {machine.label}: settings → environments → create link, then
                     paste its code here.
                   </span>
                 ) : null}
@@ -346,10 +346,10 @@ function LinkEnvironmentAction({ environmentId }: { readonly environmentId: Envi
         </DialogPanel>
         <DialogFooter variant="bare">
           <DialogClose disabled={busy} render={<Button variant="outline" type="button" />}>
-            Cancel
+            cancel
           </DialogClose>
           <Button form={formId} type="submit" disabled={busy || !ready}>
-            {busy ? "Linking…" : "Link"}
+            {busy ? "linking…" : "link"}
           </Button>
         </DialogFooter>
       </DialogPopup>

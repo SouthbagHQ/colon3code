@@ -1434,7 +1434,7 @@ export function KeybindingsSettingsPanel() {
       if (result?._tag === "Failure" && !isAtomCommandInterrupted(result)) {
         const error = squashAtomCommandFailure(result);
         toastManager.add({
-          title: "Unable to remove keybinding",
+          title: "couldn't remove keybinding 3:",
           description: error instanceof Error ? error.message : "The keybinding was not removed.",
           type: "error",
         });
@@ -1481,7 +1481,7 @@ export function KeybindingsSettingsPanel() {
             onClick={() => setIsAddingBinding(true)}
           >
             <PlusIcon aria-hidden className="size-4" />
-            Add keybinding
+            add keybinding
           </Button>
           <Tooltip>
             <TooltipTrigger
@@ -1492,13 +1492,13 @@ export function KeybindingsSettingsPanel() {
                   size="icon"
                   disabled={!keybindingsConfigPath || !canOpenKeybindingsFile}
                   onClick={openKeybindingsFile}
-                  aria-label="Open keybindings.json"
+                  aria-label="open keybindings.json"
                 >
                   <FileJsonIcon aria-hidden className="size-4" />
                 </Button>
               }
             />
-            <TooltipPopup side="top">Open keybindings.json</TooltipPopup>
+            <TooltipPopup side="top">open keybindings.json</TooltipPopup>
           </Tooltip>
         </div>
       </SettingsSection>
@@ -1534,7 +1534,7 @@ export function KeybindingsSettingsPanel() {
         ) : (
           <SettingsGroup>
             <div className="px-4 py-12 text-center text-sm text-muted-foreground">
-              No keybindings match your search.
+              no keybindings match your search 3:
             </div>
           </SettingsGroup>
         )}

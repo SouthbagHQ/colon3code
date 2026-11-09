@@ -42,7 +42,7 @@ export function ManagedRuntimeModeNotice(props: {
       </AppText>
       {target === undefined || targetLabel === undefined ? null : (
         <Button
-          label={`Switch to ${targetLabel}`}
+          label={`switch to ${targetLabel}`}
           onPress={() => updateComposerDraftSettings(props.threadKey, { runtimeMode: target })}
         />
       )}

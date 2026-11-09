@@ -1025,7 +1025,7 @@ it.effect("offers each label once across repositories, despite one that cannot b
           id: "p5",
           title: "colon3code worktree",
           workspaceRoot: "/e",
-          repository: "SouthbagHQ/colon3code",
+          repository: "southbaghq/colon3code",
         }),
         project({
           id: "p2",
@@ -1050,7 +1050,7 @@ it.effect("offers each label once across repositories, despite one that cannot b
               ? Effect.fail(requestFailed)
               : Effect.succeed({
                   items:
-                    input.repository === "SouthbagHQ/colon3code"
+                    input.repository === "southbaghq/colon3code"
                       ? [
                           { name: "size:XL", color: "d93f0b" },
                           { name: "bug", color: "d73a4a" },
@@ -1072,7 +1072,7 @@ it.effect("offers each label once across repositories, despite one that cannot b
       ["bug", "size:XL"],
     );
     assert.strictEqual(
-      reads.filter((repository) => repository === "SouthbagHQ/colon3code").length,
+      reads.filter((repository) => repository === "southbaghq/colon3code").length,
       1,
     );
     assert.strictEqual(result.truncated, false);
@@ -2724,7 +2724,7 @@ it.effect("carries every repository of a slice on from the oldest row in it", ()
           id: "p1",
           title: "colon3code",
           workspaceRoot: "/a",
-          repository: "SouthbagHQ/colon3code",
+          repository: "southbaghq/colon3code",
         }),
         project({ id: "p2", title: "web", workspaceRoot: "/b", repository: "acme/web" }),
         project({ id: "p3", title: "docs", workspaceRoot: "/c", repository: "acme/docs" }),
@@ -2735,7 +2735,7 @@ it.effect("carries every repository of a slice on from the oldest row in it", ()
             Effect.succeed({
               items: [
                 batchedChangeRequest(1, "acme/web", "2026-07-03T00:00:00Z"),
-                batchedChangeRequest(2, "SouthbagHQ/colon3code", "2026-07-02T00:00:00Z"),
+                batchedChangeRequest(2, "southbaghq/colon3code", "2026-07-02T00:00:00Z"),
                 batchedChangeRequest(3, "acme/web", "2026-07-02T00:00:00Z"),
               ],
               truncated: true,
@@ -2749,7 +2749,7 @@ it.effect("carries every repository of a slice on from the oldest row in it", ()
 
     assert.isTrue(result.truncated);
     assert.deepStrictEqual(result.nextCursors, {
-      "github.com SouthbagHQ/colon3code": "2026-07-02T00:00:00Z|1|2",
+      "github.com southbaghq/colon3code": "2026-07-02T00:00:00Z|1|2",
       "github.com acme/web": "2026-07-02T00:00:00Z|2|3",
     });
   }),

@@ -72,7 +72,7 @@ function PullRequestBaseFreshnessWarning({
                 onClick={() => onUpdate(method)}
               >
                 <PullRequestGlyph.merged aria-hidden className="size-3" />
-                {method === "rebase" ? "Update with rebase" : "Update branch"}
+                {method === "rebase" ? "update with rebase" : "update branch"}
               </Button>
             ))}
           </span>
@@ -101,7 +101,7 @@ export function PullRequestBaseBranch({
   const label = (
     <>
       {stacked ? (
-        <PullRequestGlyph.stack aria-label="Stacked pull request" className="size-3 shrink-0" />
+        <PullRequestGlyph.stack aria-label="stacked pull request" className="size-3 shrink-0" />
       ) : null}
       <code className="flex min-w-0">
         <MiddleTruncate value={baseBranch} showTitle={false} />
@@ -131,7 +131,7 @@ export function PullRequestBaseBranch({
           </span>
         }
       />
-      <TooltipPopup side="top">{stacked ? `Stacked on ${baseBranch}` : baseBranch}</TooltipPopup>
+      <TooltipPopup side="top">{stacked ? `stacked on ${baseBranch}` : baseBranch}</TooltipPopup>
     </Tooltip>
   );
 }

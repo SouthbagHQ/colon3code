@@ -58,14 +58,14 @@ export function WorkflowOpeningBlock(props: {
     );
   return (
     <section
-      aria-label={`Workflow started: ${headline.title}`}
+      aria-label={`workflow started: ${headline.title}`}
       className="flex min-w-0 flex-col gap-3 px-1 py-0.5"
       data-workflow-opening
     >
       <header className="flex min-w-0 items-start gap-2">
         <WorkflowIcon aria-hidden className="mt-0.5 size-3.5 shrink-0 text-muted-foreground" />
         <div className="flex min-w-0 flex-1 flex-col gap-0.5">
-          <p className="text-2xs font-medium text-muted-foreground">Workflow started</p>
+          <p className="text-2xs font-medium text-muted-foreground">workflow started</p>
           <h3 className="truncate text-sm font-medium text-foreground" data-thread-find-text="true">
             {headline.title}
           </h3>
@@ -134,7 +134,7 @@ function WorkflowMemberRow(props: {
             ) : (
               <button
                 type="button"
-                aria-label={`Open ${member.title}`}
+                aria-label={`open ${member.title}`}
                 aria-description={member.status}
                 onClick={() => props.onOpenThread(threadId)}
                 className={cn(
@@ -231,7 +231,7 @@ function WorkflowScript(props: { readonly script: string }) {
             data-scroll-anchor-ignore
             onClick={() => setExpanded((value) => !value)}
           >
-            {expanded ? "Show less" : "Show full script"}
+            {expanded ? "show less" : "show full script"}
           </Button>
         </div>
       ) : null}

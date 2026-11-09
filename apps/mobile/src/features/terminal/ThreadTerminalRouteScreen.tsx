@@ -866,15 +866,15 @@ function ThreadTerminal(props: {
             />
           ) : terminalSession.data === null && terminalSession.error === null ? (
             <EmptyState
-              title="Checking terminal access"
+              title="checking terminal access"
               detail="Waiting for this connection's permissions."
             />
           ) : !canReadTerminal && !canOperateTerminal ? (
             <EmptyState
               title={
                 terminalSession.error
-                  ? "Could not check terminal access"
-                  : "Terminal access unavailable"
+                  ? "could not check terminal access 3:"
+                  : "terminal access unavailable"
               }
               detail={
                 terminalSession.error ??
@@ -883,21 +883,21 @@ function ThreadTerminal(props: {
             />
           ) : canOperateTerminal && launchLocation === null ? (
             sessionsError !== null ? (
-              <EmptyState title="Could not load terminals" detail={sessionsError} />
+              <EmptyState title="could not load terminals 3:" detail={sessionsError} />
             ) : (
-              <EmptyState title="Loading terminals" detail="Reading existing terminal sessions." />
+              <EmptyState title="loading terminals" detail="Reading existing terminal sessions." />
             )
           ) : !canOperateTerminal && !hasTerminalTarget && sessionsPending ? (
-            <EmptyState title="Loading terminals" detail="Reading existing terminal sessions." />
+            <EmptyState title="loading terminals" detail="Reading existing terminal sessions." />
           ) : !canOperateTerminal && !hasTerminalTarget && sessionsError !== null ? (
-            <EmptyState title="Could not load terminals" detail={sessionsError} />
+            <EmptyState title="could not load terminals 3:" detail={sessionsError} />
           ) : !canOperateTerminal && !hasTerminalTarget ? (
             <EmptyState
-              title="No terminal sessions"
+              title="no terminal sessions"
               detail="Existing terminals will appear here when another client opens one."
             />
           ) : !canOperateTerminal && terminal.error !== null ? (
-            <EmptyState title="Terminal unavailable" detail={terminal.error} />
+            <EmptyState title="terminal unavailable" detail={terminal.error} />
           ) : (
             <>
               <View
@@ -929,7 +929,7 @@ function ThreadTerminal(props: {
                     setCaptureRequest(0);
                     if (text.trim()) setCapturedOutput(text);
                     else
-                      Dialog.alert("No terminal output", "There is no visible output to attach.");
+                      Dialog.alert("no terminal output", "There is no visible output to attach.");
                   }}
                   onInput={handleInput}
                   onResize={handleResize}

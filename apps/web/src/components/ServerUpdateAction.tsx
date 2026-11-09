@@ -56,7 +56,7 @@ function readUpdatesDenial(environmentId: EnvironmentId): string | undefined {
   );
 }
 
-const CROSS_TRACK_NOTE = "Switch tracks in About → Update track";
+const CROSS_TRACK_NOTE = "switch tracks in about → update track";
 
 /** Hosts refuse a Stable/Nightly crossing outside a track switch, which checks the database first. */
 function refusedCrossing(
@@ -403,7 +403,7 @@ export function OutdatedServerUpdateAction({
   serverLabel,
   fromVersion,
   targetVersion,
-  label = "Update",
+  label = "update",
 }: {
   readonly environmentId: EnvironmentId;
   readonly serverLabel: string;

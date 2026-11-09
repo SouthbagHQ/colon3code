@@ -110,7 +110,7 @@ function GuestShareDialog({
     >
       <DialogPopup className="max-w-lg">
         <DialogHeader>
-          <DialogTitle>Share with guest</DialogTitle>
+          <DialogTitle>share with guest</DialogTitle>
           <DialogDescription>
             The guest sees the thread as you do, including command output and the agent&apos;s
             reasoning. Each message they send waits for you.
@@ -121,13 +121,13 @@ function GuestShareDialog({
             <div className="flex items-center gap-2">
               <Input
                 readOnly
-                aria-label="Guest link"
+                aria-label="guest link"
                 value={state.url}
                 onFocus={(event) => event.currentTarget.select()}
               />
               <Button size="sm" variant="outline" onClick={() => copyToClipboard(state.url)}>
                 {isCopied ? <CheckIcon /> : <CopyIcon />}
-                {isCopied ? "Copied" : "Copy"}
+                {isCopied ? "copied" : "copy"}
               </Button>
             </div>
           ) : (
@@ -146,7 +146,7 @@ function GuestShareDialog({
         <DialogFooter>
           {state.status === "created" ? (
             <Button size="sm" onClick={onClose}>
-              Done
+              done
             </Button>
           ) : (
             <>
@@ -156,14 +156,14 @@ function GuestShareDialog({
                 onClick={onClose}
                 disabled={state.status === "creating"}
               >
-                Cancel
+                cancel
               </Button>
               <Button
                 size="sm"
                 onClick={() => void create()}
                 disabled={!canCreate || state.status === "creating"}
               >
-                {state.status === "creating" ? "Creating..." : "Create link"}
+                {state.status === "creating" ? "creating…" : "create link"}
               </Button>
             </>
           )}
@@ -198,7 +198,7 @@ export function GuestShareIndicator({ threadRef }: { readonly threadRef: ScopedT
           setClosing(false);
         }}
       >
-        Stop sharing
+        stop sharing
       </Button>
     </div>
   );
@@ -207,9 +207,9 @@ export function GuestShareIndicator({ threadRef }: { readonly threadRef: ScopedT
 function GuestShareStatus({ share }: { readonly share: ThreadGuestShare }) {
   const nowMinute = useNowMinute();
   // The share stays on the thread after it expires, until the owner clears it.
-  if (share.expiresAt.slice(0, 16) <= nowMinute) return <span>Guest link expired</span>;
+  if (share.expiresAt.slice(0, 16) <= nowMinute) return <span>guest link expired</span>;
   return (
-    <span>{share.guestName !== null ? `${share.guestName} is a guest` : "Guest link active"}</span>
+    <span>{share.guestName !== null ? `${share.guestName} is a guest` : "guest link active"}</span>
   );
 }
 
@@ -303,18 +303,18 @@ export function GuestPendingMessages({
                   size="xs"
                   variant="ghost-muted"
                   disabled={busy}
-                  aria-label={`Dismiss message from ${guestName}`}
+                  aria-label={`dismiss message from ${guestName}`}
                   onClick={() => void resolve(message.id, "dismiss")}
                 >
-                  Dismiss
+                  dismiss
                 </Button>
                 <Button
                   size="xs"
                   disabled={busy}
-                  aria-label={`Send message from ${guestName}`}
+                  aria-label={`send message from ${guestName}`}
                   onClick={() => void resolve(message.id, "send")}
                 >
-                  Send
+                  send
                 </Button>
               </div>
             ) : null}

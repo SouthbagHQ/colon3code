@@ -25,7 +25,7 @@ export function ThreadSideChatsRow(props: {
         size={12}
         tintColorClassName="accent-foreground-muted"
       />
-      <Text className="text-xs text-foreground-muted">Side chats</Text>
+      <Text className="text-xs text-foreground-muted">side chats</Text>
       <ScrollView horizontal showsHorizontalScrollIndicator={false} className="flex-1">
         <View className="flex-row gap-1 pr-4">
           {sideChats.map((sideChat) => {
@@ -39,7 +39,7 @@ export function ThreadSideChatsRow(props: {
               <Pressable
                 key={sideChat.id}
                 accessibilityRole="button"
-                accessibilityLabel={`Open side chat ${sideChat.title}${needs === null ? "" : `, needs ${needs}`}`}
+                accessibilityLabel={`open side chat ${sideChat.title}${needs === null ? "" : `, needs ${needs}`}`}
                 className="max-w-48 flex-row items-center gap-1.5 rounded-full bg-subtle px-2.5 py-1"
                 onPress={() =>
                   openLinkedThread({ environmentId: props.environmentId, threadId: sideChat.id })

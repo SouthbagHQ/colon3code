@@ -638,7 +638,7 @@ function EventLogEntries(props: {
   return (
     <ol className="max-h-64 overflow-y-auto px-3 py-2 font-mono text-2xs leading-relaxed">
       {entries.length === 0 ? (
-        <li className="text-muted-foreground">No events yet.</li>
+        <li className="text-muted-foreground">no events yet.</li>
       ) : (
         entries.map((entry) => (
           <li key={entry.id} className="flex gap-2">

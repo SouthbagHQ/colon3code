@@ -85,9 +85,9 @@ export function UpdateEverythingDialog({
 }
 
 const APP_LABELS = {
-  "this-app": "This app",
-  server: "Server",
-  "desktop-app": "Desktop app",
+  "this-app": "this app",
+  server: "server",
+  "desktop-app": "desktop app",
 } as const;
 
 function UpdateEverythingDialogContent({
@@ -98,7 +98,7 @@ function UpdateEverythingDialogContent({
   onConfirm,
   cancelRef,
   title,
-  confirmLabel = "Update",
+  confirmLabel = "update",
   notes = [],
   disabledReason = null,
   busy = false,
@@ -129,7 +129,7 @@ function UpdateEverythingDialogContent({
     <>
       <AlertDialogHeader className="shrink-0">
         <AlertDialogTitle>
-          {title ?? `Update ${updating.length} ${updating.length === 1 ? "machine" : "machines"}?`}
+          {title ?? `update ${updating.length} ${updating.length === 1 ? "machine" : "machines"}?`}
         </AlertDialogTitle>
         <AlertDialogDescription>
           {version !== null ? (
@@ -153,9 +153,9 @@ function UpdateEverythingDialogContent({
           {/* Machine names truncate first. Provider lists wrap between names, never inside one. */}
           <div className="grid grid-cols-[minmax(4rem,max-content)_max-content_minmax(min-content,1fr)_max-content] gap-x-4 text-sm">
             <div className="col-span-full grid grid-cols-subgrid border-b pb-1.5 text-muted-foreground text-xs">
-              <span>Machine</span>
+              <span>machine</span>
               <span>:3 Code</span>
-              <span>Providers</span>
+              <span>providers</span>
               <span />
             </div>
             {updating.map((row) => (
@@ -169,7 +169,7 @@ function UpdateEverythingDialogContent({
                 <span>
                   {row.app !== null ? APP_LABELS[row.app] : null}
                   {row.app === null && row.skipped !== null ? (
-                    <span className="text-muted-foreground">Skipped</span>
+                    <span className="text-muted-foreground">skipped</span>
                   ) : null}
                   {row.app === "this-app" ? (
                     <span className="block text-muted-foreground text-xs">restarts last</span>
@@ -228,7 +228,7 @@ function UpdateEverythingDialogContent({
           </p>
         ) : null}
         <AlertDialogClose ref={cancelRef} render={<Button variant="outline" disabled={busy} />}>
-          Cancel
+          cancel
         </AlertDialogClose>
         <Button disabled={disabledReason !== null || busy} onClick={onConfirm}>
           {confirmLabel}

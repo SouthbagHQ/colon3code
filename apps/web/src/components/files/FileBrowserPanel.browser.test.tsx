@@ -68,7 +68,7 @@ describe("FileBrowserPanel", () => {
         button: 2,
       }),
     );
-    const action = page.getByRole("menuitem", { name: "Copy mention", exact: true });
+    const action = page.getByRole("menuitem", { name: "copy mention", exact: true });
     await expect.element(action).toBeVisible();
     await userEvent.click(action);
     await vi.waitFor(() => expect(clipboard).toHaveBeenCalledWith("[README.md](README.md)"));

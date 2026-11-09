@@ -8,7 +8,7 @@ function MergeButton({ scopeKey, onConfirm }: { scopeKey: string; onConfirm: () 
   const confirm = useInlineActionConfirm(scopeKey);
   return (
     <button type="button" {...confirm.props("merge", onConfirm)}>
-      {confirm.isArmed("merge") ? "Confirm merge?" : "Merge"}
+      {confirm.isArmed("merge") ? "confirm merge?" : "Merge"}
     </button>
   );
 }
@@ -25,7 +25,7 @@ it("confirms on the second click and disarms on Escape", async () => {
   const button = screen.getByRole("button");
 
   await userEvent.click(button);
-  await expect.element(button).toHaveTextContent("Confirm merge?");
+  await expect.element(button).toHaveTextContent("confirm merge?");
   expect(pressEscape().defaultPrevented).toBe(true);
   await expect.element(button).toHaveTextContent("Merge");
 
@@ -41,7 +41,7 @@ it("stops swallowing Escape once the scope changes", async () => {
   const button = screen.getByRole("button");
 
   await userEvent.click(button);
-  await expect.element(button).toHaveTextContent("Confirm merge?");
+  await expect.element(button).toHaveTextContent("confirm merge?");
   await screen.rerender(<MergeButton scopeKey="b" onConfirm={onConfirm} />);
   await expect.element(button).toHaveTextContent("Merge");
   expect(pressEscape().defaultPrevented).toBe(false);
@@ -56,7 +56,7 @@ function ToolbarWithMergeButton({ shown }: { shown: boolean }) {
   const confirm = useInlineActionConfirm("a");
   return shown ? (
     <button type="button" {...confirm.props("merge", () => undefined)}>
-      {confirm.isArmed("merge") ? "Confirm merge?" : "Merge"}
+      {confirm.isArmed("merge") ? "confirm merge?" : "Merge"}
     </button>
   ) : (
     <span>gone</span>
@@ -68,7 +68,7 @@ it("stops swallowing Escape once the armed button unmounts", async () => {
   const button = screen.getByRole("button");
 
   await userEvent.click(button);
-  await expect.element(button).toHaveTextContent("Confirm merge?");
+  await expect.element(button).toHaveTextContent("confirm merge?");
   await screen.rerender(<ToolbarWithMergeButton shown={false} />);
   await expect.element(screen.getByText("gone")).toBeVisible();
   expect(pressEscape().defaultPrevented).toBe(false);
@@ -98,11 +98,11 @@ it.each(["merge", "enable-auto-merge"] as const)(
         resolveConflicts={null}
       />
     );
-    await using screen = await render(control("Checking stack membership…"));
+    await using screen = await render(control("checking stack membership…"));
     const button = screen.getByRole("button");
     await userEvent.tab();
     await expect.element(button).toHaveFocus();
-    await expect.element(button).toHaveAccessibleDescription("Checking stack membership…");
+    await expect.element(button).toHaveAccessibleDescription("checking stack membership…");
     await userEvent.keyboard("{Enter}{Enter} ");
     expect(perform).not.toHaveBeenCalled();
     await screen.rerender(control(null));

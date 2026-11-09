@@ -882,7 +882,7 @@ function UsageOverview({
               {breakdownModels.length === 0 ? (
                 <tr>
                   <td colSpan={5} className="py-6 text-center text-muted-foreground">
-                    No activity in this window.
+                    no activity in this window :3
                   </td>
                 </tr>
               ) : (
@@ -971,7 +971,7 @@ function UsageOverview({
                       colSpan={activeProviders.length + 3}
                       className="py-6 text-center text-muted-foreground"
                     >
-                      No activity in this window.
+                      no activity in this window :3
                     </td>
                   </tr>
                 ) : (
@@ -1221,7 +1221,7 @@ function UsageEnvironmentFilter({
           );
         })}
         {environments.length === 0 ? (
-          <p className="px-2 py-2 text-xs text-muted-foreground">No environments connected.</p>
+          <p className="px-2 py-2 text-xs text-muted-foreground">no environments connected.</p>
         ) : null}
         {showUsageStatus && isPartial ? (
           <p className="px-2 py-2 text-xs text-muted-foreground">

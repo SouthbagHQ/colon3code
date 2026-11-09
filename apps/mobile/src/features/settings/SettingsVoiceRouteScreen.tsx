@@ -80,8 +80,8 @@ const KINDS: Record<
   }
 > = {
   wired: {
-    label: "Wired",
-    row: "Other wired",
+    label: "wired",
+    row: "other wired",
     rowDescription: "Headsets and USB microphones not listed here",
     icon: "cable.connector",
   },
@@ -95,7 +95,7 @@ const KINDS: Record<
     icon: "headphones",
   },
   builtIn: {
-    label: "Built-in",
+    label: "built-in",
     row: "Built-in microphone",
     rowDescription: "The microphone on this device",
     icon: "iphone",
@@ -118,7 +118,7 @@ function saveDestination(id: EnvironmentId | null) {
     chooseVoiceDestination(id);
   } catch {
     Dialog.alert(
-      "Could not save transcription choice",
+      "could not save transcription choice 3:",
       "Dictation on an environment is off for this session. Save again before closing the app, or your previous choice may return when it restarts.",
     );
   }
@@ -144,21 +144,21 @@ function EnvironmentChoice({
       description={
         !usable
           ? environment.connection.phase !== "connected"
-            ? "Not connected"
-            : "Transcription unavailable"
+            ? "not connected"
+            : "transcription unavailable"
           : status?.supported === false
             ? status.reason
             : status?.state === "missing-model"
-              ? "No transcription model installed"
+              ? "no transcription model installed"
               : (environment.displayUrl ?? "Send finished recordings to this environment.")
       }
       separated
       onPress={() => {
         if (!selected)
           Dialog.confirm({
-            title: `Send microphone audio to ${environment.label}?`,
+            title: `send microphone audio to ${environment.label}?`,
             message: `Finished recordings will be sent to ${environment.displayUrl ?? environment.label} for transcription. You can switch back to This device at any time.`,
-            confirmText: "Use environment",
+            confirmText: "use environment",
             onConfirm: () => saveDestination(environment.environmentId),
           });
       }}
@@ -222,7 +222,7 @@ export function SettingsVoiceRouteScreen() {
   const dragTo = drag === null ? -1 : dragFrom + dropSteps(dragFrom, drag.translation);
 
   return (
-    <SettingsScreen title="Voice">
+    <SettingsScreen title="voice">
       <ScrollView
         contentInsetAdjustmentBehavior="automatic"
         showsVerticalScrollIndicator={false}
@@ -230,9 +230,9 @@ export function SettingsVoiceRouteScreen() {
         contentContainerClassName="gap-3 px-5 pt-4"
         contentContainerStyle={{ paddingBottom: Math.max(insets.bottom, 18) + 18 }}
       >
-        <SettingsSection title="Transcribe on">
+        <SettingsSection title="transcribe on">
           <ListChoiceRow
-            label="This device"
+            label="this device"
             description="Audio stays on this device and is transcribed here."
             selected={!grant}
             onPress={() => saveDestination(null)}
@@ -250,8 +250,8 @@ export function SettingsVoiceRouteScreen() {
             ))}
           {isReady && grant && !grantEnvironment ? (
             <ListChoiceRow
-              label="Previously selected environment"
-              description="No longer paired"
+              label="previously selected environment"
+              description="no longer paired"
               separated
               selected
               disabled
@@ -290,10 +290,10 @@ export function SettingsVoiceRouteScreen() {
         ) : null}
         {permission === "ask" || permission === "denied" ? (
           <>
-            <SettingsSection title="Microphone access">
+            <SettingsSection title="microphone access">
               <SettingsActionRow
                 icon="mic"
-                label={permission === "ask" ? "Allow microphone access" : "Open Settings"}
+                label={permission === "ask" ? "allow microphone access" : "open Settings"}
                 onPress={
                   permission === "ask" ? requestPermission : () => void Linking.openSettings()
                 }
@@ -306,7 +306,7 @@ export function SettingsVoiceRouteScreen() {
             </Text>
           </>
         ) : null}
-        <SettingsSection title="Preferred order">
+        <SettingsSection title="preferred order">
           {entries.map((entry, index) => {
             const key = microphoneEntryKey(entry);
             const shift =
@@ -387,7 +387,7 @@ function MicrophoneRow(props: {
       <View
         accessible
         accessibilityLabel={`${title}, ${kind.label}, ${props.position} of ${props.count}`}
-        accessibilityActions={onForget ? [{ name: "forget", label: "Forget" }] : undefined}
+        accessibilityActions={onForget ? [{ name: "forget", label: "forget" }] : undefined}
         onAccessibilityAction={({ nativeEvent }) => {
           if (nativeEvent.actionName === "forget") onForget?.();
         }}
@@ -428,10 +428,10 @@ function MicrophoneRow(props: {
           fullSwipeWidth={windowWidth - 40}
           onDelete={onForget}
           primaryAction={{
-            accessibilityLabel: `Forget ${title}`,
+            accessibilityLabel: `forget ${title}`,
             destructive: true,
             icon: "trash",
-            label: "Forget",
+            label: "forget",
             onPress: onForget,
           }}
           secondaryAction={null}

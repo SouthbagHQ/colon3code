@@ -326,22 +326,22 @@ export const incomingShareImports = makeIncomingShareImports({
       error instanceof Error ? error.message : "The shared content could not be saved.",
       [
         {
-          text: "Cancel import",
+          text: "cancel import",
           style: "cancel",
           onPress: () => void incomingShareImports.cancel(target),
         },
-        { text: "Retry", onPress: () => incomingShareImports.retry(target) },
+        { text: "retry", onPress: () => incomingShareImports.retry(target) },
       ],
       { cancelable: false },
     );
   },
   onCancelFailure: (target, error) => {
     Dialog.alert(
-      "Could not cancel import",
+      "could not cancel import 3:",
       error instanceof Error ? error.message : "The shared content could not be restored safely.",
       [
-        { text: "Retry import", onPress: () => incomingShareImports.retry(target) },
-        { text: "Retry cancel", onPress: () => void incomingShareImports.cancel(target) },
+        { text: "retry import", onPress: () => incomingShareImports.retry(target) },
+        { text: "retry cancel", onPress: () => void incomingShareImports.cancel(target) },
       ],
       { cancelable: false },
     );

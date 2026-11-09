@@ -36,11 +36,11 @@ export function NativeChildWorkDialog(props: {
     <Dialog open={open} onOpenChange={setOpen}>
       <Button size="sm" variant="ghost" onClick={() => setOpen(true)}>
         <ListTreeIcon />
-        <span className="@max-[420px]/composer-surface:sr-only">Subagent work</span>
+        <span className="@max-[420px]/composer-surface:sr-only">subagent work</span>
       </Button>
       <DialogPopup className="max-w-2xl">
         <DialogHeader>
-          <DialogTitle>Subagent work</DialogTitle>
+          <DialogTitle>subagent work</DialogTitle>
           <DialogDescription>Read only. These subagents cannot take messages.</DialogDescription>
         </DialogHeader>
         {open ? <NativeChildWorkContent {...props} /> : null}
@@ -66,7 +66,7 @@ function NativeChildWorkContent(props: {
         {query.error !== null ? (
           <p className="text-sm text-destructive-foreground">{query.error}</p>
         ) : children === undefined ? (
-          <p className="text-sm text-muted-foreground">Loading…</p>
+          <p className="text-sm text-muted-foreground">loading…</p>
         ) : children.length === 0 ? (
           <p className="text-sm text-muted-foreground">
             The provider has no record of which subagents this call started.
@@ -77,7 +77,7 @@ function NativeChildWorkContent(props: {
       </DialogPanel>
       <DialogFooter variant="bare">
         <Button size="sm" variant="outline" disabled={query.isPending} onClick={query.refresh}>
-          Refresh
+          refresh
         </Button>
       </DialogFooter>
     </>
@@ -96,7 +96,7 @@ function NativeChild(props: { readonly child: OrchestrationV2NativeChildWork }) 
         <p className="text-xs text-muted-foreground">Earlier steps are not shown.</p>
       ) : null}
       {child.steps === null ? (
-        <p className="text-xs text-muted-foreground">No transcript yet.</p>
+        <p className="text-xs text-muted-foreground">no transcript yet.</p>
       ) : (
         <ol className="m-0 flex list-none flex-col gap-2 border-s ps-3">
           {child.steps.map((step) => (

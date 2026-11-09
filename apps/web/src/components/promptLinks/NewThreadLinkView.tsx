@@ -237,7 +237,7 @@ export function NewThreadLinkView({ link }: { readonly link: NewThreadLink }) {
         toastManager.add(
           stackedThreadToast({
             type: "error",
-            title: "Clone failed",
+            title: "clone failed 3:",
             description: error instanceof Error ? error.message : "An error occurred.",
           }),
         );
@@ -259,7 +259,7 @@ export function NewThreadLinkView({ link }: { readonly link: NewThreadLink }) {
     if (link.kind === "pull-request") {
       setState({
         status: "failed",
-        title: `Cloning ${repository.owner}/${repository.name}`,
+        title: `cloning ${repository.owner}/${repository.name}`,
         message: "Open this link again when the clone finishes.",
       });
       return;
@@ -271,7 +271,7 @@ export function NewThreadLinkView({ link }: { readonly link: NewThreadLink }) {
     ready && link.kind === "pull-request"
       ? findPromptLinkPullRequestThread(threads, link.pullRequest)
       : undefined;
-  // Mounted only while deciding, so "Open it again" asks the server again.
+  // Mounted only while deciding, so "open it again" asks the server again.
   const lookupProjects =
     ready &&
     state.status === "opening" &&
@@ -346,10 +346,10 @@ export function NewThreadLinkView({ link }: { readonly link: NewThreadLink }) {
 
   switch (state.status) {
     case "opening":
-      return <LinkPage title="Opening the link..." />;
+      return <LinkPage title="opening the link…" />;
     case "opened":
       return (
-        <LinkPage title="This link is open">
+        <LinkPage title="this link is open">
           <Button
             size="sm"
             variant="outline"
@@ -359,26 +359,26 @@ export function NewThreadLinkView({ link }: { readonly link: NewThreadLink }) {
               setState({ status: "opening" });
             }}
           >
-            Open it again
+            open it again
           </Button>
         </LinkPage>
       );
     case "failed":
       return (
-        <LinkPage title={state.title ?? "Could not open the link"} description={state.message} />
+        <LinkPage title={state.title ?? "couldn't open the link 3:"} description={state.message} />
       );
     case "missing-repository": {
       const name = `${state.repository.owner}/${state.repository.name}`;
       return (
         <LinkPage
-          title={`You don't have ${name}`}
+          title={`you don't have ${name}`}
           description="Clone it to work on it here, or start without a project."
         >
           <Button size="sm" onClick={() => void cloneRepository(state.repository)}>
             Clone {name}
           </Button>
           <Button size="sm" variant="outline" onClick={openWithoutProject}>
-            Use without project
+            use without project
           </Button>
         </LinkPage>
       );
@@ -416,7 +416,7 @@ function PullRequestLinkCheckout({
   const { owner, name, number } = link.pullRequest;
   return (
     <LinkPage
-      title={`Check out ${owner}/${name}#${number}?`}
+      title={`check out ${owner}/${name}#${number}?`}
       description="This puts the pull request's code in a new worktree and runs your project's setup script on it."
     >
       <Button
@@ -429,7 +429,7 @@ function PullRequestLinkCheckout({
           )
         }
       >
-        {handoff !== null ? "Checking out..." : "Check out"}
+        {handoff !== null ? "checking out…" : "check out"}
       </Button>
     </LinkPage>
   );

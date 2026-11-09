@@ -28,7 +28,7 @@ export function canTurnThreadIntoProject(thread: EnvironmentThreadShell): boolea
 }
 
 export async function turnThreadIntoProject(thread: EnvironmentThreadShell): Promise<void> {
-  const title = "Could not turn thread into a project";
+  const title = "could not turn thread into a project 3:";
   if (!readEnvironmentScope(thread.environmentId, AuthOrchestrationOperateScope)) {
     Dialog.alert(title, "This connection cannot change threads.");
     return;

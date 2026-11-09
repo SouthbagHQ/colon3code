@@ -152,7 +152,7 @@ export function PullRequestDetailGhost({
                 <span className="min-w-0 truncate font-medium">{seed.repository}</span>
                 <InlineButton
                   onClick={() => void readLocalApi()?.shell.openExternal(seed.url)}
-                  aria-label={`Open ${terminology.singular} #${seed.number} on host`}
+                  aria-label={`open ${terminology.singular} #${seed.number} on host`}
                 >
                   <span className={statePresentation?.toneClassName}>#{seed.number}</span>
                   <ExternalLinkIcon aria-hidden className="size-2.5" />
@@ -250,8 +250,8 @@ export function PullRequestDetailGhost({
                     key={seed.headBranch}
                     value={seed.headBranch}
                     target="branch name"
-                    copyLabel={`Copy ${terminology.singular} branch`}
-                    copiedLabel="Branch name copied"
+                    copyLabel={`copy ${terminology.singular} branch`}
+                    copiedLabel="branch name copied"
                     className="min-w-0 font-mono"
                   />
                 ) : (

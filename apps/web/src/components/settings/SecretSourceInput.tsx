@@ -71,7 +71,7 @@ export function SecretSourceSelect(props: {
   const { value, sources } = props;
   const known = value === null || sources.some((source) => source.id === value);
   const title =
-    value === null ? "Value" : (sources.find((source) => source.id === value)?.label ?? value);
+    value === null ? "value" : (sources.find((source) => source.id === value)?.label ?? value);
   return (
     <Select
       value={value ?? STORED_VALUE}
@@ -94,7 +94,7 @@ export function SecretSourceSelect(props: {
       </SelectTrigger>
       <SelectPopup align="start" alignItemWithTrigger={false}>
         <SelectItem value={STORED_VALUE}>
-          <SourceLabel icon={TypeIcon} label="Value" />
+          <SourceLabel icon={TypeIcon} label="value" />
         </SelectItem>
         {sources.map((source) => (
           <SelectItem key={source.id} value={source.id}>
@@ -142,7 +142,7 @@ export function SecretSourceInput({
   const reference = secret !== undefined && secret.provider === provider ? secret.reference : "";
   const providerSource = sources.find((source) => source.id === provider);
   const definition = providerSource && builtInSecretProviderDefinitions.find(providerSource.kind);
-  const label = input["aria-label"] ?? "Secret";
+  const label = input["aria-label"] ?? "secret";
   const source =
     sources.length === 0 && provider === null ? null : (
       <SecretSourceSelect

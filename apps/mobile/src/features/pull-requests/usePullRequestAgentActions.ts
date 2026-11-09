@@ -44,13 +44,13 @@ export function usePullRequestAgentActions(
             (item) =>
               item.subactions?.map((child) => ({
                 ...child,
-                title: `Settled: ${child.title}`,
+                title: `settled: ${child.title}`,
               })) ?? [item],
           )
         : items;
     return {
       id: task,
-      title: action?.title ?? "Open thread",
+      title: action?.title ?? "open thread",
       image: action?.icon,
       attributes: { disabled: disabled || !links.canAsk || action?.disabled },
       ...(chooseThread ? { subactions } : {}),

@@ -847,9 +847,9 @@ function WorkspacePreparationRetryButton(props: {
   return (
     <View className="ml-7 mt-2">
       <Button
-        label="Retry"
+        label="retry"
         tone="secondary"
-        accessibilityLabel="Retry workspace preparation"
+        accessibilityLabel="retry workspace preparation"
         disabled={busy}
         onPress={() => {
           setBusy(true);
@@ -945,7 +945,7 @@ const ThreadWorkLogRow = function ThreadWorkLogRow(
     return (
       <WorkLogPressable
         accessibilityLabel={warning ? label : `${row.summary}: ${failureItem.failure.message}`}
-        accessibilityHint="Long press to copy."
+        accessibilityHint="long press to copy."
         onLongPress={() => props.onCopyRow(row.id, row.getCopyText())}
       >
         <View className="flex-1 py-1">
@@ -1038,13 +1038,13 @@ const ThreadWorkLogRow = function ThreadWorkLogRow(
         ? turnItemOutputText(shownItem)
         : fetchedItem
           ? (turnItemOutputText(fetchedItem) ??
-            (outputImages.length > 0 || viewedImagePath ? null : "No output."))
+            (outputImages.length > 0 || viewedImagePath ? null : "no output."))
           : fetchedDetail.error
             ? `Couldn't load output: ${fetchedDetail.error}`
             : row.fetchesDetail
               ? fetchedDetail.data
                 ? "Output is no longer available."
-                : "Loading output…"
+                : "loading output…"
               : null;
   const exitLine =
     failedExitCode === null ? null : (

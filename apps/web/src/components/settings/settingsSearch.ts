@@ -842,7 +842,7 @@ export const SETTINGS_SEARCH_ITEMS = [
   },
   {
     id: "telemetry-export",
-    title: "openTelemetry export",
+    title: "OpenTelemetry export",
     to: "/settings/diagnostics",
     targetId: "telemetry-export",
     scope: "environment",

@@ -141,7 +141,7 @@ it.each([AuthSourceControlWriteScope, AuthOrchestrationOperateScope])(
   async (scope) => {
     setup();
     await using screen = await render(panel());
-    const resolve = screen.getByRole("button", { name: "Resolve conflicts" });
+    const resolve = screen.getByRole("button", { name: "resolve conflicts" });
     await expect.element(resolve).toBeEnabled();
     if (scope === AuthSourceControlWriteScope) permissions.checkout = false;
     else permissions.operate = false;
@@ -155,7 +155,7 @@ it("can still add conflict resolution to an existing composer without checkout s
   permissions.checkout = false;
   permissions.operate = false;
   await using screen = await render(panel(true));
-  const resolve = screen.getByRole("button", { name: "Resolve conflicts" });
+  const resolve = screen.getByRole("button", { name: "resolve conflicts" });
   await expect.element(resolve).toBeEnabled();
   await act(() => resolve.click());
   const draft = useComposerDraftStore.getState().getComposerDraft(draftId);

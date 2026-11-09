@@ -19,7 +19,7 @@ export function LinkAccessPicker({
   return (
     <div className="space-y-1.5">
       <span id={labelId} className="block text-xs font-medium">
-        What agents here may do there
+        what agents here may do there
       </span>
       <Select
         value={value}

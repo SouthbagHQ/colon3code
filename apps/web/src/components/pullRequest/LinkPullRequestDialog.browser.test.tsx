@@ -35,5 +35,5 @@ it("focuses the reference input when the dialog opens", async () => {
     }),
   );
 
-  await expect.element(page.getByPlaceholder("Pull request URL or #42")).toHaveFocus();
+  await expect.element(page.getByPlaceholder("pull request URL or #42")).toHaveFocus();
 });

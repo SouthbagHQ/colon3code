@@ -51,10 +51,10 @@ export function useReviewGuideWriter({
       useGuideRunStore.getState().settle(guideRunKey(environmentId, reference));
       toastManager.add({
         type: "error",
-        title: "Could not start a review guide",
+        title: "couldn't start a review guide 3:",
         description: readableFailure(
           squashAtomCommandFailure(result),
-          "Check the review guide model in Settings → Source control.",
+          "Check the review guide model in settings → source control.",
         ),
       });
     }

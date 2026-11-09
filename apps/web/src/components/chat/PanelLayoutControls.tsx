@@ -54,7 +54,7 @@ export const PanelLayoutControls = memo(function PanelLayoutControls({
       className="relative shrink-0 [-webkit-app-region:no-drag]"
       pressed={threadPanelOpen}
       onPressedChange={threadPanelPresentation === "popover" ? undefined : onToggleThreadPanel}
-      aria-label="Toggle thread details panel"
+      aria-label="toggle thread details panel"
       variant="ghost"
       size="sm"
     >
@@ -71,7 +71,7 @@ export const PanelLayoutControls = memo(function PanelLayoutControls({
         )}
       </TooltipTrigger>
       <TooltipPopup side="bottom">
-        Toggle thread details
+        toggle thread details
         {threadPanelShortcutLabel ? ` (${threadPanelShortcutLabel})` : ""}
       </TooltipPopup>
     </Tooltip>

@@ -119,12 +119,12 @@ function ModelPicker({
         <ComboboxInput
           id="voice-cloud-model"
           aria-label="OpenRouter model"
-          placeholder="Search transcription models"
+          placeholder="search transcription models"
           autoFocus
           size="sm"
         />
         <ComboboxPopup>
-          <ComboboxEmpty>No transcription model matches.</ComboboxEmpty>
+          <ComboboxEmpty>no transcription model matches 3:</ComboboxEmpty>
           <ComboboxList className="max-h-64">
             {(model: CloudSpeechModel) => (
               <ComboboxItem key={model.id} value={model}>
@@ -251,7 +251,7 @@ export function CloudVoiceConfiguration({
 
   const keyField = (
     <>
-      <Label htmlFor="voice-cloud-key">{routed && saved ? "Replace API key" : "API key"}</Label>
+      <Label htmlFor="voice-cloud-key">{routed && saved ? "replace API key" : "API key"}</Label>
       <div className="flex min-w-0 items-start gap-2">
         {sources.length > 0 && (
           <SecretSourceSelect
@@ -287,7 +287,7 @@ export function CloudVoiceConfiguration({
               name="key"
               aria-label={`${company} API key`}
               autoFocus={!routed}
-              placeholder="Enter API key"
+              placeholder="enter API key"
               value={draft}
               configured={saved === true}
               disabled={busy}
@@ -320,12 +320,12 @@ export function CloudVoiceConfiguration({
         <DialogHeader>
           <DialogTitle>
             {remove
-              ? `Remove the ${company} key?`
+              ? `remove the ${company} key?`
               : active
                 ? routed
-                  ? "Manage OpenRouter dictation"
-                  : `Manage ${company} key`
-                : `Use ${name} for dictation?`}
+                  ? "manage OpenRouter dictation"
+                  : `manage ${company} key`
+                : `use ${name} for dictation?`}
           </DialogTitle>
           <DialogDescription>
             {remove
@@ -341,7 +341,7 @@ export function CloudVoiceConfiguration({
               <p>Connect to {environment.label} with dictation access to continue.</p>
             ) : AsyncResult.isFailure(presence) && saved === undefined ? (
               <Button size="sm" variant="outline" onClick={refresh}>
-                Retry loading API key
+                retry loading API key
               </Button>
             ) : routed &&
               AsyncResult.isSuccess(presence) &&
@@ -349,7 +349,7 @@ export function CloudVoiceConfiguration({
               saved === undefined ? (
               <p>Update {environment.label} to use OpenRouter dictation.</p>
             ) : saved === undefined ? (
-              <p role="status">Checking for an API key…</p>
+              <p role="status">checking for an API key…</p>
             ) : routed ? (
               <form
                 id={formId}
@@ -360,7 +360,7 @@ export function CloudVoiceConfiguration({
                 }}
               >
                 <div className="grid gap-2">
-                  <Label htmlFor="voice-cloud-model">Model</Label>
+                  <Label htmlFor="voice-cloud-model">model</Label>
                   {listedModels ? (
                     <ModelPicker
                       models={listedModels}
@@ -371,11 +371,11 @@ export function CloudVoiceConfiguration({
                     />
                   ) : AsyncResult.isFailure(models) ? (
                     <Button size="sm" variant="outline" type="button" onClick={refreshModels}>
-                      Retry loading models
+                      retry loading models
                     </Button>
                   ) : (
                     <p role="status" className="text-sm text-muted-foreground">
-                      Loading transcription models…
+                      loading transcription models…
                     </p>
                   )}
                 </div>
@@ -425,12 +425,12 @@ export function CloudVoiceConfiguration({
                 disabled={busy}
                 onClick={() => setRemove(true)}
               >
-                Remove key…
+                remove key…
               </Button>
             </div>
           )}
           <Button type="button" size="sm" variant="outline" disabled={busy} onClick={close}>
-            Cancel
+            cancel
           </Button>
           {connected &&
             (remove ? (
@@ -441,17 +441,17 @@ export function CloudVoiceConfiguration({
                 disabled={busy}
                 onClick={() => void saveKey(null, false)}
               >
-                Remove key
+                remove key
               </Button>
             ) : routed ? (
               saved !== undefined && (saved || canManage) ? (
                 <Button type="submit" form={formId} size="sm" disabled={busy || !canSubmit}>
-                  {active ? "Save" : "Save and enable"}
+                  {active ? "save" : "save and enable"}
                 </Button>
               ) : null
             ) : editingKey ? (
               <Button type="submit" form={formId} size="sm" disabled={busy || !credential}>
-                {active ? "Save key" : "Save and enable"}
+                {active ? "save key" : "save and enable"}
               </Button>
             ) : saved && !active ? (
               <Button

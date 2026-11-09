@@ -222,9 +222,9 @@ export function MobileEnrichedMarkdownText(props: SelectableMarkdownTextProps) {
             const menu = fileContextMenu?.(url) ?? {
               title: url,
               actions: [
-                { id: "enriched-open-link", title: "Open link" },
-                { id: "enriched-copy-link", title: "Copy link" },
-                { id: "enriched-share-link", title: "Share link" },
+                { id: "enriched-open-link", title: "open link" },
+                { id: "enriched-copy-link", title: "copy link" },
+                { id: "enriched-share-link", title: "share link" },
               ],
             };
             return [
@@ -294,8 +294,8 @@ export function MobileEnrichedMarkdownText(props: SelectableMarkdownTextProps) {
             const menu = props.fileContextMenu?.(url) ?? {
               title: url,
               actions: [
-                { id: "enriched-open-link", title: "Open link" },
-                { id: "enriched-copy-link", title: "Copy link" },
+                { id: "enriched-open-link", title: "open link" },
+                { id: "enriched-copy-link", title: "copy link" },
               ],
             };
             setActiveMenu({ url, menu });

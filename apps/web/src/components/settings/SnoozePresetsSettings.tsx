@@ -50,9 +50,9 @@ const SINGULAR_UNIT_LABELS: Record<DurationUnit, string> = {
 };
 
 const WHEN_LABELS: Record<"after" | SnoozePresetDay, string> = {
-  after: "In",
-  today: "Today",
-  tomorrow: "Tomorrow",
+  after: "in",
+  today: "today",
+  tomorrow: "tomorrow",
   monday: "Monday",
   tuesday: "Tuesday",
   wednesday: "Wednesday",
@@ -186,7 +186,7 @@ export function SnoozePresetsRow() {
       serverScoped
       settingKeys={["snoozePresets"]}
       {...searchableSetting("snooze-options")}
-      description="Choices in every snooze menu, listed soonest first. Weekdays mean the next one after today."
+      description="choices in every snooze menu, listed soonest first. Weekdays mean the next one after today."
       resetAction={
         !mixed && sameSnoozePresets(presets, DEFAULT_SNOOZE_PRESETS) ? null : (
           <SettingResetButton
@@ -238,12 +238,12 @@ function SnoozePresetList(props: {
   const seenWakes = new Set<string>();
   const previews = props.presets.map((preset) => {
     const resolved = resolveSnoozePreset(preset, now, formatTime);
-    if (resolved === null) return { tone: "muted", text: "Passed for today" } as const;
+    if (resolved === null) return { tone: "muted", text: "passed for today" } as const;
     if (seenIds.has(resolved.id)) {
-      return { tone: "muted", text: "Duplicate of an option above" } as const;
+      return { tone: "muted", text: "duplicate of an option above" } as const;
     }
     if (seenWakes.has(resolved.snoozedUntil)) {
-      return { tone: "muted", text: "Same time as an option above" } as const;
+      return { tone: "muted", text: "same time as an option above" } as const;
     }
     seenIds.add(resolved.id);
     seenWakes.add(resolved.snoozedUntil);
@@ -281,7 +281,7 @@ function SnoozePresetList(props: {
           <div
             key={props.keys[index]}
             role="group"
-            aria-label={`Snooze option ${index + 1}`}
+            aria-label={`snooze option ${index + 1}`}
             className="flex flex-wrap items-center gap-2"
           >
             <SnoozePresetFields preset={preset} onChange={(next) => props.onChange(index, next)} />
@@ -297,7 +297,7 @@ function SnoozePresetList(props: {
               <Button
                 variant="ghost-muted"
                 size="icon-sm"
-                aria-label={`Remove snooze option ${index + 1}`}
+                aria-label={`remove snooze option ${index + 1}`}
                 onClick={() => props.onRemove(index)}
               >
                 <XIcon />
@@ -307,7 +307,7 @@ function SnoozePresetList(props: {
         );
       })}
       <p className="text-xs text-muted-foreground">
-        {menuOrder.length === 0 ? "Menus offer only Custom…" : `Menu now: ${menuOrder.join(" · ")}`}
+        {menuOrder.length === 0 ? "menus offer only custom…" : `menu now: ${menuOrder.join(" · ")}`}
       </p>
       <div>
         <Button
@@ -317,7 +317,7 @@ function SnoozePresetList(props: {
           onClick={props.onAdd}
         >
           <PlusIcon />
-          Add option
+          add option
         </Button>
         {props.presets.length >= MAX_SNOOZE_PRESETS ? (
           <span className="ps-2 text-xs text-muted-foreground">
@@ -356,7 +356,7 @@ function SnoozePresetFields(props: {
           onChange(next);
         }}
       >
-        <SelectTrigger size="sm" className="w-32" aria-label="When">
+        <SelectTrigger size="sm" className="w-32" aria-label="when">
           <SelectValue />
         </SelectTrigger>
         <SelectPopup>
@@ -380,7 +380,7 @@ function SnoozePresetFields(props: {
             size="sm"
             type="time"
             className="w-32"
-            aria-label="Time"
+            aria-label="time"
             value={preset.time}
             onChange={(event) => {
               if (/^\d{2}:\d{2}$/.test(event.target.value)) {
@@ -430,9 +430,9 @@ function DurationFields(props: { minutes: number; onChange: (minutes: number) =>
         }}
       >
         <NumberFieldGroup>
-          <NumberFieldDecrement aria-label="Decrease" />
+          <NumberFieldDecrement aria-label="decrease" />
           <NumberFieldInput
-            aria-label="Amount"
+            aria-label="amount"
             // Base UI commits on blur but not on Enter; refocus so keyboard users stay put.
             onKeyDown={(event) => {
               if (event.key !== "Enter") return;
@@ -441,7 +441,7 @@ function DurationFields(props: { minutes: number; onChange: (minutes: number) =>
               input.focus();
             }}
           />
-          <NumberFieldIncrement aria-label="Increase" />
+          <NumberFieldIncrement aria-label="increase" />
         </NumberFieldGroup>
       </NumberField>
       <Select
@@ -454,7 +454,7 @@ function DurationFields(props: { minutes: number; onChange: (minutes: number) =>
           }
         }}
       >
-        <SelectTrigger size="sm" className="w-28" aria-label="Unit">
+        <SelectTrigger size="sm" className="w-28" aria-label="unit">
           <SelectValue />
         </SelectTrigger>
         <SelectPopup>

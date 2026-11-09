@@ -109,7 +109,7 @@ function ScopeOptionLabel({ option }: { option: ScopeOption }) {
         ) : null}
       </span>
       {option.offline ? (
-        <span className="shrink-0 text-xs text-muted-foreground">Offline</span>
+        <span className="shrink-0 text-xs text-muted-foreground">offline</span>
       ) : null}
     </>
   );
@@ -181,7 +181,7 @@ function ScopeMenu({
             value={query}
             onChange={(event) => setQuery(event.target.value)}
           />
-          <ComboboxEmpty>No matches found.</ComboboxEmpty>
+          <ComboboxEmpty>no matches found.</ComboboxEmpty>
           <ComboboxList>
             {(option: ScopeOption) => (
               <ComboboxItem key={option.value} value={option}>
@@ -270,13 +270,13 @@ function EnvironmentScopeMenu({
       }
       value={environmentValue}
       onChange={(next) => onChange(selectEnvironmentAxis(value, next))}
-      searchLabel="Search environments"
+      searchLabel="search environments"
       allOption={
         singleEnvironment
           ? null
           : {
               value: ALL_ENVIRONMENTS_VALUE,
-              label: "All environments",
+              label: "all environments",
               icon: <LayersIcon aria-hidden className="size-3.5 shrink-0" />,
             }
       }
@@ -316,8 +316,8 @@ function ProjectScopeMenu({ value, groups, environments, onChange }: SettingsSco
       label={selected?.displayName ?? (value.project ? "Unavailable project" : "All projects")}
       value={projectAxisValue(value)}
       onChange={(next) => onChange(selectProjectAxis(value, next))}
-      searchLabel="Search projects"
-      allOption={{ value: ALL_PROJECTS_VALUE, label: "All projects" }}
+      searchLabel="search projects"
+      allOption={{ value: ALL_PROJECTS_VALUE, label: "all projects" }}
       options={projects.map(({ group, machines }) => {
         const sameName = projects.filter(
           (other) =>
@@ -335,7 +335,7 @@ function ProjectScopeMenu({ value, groups, environments, onChange }: SettingsSco
         return {
           value: group.projectKey,
           label: group.displayName,
-          secondary: group.archived ? ["Archived", location].filter(Boolean).join(" · ") : location,
+          secondary: group.archived ? ["archived", location].filter(Boolean).join(" · ") : location,
           icon: <ProjectFavicon project={group} className="size-3.5 shrink-0" />,
         };
       })}

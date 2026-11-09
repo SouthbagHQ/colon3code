@@ -199,11 +199,11 @@ function DeviceStreamDocumentView({
             accessibilityLiveRegion="polite"
             className="text-center text-sm text-foreground-muted"
           >
-            {status === "error" ? error : "Connecting to device..."}
+            {status === "error" ? error : "connecting to device…"}
           </AppText>
           {status === "error" ? (
             <View className="items-center">
-              <Button label="Reconnect" tone="secondary" onPress={onRetry} />
+              <Button label="reconnect" tone="secondary" onPress={onRetry} />
             </View>
           ) : null}
         </View>

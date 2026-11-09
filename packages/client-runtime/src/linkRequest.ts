@@ -219,7 +219,7 @@ export function linkRequestDisplay(
     case "pending":
       return visibility === "local"
         ? { kind: "pending" }
-        : { kind: "pending-elsewhere", label: "Waiting for an answer in the original thread" };
+        : { kind: "pending-elsewhere", label: "waiting for an answer in the original thread" };
     case "linked":
       return {
         kind: "answered",
@@ -229,15 +229,15 @@ export function linkRequestDisplay(
         }`,
       };
     case "declined":
-      return { kind: "answered", outcome: "declined", label: "Declined" };
+      return { kind: "answered", outcome: "declined", label: "declined" };
     case "failed":
       return {
         kind: "answered",
         outcome: "failed",
-        label: `Could not link: ${item.failure ?? "the other environment refused"}`,
+        label: `could not link: ${item.failure ?? "the other environment refused"}`,
       };
     case "cancelled":
-      return { kind: "answered", outcome: "ended", label: "Request ended" };
+      return { kind: "answered", outcome: "ended", label: "request ended" };
   }
 }
 

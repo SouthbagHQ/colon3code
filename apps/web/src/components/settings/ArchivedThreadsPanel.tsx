@@ -24,8 +24,8 @@ import { useRef, useState } from "react";
 import { Tooltip, TooltipTrigger, TooltipPopup } from "../ui/tooltip";
 
 const ARCHIVE_ACTIONS = [
-  { action: "unarchive", label: "Unarchive", Icon: ArchiveX },
-  { action: "delete", label: "Delete", Icon: Trash2Icon },
+  { action: "unarchive", label: "unarchive", Icon: ArchiveX },
+  { action: "delete", label: "delete", Icon: Trash2Icon },
 ] as const;
 type ArchiveAction = (typeof ARCHIVE_ACTIONS)[number]["action"];
 
@@ -183,7 +183,7 @@ export function ArchivedThreadsPanel() {
       if (clicked === "unarchive" || clicked === "delete")
         await handleThreadAction(clicked, thread);
     });
-    reportFailure(result, "Archived thread action failed");
+    reportFailure(result, "archived thread action failed 3:");
   };
 
   return (
@@ -202,10 +202,10 @@ export function ArchivedThreadsPanel() {
                   <ArchiveIcon className="size-3.5 text-muted-foreground" />
                 )}
                 {isLoadingArchive
-                  ? "Loading archived threads"
+                  ? "loading archived threads…"
                   : archiveError
-                    ? "Could not load archived threads"
-                    : "No archived threads"}
+                    ? "couldn't load archived threads 3:"
+                    : "no archived threads :3"}
               </span>
             }
             description={

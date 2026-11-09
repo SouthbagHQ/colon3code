@@ -29,20 +29,20 @@ export function pullRequestAgentThreadActions(
       id: `${task}:${thread.id}`,
       title: thread.title,
       subtitle: thread.archivedAt
-        ? "Archived thread"
+        ? "archived thread"
         : thread.settled
-          ? "Settled thread"
-          : "Continue thread",
+          ? "settled thread"
+          : "continue thread",
       image: "bubble.left.and.bubble.right",
       attributes: { disabled: task !== "ask" && Boolean(thread.archivedAt) },
     };
     (thread.settled ? settled : active).push(action);
   }
   return [
-    ...(canAsk ? [{ id: `${task}:new`, title: "Start a new thread", image: "plus" }] : []),
+    ...(canAsk ? [{ id: `${task}:new`, title: "start a new thread", image: "plus" }] : []),
     ...active,
     ...(settled.length
-      ? [{ id: `${task}:settled`, title: "Settled threads", subactions: settled }]
+      ? [{ id: `${task}:settled`, title: "settled threads", subactions: settled }]
       : []),
   ];
 }
@@ -71,26 +71,26 @@ export function pullRequestAgentActions(pr: PullRequestDetail, canWatch: boolean
   return [
     {
       task: "ask",
-      title: "Ask a question",
+      title: "ask a question",
       icon: "bubble.left.and.text.bubble.right",
       disabled: false,
     },
-    { task: "explain", title: `Explain this ${shortLabel}`, icon: "book", disabled: false },
+    { task: "explain", title: `explain this ${shortLabel}`, icon: "book", disabled: false },
     {
       task: "feedback",
-      title: "Address feedback",
+      title: "address feedback",
       icon: "wrench.and.screwdriver",
       disabled: pr.state !== "open",
     },
     {
       task: "conflicts",
-      title: "Resolve conflicts",
+      title: "resolve conflicts",
       icon: "arrow.triangle.branch",
       disabled: pr.state !== "open" || pr.mergeability !== "conflicting",
     },
     {
       task: "watch",
-      title: `Watch ${shortLabel}`,
+      title: `watch ${shortLabel}`,
       icon: "eye",
       disabled: pr.state !== "open" || !canWatch,
     },

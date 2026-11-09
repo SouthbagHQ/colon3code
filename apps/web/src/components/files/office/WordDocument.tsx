@@ -98,7 +98,7 @@ export default function WordDocument(props: {
     <OfficePages
       pages={opened.pages}
       paint={opened.paint}
-      label="Page"
+      label="page"
       scrollRef={scroll}
       onError={onError}
       overlay={(index) => (

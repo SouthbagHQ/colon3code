@@ -302,12 +302,12 @@ async function mountSettings(search: SettingsScopeSearch) {
 }
 
 const nameInput = (screen: Screen) =>
-  screen.container.querySelector<HTMLInputElement>('[aria-label="Project name"]')!;
+  screen.container.querySelector<HTMLInputElement>('[aria-label="project name"]')!;
 const removeCheckout = (screen: Screen, root: string) =>
-  screen.container.querySelector<HTMLButtonElement>(`[aria-label="Remove checkout ${root}"]`)!;
+  screen.container.querySelector<HTMLButtonElement>(`[aria-label="remove checkout ${root}"]`)!;
 const removeAll = (screen: Screen) =>
   [...screen.container.querySelectorAll("button")].find((button) =>
-    button.textContent?.includes("Remove all entries"),
+    button.textContent?.includes("remove all entries"),
   )!;
 
 async function grant(id: EnvironmentId, result: SessionResult) {
@@ -337,7 +337,7 @@ describe("project organization", () => {
   it("archives the checkout on every machine while one machine is picked", async () => {
     setup();
     await using _screen = await mountPanel({ machine: primaryId });
-    await userEvent.click(page.getByRole("button", { name: "Archive" }));
+    await userEvent.click(page.getByRole("button", { name: "archive" }));
     await vi.waitFor(() => expect(state.update).toHaveBeenCalledTimes(2));
     expect(
       state.update.mock.calls.map(([request]) => [request.environmentId, request.input.archived]),
@@ -386,7 +386,7 @@ describe("project settings permissions", () => {
       firstUpdate.resolve(AsyncResult.success(undefined));
       await firstUpdate.promise;
     });
-    await expectProjectAccessDeniedToast("Failed to rename project");
+    await expectProjectAccessDeniedToast("couldn't rename the project");
     expect(state.update).toHaveBeenCalledOnce();
     expect(state.update.mock.calls[0]![0].environmentId).toBe(primaryId);
   });
@@ -430,7 +430,7 @@ describe("project settings permissions", () => {
       confirmed.resolve(true);
       await confirmed.promise;
     });
-    await expectProjectAccessDeniedToast("Failed to remove project");
+    await expectProjectAccessDeniedToast("couldn't remove project 3:");
     expect(state.delete).not.toHaveBeenCalled();
     expect(state.releaseUploads).not.toHaveBeenCalled();
     expect(state.clearDraft).not.toHaveBeenCalled();
@@ -446,7 +446,7 @@ describe("project settings permissions", () => {
     await act(async () => {
       nameInput(screen).dispatchEvent(new FocusEvent("focusout", { bubbles: true }));
     });
-    await expectProjectAccessDeniedToast("Failed to rename project");
+    await expectProjectAccessDeniedToast("couldn't rename the project");
     expect(state.update).not.toHaveBeenCalled();
     expect(nameInput(screen).disabled).toBe(true);
 
@@ -482,7 +482,7 @@ describe("project settings permissions", () => {
 describe("project identity reset", () => {
   const scratchIcon = { kind: "lucide", name: "message-square-dashed", color: "gray" } as const;
   const resetButton = (screen: Screen, label: string) =>
-    screen.container.querySelector<HTMLButtonElement>(`[aria-label="Reset ${label} to default"]`);
+    screen.container.querySelector<HTMLButtonElement>(`[aria-label="reset ${label} to default"]`);
   const asScratch = (project: Project): Project => ({
     ...project,
     isScratch: true,
@@ -571,7 +571,7 @@ it("opens the fallback search target across all environments from a checkout", a
     </RegistryContext.Provider>,
     { router: false },
   );
-  await userEvent.click(page.getByRole("button", { name: "Open all environments" }));
+  await userEvent.click(page.getByRole("button", { name: "open all environments" }));
   await vi.waitFor(() => expect(router.state.location.search).toEqual({}));
   expect(router.state.location.hash).toBe("fallback-model");
 });
@@ -596,7 +596,7 @@ describe("project settings scope", () => {
     state.projects = state.projects.filter((project) => project.environmentId === primaryId);
     await using _screen = await mountSettings({ project: projectKey() });
 
-    await expect.element(page.getByRole("textbox", { name: "Project name" })).toBeVisible();
+    await expect.element(page.getByRole("textbox", { name: "project name" })).toBeVisible();
     await userEvent.click(environmentMenu());
     await expect.element(primaryOption()).toBeVisible();
     await expect.element(remoteOption()).not.toBeInTheDocument();
@@ -620,10 +620,10 @@ describe("project settings scope", () => {
   });
 
   it.each([
-    [undefined, "This project has no checkout on this environment."],
+    [undefined, "this project has no checkout on this environment yet ;3"],
     [
       "removed-checkout",
-      "This checkout is no longer available in the selected project and environment.",
+      "aw, this checkout isn't in the selected project and environment anymore 3:",
     ],
   ])("recovers a stale environment link with checkout %s", async (checkout, message) => {
     setup();
@@ -640,10 +640,10 @@ describe("project settings scope", () => {
     await expect
       .element(page.getByRole("button", { name: "Environment scope: remote" }))
       .toBeVisible();
-    await userEvent.click(page.getByRole("button", { name: "Show all environments" }));
+    await userEvent.click(page.getByRole("button", { name: "show all environments" }));
 
     await expect
-      .element(page.getByRole("textbox", { name: "Project name" }))
+      .element(page.getByRole("textbox", { name: "project name" }))
       .toHaveValue("Shared repo");
     expect(screen.router.state.location.search).toEqual({ project: key });
     await expect
@@ -651,7 +651,7 @@ describe("project settings scope", () => {
       .toBeVisible();
     await expect.element(page.getByText(message, { exact: true })).not.toBeInTheDocument();
     await expect
-      .element(page.getByRole("button", { name: "Remove project", exact: true }))
+      .element(page.getByRole("button", { name: "remove project", exact: true }))
       .toBeEnabled();
   });
 });
@@ -661,7 +661,7 @@ it("returns to the project overview after removal, clearing the selection but ke
   state.projects = [state.projects[1]!];
   await using screen = await mountPanel({ machine: remoteId, checkout: "remote:/work/remote" });
   const removeProject = [...screen.container.querySelectorAll("button")].find(
-    (button) => button.textContent === "Remove project",
+    (button) => button.textContent === "remove project",
   )!;
 
   await userEvent.click(removeProject);

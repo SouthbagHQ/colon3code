@@ -326,7 +326,7 @@ function ProviderEnvironmentFieldRow(props: {
               size="icon-sm"
               variant="ghost-destructive"
               onClick={() => props.onRemove(props.field)}
-              aria-label={`Clear ${props.field.label}`}
+              aria-label={`clear ${props.field.label}`}
             >
               <XIcon className="size-3.5" />
             </Button>
@@ -491,7 +491,7 @@ export function ProviderEnvironmentSection(props: {
                           });
                         }}
                         aria-pressed={variable.sensitive}
-                        aria-label={`Mark environment variable ${variable.name || index + 1} as sensitive`}
+                        aria-label={`mark environment variable ${variable.name || index + 1} as sensitive`}
                       >
                         {variable.sensitive ? (
                           <LockIcon className="size-3" />
@@ -502,7 +502,7 @@ export function ProviderEnvironmentSection(props: {
                     }
                   />
                   <TooltipPopup side="top">
-                    {variable.sensitive ? "Sensitive, stored separately" : "Plain text"}
+                    {variable.sensitive ? "sensitive, stored separately" : "plain text"}
                   </TooltipPopup>
                 </Tooltip>
               ) : null;
@@ -531,7 +531,7 @@ export function ProviderEnvironmentSection(props: {
                     placeholder="value"
                     configured={variable.valueRedacted === true}
                     spellCheck={false}
-                    aria-label={`Environment variable value ${index + 1}`}
+                    aria-label={`environment variable value ${index + 1}`}
                     sources={props.secretSources ?? []}
                     onSecretChange={(secret) => setVariableSecret(variable.id, secret)}
                   >
@@ -553,7 +553,7 @@ export function ProviderEnvironmentSection(props: {
                       autoComplete="off"
                       placeholder="value"
                       spellCheck={false}
-                      aria-label={`Environment variable value ${index + 1}`}
+                      aria-label={`environment variable value ${index + 1}`}
                     />,
                   )
                 )}
@@ -580,8 +580,8 @@ function ProjectOverrideInheritance({
   readonly deviceEnabled: boolean;
 }) {
   const layers = [
-    { key: "project", label: "Project", enabled: projectEnabled, effective: true },
-    { key: "device", label: "Device", enabled: deviceEnabled, effective: false },
+    { key: "project", label: "project", enabled: projectEnabled, effective: true },
+    { key: "device", label: "device", enabled: deviceEnabled, effective: false },
   ];
   return (
     <Popover>
@@ -593,7 +593,7 @@ function ProjectOverrideInheritance({
                 <Button
                   size="icon-micro"
                   variant="ghost-muted"
-                  aria-label="Overridden for this project. Show where this value comes from"
+                  aria-label="overridden for this project: show where this value comes from"
                 />
               }
             />
@@ -601,7 +601,7 @@ function ProjectOverrideInheritance({
         >
           <LayersIcon className="size-3 text-primary" />
         </TooltipTrigger>
-        <TooltipPopup side="top">Overridden for this project</TooltipPopup>
+        <TooltipPopup side="top">overridden for this project</TooltipPopup>
       </Tooltip>
       <PopoverPopup align="end" width="md" padding="none">
         <ol role="list" className="px-3 py-2.5 text-sm">
@@ -627,7 +627,7 @@ function ProjectOverrideInheritance({
                   layer.effective ? "text-foreground" : "text-muted-foreground",
                 )}
               >
-                {layer.enabled ? "On" : "Off"}
+                {layer.enabled ? "on" : "off"}
                 {layer.effective ? (
                   <CheckIcon aria-hidden className="size-3.5 shrink-0 text-primary" />
                 ) : (
@@ -752,7 +752,7 @@ export function ProviderInstanceCard({
   const updateProgress = isUpdating
     ? ((updateState?.status === "queued" || updateState?.status === "running"
         ? updateState.message
-        : null) ?? "Starting update")
+        : null) ?? "starting update…")
     : null;
   const updateProblem =
     !isUpdating && (updateState?.status === "failed" || updateState?.status === "unchanged")
@@ -1003,7 +1003,7 @@ export function ProviderInstanceCard({
                   size={mode === "list" ? "icon-micro" : "icon-xs"}
                   variant="ghost-muted"
                   className={mode === "list" ? "pointer-events-auto relative shrink-0" : undefined}
-                  aria-label={`${updateProgress ? "Updating" : versionAdvisory.title}, view details`}
+                  aria-label={`${updateProgress ? "updating…" : versionAdvisory.title}, view details`}
                 >
                   {updateProgress ? (
                     <Spinner tone="muted" {...(mode === "list" ? { size: "sm" as const } : {})} />
@@ -1021,7 +1021,7 @@ export function ProviderInstanceCard({
           }
         />
         <TooltipPopup side="top">
-          {updateProgress ? "Updating" : versionAdvisory.title}
+          {updateProgress ? "updating…" : versionAdvisory.title}
         </TooltipPopup>
       </Tooltip>
       <PopoverPopup side="bottom" align="end" width="md" aria-label={versionAdvisory.title}>
@@ -1050,10 +1050,10 @@ export function ProviderInstanceCard({
             >
               {isUpdating ? <Spinner /> : <DownloadIcon />}
               {isUpdating
-                ? "Updating"
+                ? "updating…"
                 : versionAdvisory.targetVersion
-                  ? `Install ${getProviderVersionLabel(versionAdvisory.targetVersion)}`
-                  : "Update now"}
+                  ? `install ${getProviderVersionLabel(versionAdvisory.targetVersion)}`
+                  : "update now"}
             </Button>
           ) : null}
           {updateProgress || updateProblem ? (
@@ -1088,13 +1088,13 @@ export function ProviderInstanceCard({
                       variant="ghost-muted"
                       className="shrink-0"
                       onClick={() => copyToClipboard(updateCommand, { providerName: displayName })}
-                      aria-label="Copy update command"
+                      aria-label="copy update command"
                     >
                       <CopyIcon className="size-3" />
                     </Button>
                   }
                 />
-                <TooltipPopup side="top">Copy command</TooltipPopup>
+                <TooltipPopup side="top">copy command</TooltipPopup>
               </Tooltip>
             </div>
           ) : null}
@@ -1147,7 +1147,7 @@ export function ProviderInstanceCard({
                   className="pointer-events-auto line-clamp-2 [overflow-wrap:anywhere]"
                 >
                   {updateProgress ? (
-                    `Updating · ${updateProgress}`
+                    `updating · ${updateProgress}`
                   ) : (
                     <>
                       {summary.headline}
@@ -1250,7 +1250,7 @@ export function ProviderInstanceCard({
             disabled={readOnly}
           >
             <ExternalLinkIcon />
-            Continue authentication
+            continue authentication
           </Button>
         </div>
       ) : null}
@@ -1282,7 +1282,7 @@ export function ProviderInstanceCard({
   return (
     <>
       <SettingsSection title={displayName} icon={titleIconNode} headerAction={editorHeaderAction}>
-        <SettingsRow title="Status" status={statusContent} />
+        <SettingsRow title="status" status={statusContent} />
         <SettingsRow
           title="display name"
           control={

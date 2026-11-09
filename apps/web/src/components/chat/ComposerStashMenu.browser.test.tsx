@@ -34,7 +34,7 @@ function Composer({ dialog = false }: { dialog?: boolean }) {
         </button>
         <p role="status">{answer ? `Selected: ${answer}` : "Choose an answer"}</p>
       </form>
-      <input aria-label="Search threads" />
+      <input aria-label="search threads" />
       <button onClick={() => setOpen(true)}>Open stash</button>
       {open && (
         <ComposerStashMenu
@@ -63,7 +63,7 @@ function Composer({ dialog = false }: { dialog?: boolean }) {
 }
 
 const editor = () => page.getByRole("textbox", { name: "Message" });
-const stash = () => page.getByRole("list", { name: "Stashed prompts" });
+const stash = () => page.getByRole("list", { name: "stashed prompts" });
 const press = (keys: string) => userEvent.keyboard(keys);
 const focus = (element: Element) => act(async () => (element as HTMLElement).focus());
 
@@ -92,7 +92,7 @@ it("leaves dialog, unrelated input and question button shortcuts alone while the
   expect(stash().element().textContent).toContain("second prompt");
   await expect.element(editor()).toHaveValue("Unsent draft");
 
-  await focus(page.getByRole("textbox", { name: "Search threads" }).element());
+  await focus(page.getByRole("textbox", { name: "search threads" }).element());
   await press("{ArrowDown}{Enter}{Control>}{Backspace}{/Control}{Meta>}{Backspace}{/Meta}{Escape}");
   expect(stash().element().textContent).toContain("first prompt");
   expect(stash().element().textContent).toContain("second prompt");

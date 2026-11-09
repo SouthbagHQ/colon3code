@@ -37,11 +37,11 @@ export type GuideStopParams = PullRequestParams & {
 };
 
 const attentionLabels = {
-  tradeoff: "A tradeoff to weigh",
-  contract: "A contract to check",
-  product: "A product call",
-  risk: "A risk to judge",
-  accessibility: "An accessibility call",
+  tradeoff: "a tradeoff to weigh",
+  contract: "a contract to check",
+  product: "a product call",
+  risk: "a risk to judge",
+  accessibility: "an accessibility call",
 };
 
 export function PullRequestGuideContent({
@@ -133,12 +133,12 @@ export function PullRequestGuideStopScreen({ route }: StaticScreenProps<GuideSto
         onBack={() => navigation.goBack()}
         menus={[
           {
-            title: "Guide options",
+            title: "guide options",
             icon: "ellipsis",
             items: [
               {
                 id: "word-wrap",
-                title: "Word wrap",
+                title: "word wrap",
                 icon: "text.alignleft",
                 selected: appearance.codeWordBreak,
                 onPress: () => setCodeWordBreak(!appearance.codeWordBreak),
@@ -158,7 +158,7 @@ export function PullRequestGuideStopScreen({ route }: StaticScreenProps<GuideSto
             ) : changedGuide ? (
               <Text>This guide was rewritten. Go back to start the new tour.</Text>
             ) : !stop ? (
-              <Text>{state.error ?? "Loading stop…"}</Text>
+              <Text>{state.error ?? "loading stop…"}</Text>
             ) : (
               <>
                 <GuideNotice state={state} />
@@ -201,7 +201,7 @@ export function PullRequestGuideStopScreen({ route }: StaticScreenProps<GuideSto
                 {diff.error ? <Text className="text-danger-foreground">{diff.error}</Text> : null}
                 {notes.length ? (
                   <View className="gap-4">
-                    <Text className="font-t3-semibold">Notes on this stop</Text>
+                    <Text className="font-t3-semibold">notes on this stop</Text>
                     {notes.map(({ marker, note }) => (
                       <View key={marker} className="flex-row gap-3">
                         <View className="h-7 w-7 items-center justify-center rounded-lg bg-grouped-card">
@@ -239,7 +239,7 @@ export function PullRequestGuideStopScreen({ route }: StaticScreenProps<GuideSto
                 ) : null}
                 {stop.questions.length ? (
                   <View className="gap-3">
-                    <Text className="font-t3-semibold">Questions to consider</Text>
+                    <Text className="font-t3-semibold">questions to consider</Text>
                     {stop.questions.map((question) => (
                       <PullRequestMarkdown key={question} lineBreaks={false} markdown={question} />
                     ))}
@@ -249,10 +249,10 @@ export function PullRequestGuideStopScreen({ route }: StaticScreenProps<GuideSto
                   accessibilityRole="button"
                   accessibilityLabel={
                     guide && position < guide.stops.length - 1
-                      ? "Next stop"
+                      ? "next stop"
                       : canReview
-                        ? "Finish review"
-                        : "Finish tour"
+                        ? "finish review"
+                        : "finish tour"
                   }
                   className="mt-2 flex-row items-center gap-4 border-t border-border-subtle pt-5 pb-2 active:opacity-60"
                   onPress={() =>
@@ -274,15 +274,15 @@ export function PullRequestGuideStopScreen({ route }: StaticScreenProps<GuideSto
                   <View className="min-w-0 flex-1 gap-1">
                     <Text className="text-xs text-foreground-muted">
                       {guide && position < guide.stops.length - 1
-                        ? `Next · ${position + 2} of ${guide.stops.length}`
-                        : "End of guide"}
+                        ? `next · ${position + 2} of ${guide.stops.length}`
+                        : "end of guide"}
                     </Text>
                     <Text className="text-base font-t3-semibold">
                       {guide && position < guide.stops.length - 1
                         ? guide.stops[position + 1]?.title
                         : canReview
-                          ? "Finish review"
-                          : "Finish tour"}
+                          ? "finish review"
+                          : "finish tour"}
                     </Text>
                   </View>
                   <View className="h-11 w-11 items-center justify-center rounded-full bg-foreground">

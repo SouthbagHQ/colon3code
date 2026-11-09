@@ -44,13 +44,13 @@ export function buildDraftActionMenuItems(options: {
   return [
     {
       id: "copy",
-      label: "Copy",
+      label: "copy",
       icon: "copy",
       disabled: !options.hasPath && !options.hasBranch,
       children: [
-        ...(options.hasPath ? [{ id: "copy-path" as const, label: "Path", icon: "folder" }] : []),
+        ...(options.hasPath ? [{ id: "copy-path" as const, label: "path", icon: "folder" }] : []),
         ...(options.hasBranch
-          ? [{ id: "copy-branch" as const, label: "Branch", icon: "git-branch" }]
+          ? [{ id: "copy-branch" as const, label: "branch", icon: "git-branch" }]
           : []),
       ],
     },
@@ -59,7 +59,7 @@ export function buildDraftActionMenuItems(options: {
       : []),
     {
       id: "discard",
-      label: "Discard draft",
+      label: "discard draft",
       icon: "trash",
       destructive: true,
       separatorBefore: true,
@@ -118,7 +118,7 @@ export function buildThreadActionMenuItems(
 ): ReadonlyArray<ContextMenuItem<ThreadActionMenuId>> {
   const items: ReadonlyArray<ContextMenuItem<ThreadActionMenuId>> = [
     ...(state.canFind
-      ? [{ id: "find" as const, label: "Find in thread", icon: "text-search" }]
+      ? [{ id: "find" as const, label: "find in thread", icon: "text-search" }]
       : []),
     ...(state.branch
       ? [
@@ -196,7 +196,7 @@ export function buildThreadActionMenuItems(
       ? [
           {
             id: "turn-into-project" as const,
-            label: "Turn into project",
+            label: "turn into project",
             icon: "folder-plus",
             disabled: state.isRunning,
           },

@@ -439,7 +439,7 @@ export function useComposerSend(input: ComposerSendInput) {
       toastManager.add(
         stackedThreadToast({
           type: "info",
-          title: "Annotation attached to draft",
+          title: "annotation attached to draft",
           description: "Sending is unavailable right now. Finish the current action, then send.",
         }),
       );
@@ -499,7 +499,7 @@ export function useComposerSend(input: ComposerSendInput) {
       toastManager.add(
         stackedThreadToast({
           type: "warning",
-          title: "Side chat not started",
+          title: "side chat not started",
           description: sideChatDisabledReason,
         }),
       );
@@ -518,7 +518,7 @@ export function useComposerSend(input: ComposerSendInput) {
         toastManager.add(
           stackedThreadToast({
             type: "warning",
-            title: "Side chats take text only",
+            title: "side chats take text only",
             description: "Remove the attachments and context, then send it again.",
           }),
         );
@@ -624,7 +624,7 @@ export function useComposerSend(input: ComposerSendInput) {
       toastManager.add(
         stackedThreadToast({
           type: "warning",
-          title: "Attached thread is on another machine",
+          title: "attached thread is on another machine",
           description: `This machine's agent can't read "${strandedThread.title}". Remove it, or switch back to ${owner} to send.`,
         }),
       );
@@ -1508,7 +1508,7 @@ export function useComposerSend(input: ComposerSendInput) {
               title:
                 submissionIntent === "background"
                   ? "aw, the background task failed 3:"
-                  : "Could not start thread",
+                  : "aw, couldn't start a new thread 3:",
               description: error instanceof Error ? error.message : "failed to send message.",
               actionProps: {
                 children: "open draft",

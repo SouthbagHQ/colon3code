@@ -285,7 +285,7 @@ export function DevicePanel(props: {
             >
               {loadError !== null ? (
                 <Button size="sm" variant="outline" onClick={refreshState}>
-                  Retry
+                  retry
                 </Button>
               ) : null}
             </DeviceLoadingView>
@@ -402,7 +402,7 @@ function DeviceNotice(props: { readonly onDismiss: () => void; readonly children
       <Button
         size="icon-xs"
         variant="ghost"
-        aria-label="Dismiss device error"
+        aria-label="dismiss device error"
         onClick={props.onDismiss}
       >
         <XIcon />
@@ -446,21 +446,21 @@ function DeviceDiscoveryWarning(props: {
             size="micro"
             variant="ghost"
             disabled={retrying}
-            aria-label={`Retry device discovery on ${props.label}`}
+            aria-label={`retry device discovery on ${props.label}`}
             onClick={() => {
               setRetrying(true);
               void props.onRetry().finally(() => setRetrying(false));
             }}
           >
-            {retrying ? "Retrying…" : "Retry"}
+            {retrying ? "retrying…" : "retry"}
           </Button>
         ) : null}
         <Popover open={open} onOpenChange={setOpen}>
           <PopoverTrigger
-            aria-label={`Details for ${props.label}`}
+            aria-label={`details for ${props.label}`}
             render={<Button size="micro" variant="ghost" />}
           >
-            Details
+            details
           </PopoverTrigger>
           <PopoverPopup side="bottom" align="end" width="lg" padding="compact">
             <p className="whitespace-pre-wrap break-words font-mono text-xs text-muted-foreground">
@@ -471,7 +471,7 @@ function DeviceDiscoveryWarning(props: {
         <Button
           size="icon-micro"
           variant="ghost"
-          aria-label={`Dismiss device warning for ${props.label}`}
+          aria-label={`dismiss device warning for ${props.label}`}
           onClick={() => {
             setOpen(false);
             setDismissedCause(cause);

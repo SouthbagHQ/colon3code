@@ -1029,7 +1029,7 @@ function ManagedCodexSetup({
                     disabled={readOnly || busy}
                     onClick={() => onModeChange("existing")}
                   >
-                    Use existing CLI
+                    use existing CLI
                   </Button>
                 ) : null}
               </>

@@ -339,7 +339,7 @@ function SidebarUpdateControl() {
             description:
               updatesDenial ??
               result.state.message ??
-              "Automatic updates are not available in this build.",
+              "automatic updates are not available in this build.",
           }),
         );
       })
@@ -377,7 +377,7 @@ function SidebarUpdateControl() {
       toastManager.add(
         stackedThreadToast({
           type: "error",
-          title: "Could not update everything",
+          title: "aw, couldn't update everything 3:",
           description: error instanceof Error ? error.message : "An unexpected error occurred.",
         }),
       );

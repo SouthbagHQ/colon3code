@@ -32,7 +32,7 @@ export function resolveSpeechPresentation(
       };
     case "error":
       return {
-        status: state.error ?? "Voice input failed",
+        status: state.error ?? "voice input failed",
         showsCancel: false,
         showsConfirm: false,
         confirmEnabled: false,
@@ -41,7 +41,7 @@ export function resolveSpeechPresentation(
     case "preparing":
       return {
         status: progress
-          ? `Downloading speech model ${Math.round((progress.downloaded / Math.max(1, progress.total)) * 100)}%`
+          ? `downloading speech model ${Math.round((progress.downloaded / Math.max(1, progress.total)) * 100)}%`
           : "Preparing",
         showsCancel: true,
         showsConfirm: true,
@@ -50,7 +50,7 @@ export function resolveSpeechPresentation(
       };
     case "recording":
       return {
-        status: "Recording",
+        status: "recording",
         showsCancel: true,
         showsConfirm: true,
         confirmEnabled: true,
@@ -58,7 +58,7 @@ export function resolveSpeechPresentation(
       };
     case "transcribing":
       return {
-        status: "Transcribing",
+        status: "transcribing",
         showsCancel: true,
         showsConfirm: true,
         confirmEnabled: false,
@@ -66,7 +66,7 @@ export function resolveSpeechPresentation(
       };
     case "post-processing":
       return {
-        status: "Post-processing",
+        status: "post-processing",
         showsCancel: true,
         showsConfirm: true,
         confirmEnabled: false,
@@ -147,7 +147,7 @@ function ComposerSpeechCancelButton(props: {
   onCancel(): void;
 }) {
   if (props.state.phase === "idle") return null;
-  const label = props.state.phase === "error" ? "Dismiss voice input error" : "Cancel voice input";
+  const label = props.state.phase === "error" ? "dismiss voice input error" : "cancel voice input";
 
   return (
     <Tooltip>
@@ -183,7 +183,7 @@ export function ComposerSpeechButton(props: {
   onCancel(): void;
 }) {
   const presentation = resolveSpeechPresentation(props.state, props.progress);
-  const label = "Start voice input";
+  const label = "start voice input";
 
   if (presentation.showsConfirm || props.state.phase === "error") return null;
 
@@ -245,8 +245,8 @@ export function ComposerSpeechRecordingPill(props: {
   if (!presentation.showsConfirm) return null;
 
   const label = presentation.confirmEnabled
-    ? "Finish voice input"
-    : (presentation.status ?? "Voice input is busy");
+    ? "finish voice input"
+    : (presentation.status ?? "voice input is busy");
 
   return (
     <VoiceInputPill>
@@ -270,7 +270,7 @@ export function ComposerSpeechRecordingPill(props: {
           onClick={props.onSkipPostProcessing}
           className="shrink-0"
         >
-          Skip
+          skip
         </Button>
       ) : (
         <Tooltip>

@@ -254,7 +254,7 @@ describe("EnvironmentProviderSettings routing", () => {
     await setProviders([provider()]);
     await using _screen = await render(panel({ targetInstanceId: customId }));
     await expect
-      .element(page.getByText("This provider instance is no longer available on this device."))
+      .element(page.getByText("aw, this provider instance isn't on this device anymore 3:"))
       .toBeVisible();
     expect(state.updateSettings).not.toHaveBeenCalled();
   });
@@ -272,7 +272,7 @@ describe("EnvironmentProviderSettings routing", () => {
       },
     };
     await using _screen = await render(panel());
-    await userEvent.click(page.getByRole("switch", { name: "Enable Work" }).first());
+    await userEvent.click(page.getByRole("switch", { name: "enable Work" }).first());
 
     expect(state.mutateProviderInstance).toHaveBeenCalledWith(
       {
@@ -311,7 +311,7 @@ describe("EnvironmentProviderSettings routing", () => {
       },
     ]);
     await using _screen = await render(panel({ targetInstanceId: instanceId }));
-    const link = page.getByRole("link", { name: "Continue authentication" });
+    const link = page.getByRole("link", { name: "continue authentication" });
     link.element().addEventListener("click", (event) => event.preventDefault());
     await userEvent.click(link);
 
@@ -352,7 +352,7 @@ describe("EnvironmentProviderSettings routing", () => {
     ]);
     await using _screen = await render(panel({ targetInstanceId: codexId }));
     await expect.element(page.getByRole("button", { name: "Reconnect account" })).toBeVisible();
-    await userEvent.click(page.getByRole("button", { name: "Use existing CLI" }).element());
+    await userEvent.click(page.getByRole("button", { name: "use existing CLI" }).element());
 
     expect(state.mutateProviderInstance).toHaveBeenCalledWith(
       {
@@ -384,7 +384,7 @@ describe("EnvironmentProviderSettings instance removal", () => {
     };
     await setProviders([provider()]);
     await using _screen = await render(panel({ targetInstanceId: codexId }));
-    const reset = page.getByRole("button", { name: "Reset Codex provider settings to default" });
+    const reset = page.getByRole("button", { name: /^reset .* provider settings to default$/ });
     await userEvent.click(reset);
 
     expect(state.mutateProviderInstance).not.toHaveBeenCalled();
@@ -416,7 +416,7 @@ describe("EnvironmentProviderSettings instance removal", () => {
     };
     await setProviders([{ ...provider(), instanceId: antigravityId, driver: antigravity }]);
     await using _screen = await render(panel({ targetInstanceId: antigravityId }));
-    await userEvent.click(page.getByRole("button", { name: /^Reset .* provider settings/ }));
+    await userEvent.click(page.getByRole("button", { name: /^reset .* provider settings/ }));
 
     expect(state.confirm).toHaveBeenCalledWith(
       expect.stringContaining("It will also be turned off."),
@@ -436,7 +436,7 @@ describe("EnvironmentProviderSettings instance removal", () => {
       },
     };
     await using _screen = await render(panel({ targetInstanceId: customId }));
-    const remove = page.getByRole("button", { name: `Delete instance ${customId}` });
+    const remove = page.getByRole("button", { name: `delete instance ${customId}` });
     await userEvent.click(remove);
 
     expect(state.mutateProviderInstance).not.toHaveBeenCalled();

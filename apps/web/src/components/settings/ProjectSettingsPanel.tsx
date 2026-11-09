@@ -99,7 +99,7 @@ function CheckoutGroupingSelect({ member }: { member: SidebarProjectGroupMember 
           toastManager.add(
             stackedThreadToast({
               type: "error",
-              title: "Could not save grouping rule",
+              title: "couldn't save grouping rule 3:",
               description: error instanceof Error ? error.message : "An error occurred.",
             }),
           );
@@ -108,7 +108,7 @@ function CheckoutGroupingSelect({ member }: { member: SidebarProjectGroupMember 
     >
       <SelectTrigger
         size="sm"
-        aria-label={`Grouping rule for ${member.workspaceRoot} on ${
+        aria-label={`grouping rule for ${member.workspaceRoot} on ${
           member.environmentLabel
             ? `${member.environmentLabel} (${member.environmentId})`
             : member.environmentId
@@ -116,13 +116,13 @@ function CheckoutGroupingSelect({ member }: { member: SidebarProjectGroupMember 
       >
         <SelectValue>
           {selection === "inherit"
-            ? `Default (${PROJECT_GROUPING_MODE_LABELS[globalMode]})`
+            ? `default (${PROJECT_GROUPING_MODE_LABELS[globalMode]})`
             : PROJECT_GROUPING_MODE_LABELS[selection]}
         </SelectValue>
       </SelectTrigger>
       <SelectPopup align="end" alignItemWithTrigger={false}>
         <SelectItem hideIndicator value="inherit">
-          Use global default
+          use global default
         </SelectItem>
         <SelectItem hideIndicator value="repository">
           {PROJECT_GROUPING_MODE_LABELS.repository}
@@ -346,7 +346,7 @@ function ProjectDetail({
     group.memberProjects.some((member) => member.title !== SCRATCH_PROJECT_TITLE);
 
   const removeMembers = async (members: ReadonlyArray<SidebarProjectGroupMember>) => {
-    if (checkProjectAccess(members, "Failed to remove project")) return;
+    if (checkProjectAccess(members, "couldn't remove project 3:")) return;
     const api = readLocalApi();
     if (!api) return;
 
@@ -362,11 +362,11 @@ function ProjectDetail({
       api.dialogs.confirm(confirmationMessage, { variant: "destructive" }),
     );
     if (confirmed._tag === "Failure" || !confirmed.value) return;
-    if (checkProjectAccess(members, "Failed to remove project")) return;
+    if (checkProjectAccess(members, "couldn't remove project 3:")) return;
 
     const draftStore = useComposerDraftStore.getState();
     for (const member of members) {
-      if (checkProjectAccess([member], "Failed to remove project")) return;
+      if (checkProjectAccess([member], "couldn't remove project 3:")) return;
       const memberThreads = projectThreads.filter(
         (thread) => thread.environmentId === member.environmentId && thread.projectId === member.id,
       );
@@ -425,9 +425,9 @@ function ProjectDetail({
           variant="outline"
           disabled={!editableIds.has(member.environmentId)}
           onClick={() => void removeMembers([member])}
-          aria-label={`Remove checkout ${member.workspaceRoot}`}
+          aria-label={`remove checkout ${member.workspaceRoot}`}
         >
-          Remove
+          remove
         </Button>
       ) : null}
     </div>
@@ -610,7 +610,7 @@ function ProjectDetail({
           {canOrganize ? (
             <>
               <SettingsRow
-                title="Pin"
+                title="pin"
                 description="Pinned projects come first in project pickers."
                 control={
                   <Switch
@@ -619,15 +619,15 @@ function ProjectDetail({
                     onCheckedChange={(checked) =>
                       void organize(
                         { pinned: Boolean(checked) },
-                        checked ? "Failed to pin project" : "Failed to unpin project",
+                        checked ? "couldn't pin project 3:" : "couldn't unpin project 3:",
                       )
                     }
-                    aria-label="Pin project"
+                    aria-label="pin project"
                   />
                 }
               />
               <SettingsRow
-                title="Archive"
+                title="archive"
                 description={
                   group.archived
                     ? "Hidden from project pickers. Threads and files are kept."
@@ -642,12 +642,12 @@ function ProjectDetail({
                       void organize(
                         { archived: !group.archived },
                         group.archived
-                          ? "Failed to unarchive project"
-                          : "Failed to archive project",
+                          ? "couldn't unarchive project 3:"
+                          : "couldn't archive project 3:",
                       )
                     }
                   >
-                    {group.archived ? "Unarchive" : "Archive"}
+                    {group.archived ? "unarchive" : "archive"}
                   </Button>
                 }
               />

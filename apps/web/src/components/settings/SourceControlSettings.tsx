@@ -182,7 +182,7 @@ function itemSummary({
     }
 
     if (auth.status === "unauthenticated" && auth.accounts?.some((entry) => entry.authenticated)) {
-      return <span>{optionLabel(auth.detail) ?? `Every ${item.label} host is turned off.`}</span>;
+      return <span>{optionLabel(auth.detail) ?? `every ${item.label} host is turned off.`}</span>;
     }
 
     if (auth.status === "unauthenticated") {
@@ -360,7 +360,7 @@ function EmptySourceControlDiscovery({
         <EmptyContent>
           <Button size="sm" variant="outline" onClick={onScan} disabled={isPending}>
             <RefreshIcon size="sm" refreshing={isPending} />
-            Scan
+            scan
           </Button>
         </EmptyContent>
       </Empty>
@@ -411,7 +411,7 @@ export function SourceControlSettingsPanel() {
             {credentials.appSignIn && item.appSignIn === true ? (
               <div className="flex items-center gap-3 text-2xs text-muted-foreground">
                 <span aria-hidden className="h-px flex-1 bg-border" />
-                Or use your own credentials
+                or use your own credentials
                 <span aria-hidden className="h-px flex-1 bg-border" />
               </div>
             ) : null}

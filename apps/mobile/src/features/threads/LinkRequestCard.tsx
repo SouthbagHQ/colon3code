@@ -48,7 +48,7 @@ const ACCESS_CHOICES: ReadonlyArray<{
 }> = [
   {
     access: "read-only",
-    label: "Read only",
+    label: "read only",
     description: "Read projects and threads. Cannot start, message or change anything.",
   },
   ...RUNTIME_MODE_CHOICES.map((choice) => ({ ...choice, access: choice.mode })),
@@ -135,7 +135,7 @@ function PendingLinkRequest(props: {
       <View className="gap-1">
         <Text className="font-t3-bold text-base text-foreground">
           {picksMachine(item)
-            ? "Link a machine to this environment"
+            ? "link a machine to this environment"
             : `Link ${target} to this environment`}
         </Text>
         {item.reason.trim() ? (
@@ -159,7 +159,7 @@ function PendingLinkRequest(props: {
       {canAnswer ? (
         <>
           <Button
-            label={picksMachine(item) ? "Choose machine…" : "Review link…"}
+            label={picksMachine(item) ? "choose machine…" : "review link…"}
             disabled={declining}
             onPress={() => setOpen(true)}
             tone="primary"
@@ -174,7 +174,7 @@ function PendingLinkRequest(props: {
               className="px-1 py-1 active:opacity-60 disabled:opacity-50"
               onPress={() => void decline()}
             >
-              <Text className="font-sans text-xs text-foreground-muted">Decline</Text>
+              <Text className="font-sans text-xs text-foreground-muted">decline</Text>
             </Pressable>
           </View>
         </>
@@ -318,7 +318,7 @@ function LinkRequestSheet(props: {
 
   return (
     <Sheet
-      title={pickMachine ? "Link a machine" : `Link ${targetName}`}
+      title={pickMachine ? "link a machine" : `link ${targetName}`}
       onClose={props.onClose}
       // An answer that lands after a close would still link, and would close a reopened sheet.
       dismissDisabled={busy}
@@ -342,7 +342,7 @@ function LinkRequestSheet(props: {
           ) : null}
         </View>
         {pickMachine ? (
-          <SettingsSection title="Machine">
+          <SettingsSection title="machine">
             {machines.map((machine, index) => (
               <MachineRow
                 key={machine.environmentId}
@@ -357,7 +357,7 @@ function LinkRequestSheet(props: {
               />
             ))}
             <SettingsChoiceRow
-              label="Another address…"
+              label="another address…"
               description="Link a machine this app does not know, by its https or Tailscale address."
               selected={selected === ANOTHER_ADDRESS}
               separated={machines.length > 0}
@@ -372,7 +372,7 @@ function LinkRequestSheet(props: {
         {needsAddress && !(item.url !== undefined && item.environmentId === undefined) ? (
           <View className="gap-2">
             <TextInput
-              accessibilityLabel="Address"
+              accessibilityLabel="address"
               placeholder="https://machine.tailnet.ts.net"
               value={address}
               onChangeText={setAddress}
@@ -400,8 +400,8 @@ function LinkRequestSheet(props: {
             {canMint ? null : (
               <View className="gap-2">
                 <TextInput
-                  accessibilityLabel="Pairing code"
-                  placeholder="Paste the code"
+                  accessibilityLabel="pairing code"
+                  placeholder="paste the code"
                   value={pairingCode}
                   onChangeText={setPairingCode}
                   editable={!busy}
@@ -417,7 +417,7 @@ function LinkRequestSheet(props: {
                 </Text>
               </View>
             )}
-            <SettingsSection title="What agents here may do there">
+            <SettingsSection title="what agents here may do there">
               {ACCESS_CHOICES.map((choice, index) => (
                 <SettingsChoiceRow
                   key={choice.access}
@@ -446,13 +446,13 @@ function LinkRequestSheet(props: {
           </Text>
         ) : null}
         <Button
-          label={busy ? "Linking…" : useExisting ? "Use this link" : "Link"}
+          label={busy ? "linking…" : useExisting ? "use this link" : "link"}
           disabled={busy || !ready}
           onPress={() => void submit()}
           tone="primary"
           fullWidth
         />
-        <Button label="Cancel" tone="secondary" disabled={busy} onPress={props.onClose} fullWidth />
+        <Button label="cancel" tone="secondary" disabled={busy} onPress={props.onClose} fullWidth />
       </ScrollView>
     </Sheet>
   );
@@ -473,7 +473,7 @@ function MachineRow(props: {
       ? null
       : machine.connectOnly
         ? "T3 Connect"
-        : "Not connected";
+        : "not connected";
   return (
     <Pressable
       accessibilityRole="radio"

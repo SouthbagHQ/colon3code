@@ -110,9 +110,9 @@ async function copyPageText(text: string) {
   } catch {
     const id = toastManager.add({
       type: "info",
-      title: "The page copied text",
+      title: "the page copied text",
       actionProps: {
-        children: "Copy",
+        children: "copy",
         onClick: () => {
           toastManager.close(id);
           void navigator.clipboard.writeText(text).catch(() => undefined);
@@ -125,9 +125,9 @@ async function copyPageText(text: string) {
 function offerDownload(download: PreviewStreamDownload) {
   const id = toastManager.add({
     type: "info",
-    title: `Downloaded ${download.fileName}`,
+    title: `downloaded ${download.fileName}`,
     actionProps: {
-      children: "Save",
+      children: "save",
       onClick: () => {
         toastManager.close(id);
         const anchor = document.createElement("a");
@@ -189,7 +189,7 @@ export function ServerBrowserSurface(props: {
     void uploadPreviewStreamFiles(chooser, files).catch((cause: unknown) =>
       toastManager.add({
         type: "error",
-        title: "Could not send the files to the page",
+        title: "aw, couldn't send the files to the page 3:",
         description: cause instanceof Error ? cause.message : undefined,
       }),
     );
@@ -764,7 +764,7 @@ export function ServerBrowserSurface(props: {
               send({ type: control.controller === "you" ? "releaseControl" : "takeControl" })
             }
           >
-            {control.controller === "you" ? "Release control" : "Take control"}
+            {control.controller === "you" ? "release control" : "take control"}
           </Button>
         ) : null}
       </div>
@@ -796,7 +796,7 @@ export function ServerBrowserSurface(props: {
         {/* Pin top-left to avoid focus scrolling; 16px prevents iOS focus zoom. */}
         <textarea
           ref={inputRef}
-          aria-label="Browser page"
+          aria-label="browser page"
           aria-description="Press Shift+Escape to leave the browser page."
           autoCapitalize="off"
           autoComplete="off"
@@ -826,7 +826,7 @@ export function ServerBrowserSurface(props: {
           <div
             className="absolute inset-x-2 top-2 z-10 flex flex-col gap-2 rounded-lg border border-border bg-background p-3 shadow-lg"
             role="dialog"
-            aria-label="Choose files for the page"
+            aria-label="choose files for the page"
           >
             <p className="text-sm">
               The page asks for {fileChooser.multiple ? "files" : "a file"}.
@@ -845,7 +845,7 @@ export function ServerBrowserSurface(props: {
             />
             <div className="flex justify-end gap-2">
               <Button variant="outline" size="sm" onClick={() => answerFileChooser([])}>
-                Cancel
+                cancel
               </Button>
               <Button size="sm" onClick={() => fileInputRef.current?.click()}>
                 Choose {fileChooser.multiple ? "files" : "file"}
@@ -857,14 +857,14 @@ export function ServerBrowserSurface(props: {
           <div
             className="absolute inset-x-2 top-2 z-10 flex flex-col gap-2 rounded-lg border border-border bg-background p-3 shadow-lg"
             role="dialog"
-            aria-label="Browser dialog"
+            aria-label="browser dialog"
           >
             <p className="break-words text-sm">{control.dialog.message}</p>
             {control.controller === "you" ? (
               <>
                 {control.dialog.type === "prompt" ? (
                   <Input
-                    aria-label="Dialog response"
+                    aria-label="dialog response"
                     value={promptText}
                     onChange={(event) => setPromptText(event.target.value)}
                   />
@@ -875,7 +875,7 @@ export function ServerBrowserSurface(props: {
                     size="sm"
                     onClick={() => send({ type: "dialog", accept: false })}
                   >
-                    Dismiss
+                    dismiss
                   </Button>
                   <Button
                     size="sm"
@@ -887,7 +887,7 @@ export function ServerBrowserSurface(props: {
                       })
                     }
                   >
-                    Accept
+                    accept
                   </Button>
                 </div>
               </>
@@ -904,7 +904,7 @@ export function ServerBrowserSurface(props: {
           </p>
           <CommandBlock command={hostSetup.command} className="w-full max-w-md text-left" />
           <Button variant="outline" size="sm" onClick={() => setHostSetup(null)}>
-            Try again
+            try again
           </Button>
         </div>
       ) : null}

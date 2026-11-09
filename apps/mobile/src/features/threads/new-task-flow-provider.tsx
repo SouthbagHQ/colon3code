@@ -626,7 +626,7 @@ export function NewTaskFlowProvider(
     if (!isAtomCommandInterrupted(result)) {
       const error = squashAtomCommandFailure(result);
       Dialog.alert(
-        "Could not switch machine",
+        "could not switch machine 3:",
         error instanceof Error
           ? error.message
           : "The folder for threads without a project could not be created.",

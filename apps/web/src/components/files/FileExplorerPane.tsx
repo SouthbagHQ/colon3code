@@ -20,7 +20,7 @@ export function FileExplorerPane({
   defaultWidth = 256,
   defaultWidthFraction,
   minWidth = MIN_WIDTH,
-  resizeLabel = "Resize file explorer",
+  resizeLabel = "resize file explorer",
 }: {
   resizable: boolean;
   children: ReactNode;
@@ -61,7 +61,7 @@ export function FileExplorerPane({
         measure();
         return observeResize(row, measure);
       }}
-      aria-label="File explorer"
+      aria-label="file explorer"
       className={cn(
         "relative flex min-h-0 min-w-0 shrink-0 bg-background",
         resizable ? "border-l border-border/60" : "flex-1",

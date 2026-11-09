@@ -61,9 +61,9 @@ function Picker({ keybindings = [] }: { keybindings?: ResolvedKeybindingsConfig 
 it("keeps composition keys out of model selection and dismissal", async () => {
   await using screen = await render(<Picker />);
   await page.getByRole("button", { name: "Choose model" }).click();
-  const search = page.getByPlaceholder("Search models...");
+  const search = page.getByPlaceholder("search models...");
   await search.fill("Target");
-  await expect.element(page.getByRole("option", { name: /Target model/ })).toBeVisible();
+  await expect.element(page.getByRole("option", { name: /target model/ })).toBeVisible();
 
   for (const nativeEvent of [{ isComposing: true }, { keyCode: 229 }]) {
     for (const key of ["Enter", "Escape"]) {
@@ -99,9 +99,9 @@ it("keeps composing keys from triggering model jump shortcuts", async () => {
   ]);
   await using screen = await render(<Picker keybindings={keybindings} />);
   await page.getByRole("button", { name: "Choose model" }).click();
-  const search = page.getByPlaceholder("Search models...");
+  const search = page.getByPlaceholder("search models...");
   await search.fill("Target");
-  await expect.element(page.getByRole("option", { name: /Target model/ })).toBeVisible();
+  await expect.element(page.getByRole("option", { name: /target model/ })).toBeVisible();
 
   for (const nativeEvent of [{ isComposing: true }, { keyCode: 229 }]) {
     const event = new KeyboardEvent("keydown", {

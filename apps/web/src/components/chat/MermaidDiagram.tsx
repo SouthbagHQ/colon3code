@@ -276,7 +276,7 @@ export function MermaidDiagram({
       {renderError ? <DiagramError message={renderError} source={source} /> : null}
       <button
         type="button"
-        aria-label="Expand diagram"
+        aria-label="expand diagram"
         hidden={renderError !== null}
         className="block w-full cursor-zoom-in rounded-md focus-visible:outline-2 focus-visible:outline-ring"
         onClick={(event) => {
@@ -305,7 +305,7 @@ function DiagramError({
         <p className="m-0 text-xs text-destructive">Unable to render diagram: {message}</p>
         {onRetry ? (
           <Button type="button" variant="ghost" size="xs" onClick={onRetry}>
-            Retry
+            retry
           </Button>
         ) : null}
       </div>

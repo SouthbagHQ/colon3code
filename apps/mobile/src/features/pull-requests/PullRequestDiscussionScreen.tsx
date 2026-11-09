@@ -144,7 +144,7 @@ function Discussion({ params }: { params: PullRequestParams & { readonly discuss
     <PullRequestMarkdownRepository params={params} changeRequest={detail.data}>
       <KeyboardAvoidingView automaticOffset behavior="height" className="flex-1 bg-screen">
         <AppBar
-          title="Discussion"
+          title="discussion"
           subtitle={`#${params.number}`}
           onBack={() => navigation.goBack()}
           actions={
@@ -182,7 +182,7 @@ function Discussion({ params }: { params: PullRequestParams & { readonly discuss
                   {thread.isOutdated ? " · Outdated" : ""}
                 </Text>
                 <Button
-                  label="View file diff"
+                  label="view file diff"
                   onPress={() =>
                     navigation.navigate("PullRequestFile", { ...params, path: thread.path })
                   }
@@ -196,7 +196,7 @@ function Discussion({ params }: { params: PullRequestParams & { readonly discuss
                 <View className="flex-row items-center gap-2">
                   <PullRequestAvatar actor={comment.author} size={28} />
                   <Text className="min-w-0 flex-1 text-sm font-t3-medium">
-                    {comment.author?.login ?? "Unknown author"}
+                    {comment.author?.login ?? "unknown author"}
                   </Text>
                   <Text className="text-2xs text-foreground-muted">
                     {relativeTime(comment.createdAt)}
@@ -217,7 +217,7 @@ function Discussion({ params }: { params: PullRequestParams & { readonly discuss
             ))}
             {nextCursor ? (
               <Button
-                label={busy ? "Loading…" : "Load more replies"}
+                label={busy ? "loading…" : "load more replies"}
                 disabled={busy}
                 onPress={() => void more()}
               />
@@ -242,13 +242,13 @@ function Discussion({ params }: { params: PullRequestParams & { readonly discuss
               className="flex-row items-end gap-1 p-1"
             >
               <TextInput
-                accessibilityLabel="Discussion reply"
+                accessibilityLabel="discussion reply"
                 selection={completions.selection}
                 onSelectionChange={completions.onSelectionChange}
                 onBlur={completions.onBlur}
                 multiline
                 maxLength={65536}
-                placeholder="Reply…"
+                placeholder="reply…"
                 placeholderTextColorClassName="accent-foreground-muted"
                 value={body}
                 onChangeText={setBody}
@@ -257,7 +257,7 @@ function Discussion({ params }: { params: PullRequestParams & { readonly discuss
               />
               <View>
                 <Button
-                  label={busy ? "Posting…" : "Reply"}
+                  label={busy ? "posting…" : "Reply"}
                   tone="contrast"
                   disabled={busy || !body.trim()}
                   onPress={() => void post()}

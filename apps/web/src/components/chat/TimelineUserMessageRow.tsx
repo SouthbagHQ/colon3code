@@ -120,7 +120,7 @@ function UserFileCard({
         </span>
         <span className="block text-xs text-muted-foreground tabular-nums">
           {file.downloadable === false ? (
-            "Sending…"
+            "sending…"
           ) : (
             <>
               {!pastedText && `${extension} · `}
@@ -139,7 +139,7 @@ function UserFileCard({
       {file.downloadable === false ? (
         <>
           <div className="flex min-w-0 flex-1 items-center gap-3">{identity}</div>
-          <Button size="icon-xs" variant="ghost-muted" disabled aria-label="Sending attachment">
+          <Button size="icon-xs" variant="ghost-muted" disabled aria-label="sending attachment">
             <DownloadIcon />
           </Button>
         </>
@@ -335,7 +335,7 @@ function AutomationMessageRow({ row }: { row: Extract<TimelineRow, { kind: "mess
                 search={{ environmentId: ctx.activeThreadEnvironmentId, taskId: scheduledTaskId }}
                 className="rounded-sm text-xs text-muted-foreground hover:underline focus-visible:outline-2 focus-visible:outline-ring"
               >
-                Open automation
+                open automation
               </Link>
             ) : null}
             <TimelineRowTimestamp
@@ -351,7 +351,7 @@ function AutomationMessageRow({ row }: { row: Extract<TimelineRow, { kind: "mess
               {promptLink !== null && (
                 <MessageCopyButton
                   text={promptLink}
-                  label="Copy prompt link"
+                  label="copy prompt link"
                   icon={LinkIconNode}
                   variant="ghost"
                 />
@@ -784,7 +784,7 @@ function UserTimelineRow({ row }: { row: Extract<TimelineRow, { kind: "message" 
     >
       {folded && senderThreadId ? (
         <InlineButton onClick={() => ctx.onOpenThread(senderThreadId)} tone="muted">
-          Open thread
+          open thread
         </InlineButton>
       ) : null}
       <Tooltip>
@@ -815,7 +815,7 @@ function UserTimelineRow({ row }: { row: Extract<TimelineRow, { kind: "message" 
         {promptLink !== null && (
           <MessageCopyButton
             text={promptLink}
-            label="Copy prompt link"
+            label="copy prompt link"
             icon={LinkIconNode}
             variant="ghost"
           />
@@ -833,7 +833,7 @@ function UserTimelineRow({ row }: { row: Extract<TimelineRow, { kind: "message" 
           className="me-1 text-2xs text-muted-foreground/70"
           data-user-message-attribution="colon3code"
         >
-          Sent by :3 Code
+          sent by :3 Code
         </p>
       ) : null}
       {/* The row's heading already names the guest for screen readers. */}
@@ -948,7 +948,7 @@ function UserTimelineRow({ row }: { row: Extract<TimelineRow, { kind: "message" 
                         <span className="block truncate">{label}</span>
                         {file.downloadable === false || pastedText ? (
                           <span className="block text-xs text-muted-foreground tabular-nums">
-                            {file.downloadable === false ? "Sending…" : formatBytes(file.sizeBytes)}
+                            {file.downloadable === false ? "sending…" : formatBytes(file.sizeBytes)}
                           </span>
                         ) : null}
                       </span>
@@ -1066,8 +1066,8 @@ function UserMessageIntentMarker({
       </TooltipTrigger>
       <TooltipPopup side="top">
         {intent === "promoted_queued_to_steer"
-          ? "Originally queued, then promoted to steer the active turn"
-          : "Steered the active turn"}
+          ? "originally queued, then promoted to steer the active turn"
+          : "steered the active turn"}
       </TooltipPopup>
     </Tooltip>
   );

@@ -118,8 +118,8 @@ function setup() {
 it("saves maintainer edits, locks while saving, and restores the saved value when a save fails", async () => {
   const control = setup();
   await using screen = await render(control());
-  await screen.getByRole("button", { name: "More pull request actions" }).click();
-  const checkbox = page.getByRole("menuitemcheckbox", { name: "Allow edits from maintainers" });
+  await screen.getByRole("button", { name: "more pull request actions" }).click();
+  const checkbox = page.getByRole("menuitemcheckbox", { name: "allow edits from maintainers" });
   await expect.element(checkbox).toBeChecked();
   await checkbox.click();
   await expect.element(page.getByRole("status")).not.toBeInTheDocument();
@@ -146,7 +146,7 @@ it("saves maintainer edits, locks while saving, and restores the saved value whe
   expect(mocks.notify).toHaveBeenCalledExactlyOnceWith(
     expect.objectContaining({
       type: "error",
-      title: "Could not save maintainer access",
+      title: "couldn't save maintainer access 3:",
       description: "Resource not accessible by integration",
     }),
   );
@@ -155,8 +155,8 @@ it("saves maintainer edits, locks while saving, and restores the saved value whe
 it("keeps a saved choice through a stale refresh, then follows the host", async () => {
   const control = setup();
   await using screen = await render(control());
-  await screen.getByRole("button", { name: "More pull request actions" }).click();
-  const checkbox = page.getByRole("menuitemcheckbox", { name: "Allow edits from maintainers" });
+  await screen.getByRole("button", { name: "more pull request actions" }).click();
+  const checkbox = page.getByRole("menuitemcheckbox", { name: "allow edits from maintainers" });
   let settle!: (value: { _tag: "Success" }) => void;
   mocks.update.mockReturnValueOnce(
     new Promise((resolve) => {
@@ -178,8 +178,8 @@ it("keeps a saved choice through a stale refresh, then follows the host", async 
 it("follows the host's first reading after a save, even when it matches the old value", async () => {
   const control = setup();
   await using screen = await render(control());
-  await screen.getByRole("button", { name: "More pull request actions" }).click();
-  const checkbox = page.getByRole("menuitemcheckbox", { name: "Allow edits from maintainers" });
+  await screen.getByRole("button", { name: "more pull request actions" }).click();
+  const checkbox = page.getByRole("menuitemcheckbox", { name: "allow edits from maintainers" });
   await checkbox.click();
   await expect.element(page.getByRole("status")).not.toBeInTheDocument();
   await expect.element(checkbox).not.toBeChecked();
@@ -206,7 +206,7 @@ it.each<[string, Detail]>([
 ])("hides maintainer edits on a pull request that is %s", async (_, detail) => {
   const control = setup();
   await using screen = await render(control(detail));
-  await screen.getByRole("button", { name: "More pull request actions" }).click();
+  await screen.getByRole("button", { name: "more pull request actions" }).click();
   await expect.element(page.getByRole("menuitem", { name: "Open on GitHub" })).toBeVisible();
   expect(document.querySelector('[role="menuitemcheckbox"]')).toBeNull();
 });

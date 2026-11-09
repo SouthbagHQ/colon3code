@@ -311,8 +311,8 @@ export function DraftHeroHeadline({
       </Tooltip>
       <ComboboxPopup align="center" className="w-72 overflow-hidden">
         <ComboboxSearchInput
-          aria-label="Search projects"
-          placeholder="Search projects..."
+          aria-label="search projects"
+          placeholder="search projects…"
           value={pickerQuery}
           onChange={(event) => setPickerQuery(event.target.value)}
           onKeyDown={(event) => {

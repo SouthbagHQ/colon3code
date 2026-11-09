@@ -614,7 +614,7 @@ function ThreadDetailBody(
     });
     setForceStoppingKey((current) => (current === threadKey ? null : current));
     if (result._tag === "Failure") {
-      if (!isAtomCommandInterrupted(result)) Dialog.alert("Could not force stop the agent");
+      if (!isAtomCommandInterrupted(result)) Dialog.alert("could not force stop the agent 3:");
       return;
     }
     const others = result.value.sharedWithThreadIds.length;
@@ -735,7 +735,7 @@ function ThreadDetailBody(
     if (result._tag === "Failure" && !isAtomCommandInterrupted(result)) {
       const error = squashAtomCommandFailure(result);
       Dialog.alert(
-        "Could not update thread",
+        "could not update thread 3:",
         error instanceof Error ? error.message : "Try again.",
       );
     }
@@ -770,15 +770,15 @@ function ThreadDetailBody(
         action:
           unresponsive && canForceStop
             ? {
-                label: forceStoppingKey === selectedThreadKey ? "Force stopping..." : "Force stop",
-                accessibilityLabel: "Force stop the agent",
+                label: forceStoppingKey === selectedThreadKey ? "force stopping…" : "force stop",
+                accessibilityLabel: "force stop the agent",
                 disabled: forceStoppingKey === selectedThreadKey,
                 onPress: () =>
                   Dialog.confirm({
-                    title: "Force stop the agent?",
+                    title: "force stop the agent?",
                     message:
                       "It has not answered Stop. Force stop ends the turn and kills the agent's processes, unless other working threads share them.",
-                    confirmText: "Force stop",
+                    confirmText: "force stop",
                     destructive: true,
                     onConfirm: () => void forceStop(runStop.runId),
                   }),
@@ -807,7 +807,7 @@ function ThreadDetailBody(
       return {
         kind: "child-input",
         label: childThreadInputsTitle(childThreadInputs),
-        accessibilityLabel: `Open ${childInput.hasPendingApprovals ? "approval" : "question"} from ${childInput.title}`,
+        accessibilityLabel: `open ${childInput.hasPendingApprovals ? "approval" : "question"} from ${childInput.title}`,
         onPress: () => {
           Keyboard.dismiss();
           openLinkedThread({ environmentId: childInput.environmentId, threadId: childInput.id });
@@ -837,7 +837,7 @@ function ThreadDetailBody(
         },
         action: {
           label: statusPending ? "Stopping..." : "Stop",
-          accessibilityLabel: "Stop background work",
+          accessibilityLabel: "stop background work",
           disabled: !props.canOperateThread || statusPending,
           onPress: () => void runStatusAction("stop"),
         },
@@ -1303,7 +1303,7 @@ function ThreadDetailBody(
             if (feedbackTarget?.supportsFeedback) {
               if (hasAttachmentsOrContext) {
                 Dialog.alert(
-                  "Approval feedback",
+                  "approval feedback",
                   "Send approval feedback without attachments or added context.",
                 );
                 return false;

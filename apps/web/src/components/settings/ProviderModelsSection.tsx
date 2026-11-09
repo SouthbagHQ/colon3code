@@ -477,10 +477,10 @@ function ProviderModelRow({
   const capLabels = describeModelCapabilities(model, flagMissingReasoning);
   const nameClassName = cn("text-xs", isHidden ? "text-muted-foreground" : "text-foreground/90");
   const pickerTooltip = model.isCustom
-    ? "Custom models are always shown in the picker"
+    ? "custom models are always shown in the picker"
     : isHidden
-      ? "Hidden from picker"
-      : "Shown in picker";
+      ? "hidden from picker"
+      : "shown in picker";
 
   return (
     <div
@@ -498,7 +498,7 @@ function ProviderModelRow({
               variant="ghost-muted"
               disabled={!canWritePreferences}
               onClick={() => onToggleFavorite(model.slug)}
-              aria-label={`${isFavorite ? "Remove" : "Add"} ${model.name} ${
+              aria-label={`${isFavorite ? "remove" : "add"} ${model.name} ${
                 isFavorite ? "from" : "to"
               } favorites`}
             />
@@ -507,7 +507,7 @@ function ProviderModelRow({
           <StarIcon className={cn("size-3", isFavorite && "fill-current text-warning")} />
         </TooltipTrigger>
         <TooltipPopup side="top">
-          {isFavorite ? "Remove from favorites" : "Add to favorites"}
+          {isFavorite ? "remove from favorites" : "add to favorites"}
         </TooltipPopup>
       </Tooltip>
       <span className="flex min-w-0 items-baseline gap-2">
@@ -551,13 +551,13 @@ function ProviderModelRow({
                     variant="ghost-muted"
                     disabled={!canWritePreferences || !canMoveUp}
                     onClick={() => onMove(model.slug, -1)}
-                    aria-label={`Move ${model.name} up`}
+                    aria-label={`move ${model.name} up`}
                   />
                 }
               >
                 <ArrowUpIcon className="size-3" />
               </TooltipTrigger>
-              <TooltipPopup side="top">Move up</TooltipPopup>
+              <TooltipPopup side="top">move up</TooltipPopup>
             </Tooltip>
             <Tooltip>
               <TooltipTrigger
@@ -567,13 +567,13 @@ function ProviderModelRow({
                     variant="ghost-muted"
                     disabled={!canWritePreferences || !canMoveDown}
                     onClick={() => onMove(model.slug, 1)}
-                    aria-label={`Move ${model.name} down`}
+                    aria-label={`move ${model.name} down`}
                   />
                 }
               >
                 <ArrowDownIcon className="size-3" />
               </TooltipTrigger>
-              <TooltipPopup side="top">Move down</TooltipPopup>
+              <TooltipPopup side="top">move down</TooltipPopup>
             </Tooltip>
           </>
         ) : null}
@@ -586,14 +586,14 @@ function ProviderModelRow({
                     size="icon-micro"
                     variant="ghost-muted"
                     disabled={!canManageCustomModels}
-                    aria-label={`Edit ${model.slug}`}
+                    aria-label={`edit ${model.slug}`}
                     onClick={() => onToggleEdit(model.slug)}
                   />
                 }
               >
                 <PencilIcon className="size-3" />
               </TooltipTrigger>
-              <TooltipPopup side="top">Edit name and options</TooltipPopup>
+              <TooltipPopup side="top">edit name and options</TooltipPopup>
             </Tooltip>
             <Tooltip>
               <TooltipTrigger
@@ -602,14 +602,14 @@ function ProviderModelRow({
                     size="icon-micro"
                     variant="ghost-muted"
                     disabled={!canManageCustomModels}
-                    aria-label={`Remove ${model.slug}`}
+                    aria-label={`remove ${model.slug}`}
                     onClick={() => onRemove(model.slug)}
                   />
                 }
               >
                 <XIcon className="size-3" />
               </TooltipTrigger>
-              <TooltipPopup side="top">Remove custom model</TooltipPopup>
+              <TooltipPopup side="top">remove custom model</TooltipPopup>
             </Tooltip>
           </>
         ) : null}
@@ -622,7 +622,7 @@ function ProviderModelRow({
             checked={!isHidden}
             disabled={!canWritePreferences || model.isCustom}
             onCheckedChange={(checked) => onSetHidden(model.slug, !checked)}
-            aria-label={`Show ${model.name} in the model picker`}
+            aria-label={`show ${model.name} in the model picker`}
           />
         </TooltipTrigger>
         <TooltipPopup side="top">{pickerTooltip}</TooltipPopup>

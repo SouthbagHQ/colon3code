@@ -178,10 +178,10 @@ function CrashReportsSetting() {
 
   return (
     <View className="gap-3">
-      <SettingsSection title="Crash reports">
+      <SettingsSection title="crash reports">
         <SettingsSwitchRow
           icon="tray.and.arrow.up"
-          label="Send crash reports"
+          label="send crash reports"
           disabled={!ready || saving}
           value={enabled}
           onValueChange={change}

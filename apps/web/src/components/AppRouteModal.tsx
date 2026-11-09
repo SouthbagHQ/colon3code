@@ -90,14 +90,14 @@ export function AppRouteModalClose() {
       <TooltipTrigger
         render={
           <DialogPrimitive.Close
-            aria-label="Close"
+            aria-label="close"
             render={<Button size="icon-sm" variant="ghost" />}
           />
         }
       >
         <XIcon />
       </TooltipTrigger>
-      <TooltipPopup side="bottom">Close (Esc)</TooltipPopup>
+      <TooltipPopup side="bottom">close (Esc)</TooltipPopup>
     </Tooltip>
   );
 }

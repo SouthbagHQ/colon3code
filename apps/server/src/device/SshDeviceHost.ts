@@ -238,7 +238,7 @@ export const make = Effect.fn("SshDeviceHost.make")(function* (
         preHostArgs: identityArgs(config),
         // Match the hub cwd so relative executables and PATH entries resolve identically.
         remoteCommandArgs: commandArgs(
-          `cd "$HOME/.t3/device/hosts/${owner}" && exec ${[command, ...args].map(quoteRemoteArg).join(" ")}`,
+          `cd "$HOME/.colon3code/device/hosts/${owner}" && exec ${[command, ...args].map(quoteRemoteArg).join(" ")}`,
         ),
         keepErrorOutputTail: true,
         ...(options?.stdin === undefined ? {} : { stdin: options.stdin }),

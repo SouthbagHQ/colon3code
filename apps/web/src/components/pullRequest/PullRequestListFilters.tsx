@@ -298,14 +298,14 @@ function PullRequestAuthorChoices({
         busy={hosted.isPending}
         value={query}
         onChange={(event) => setQuery(event.currentTarget.value)}
-        placeholder="Search authors"
-        aria-label="Search authors"
+        placeholder="search authors"
+        aria-label="search authors"
       />
       <MenuRadioGroup value={selected?.actor.login ?? value ?? ""} onValueChange={select}>
         <MenuRadioItem value="">
           <span className="flex min-w-0 items-center gap-2">
             <LayersIcon aria-hidden className="size-3.5" />
-            Anyone
+            anyone
           </span>
         </MenuRadioItem>
         {visible.map((option) => (
@@ -323,7 +323,7 @@ function PullRequestAuthorChoices({
         ))}
         {visible.length === 0 && !hosted.isPending ? (
           <MenuItem disabled>
-            {hosted.error === null ? "No authors found" : "Couldn't search authors on the host"}
+            {hosted.error === null ? "no authors found" : "couldn't search authors on the host 3:"}
           </MenuItem>
         ) : null}
       </MenuRadioGroup>
@@ -391,12 +391,12 @@ function PullRequestLabelChoices({
         busy={hosted.isPending}
         value={query}
         onChange={(event) => setQuery(event.currentTarget.value)}
-        placeholder="Search labels"
-        aria-label="Search labels"
+        placeholder="search labels"
+        aria-label="search labels"
       />
       {visible.length === 0 && !hosted.isPending ? (
         <MenuItem disabled>
-          {hosted.error === null ? "No labels found" : "Couldn't search labels on the host"}
+          {hosted.error === null ? "no labels found" : "couldn't search labels on the host 3:"}
         </MenuItem>
       ) : null}
       {visible.map((option) => {

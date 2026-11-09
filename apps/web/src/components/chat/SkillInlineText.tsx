@@ -94,7 +94,7 @@ export function SkillChipPopover(props: {
       kind="skill"
       icon={<SkillChipIcon />}
       label={props.label}
-      accessibleLabel={`Skill ${props.label}`}
+      accessibleLabel={`skill ${props.label}`}
       copyMarkdown={props.copyMarkdown}
     >
       <div className="space-y-3 p-2 text-sm">
@@ -102,7 +102,7 @@ export function SkillChipPopover(props: {
         <p>{props.description || "No description is available for this skill."}</p>
         {props.onViewInstructions ? (
           <Button variant="outline" size="sm" onClick={props.onViewInstructions}>
-            View instructions
+            view instructions
           </Button>
         ) : null}
       </div>

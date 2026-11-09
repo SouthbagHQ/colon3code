@@ -194,7 +194,7 @@ function LinkRowImpl({
                 {watching ? (
                   <Tooltip>
                     <TooltipTrigger render={<span className="inline-flex shrink-0" />}>
-                      <EyeIcon role="img" aria-label="Watching" className="size-3.5" />
+                      <EyeIcon role="img" aria-label="watching" className="size-3.5" />
                     </TooltipTrigger>
                     <TooltipPopup>
                       Watching: the agent wakes when checks finish, someone comments, or the branch
@@ -333,7 +333,7 @@ function LinkRowImpl({
             {onSetWatching !== null && open ? (
               <MenuItem onClick={() => onSetWatching(link, !watching)}>
                 {watching ? <EyeOffIcon className="size-3.5" /> : <EyeIcon className="size-3.5" />}
-                {watching ? "Stop watching" : "Watch for changes"}
+                {watching ? "stop watching" : "watch for changes"}
               </MenuItem>
             ) : null}
             <MenuItem onClick={() => onUnlink(link)}>

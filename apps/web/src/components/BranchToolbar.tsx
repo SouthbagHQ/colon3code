@@ -109,7 +109,7 @@ function showWorkspaceContextMenu(event: ReactMouseEvent, workspacePath: string)
   event.preventDefault();
   event.stopPropagation();
   void api.contextMenu
-    .show([{ id: "copy-path", label: "Copy full path", icon: "copy" }], {
+    .show([{ id: "copy-path", label: "copy full path", icon: "copy" }], {
       x: event.clientX,
       y: event.clientY,
     })
@@ -121,7 +121,7 @@ function showWorkspaceContextMenu(event: ReactMouseEvent, workspacePath: string)
           if (didCopy) {
             toastManager.add({
               type: "success",
-              title: "Path copied",
+              title: "copied the path for you :3",
               description: clipboardPath,
             });
           }
@@ -130,7 +130,7 @@ function showWorkspaceContextMenu(event: ReactMouseEvent, workspacePath: string)
           toastManager.add(
             stackedThreadToast({
               type: "error",
-              title: "Failed to copy path",
+              title: "aw, couldn't copy the path 3:",
               description: error instanceof Error ? error.message : "An error occurred.",
             }),
           );
@@ -243,7 +243,7 @@ const RunContextSelector = memo(function RunContextSelector({
           />
         )}
       </TooltipTrigger>
-      <TooltipPopup>{autoEnvironmentLabel ?? activeEnvironment?.label ?? "Run on"}</TooltipPopup>
+      <TooltipPopup>{autoEnvironmentLabel ?? activeEnvironment?.label ?? "run on"}</TooltipPopup>
     </Tooltip>
   );
   const icon = showEnvironmentIndicator ? environmentIcon : workspaceIcon;
@@ -369,7 +369,7 @@ const RunContextSelector = memo(function RunContextSelector({
                   <MenuSubTrigger>
                     <span className={ADD_TO_MACHINE_LABEL_CLASS}>
                       <PlusIcon className="size-3" />
-                      <span className="min-w-0 truncate">Add to another machine</span>
+                      <span className="min-w-0 truncate">add to another machine</span>
                     </span>
                   </MenuSubTrigger>
                   <MenuSubPopup {...(!isPanel ? composerFloatingLayerProps : {})}>

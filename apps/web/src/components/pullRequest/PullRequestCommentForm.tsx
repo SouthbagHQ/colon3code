@@ -162,16 +162,16 @@ export function PullRequestCommentForm({
                 </span>
                 <span className="col-start-1 row-start-1">
                   {submitting === "close"
-                    ? "Closing..."
+                    ? "closing…"
                     : inlineConfirm.isArmed("close")
-                      ? "Confirm close?"
-                      : "Close with comment"}
+                      ? "confirm close?"
+                      : "close with comment"}
                 </span>
               </span>
             ) : submitting === "reopen" ? (
-              "Reopening..."
+              "reopening…"
             ) : (
-              "Reopen with comment"
+              "reopen with comment"
             )}
           </Button>
         )}

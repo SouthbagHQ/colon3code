@@ -909,7 +909,7 @@ function RightPanelTab(
   const sideChatState = sideChatTabState(sideChatShell);
   const content = (
     <>
-      <PanelTabCloseButton label={`Close ${title}`} onClick={() => onClose(surface)}>
+      <PanelTabCloseButton label={`close ${title}`} onClick={() => onClose(surface)}>
         <SurfaceIcon
           surface={surface}
           previewUrl={props.previewUrl}
@@ -932,7 +932,7 @@ function RightPanelTab(
               <button
                 type="button"
                 className="cursor-pointer flex size-4 shrink-0 items-center justify-center rounded-sm hover:bg-muted"
-                aria-label={audio === "muted" ? `Unmute ${title}` : `Mute ${title}`}
+                aria-label={audio === "muted" ? `unmute ${title}` : `mute ${title}`}
                 onClick={(event) => {
                   event.stopPropagation();
                   void previewBridge
@@ -1321,8 +1321,8 @@ export function RightPanelTabs(props: RightPanelTabsProps) {
       workspaceFocusKey={`panel:${props.environmentId}:${props.activeSurfaceId ?? "empty"}`}
       workspaceLabel={
         focusedSurface
-          ? `Workspace panel: ${surfaceTitle(focusedSurface, props.previewSessions, props.terminalLabelsById)}`
-          : "Workspace panel"
+          ? `workspace panel: ${surfaceTitle(focusedSurface, props.previewSessions, props.terminalLabelsById)}`
+          : "workspace panel"
       }
       mode={props.mode}
       {...(props.maximized !== undefined ? { maximized: props.maximized } : {})}

@@ -176,7 +176,7 @@ export function GuideExcerpt({
             {excerpt.end} are not in the loaded diff.
           </span>
           <Button size="xs" variant="outline" onClick={() => onOpenFile(excerpt.path)}>
-            Open in Code
+            open in code
           </Button>
         </div>
       )}
@@ -327,13 +327,13 @@ function ExcerptDiff({
                 text=""
                 completionScope={commenting.canComment ? commenting.completionScope : null}
                 placeholder={
-                  commenting.canComment ? "Add a comment…" : "Ask the agent about these lines…"
+                  commenting.canComment ? "add a comment…" : "ask the agent about these lines…"
                 }
-                submitLabel={commenting.canComment ? "Add to review" : "Ask agent"}
+                submitLabel={commenting.canComment ? "add to review" : "ask agent"}
                 {...(commenting.canComment && onAskAgent !== null
                   ? {
                       secondaryAction: {
-                        label: "Ask agent",
+                        label: "ask agent",
                         onAction: (text: string) => askAgent(text),
                       },
                     }
@@ -366,7 +366,7 @@ function ExcerptDiff({
             <Button
               size="icon-xs"
               variant="ghost-muted"
-              aria-label={`Open ${excerpt.path} in Code`}
+              aria-label={`open ${excerpt.path} in code`}
               onClick={() => onOpenFile(excerpt.path)}
             >
               <ArrowUpRightIcon aria-hidden />

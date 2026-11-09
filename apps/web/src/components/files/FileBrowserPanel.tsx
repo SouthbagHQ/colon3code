@@ -198,8 +198,8 @@ export default function FileBrowserPanel({
         const clicked = await api.contextMenu.show(
           [
             ...fileMenuItems,
-            { id: "copy-mention", label: "Copy mention" },
-            { id: "add-to-chat", label: "Add to chat" },
+            { id: "copy-mention", label: "copy mention" },
+            { id: "add-to-chat", label: "add to chat" },
           ],
           position,
         );
@@ -216,13 +216,13 @@ export default function FileBrowserPanel({
             await writeTextToClipboard(mention);
             toastManager.add({
               type: "success",
-              title: "Mention copied",
+              title: "copied the mention :3",
               description: relativePath,
             });
           } catch (error) {
             toastManager.add({
               type: "error",
-              title: "Failed to copy mention",
+              title: "aw, couldn't copy the mention 3:",
               description: error instanceof Error ? error.message : "An error occurred.",
             });
           }
@@ -233,7 +233,7 @@ export default function FileBrowserPanel({
           if (!composer) {
             toastManager.add({
               type: "error",
-              title: "Unable to add to chat",
+              title: "couldn't add that to the chat",
               description: "Open a chat for this project and try again.",
             });
             return;
@@ -242,7 +242,7 @@ export default function FileBrowserPanel({
           if (!inserted) {
             toastManager.add({
               type: "error",
-              title: "Unable to add to chat",
+              title: "couldn't add that to the chat",
               description: "The chat isn't ready to accept input right now.",
             });
           }
@@ -290,7 +290,7 @@ export default function FileBrowserPanel({
       row.kind === "directory" &&
       row.isExpanded &&
       loadingDirectoriesRef.current.has(item.path.replace(/\/$/, ""))
-        ? { icon: "t3-tree-icon-loading", title: "Loading…" }
+        ? { icon: "t3-tree-icon-loading", title: "loading…" }
         : null,
     search: false,
     onSearchChange: (value) => setQuery(value ?? ""),
@@ -553,7 +553,7 @@ export default function FileBrowserPanel({
       {hasNoSearchMatches ? (
         ready && !isPending && !pathSearch.isPending && !error && !pathSearch.error ? (
           <div role="status" className="px-3 py-4 text-xs text-muted-foreground">
-            No matching files.
+            no matching files.
           </div>
         ) : null
       ) : (

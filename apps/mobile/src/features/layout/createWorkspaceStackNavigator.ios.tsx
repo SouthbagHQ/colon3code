@@ -476,7 +476,7 @@ function WorkspaceColumns(
                     pointerEvents="box-none"
                   >
                     <WorkspacePaneDivider
-                      accessibilityLabel="Resize inspector"
+                      accessibilityLabel="resize inspector"
                       currentWidth={inspectorWidth}
                       resizeDirection={-1}
                       onResizeStart={() => {

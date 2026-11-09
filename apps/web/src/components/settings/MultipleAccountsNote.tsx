@@ -41,7 +41,7 @@ export function MultipleAccountsNote({
             rel="noreferrer"
             className="underline underline-offset-2 hover:text-foreground"
           >
-            More info
+            more info
           </a>
         </p>
       </AlertDescription>

@@ -31,7 +31,7 @@ function RedactedLogin(props: {
       <span className="select-none blur-xs" aria-hidden>
         {redactedPlaceholder(props.account)}
       </span>
-      <span className="sr-only">{props.label ?? "Hidden account"}</span>
+      <span className="sr-only">{props.label ?? "hidden account"}</span>
     </span>
   );
 }
@@ -101,7 +101,7 @@ export function SourceControlAccountSettings({
           size="icon-xs"
           variant="ghost-muted"
           onClick={() => setRevealed((current) => !current)}
-          aria-label={revealed ? `Hide ${label} accounts` : `Reveal ${label} accounts`}
+          aria-label={revealed ? `hide ${label} accounts` : `reveal ${label} accounts`}
           aria-pressed={revealed}
         >
           {revealed ? <EyeOffIcon /> : <EyeIcon />}
@@ -120,7 +120,7 @@ export function SourceControlAccountSettings({
                 <span className="text-xs font-medium text-foreground">{group.host}</span>
                 {group.selectable.length === 1 && group.selectable[0] !== undefined ? (
                   <p className="flex min-w-0 items-center gap-1 text-xs text-muted-foreground">
-                    <span>Signed in as</span>
+                    <span>signed in as</span>
                     <RedactedLogin revealed={revealed} account={group.selectable[0]} />
                   </p>
                 ) : null}
@@ -128,13 +128,13 @@ export function SourceControlAccountSettings({
               <Switch
                 checked={enabled}
                 disabled={saving}
-                aria-label={`Use ${label} on ${group.host}`}
+                aria-label={`use ${label} on ${group.host}`}
                 onCheckedChange={(checked) => void save(group.host, { enabled: checked })}
               />
             </div>
             {group.selectable.length > 1 ? (
               <div className="flex items-center justify-between gap-3">
-                <span className="text-xs text-muted-foreground">Account</span>
+                <span className="text-xs text-muted-foreground">account</span>
                 <div className="w-64 max-w-full">
                   <Select
                     value={pinned}
@@ -185,7 +185,7 @@ export function SourceControlAccountSettings({
                           <RedactedLogin
                             revealed={revealed}
                             account={account}
-                            label={`Account ${index + 1}`}
+                            label={`account ${index + 1}`}
                           />
                         </SelectItem>
                       ))}
@@ -205,7 +205,7 @@ export function SourceControlAccountSettings({
                   disabled={saving}
                   onClick={() => void save(group.host, { account: null })}
                 >
-                  Use active login
+                  use active login
                 </Button>
               </div>
             ) : null}

@@ -155,7 +155,7 @@ export function AutoSettleSettingsRows(props: {
         {afterDays !== null ? (
           <View className="flex-row items-center gap-4 px-4 py-4 android:min-h-14 android:py-3">
             <View className="w-[22px] android:w-6" />
-            <Text className="flex-1 text-foreground text-lg android:text-base">Inactive days</Text>
+            <Text className="flex-1 text-foreground text-lg android:text-base">inactive days</Text>
             <AutoSettleDaysField
               value={afterDays}
               disabled={disabledFor("sidebarAutoSettleAfterDays")}

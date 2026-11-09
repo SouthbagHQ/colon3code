@@ -195,7 +195,7 @@ export function MicrophoneTest({ microphoneId }: { microphoneId: string }) {
     return (
       <Button size="sm" variant="outline" onClick={() => void start()}>
         <MicIcon />
-        Test microphone
+        test microphone
       </Button>
     );
   }
@@ -215,7 +215,7 @@ export function MicrophoneTest({ microphoneId }: { microphoneId: string }) {
       <Button
         size="icon-sm-pill"
         variant="ghost"
-        aria-label="Cancel microphone test"
+        aria-label="cancel microphone test"
         onClick={cancel}
       >
         <XIcon />
@@ -226,12 +226,12 @@ export function MicrophoneTest({ microphoneId }: { microphoneId: string }) {
           <span aria-hidden className="size-1.5 shrink-0 rounded-full bg-primary" />
           <span
             className="shrink-0 text-xs tabular-nums text-muted-foreground"
-            aria-label="Recording time"
+            aria-label="recording time"
           >
             {formatTime(elapsed)} / {formatTime(LOOPBACK_SECONDS)}
           </span>
           <meter
-            aria-label="Microphone input level"
+            aria-label="microphone input level"
             min={0}
             max={1}
             value={level}
@@ -240,12 +240,12 @@ export function MicrophoneTest({ microphoneId }: { microphoneId: string }) {
         </>
       ) : (
         <span role="status" className="min-w-0 flex-1 truncate text-xs text-muted-foreground">
-          Opening microphone…
+          opening microphone…
         </span>
       )}
       <Button
         size="icon-sm-pill"
-        aria-label="Stop recording"
+        aria-label="stop recording"
         disabled={phase !== "recording"}
         onClick={() => {
           const recorder = capture.current?.recorder;
@@ -307,14 +307,14 @@ function MicrophonePlayback({
         <Button
           size="icon-sm-pill"
           variant="ghost"
-          aria-label={playing ? "Pause recording" : "Play recording"}
+          aria-label={playing ? "pause recording" : "play recording"}
           onClick={() => void togglePlayback()}
         >
           {playing ? <PauseIcon /> : <PlayIcon />}
         </Button>
         <input
           type="range"
-          aria-label="Recording playback position"
+          aria-label="recording playback position"
           min={0}
           max={duration}
           step={0.01}
@@ -333,10 +333,10 @@ function MicrophonePlayback({
         <span className="shrink-0 text-xs tabular-nums text-muted-foreground">
           {formatTime(position)}
         </span>
-        <Button size="icon-sm-pill" variant="ghost" aria-label="Record again" onClick={onRetry}>
+        <Button size="icon-sm-pill" variant="ghost" aria-label="record again" onClick={onRetry}>
           <RotateCcwIcon />
         </Button>
-        <Button size="icon-sm-pill" aria-label="Done" onClick={onDone}>
+        <Button size="icon-sm-pill" aria-label="done" onClick={onDone}>
           <CheckIcon />
         </Button>
       </VoiceInputPill>

@@ -953,7 +953,7 @@ it.layer(NodeServices.layer)("AgentSessionScanner", (it) => {
           const input = { claudeHomePath, codexHomePath, configBaseDir };
           const result = yield* runScan(input);
           const git = {
-            remoteKey: "github.com/SouthbagHQ/colon3code",
+            remoteKey: "github.com/southbaghq/colon3code",
             repository: "SouthbagHQ/colon3code",
           };
           expect(

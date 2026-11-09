@@ -170,8 +170,8 @@ export function HomeRouteScreen() {
           search={{
             value: searchQuery,
             onChangeText: setSearchQuery,
-            placeholder: "Search",
-            accessibilityLabel: "Search threads",
+            placeholder: "search",
+            accessibilityLabel: "search threads",
           }}
           filter={{
             customized: selectedEnvironmentId !== null || selectedProjectKey !== null,

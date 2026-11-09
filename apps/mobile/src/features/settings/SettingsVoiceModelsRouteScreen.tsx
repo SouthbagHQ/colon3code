@@ -46,10 +46,10 @@ export function SettingsVoiceModelsRouteScreen({
     );
   return (
     <PullRequestSearchSheet
-      title="Transcription models"
-      placeholder="Search models or languages"
-      closeAccessibilityLabel="Close transcription models"
-      clearAccessibilityLabel="Clear model search"
+      title="transcription models"
+      placeholder="search models or languages"
+      closeAccessibilityLabel="close transcription models"
+      clearAccessibilityLabel="clear model search"
       query={query}
       onQueryChange={setQuery}
     >
@@ -87,7 +87,7 @@ export function SettingsVoiceModelsRouteScreen({
               <AppActivityIndicator className="my-8" />
             ) : (
               <EmptyState
-                title={needle ? "No models match" : "No transcription models"}
+                title={needle ? "no models match" : "no transcription models"}
                 detail={
                   needle ? "Try another name or language." : `${label} has no models to list.`
                 }

@@ -199,8 +199,8 @@ export function UsagePriceOverrides({
     value: string,
   ) =>
     !row.isNew &&
-    cell.placeholder !== "Mixed" &&
-    cell.placeholder !== "Unavailable" &&
+    cell.placeholder !== "mixed" &&
+    cell.placeholder !== "unavailable" &&
     value === cell.value;
   const updateOrDropDraft = (draft: UsagePriceDraft) => {
     if (!draft.isNew && Object.keys(draft.values).length === 0 && draft.alias === undefined)
@@ -354,7 +354,7 @@ export function UsagePriceOverrides({
                   <TableHeader>
                     <TableRow>
                       <TableHead>Model ID</TableHead>
-                      <TableHead>Map to</TableHead>
+                      <TableHead>map to</TableHead>
                       {USAGE_PRICE_FIELDS.map((field) => (
                         <TableHead key={field.key}>{field.label}</TableHead>
                       ))}
@@ -382,7 +382,7 @@ export function UsagePriceOverrides({
                           <p className="py-6 text-muted-foreground">
                             {selected.some((environment) => environment.prices === null)
                               ? "Some environment prices are unavailable."
-                              : "No custom prices or mappings. Add a row to set one."}
+                              : "no custom prices or mappings yet. Add a row to set one :3"}
                           </p>
                         </TableCell>
                       </TableRow>
@@ -445,9 +445,9 @@ export function UsagePriceOverrides({
                                 <Input
                                   size="compact"
                                   value={row.alias ?? aliasCell.value}
-                                  aria-label={`Map ${row.model || "new model"} to model`}
+                                  aria-label={`map ${row.model || "new model"} to model`}
                                   list="usage-alias-models"
-                                  placeholder={row.isNew ? "Optional" : aliasCell.placeholder}
+                                  placeholder={row.isNew ? "optional" : aliasCell.placeholder}
                                   autoComplete="off"
                                   spellCheck={false}
                                   disabled={locked}

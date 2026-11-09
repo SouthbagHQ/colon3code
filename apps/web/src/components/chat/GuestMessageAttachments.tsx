@@ -86,7 +86,7 @@ export function GuestMessageAttachments(props: {
           <button
             key={file.id}
             type="button"
-            aria-label={`Preview ${file.name}`}
+            aria-label={`preview ${file.name}`}
             onClick={() => props.onOpenFile?.(file)}
             className={cn(FILE_ROW, "cursor-pointer hover:underline")}
           >

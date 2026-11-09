@@ -301,7 +301,7 @@ export function useChatTerminalActions(input: ChatTerminalActionsInput) {
         toastManager.add(
           stackedThreadToast({
             type: "error",
-            title: "Could not open preview",
+            title: "couldn't open the preview",
             description: error instanceof Error ? error.message : "An unexpected error occurred.",
           }),
         );

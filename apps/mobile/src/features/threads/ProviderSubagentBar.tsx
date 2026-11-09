@@ -65,10 +65,10 @@ export function ProviderSubagentBar(props: {
         </Text>
       </View>
       {props.inspect ? (
-        <Button label="Work" tone="secondary" onPress={() => setInspecting(true)} />
+        <Button label="work" tone="secondary" onPress={() => setInspecting(true)} />
       ) : null}
       {props.onOpenParent ? (
-        <Button label="Open parent" tone="secondary" onPress={props.onOpenParent} />
+        <Button label="open parent" tone="secondary" onPress={props.onOpenParent} />
       ) : null}
       {props.inspect && inspecting ? (
         <NativeChildWorkSheet {...props.inspect} onClose={() => setInspecting(false)} />

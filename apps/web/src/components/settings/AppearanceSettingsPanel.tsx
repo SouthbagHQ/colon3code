@@ -38,50 +38,50 @@ import { TypographySection } from "./TypographySettings";
 import { ThreadDetailsItemsRow } from "./ThreadDetailsItemsRow";
 
 const ENVIRONMENT_IDENTIFICATION_LABELS: Record<EnvironmentIdentificationMode, string> = {
-  artwork: "Artwork",
-  "nightly-artwork": "Nightly artwork",
-  "dev-artwork": "Dev artwork",
-  pill: "Version pill",
-  none: "None",
+  artwork: "artwork",
+  "nightly-artwork": "nightly artwork",
+  "dev-artwork": "dev artwork",
+  pill: "version pill",
+  none: "none",
 };
 
 // The default "artwork" follows the running channel, so it is labeled as that channel's art,
-// or as "None" on Latest. The other channel's art is offered as a fixed choice.
+// or as "none" on Latest. The other channel's art is offered as a fixed choice.
 function environmentIdentificationOptions(
   stageVariant: SidebarStageBackdropVariant | null,
 ): ReadonlyArray<readonly [EnvironmentIdentificationMode, string]> {
   if (stageVariant === "dev") {
     return [
-      ["artwork", "Dev artwork"],
-      ["nightly-artwork", "Nightly artwork"],
-      ["pill", "Version pill"],
-      ["none", "None"],
+      ["artwork", "dev artwork"],
+      ["nightly-artwork", "nightly artwork"],
+      ["pill", "version pill"],
+      ["none", "none"],
     ];
   }
   if (stageVariant === "nightly") {
     return [
-      ["artwork", "Nightly artwork"],
-      ["dev-artwork", "Dev artwork"],
-      ["pill", "Version pill"],
-      ["none", "None"],
+      ["artwork", "nightly artwork"],
+      ["dev-artwork", "dev artwork"],
+      ["pill", "version pill"],
+      ["none", "none"],
     ];
   }
   return [
-    ["artwork", "None"],
-    ["nightly-artwork", "Nightly artwork"],
-    ["dev-artwork", "Dev artwork"],
+    ["artwork", "none"],
+    ["nightly-artwork", "nightly artwork"],
+    ["dev-artwork", "dev artwork"],
   ];
 }
 
 const CHAT_WIDTH_LABELS: Record<ChatWidth, string> = {
-  comfortable: "Comfortable",
-  wide: "Wide",
-  full: "Full",
+  comfortable: "comfortable",
+  wide: "wide",
+  full: "full",
 };
 
 const EFFORT_DISPLAY_LABELS: Record<EffortDisplay, string> = {
-  label: "Word",
-  bars: "Bars",
+  label: "word",
+  bars: "bars",
 };
 
 export function AppearanceSettingsPanel() {
@@ -144,7 +144,7 @@ export function AppearanceSettingsPanel() {
 
   return (
     <SettingsPageContainer>
-      <SettingsSection id="appearance" title="Colors & themes" variant="plain" hideTitle>
+      <SettingsSection id="appearance" title="colors & themes" variant="plain" hideTitle>
         <div id={searchableSetting("theme").id}>
           <ThemeLibrary
             appearanceMode={appearanceMode}
@@ -162,7 +162,7 @@ export function AppearanceSettingsPanel() {
         </div>
       </SettingsSection>
 
-      <SettingsSection id="appearance-interface" title="Interface">
+      <SettingsSection id="appearance-interface" title="interface">
         <SettingsRow
           {...searchableSetting("setting-appearance-contrast")}
           description="Adjust the contrast of colors and borders across the interface."
@@ -187,7 +187,7 @@ export function AppearanceSettingsPanel() {
                 {settings.appearanceContrast}%
               </output>
               <input
-                aria-label="Contrast"
+                aria-label="contrast"
                 className="settings-slider min-w-0 flex-1"
                 id="appearance-contrast"
                 max={MAX_APPEARANCE_CONTRAST}
@@ -233,7 +233,7 @@ export function AppearanceSettingsPanel() {
                 {settings.glassOpacity}%
               </output>
               <input
-                aria-label="Glass opacity"
+                aria-label="glass opacity"
                 className="settings-slider min-w-0 flex-1"
                 id="glass-opacity"
                 max={MAX_GLASS_OPACITY}
@@ -277,13 +277,13 @@ export function AppearanceSettingsPanel() {
                     updateSettings({ chatWidth: value });
                 }}
               >
-                <SelectTrigger size="sm" className="w-full min-w-0" aria-label="Chat width">
+                <SelectTrigger size="sm" className="w-full min-w-0" aria-label="chat width">
                   <SelectValue>{CHAT_WIDTH_LABELS[settings.chatWidth]}</SelectValue>
                 </SelectTrigger>
                 <SelectPopup align="end" alignItemWithTrigger={false}>
-                  <SelectItem value="comfortable">Comfortable (default)</SelectItem>
-                  <SelectItem value="wide">Wide</SelectItem>
-                  <SelectItem value="full">Full</SelectItem>
+                  <SelectItem value="comfortable">comfortable (default)</SelectItem>
+                  <SelectItem value="wide">wide</SelectItem>
+                  <SelectItem value="full">full</SelectItem>
                 </SelectPopup>
               </Select>
             </div>
@@ -312,12 +312,12 @@ export function AppearanceSettingsPanel() {
                     updateSettings({ effortDisplay: value });
                 }}
               >
-                <SelectTrigger size="sm" className="w-full min-w-0" aria-label="Effort display">
+                <SelectTrigger size="sm" className="w-full min-w-0" aria-label="effort display">
                   <SelectValue>{EFFORT_DISPLAY_LABELS[settings.effortDisplay]}</SelectValue>
                 </SelectTrigger>
                 <SelectPopup align="end" alignItemWithTrigger={false}>
-                  <SelectItem value="label">Word (default)</SelectItem>
-                  <SelectItem value="bars">Bars</SelectItem>
+                  <SelectItem value="label">word (default)</SelectItem>
+                  <SelectItem value="bars">bars</SelectItem>
                 </SelectPopup>
               </Select>
             </div>
@@ -344,7 +344,7 @@ export function AppearanceSettingsPanel() {
               onCheckedChange={(checked) =>
                 updateSettings({ mathRenderingEnabled: Boolean(checked) })
               }
-              aria-label="Render math"
+              aria-label="render math"
             />
           }
         />
@@ -371,7 +371,7 @@ export function AppearanceSettingsPanel() {
                     {settings.panelAnimationDurationMs} ms
                   </output>
                   <input
-                    aria-label="Panel animation duration"
+                    aria-label="panel animation duration"
                     className="settings-slider min-w-0 flex-1"
                     id="panel-animation-duration"
                     max={MAX_PANEL_ANIMATION_DURATION_MS}
@@ -436,7 +436,7 @@ export function AppearanceSettingsPanel() {
                 <SelectTrigger
                   size="sm"
                   className="w-full sm:w-40"
-                  aria-label="Environment identification"
+                  aria-label="environment identification"
                 >
                   <SelectValue>{environmentIdentificationLabel}</SelectValue>
                 </SelectTrigger>
@@ -473,7 +473,7 @@ export function AppearanceSettingsPanel() {
                 onCheckedChange={(checked) =>
                   updateSettings({ persistComposerContextStrip: Boolean(checked) })
                 }
-                aria-label="Keep composer context visible in active threads"
+                aria-label="keep composer context visible in active threads"
               />
             }
           />

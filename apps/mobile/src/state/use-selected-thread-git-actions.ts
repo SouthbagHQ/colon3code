@@ -221,7 +221,7 @@ export function useSelectedThreadGitActions() {
       const error = Cause.squash(result.cause);
       const message = error instanceof Error ? error.message : "Failed to refresh branches.";
       setPendingConnectionError(message);
-      showGitActionResult({ type: "error", title: "Git action failed", description: message });
+      showGitActionResult({ type: "error", title: "Git action failed 3:", description: message });
       return null;
     }
     setPendingConnectionError(null);

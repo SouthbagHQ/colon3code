@@ -45,7 +45,7 @@ export function PullRequestRoutingSettings() {
 
   return (
     <View className="mt-5 gap-3">
-      <SettingsSection title="Pull request routing">
+      <SettingsSection title="pull request routing">
         {[...catalog.entries.values()].map((entry) => {
           const environmentId = entry.target.environmentId;
           const selected = pullRequestRoutingPermissionFor(entry, permissions);

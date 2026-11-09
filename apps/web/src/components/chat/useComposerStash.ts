@@ -450,7 +450,7 @@ export function useComposerStash(input: {
     if (pendingDraftWork.has(attachmentTargetKey)) {
       toastManager.add({
         type: "info",
-        title: "Still bringing attached context into this message.",
+        title: "still bringing attached context into this message.",
         description: "stash again once its chip resolves.",
       });
       return;

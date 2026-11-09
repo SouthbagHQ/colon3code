@@ -14,9 +14,9 @@ import {
 } from "./useScopedSettings";
 
 const MODES = {
-  static: "Static prefix",
-  semantic: "Semantic prefix",
-  custom: "Custom instructions",
+  static: "static prefix",
+  semantic: "semantic prefix",
+  custom: "custom instructions",
 } satisfies Record<BranchNamingMode, string>;
 
 export function BranchNamingSettings() {
@@ -61,9 +61,9 @@ export function BranchNamingSettings() {
               }
             }}
           >
-            <SelectTrigger size="sm" aria-label="Worktree branch naming">
+            <SelectTrigger size="sm" aria-label="worktree branch naming">
               <SelectValue>
-                {(value: BranchNamingMode | null) => (value === null ? "Mixed" : MODES[value])}
+                {(value: BranchNamingMode | null) => (value === null ? "mixed" : MODES[value])}
               </SelectValue>
             </SelectTrigger>
             <SelectPopup align="end" alignItemWithTrigger={false}>
@@ -80,7 +80,7 @@ export function BranchNamingSettings() {
         <SettingsRow
           serverScoped
           settingKeys={["branchNamePrefix"]}
-          title="Branch prefix"
+          title="branch prefix"
           description="For example, t3 or t3/ produces t3/add-search. Leave empty for no prefix."
           resetAction={
             prefixMixed ||
@@ -96,13 +96,13 @@ export function BranchNamingSettings() {
           control={
             <Input
               key={`${scopeKey}:${prefixMixed}:${settings.branchNamePrefix}`}
-              aria-label="Branch prefix"
+              aria-label="branch prefix"
               autoCapitalize="none"
               spellCheck={false}
               onChange={() => {
                 prefixEdited.current = true;
               }}
-              placeholder={prefixMixed ? "Mixed" : "No prefix"}
+              placeholder={prefixMixed ? "mixed" : "no prefix"}
               defaultValue={prefixMixed ? "" : settings.branchNamePrefix}
               onBlur={(event) => {
                 const value = event.target.value.trim();
@@ -118,7 +118,7 @@ export function BranchNamingSettings() {
         <SettingsRow
           serverScoped
           settingKeys={["branchNameInstructions"]}
-          title="Branch naming instructions"
+          title="branch naming instructions"
           description="Appended to the naming prompt. The model returns the complete branch name; no prefix or suffix is added."
           resetAction={
             instructionsMixed || settings.branchNameInstructions !== "" ? (
@@ -132,7 +132,7 @@ export function BranchNamingSettings() {
           <div className="mt-3 max-w-2xl pb-3.5">
             <Textarea
               key={`${scopeKey}:${instructionsMixed}:${settings.branchNameInstructions}`}
-              aria-label="Branch naming instructions"
+              aria-label="branch naming instructions"
               onChange={() => {
                 instructionsEdited.current = true;
               }}

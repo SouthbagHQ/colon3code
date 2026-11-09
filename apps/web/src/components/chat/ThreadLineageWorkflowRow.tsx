@@ -76,7 +76,7 @@ function WorkflowMemberRow({
           render={
             <ThreadDetailsControl
               part="row"
-              aria-label={`Open ${member.title} chat`}
+              aria-label={`open ${member.title} chat`}
               disabled={!canOpen}
               onClick={() => canOpen && onOpen(threadId)}
             />
@@ -160,7 +160,7 @@ export function ThreadLineageWorkflowRow({
                     variant="ghost"
                     part="icon"
                     tone="destructive"
-                    aria-label={`Stop workflow ${label}`}
+                    aria-label={`stop workflow ${label}`}
                     disabled={stopDisabled}
                     onClick={onStop}
                   />
@@ -172,7 +172,7 @@ export function ThreadLineageWorkflowRow({
                   <SquareIcon aria-hidden className="size-3 fill-current" />
                 )}
               </TooltipTrigger>
-              <TooltipPopup side="left">Stop entire workflow</TooltipPopup>
+              <TooltipPopup side="left">stop entire workflow</TooltipPopup>
             </Tooltip>
           </div>
         ) : null}
@@ -182,7 +182,7 @@ export function ThreadLineageWorkflowRow({
           variant="ghost"
           part="secondary"
           aria-expanded={expanded}
-          aria-label={`${expanded ? "Collapse" : "Expand"} ${label}`}
+          aria-label={`${expanded ? "collapse" : "expand"} ${label}`}
           onClick={() => setExpanded((value) => !value)}
         >
           <ChevronDownIcon
@@ -205,12 +205,12 @@ export function ThreadLineageWorkflowRow({
                   variant="panel"
                   tone={phase.state === "running" ? "emphasized" : "muted"}
                   expanded={open}
-                  aria-label={`${open ? "Collapse" : "Expand"} ${phase.title} phase, ${status}`}
+                  aria-label={`${open ? "collapse" : "expand"} ${phase.title} phase, ${status}`}
                   onClick={() => setPhaseOpen((phases) => new Map(phases).set(phase.index, !open))}
                   accessory={
                     <>
                       {status === "failed" ? (
-                        <SectionHeaderStatus>Failed</SectionHeaderStatus>
+                        <SectionHeaderStatus>failed</SectionHeaderStatus>
                       ) : null}
                       <span className="shrink-0 text-2xs font-normal tabular-nums">
                         {phase.settledCount}/{phase.members.length}{" "}
@@ -256,7 +256,7 @@ export function ThreadLineageWorkflowRow({
             />
           ))}
           {phases.length === 0 && group.unphasedMembers.length === 0 ? (
-            <li className="px-2.5 py-1.5 text-2xs text-muted-foreground/70">No agents yet</li>
+            <li className="px-2.5 py-1.5 text-2xs text-muted-foreground/70">no agents yet</li>
           ) : null}
         </ul>
       ) : null}

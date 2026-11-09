@@ -480,7 +480,7 @@ function ConnectionsSettingsContent({
       toastManager.add(
         stackedThreadToast({
           type: "error",
-          title: "Could not update network access",
+          title: "couldn't update network access 3:",
           description: message,
         }),
       );
@@ -702,7 +702,7 @@ function ConnectionsSettingsContent({
       return;
     }
     const confirmed = await requestConfirmDialog(
-      `Remove ${environment.label} from this device?\nThis forgets its pairing, credentials, and cached threads here. Switch it off instead to keep it saved.`,
+      `remove ${environment.label} from this device?\nThis forgets its pairing, credentials, and cached threads here. Switch it off instead to keep it saved.`,
       { variant: "destructive" },
     );
     if (confirmed === true) await removeSavedBackend(environment);
@@ -1248,7 +1248,7 @@ function ConnectionsSettingsContent({
             {accessEnvironment ? (
               <details className="group px-3 sm:px-4">
                 <summary className="flex min-h-11 cursor-pointer list-none items-center gap-2 rounded-md text-sm font-medium outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring [&::-webkit-details-marker]:hidden">
-                  Permissions
+                  permissions
                   <ChevronRightIcon
                     aria-hidden
                     className="size-3 text-muted-foreground group-open:rotate-90"
@@ -1593,7 +1593,7 @@ function ConnectionsSettingsContent({
   return (
     <SettingsPageContainer>
       {desktopBridge ? (
-        <SettingsSection id="this-app" title="This app">
+        <SettingsSection id="this-app" title="this app">
           <LocalEnvironmentSetting />
         </SettingsSection>
       ) : null}

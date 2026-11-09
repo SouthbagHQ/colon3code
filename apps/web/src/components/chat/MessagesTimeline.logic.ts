@@ -1212,7 +1212,7 @@ function deriveTurnFolds(input: {
         createdAt: steer.createdAt,
         hiddenEntryIds: segmentHiddenIds(entries),
         entryIds: new Set(entries.map((entry) => entry.id)),
-        label: segmentMs !== null ? `Continued for ${formatDuration(segmentMs)}` : "Continued",
+        label: segmentMs !== null ? `continued for ${formatDuration(segmentMs)}` : "continued",
       });
     }
   }
@@ -1860,7 +1860,7 @@ export function deriveMessagesTimelineRows(input: {
         createdAt: supersededFold.createdAt,
         runId: supersededFold.runId,
         attemptId: supersededFold.attemptId,
-        label: "Superseded attempt",
+        label: "superseded attempt",
         expanded: input.expandedAttemptIds?.has(supersededFold.attemptId) ?? false,
       });
     }

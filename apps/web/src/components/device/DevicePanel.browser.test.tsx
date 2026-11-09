@@ -144,7 +144,7 @@ const devicePanel = (threadRef: ScopedThreadRef, surface = picker) => (
     onDismissSetup={() => undefined}
   />
 );
-const startButton = () => container.querySelector<HTMLButtonElement>('[aria-label="Start Phone"]');
+const startButton = () => container.querySelector<HTMLButtonElement>('[aria-label="start Phone"]');
 const click = (button: HTMLButtonElement | null) =>
   act(async () => {
     button!.click();
@@ -225,7 +225,7 @@ describe("DevicePanel discovery warning", () => {
     currentState = withCause("first cause");
     await using screen = await render(devicePanel(threadA), { container });
 
-    await screen.getByRole("button", { name: "Dismiss device warning for This Mac" }).click();
+    await screen.getByRole("button", { name: "dismiss device warning for This Mac" }).click();
     await screen.rerender(devicePanel(threadA));
     await expect.element(screen.getByText(warning)).not.toBeInTheDocument();
 

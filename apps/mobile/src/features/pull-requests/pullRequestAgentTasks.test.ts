@@ -36,15 +36,15 @@ describe("PR agent tasks", () => {
     expect(pullRequestAgentThread([thread, archived], archived.id)).toBe(archived);
     const actions = pullRequestAgentThreadActions([settled, archived], "ask", true);
     expect(actions.map((action) => action.title)).toEqual([
-      "Start a new thread",
+      "start a new thread",
       "Existing work",
-      "Settled threads",
+      "settled threads",
     ]);
     expect(actions[2]?.subactions).toMatchObject([
-      { id: `ask:${settled.id}`, subtitle: "Settled thread" },
+      { id: `ask:${settled.id}`, subtitle: "settled thread" },
     ]);
     expect(pullRequestAgentThreadActions([thread], "ask", false)).toMatchObject([
-      { id: `ask:${thread.id}`, subtitle: "Continue thread" },
+      { id: `ask:${thread.id}`, subtitle: "continue thread" },
     ]);
     expect(
       pullRequestAgentThreadActions([settled], "feedback", false)[0]?.subactions,

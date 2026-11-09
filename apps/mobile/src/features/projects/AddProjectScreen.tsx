@@ -737,7 +737,7 @@ function useCreateProject(environment: EnvironmentOption | null) {
       !readEnvironmentScope(environment.environmentId, AuthOrchestrationOperateScope)
     ) {
       Dialog.alert(
-        "Project not added",
+        "project not added",
         `This connection cannot add projects right now. Any existing files remain at ${workspaceRoot}.`,
       );
       return;
@@ -794,7 +794,7 @@ function useCreateProject(environment: EnvironmentOption | null) {
     );
     if (project === null) {
       Dialog.alert(
-        "Project added",
+        "project added",
         "The project was created but has not reached this device yet. It will appear in the project list once the connection catches up.",
       );
       return result;
@@ -1125,7 +1125,7 @@ export function AddProjectNewScreen(props: { readonly environmentId?: string | s
     }
     const { projectId, workspaceRoot, commitError } = result.value;
     if (commitError !== undefined) {
-      Dialog.alert("Created without a first commit", commitError);
+      Dialog.alert("created without a first commit", commitError);
     }
     if (publishes && publishTarget !== null) {
       void publishRepository({
@@ -1139,7 +1139,7 @@ export function AddProjectNewScreen(props: { readonly environmentId?: string | s
       }).then((publishResult) => {
         if (AsyncResult.isFailure(publishResult)) {
           Dialog.alert(
-            `Could not create the ${publishTarget.definition.label} repository`,
+            `could not create the ${publishTarget.definition.label} repository`,
             errorMessage(Cause.squash(publishResult.cause)),
           );
         } else {

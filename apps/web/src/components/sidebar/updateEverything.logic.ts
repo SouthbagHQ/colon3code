@@ -148,7 +148,7 @@ export interface ChannelSwitchRelease {
 }
 
 export const channelSwitchLabel = (channel: DesktopUpdateChannel) =>
-  channel === "nightly" ? "Nightly" : "Stable";
+  channel === "nightly" ? "nightly" : "stable";
 
 /** Stable and Nightly each build their own commits, so either can hold migrations the other lacks.
  * Crossing tracks needs proof that the target release knows every migration the database holds. */
@@ -460,10 +460,10 @@ export function describeUpdateCapsule(
 ): UpdateCapsuleView {
   if (run.phase === "countdown" && run.restartAt !== null) {
     const seconds = Math.max(0, Math.ceil((run.restartAt - now) / 1000));
-    return { tone: "default", label: `Restart in ${seconds}s`, action: "later" };
+    return { tone: "default", label: `restart in ${seconds}s`, action: "later" };
   }
   if (run.phase === "installing") {
-    return { tone: "default", label: "Restarting…", action: null };
+    return { tone: "default", label: "restarting…", action: null };
   }
   const active = machines.filter(({ status }) => isActive(status) && status !== "waiting");
   const slowest = active.toSorted((a, b) => a.machine.startedAt - b.machine.startedAt)[0];
@@ -485,7 +485,7 @@ export function describeUpdateCapsule(
   if (local?.status === "downloading") {
     return {
       tone: "default",
-      label: `Downloading${local.percent === null ? "" : ` ${Math.floor(local.percent)}%`}`,
+      label: `downloading${local.percent === null ? "" : ` ${Math.floor(local.percent)}%`}`,
       action: null,
     };
   }
@@ -538,7 +538,7 @@ export function collectUpdateEverythingResult(input: {
     updatedProviders: input.providers.filter((outcome) => outcome.status === "updated").length,
     restarting: [],
     failures: [
-      ...input.localFailures.map((failure) => `This app: ${failure}`),
+      ...input.localFailures.map((failure) => `this app: ${failure}`),
       ...input.servers.flatMap(({ label, outcome }) =>
         outcome.status === "failed" ? [`${label}: ${outcome.message}`] : [],
       ),
@@ -570,13 +570,13 @@ export function getUpdateEverythingToastView(
     if (parts.length === 0) return null;
     return {
       type: "success",
-      title: `Updated ${joinList(parts)}`,
+      title: `updated ${joinList(parts)} :3`,
       ...(restarting.length === 0 ? {} : { description: restarting.join("\n") }),
     };
   }
   return {
     type: "error",
-    title: parts.length === 0 ? "Update failed" : `Updated ${joinList(parts)}`,
+    title: parts.length === 0 ? "aw, update failed 3:" : `updated ${joinList(parts)}`,
     description: [...result.failures, ...restarting].join("\n"),
   };
 }
@@ -627,7 +627,7 @@ export function describeUpdateEverything(plan: UpdateEverythingPlan): {
     (count, machine) => count + machine.providers.length,
     0,
   );
-  const summary = `Update ${joinList(
+  const summary = `update ${joinList(
     [
       plan.localVersion ? "this app" : null,
       countLabel(plan.servers.length, "server"),
@@ -651,7 +651,7 @@ export function describeUpdateEverything(plan: UpdateEverythingPlan): {
     rows.set(environmentId, { ...row, ...change });
   };
   if (plan.localVersion) {
-    if (plan.localMachines.length === 0) update(null, "This app", { app: "this-app" });
+    if (plan.localMachines.length === 0) update(null, "this app", { app: "this-app" });
     for (const machine of plan.localMachines) {
       update(machine.environmentId, machine.label, { app: "this-app" });
     }

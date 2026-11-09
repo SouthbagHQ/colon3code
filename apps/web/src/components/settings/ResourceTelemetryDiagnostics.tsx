@@ -901,7 +901,7 @@ function ResourceTelemetryDiagnosticsBody({
         if (result.value.signaled) return;
         toastManager.add({
           type: "error",
-          title: `Could not send ${signal}`,
+          title: `oops, couldn't send ${signal} 3:`,
           description: Option.getOrElse(
             result.value.message,
             () => `Failed to send ${signal} to process ${process.identity.pid}.`,

@@ -62,7 +62,7 @@ export function ManagedByOrganization({ policy }: { policy: ManagedPolicySummary
             rel="noreferrer"
             className="text-foreground underline underline-offset-2"
           >
-            Get help
+            get help
           </a>
         </>
       ) : null}

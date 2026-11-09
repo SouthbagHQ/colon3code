@@ -66,11 +66,11 @@ export function IntervalSecondsField({
       }}
     >
       <NumberFieldGroup>
-        <NumberFieldDecrement aria-label={`Decrease ${label}`} />
+        <NumberFieldDecrement aria-label={`decrease ${label}`} />
         <NumberFieldInput
           aria-label={`${label.charAt(0).toUpperCase()}${label.slice(1)} in seconds`}
         />
-        <NumberFieldIncrement aria-label={`Increase ${label}`} />
+        <NumberFieldIncrement aria-label={`increase ${label}`} />
       </NumberFieldGroup>
     </NumberField>
   );

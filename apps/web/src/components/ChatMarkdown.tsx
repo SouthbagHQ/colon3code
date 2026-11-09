@@ -612,7 +612,7 @@ function useChatMarkdownState({
         toastManager.add(
           stackedThreadToast({
             type: "error",
-            title: "Media unavailable",
+            title: "media unavailable",
             description,
           }),
         );
@@ -719,7 +719,7 @@ function useChatMarkdownState({
           toastManager.add(
             stackedThreadToast({
               type: "error",
-              title: "Unable to open link in browser",
+              title: "couldn't open the link in the browser",
               description: error.message,
             }),
           );
@@ -1085,7 +1085,7 @@ const CHAT_MARKDOWN_COMPONENTS = {
       return environmentId ? (
         <MarkdownThreadLink environmentId={environmentId} link={threadLink} label={label} />
       ) : (
-        <span>{label ?? "Thread"}</span>
+        <span>{label ?? "thread"}</span>
       );
     }
     const contextReference = href ? parseComposerContextHref(href) : null;

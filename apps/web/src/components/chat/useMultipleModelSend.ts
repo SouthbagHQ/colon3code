@@ -255,7 +255,7 @@ export function useMultipleModelSend(input: MultipleModelSendInput) {
               "Your newer draft is unchanged. Restore the failed prompt when this composer is empty.",
             timeout: 0,
             actionProps: {
-              children: "Restore prompt",
+              children: "restore prompt",
               onClick: () => {
                 if (
                   !draftId ||

@@ -1210,7 +1210,7 @@ function AdaptiveWorkspaceLayoutContent(
           style={[{ zIndex: 1 }, scrimAnimatedStyle]}
         >
           <Pressable
-            accessibilityLabel="Hide sidebar"
+            accessibilityLabel="hide sidebar"
             className="flex-1"
             onPress={() => setPrimarySidebarVisible(false)}
           />

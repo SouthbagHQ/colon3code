@@ -222,7 +222,7 @@ function PullRequestRowImpl({
                       matched in the description
                     </span>
                   </TooltipTrigger>
-                  <TooltipPopup side="top">Matched in the description</TooltipPopup>
+                  <TooltipPopup side="top">matched in the description</TooltipPopup>
                 </Tooltip>
               ) : null}
               {showProvider ? (

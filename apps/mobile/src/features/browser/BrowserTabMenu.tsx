@@ -18,13 +18,13 @@ import { previewEnvironment } from "../../state/preview";
 import { useAtomCommand } from "../../state/use-atom-command";
 
 const APPEARANCES = [
-  { id: "system", title: "System" },
-  { id: "light", title: "Light" },
-  { id: "dark", title: "Dark" },
+  { id: "system", title: "system" },
+  { id: "light", title: "light" },
+  { id: "dark", title: "dark" },
 ] as const;
 
 const VIEWPORTS = [
-  { id: "fill", title: "Fit to screen", setting: FILL_PREVIEW_VIEWPORT },
+  { id: "fill", title: "fit to screen", setting: FILL_PREVIEW_VIEWPORT },
   ...(["Phone", "Tablet", "Desktop"] as const).flatMap((category) => {
     const preset = PREVIEW_VIEWPORT_PRESETS.find((candidate) => candidate.category === category);
     if (!preset) return [];
@@ -70,16 +70,16 @@ export function BrowserTabMenu({
 
   const closeAction: MenuAction = {
     id: "close",
-    title: "Close tab",
+    title: "close tab",
     image: "xmark",
     attributes: { destructive: true, disabled: !canClose },
   };
   const actions: MenuAction[] = [
-    ...(onPaste ? [{ id: "paste", title: "Paste", image: "doc.on.clipboard" }] : []),
-    { id: "hard-reload", title: "Hard reload", image: "arrow.clockwise.circle" },
+    ...(onPaste ? [{ id: "paste", title: "paste", image: "doc.on.clipboard" }] : []),
+    { id: "hard-reload", title: "hard reload", image: "arrow.clockwise.circle" },
     {
       id: "appearance",
-      title: "Appearance",
+      title: "appearance",
       image: "circle.lefthalf.filled",
       subactions: APPEARANCES.map((option) => ({
         id: `appearance:${option.id}`,
@@ -89,17 +89,17 @@ export function BrowserTabMenu({
     },
     {
       id: "zoom",
-      title: `Zoom (${Math.round(zoomFactor * 100)}%)`,
+      title: `zoom (${Math.round(zoomFactor * 100)}%)`,
       image: "plus.magnifyingglass",
       subactions: [
-        { id: "zoom:in", title: "Zoom in", image: "plus.magnifyingglass" },
-        { id: "zoom:out", title: "Zoom out", image: "minus.magnifyingglass" },
-        { id: "zoom:reset", title: "Actual size", image: "1.magnifyingglass" },
+        { id: "zoom:in", title: "zoom in", image: "plus.magnifyingglass" },
+        { id: "zoom:out", title: "zoom out", image: "minus.magnifyingglass" },
+        { id: "zoom:reset", title: "actual size", image: "1.magnifyingglass" },
       ],
     },
     {
       id: "viewport",
-      title: "Viewport",
+      title: "viewport",
       image: "rectangle.and.arrow.up.right.and.arrow.down.left",
       subactions: VIEWPORTS.map((option) => ({
         id: `viewport:${option.id}`,
@@ -109,11 +109,11 @@ export function BrowserTabMenu({
     },
     {
       id: "site-data",
-      title: "Site data",
+      title: "site data",
       image: "trash",
       subactions: [
-        { id: "clear:cookies", title: "Clear cookies", attributes: { destructive: true } },
-        { id: "clear:cache", title: "Clear cache", attributes: { destructive: true } },
+        { id: "clear:cookies", title: "clear cookies", attributes: { destructive: true } },
+        { id: "clear:cache", title: "clear cache", attributes: { destructive: true } },
       ],
     },
     closeAction,
@@ -160,12 +160,12 @@ export function BrowserTabMenu({
       // the other state's actions.
       key={streaming ? "streaming" : "idle"}
       accessible
-      accessibilityLabel="Browser tab options"
+      accessibilityLabel="browser tab options"
       accessibilityRole="button"
       actions={streaming ? actions : [closeAction]}
       onPressAction={({ nativeEvent }) => onAction(nativeEvent.event)}
     >
-      <ControlPill icon="ellipsis" accessibilityLabel="Browser tab options" />
+      <ControlPill icon="ellipsis" accessibilityLabel="browser tab options" />
     </Menu>
   );
 }

@@ -116,7 +116,7 @@ export function WorktreeSetupCard(props: WorktreeSetupCardProps) {
               />
             ) : null}
             <Text numberOfLines={1} className="shrink text-2xs text-foreground-secondary">
-              {backgroundSetup ? "Background setup" : "Details"}
+              {backgroundSetup ? "background setup" : "details"}
             </Text>
             {!backgroundSetup ? (
               <SymbolView name="chevron.right" size={10} tintColorClassName="accent-icon-muted" />
@@ -239,7 +239,7 @@ function SetupDetailsSheet({
             />
             {onWorkLocally ? (
               <Button
-                label="Work locally"
+                label="work locally"
                 tone="secondary"
                 onPress={() => {
                   onClose();

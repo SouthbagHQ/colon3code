@@ -1226,7 +1226,7 @@ export default function GitActionsControl({
       toastManager.add(
         stackedThreadToast({
           type: "error",
-          title: "Action failed",
+          title: "aw, that action didn't work 3:",
           description: error instanceof Error ? error.message : "An error occurred.",
           timeout: errorToastTiming.timeout,
           ...(scopedToastData !== undefined ? { data: scopedToastData } : {}),
@@ -1240,7 +1240,7 @@ export default function GitActionsControl({
     const createdPullRequest = actionResult.pr.status === "created";
     setInlineSuccess({
       title: createdPullRequest
-        ? `Created ${changeRequestTerminology.shortLabel}`
+        ? `created ${changeRequestTerminology.shortLabel}`
         : actionResult.toast.title,
       description: createdPullRequest ? null : (actionResult.toast.description ?? null),
       scopeKey: successScopeKey,
@@ -1644,7 +1644,7 @@ export default function GitActionsControl({
         >
           <FileDiffIcon className={THREAD_DETAILS_PANEL_ICON_CLASS} aria-hidden />
           <span className="flex min-w-0 flex-1 items-baseline gap-1.5">
-            <span className="shrink-0">Changes</span>
+            <span className="shrink-0">changes</span>
             {changesBaseLabel ? (
               <Tooltip>
                 <TooltipTrigger
@@ -1775,7 +1775,7 @@ export default function GitActionsControl({
                                   type="button"
                                   className="flex min-w-0 flex-1 items-center justify-between gap-3 text-left enabled:cursor-pointer"
                                   disabled={!canOperateThread || workingTreeRoot === null}
-                                  aria-label={`Open ${file.path} in editor`}
+                                  aria-label={`open ${file.path} in editor`}
                                   onClick={() => openChangedFileInEditor(file.path)}
                                 >
                                   <StartTruncatedPath

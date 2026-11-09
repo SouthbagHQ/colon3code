@@ -16,8 +16,8 @@ const FOLDS = [
   { id: "open", angle: 180 },
 ] as const;
 const STANDS = [
-  { id: "laptop", label: "Laptop stand" },
-  { id: "tent", label: "Tent stand" },
+  { id: "laptop", label: "laptop stand" },
+  { id: "tent", label: "tent stand" },
 ] as const;
 
 export function DeviceDuoControls(props: {
@@ -36,9 +36,9 @@ export function DeviceDuoControls(props: {
   // correct display frame.
   const foldWaits = props.state.pending && (stand || props.state.requested?.control === "pose");
   const foldLabels = {
-    closed: "Closed",
-    half: phoneVertical ? "Book" : "Laptop",
-    open: "Open",
+    closed: "closed",
+    half: phoneVertical ? "book" : "laptop",
+    open: "open",
   };
   const button = (
     key: string,
@@ -71,7 +71,7 @@ export function DeviceDuoControls(props: {
     "pointer-events-auto flex shrink-0 flex-col items-center gap-1 rounded-full border border-border/50 bg-background/80 p-1 shadow-sm";
   return (
     <div aria-label="iPhone Duo stands" className="flex flex-col items-center gap-2">
-      <div role="group" aria-label="Fold shape" className={group}>
+      <div role="group" aria-label="fold shape" className={group}>
         {FOLDS.map(({ id, angle: value }) =>
           button(
             id,
@@ -90,7 +90,7 @@ export function DeviceDuoControls(props: {
           ),
         )}
       </div>
-      <div role="group" aria-label="Device stance" className={group}>
+      <div role="group" aria-label="device stance" className={group}>
         {STANDS.map(({ id, label }) =>
           button(
             id,

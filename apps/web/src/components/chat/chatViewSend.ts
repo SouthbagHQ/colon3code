@@ -108,14 +108,14 @@ export async function startFanoutThread(input: {
     const failureToastId = toastManager.add(
       stackedThreadToast({
         type: "error",
-        title: `Could not start ${input.model}`,
+        title: `aw, couldn't start ${input.model}`,
         description: error instanceof Error ? error.message : "failed to send message.",
         ...(retainedThreadId
           ? {
               timeout: 0,
               data: {
                 secondaryActionProps: {
-                  children: "Allow retry",
+                  children: "allow retry",
                   onClick: () => {
                     void readLocalApi()
                       ?.dialogs.confirm(
@@ -137,7 +137,7 @@ export async function startFanoutThread(input: {
                 },
               },
               actionProps: {
-                children: "Open thread",
+                children: "open thread",
                 onClick: () => input.openThread(retainedThreadId),
               },
             }

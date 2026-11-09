@@ -280,7 +280,7 @@ function FileViewedToggle({
         onClick={(event) => event.stopPropagation()}
       >
         <Checkbox
-          aria-label={stale ? "Changed" : "Viewed"}
+          aria-label={stale ? "changed" : "viewed"}
           checked={viewed}
           onCheckedChange={(next, details) =>
             viewedFiles.setFileViewed(
@@ -293,14 +293,14 @@ function FileViewedToggle({
         {stale ? (
           <Tooltip>
             <TooltipTrigger render={<span className="text-warning-foreground" />}>
-              Changed
+              changed
             </TooltipTrigger>
             <TooltipPopup side="bottom">
               This file has been pushed to since you marked it viewed.
             </TooltipPopup>
           </Tooltip>
         ) : (
-          <span className="@max-xs:hidden">Viewed</span>
+          <span className="@max-xs:hidden">viewed</span>
         )}
       </label>
     </span>
@@ -1581,7 +1581,7 @@ function PullRequestCodeTab({
             defaultWidth={320}
             defaultWidthFraction={0.4}
             minWidth={192}
-            resizeLabel="Resize PR Code files"
+            resizeLabel="resize PR code files"
           >
             <DiffFileTree
               ariaLabel={`${term} #${detail.number} files`}

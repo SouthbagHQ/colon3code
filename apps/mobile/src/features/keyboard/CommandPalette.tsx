@@ -328,7 +328,7 @@ export function CommandPalette(props: {
       {
         key: "scheduledTasks",
         kind: "action",
-        title: "Scheduled tasks",
+        title: "scheduled tasks",
         searchTerms: ["schedule", "automations", "recurring"],
         run: () => openSettings(navigation, "SettingsScheduledTasks"),
       },
@@ -351,7 +351,7 @@ export function CommandPalette(props: {
       actions.push({
         key: "triage",
         kind: "action",
-        title: "Triage an issue",
+        title: "triage an issue",
         // Mobile has no triage hero, so name the machine before it starts.
         detail: `On ${savedConnectionsById[triageEnvironmentId]?.environmentLabel ?? "this machine"}`,
         searchTerms: ["triage", "bug", "issue", "report", "broken", "debug", "help", "support"],
@@ -688,7 +688,7 @@ export function CommandPalette(props: {
                 ListFooterComponent={
                   results.length > 0 && search.isPending && !query.startsWith(">") ? (
                     <Text className="px-5 pt-2 text-xs text-foreground-muted">
-                      Searching messages…
+                      searching messages…
                     </Text>
                   ) : undefined
                 }
@@ -699,7 +699,7 @@ export function CommandPalette(props: {
                         className="px-5 pt-2 text-xs text-foreground-muted"
                         style={{ height: SECTION_LABEL_HEIGHT }}
                       >
-                        In messages
+                        in messages
                       </Text>
                     ) : null}
                     <PaletteRow

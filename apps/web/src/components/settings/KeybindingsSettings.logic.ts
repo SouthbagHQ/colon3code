@@ -210,17 +210,17 @@ export interface KeybindingGroup {
 const KEYBINDING_GROUPS = [
   {
     id: "navigation",
-    title: "Navigation",
+    title: "navigation",
     prefixes: ["sidebar", "rightPanel", "commandPalette", "filePicker", "projectSearch", "editor"],
   },
-  { id: "threads", title: "Threads", prefixes: ["thread", "chat", "pullRequest"] },
-  { id: "composer", title: "Composer", prefixes: ["composer", "modelPicker"] },
-  { id: "terminal", title: "Terminal", prefixes: ["terminal"] },
-  { id: "preview", title: "Preview & diff", prefixes: ["preview", "diff"] },
-  { id: "appearance", title: "Appearance", prefixes: ["theme", "appearance", "themeEditor"] },
-  { id: "scripts", title: "Project scripts", prefixes: ["script"] },
+  { id: "threads", title: "threads", prefixes: ["thread", "chat", "pullRequest"] },
+  { id: "composer", title: "composer", prefixes: ["composer", "modelPicker"] },
+  { id: "terminal", title: "terminal", prefixes: ["terminal"] },
+  { id: "preview", title: "preview & diff", prefixes: ["preview", "diff"] },
+  { id: "appearance", title: "appearance", prefixes: ["theme", "appearance", "themeEditor"] },
+  { id: "scripts", title: "project scripts", prefixes: ["script"] },
 ] as const;
-const OTHER_KEYBINDING_GROUP = { id: "other", title: "Other" } as const;
+const OTHER_KEYBINDING_GROUP = { id: "other", title: "other" } as const;
 
 function keybindingGroupFor(command: KeybindingCommand): { id: string; title: string } {
   const prefix = String(command).split(".")[0] ?? "";

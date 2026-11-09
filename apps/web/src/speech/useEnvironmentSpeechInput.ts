@@ -348,7 +348,7 @@ export function useEnvironmentSpeechInput(input: HookInput) {
       onPostProcessingError: () =>
         toastManager.add({
           type: "warning",
-          title: "Transcript cleanup failed",
+          title: "aw, transcript cleanup failed 3:",
           description: "The original transcript was added.",
         }),
       readDraft,
@@ -469,7 +469,7 @@ export function useEnvironmentSpeechInput(input: HookInput) {
         error: choice
           ? null
           : catalog
-            ? "No model matches your language. Choose a model or change the language in Voice settings."
+            ? "No model matches your language. Choose a model or change the language in voice settings."
             : "Could not load transcription models. Check the connection and try again.",
       }));
     },
@@ -506,7 +506,7 @@ export function useEnvironmentSpeechInput(input: HookInput) {
       setQueuedStart(null);
       toastManager.add({
         type: "error",
-        title: "Could not start voice input",
+        title: "aw, couldn't start voice input 3:",
         description: error instanceof Error ? error.message : String(error),
       });
       return;
@@ -520,7 +520,7 @@ export function useEnvironmentSpeechInput(input: HookInput) {
     if (!latestStatus.supported) {
       toastManager.add({
         type: "error",
-        title: "Voice input is not available",
+        title: "hmm, voice input isn't available 3:",
         description: latestStatus.reason,
       });
       return;

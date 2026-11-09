@@ -53,12 +53,12 @@ export function OutdatedServerUpdateSection({
     const targetVersion = release?.targetVersion;
     if (busy || !release || !targetVersion) return;
     Dialog.alert(
-      `Update ${label}?`,
+      `update ${label}?`,
       `Install :3 Code ${targetVersion}. :3 Code restarts on that machine and reconnects. Running threads may be interrupted.`,
       [
-        { text: "Cancel", style: "cancel" },
+        { text: "cancel", style: "cancel" },
         {
-          text: "Update",
+          text: "update",
           onPress: () => {
             setCheckErrorDismissed(true);
             void update({
@@ -76,15 +76,15 @@ export function OutdatedServerUpdateSection({
     <SettingsSection title=":3 Code">
       <View className="gap-1 p-4">
         <Text className="text-base text-foreground">
-          {release ? `Version ${release.fromVersion}` : "Update required"}
+          {release ? `version ${release.fromVersion}` : "update required"}
         </Text>
         <Text className="text-sm text-foreground-muted">
           {state.status === "running"
             ? state.stage === "resuming"
-              ? "Restarting and reconnecting…"
+              ? "restarting and reconnecting…"
               : state.stage === "installing"
-                ? "Installing update…"
-                : "Downloading update…"
+                ? "installing update…"
+                : "downloading update…"
             : release
               ? release.targetVersion
                 ? `Version ${release.targetVersion} is available.`
@@ -99,7 +99,7 @@ export function OutdatedServerUpdateSection({
       </View>
       <SettingsActionRow
         icon="arrow.clockwise"
-        label="Check for updates"
+        label="check for updates"
         disabled={busy}
         loading={checking}
         onPress={check}
@@ -107,7 +107,7 @@ export function OutdatedServerUpdateSection({
       {release?.targetVersion ? (
         <SettingsActionRow
           icon="arrow.up.circle"
-          label={state.status === "failed" ? "Retry update" : `Update to ${release.targetVersion}`}
+          label={state.status === "failed" ? "retry update" : `update to ${release.targetVersion}`}
           disabled={busy}
           loading={state.status === "running"}
           onPress={requestUpdate}

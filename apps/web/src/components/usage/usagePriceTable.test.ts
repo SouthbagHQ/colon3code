@@ -126,7 +126,7 @@ describe("price table edits", () => {
     const priced = target("priced", { example: price });
     const edit = draft({ inputCostPerMillionTokens: "3", outputCostPerMillionTokens: "8" });
     expect(usagePriceTableErrors([mapped, priced], [edit]).get(edit.id)).toBe(
-      'mapped maps this model. Remove it from "Apply to" or clear its mapping first.',
+      'mapped maps this model. Remove it from "apply to" or clear its mapping first.',
     );
     expect(usagePriceTableChanges(mapped, [edit]).changes).toEqual([]);
 

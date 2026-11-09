@@ -56,18 +56,18 @@ export function ProviderWizardAuthenticationStep({
             />
           ) : (
             <SettingsRow
-              title="Account"
+              title="account"
               description={
                 isDiscovering
-                  ? "Discovering sign-in methods…"
+                  ? "discovering sign-in methods…"
                   : (query.error ??
                     auth?.message ??
-                    "No in-app sign-in advertised. Follow the provider's docs to finish setup.")
+                    "no in-app sign-in advertised. Follow the provider's docs to finish setup.")
               }
               control={
                 isDiscovering ? (
                   <Button disabled size="sm" variant="outline">
-                    Sign in
+                    sign in
                   </Button>
                 ) : provider?.setup?.documentationUrl ? (
                   <Button
@@ -77,7 +77,7 @@ export function ProviderWizardAuthenticationStep({
                       <a href={provider.setup.documentationUrl} target="_blank" rel="noreferrer" />
                     }
                   >
-                    Open docs
+                    open docs
                   </Button>
                 ) : undefined
               }
@@ -92,7 +92,7 @@ export function ProviderWizardAuthenticationStep({
           disabled={active}
           onClick={onFinish}
         >
-          {signedIn ? "Done" : "Skip for now"}
+          {signedIn ? "done" : "skip for now"}
         </Button>
       </WizardFooter>
     </>

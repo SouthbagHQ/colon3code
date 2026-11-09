@@ -111,7 +111,7 @@ it("rechecks the grant before preparing an agent", async () => {
   await using _screen = await render(<Step onPrepared={onPrepared} />);
   state.canManage = false;
 
-  await page.getByRole("button", { name: "Add Gemini CLI" }).click();
+  await page.getByRole("button", { name: "add Gemini CLI" }).click();
 
   expect(state.prepare).not.toHaveBeenCalled();
   expect(onPrepared).not.toHaveBeenCalled();
@@ -122,6 +122,6 @@ it("leaves out Registry agents that :3 Code supports as their own providers", as
   state.result = { agents: [gemini, { ...gemini, id: "codex-acp", name: "Codex" }] };
   await using _screen = await render(<Step />);
 
-  expect(page.getByRole("button", { name: "Add Gemini CLI" }).query()).not.toBeNull();
-  expect(page.getByRole("button", { name: "Add Codex" }).query()).toBeNull();
+  expect(page.getByRole("button", { name: "add Gemini CLI" }).query()).not.toBeNull();
+  expect(page.getByRole("button", { name: "add Codex" }).query()).toBeNull();
 });

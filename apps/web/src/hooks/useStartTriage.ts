@@ -22,7 +22,7 @@ const copyTriageCliCommand = () =>
   writeTextToClipboard(TRIAGE_CLI_COMMAND, "command").catch(() =>
     toastManager.add({
       type: "error",
-      title: `Could not copy. Type ${TRIAGE_CLI_COMMAND} instead.`,
+      title: `aw, couldn't copy. Type ${TRIAGE_CLI_COMMAND} instead 3:`,
     }),
   );
 
@@ -47,10 +47,10 @@ export function useStartTriage() {
     toastManager.add(
       stackedThreadToast({
         type: "error",
-        title: "Could not start triage",
+        title: "aw, couldn't start triage 3:",
         description: `${description} Run ${TRIAGE_CLI_COMMAND} in a terminal on that machine instead.`,
         timeout: 0,
-        actionProps: { children: "Copy command", onClick: () => void copyTriageCliCommand() },
+        actionProps: { children: "copy command", onClick: () => void copyTriageCliCommand() },
         // "Copy command" is the copy that helps here, not the error text.
         data: { hideCopyButton: true },
       }),
@@ -92,7 +92,7 @@ export function useStartTriage() {
     const pendingTimer = setTimeout(() => {
       pendingToastId = toastManager.add({
         type: "loading",
-        title: "Starting triage…",
+        title: "starting triage…",
         timeout: 0,
       });
     }, 400);

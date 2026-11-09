@@ -124,7 +124,7 @@ export function deriveProviderSettingsFields(
           control: formAnnotation.control ?? "text",
           label:
             isLocalAcp && key === "commandPath"
-              ? "Executable"
+              ? "executable"
               : (annotatedTitle ?? titleizeFieldKey(key)),
           ...(isLocalAcp && key === "commandPath"
             ? { description: "Executable name or path on this environment." }
@@ -226,7 +226,7 @@ function ProviderCommandArguments({
 
   return (
     <SettingsRow
-      title="Arguments"
+      title="arguments"
       description="One literal argument per row, in launch order."
       managed={managedReason}
       control={
@@ -237,7 +237,7 @@ function ProviderCommandArguments({
           onClick={() => updateArguments([...rows, makeCommandArgumentDraftRow("")])}
         >
           <PlusIcon />
-          Add argument
+          add argument
         </Button>
       }
     >
@@ -261,7 +261,7 @@ function ProviderCommandArguments({
                       ),
                     )
                   }
-                  aria-label={`Argument ${index + 1}`}
+                  aria-label={`argument ${index + 1}`}
                   spellCheck={false}
                 />
                 <Button
@@ -271,7 +271,7 @@ function ProviderCommandArguments({
                   onClick={() =>
                     updateArguments(rows.filter((current) => current.id !== argument.id))
                   }
-                  aria-label={`Remove argument ${index + 1}`}
+                  aria-label={`remove argument ${index + 1}`}
                 >
                   <XIcon />
                 </Button>
@@ -384,7 +384,7 @@ function SecretSettingsControl({
           size="icon-sm"
           variant="ghost-destructive"
           onClick={() => onChange(nextProviderConfigWithFieldValue(value, field, ""))}
-          aria-label={`Clear ${field.label}`}
+          aria-label={`clear ${field.label}`}
         >
           <XIcon className="size-3.5" />
         </Button>
@@ -534,7 +534,7 @@ function ProviderSettingsFieldRow({
               size="icon-sm"
               variant="ghost-destructive"
               onClick={() => onChange(nextProviderConfigWithFieldValue(value, field, ""))}
-              aria-label={`Clear ${field.label}`}
+              aria-label={`clear ${field.label}`}
             >
               <XIcon className="size-3.5" />
             </Button>

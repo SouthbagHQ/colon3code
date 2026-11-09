@@ -76,7 +76,7 @@ export const TimelinePendingApprovalRow = memo(function TimelinePendingApprovalR
             <>
               <span className="inline-flex items-center gap-1 text-warning">
                 <ShieldIcon aria-hidden className="size-3 shrink-0" />
-                Waiting for approval
+                waiting for approval
               </span>
               {onRespondToApproval ? (
                 <>

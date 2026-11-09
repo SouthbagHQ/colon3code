@@ -100,12 +100,12 @@ function ReferenceStateIcon({ candidate }: { candidate: PullRequestReferenceCand
       ? resolvePullRequestState({ state: candidate.state, isDraft: false })
       : candidate.state === "open"
         ? {
-            label: "Open issue",
+            label: "open issue",
             Icon: CircleDotIcon,
             toneClassName: PULL_REQUEST_STATE_PRESENTATION.open.toneClassName,
           }
         : {
-            label: "Closed issue",
+            label: "closed issue",
             Icon: CircleCheckIcon,
             toneClassName: PULL_REQUEST_STATE_PRESENTATION.merged.toneClassName,
           };
@@ -143,16 +143,16 @@ function CompletionRow({ completion }: { completion: PullRequestCompletion }) {
 
 const EMPTY_STATE = {
   mention: {
-    label: "Mention a user",
-    pending: "Searching users...",
-    failed: "Couldn't search users on the host",
-    none: "No matching users",
+    label: "mention a user",
+    pending: "searching users…",
+    failed: "couldn't search users on the host",
+    none: "no matching users",
   },
   reference: {
-    label: "Reference an issue or change request",
-    pending: "Searching...",
-    failed: "Couldn't search the host",
-    none: "No matching issues or change requests",
+    label: "reference an issue or change request",
+    pending: "searching…",
+    failed: "couldn't search the host",
+    none: "no matching issues or change requests",
   },
 } as const;
 

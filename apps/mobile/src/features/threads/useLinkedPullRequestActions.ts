@@ -90,7 +90,7 @@ export function useLinkedPullRequestActions(input: {
   const promptLink = () => {
     const { singular } = terminology;
     Dialog.prompt({
-      title: `Link ${singular}`,
+      title: `link ${singular}`,
       message: `Paste a ${singular} URL, or enter 123 / #123 for this thread's repository.`,
       placeholder: `${capitalizeTerm(singular)} URL or #42`,
       initialValue: "",
@@ -118,13 +118,13 @@ export function useLinkedPullRequestActions(input: {
     const open = link.snapshot === null || link.snapshot.state === "open";
     const watching = link.watch !== undefined;
     return [
-      { id: "copy", title: "Copy link", image: "link" },
-      { id: "browser", title: "Open in browser", image: "safari" },
+      { id: "copy", title: "copy link", image: "link" },
+      { id: "browser", title: "open in browser", image: "safari" },
       ...((watching ? canWatch : canStartWatch) && open
         ? [
             {
               id: "watch",
-              title: watching ? "Stop watching" : "Watch for changes",
+              title: watching ? "stop watching" : "watch for changes",
               image: watching ? "eye.slash" : "eye",
             },
           ]
@@ -133,7 +133,7 @@ export function useLinkedPullRequestActions(input: {
         ? [
             {
               id: "unlink",
-              title: link.source === "stack" ? "Dismiss from thread" : "Unlink from thread",
+              title: link.source === "stack" ? "dismiss from thread" : "unlink from thread",
               image: "xmark",
               attributes: { destructive: true },
             },

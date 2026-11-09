@@ -44,7 +44,7 @@ export function LinkedEnvironmentsSection(props: {
   const now = DateTime.makeUnsafe(nowMs);
   return (
     <View className="mt-5 gap-3">
-      <SettingsSection title={`Linked from ${props.environmentLabel}`}>
+      <SettingsSection title={`linked from ${props.environmentLabel}`}>
         {links.data.links.map((link) => {
           const health = peerLinkHealth(link, now);
           const status =

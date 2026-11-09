@@ -15,7 +15,7 @@ export function startLegacyThreadMigrationToast(): () => void {
         if (toastId !== null) return;
         toastId = toastManager.add({
           type: "loading",
-          title: "Restoring your threads…",
+          title: "restoring your threads…",
           description: `Migrating ${migration.totalThreadCount.toLocaleString()} ${
             migration.totalThreadCount === 1 ? "thread" : "threads"
           } from the previous version. You can keep working while this finishes.`,

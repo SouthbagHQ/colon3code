@@ -215,7 +215,7 @@ export function ThreadDetailsPanel(props: ThreadDetailsPanelProps) {
               {props.gitCwd && (show.branch || show.git) ? (
                 <ThreadDetailsSection
                   headingId="thread-details-version-control-heading"
-                  title="Version Control"
+                  title="version control"
                   showHeading={false}
                   separated={density === "full"}
                 >
@@ -278,7 +278,7 @@ export function ThreadDetailsPanel(props: ThreadDetailsPanelProps) {
                 >
                   <SlidersHorizontalIcon className={THREAD_DETAILS_PANEL_ICON_CLASS} aria-hidden />
                   <span className={cn("ml-0.5", THREAD_DETAILS_PANEL_LABEL_CLASS)}>
-                    Choose what to show
+                    choose what to show
                   </span>
                 </ThreadDetailsControl>
               </div>

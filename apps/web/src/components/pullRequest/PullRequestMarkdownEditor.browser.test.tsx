@@ -90,7 +90,7 @@ function button(screen: Screen, label: string) {
   return match!;
 }
 
-const clickSave = (screen: Screen) => act(async () => button(screen, "Save").click());
+const clickSave = (screen: Screen) => act(async () => button(screen, "save").click());
 
 async function grant(allowed: boolean) {
   await act(async () => {
@@ -109,7 +109,7 @@ it("keeps an edited draft through revocation and saves it after access returns w
   await userEvent.type(textarea, "Keep these unsaved edits");
 
   await grant(false);
-  expect(button(screen, "Save").disabled).toBe(true);
+  expect(button(screen, "save").disabled).toBe(true);
   expect(screen.container.querySelector("textarea")).toBe(textarea);
 
   await grant(true);

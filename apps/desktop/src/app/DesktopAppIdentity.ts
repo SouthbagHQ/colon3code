@@ -94,8 +94,12 @@ export const make = Effect.gen(function* () {
   const configure = Effect.gen(function* () {
     const commitHash = yield* resolveAboutCommitHash;
     // Electron strips spaces but keeps parentheses in its User-Agent token, breaking Turnstile in preview sessions.
+    // The fork's ":3" brand isn't a valid RFC 9110 token, so drop non-token characters too.
     yield* electronApp.setName(
-      `${environment.branding.baseName} ${environment.branding.stageLabel}`,
+      `${environment.branding.baseName} ${environment.branding.stageLabel}`
+        .replace(/^:3/, "Colon3")
+        .replace(/[^ !#$%&'*+\-.^_`|~0-9A-Za-z]/g, "")
+        .trim(),
     );
     yield* electronApp.setAboutPanelOptions({
       applicationName: environment.displayName,

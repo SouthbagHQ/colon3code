@@ -55,11 +55,11 @@ function useActionSubmission(params: PullRequestParams) {
 }
 
 const VERDICTS = [
-  { value: "comment", title: "Comment" },
-  { value: "approve", title: "Approve" },
+  { value: "comment", title: "comment" },
+  { value: "approve", title: "approve" },
   {
     value: "request-changes",
-    title: "Request changes",
+    title: "request changes",
   },
 ] as const;
 
@@ -141,7 +141,7 @@ export function PullRequestReviewSheet({
     });
   return (
     <SheetContent
-      title={reviewing ? "Submit review" : "Add comment"}
+      title={reviewing ? "submit review" : "add comment"}
       subtitle={`#${params.number}${reviewing && result.data?.headSha ? ` · reviewing ${result.data.headSha.slice(0, 7)}` : ` · ${params.repository}`}`}
       busy={submission.busy}
       footer={
@@ -153,9 +153,9 @@ export function PullRequestReviewSheet({
                 ? verdict?.value === "approve"
                   ? "Approve"
                   : verdict?.value === "request-changes"
-                    ? "Request changes"
-                    : "Submit review"
-                : "Post comment"
+                    ? "request changes"
+                    : "submit review"
+                : "post comment"
           }
           fullWidth
           tone={Platform.OS === "android" ? "primary" : "contrast"}
@@ -184,13 +184,13 @@ export function PullRequestReviewSheet({
         selection={completions.selection}
         onSelectionChange={completions.onSelectionChange}
         onBlur={completions.onBlur}
-        accessibilityLabel={reviewing ? "Review summary" : "Comment"}
+        accessibilityLabel={reviewing ? "review summary" : "Comment"}
         placeholder={
           reviewing
             ? summaryRequired
-              ? "Summary required to request changes…"
-              : "Summarize your review…"
-            : "Write a comment…"
+              ? "summary required to request changes…"
+              : "summarize your review…"
+            : "write a comment…"
         }
         placeholderTextColorClassName="accent-foreground-muted"
         editable={store.ready && !submission.busy}
@@ -240,8 +240,8 @@ export function PullRequestReviewSheet({
               </Text>
               <Text className="text-2xs text-foreground-muted">
                 {draft.headSha !== result.data?.headSha
-                  ? "Branch changed · Tap to choose a new line"
-                  : "Tap to edit"}
+                  ? "branch changed · tap to choose a new line"
+                  : "tap to edit"}
               </Text>
             </Pressable>
           ))}

@@ -1884,7 +1884,7 @@ export const ChatComposer = memo(function ChatComposer(props: ChatComposerProps)
   });
   const { blocksSubmission: voiceInputActive, submitAfterDictation } = speechInput;
   const voiceSendDisabledReason =
-    sendDisabledReason ?? (speechInput.preparing ? "Preparing voice input" : null);
+    sendDisabledReason ?? (speechInput.preparing ? "preparing voice input" : null);
   const dictationShortcutLabel = useDictationShortcut({
     keybindings,
     speech: speechInput,
@@ -2658,7 +2658,7 @@ export const ChatComposer = memo(function ChatComposer(props: ChatComposerProps)
       if (!inserted) {
         toastManager.add({
           type: "error",
-          title: "Unable to add folder",
+          title: "couldn't add that folder",
           description: "the composer is busy right now; try again once it is ready.",
         });
         break;
@@ -2745,7 +2745,7 @@ export const ChatComposer = memo(function ChatComposer(props: ChatComposerProps)
       pendingDraftWork.begin(targetKey);
       const loadingToast = toastManager.add({
         type: "loading",
-        title: "Loading thread context…",
+        title: "loading thread context…",
         timeout: 0,
         data: { threadRef: routeThreadRef, hideCopyButton: true },
       });
@@ -2780,7 +2780,7 @@ export const ChatComposer = memo(function ChatComposer(props: ChatComposerProps)
         const error = squashAtomCommandFailure(importResult);
         toastManager.add({
           type: "error",
-          title: "Unable to read the dropped thread",
+          title: "couldn't read the dropped thread",
           description:
             isEnvironmentRequestInvalidError(error) &&
             error.reason === "thread_transcript_too_large"
@@ -2829,7 +2829,7 @@ export const ChatComposer = memo(function ChatComposer(props: ChatComposerProps)
       if (!inserted) {
         toastManager.add({
           type: "error",
-          title: "Unable to add thread",
+          title: "couldn't add that thread",
           description: "the composer is busy right now; try again once it is ready.",
         });
         return;
@@ -3451,8 +3451,8 @@ export const ChatComposer = memo(function ChatComposer(props: ChatComposerProps)
                     ? composerTriggerKind === "pull-request"
                       ? "Finding pull request..."
                       : composerTriggerKind === "skill" || composerTriggerKind === "slash-command"
-                        ? "Searching workspace skills..."
-                        : "Searching workspace files..."
+                        ? "searching workspace skills…"
+                        : "searching workspace files…"
                     : composerMenuEmptyState
                   : ""}
               </div>
@@ -3498,7 +3498,7 @@ export const ChatComposer = memo(function ChatComposer(props: ChatComposerProps)
                   <ComposerPromptEditor
                     draftKey={composerDraftTargetKey}
                     // Switching threads lands focus here, so the label names the thread.
-                    ariaLabel={activeThread ? `Message ${activeThread.title}` : "Message"}
+                    ariaLabel={activeThread ? `message ${activeThread.title}` : "message"}
                     suggestionListId={composerSuggestionListId}
                     activeSuggestionId={
                       composerSuggestionListVisible && activeComposerMenuItem
@@ -3592,7 +3592,7 @@ export const ChatComposer = memo(function ChatComposer(props: ChatComposerProps)
 
             {speechInput.preview ? (
               <div
-                aria-label="Live transcription"
+                aria-label="live transcription"
                 className="mx-3 mb-3 max-h-32 overflow-y-auto rounded-lg border border-border/60 bg-muted/30 px-3 py-2 text-sm leading-relaxed break-words whitespace-pre-wrap sm:mx-4"
               >
                 <span>{speechInput.preview.committed}</span>

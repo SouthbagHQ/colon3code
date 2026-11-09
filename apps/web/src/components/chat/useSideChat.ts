@@ -53,7 +53,7 @@ export function useSideChat(input: {
     const targetThreadId = newThreadId();
     const fork = await forkSideChat({
       environmentId: threadRef.environmentId,
-      input: { sourceThreadId: threadRef.threadId, targetThreadId, title: "Side chat" },
+      input: { sourceThreadId: threadRef.threadId, targetThreadId, title: "side chat" },
     });
     if (fork._tag === "Failure") {
       reportFailure(fork, "Could not start a side chat.");

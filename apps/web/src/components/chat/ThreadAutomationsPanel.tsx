@@ -105,7 +105,7 @@ export function ThreadAutomationsPanel(props: {
     });
     setBusyTaskId(null);
     if (result._tag === "Failure" && !isAtomCommandInterrupted(result)) {
-      reportFailure("Could not update automation", squashAtomCommandFailure(result));
+      reportFailure("couldn't update that automation", squashAtomCommandFailure(result));
     }
   };
 
@@ -122,14 +122,14 @@ export function ThreadAutomationsPanel(props: {
     });
     setBusyTaskId(null);
     if (result._tag === "Failure" && !isAtomCommandInterrupted(result)) {
-      reportFailure("Could not run automation", squashAtomCommandFailure(result));
+      reportFailure("couldn't run that automation", squashAtomCommandFailure(result));
     }
   };
 
   return (
     <ThreadDetailsSection
       headingId="thread-details-automations-heading"
-      title="Automations"
+      title="automations"
       data-thread-automations-panel
       actions={
         <Tooltip>
@@ -139,7 +139,7 @@ export function ThreadAutomationsPanel(props: {
                 size="icon-xs"
                 variant="ghost"
                 part="icon"
-                aria-label="Manage scheduled tasks"
+                aria-label="manage scheduled tasks"
                 onClick={() =>
                   void navigate({
                     to: "/settings/scheduled-tasks",
@@ -151,7 +151,7 @@ export function ThreadAutomationsPanel(props: {
               </ThreadDetailsControl>
             }
           />
-          <TooltipPopup>Manage scheduled tasks</TooltipPopup>
+          <TooltipPopup>manage scheduled tasks</TooltipPopup>
         </Tooltip>
       }
     >
@@ -193,7 +193,7 @@ export function ThreadAutomationsPanel(props: {
                     size="icon-xs"
                     variant="ghost"
                     part="icon"
-                    aria-label={`Edit ${task.title}`}
+                    aria-label={`edit ${task.title}`}
                     onClick={() =>
                       void navigate({
                         to: "/settings/scheduled-tasks",
@@ -205,7 +205,7 @@ export function ThreadAutomationsPanel(props: {
                   </ThreadDetailsControl>
                 }
               />
-              <TooltipPopup>Edit automation</TooltipPopup>
+              <TooltipPopup>edit automation</TooltipPopup>
             </Tooltip>
             {/* Webhook tasks need a request from their URL. */}
             {task.schedule.type === "webhook" ? null : (
@@ -216,7 +216,7 @@ export function ThreadAutomationsPanel(props: {
                       size="icon-xs"
                       variant="ghost"
                       part="icon"
-                      aria-label={`Run ${task.title} now`}
+                      aria-label={`run ${task.title} now`}
                       disabled={
                         !canOperate || busyTaskId !== null || task.lastRunStatus === "running"
                       }
@@ -226,13 +226,13 @@ export function ThreadAutomationsPanel(props: {
                     </ThreadDetailsControl>
                   }
                 />
-                <TooltipPopup>Run now</TooltipPopup>
+                <TooltipPopup>run now</TooltipPopup>
               </Tooltip>
             )}
             <Switch
               checked={task.enabled}
               disabled={!canOperate || busyTaskId !== null}
-              aria-label={task.enabled ? `Pause ${task.title}` : `Resume ${task.title}`}
+              aria-label={task.enabled ? `pause ${task.title}` : `resume ${task.title}`}
               onCheckedChange={(enabled) => void toggleEnabled(task, enabled)}
             />
           </li>

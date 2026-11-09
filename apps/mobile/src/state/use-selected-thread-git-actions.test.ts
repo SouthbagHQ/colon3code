@@ -300,7 +300,7 @@ describe("automatic feature branch refs", () => {
     );
     expect(await useSelectedThreadGitActions().refreshSelectedThreadBranches()).toBeNull();
     expect(state.results).toEqual([
-      { type: "error", title: "Git action failed", description: "Cannot list refs" },
+      { type: "error", title: "Git action failed 3:", description: "Cannot list refs" },
     ]);
   });
 });

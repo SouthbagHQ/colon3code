@@ -33,7 +33,7 @@ export function NativeChildWorkSheet(props: {
   );
   const children = query.data?.children;
   return (
-    <Sheet title="Subagent work" onClose={props.onClose}>
+    <Sheet title="subagent work" onClose={props.onClose}>
       <ScrollView
         contentInsetAdjustmentBehavior="automatic"
         contentContainerStyle={{
@@ -51,7 +51,7 @@ export function NativeChildWorkSheet(props: {
             {query.error}
           </Text>
         ) : children === undefined ? (
-          <Text className="font-sans text-sm text-foreground-secondary">Loading…</Text>
+          <Text className="font-sans text-sm text-foreground-secondary">loading…</Text>
         ) : children.length === 0 ? (
           <Text className="font-sans text-sm text-foreground-secondary">
             The provider has no record of which subagents this call started.
@@ -61,7 +61,7 @@ export function NativeChildWorkSheet(props: {
         )}
         <View className="flex-row justify-end">
           <Button
-            label="Refresh"
+            label="refresh"
             tone="secondary"
             disabled={query.isPending}
             onPress={query.refresh}

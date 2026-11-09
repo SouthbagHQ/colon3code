@@ -143,7 +143,7 @@ export function AssistantCitationChip({
         kind="citation"
         icon={<QuoteIcon />}
         label={label}
-        accessibleLabel={`Quoted assistant text: ${label}`}
+        accessibleLabel={`quoted assistant text: ${label}`}
         copyMarkdown={serializeAssistantCitation(citation)}
       >
         <div className="flex max-h-[calc(var(--available-height)_-_1rem_-_2px)] flex-col items-start gap-3 p-1 text-sm">
@@ -152,7 +152,7 @@ export function AssistantCitationChip({
             render={<Button variant="outline" size="sm" render={<Link {...sourceLinkProps} />} />}
           >
             <ArrowUpRightIcon aria-hidden="true" />
-            Go to source
+            go to source
           </PopoverClose>
         </div>
       </ContextChipPopover>

@@ -174,7 +174,7 @@ export function EasDeviceHostEditor(props: {
           }}
         >
           <DialogHeader>
-            <DialogTitle>{props.isNew ? "Add EAS host" : "Edit EAS host"}</DialogTitle>
+            <DialogTitle>{props.isNew ? "add EAS host" : "edit EAS host"}</DialogTitle>
             <DialogDescription>
               The environment's server signs in to Expo and starts the sessions. Without a token
               here it uses EXPO_TOKEN, then its eas login.
@@ -182,7 +182,7 @@ export function EasDeviceHostEditor(props: {
           </DialogHeader>
           <DialogPanel>
             <label className="block space-y-1.5 text-sm">
-              <span>Name</span>
+              <span>name</span>
               <Input
                 autoFocus
                 required
@@ -222,7 +222,7 @@ export function EasDeviceHostEditor(props: {
                     resetAccount();
                   }}
                   disabled={props.busy}
-                  placeholder="Optional"
+                  placeholder="optional"
                   onChange={(event) => {
                     const value = event.target.value;
                     // Emptying the field is not clearing the saved token; the
@@ -242,7 +242,7 @@ export function EasDeviceHostEditor(props: {
                     type="button"
                     size="icon-sm"
                     variant="ghost-destructive"
-                    aria-label="Clear access token"
+                    aria-label="clear access token"
                     onClick={() => {
                       setToken({ kind: "cleared" });
                       setTokenValid(true);
@@ -262,7 +262,7 @@ export function EasDeviceHostEditor(props: {
                   : account.status === "failed"
                     ? account.error
                     : account.status === "checking"
-                      ? "Checking the Expo account…"
+                      ? "checking the Expo account…"
                       : "Check the Expo account before choosing a project."}
               </p>
               <Button
@@ -292,13 +292,13 @@ export function EasDeviceHostEditor(props: {
                   <SelectValue>
                     {(value: string) =>
                       value === FROM_THREAD_PROJECT
-                        ? "From the thread's project"
+                        ? "from the thread's project"
                         : (apps.find((app) => app.id === value)?.fullName ?? value)
                     }
                   </SelectValue>
                 </SelectTrigger>
                 <SelectPopup>
-                  <SelectItem value={FROM_THREAD_PROJECT}>From the thread's project</SelectItem>
+                  <SelectItem value={FROM_THREAD_PROJECT}>from the thread's project</SelectItem>
                   {draft.appId && !apps.some((app) => app.id === draft.appId) ? (
                     <SelectItem value={draft.appId}>{draft.appId}</SelectItem>
                   ) : null}
@@ -310,14 +310,14 @@ export function EasDeviceHostEditor(props: {
                 </SelectPopup>
               </Select>
               <p className="text-xs text-muted-foreground">
-                Sessions bill the project's Expo account. "From the thread's project" reads
+                Sessions bill the project's Expo account. "from the thread's project" reads
                 extra.eas.projectId from the project's app config.
               </p>
             </div>
             <div className="grid grid-cols-3 gap-3 text-sm">
-              {limit("maxConcurrentSessions", "Sessions at once", 20)}
-              {limit("maxSessionMinutes", "Session minutes", 115)}
-              {limit("idleMinutes", "Idle minutes", 60)}
+              {limit("maxConcurrentSessions", "sessions at once", 20)}
+              {limit("maxSessionMinutes", "session minutes", 115)}
+              {limit("idleMinutes", "idle minutes", 60)}
             </div>
             <p className="text-xs text-muted-foreground">
               Expo allows sessions of up to 40 minutes on free accounts and 115 on paid ones, and
@@ -333,7 +333,7 @@ export function EasDeviceHostEditor(props: {
           </DialogPanel>
           <DialogFooter>
             <Button type="button" variant="ghost" disabled={props.busy} onClick={props.onClose}>
-              Cancel
+              cancel
             </Button>
             <Button type="submit" disabled={props.busy || !valid}>
               {props.busy ? <Spinner size="xs" /> : null} Save host

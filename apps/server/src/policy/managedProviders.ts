@@ -14,6 +14,8 @@ import {
   resolveProviderInstanceEnabled,
   type RuntimeMode,
   type ServerSettings,
+  SOUTHBAG_CODE_DRIVER_KIND,
+  SouthbagCodeSettings,
 } from "@t3tools/contracts";
 import { acpRegistryClient } from "@t3tools/provider-acp-registry/client";
 import { cursorClient } from "@t3tools/provider-cursor/client";
@@ -69,6 +71,7 @@ const PIN_BYPASS_FIELDS: ReadonlyMap<
 
 /** Drivers this build knows, by the names users see; a policy naming any other is refused. */
 const KNOWN_DRIVERS: ReadonlyMap<ProviderDriverKind, KnownDriver> = new Map([
+  known(SOUTHBAG_CODE_DRIVER_KIND, "Southbag Code", SouthbagCodeSettings),
   known("codex", "Codex", CodexSettings),
   known("claudeAgent", "Claude", ClaudeSettings),
   known("antigravity", "Antigravity", AntigravitySettings),

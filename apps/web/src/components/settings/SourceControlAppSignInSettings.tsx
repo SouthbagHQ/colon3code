@@ -162,26 +162,26 @@ export function SourceControlAppSignInSettings({
     subtitle =
       account !== null && !tokenOverrides ? (
         <span className="flex min-w-0 items-center gap-1">
-          Signed in as
+          signed in as
           <RedactedSensitiveText
             value={account}
-            ariaLabel="Signed-in GitHub account"
-            revealTooltip="Show account"
-            hideTooltip="Hide account"
+            ariaLabel="signed-in GitHub account"
+            revealTooltip="show account"
+            hideTooltip="hide account"
           />
         </span>
       ) : tokenOverrides ? (
-        "Signed in, but the token saved below is used while it can be read."
+        "signed in, but the token saved below is used while it can be read."
       ) : (
-        "Signed in"
+        "signed in"
       );
     action = (
       <Button size="xs" variant="outline" disabled={!canSignIn} onClick={() => void signOut()}>
-        Sign out
+        sign out
       </Button>
     );
   } else if (waiting !== null) {
-    subtitle = "Approve the app on GitHub to finish signing in.";
+    subtitle = "approve the app on GitHub to finish signing in.";
     action = (
       <Button
         size="xs"
@@ -191,7 +191,7 @@ export function SourceControlAppSignInSettings({
           void cancel({ environmentId, input: { provider: definition.kind, host } });
         }}
       >
-        Cancel
+        cancel
       </Button>
     );
   } else {
@@ -203,7 +203,7 @@ export function SourceControlAppSignInSettings({
         onClick={() => void signIn()}
       >
         {state.status === "starting" ? <Spinner /> : null}
-        {state.status === "failed" ? "Try again" : "Sign in with GitHub"}
+        {state.status === "failed" ? "try again" : "sign in with GitHub"}
       </Button>
     );
   }
@@ -231,7 +231,7 @@ export function SourceControlAppSignInSettings({
             <Button
               size="icon-xs"
               variant="ghost"
-              aria-label="Copy code"
+              aria-label="copy code"
               onClick={() => copyToClipboard(waiting.userCode, undefined)}
             >
               <MorphIcon className="size-3.5" icon={isCopied ? Check : Copy} />
@@ -245,7 +245,7 @@ export function SourceControlAppSignInSettings({
               }
               onClick={() => copyToClipboard(waiting.userCode, undefined)}
             >
-              Copy code & open GitHub
+              copy code & open GitHub
               <ExternalLinkIcon aria-hidden className="size-3.5" />
             </Button>
             <p className="flex items-center gap-1.5 text-xs text-muted-foreground">
@@ -261,8 +261,8 @@ export function SourceControlAppSignInSettings({
           <span className="min-w-0 flex-1">
             Reaches repositories in accounts and organizations that installed the app.
           </span>
-          <ExternalLink href={appSignIn.installUrl}>Install on an organization</ExternalLink>
-          <ExternalLink href={appSignIn.revokeUrl}>Manage on GitHub</ExternalLink>
+          <ExternalLink href={appSignIn.installUrl}>install on an organization</ExternalLink>
+          <ExternalLink href={appSignIn.revokeUrl}>manage on GitHub</ExternalLink>
         </div>
       ) : null}
 

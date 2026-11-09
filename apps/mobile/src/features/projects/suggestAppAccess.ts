@@ -25,12 +25,12 @@ export async function suggestAppAccessForRemote(
   if (result._tag !== "Success" || result.value.status !== "not-covered") return;
   const owner = target.input.repository.split("/")[0] ?? target.input.repository;
   Alert.alert(
-    `Give ${target.appSignIn.appName} access to ${owner}`,
+    `give ${target.appSignIn.appName} access to ${owner}`,
     `It isn't installed there, so GitHub requests for ${target.input.repository} use your own login and its lower rate limit.`,
     [
-      { text: "Not now", style: "cancel" },
+      { text: "not now", style: "cancel" },
       {
-        text: "Install",
+        text: "install",
         onPress: () => void Linking.openURL(target.appSignIn.installUrl).catch(() => undefined),
       },
     ],

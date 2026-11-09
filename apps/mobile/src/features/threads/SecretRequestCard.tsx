@@ -133,7 +133,7 @@ function PendingSecretRequestForm(props: {
       {sources.length > 0 ? (
         <View className="flex-row flex-wrap gap-2">
           <Chip
-            label="Value"
+            label="value"
             size="small"
             selected={source === null}
             disabled={submitting}
@@ -197,7 +197,7 @@ function PendingSecretRequestForm(props: {
         </Text>
       ) : null}
       <Button
-        label="Save securely"
+        label="save securely"
         tone="primary"
         fullWidth
         disabled={submitting || draft.trim().length === 0}
@@ -216,7 +216,7 @@ function PendingSecretRequestForm(props: {
           </Text>
         </View>
         <Button
-          label="Decline"
+          label="decline"
           tone="text"
           disabled={submitting}
           onPress={() => void send({ type: "decline" })}

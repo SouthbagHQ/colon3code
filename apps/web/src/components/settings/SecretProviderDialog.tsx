@@ -67,7 +67,7 @@ export function SecretProviderDialog({
       <DialogPopup className="max-w-md">
         <DialogHeader>
           <DialogTitle>
-            {existing ? `Edit ${existing.config.label}` : "Add a 1Password provider"}
+            {existing ? `edit ${existing.config.label}` : "add a 1Password provider"}
           </DialogTitle>
           <DialogDescription>
             Provider variables on {environmentLabel} can read values from it by name. Values are
@@ -84,10 +84,10 @@ export function SecretProviderDialog({
             }}
           >
             <div className="grid gap-1.5">
-              <Label htmlFor="secret-provider-name">Name</Label>
+              <Label htmlFor="secret-provider-name">name</Label>
               <Input
                 id="secret-provider-name"
-                placeholder="Personal"
+                placeholder="personal"
                 value={draft.name}
                 onChange={(event) => update({ name: event.target.value })}
                 maxLength={64}
@@ -108,7 +108,7 @@ export function SecretProviderDialog({
               ) : null}
             </div>
             <div className="grid gap-1.5">
-              <Label htmlFor="secret-provider-account">Account</Label>
+              <Label htmlFor="secret-provider-account">account</Label>
               <Input
                 id="secret-provider-account"
                 placeholder="my.1password.com"
@@ -139,14 +139,14 @@ export function SecretProviderDialog({
         </DialogPanel>
         <DialogFooter variant="bare">
           <Button variant="outline" onClick={onClose}>
-            Cancel
+            cancel
           </Button>
           <Button
             type="submit"
             form="secret-provider-form"
             disabled={submitted && Result.isFailure(result)}
           >
-            {existing ? "Save changes" : "Add provider"}
+            {existing ? "save changes" : "add provider"}
           </Button>
         </DialogFooter>
       </DialogPopup>

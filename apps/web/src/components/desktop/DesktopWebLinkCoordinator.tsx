@@ -107,14 +107,14 @@ export function DesktopWebLinkCoordinator() {
 
   const reportFailure = (url: string, description = url) =>
     toastManager.add(
-      stackedThreadToast({ type: "error", title: "Could not open the link", description }),
+      stackedThreadToast({ type: "error", title: "couldn't open the link", description }),
     );
 
   const reportPairingFailure = (error: unknown) =>
     toastManager.add(
       stackedThreadToast({
         type: "error",
-        title: "Could not add backend",
+        title: "aw, couldn't add that backend 3:",
         description: error instanceof Error ? error.message : "Failed to add backend.",
       }),
     );
@@ -141,7 +141,7 @@ export function DesktopWebLinkCoordinator() {
     pairedUrlsRef.current.add(pairingUrl);
     toastManager.add({
       type: "success",
-      title: "Backend added",
+      title: "backend added :3",
       description: "The environment is saved and will reconnect on app startup.",
     });
   };
@@ -152,7 +152,7 @@ export function DesktopWebLinkCoordinator() {
       reportFailure(url);
       return null;
     }
-    const project = await openScratchProject(environmentId, "Could not open the link");
+    const project = await openScratchProject(environmentId, "couldn't open the link");
     if (!project) return null;
     const opened = await openThread(scopeProjectRef(project.environmentId, project.id));
     if (!opened) {

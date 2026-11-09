@@ -844,7 +844,7 @@ function DiagnosticsSettingsBody() {
         clearSignaling();
         toastManager.add({
           type: "error",
-          title: "Could not confirm signal",
+          title: "couldn't confirm signal 3:",
           description: error instanceof Error ? error.message : `Failed to send ${signal}.`,
         });
         return;
@@ -871,7 +871,7 @@ function DiagnosticsSettingsBody() {
         const error = squashAtomCommandFailure(result);
         toastManager.add({
           type: "error",
-          title: `Could not send ${signal}`,
+          title: `couldn't send ${signal} 3:`,
           description: error instanceof Error ? error.message : `Failed to send ${signal}.`,
         });
       }
@@ -883,7 +883,7 @@ function DiagnosticsSettingsBody() {
       if (isStaleProcessSignalMessage(message)) {
         toastManager.add({
           type: "info",
-          title: "Process already exited",
+          title: "process already exited",
           description: "The process is not a child of the T3 Server. It might already have exited.",
         });
         return;
@@ -891,7 +891,7 @@ function DiagnosticsSettingsBody() {
 
       toastManager.add({
         type: "error",
-        title: `Could not send ${signal}`,
+        title: `couldn't send ${signal} 3:`,
         description: message ?? `Failed to send ${signal}.`,
       });
       return;
@@ -913,7 +913,7 @@ function DiagnosticsSettingsBody() {
           {environmentId === null
             ? "Connect an environment to see diagnostics."
             : diagnosticsAccess.isPending
-              ? "Checking diagnostics access…"
+              ? "checking diagnostics access…"
               : diagnosticsAccess.error}
         </p>
       </SettingsPageContainer>

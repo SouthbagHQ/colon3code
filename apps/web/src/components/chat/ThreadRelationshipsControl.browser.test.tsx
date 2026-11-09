@@ -84,8 +84,8 @@ function setup() {
 }
 
 it.each([
-  ["merge", "Could not merge back"],
-  ["disconnect", "Could not disconnect agent session"],
+  ["merge", "aw, couldn't merge back 3:"],
+  ["disconnect", "couldn't disconnect the agent session"],
 ])("reports a rejected %s command and clears the busy state", async (action, title) => {
   setup();
   await using screen = await render(
@@ -100,25 +100,25 @@ it.each([
   );
 
   if (action === "merge") {
-    await screen.getByRole("button", { name: "Merge back to source conversation" }).click();
+    await screen.getByRole("button", { name: "merge back to source conversation" }).click();
   } else {
-    await screen.getByRole("button", { name: "More thread actions" }).click();
-    await page.getByRole("menuitem", { name: "Disconnect agent session" }).click();
+    await screen.getByRole("button", { name: "more thread actions" }).click();
+    await page.getByRole("menuitem", { name: "disconnect agent session" }).click();
   }
 
   await expect.element(page.getByText(title, { exact: true })).toBeVisible();
   await expect
     .element(
       screen.getByRole("button", {
-        name: action === "merge" ? "Merge back to source conversation" : "More thread actions",
+        name: action === "merge" ? "merge back to source conversation" : "more thread actions",
       }),
     )
     .toBeEnabled();
 });
 
 it.each([
-  ["merge", "Could not merge back"],
-  ["disconnect", "Could not disconnect agent session"],
+  ["merge", "aw, couldn't merge back 3:"],
+  ["disconnect", "couldn't disconnect the agent session"],
 ])("clears the previous %s error after a successful retry", async (action, title) => {
   setup();
   await using screen = await render(
@@ -135,10 +135,10 @@ it.each([
 
   const runAction = async () => {
     if (action === "merge") {
-      await screen.getByRole("button", { name: "Merge back to source conversation" }).click();
+      await screen.getByRole("button", { name: "merge back to source conversation" }).click();
     } else {
-      await screen.getByRole("button", { name: "More thread actions" }).click();
-      await page.getByRole("menuitem", { name: "Disconnect agent session" }).click();
+      await screen.getByRole("button", { name: "more thread actions" }).click();
+      await page.getByRole("menuitem", { name: "disconnect agent session" }).click();
     }
   };
 
@@ -156,7 +156,7 @@ it.each([
     );
   });
   if (action === "disconnect") {
-    await expect.element(screen.getByRole("button", { name: "More thread actions" })).toBeEnabled();
+    await expect.element(screen.getByRole("button", { name: "more thread actions" })).toBeEnabled();
   }
 });
 
@@ -199,7 +199,7 @@ it("opens an idle child from Lineage when its shell has not been loaded", async 
       showSideChats
     />,
   );
-  await screen.getByRole("button", { name: /Previous agents/ }).click();
+  await screen.getByRole("button", { name: /previous agents/ }).click();
   const child = screen.getByRole("button", { name: /Idle child/ });
   await expect.element(child).toBeEnabled();
   await child.click();
@@ -314,7 +314,7 @@ it("shows a remote subagent's full title in its tooltip even when its environmen
   await expect
     .element(screen.getByRole("button", { name: new RegExp(longTitle) }))
     .not.toBeInTheDocument();
-  await screen.getByRole("button", { name: /Previous agents/ }).click();
+  await screen.getByRole("button", { name: /previous agents/ }).click();
   const row = screen.getByRole("button", { name: new RegExp(longTitle) });
   await userEvent.hover(row);
   await vi.waitFor(() =>

@@ -104,7 +104,7 @@ export function AddUsageLimitSourceDialog({
               <Label htmlFor="usage-source-key">management key</Label>
               <SecretSourceInput
                 id="usage-source-key"
-                aria-label="Management key"
+                aria-label="management key"
                 value={keyDraft}
                 sources={secretSources}
                 onChange={(event) => setKeyDraft(event.target.value)}

@@ -127,7 +127,7 @@ function EnvironmentPickerRow(props: {
           ) : null}
           {connection?.phase !== "connected" ? (
             <Button
-              label="Reconnect now"
+              label="reconnect now"
               onPress={() => onReconnectEnvironment(props.environmentId)}
             />
           ) : null}

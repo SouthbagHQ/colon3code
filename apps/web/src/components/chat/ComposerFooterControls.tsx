@@ -54,8 +54,8 @@ export const ComposerFooterModeControls = memo(function ComposerFooterModeContro
   const RuntimeModeIcon = runtimeModeOption.icon;
   const interactionModeTooltip =
     props.interactionMode === "plan"
-      ? "Plan mode. Click to return to normal build mode"
-      : "Default mode. Click to enter plan mode";
+      ? "plan mode: click to return to normal build mode"
+      : "default mode: click to enter plan mode";
 
   const interactionModeToggle = props.showInteractionModeToggle ? (
     <Tooltip>
@@ -97,7 +97,7 @@ export const ComposerFooterModeControls = memo(function ComposerFooterModeContro
   ) : null;
 
   // The chip opens the same Permissions toggle used in the model picker and the overflow menu.
-  const permissionsTooltip = `Permissions: ${runtimeModeOption.label}. ${runtimeModeOption.description}`;
+  const permissionsTooltip = `permissions: ${runtimeModeOption.label}. ${runtimeModeOption.description}`;
   const permissionsChip = (
     <Menu
       open={open}
@@ -117,7 +117,7 @@ export const ComposerFooterModeControls = memo(function ComposerFooterModeContro
                   size={size}
                   // Mirrors the model trigger's trailing pe-1 so the gaps on both sides of the chip match.
                   className="ps-1.5"
-                  aria-label={`Permissions: ${runtimeModeOption.label}`}
+                  aria-label={`permissions: ${runtimeModeOption.label}`}
                 />
               }
             />

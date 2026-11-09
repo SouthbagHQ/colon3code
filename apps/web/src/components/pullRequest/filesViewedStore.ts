@@ -248,7 +248,8 @@ const filesViewedStore = createFilesViewedStore({
       { reportFailure: false },
     ),
   refresh: (target) => appAtomRegistry.refresh(filesViewedAtom(target)),
-  reportFailure: () => toastManager.add({ type: "error", title: "Could not update viewed files" }),
+  reportFailure: () =>
+    toastManager.add({ type: "error", title: "couldn't update viewed files 3:" }),
 });
 
 export function filesViewedScope(target: FilesViewedTarget): FilesViewedScopeHandle {

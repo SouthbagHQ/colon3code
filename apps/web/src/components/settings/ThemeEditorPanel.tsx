@@ -164,17 +164,17 @@ const THEME_EDITOR_ROLE_GROUPS: ReadonlyArray<{
   },
   {
     id: "search",
-    title: "Search",
+    title: "search",
     families: [
       {
         id: "search-matches",
-        label: "Search matches",
+        label: "search matches",
         role: "searchMatchBackground",
         roles: ["searchMatchBackground", "searchMatchForeground"],
       },
       {
         id: "current-match",
-        label: "Current match",
+        label: "current match",
         role: "searchMatchActiveBackground",
         roles: ["searchMatchActiveBackground", "searchMatchActiveForeground"],
       },

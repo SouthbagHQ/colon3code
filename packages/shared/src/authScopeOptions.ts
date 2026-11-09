@@ -25,82 +25,82 @@ export const AUTH_SCOPE_OPTIONS: ReadonlyArray<{
 }> = [
   {
     scope: AuthOrchestrationReadScope,
-    title: "View environment",
+    title: "view environment",
     description: "Read threads, status, checkpoints, and configuration.",
   },
   {
     scope: AuthOrchestrationOperateScope,
-    title: "Operate tasks",
+    title: "operate tasks",
     description: "Start, update, and stop tasks.",
   },
   {
     scope: AuthSettingsWriteScope,
-    title: "Change environment settings",
+    title: "change environment settings",
     description: "Edit environment preferences and keybindings.",
   },
   {
     scope: AuthProvidersManageScope,
-    title: "Manage providers",
+    title: "manage providers",
     description: "Configure, install, sign in to, and update providers and usage sources.",
   },
   {
     scope: AuthEnvironmentMaintainScope,
-    title: "Maintain environment",
+    title: "maintain environment",
     description: "Update the server and control environment processes.",
   },
   {
     scope: AuthPreviewOperateScope,
-    title: "Control previews",
+    title: "control previews",
     description: "Open browser previews and host browser automation.",
   },
   {
     scope: AuthDiagnosticsReadScope,
-    title: "View diagnostics and usage",
+    title: "view diagnostics and usage",
     description: "Read process diagnostics, resource history, and usage totals.",
   },
   {
     scope: AuthTerminalReadScope,
-    title: "View terminals",
+    title: "view terminals",
     description: "Read existing terminal output and status.",
   },
   {
     scope: AuthTerminalOperateScope,
-    title: "Use terminals",
+    title: "use terminals",
     description: "Create terminals and send input to running shells.",
   },
   {
     scope: AuthSourceControlWriteScope,
-    title: "Change source control",
+    title: "change source control",
     description: "Commit, push, manage branches and repositories, and change pull requests.",
   },
   {
     scope: AuthFilesystemReadScope,
-    title: "Read files",
+    title: "read files",
     description: "Browse host files, search workspaces, and inspect local changes.",
   },
   {
     scope: AuthFilesystemWriteScope,
-    title: "Write files",
+    title: "write files",
     description: "Edit workspace files and save plans to disk.",
   },
   {
     scope: AuthAccessReadScope,
-    title: "View access",
+    title: "view access",
     description: "Inspect pairing links and authorized clients.",
   },
   {
     scope: AuthAccessWriteScope,
-    title: "Manage access",
+    title: "manage access",
     description: "Issue and revoke credentials for other clients.",
   },
   {
     scope: AuthRelayReadScope,
-    title: "View relay",
+    title: "view relay",
     description: "Inspect managed relay connectivity.",
   },
   {
     scope: AuthRelayWriteScope,
-    title: "Manage relay",
+    title: "manage relay",
     description: "Change managed tunnel connectivity.",
   },
 ];
@@ -118,5 +118,5 @@ export function sessionPermissionsUnavailableMessage(input: {
     return "This environment did not accept your session. Reconnect to try again.";
   return input.failed
     ? "Could not verify your permissions. Retrying automatically."
-    : "Checking permissions…";
+    : "checking permissions…";
 }

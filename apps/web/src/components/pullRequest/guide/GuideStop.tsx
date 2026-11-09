@@ -31,11 +31,11 @@ import { GuideProse } from "./GuideProse";
 import { letterStopNotes } from "@t3tools/client-runtime/review-guide-tour";
 
 const ATTENTION_LABELS = {
-  tradeoff: "A tradeoff to weigh",
-  contract: "A contract to check",
-  product: "A product call",
-  risk: "A risk to judge",
-  accessibility: "An accessibility call",
+  tradeoff: "a tradeoff to weigh",
+  contract: "a contract to check",
+  product: "a product call",
+  risk: "a risk to judge",
+  accessibility: "an accessibility call",
 } as const satisfies Record<PullRequestReviewGuideAttention["kind"], string>;
 
 export function GuideStop({
@@ -101,7 +101,7 @@ export function GuideStop({
               <Button
                 size="icon-xs"
                 variant="outline"
-                aria-label="Previous stop"
+                aria-label="previous stop"
                 disabled={index === 0}
                 onClick={() => onStep(-1)}
               >
@@ -110,7 +110,7 @@ export function GuideStop({
               <Button
                 size="icon-xs"
                 variant="outline"
-                aria-label="Next stop"
+                aria-label="next stop"
                 disabled={index === stopCount - 1}
                 onClick={() => onStep(1)}
               >
@@ -174,7 +174,7 @@ export function GuideStop({
         {otherFiles.length > 0 ? (
           <section className="flex flex-col gap-1.5">
             <h3 className="text-xs font-medium text-muted-foreground">
-              {stop.excerpts.length > 0 ? "Also in this stop" : "Files in this stop"}
+              {stop.excerpts.length > 0 ? "also in this stop" : "files in this stop"}
             </h3>
             <DiffWorkerPoolProvider>
               <ul className="flex flex-col overflow-hidden rounded-lg border border-border/60">
@@ -215,7 +215,7 @@ export function GuideStop({
                           ) : (
                             <p className="px-3 py-2 text-xs text-muted-foreground">
                               {diffLoading
-                                ? "Loading the diff..."
+                                ? "loading the diff…"
                                 : "This file is not in the loaded diff."}
                             </p>
                           )}
@@ -232,7 +232,7 @@ export function GuideStop({
         {stop.questions.length > 0 || onAsk !== null ? (
           <section className="flex flex-col gap-1.5">
             {stop.questions.length > 0 ? (
-              <h3 className="text-xs font-medium text-muted-foreground">Questions to consider</h3>
+              <h3 className="text-xs font-medium text-muted-foreground">questions to consider</h3>
             ) : null}
             <div className="flex flex-col items-start gap-1.5">
               {stop.questions.map((question) =>
@@ -251,7 +251,7 @@ export function GuideStop({
                       aria-hidden
                       className="size-3.5 h-lh shrink-0 text-muted-foreground"
                     />
-                    <span className="sr-only">Ask an agent: </span>
+                    <span className="sr-only">ask an agent: </span>
                     <span>
                       <GuideProse text={question} plain />
                     </span>
@@ -261,7 +261,7 @@ export function GuideStop({
               {onAsk !== null ? (
                 <Button size="sm" variant="ghost-muted" onClick={() => onAsk("")}>
                   <MessageCircleQuestionIcon aria-hidden />
-                  Ask about this stop
+                  ask about this stop
                 </Button>
               ) : null}
             </div>
@@ -271,13 +271,13 @@ export function GuideStop({
         <footer className="flex flex-wrap items-center justify-end gap-3 border-t border-border/60 pt-4">
           {nextTitle !== null ? (
             <Button size="multiline" className="max-w-full" onClick={() => onStep(1)}>
-              <span className="min-w-0 break-words">Next: {nextTitle}</span>
+              <span className="min-w-0 break-words">next: {nextTitle}</span>
               <ArrowRightIcon aria-hidden />
             </Button>
           ) : onFinish !== null ? (
             <Button onClick={onFinish}>
               <MessageSquareIcon aria-hidden />
-              Finish review
+              finish review
             </Button>
           ) : null}
         </footer>

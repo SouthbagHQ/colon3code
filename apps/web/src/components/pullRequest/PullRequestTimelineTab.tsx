@@ -188,14 +188,14 @@ function AddToChatButton({
             size="icon-xs"
             variant="ghost-muted"
             className="-mt-1 shrink-0"
-            aria-label="Add to chat"
+            aria-label="add to chat"
             onClick={() => onAddToChat(comment)}
           />
         }
       >
         <MessageSquarePlusIcon className="size-3" />
       </TooltipTrigger>
-      <TooltipPopup>Add to chat</TooltipPopup>
+      <TooltipPopup>add to chat</TooltipPopup>
     </Tooltip>
   );
 }
@@ -448,11 +448,11 @@ function ReviewThreadEvent({
         {thread.isResolved ? (
           <span className="inline-flex shrink-0 items-center gap-1 font-medium text-success-foreground">
             <CircleCheckIcon aria-hidden className="size-3" />
-            Resolved
+            resolved
           </span>
         ) : null}
-        {dismissed ? <span className="shrink-0 font-medium">Review dismissed</span> : null}
-        {thread.isOutdated ? <span className="shrink-0 font-medium">Outdated</span> : null}
+        {dismissed ? <span className="shrink-0 font-medium">review dismissed</span> : null}
+        {thread.isOutdated ? <span className="shrink-0 font-medium">outdated</span> : null}
         {expanded ? null : (
           <span className="shrink-0">
             · {event.actor?.login ?? "ghost"}
@@ -770,7 +770,7 @@ export function PullRequestTimelineTab({
       <div ref={scrollerRef} className="scrollbar-gutter-both h-full overflow-y-auto px-4 py-5">
         <div className="flex flex-col items-center justify-center py-16 text-center text-muted-foreground">
           <PullRequestGlyph.pullRequest className="mb-2 size-5" />
-          <p className="text-xs">No activity yet.</p>
+          <p className="text-xs">no activity yet :3</p>
         </div>
       </div>
     );

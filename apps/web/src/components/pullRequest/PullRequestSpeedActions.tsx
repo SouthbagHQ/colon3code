@@ -84,7 +84,7 @@ export function PullRequestSpeedActions<Entry extends PullRequestSpeedActionEntr
     <SpeedModeGroup
       busy={busy}
       pending={actionPending || closing}
-      label={`Quick actions for ${terminology.singular} #${entry.number}`}
+      label={`quick actions for ${terminology.singular} #${entry.number}`}
     >
       {actions.map((action) => {
         const label = ACTIONS[action].label;
@@ -112,9 +112,9 @@ export function PullRequestSpeedActions<Entry extends PullRequestSpeedActionEntr
             </TooltipTrigger>
             <TooltipPopup>
               {action === "merge" && entry.stack
-                ? `Open this ${terminology.singular} to merge its stack`
+                ? `open this ${terminology.singular} to merge its stack`
                 : action === "close" && onCloseSweepStart
-                  ? "Close immediately, or drag across rows to close several"
+                  ? "close immediately, or drag across rows to close several"
                   : `${label} immediately`}
             </TooltipPopup>
           </Tooltip>
@@ -164,8 +164,8 @@ function SpeedModeGroup({
 }
 
 const ACTIONS = {
-  close: { label: "Close", Icon: PullRequestGlyph.closed },
-  merge: { label: "Merge", Icon: PullRequestGlyph.merged },
-  ready: { label: "Ready for review", Icon: PullRequestGlyph.pullRequest },
-  reopen: { label: "Reopen", Icon: PullRequestGlyph.reopen },
+  close: { label: "close", Icon: PullRequestGlyph.closed },
+  merge: { label: "merge", Icon: PullRequestGlyph.merged },
+  ready: { label: "ready for review", Icon: PullRequestGlyph.pullRequest },
+  reopen: { label: "reopen", Icon: PullRequestGlyph.reopen },
 } as const;

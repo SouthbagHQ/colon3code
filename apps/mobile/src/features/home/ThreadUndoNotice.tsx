@@ -80,7 +80,7 @@ export function ThreadUndoNotice(props: { readonly visible: boolean }) {
       <Toast
         message={`${notice.action} thread`}
         action={{
-          label: "Undo",
+          label: "undo",
           onPress: () => {
             void notice.undo();
           },

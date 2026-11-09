@@ -52,7 +52,7 @@ export function DevReplayHost() {
     }
     const threadId = newThreadId();
     const modelSelection = { instanceId: DEV_REPLAY_INSTANCE_ID, model };
-    const title = `Replay: ${model}`;
+    const title = `replay: ${model}`;
     const createdAt = new Date().toISOString();
     const result = await startTurn({
       environmentId,
@@ -113,7 +113,7 @@ export function DevReplayHost() {
     replay(scenario).catch((error: unknown) =>
       toastManager.add({
         type: "error",
-        title: "Replay failed",
+        title: "replay failed",
         description: error instanceof Error ? error.message : String(error),
       }),
     );
@@ -124,7 +124,7 @@ export function DevReplayHost() {
       <DialogPopup className="sm:max-w-sm">
         <DialogHeader>
           <DialogTitle>
-            {project === undefined ? "Replay a recorded turn" : `Replay in ${project.title}`}
+            {project === undefined ? "replay a recorded turn" : `replay in ${project.title}`}
           </DialogTitle>
         </DialogHeader>
         <DialogPanel>

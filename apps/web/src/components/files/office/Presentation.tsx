@@ -100,7 +100,7 @@ export default function Presentation(props: {
     <div className="flex min-h-0 flex-1 flex-col">
       <div className={FILE_SURFACE_SUBHEADER_CLASS}>
         <FileSurfaceAction
-          label="Previous slide"
+          label="previous slide"
           disabled={page === 0}
           onPress={() => select(page - 1)}
         >
@@ -110,7 +110,7 @@ export default function Presentation(props: {
           Slide {page + 1} of {opened.slides.length}
         </span>
         <FileSurfaceAction
-          label="Next slide"
+          label="next slide"
           disabled={page + 1 === opened.slides.length}
           onPress={() => select(page + 1)}
         >
@@ -120,7 +120,7 @@ export default function Presentation(props: {
       <OfficePages
         pages={opened.slides}
         paint={opened.paint}
-        label="Slide"
+        label="slide"
         scrollRef={scroll}
         onPageChange={setPage}
         onError={onError}
@@ -143,11 +143,11 @@ export default function Presentation(props: {
           const slide = opened.slides[index];
           return slide?.notes || slide?.hidden ? (
             <div className="space-y-1 text-xs text-muted-foreground">
-              {slide.hidden ? <p>Hidden slide</p> : null}
+              {slide.hidden ? <p>hidden slide</p> : null}
               {slide.notes ? (
                 <p
                   role="note"
-                  aria-label="Speaker notes"
+                  aria-label="speaker notes"
                   className="select-text whitespace-pre-wrap break-words"
                 >
                   {slide.notes}

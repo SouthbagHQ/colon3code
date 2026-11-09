@@ -139,7 +139,7 @@ export function SimlockDeviceHostEditor(props: {
           }}
         >
           <DialogHeader>
-            <DialogTitle>{props.isNew ? "Add Simlock host" : "Edit Simlock host"}</DialogTitle>
+            <DialogTitle>{props.isNew ? "add Simlock host" : "edit Simlock host"}</DialogTitle>
             <DialogDescription>
               {several
                 ? "Each selected environment's server leases devices from your Simlock gateway with its own agent token, and releases them when they close."
@@ -148,7 +148,7 @@ export function SimlockDeviceHostEditor(props: {
           </DialogHeader>
           <DialogPanel>
             <label className="block space-y-1.5 text-sm">
-              <span>Name</span>
+              <span>name</span>
               <Input
                 autoFocus
                 required
@@ -161,7 +161,7 @@ export function SimlockDeviceHostEditor(props: {
               />
             </label>
             <label className="block space-y-1.5 text-sm">
-              <span>Gateway URL</span>
+              <span>gateway URL</span>
               <Input
                 required
                 type="url"
@@ -182,7 +182,7 @@ export function SimlockDeviceHostEditor(props: {
                   environmentId={environment.environmentId}
                   hostId={props.isNew ? null : props.host.id}
                   gatewayUrl={checkUrl}
-                  label={several ? `Agent token · ${environment.label}` : "Agent token"}
+                  label={several ? `agent token · ${environment.label}` : "agent token"}
                   token={tokens.get(environment.environmentId) ?? { kind: "cleared" }}
                   saved={savedValue(environment)}
                   busy={props.busy}
@@ -208,8 +208,8 @@ export function SimlockDeviceHostEditor(props: {
               </p>
             </div>
             <div className="grid grid-cols-2 gap-3 text-sm">
-              {limit("maxLeases", "Devices at once", 1, 20)}
-              {limit("maxLeaseMinutes", "Lease minutes", 5, 240)}
+              {limit("maxLeases", "devices at once", 1, 20)}
+              {limit("maxLeaseMinutes", "lease minutes", 5, 240)}
             </div>
             <p className="text-xs text-muted-foreground">
               A lease ends after the lease minutes even while in use.
@@ -223,7 +223,7 @@ export function SimlockDeviceHostEditor(props: {
           </DialogPanel>
           <DialogFooter>
             <Button type="button" variant="ghost" disabled={props.busy} onClick={props.onClose}>
-              Cancel
+              cancel
             </Button>
             <Button type="submit" disabled={props.busy || problem !== null}>
               {props.busy ? <Spinner size="xs" /> : null} Save host
@@ -277,7 +277,7 @@ function SimlockTokenField(props: {
   const identity = AsyncResult.isSuccess(check) ? check.value : null;
   const status =
     props.gatewayUrl === null ? null : check._tag === "Initial" || check.waiting ? (
-      <span className="text-muted-foreground">Checking…</span>
+      <span className="text-muted-foreground">checking…</span>
     ) : identity ? (
       <span className="text-muted-foreground">
         {identity.tokenSource === "env"
@@ -300,7 +300,7 @@ function SimlockTokenField(props: {
         <SecretSourceInput
           key={inputKey}
           id={id}
-          aria-label="Agent token"
+          aria-label="agent token"
           className="min-w-0 flex-1"
           configured={props.token.kind === "saved" && typeof props.saved === "string"}
           value={
@@ -339,7 +339,7 @@ function SimlockTokenField(props: {
             type="button"
             size="icon-sm"
             variant="ghost-destructive"
-            aria-label="Clear agent token"
+            aria-label="clear agent token"
             disabled={props.busy}
             onClick={() => {
               props.onChange({ kind: "cleared" });

@@ -188,7 +188,7 @@ function useThreadGitControlModel(props: ThreadGitMenuProps) {
     ) {
       if (props.hasThread === false) {
         Dialog.alert(
-          "Choose a feature branch",
+          "choose a feature branch",
           "Switch branches before publishing changes from this draft.",
         );
         return;
@@ -345,9 +345,9 @@ export function useThreadGitMenuDefinition(props: ThreadGitMenuProps): AppBarMen
         ? [
             {
               id: "git-merge-back",
-              title: "Merge back to source",
+              title: "merge back to source",
               icon: PullRequestGlyph.merged,
-              subtitle: "Bring this thread's latest turn into its source",
+              subtitle: "bring this thread's latest turn into its source",
               onPress: props.onMergeBack,
             },
           ]

@@ -112,12 +112,12 @@ export function EnvironmentRoutesSection({
   };
   const confirmRemove = (route: ConnectionRoute) =>
     Dialog.alert(
-      `Remove ${connectionRouteLabel(route)}?`,
+      `remove ${connectionRouteLabel(route)}?`,
       connectionRouteAddress(route) ?? undefined,
       [
-        { text: "Cancel", style: "cancel" },
+        { text: "cancel", style: "cancel" },
         {
-          text: "Remove",
+          text: "remove",
           style: "destructive",
           onPress: () =>
             void removeRoute({ environmentId, routeId: connectionRouteId(route.target) }),
@@ -130,11 +130,11 @@ export function EnvironmentRoutesSection({
 
   return (
     <SettingsSection
-      title="Routes"
+      title="routes"
       trailing={
         routes.length > 1 ? (
           <Button
-            label={editing ? "Done" : "Edit"}
+            label={editing ? "done" : "Edit"}
             tone="text"
             onPress={() => setEditing((value) => !value)}
           />
@@ -143,7 +143,7 @@ export function EnvironmentRoutesSection({
     >
       <SettingsActionRow
         icon="checkmark.circle"
-        label="Your permissions"
+        label="your permissions"
         onPress={() => setPermissionsOpen((open) => !open)}
       />
       {permissionsOpen ? (
@@ -159,7 +159,7 @@ export function EnvironmentRoutesSection({
               </Text>
               {AUTH_SCOPE_OPTIONS.map(({ scope, title }) => (
                 <Text key={scope} className="text-sm text-foreground">
-                  {title}: {sessionGrantsScope(session, scope) ? "Allowed" : "Not granted"}
+                  {title}: {sessionGrantsScope(session, scope) ? "allowed" : "not granted"}
                 </Text>
               ))}
             </>
@@ -218,7 +218,7 @@ export function EnvironmentRoutesSection({
           />
         );
       })}
-      <SettingsActionRow icon="plus" label="Add route" onPress={onAddRoute} />
+      <SettingsActionRow icon="plus" label="add route" onPress={onAddRoute} />
     </SettingsSection>
   );
 }
@@ -260,7 +260,7 @@ function RouteRow(props: {
       {props.editing && props.onRemove ? (
         <Pressable
           accessibilityRole="button"
-          accessibilityLabel={`Remove ${label} route`}
+          accessibilityLabel={`remove ${label} route`}
           hitSlop={8}
           onPress={props.onRemove}
           className="active:opacity-70"
@@ -280,9 +280,9 @@ function RouteRow(props: {
         accessibilityLabel={[
           label,
           address,
-          isLearned(route) ? "Found automatically" : null,
-          props.inUse ? "In use" : null,
-          `Route ${props.position} of ${props.count}`,
+          isLearned(route) ? "found automatically" : null,
+          props.inUse ? "in use" : null,
+          `route ${props.position} of ${props.count}`,
         ]
           .filter((part) => part !== null)
           .join(", ")}
@@ -305,7 +305,7 @@ function RouteRow(props: {
               {label}
             </Text>
             {props.inUse ? (
-              <StatusPill {...connectionTone("connected")} label="In use" size="compact" />
+              <StatusPill {...connectionTone("connected")} label="in use" size="compact" />
             ) : null}
           </View>
           {address !== null ? (

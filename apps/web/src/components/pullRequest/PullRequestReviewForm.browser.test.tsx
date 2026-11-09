@@ -47,7 +47,7 @@ it("submits only the line comments still in the draft when dictation finishes", 
       onSubmitted={vi.fn()}
     />,
   );
-  await screen.getByRole("button", { name: "Submit review" }).click();
+  await screen.getByRole("button", { name: "submit review" }).click();
   await act(() => store.clear(key));
   await act(() => mocks.queue.mock.calls[0]![0]("Dictated summary"));
   expect(mocks.submit).toHaveBeenCalledWith(

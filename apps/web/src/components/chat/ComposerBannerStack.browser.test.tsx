@@ -137,7 +137,7 @@ it("opens the details of a long notice right above its button", async () => {
   await using screen = await render(noticeRow("40rem", script), { container });
   const details = screen.getByRole("button", { name: "Show details" });
   await userEvent.hover(details);
-  const popup = page.getByLabelText("Notice details");
+  const popup = page.getByLabelText("notice details");
   await expect.element(popup).toBeVisible();
 
   // A positioner sized to the unscrolled text flips beside the button and covers it.

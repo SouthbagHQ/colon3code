@@ -61,12 +61,12 @@ it("fits the width, then finds split and rotated text and jumps to its page", as
     const region = screen.container.querySelector<HTMLElement>('[role="region"]')!;
     // Fit width follows the measured viewport, which settles once the scrollbar appears.
     await vi.waitFor(() => {
-      const canvas = region.querySelector('canvas[aria-label="Page 1"]')!;
+      const canvas = region.querySelector('canvas[aria-label="page 1"]')!;
       expect(canvas.getBoundingClientRect().width).toBe(region.clientWidth - 32);
       expect(region.scrollWidth).toBe(region.clientWidth);
     });
 
-    const find = screen.getByRole("searchbox", { name: "Find in PDF" });
+    const find = screen.getByRole("searchbox", { name: "find in PDF" });
     await find.fill("quarterly outlook");
     await expect.element(screen.getByRole("status")).toHaveTextContent("1/1");
     await vi.waitFor(() =>
@@ -120,8 +120,8 @@ it("restores page, within-page offset and zoom after a remount", async () => {
   try {
     await using screen = await render(viewer(1, "restore:a"));
     await expect.element(screen.getByText("1 / 2 pages")).toBeVisible();
-    await screen.getByRole("button", { name: "Zoom in", exact: true }).click();
-    await screen.getByRole("button", { name: "Next page", exact: true }).click();
+    await screen.getByRole("button", { name: "zoom in", exact: true }).click();
+    await screen.getByRole("button", { name: "next page", exact: true }).click();
     await expect.element(screen.getByText("2 / 2 pages")).toBeVisible();
     const region = () => screen.getByRole("region", { name: "Restored PDF" }).element();
     const top = region().scrollTop + 40;
@@ -138,7 +138,7 @@ it("restores page, within-page offset and zoom after a remount", async () => {
     await vi.waitFor(() => expect(region().scrollTop).toBeCloseTo(top, 0));
     await vi.waitFor(() => expect(screen.container.textContent).toContain(zoom));
 
-    await screen.getByRole("button", { name: "Fit width", exact: true }).click();
+    await screen.getByRole("button", { name: "fit width", exact: true }).click();
     await vi.waitFor(() => {
       const canvas = region().querySelector("canvas")!;
       expect(canvas.getBoundingClientRect().width).toBe(region().clientWidth - 32);
@@ -155,7 +155,7 @@ it("restores page, within-page offset and zoom after a remount", async () => {
 
     await screen.rerender(viewer(4, "restore:b"));
     await expect.element(screen.getByText("1 / 2 pages")).toBeVisible();
-    await expect.element(screen.getByText("Fit width")).toBeVisible();
+    await expect.element(screen.getByText("fit width")).toBeVisible();
   } finally {
     URL.revokeObjectURL(url);
   }

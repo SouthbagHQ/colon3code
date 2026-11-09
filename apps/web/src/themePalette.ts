@@ -415,10 +415,22 @@ export function getStandardThemeColors(appearance: ThemeAppearance): ThemeColors
   return (standardLightThemeColors ??= decodeThemeColors(T3_CODE_LIGHT_THEME_COLORS));
 }
 
-// index.css paints the light bubble a step darker than the shared palette mobile uses.
+// index.css paints the fork's blush (light) and plum (dark) default look rather than the
+// shared neutral palette mobile uses, so solves that measure the page start from those.
+// surfaceRaised is index.css's 20% card wash composited over the canvas.
 const STANDARD_WEB_PAINTED_COLORS: Record<ThemeAppearance, Partial<ThemeColors>> = {
-  light: { messageSurface: "#ebebed" },
-  dark: { canvas: "#000000", messageSurface: "#1e1e1e" },
+  light: {
+    canvas: "#fff3f2",
+    surface: "#fffcfc",
+    surfaceRaised: "#fff5f4",
+    messageSurface: "#fddddd",
+  },
+  dark: {
+    canvas: "#231521",
+    surface: "#2b1e2a",
+    surfaceRaised: "#2b1e2a",
+    messageSurface: "#402737",
+  },
 };
 
 /** The standard theme as index.css paints it, for solves that measure the page. */

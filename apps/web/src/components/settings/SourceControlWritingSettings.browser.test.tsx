@@ -60,7 +60,7 @@ vi.mock(import("./settingsLayout"), async (original) => ({
 import { SourceControlWritingSettingsSection } from "./SourceControlWritingSettings";
 
 const resetButton = (label: string) =>
-  page.getByRole("button", { name: `Reset ${label} to default` });
+  page.getByRole("button", { name: `reset ${label} to default` });
 
 const content = () => (
   <StrictMode>

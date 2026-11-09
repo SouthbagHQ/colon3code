@@ -16,12 +16,12 @@ export function ComposerQueuedEditBanner(props: {
     <View className="flex-row items-center gap-2 px-4 pb-2">
       <SymbolView name="pencil" size={12} tintColorClassName="accent-foreground-muted" />
       <Text className="min-w-0 flex-1 text-xs text-foreground-muted" numberOfLines={1}>
-        Editing queued message
+        editing queued message
       </Text>
       <Button
-        label="Cancel"
+        label="cancel"
         tone="text"
-        accessibilityLabel="Cancel editing queued message"
+        accessibilityLabel="cancel editing queued message"
         disabled={props.saving}
         onPress={props.onCancel}
       />
@@ -98,7 +98,7 @@ function QueuedEditAttachmentChip(props: {
       </Text>
       <Pressable
         accessibilityRole="button"
-        accessibilityLabel={`Remove ${attachment.name}`}
+        accessibilityLabel={`remove ${attachment.name}`}
         disabled={props.disabled}
         hitSlop={8}
         onPress={() => props.onRemove(attachment.id)}

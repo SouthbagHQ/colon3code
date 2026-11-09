@@ -214,7 +214,7 @@ describe("SettingsServerControlsRouteScreen", () => {
         (button) => button.textContent === label,
       )!;
 
-    act(() => toggle("Agent browser access").click());
+    act(() => toggle("agent browser access").click());
     act(() => toggle("auto-settle merged threads").click());
 
     // Both rewrite the whole project override, so a second write planned now would drop the first.

@@ -32,7 +32,7 @@ export const accessConfig: Record<
   { readonly label: string; readonly description: string; readonly icon: IconComponent }
 > = {
   "read-only": {
-    label: "Read only",
+    label: "read only",
     description: "Read projects and threads. Cannot start, message or change anything.",
     icon: EyeIcon,
   },
@@ -150,7 +150,7 @@ export function ConnectAgentSurface() {
     return (
       <StandalonePage>
         <ConnectAgentHeading
-          title="Checking the sign-in request"
+          title="checking the sign-in request"
           description="One moment while this environment verifies the agent's request."
         />
         <Spinner className="mt-6" size="lg" tone="muted" />
@@ -161,7 +161,7 @@ export function ConnectAgentSurface() {
   if (loaded.status === "invalid") {
     return (
       <StandalonePage>
-        <ConnectAgentHeading title="This sign-in cannot continue" description={loaded.message} />
+        <ConnectAgentHeading title="this sign-in cannot continue" description={loaded.message} />
         <p className="mt-4 text-sm text-muted-foreground">
           Close this page and start the sign-in again from your agent.
         </p>
@@ -176,7 +176,7 @@ export function ConnectAgentSurface() {
   return (
     <StandalonePage>
       <ConnectAgentHeading
-        title={`Connect ${details.clientName}`}
+        title={`connect ${details.clientName}`}
         description={
           <>
             This agent wants to use the threads in every project on{" "}
@@ -208,7 +208,7 @@ export function ConnectAgentSurface() {
       >
         <div className="space-y-2">
           <span id="connect-agent-access-label" className="text-sm font-medium">
-            What it may do
+            what it may do
           </span>
           <RadioGroup
             aria-labelledby="connect-agent-access-label"
@@ -233,7 +233,7 @@ export function ConnectAgentSurface() {
         {oneClick ? null : (
           <div className="space-y-2">
             <label className="text-sm font-medium" htmlFor="connect-agent-pairing-code">
-              Pairing code
+              pairing code
             </label>
             <Input
               id="connect-agent-pairing-code"
@@ -243,7 +243,7 @@ export function ConnectAgentSurface() {
               disabled={pending !== null}
               nativeInput
               onChange={(event) => setPairingCode(event.currentTarget.value)}
-              placeholder="Paste a one-time pairing code"
+              placeholder="paste a one-time pairing code"
               spellCheck={false}
               value={pairingCode}
             />
@@ -262,7 +262,7 @@ export function ConnectAgentSurface() {
 
         <div className="flex flex-wrap gap-2">
           <Button disabled={!canApprove} type="submit">
-            {pending === "approve" ? "Approving…" : "Approve"}
+            {pending === "approve" ? "approving…" : "approve"}
           </Button>
           <Button
             disabled={pending !== null}
@@ -270,7 +270,7 @@ export function ConnectAgentSurface() {
             type="button"
             variant="outline"
           >
-            {pending === "deny" ? "Denying…" : "Deny"}
+            {pending === "deny" ? "denying…" : "deny"}
           </Button>
         </div>
       </form>
@@ -285,7 +285,7 @@ function ConnectAgentHeading({
   readonly title: string;
   readonly description: ReactNode;
 }) {
-  return <StandalonePageHeader context="Agent sign-in" title={title} description={description} />;
+  return <StandalonePageHeader context="agent sign-in" title={title} description={description} />;
 }
 
 /** Why a managed policy keeps `access` from being granted, or undefined when it may be. */

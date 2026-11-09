@@ -55,7 +55,7 @@ export function useProjectCloneBanner(activeProjectRef: ScopedProjectRef | null)
       : activeProjectClone !== null && activeProjectClone.phase !== "done"
         ? "repository not cloned"
         : activeProjectFileCopy?.phase === "copying"
-          ? "Copying files"
+          ? "copying files"
           : null;
   const projectCloneBannerItem = (() => {
     if (activeProjectFileCopy?.phase === "failed" && activeProjectRef) {
@@ -100,7 +100,7 @@ export function useProjectCloneBanner(activeProjectRef: ScopedProjectRef | null)
       id: `project-clone:${projectId}`,
       variant: cancelled ? "warning" : "error",
       icon: <DownloadIcon />,
-      title: cancelled ? `Cancelled cloning ${name}` : `Failed to clone ${name}`,
+      title: cancelled ? `cancelled cloning ${name}` : `mrrp, couldn't clone ${name} 3:`,
       description: cancelled ? "Retry to bring in the repository." : activeProjectClone.error,
       actions: (
         <>

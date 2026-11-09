@@ -94,7 +94,7 @@ function TimelineComment({
         <PullRequestAvatar actor={comment.author} size={22} />
         <View className="min-w-0 flex-1">
           <Text className="text-sm">
-            <Text className="font-t3-medium">{comment.author?.login ?? "Unknown author"}</Text>
+            <Text className="font-t3-medium">{comment.author?.login ?? "unknown author"}</Text>
             <Text className="text-foreground-muted">
               {approved ? " approved" : changes ? " requested changes" : " commented"}
             </Text>
@@ -175,7 +175,7 @@ function TimelineComment({
               className="flex-row items-center justify-center gap-1 py-2 active:opacity-70"
             >
               <Text className="text-xs font-t3-medium text-foreground">
-                {expanded ? "Show less" : "Show more"}
+                {expanded ? "show less" : "show more"}
               </Text>
               <SymbolView
                 name={expanded ? "chevron.up" : "chevron.down"}
@@ -222,7 +222,7 @@ export function pullRequestTimelineRows(
             <PullRequestAvatar actor={thread.comments[0]?.author ?? null} size={22} />
             <Text className="flex-1 text-sm">
               <Text className="font-t3-medium">
-                {thread.comments[0]?.author?.login ?? "Unknown author"}
+                {thread.comments[0]?.author?.login ?? "unknown author"}
               </Text>
               <Text className="text-foreground-muted"> started a discussion</Text>
             </Text>
@@ -264,7 +264,7 @@ export function pullRequestTimelineRows(
         <TimelineEvent icon="commit">
           <Pressable
             accessibilityRole="button"
-            accessibilityLabel={`View commit ${commit.oid.slice(0, 7)}, ${commit.messageHeadline}`}
+            accessibilityLabel={`view commit ${commit.oid.slice(0, 7)}, ${commit.messageHeadline}`}
             onPress={() =>
               navigation.dispatch(
                 StackActions.push("PullRequestFile", { ...params, commit: commit.oid, path: "" }),

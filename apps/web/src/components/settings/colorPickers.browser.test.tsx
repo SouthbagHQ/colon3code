@@ -7,8 +7,8 @@ import { act, render } from "../../../test/render";
 import { ProviderAccentColorPicker } from "./ProviderAccentColorPicker";
 import { ThemeColorField } from "./ThemeColorPicker";
 
-const HUE = "Accent color hue";
-const PLANE = "Accent color saturation and brightness";
+const HUE = "accent color hue";
+const PLANE = "accent color saturation and brightness";
 
 async function renderPicker(ui: ReactNode) {
   await using stack = new AsyncDisposableStack();
@@ -61,7 +61,7 @@ async function renderThemeField(value: string) {
   );
   await using stack = new AsyncDisposableStack();
   const screen = stack.use(await renderPicker(field(value)));
-  await open("Choose Accent color color");
+  await open("choose accent color color");
   stack.move();
   return Object.assign(screen, {
     onChange,
@@ -77,19 +77,19 @@ function ControlledThemeField() {
 describe("theme color field", () => {
   it("jumps hue to both endpoints without changing saturation or brightness", async () => {
     await using _screen = await render(<ControlledThemeField />);
-    await open("Choose Accent color color");
+    await open("choose accent color color");
 
     await press(HUE, "Home");
     expect(slider(HUE).getAttribute("aria-valuenow")).toBe("0");
-    expect(byLabel<HTMLInputElement>("Accent color picker hex value").value).toBe("#804040");
+    expect(byLabel<HTMLInputElement>("accent color picker hex value").value).toBe("#804040");
 
     await press(HUE, "End");
     expect(slider(HUE).getAttribute("aria-valuenow")).toBe("360");
-    expect(byLabel<HTMLInputElement>("Accent color picker hex value").value).toBe("#804040");
+    expect(byLabel<HTMLInputElement>("accent color picker hex value").value).toBe("#804040");
 
     await press(HUE, "ArrowRight", true);
     expect(slider(HUE).getAttribute("aria-valuenow")).toBe("10");
-    expect(byLabel<HTMLInputElement>("Accent color picker hex value").value).toBe("#804b40");
+    expect(byLabel<HTMLInputElement>("accent color picker hex value").value).toBe("#804b40");
   });
 
   it("keeps the selected hue when a grey color is echoed back from theme settings", async () => {
@@ -111,7 +111,7 @@ describe("theme color field", () => {
     await using screen = await renderThemeField("#22ccff80");
     const { onChange } = screen;
 
-    await userEvent.fill(byLabel("Accent color picker hex value"), "#ff0000");
+    await userEvent.fill(byLabel("accent color picker hex value"), "#ff0000");
     expect(onChange).toHaveBeenLastCalledWith("accent", "#ff000080");
   });
 });
@@ -123,7 +123,7 @@ async function renderAccentPicker(value: string) {
   );
   await using stack = new AsyncDisposableStack();
   const screen = stack.use(await renderPicker(picker(value)));
-  await open("Change accent color for Codex");
+  await open("change accent color for Codex");
   stack.move();
   return Object.assign(screen, {
     onCommit,
@@ -142,8 +142,8 @@ describe("provider accent color picker", () => {
       />,
     );
 
-    await open("Add accent color for Example provider");
-    expect(byLabel<HTMLInputElement>("Custom hex accent color").value).toBe("#2563eb");
+    await open("add accent color for Example provider");
+    expect(byLabel<HTMLInputElement>("custom hex accent color").value).toBe("#2563eb");
     expect(onCommit).not.toHaveBeenCalled();
     await userEvent.keyboard("{Escape}");
     expect(onCommit).not.toHaveBeenCalled();
@@ -159,15 +159,15 @@ describe("provider accent color picker", () => {
       />,
     );
 
-    await open("Add accent color for Example provider");
-    await userEvent.click(page.getByRole("button", { name: "Add color", exact: true }));
+    await open("add accent color for Example provider");
+    await userEvent.click(page.getByRole("button", { name: "add color", exact: true }));
 
     expect(onCommit).toHaveBeenCalledExactlyOnceWith("#2563eb");
     await expect
-      .element(screen.getByRole("button", { name: "Change accent color for Example provider" }))
+      .element(screen.getByRole("button", { name: "change accent color for Example provider" }))
       .toBeVisible();
     await vi.waitFor(() =>
-      expect(document.querySelector('[aria-label="Custom hex accent color"]')).toBeNull(),
+      expect(document.querySelector('[aria-label="custom hex accent color"]')).toBeNull(),
     );
   });
 
@@ -181,8 +181,8 @@ describe("provider accent color picker", () => {
       />,
     );
 
-    await open("Add accent color for Example provider");
-    await act(async () => byLabel("Accent color saturation").focus());
+    await open("add accent color for Example provider");
+    await act(async () => byLabel("accent color saturation").focus());
     await userEvent.tab();
     await userEvent.tab();
     await userEvent.tab();
@@ -191,7 +191,7 @@ describe("provider accent color picker", () => {
 
     expect(onCommit).toHaveBeenCalledExactlyOnceWith("#2563eb");
     await expect
-      .element(screen.getByRole("button", { name: "Change accent color for Example provider" }))
+      .element(screen.getByRole("button", { name: "change accent color for Example provider" }))
       .toBeVisible();
   });
 
@@ -205,13 +205,13 @@ describe("provider accent color picker", () => {
       />,
     );
 
-    await open("Change accent color for Example provider");
+    await open("change accent color for Example provider");
     await press(HUE, "ArrowRight", true);
     expect(onCommit).toHaveBeenLastCalledWith("#ff2a00");
-    await userEvent.click(page.getByRole("button", { name: "Clear color", exact: true }));
+    await userEvent.click(page.getByRole("button", { name: "clear color", exact: true }));
     expect(onCommit).toHaveBeenLastCalledWith("");
     await expect
-      .element(screen.getByRole("button", { name: "Add accent color for Example provider" }))
+      .element(screen.getByRole("button", { name: "add accent color for Example provider" }))
       .toBeVisible();
   });
 
@@ -232,29 +232,29 @@ describe("provider accent color picker", () => {
   it("saves a change back to the saved color while the first change is still saving", async () => {
     await using screen = await renderAccentPicker("#ff0000");
 
-    await userEvent.fill(byLabel("Custom hex accent color"), "#00ff00");
-    await userEvent.fill(byLabel("Custom hex accent color"), "#ff0000");
+    await userEvent.fill(byLabel("custom hex accent color"), "#00ff00");
+    await userEvent.fill(byLabel("custom hex accent color"), "#ff0000");
 
     expect(screen.onCommit).toHaveBeenLastCalledWith("#ff0000");
-    await userEvent.fill(byLabel("Custom hex accent color"), "#00FF00");
+    await userEvent.fill(byLabel("custom hex accent color"), "#00FF00");
     await screen.echo("#00FF00");
-    expect(byLabel<HTMLInputElement>("Custom hex accent color").value).toBe("#00FF00");
+    expect(byLabel<HTMLInputElement>("custom hex accent color").value).toBe("#00FF00");
   });
 
   it("shows the saved color again when it is reverted outside the picker", async () => {
     await using screen = await renderAccentPicker("#ff0000");
 
-    await userEvent.fill(byLabel("Custom hex accent color"), "#00ff00");
+    await userEvent.fill(byLabel("custom hex accent color"), "#00ff00");
     expect(screen.onCommit).toHaveBeenLastCalledWith("#00ff00");
     await screen.echo("#00ff00");
     await screen.echo("#ff0000");
 
-    expect(byLabel<HTMLInputElement>("Custom hex accent color").value).toBe("#ff0000");
+    expect(byLabel<HTMLInputElement>("custom hex accent color").value).toBe("#ff0000");
     await screen.echo("");
-    expect(byLabel<HTMLInputElement>("Custom hex accent color").value).toBe("#2563eb");
-    await userEvent.click(page.getByRole("button", { name: "Add color", exact: true }));
+    expect(byLabel<HTMLInputElement>("custom hex accent color").value).toBe("#2563eb");
+    await userEvent.click(page.getByRole("button", { name: "add color", exact: true }));
     expect(screen.onCommit).toHaveBeenLastCalledWith("#2563eb");
 
-    expect(byLabel("Change accent color for Codex").style.backgroundColor).toBe("rgb(37, 99, 235)");
+    expect(byLabel("change accent color for Codex").style.backgroundColor).toBe("rgb(37, 99, 235)");
   });
 });

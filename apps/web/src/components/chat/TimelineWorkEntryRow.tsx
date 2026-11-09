@@ -263,7 +263,7 @@ function WorkEntryLogRow(props: WorkEntryRowProps) {
               onClick={() => onRetryWorkspacePreparation(retryRunId)}
             >
               <RotateCcwIcon aria-hidden />
-              Retry
+              retry
             </Button>
           </div>
         ) : null}
@@ -476,19 +476,19 @@ function WorkEntryLogRow(props: WorkEntryRowProps) {
               }}
               onKeyDown={stopRowToggle}
             >
-              Open chat
+              open chat
             </button>
           ) : null}
           {notifiedSubagentThreadId ? (
             <InlineButton
-              aria-label="Open subagent thread"
+              aria-label="open subagent thread"
               onClick={(event) => {
                 event.stopPropagation();
                 ctx.onOpenThread(notifiedSubagentThreadId);
               }}
               onKeyDown={stopRowToggle}
             >
-              Open subagent
+              open subagent
             </InlineButton>
           ) : null}
           {showFailedIndicator &&

@@ -61,7 +61,7 @@ export function ConnectionDiagnosisHeadline({
 }
 
 const HOP_MARK = { ok: "✓", failed: "✕", unchecked: "–" } as const;
-const HOP_NOTE = { ok: "", failed: "Failed", unchecked: "Not checked" } as const;
+const HOP_NOTE = { ok: "", failed: "failed", unchecked: "not checked" } as const;
 
 /** Ticks once per second, and only while a retry is scheduled, so the list around it does not re-render. */
 function RetryCountdown({ retryAt }: { readonly retryAt: number }) {
@@ -101,7 +101,7 @@ export function ConnectionDiagnosisSummary({
           onClick={onToggle}
           className="inline-flex items-center gap-0.5 rounded-sm outline-none hover:text-foreground focus-visible:ring-1 focus-visible:ring-inset focus-visible:ring-ring"
         >
-          Details
+          details
           <ChevronRightIcon
             aria-hidden
             className={cn(
@@ -129,12 +129,12 @@ export function ConnectionDiagnosisPanel({
 }) {
   const { copyToClipboard } = useCopyToClipboard({
     target: "connection diagnostics",
-    onCopy: () => toastManager.add({ type: "success", title: "Diagnostics copied" }),
+    onCopy: () => toastManager.add({ type: "success", title: "diagnostics copied :3" }),
     onError: (error) =>
       toastManager.add(
         stackedThreadToast({
           type: "error",
-          title: "Could not copy diagnostics",
+          title: "couldn't copy diagnostics 3:",
           description: error.message,
         }),
       ),
@@ -159,7 +159,7 @@ export function ConnectionDiagnosisPanel({
         ))}
       </ol>
       <div>
-        <p className="font-medium text-foreground">What to try</p>
+        <p className="font-medium text-foreground">what to try</p>
         <ol className="list-decimal pl-4 text-muted-foreground">
           {diagnosis.steps.map((step) => (
             <li key={step}>{step}</li>
@@ -172,7 +172,7 @@ export function ConnectionDiagnosisPanel({
             rel="noreferrer"
             className="text-muted-foreground underline underline-offset-2 hover:text-foreground"
           >
-            More info
+            more info
           </a>
         ) : null}
       </div>
@@ -186,7 +186,7 @@ export function ConnectionDiagnosisPanel({
       </dl>
       <div className="flex flex-wrap gap-2">
         <Button type="button" size="xs" variant="outline" onClick={onRetry}>
-          Retry now
+          retry now
         </Button>
         <Button
           type="button"
@@ -197,11 +197,11 @@ export function ConnectionDiagnosisPanel({
             copyToClipboard(text, undefined);
           }}
         >
-          Copy diagnostics
+          copy diagnostics
         </Button>
         {onAddRoute ? (
           <Button type="button" size="xs" variant="outline" onClick={onAddRoute}>
-            Add direct route
+            add direct route
           </Button>
         ) : null}
       </div>

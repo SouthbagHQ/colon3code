@@ -36,7 +36,7 @@ it.each([
   { width: 390, height: 844, axis: "height", typed: "2532", expected: "1170 × 2532" },
 ])("keeps each typed $axis digit until the locked size is committed", async (testCase) => {
   await using screen = await render(<Viewport {...testCase} />);
-  const input = screen.getByRole("spinbutton", { name: `Viewport ${testCase.axis}` });
+  const input = screen.getByRole("spinbutton", { name: `viewport ${testCase.axis}` });
   await userEvent.clear(input);
   await userEvent.type(input, testCase.typed);
   await expect.element(input).toHaveValue(Number(testCase.typed));
@@ -48,7 +48,7 @@ it.each([
 
 it("clamps a completed width below the locked minimum when leaving the toolbar", async () => {
   await using screen = await render(<Viewport />);
-  const input = screen.getByRole("spinbutton", { name: "Viewport width" });
+  const input = screen.getByRole("spinbutton", { name: "viewport width" });
   await userEvent.clear(input);
   await userEvent.type(input, "256");
   await expect.element(input).toHaveValue(256);
@@ -60,7 +60,7 @@ it("clamps a completed width below the locked minimum when leaving the toolbar",
 
 it("still limits a completed locked size to the viewport area cap", async () => {
   await using screen = await render(<Viewport width={1920} height={1920} />);
-  const input = screen.getByRole("spinbutton", { name: "Viewport width" });
+  const input = screen.getByRole("spinbutton", { name: "viewport width" });
   await userEvent.clear(input);
   await userEvent.type(input, "3840");
   await expect.element(input).toHaveValue(3840);

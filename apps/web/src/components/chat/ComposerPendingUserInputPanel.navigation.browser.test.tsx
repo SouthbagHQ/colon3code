@@ -167,7 +167,7 @@ it("tells the user when an option click moves their typed answer into the hidden
   expect(toast).toHaveBeenCalledWith(
     expect.objectContaining({
       type: "info",
-      title: "Your typed text was set aside",
+      title: "your typed text was set aside",
       description: "It will be back in the composer once the question is answered.",
       data: { threadRef: draftTarget },
     }),

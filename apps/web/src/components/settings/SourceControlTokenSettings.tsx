@@ -104,14 +104,14 @@ export function SourceControlTokenSettings({
                 />
               }
             >
-              Create a token
+              create a token
               <ExternalLinkIcon aria-hidden className="size-3" />
             </InlineButton>
           ) : null}
         </p>
         <div className="grid gap-3 sm:grid-cols-[12rem_1fr]">
           <div className="grid gap-1.5">
-            <Label htmlFor={`${definition.kind}-token-host-${environmentId}`}>Host</Label>
+            <Label htmlFor={`${definition.kind}-token-host-${environmentId}`}>host</Label>
             <Input
               id={`${definition.kind}-token-host-${environmentId}`}
               autoComplete="off"
@@ -122,7 +122,7 @@ export function SourceControlTokenSettings({
             />
           </div>
           <div className="grid gap-1.5">
-            <Label htmlFor={`${definition.kind}-token-${environmentId}`}>Token</Label>
+            <Label htmlFor={`${definition.kind}-token-${environmentId}`}>token</Label>
             <SecretSourceInput
               id={`${definition.kind}-token-${environmentId}`}
               size="sm"
@@ -138,8 +138,8 @@ export function SourceControlTokenSettings({
         <div className="flex items-center justify-between gap-3">
           <p className="text-xs text-muted-foreground">
             {savedHosts.length === 0
-              ? `No token saved; the server uses ${credentials.tokenEnvVar} or the ${credentials.cliName} login.`
-              : `Saved for ${savedHosts.join(", ")}.`}
+              ? `no token saved; the server uses ${credentials.tokenEnvVar} or the ${credentials.cliName} login.`
+              : `saved for ${savedHosts.join(", ")}.`}
           </p>
           <div className="flex shrink-0 gap-2">
             {isSaved ? (
@@ -149,7 +149,7 @@ export function SourceControlTokenSettings({
                 disabled={saving}
                 onClick={() => void save(normalizedHost, "")}
               >
-                Remove
+                remove
               </Button>
             ) : null}
             <Button
@@ -157,7 +157,7 @@ export function SourceControlTokenSettings({
               size="xs"
               disabled={!normalizedHost || submission === "" || saving}
             >
-              Save
+              save
             </Button>
           </div>
         </div>

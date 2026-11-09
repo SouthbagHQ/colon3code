@@ -37,10 +37,10 @@ function modelAlias(target: UsagePriceTarget, model: string) {
 
 export function usageAliasCell(targets: readonly UsagePriceTarget[], model: string) {
   if (targets.some((target) => target.aliases === null))
-    return { value: "", placeholder: "Unavailable" };
+    return { value: "", placeholder: "unavailable" };
   const values = targets.map((target) => modelAlias(target, model) ?? "");
-  if (values.some((value) => value !== values[0])) return { value: "", placeholder: "Mixed" };
-  return { value: values[0] ?? "", placeholder: "None" };
+  if (values.some((value) => value !== values[0])) return { value: "", placeholder: "mixed" };
+  return { value: values[0] ?? "", placeholder: "none" };
 }
 
 export function usagePriceCell(
@@ -81,7 +81,7 @@ export function usagePriceTableChanges(
       if (draft.alias === undefined && Object.keys(draft.values).length > 0) {
         errors.set(
           draft.id,
-          `${target.label} maps this model. Remove it from "Apply to" or clear its mapping first.`,
+          `${target.label} maps this model. Remove it from "apply to" or clear its mapping first.`,
         );
         continue;
       }

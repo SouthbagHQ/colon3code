@@ -126,7 +126,7 @@ it("merges with the last selected merge method", async () => {
   const clickMerge = async (scope: ParentNode) =>
     await act(async () => {
       [...scope.querySelectorAll("button")]
-        .find((button) => button.textContent?.trim() === "Merge")!
+        .find((button) => button.textContent?.trim() === "merge")!
         .click();
     });
   await clickMerge(container);
@@ -154,7 +154,7 @@ it("requires a new merge click after passing checks become pending and pass agai
   const clickMerge = async () =>
     await act(async () => {
       [...container.querySelectorAll("button")]
-        .find((button) => button.textContent?.trim() === "Merge")!
+        .find((button) => button.textContent?.trim() === "merge")!
         .click();
     });
   const dialogs = () => [...document.querySelectorAll('[role="alertdialog"]')];

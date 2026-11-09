@@ -46,8 +46,8 @@ import {
 function useFontDefaultFamilies() {
   const settings = useScopedSettings();
   const [defaults] = useState(() => ({
-    sans: resolveDefaultFamilyLabel(DEFAULT_SANS_FONT_STACK) ?? "System default",
-    code: resolveDefaultFamilyLabel(DEFAULT_CODE_FONT_STACK) ?? "System monospace",
+    sans: resolveDefaultFamilyLabel(DEFAULT_SANS_FONT_STACK) ?? "system default",
+    code: resolveDefaultFamilyLabel(DEFAULT_CODE_FONT_STACK) ?? "system monospace",
   }));
   return {
     sans: defaults.sans,
@@ -63,7 +63,7 @@ function InterfaceFontRow({ preview }: { preview?: ReactNode }) {
   return (
     <FontFamilySettingsRow
       {...searchableSetting("interface-font")}
-      description="Everything outside code blocks and the terminal."
+      description="all the text outside code blocks and the terminal :3"
       defaultFamily={defaults.sans}
       defaultValue={DEFAULT_UNIFIED_SETTINGS.fontFamilySans}
       value={settings.fontFamilySans}
@@ -75,7 +75,7 @@ function InterfaceFontRow({ preview }: { preview?: ReactNode }) {
         })
       }
       size={{
-        label: "Interface font size",
+        label: "interface font size",
         min: MIN_INTERFACE_FONT_SIZE,
         max: MAX_INTERFACE_FONT_SIZE,
         value: settings.fontSizeInterface,
@@ -94,7 +94,7 @@ function PromptFontRow() {
   return (
     <FontFamilySettingsRow
       {...searchableSetting("prompt-font")}
-      description="Only the box you write prompts in. Mono works well here."
+      description="just the box you write prompts in. mono feels nice here ;3"
       defaultFamily={defaults.interfaceFamily}
       defaultValue={DEFAULT_UNIFIED_SETTINGS.fontFamilyComposer}
       value={settings.fontFamilyComposer}
@@ -106,7 +106,7 @@ function PromptFontRow() {
         })
       }
       size={{
-        label: "Prompt font size",
+        label: "prompt font size",
         min: MIN_PROMPT_FONT_SIZE,
         max: MAX_PROMPT_FONT_SIZE,
         value: settings.fontSizePrompt,
@@ -120,7 +120,7 @@ function PromptFontRow() {
 
 function CodeFontRow({
   title,
-  description = "Code blocks, diffs, and file previews.",
+  description = "code blocks, diffs, and file previews.",
   preview,
 }: {
   title?: string;
@@ -147,7 +147,7 @@ function CodeFontRow({
       }
       requireMonospace
       size={{
-        label: "Code font size",
+        label: "code font size",
         min: MIN_CODE_FONT_SIZE,
         max: MAX_CODE_FONT_SIZE,
         value: settings.fontSizeCode,
@@ -166,7 +166,7 @@ function TerminalFontRow() {
   return (
     <FontFamilySettingsRow
       {...searchableSetting("terminal-font")}
-      description="Terminal output, independent from code blocks and diffs."
+      description="terminal output, separate from code blocks and diffs uwu"
       defaultFamily={defaults.code}
       defaultValue={DEFAULT_UNIFIED_SETTINGS.fontFamilyTerminal}
       value={settings.fontFamilyTerminal}
@@ -179,7 +179,7 @@ function TerminalFontRow() {
       }
       requireMonospace
       size={{
-        label: "Terminal font size",
+        label: "terminal font size",
         min: MIN_TERMINAL_FONT_SIZE,
         max: MAX_TERMINAL_FONT_SIZE,
         value: settings.fontSizeTerminal,
@@ -207,7 +207,7 @@ function FontSmoothingRow() {
   return (
     <SettingsRow
       {...searchableSetting("font-smoothing")}
-      description="Use thinner grayscale text smoothing instead of the macOS default."
+      description="use thinner grayscale text smoothing instead of the macOS default ^w^"
       resetAction={
         settings.fontSmoothing !== DEFAULT_UNIFIED_SETTINGS.fontSmoothing ? (
           <SettingResetButton
@@ -222,7 +222,7 @@ function FontSmoothingRow() {
         <Switch
           checked={settings.fontSmoothing}
           onCheckedChange={(checked) => updateSettings({ fontSmoothing: Boolean(checked) })}
-          aria-label="Font smoothing"
+          aria-label="font smoothing"
         />
       }
     />
@@ -235,7 +235,7 @@ function WordWrapRow() {
   return (
     <SettingsRow
       {...searchableSetting("word-wrap")}
-      description="Wrap long lines in code blocks, diffs, and file previews by default."
+      description="wraps long lines in code blocks, diffs, and file previews by default :3"
       resetAction={
         settings.wordWrap !== DEFAULT_UNIFIED_SETTINGS.wordWrap ? (
           <SettingResetButton
@@ -248,7 +248,7 @@ function WordWrapRow() {
         <Switch
           checked={settings.wordWrap}
           onCheckedChange={(checked) => updateSettings({ wordWrap: Boolean(checked) })}
-          aria-label="Wrap code, diffs, and file previews by default"
+          aria-label="wrap code, diffs, and file previews by default"
         />
       }
     />
@@ -276,12 +276,12 @@ function SeparateFontsRow({
   return (
     <SettingsRow
       {...searchableSetting("separate-fonts")}
-      description="Set the prompt, code, and terminal fonts separately instead of one monospace font."
+      description="set the prompt, code, and terminal fonts separately instead of one monospace font."
       control={
         <Switch
           checked={checked}
           onCheckedChange={(next) => onCheckedChange(Boolean(next))}
-          aria-label="Separate fonts"
+          aria-label="separate fonts"
         />
       }
     />
@@ -294,8 +294,8 @@ function SimpleFontRows() {
     <>
       <InterfaceFontRow preview={<PromptFontPreview />} />
       <CodeFontRow
-        title="Monospace font"
-        description="Code blocks, diffs, file previews, and the terminal."
+        title="monospace font"
+        description="code blocks, diffs, file previews, and the terminal ;3"
         preview={
           <>
             <CodeFontPreview />
@@ -335,7 +335,7 @@ export function TypographySection() {
   const showAdvanced =
     advanced || (searchTargetId !== null && isAdvancedTypographyTarget(searchTargetId));
   return (
-    <SettingsSection id="typography" title="Typography">
+    <SettingsSection id="typography" title="typography :3">
       {showAdvanced ? <FontSettingsGroup /> : <SimpleFontRows />}
       <WordWrapRow />
       <AdvancedSettings

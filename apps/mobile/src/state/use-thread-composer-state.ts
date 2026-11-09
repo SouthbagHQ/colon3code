@@ -441,7 +441,7 @@ export function useThreadComposerState(input: {
       edit.existingAttachments.length === 0 &&
       draft.attachments.length === 0
     ) {
-      Dialog.alert("Add a message", "A queued message cannot be left empty.");
+      Dialog.alert("add a message", "A queued message cannot be left empty.");
       return;
     }
     if (
@@ -472,7 +472,7 @@ export function useThreadComposerState(input: {
       finishSave(false);
       const error = squashAtomCommandFailure(prepared);
       Dialog.alert(
-        "Could not save the queued message",
+        "could not save the queued message 3:",
         error instanceof Error ? error.message : "Your edit is still in the composer.",
       );
       return;
@@ -508,7 +508,7 @@ export function useThreadComposerState(input: {
       // The run left the queue during the save; its exit already told the composer what happened.
       if (!finishSave(false)) return;
       Dialog.alert(
-        "Could not save the queued message",
+        "could not save the queued message 3:",
         "It may have already started. Your edit is still in the composer.",
       );
       return;
@@ -586,14 +586,14 @@ export function useThreadComposerState(input: {
     const sideChatCommand = beforeDispatch === undefined ? parseSideChatCommand(text) : null;
     if (sideChatCommand) {
       if (sideChatUnavailableReason !== null) {
-        Dialog.alert("Side chat not started", sideChatUnavailableReason);
+        Dialog.alert("side chat not started", sideChatUnavailableReason);
       } else if (attachments.length > 0 || (draft.context?.records.length ?? 0) > 0) {
         Dialog.alert(
-          "Side chats take text only",
+          "side chats take text only",
           "Remove the attachments and context, then send it again.",
         );
       } else if (sideChatCommand.prompt.length === 0) {
-        Dialog.alert("Ask a side question", "Type the question after /side, then send it.");
+        Dialog.alert("ask a side question", "Type the question after /side, then send it.");
       } else if (modelUnavailable) {
         alertModelUnavailable();
       } else if (!startingSideChatRef.current) {

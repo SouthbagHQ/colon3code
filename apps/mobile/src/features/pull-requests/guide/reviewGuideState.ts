@@ -24,51 +24,51 @@ export function guideNoticeState(state: {
   if (state.running) {
     return {
       kind: "writing" as const,
-      title: "Rewriting guide",
+      title: "rewriting guide",
       description: guide
         ? "You can keep reading this guide while the agent writes the update."
         : "An agent is reading the change and writing the tour. You can leave and come back when it’s ready.",
-      action: guide ? "Rewriting…" : "Writing guide…",
+      action: guide ? "rewriting…" : "writing guide…",
     };
   }
   const error = state.startError ?? failure;
   if (error) {
     return {
       kind: "failed" as const,
-      title: "Could not write guide",
+      title: "could not write guide",
       description: error,
-      action: "Try again",
+      action: "try again",
     };
   }
   if (state.error) {
     return {
       kind: "unavailable" as const,
-      title: "Could not refresh guide",
+      title: "could not refresh guide",
       description: state.error,
-      action: "Try again",
+      action: "try again",
     };
   }
   if (!state.data) {
     return {
       kind: "loading" as const,
-      title: "Review guide",
+      title: "review guide",
       description: "Checking for a saved guide…",
-      action: "Loading guide…",
+      action: "loading guide…",
     };
   }
   if (stale) {
     return {
       kind: "stale" as const,
-      title: "New changes since this guide",
+      title: "new changes since this guide",
       description: "You can read the previous guide, or rewrite it for the latest changes.",
-      action: "Rewrite guide",
+      action: "rewrite guide",
     };
   }
   return {
     kind: guide ? ("ready" as const) : ("empty" as const),
-    title: "Review guide",
+    title: "review guide",
     description:
       "Get a tour of the change, with code excerpts and notes on what needs a closer look.",
-    action: "Write guide",
+    action: "write guide",
   };
 }

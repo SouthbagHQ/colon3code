@@ -194,7 +194,7 @@ describe("bounded binary previews", () => {
       await act(() => child()!.click());
       await vi.waitFor(() => expect(child()?.textContent).toBe("hello.txt"));
       const parent = () =>
-        screen.container.querySelector<HTMLButtonElement>('[aria-label="Parent folder"]')!;
+        screen.container.querySelector<HTMLButtonElement>('[aria-label="parent folder"]')!;
       await act(() => parent().click());
       await act(() => parent().click());
       expect(parent().disabled).toBe(true);
@@ -571,7 +571,7 @@ describe("large text preview recovery", () => {
         state(`${changed}#retried`);
         return changed;
       });
-      await screen.getByRole("button", { name: "Try again" }).click();
+      await screen.getByRole("button", { name: "try again" }).click();
       expect(refresh).toHaveBeenCalledOnce();
       await screen.rerender(preview("legacy-edit", 1));
       await vi.waitFor(() => expect(screen.container.textContent).toContain("changed"));
@@ -892,7 +892,7 @@ describe("large text preview recovery", () => {
     );
     await screen.rerender(<LargeTextViewer name="log.txt" text="" delimiter={null} />);
     await vi.waitFor(
-      () => expect(screen.container.textContent).toContain("This file is empty."),
+      () => expect(screen.container.textContent).toContain("this file is empty."),
       10_000,
     );
     expect(screen.container.querySelector('[role="alert"]')).toBeNull();
@@ -1969,7 +1969,7 @@ it("clears an Office metadata error when the same URL becomes previewable", asyn
     <OfficeFilePreview src={src} name="report.docx" kind="docx" sizeBytes={100} />,
   );
   await vi.waitFor(() =>
-    expect(screen.container.querySelector('[aria-label="Loading file"]')).not.toBeNull(),
+    expect(screen.container.querySelector('[aria-label="loading file"]')).not.toBeNull(),
   );
   expect(screen.container.textContent).not.toContain("under 50 MB");
   resolveBody("invalid-office-file");
@@ -2131,7 +2131,7 @@ it("opens a known empty attachment even when its range response is inaccessible"
     />,
   );
   await vi.waitFor(
-    () => expect(screen.container.textContent).toContain("This file is empty."),
+    () => expect(screen.container.textContent).toContain("this file is empty."),
     10_000,
   );
 });
@@ -2164,7 +2164,7 @@ it.each(["draft", "thread"] as const)(
       ),
     );
     expect(fetch).toHaveBeenCalled();
-    expect(screen.container.textContent).not.toContain("This file is empty.");
+    expect(screen.container.textContent).not.toContain("this file is empty.");
   },
 );
 
@@ -2351,13 +2351,13 @@ it("toggles a Mermaid attachment between diagram and source through the lazy pre
   await vi.waitFor(() =>
     expect(screen.container.querySelector("[data-markdown-mermaid] svg path")).not.toBeNull(),
   );
-  await screen.getByRole("button", { name: "Expand diagram" }).click();
+  await screen.getByRole("button", { name: "expand diagram" }).click();
   await vi.waitFor(() => {
     const image = document.querySelector<HTMLImageElement>('[role="dialog"] img');
     expect(image?.alt).toBe("Mermaid diagram");
     expect(image?.naturalWidth).toBeGreaterThan(0);
   });
-  await page.getByRole("button", { name: "Close image preview" }).click();
+  await page.getByRole("button", { name: "close image preview" }).click();
   await vi.waitFor(() => expect(document.querySelector('[role="dialog"]')).toBeNull());
   await screen.getByRole("button", { name: "show Mermaid source" }).click();
   await vi.waitFor(() => expect(screen.container.querySelector("pre")?.textContent).toBe(text));
@@ -2526,9 +2526,9 @@ it("keeps a workspace PDF's page, offset and zoom when a new revision reloads it
     const region = () => screen.getByRole("region", { name: "Planning PDF" }).element();
     const offset = () =>
       region().getBoundingClientRect().top -
-      region().querySelector('canvas[aria-label="Page 2"]')!.getBoundingClientRect().top;
-    await screen.getByRole("button", { name: "Zoom in", exact: true }).click();
-    await screen.getByRole("button", { name: "Next page", exact: true }).click();
+      region().querySelector('canvas[aria-label="page 2"]')!.getBoundingClientRect().top;
+    await screen.getByRole("button", { name: "zoom in", exact: true }).click();
+    await screen.getByRole("button", { name: "next page", exact: true }).click();
     await expect.element(screen.getByText("2 / 3 pages", { exact: true })).toBeVisible();
     const zoom = screen.container.textContent!.match(/\d+%/)![0];
     const top = region().scrollTop + 100;
@@ -2550,7 +2550,7 @@ it("keeps a workspace PDF's page, offset and zoom when a new revision reloads it
 
     await reload(screen, preview(updated, "two", "/repo/another.pdf"));
     await expect.element(screen.getByText("1 / 3 pages", { exact: true })).toBeVisible();
-    expect(screen.container.textContent).toContain("Fit width");
+    expect(screen.container.textContent).toContain("fit width");
     expect(region().scrollTop).toBe(0);
   } finally {
     URL.revokeObjectURL(original);
@@ -2568,8 +2568,8 @@ it("unwraps one text attachment without turning off the word wrap setting", asyn
       file={file}
     />,
   );
-  await screen.getByRole("button", { name: "Disable word wrap" }).click();
-  await expect.element(screen.getByRole("button", { name: "Enable word wrap" })).toBeVisible();
+  await screen.getByRole("button", { name: "disable word wrap" }).click();
+  await expect.element(screen.getByRole("button", { name: "enable word wrap" })).toBeVisible();
   expect(getClientSettings().wordWrap).toBe(true);
   expect(screen.container.querySelector("pre")?.dataset.wordWrap).toBe("false");
 });

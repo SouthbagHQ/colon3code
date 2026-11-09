@@ -238,7 +238,7 @@ function AddToChatButton({ onClick }: { onClick: () => void }) {
       {/* Wrapped like Fix's label so both sit on the header's baseline. */}
       <span className="inline-flex items-baseline gap-1">
         <MessageSquarePlusIcon className="size-3 self-center" />
-        <span>Add to chat</span>
+        <span>add to chat</span>
       </span>
     </Button>
   );
@@ -665,7 +665,7 @@ export function PullRequestSummaryTab({
                 <HammerIcon className="size-3 self-center" />
                 <span>
                   {pendingFinding === pullRequestFindingKey(finding)
-                    ? "Preparing..."
+                    ? "preparing…"
                     : fixFindingLabel}
                 </span>
               </span>
@@ -708,7 +708,7 @@ export function PullRequestSummaryTab({
           editing={commentEditing}
           detail={detail}
           thread={thread}
-          label={thread?.isResolved ? "Resolved" : "Review dismissed"}
+          label={thread?.isResolved ? "resolved" : "review dismissed"}
           body={visibleBody(comment.body)}
           replyCount={item.kind === "thread" ? item.replies.length + item.moreReplies : 0}
           replies={replies}
@@ -1019,7 +1019,7 @@ export function PullRequestSummaryTab({
                     className="w-full"
                     onClick={() => setShown({ url: detail.url, count: COMMENT_PAGE })}
                   >
-                    Show only {COMMENT_PAGE} recent conversations
+                    show only {COMMENT_PAGE} recent conversations
                   </Button>
                 ) : null}
               </div>

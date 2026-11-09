@@ -32,9 +32,9 @@ export function DatabaseStorageNotice({
   );
   if (visible.length === 0) return null;
   return (
-    <SettingsSection id="storage-database" title="Database">
+    <SettingsSection id="storage-database" title="database">
       <SettingsRow
-        title="Reclaim freed database space"
+        title="reclaim freed database space"
         description="These databases still hold space freed by history cleanup. Run the command on each machine to reclaim it. It restarts the background service. Quit the desktop app first if it hosts the environment."
       />
       {visible.map(({ environmentId, status }) => (
@@ -52,14 +52,14 @@ export function DatabaseStorageNotice({
                 size="xs"
                 onClick={() => copyToClipboard(status.compactCommand, undefined)}
               >
-                Copy command
+                copy command
               </Button>
               <Button
                 variant="ghost"
                 size="xs"
                 onClick={() => setDismissed((current) => [...current, environmentId])}
               >
-                Dismiss
+                dismiss
               </Button>
             </div>
           }

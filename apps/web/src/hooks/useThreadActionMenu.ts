@@ -248,7 +248,7 @@ export function useThreadActionMenu(input: {
         }
         case "auto-settle:enabled":
         case "auto-settle:disabled":
-          await reportFailure("Failed to update auto-settle", () =>
+          await reportFailure("hmm, couldn't update auto-settle 3:", () =>
             setThreadAutoSettle(threadRef, action === "auto-settle:enabled"),
           );
           return;

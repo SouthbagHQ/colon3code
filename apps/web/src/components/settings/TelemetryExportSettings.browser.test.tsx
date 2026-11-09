@@ -88,7 +88,7 @@ describe("TelemetryExportSettings", () => {
     await screen.rerender(<TelemetryExportSettings />);
     await replace("otlpMetricsUrl", "http://new/v1/metrics");
     const save = [...container.querySelectorAll("button")].find(
-      (button) => button.textContent === "Save",
+      (button) => button.textContent === "save",
     )!;
     await userEvent.click(save);
 
@@ -96,7 +96,7 @@ describe("TelemetryExportSettings", () => {
       environmentId: "env",
       input: { patch: { observability: { otlpMetricsUrl: "http://new/v1/metrics" } } },
     });
-    expect(container.textContent).toContain("Saved. Restart the server to apply.");
+    expect(container.textContent).toContain("saved :3 restart the server to apply.");
   });
 
   it("reports and tests the endpoint the environment set over an empty setting", async () => {
@@ -118,11 +118,11 @@ describe("TelemetryExportSettings", () => {
     await using screen = await render(<TelemetryExportSettings />);
 
     await expect
-      .element(screen.getByText("Set by environment · Connected · 12 ms"))
+      .element(screen.getByText("set by environment · connected · 12 ms"))
       .toBeInTheDocument();
     await expect
       .element(
-        screen.getByText("Running: http://collector/v1/traces from OTEL_EXPORTER_OTLP_ENDPOINT"),
+        screen.getByText("running: http://collector/v1/traces from OTEL_EXPORTER_OTLP_ENDPOINT"),
       )
       .toBeInTheDocument();
     expect(checkOtlpEndpoint).toHaveBeenCalledExactlyOnceWith({
@@ -131,7 +131,7 @@ describe("TelemetryExportSettings", () => {
     });
     expect(screen.container.querySelector<HTMLInputElement>("#otlpTracesUrl")!.value).toBe("");
 
-    await userEvent.click(screen.getByRole("button", { name: "Test" }).first());
+    await userEvent.click(screen.getByRole("button", { name: "test" }).first());
 
     expect(checkOtlpEndpoint).toHaveBeenCalledTimes(2);
     expect(checkOtlpEndpoint).toHaveBeenLastCalledWith({

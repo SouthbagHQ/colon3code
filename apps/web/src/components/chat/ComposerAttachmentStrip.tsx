@@ -300,7 +300,7 @@ export function ComposerAttachmentMediaRow({
                   variant="media-close"
                   size="icon-xs"
                   onClick={() => onRemoveImage(image.id)}
-                  aria-label={`Remove ${image.name}`}
+                  aria-label={`remove ${image.name}`}
                 >
                   <XIcon />
                 </Button>
@@ -617,7 +617,7 @@ export function ComposerRestingImagePreviews({
         <button
           type="button"
           className="flex size-7 shrink-0 cursor-pointer items-center justify-center rounded-md border border-border/70 bg-muted/60 font-medium text-secondary-label text-xs tabular-nums outline-none hover:bg-muted focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring focus-visible:ring-offset-1 focus-visible:ring-offset-background"
-          aria-label={`Show ${String(counts.overflowCount)} more image attachments`}
+          aria-label={`show ${String(counts.overflowCount)} more image attachments`}
           onPointerDown={(event) => event.preventDefault()}
           onClick={onShowMore}
         >
@@ -658,7 +658,7 @@ export function ComposerQueuedAttachmentRow({
             size="icon-xs"
             className="absolute right-1 top-1"
             onClick={() => onRemove(attachment.id)}
-            aria-label={`Remove ${attachment.name}`}
+            aria-label={`remove ${attachment.name}`}
           >
             <XIcon />
           </Button>

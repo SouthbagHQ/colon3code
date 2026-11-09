@@ -45,8 +45,8 @@ export function ThreadFindBar(props: ThreadFindBarProps) {
   if (hasQuery) {
     label = props.counting ? "1/…" : formatThreadFindCount(props.activeIndex, props.matchCount);
   }
-  if (props.status === "loading") label = "Searching…";
-  if (props.status === "error") label = "Search failed";
+  if (props.status === "loading") label = "searching…";
+  if (props.status === "error") label = "search failed";
   const navigationDisabled =
     props.matchCount === 0 || props.status === "loading" || props.counting === true;
   const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
@@ -69,7 +69,7 @@ export function ThreadFindBar(props: ThreadFindBarProps) {
         size="lg"
         onContextMenu={(event) => event.stopPropagation()}
         role="search"
-        aria-label="Find in thread"
+        aria-label="find in thread"
         aria-busy={props.status === "loading" || props.counting === true}
         className="w-full"
       >
@@ -78,8 +78,8 @@ export function ThreadFindBar(props: ThreadFindBarProps) {
           type="search"
           size="sm"
           value={props.query}
-          aria-label="Find in thread"
-          placeholder="Find in thread"
+          aria-label="find in thread"
+          placeholder="find in thread"
           maxLength={200}
           spellCheck={false}
           autoComplete="off"
@@ -98,13 +98,13 @@ export function ThreadFindBar(props: ThreadFindBarProps) {
           </span>
           {props.status === "error" ? (
             <Button size="xs" variant="ghost" onClick={props.onRetry}>
-              Retry
+              retry
             </Button>
           ) : null}
           <Button
             size="icon-xs"
             variant="ghost"
-            aria-label="Previous match"
+            aria-label="previous match"
             disabled={navigationDisabled}
             onClick={props.onPrevious}
           >
@@ -113,13 +113,13 @@ export function ThreadFindBar(props: ThreadFindBarProps) {
           <Button
             size="icon-xs"
             variant="ghost"
-            aria-label="Next match"
+            aria-label="next match"
             disabled={navigationDisabled}
             onClick={props.onNext}
           >
             <ChevronDownIcon />
           </Button>
-          <Button size="icon-xs" variant="ghost" aria-label="Close find" onClick={props.onClose}>
+          <Button size="icon-xs" variant="ghost" aria-label="close find" onClick={props.onClose}>
             <XIcon />
           </Button>
         </InputGroupAddon>

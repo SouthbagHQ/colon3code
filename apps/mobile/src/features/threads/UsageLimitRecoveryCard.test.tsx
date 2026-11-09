@@ -58,14 +58,14 @@ function failedThread(
 describe("UsageLimitRecoveryCard", () => {
   // Older servers report ChatGPT sharing limits as provider errors and may store a reset.
   it.each([
-    [CHATGPT_USAGE_LIMIT_CODE, "usage_limit", null, ["Manage usage"]],
-    [CHATGPT_WORKSPACE_USAGE_LIMIT_CODE, "usage_limit", null, ["Copy request for admin"]],
-    [CHATGPT_USAGE_LIMIT_CODE, "provider_error", null, ["Manage usage"]],
+    [CHATGPT_USAGE_LIMIT_CODE, "usage_limit", null, ["manage usage"]],
+    [CHATGPT_WORKSPACE_USAGE_LIMIT_CODE, "usage_limit", null, ["copy request for admin"]],
+    [CHATGPT_USAGE_LIMIT_CODE, "provider_error", null, ["manage usage"]],
     [
       CHATGPT_USAGE_LIMIT_CODE,
       "usage_limit",
       new Date(DAY_MS).toISOString(),
-      ["Manage usage", "Resume at reset", "Snooze until reset"],
+      ["manage usage", "resume at reset", "snooze until reset"],
     ],
   ])("shows one ChatGPT notice for %s (%s, reset %s)", (code, errorClass, resetAt, actions) => {
     const container = document.createElement("div");
@@ -147,7 +147,7 @@ describe("UsageLimitRecoveryCard", () => {
     );
     const snooze = () =>
       [...container.querySelectorAll("button")].find(
-        (button) => button.textContent === "Snooze until reset",
+        (button) => button.textContent === "snooze until reset",
       );
     expect(snooze()?.disabled).toBe(false);
 

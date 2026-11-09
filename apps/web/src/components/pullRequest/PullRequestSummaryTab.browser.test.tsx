@@ -139,9 +139,9 @@ it("keeps an unsaved description when collapsed and reopened, and after a failed
   await screen.click("description");
   expect(screen.container.querySelector("textarea")!.value).toBe("Unsaved description");
 
-  await userEvent.click(screen.getByRole("button", { name: "Save" }));
+  await userEvent.click(screen.getByRole("button", { name: "save" }));
   expect(state.update).toHaveBeenCalledTimes(1);
-  await expect.element(screen.getByRole("button", { name: "Save" })).toBeEnabled();
+  await expect.element(screen.getByRole("button", { name: "save" })).toBeEnabled();
   expect(screen.container.querySelector("textarea")!.value).toBe("Unsaved description");
 });
 

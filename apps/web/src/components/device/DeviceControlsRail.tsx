@@ -94,7 +94,7 @@ export function DeviceControlsRail(props: {
                     <Button
                       size="icon-sm"
                       variant="ghost"
-                      aria-label="Rotate device"
+                      aria-label="rotate device"
                       disabled={controls.disabled}
                     />
                   }
@@ -121,7 +121,7 @@ export function DeviceControlsRail(props: {
         ) : props.hostKind === "simlock" ? null : (
           <RailButton
             tooltipSide={popupSide}
-            label="Rotate device"
+            label="rotate device"
             disabled={inputDisabled || !!view.keyboard?.attached}
             onClick={() => handle?.rotate()}
           >
@@ -133,7 +133,7 @@ export function DeviceControlsRail(props: {
             <RailDivider />
             <RailButton
               tooltipSide={popupSide}
-              label={`Switch device to ${nextAppearance} mode`}
+              label={`switch device to ${nextAppearance} mode`}
               disabled={controls.disabled || !settings?.appearance}
               onClick={() => void controls.act({ type: "setAppearance", value: nextAppearance })}
             >
@@ -169,9 +169,9 @@ export function DeviceControlsRail(props: {
                   {(
                     [
                       ["small", "Small"],
-                      ["default", "Default"],
+                      ["default", "default"],
                       ["large", "Large"],
-                      ["extra-large", "Extra large"],
+                      ["extra-large", "extra large"],
                     ] as const
                   ).map(([value, label]) => (
                     <MenuRadioItem key={value} value={value}>
@@ -186,7 +186,7 @@ export function DeviceControlsRail(props: {
             </Menu>
             <RailButton
               tooltipSide={popupSide}
-              label="Device tools"
+              label="device tools"
               pressed={props.toolsOpen}
               onClick={props.onTools}
             >

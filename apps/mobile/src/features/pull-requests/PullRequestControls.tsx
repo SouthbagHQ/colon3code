@@ -127,8 +127,8 @@ export function PullRequestActionToolbar(props: {
   const { shortLabel } = sourceControlClients.get(
     (props.pr ?? props.params.initialSummary)?.provider,
   ).changeRequest;
-  const threadLabel = agent.threads.length ? "Continue thread" : `Work on ${shortLabel}`;
-  const primaryLabel = pendingReview ? `Submit review · ${draft.comments.length}` : threadLabel;
+  const threadLabel = agent.threads.length ? "continue thread" : `work on ${shortLabel}`;
+  const primaryLabel = pendingReview ? `submit review · ${draft.comments.length}` : threadLabel;
   const chooseThread = agent.chooseThread;
   const agentActions = agent.actions.filter((action) => action.task !== "ask");
   const open = (mode: "review" | "comment") =>
@@ -177,7 +177,7 @@ export function PullRequestActionToolbar(props: {
               <View className="min-w-0 shrink">
                 {!pendingReview && chooseThread ? (
                   <Menu
-                    title="Open thread"
+                    title="open thread"
                     actions={threadMenuItems}
                     onPressAction={({ nativeEvent }) => agent.select(nativeEvent.event)}
                   >
@@ -188,7 +188,7 @@ export function PullRequestActionToolbar(props: {
                 )}
               </View>
             ) : null}
-            <IconButton icon="file.diff" accessibilityLabel="Changed files" onPress={openFiles} />
+            <IconButton icon="file.diff" accessibilityLabel="changed files" onPress={openFiles} />
           </View>
         </Toolbar>
       </View>
@@ -265,7 +265,7 @@ export function PullRequestActionToolbar(props: {
     <Toolbar.Button
       identifier="workspace-trailing-action"
       icon={{ type: "image", source: require("../../../assets/icons/file-diff.png") }}
-      accessibilityLabel="Changed files"
+      accessibilityLabel="changed files"
       onPress={openFiles}
       separateBackground
     />

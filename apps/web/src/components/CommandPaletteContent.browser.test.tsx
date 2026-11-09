@@ -18,7 +18,7 @@ function SubmenuPalette() {
           <CommandPaletteContent
             items={["Project A"]}
             inputProps={{
-              placeholder: "Search projects",
+              placeholder: "search projects",
               startAddon: (
                 <button type="button" aria-label="Back">
                   Back
@@ -42,6 +42,6 @@ describe("CommandPaletteContent", () => {
 
     await userEvent.click(page.getByRole("button", { name: "Open" }));
 
-    await expect.element(page.getByPlaceholder("Search projects")).toHaveFocus();
+    await expect.element(page.getByPlaceholder("search projects")).toHaveFocus();
   });
 });

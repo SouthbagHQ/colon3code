@@ -484,7 +484,7 @@ it.each(["cancel", "failed restart"] as const)(
     await act(() => {
       firstStart = mocks.voice.start();
     });
-    await expect.element(page.getByText("Loading transcription models…")).toBeVisible();
+    await expect.element(page.getByText("loading transcription models…")).toBeVisible();
     if (action === "cancel") {
       await act(() => mocks.voice.cancel());
     } else {
@@ -516,9 +516,9 @@ it.each([true, false])(
     mocks.catalogOffline = offline;
     await using _screen = await render(<Probe showWizard />);
     await act(() => mocks.voice.start());
-    const wizard = page.getByRole("dialog", { name: "Set up voice input" });
-    const retry = wizard.getByRole("button", { name: "Retry loading models" });
-    const download = wizard.getByRole("button", { name: "Download model" });
+    const wizard = page.getByRole("dialog", { name: "set up voice input" });
+    const retry = wizard.getByRole("button", { name: "retry loading models" });
+    const download = wizard.getByRole("button", { name: "download model" });
     await expect.element(wizard.getByRole("alert")).toBeVisible();
     await expect.element(download).not.toBeInTheDocument();
     if (offline) {

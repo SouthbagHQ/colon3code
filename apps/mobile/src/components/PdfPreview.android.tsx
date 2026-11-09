@@ -60,14 +60,14 @@ export function PdfPreview(props: { readonly uri: string }) {
   if (error) {
     return (
       <View className="flex-1 gap-4 bg-card">
-        <FilePreviewNotice title="Could not load PDF">{error}</FilePreviewNotice>
+        <FilePreviewNotice title="could not load PDF">{error}</FilePreviewNotice>
         <View className="items-center">
-          <ControlPill label="Try again" variant="pill" onPress={refresh} />
+          <ControlPill label="try again" variant="pill" onPress={refresh} />
         </View>
       </View>
     );
   }
-  if (localUri === null) return <FilePreviewLoading message="Loading PDF..." background="card" />;
+  if (localUri === null) return <FilePreviewLoading message="loading PDF…" background="card" />;
 
   return (
     <Pdf

@@ -27,7 +27,7 @@ export function PullRequestOverviewLoading({
   return (
     <View
       className="gap-5"
-      accessibilityLabel="Loading pull request details"
+      accessibilityLabel="loading pull request details"
       accessibilityState={{ busy: true }}
     >
       <PullRequestStackCard params={params} state={stack} />
@@ -36,11 +36,11 @@ export function PullRequestOverviewLoading({
           compact
           title={
             summary.checksState === "passing"
-              ? "Checks completed"
+              ? "checks completed"
               : summary.checksState === "failing"
-                ? "Checks failing"
+                ? "checks failing"
                 : summary.checksState === "pending"
-                  ? "Checks running"
+                  ? "checks running"
                   : "Checks"
           }
           icon={
@@ -62,7 +62,7 @@ export function PullRequestOverviewLoading({
         </PullRequestCardRow>
         <PullRequestCardRow
           compact
-          title={review?.accessibleLabel ?? "Reviews"}
+          title={review?.accessibleLabel ?? "reviews"}
           icon={review?.icon ?? "bubble.left"}
           tint={review?.tint}
         >
@@ -72,9 +72,9 @@ export function PullRequestOverviewLoading({
           compact
           title={
             conflicting
-              ? `Conflicts with ${summary.baseBranch}`
+              ? `conflicts with ${summary.baseBranch}`
               : clean
-                ? `No conflicts with ${summary.baseBranch}`
+                ? `no conflicts with ${summary.baseBranch}`
                 : "Branch"
           }
           icon={
@@ -100,7 +100,7 @@ export function PullRequestOverviewLoading({
         </View>
       ) : null}
       <View className="gap-3">
-        <PullRequestSectionHeading>Description</PullRequestSectionHeading>
+        <PullRequestSectionHeading>description</PullRequestSectionHeading>
         <View className="gap-3 py-1">
           <View className="h-4 w-full rounded bg-subtle-strong" />
           <View className="h-4 w-full rounded bg-subtle-strong" />

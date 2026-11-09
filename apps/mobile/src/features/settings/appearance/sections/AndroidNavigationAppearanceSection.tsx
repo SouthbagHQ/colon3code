@@ -7,7 +7,7 @@ import { useAppearancePreferences } from "../AppearancePreferencesProvider";
 export function AndroidNavigationAppearanceSection() {
   const { isReady, androidNavigationStyle, setAndroidNavigationStyle } = useAppearancePreferences();
   return (
-    <SettingsSection title="Navigation">
+    <SettingsSection title="navigation">
       <View accessibilityRole="radiogroup">
         <SettingsChoiceRow
           label="One UI"

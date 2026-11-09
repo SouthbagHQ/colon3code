@@ -20,7 +20,7 @@ function ChildApproval({ entry }: { entry: ChildThreadApproval }) {
   const { approval } = entry;
   return (
     <section
-      aria-label={`Approval from ${entry.title}`}
+      aria-label={`approval from ${entry.title}`}
       className="rounded-lg border border-border bg-background p-3 text-xs"
     >
       <p className="mb-2 font-medium">Approval needed from {entry.title}</p>

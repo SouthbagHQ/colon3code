@@ -22,7 +22,7 @@ export function EnvironmentContextChip(props: {
           <ContextChip
             kind="environment"
             tabIndex={0}
-            aria-label={`Machine, ${label}`}
+            aria-label={`machine, ${label}`}
             data-markdown-copy={props.copyMarkdown}
           >
             <EnvironmentMachineIcon
@@ -33,7 +33,7 @@ export function EnvironmentContextChip(props: {
         }
       />
       <TooltipPopup side="top">
-        {environment ? ":3 Code environment" : "Machine not in this app"}
+        {environment ? ":3 Code environment" : "machine not in this app"}
       </TooltipPopup>
     </Tooltip>
   );

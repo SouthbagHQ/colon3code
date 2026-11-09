@@ -1246,7 +1246,7 @@ export default function FilePreviewPanel({
       return (
         <div className="flex min-h-0 flex-1 items-center justify-center gap-2 text-sm text-muted-foreground">
           <Spinner className="size-4" />
-          Checking file access...
+          checking file access…
         </div>
       );
     }
@@ -1466,7 +1466,7 @@ export default function FilePreviewPanel({
                 </p>
                 {attemptedPath ? (
                   <p className="text-muted-foreground">
-                    Attempted path
+                    attempted path
                     <code className="block break-all font-mono text-foreground select-all">
                       {attemptedPath}
                     </code>
@@ -1596,7 +1596,7 @@ export function WorkspaceLargeTextPreview(props: {
   const showError = (cause: unknown) => {
     toastManager.add({
       type: "error",
-      title: "Could not read file",
+      title: "hmm, couldn't read that file 3:",
       description: cause instanceof Error ? cause.message : "Try again.",
     });
   };
@@ -1628,14 +1628,14 @@ export function WorkspaceLargeTextPreview(props: {
       />
     );
   if (assetUrl._tag !== "Success" || loaded === null)
-    return <div className="p-6 text-xs text-muted-foreground">Loading…</div>;
+    return <div className="p-6 text-xs text-muted-foreground">loading…</div>;
   const src = `${loaded.url}${loaded.url.includes("?") ? "&" : "?"}revision=${encodeURIComponent(loaded.revision)}`;
   return (
     <>
       <div className={FILE_SURFACE_SUBHEADER_CLASS}>
-        <span className="min-w-0 flex-1 text-xs text-muted-foreground">Full file</span>
+        <span className="min-w-0 flex-1 text-xs text-muted-foreground">full file</span>
         <FileSurfaceAction
-          label={isCopied ? "Copied" : "Copy contents"}
+          label={isCopied ? "copied" : "copy contents"}
           onPress={() => {
             const copy = copyContents.current;
             if (!copy) return;
@@ -1647,7 +1647,7 @@ export function WorkspaceLargeTextPreview(props: {
           {isCopied ? <CheckIcon className="size-3.5" /> : <CopyIcon className="size-3.5" />}
         </FileSurfaceAction>
         <FileSurfaceAction
-          label={saving ? "Preparing file…" : "Save file"}
+          label={saving ? "preparing file…" : "save file"}
           disabled={saving}
           onPress={() => {
             setSaving(true);
@@ -1670,7 +1670,7 @@ export function WorkspaceLargeTextPreview(props: {
           <DownloadIcon className="size-3.5" />
         </FileSurfaceAction>
       </div>
-      <Suspense fallback={<div className="p-6 text-xs text-muted-foreground">Loading…</div>}>
+      <Suspense fallback={<div className="p-6 text-xs text-muted-foreground">loading…</div>}>
         <LargeTextViewer
           key={`${src}:${revision}`}
           name={props.name}

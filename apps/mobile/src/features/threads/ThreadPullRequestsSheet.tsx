@@ -41,7 +41,7 @@ export function ThreadPullRequestsSheet(
   });
   const rowInputs = { lines, actions };
   const { singular } = actions.terminology;
-  const title = `Linked ${actions.terminology.plural}`;
+  const title = `linked ${actions.terminology.plural}`;
 
   const content = (
     <View className="flex-1 android:bg-sheet-solid ios:bg-screen">
@@ -94,7 +94,7 @@ export function ThreadPullRequestsSheet(
           actions.canLink
             ? [
                 {
-                  accessibilityLabel: `Link ${singular}`,
+                  accessibilityLabel: `link ${singular}`,
                   icon: "plus",
                   onPress: actions.promptLink,
                 },

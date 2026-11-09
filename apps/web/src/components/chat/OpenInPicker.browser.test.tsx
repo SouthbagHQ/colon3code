@@ -123,7 +123,7 @@ async function setup() {
     return element!;
   }
 
-  const primaryButton = () => byLabel("Open file in preferred editor");
+  const primaryButton = () => byLabel("open file in preferred editor");
   const menuItems = () => [...document.querySelectorAll<HTMLElement>('[role="menuitem"]')];
 
   async function click(element: HTMLElement) {
@@ -184,7 +184,7 @@ describe("host editor access", () => {
 
     await renderPicker();
     expect(primaryButton().disabled).toBe(true);
-    expect(byLabel("Choose editor").disabled).toBe(true);
+    expect(byLabel("choose editor").disabled).toBe(true);
     expect((await pressOpenFavorite()).defaultPrevented).toBe(false);
   });
 });

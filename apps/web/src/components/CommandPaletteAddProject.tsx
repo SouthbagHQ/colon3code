@@ -101,7 +101,7 @@ export function NewProjectPublishHostPicker(props: {
           if (kind !== null) props.onValueChange(kind);
         }}
       >
-        <SelectTrigger size="xs" variant="ghost" aria-label="Host for the new repository">
+        <SelectTrigger size="xs" variant="ghost" aria-label="host for the new repository">
           <SelectValue>
             {(kind: SourceControlProviderKind) => sourceControlClients.get(kind).label}
           </SelectValue>
@@ -135,12 +135,12 @@ export function NewProjectSummary(props: {
         </CommandPaletteTitleIcon>
         <span className="flex min-w-0 flex-1 flex-col">
           <span className="truncate text-foreground text-sm">
-            {props.name.length > 0 ? props.name : "New project"}
+            {props.name.length > 0 ? props.name : "new project"}
           </span>
           <span className="truncate text-muted-foreground/85 text-xs">
             {props.name.length > 0
-              ? `Creates ${props.pathPreview}`
-              : `Goes in ${props.projectsRoot}`}
+              ? `creates ${props.pathPreview}`
+              : `goes in ${props.projectsRoot}`}
             {props.environmentLabel === null ? null : ` on ${props.environmentLabel}`}
           </span>
         </span>

@@ -65,7 +65,7 @@ export default function ProviderAuthTerminal({
     <>
       <div
         ref={mountSurface}
-        aria-label="Provider sign-in terminal"
+        aria-label="provider sign-in terminal"
         className="relative h-64 overflow-hidden rounded-md border border-border"
       />
       {error ? (

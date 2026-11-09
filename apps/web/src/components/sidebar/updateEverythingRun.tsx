@@ -341,7 +341,7 @@ export function startDesktopUpdateLaunchNotice(): () => void {
       toastManager.add(
         stackedThreadToast({
           type: "error",
-          title: "Update did not apply",
+          title: "aw, the update didn't apply 3:",
           description: `:3 Code is still on ${APP_VERSION}. Install ${notAppliedVersion} again from the update button.`,
         }),
       );

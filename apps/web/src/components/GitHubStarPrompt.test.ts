@@ -169,7 +169,7 @@ describe("recordPromptSent", () => {
     await (await startSession()).send();
     click(add.mock.lastCall?.[0].actionProps);
     await vi.advanceTimersByTimeAsync(0);
-    expect(update.mock.lastCall?.[1]).toMatchObject({ title: "Thanks for the star!" });
+    expect(update.mock.lastCall?.[1]).toMatchObject({ title: "thanks for the star! :3" });
     expect(store.get("colon3code:github-star-prompt:dismissed")).toBe("true");
     expect(openExternal).not.toHaveBeenCalled();
 
@@ -180,7 +180,7 @@ describe("recordPromptSent", () => {
     await vi.advanceTimersByTimeAsync(0);
     expect(openExternal).toHaveBeenCalledWith("https://github.com/SouthbagHQ/colon3code");
     expect(update.mock.lastCall?.[1]).not.toMatchObject({
-      actionProps: { children: "Open GitHub" },
+      actionProps: { children: "open GitHub" },
     });
 
     setup({ sent: 5 });
@@ -190,7 +190,7 @@ describe("recordPromptSent", () => {
     click(add.mock.lastCall?.[0].actionProps);
     await vi.advanceTimersByTimeAsync(0);
     const fallback = update.mock.lastCall?.[1];
-    expect(fallback).toMatchObject({ actionProps: { children: "Open GitHub" } });
+    expect(fallback).toMatchObject({ actionProps: { children: "open GitHub" } });
     expect(openExternal).not.toHaveBeenCalled();
     click(typeof fallback === "object" ? fallback.actionProps : undefined);
     expect(openExternal).toHaveBeenCalledOnce();

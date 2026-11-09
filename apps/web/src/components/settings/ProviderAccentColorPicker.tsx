@@ -67,7 +67,7 @@ function ProviderCustomColorPanel(props: {
       <div className="grid gap-3 p-3">
         <div onPointerDownCapture={startDrag}>
           <ColorHueSlider
-            label="Accent color hue"
+            label="accent color hue"
             value={hsv.h}
             onChange={(h) => changeHsv({ ...hsv, h })}
             onInteractionEnd={endDrag}
@@ -93,7 +93,7 @@ function ProviderCustomColorPanel(props: {
           <PopoverClose
             render={
               <Button type="button" size="compact" onClick={() => onCommit(currentColor)}>
-                Add color
+                add color
               </Button>
             }
           />
@@ -129,7 +129,7 @@ function ProviderCustomColorPicker(props: {
             aria-label={`${normalized ? "change" : "add"} accent color for ${props.displayName}`}
           >
             {normalized ? (
-              <span className="sr-only">Change accent color</span>
+              <span className="sr-only">change accent color</span>
             ) : (
               <PlusIcon aria-hidden />
             )}

@@ -35,7 +35,7 @@ export function useForceStopThread(environmentId: EnvironmentId) {
       const error = squashAtomCommandFailure(result);
       toastManager.add({
         type: "error",
-        title: "Could not force stop the agent",
+        title: "aw, couldn't force stop the agent 3:",
         description: error instanceof Error ? error.message : undefined,
       });
       return;
@@ -44,13 +44,13 @@ export function useForceStopThread(environmentId: EnvironmentId) {
     if (result.value.outcome === "releasing") {
       toastManager.add({
         type: "info",
-        title: "Turn stopped; the agent is still shutting down",
+        title: "turn stopped; the agent is still shutting down",
       });
     }
     if (result.value.outcome === "shared") {
       toastManager.add({
         type: "info",
-        title: "Turn stopped; the agent process kept running",
+        title: "turn stopped; the agent process kept running",
         description: `It is shared with ${others === 0 ? "other" : others} working ${others === 1 ? "thread" : "threads"}. Stop those to free it.`,
       });
     }

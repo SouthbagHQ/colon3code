@@ -188,9 +188,9 @@ describe("collectChannelSwitchTargets", () => {
       ["newer-service", "run `t3 update --channel stable --allow-downgrade` there"],
       [
         "new-service",
-        "its database has changes 0.1.3 does not support yet; stay on Nightly until Stable has them",
+        "its database has changes 0.1.3 does not support yet; stay on nightly until stable has them",
       ],
-      ["old-server", "its server predates database checks; update it on Nightly first"],
+      ["old-server", "its server predates database checks; update it on nightly first"],
       ["mac-desktop", "switch the Mac app on that Mac"],
       ["preview", "runs a preview build"],
     ]);
@@ -237,7 +237,7 @@ describe("collectChannelSwitchTargets", () => {
     expect(skipped.map((entry) => [entry.label, entry.reason])).toEqual([
       [
         "ahead",
-        `its database has changes ${NIGHTLY} does not support yet; stay on Stable until Nightly has them`,
+        `its database has changes ${NIGHTLY} does not support yet; stay on stable until nightly has them`,
       ],
       ["old-desktop", "needs a newer desktop app"],
       [

@@ -65,7 +65,7 @@ function mount(sourceAnchor: AssistantCitationSourceAnchor, onSave: () => boolea
 }
 
 const textarea = () =>
-  document.querySelector<HTMLTextAreaElement>('textarea[aria-label="Comment on selected text"]');
+  document.querySelector<HTMLTextAreaElement>('textarea[aria-label="comment on selected text"]');
 
 async function typeComment(value: string) {
   const input = textarea()!;
@@ -107,7 +107,7 @@ describe("citation comment source disappearance", () => {
     expect(mocks.observeSource).toHaveBeenCalledTimes(1);
 
     await typeComment("shortened comment");
-    await clickButton("Save");
+    await clickButton("save");
     expect(onSave).toHaveBeenCalledWith("shortened comment");
     expect(textarea()).toBeNull();
   });
@@ -122,7 +122,7 @@ describe("citation comment source disappearance", () => {
     expect(onSave).toHaveBeenCalledWith("keep this draft");
     expect(textarea()?.value).toBe("keep this draft");
     onSave.mockReturnValue(true);
-    await clickButton("Save");
+    await clickButton("save");
     expect(onSave).toHaveBeenLastCalledWith("keep this draft");
     expect(textarea()).toBeNull();
   });

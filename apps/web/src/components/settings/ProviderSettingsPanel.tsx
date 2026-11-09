@@ -596,7 +596,7 @@ export function EnvironmentProviderSettings({
         if (result._tag === "Success" && !result.value.accepted) {
           toastManager.add({
             type: "warning",
-            title: "Authentication request expired",
+            title: "hmm, that authentication request expired 3:",
             description: "Refresh the provider and start the authentication flow again.",
           });
           return;
@@ -605,7 +605,7 @@ export function EnvironmentProviderSettings({
           const error = squashAtomCommandFailure(result);
           toastManager.add({
             type: "error",
-            title: "Could not continue authentication",
+            title: "oops, couldn't continue authentication 3:",
             description:
               error instanceof Error ? error.message : "The authentication request expired.",
           });
@@ -803,7 +803,7 @@ export function EnvironmentProviderSettings({
       const error = squashAtomCommandFailure(result);
       toastManager.add({
         type: "error",
-        title: "Could not update provider instance",
+        title: "oops, couldn't update the provider instance 3:",
         description: error instanceof Error ? error.message : "The settings update failed.",
       });
     }
@@ -836,7 +836,7 @@ export function EnvironmentProviderSettings({
   const deleteInstance = useStableCallback(
     async (instanceId: ProviderInstanceId, instance: ProviderInstanceConfig) => {
       const confirmed = await confirmProviderInstanceRemoval(
-        `Remove the ${providerInstanceName(instance)} provider instance?`,
+        `remove the ${providerInstanceName(instance)} provider instance?`,
       );
       if (!confirmed) return;
       const updateResult = await persistProviderInstance({
@@ -847,7 +847,7 @@ export function EnvironmentProviderSettings({
         const error = squashAtomCommandFailure(updateResult);
         toastManager.add({
           type: "error",
-          title: "Could not delete provider instance",
+          title: "oops, couldn't delete the provider instance 3:",
           description: error instanceof Error ? error.message : "The settings update failed.",
         });
         return;
@@ -867,7 +867,7 @@ export function EnvironmentProviderSettings({
         const error = squashAtomCommandFailure(uninstallResult);
         toastManager.add({
           type: "warning",
-          title: "Provider deleted, but managed files remain",
+          title: "provider deleted, but managed files remain 3:",
           description: error instanceof Error ? error.message : "Managed binary cleanup failed.",
         });
       }
@@ -881,7 +881,7 @@ export function EnvironmentProviderSettings({
       resolveProviderInstanceEnabled(instance) &&
       !resolveProviderInstanceEnabled({ driver: driverKind });
     const confirmed = await confirmProviderInstanceRemoval(
-      `Reset the ${providerInstanceName(instance)} provider to its defaults?`,
+      `reset the ${providerInstanceName(instance)} provider to its defaults?`,
       turnsOff ? " It will also be turned off." : "",
     );
     if (!confirmed) return;
@@ -890,7 +890,7 @@ export function EnvironmentProviderSettings({
       const error = squashAtomCommandFailure(result);
       toastManager.add({
         type: "error",
-        title: "Could not reset provider instance",
+        title: "oops, couldn't reset the provider instance 3:",
         description: error instanceof Error ? error.message : "The settings update failed.",
       });
     }
@@ -984,13 +984,13 @@ export function EnvironmentProviderSettings({
                     size="icon-xs"
                     variant="ghost-muted"
                     onClick={() => setIsAddInstanceDialogOpen(true)}
-                    aria-label="Add provider"
+                    aria-label="add provider"
                   >
                     <PlusIcon />
                   </Button>
                 }
               />
-              <TooltipPopup side="top">Add provider</TooltipPopup>
+              <TooltipPopup side="top">add provider</TooltipPopup>
             </Tooltip>
           ) : null
         }
@@ -1058,7 +1058,7 @@ export function EnvironmentProviderSettings({
                     onClick={() => setIsAddInstanceDialogOpen(true)}
                   >
                     <PlusIcon className="size-4 shrink-0" />
-                    Add provider
+                    add provider
                   </button>
                 ) : null}
               </div>
@@ -1368,7 +1368,7 @@ function ProviderInstanceRow({
           liveProvider?.setup?.canAuthenticate === false ? (
           <SettingsRow
             title="Cursor account"
-            description="Using CURSOR_API_KEY. Remove it from this provider's environment to use browser sign-in."
+            description="using CURSOR_API_KEY. Remove it from this provider's environment to use browser sign-in."
           />
         ) : null
       }

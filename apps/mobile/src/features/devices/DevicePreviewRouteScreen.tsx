@@ -145,7 +145,7 @@ export function DevicePreviewScreen({
       },
     }).finally(() => setShuttingDown(false));
     if (result._tag === "Failure") {
-      Dialog.alert("Could not shut down device", String(Cause.squash(result.cause)));
+      Dialog.alert("could not shut down device", String(Cause.squash(result.cause)));
     }
   };
 
@@ -299,7 +299,7 @@ export function DevicePreviewScreen({
                 {state.error}
               </AppText>
               <View className="items-center">
-                <Button label="Retry" tone="secondary" onPress={state.refresh} />
+                <Button label="retry" tone="secondary" onPress={state.refresh} />
               </View>
             </>
           ) : focused && foreground ? (
@@ -313,7 +313,7 @@ export function DevicePreviewScreen({
           style={{ paddingBottom: Math.max(insets.bottom, 8) }}
         >
           <ControlPill
-            accessibilityLabel="Home"
+            accessibilityLabel="home"
             icon="house"
             disabled={!inputConnected}
             onPress={pressHome}
@@ -329,19 +329,19 @@ export function DevicePreviewScreen({
         >
           {inputConnected ? (
             <Pressable
-              accessibilityLabel="Hide device controls"
+              accessibilityLabel="hide device controls"
               className="absolute inset-0 bg-black/30"
               onPress={() => setControlsVisible(false)}
             />
           ) : null}
           <View className="px-3" style={{ paddingTop: Math.max(insets.top, 12) }}>
             <GlassSurface className="flex-row items-center gap-1 p-1">
-              <SheetCloseButton accessibilityLabel="Close device preview" onClose={onClose} />
+              <SheetCloseButton accessibilityLabel="close device preview" onClose={onClose} />
               <AppText numberOfLines={1} className="flex-1 text-center font-t3-medium text-base">
                 {preview?.name ?? "Devices"}
               </AppText>
               <ControlPill
-                accessibilityLabel="Home"
+                accessibilityLabel="home"
                 icon="house"
                 disabled={!inputConnected}
                 onPress={pressHome}
@@ -360,9 +360,9 @@ export function DevicePreviewScreen({
           }}
         >
           <GlassSurface className="flex-row items-center gap-1 p-1">
-            <SheetCloseButton accessibilityLabel="Close device preview" onClose={onClose} />
+            <SheetCloseButton accessibilityLabel="close device preview" onClose={onClose} />
             <ControlPill
-              accessibilityLabel="Show device controls"
+              accessibilityLabel="show device controls"
               icon="chevron.down"
               onPress={() => setControlsVisible(true)}
             />
@@ -378,14 +378,14 @@ function DeviceOptionsMenu({ items }: { readonly items: ReadonlyArray<AppBarMenu
     <Menu
       actions={androidHeaderMenuActions(items)}
       isAnchoredToRight
-      title="Device options"
+      title="device options"
       onPressAction={({ nativeEvent }) => {
         const action = findHeaderMenuAction(items, nativeEvent.event);
         if (action && !action.disabled) action.onPress();
       }}
     >
       <Pressable
-        accessibilityLabel="Device options"
+        accessibilityLabel="device options"
         accessibilityRole="button"
         className="size-11 items-center justify-center rounded-full bg-subtle"
       >
@@ -437,13 +437,13 @@ function OpenDevicePreview({
             {error}
           </AppText>
           <View className="items-center">
-            <Button label="Retry" tone="secondary" onPress={refresh} />
+            <Button label="retry" tone="secondary" onPress={refresh} />
           </View>
         </>
       ) : (
         <>
           <AppActivityIndicator color={themeVariables["--color-icon"]} />
-          <AppText className="text-sm text-foreground-muted">Connecting to device...</AppText>
+          <AppText className="text-sm text-foreground-muted">connecting to device…</AppText>
         </>
       )}
     </View>

@@ -87,12 +87,12 @@ it("enables the chosen provider only after a successful setup and keeps its gran
               <VoiceSettingsPanel />
             </SettingsScopeProvider>,
           );
-          const destination = screen.getByRole("combobox", { name: "Transcribe with" });
+          const destination = screen.getByRole("combobox", { name: "transcribe with" });
           await expect.element(destination).toHaveTextContent("Laptop");
           await destination.click();
           await page.getByRole("option", { name: "OpenAI via Laptop" }).click();
           const dialog = page.getByRole("dialog");
-          await dialog.getByRole("button", { name: "Cancel" }).click();
+          await dialog.getByRole("button", { name: "cancel" }).click();
           await expect.element(destination).toHaveTextContent("Laptop");
           expect(writes).toEqual([]);
           await destination.click();
@@ -104,7 +104,7 @@ it("enables the chosen provider only after a successful setup and keeps its gran
           await expect.element(dialog.getByRole("alert")).toBeVisible();
           expect(writes).toEqual([]);
           await expect
-            .element(dialog.getByRole("button", { name: "Save and enable" }))
+            .element(dialog.getByRole("button", { name: "save and enable" }))
             .toBeEnabled();
           await dialog.getByLabelText("OpenAI API key reference").click();
           await userEvent.keyboard("{Enter}");
@@ -112,7 +112,7 @@ it("enables the chosen provider only after a successful setup and keeps its gran
           await expect.element(destination).toHaveTextContent("OpenAI via Laptop");
           expect(writes).toEqual([{ key: { provider: "work", reference: "op://Work/Voice/key" } }]);
           const grant = window.localStorage.getItem("colon3code:voice-audio-grant:v1");
-          await screen.getByRole("button", { name: "Manage key" }).click();
+          await screen.getByRole("button", { name: "manage key" }).click();
           await dialog.getByLabelText("OpenAI API key", { exact: true }).fill("replacement");
           await userEvent.keyboard("{Enter}");
           await expect.element(dialog).not.toBeInTheDocument();
@@ -123,8 +123,8 @@ it("enables the chosen provider only after a successful setup and keeps its gran
           await dialog.getByRole("button", { name: "Use Grok Voice Transcribe" }).click();
           await expect.element(destination).toHaveTextContent("Grok Voice Transcribe via Laptop");
           await destination.click();
-          await page.getByRole("option", { name: "Off", exact: true }).click();
-          await expect.element(destination).toHaveTextContent("Off");
+          await page.getByRole("option", { name: "off", exact: true }).click();
+          await expect.element(destination).toHaveTextContent("off");
         },
       );
     },
@@ -187,11 +187,11 @@ it("OpenRouter needs an exact model, and changing it writes no credential", asyn
               <VoiceSettingsPanel />
             </SettingsScopeProvider>,
           );
-          const destination = screen.getByRole("combobox", { name: "Transcribe with" });
+          const destination = screen.getByRole("combobox", { name: "transcribe with" });
           await destination.click();
           await page.getByRole("option", { name: "OpenRouter via Laptop" }).click();
           const dialog = page.getByRole("dialog");
-          const save = dialog.getByRole("button", { name: "Save and enable" });
+          const save = dialog.getByRole("button", { name: "save and enable" });
           await expect.element(save).toBeDisabled();
           const picker = dialog.getByRole("combobox", { name: "OpenRouter model" });
           await expect.element(picker).toBeVisible();
@@ -209,13 +209,13 @@ it("OpenRouter needs an exact model, and changing it writes no credential", asyn
           await expect.element(destination).toHaveTextContent("OpenRouter via Laptop");
           expect(grantModel()).toBe("other/listen-2");
           expect(writes).toEqual([]);
-          await screen.getByRole("button", { name: "Manage OpenRouter" }).click();
+          await screen.getByRole("button", { name: "manage OpenRouter" }).click();
           const current = dialog.getByRole("combobox", { name: "OpenRouter model" });
           await expect.element(current).toHaveValue("Other: Listen 2");
           await userEvent.clear(current);
           await userEvent.type(current, "acme");
           await page.getByRole("option", { name: /Acme: Transcribe 1/ }).click();
-          await dialog.getByRole("button", { name: "Save" }).click();
+          await dialog.getByRole("button", { name: "save" }).click();
           await expect.element(dialog).not.toBeInTheDocument();
           await expect.element(destination).toHaveTextContent("OpenRouter via Laptop");
           expect(grantModel()).toBe("acme/transcribe-1");

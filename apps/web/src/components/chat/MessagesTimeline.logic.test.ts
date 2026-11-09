@@ -1448,7 +1448,7 @@ describe("deriveMessagesTimelineRows", () => {
       "final",
     ]);
     expect(collapsed[1]).toMatchObject({ label: "all done in 30s ^w^" });
-    expect(collapsed[3]).toMatchObject({ label: "Continued for 20s", createdAt: time(10) });
+    expect(collapsed[3]).toMatchObject({ label: "continued for 20s", createdAt: time(10) });
 
     expect(rows(new Set([segmentKey])).map((row) => row.id)).toEqual([
       "prompt",
@@ -3033,7 +3033,7 @@ describe("v2 run and attempt history", () => {
     expect(collapsedRows.find((row) => row.kind === "attempt-fold")).toMatchObject({
       attemptId: supersededAttemptId,
       runId,
-      label: "Superseded attempt",
+      label: "superseded attempt",
       expanded: false,
       deferredWorkItemIds: ["old-work-anchor"],
     });
@@ -3217,7 +3217,7 @@ describe("v2 run and attempt history", () => {
       const rows = rowsFor(11, "running");
       expect(rows.find((row) => row.kind === "attempt-fold")).toMatchObject({
         attemptId: supersededAttempt.id,
-        label: "Superseded attempt",
+        label: "superseded attempt",
       });
       expect(rows.map((row) => row.id)).not.toContain("old-reply-entry");
     });

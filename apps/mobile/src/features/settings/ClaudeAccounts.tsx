@@ -69,13 +69,13 @@ export function ClaudeAccount({
   const configDir = claudeConfigDir(instance);
   const name = provider.displayName ?? "Claude";
   const status = !provider.enabled
-    ? "Turned off"
+    ? "turned off"
     : provider.auth.status === "authenticated"
-      ? "Signed in"
+      ? "signed in"
       : provider.auth.status === "unauthenticated"
-        ? "Not signed in"
+        ? "not signed in"
         : !provider.installed
-          ? "Not installed"
+          ? "not installed"
           : null;
   const removable =
     provider.instanceId !== DEFAULT_CLAUDE_INSTANCE_ID &&
@@ -84,12 +84,12 @@ export function ClaudeAccount({
       `providerInstances.${provider.instanceId}`,
     );
   const actions: MenuAction[] = [
-    { id: "edit", title: "Edit", image: "pencil" },
+    { id: "edit", title: "edit", image: "pencil" },
     ...(removable
       ? [
           {
             id: "remove",
-            title: "Remove",
+            title: "remove",
             image: "trash",
             attributes: { destructive: true },
           } satisfies MenuAction,
@@ -98,12 +98,12 @@ export function ClaudeAccount({
   ];
   function remove() {
     Dialog.alert(
-      `Remove ${name}?`,
+      `remove ${name}?`,
       `It leaves the model picker on ${environment.label}. The config folder and its sign-in stay on the server.`,
       [
-        { text: "Cancel", style: "cancel" },
+        { text: "cancel", style: "cancel" },
         {
-          text: "Remove",
+          text: "remove",
           style: "destructive",
           onPress: () => {
             void run({ operation: "remove", instanceId: provider.instanceId });
@@ -120,7 +120,7 @@ export function ClaudeAccount({
             {name}
           </Text>
           <Text textRole="footnote" className="text-foreground-muted" numberOfLines={2}>
-            {[status, configDir || "Default config folder"].filter(Boolean).join(" · ")}
+            {[status, configDir || "default config folder"].filter(Boolean).join(" · ")}
           </Text>
         </View>
         {editing ? null : (
@@ -174,7 +174,7 @@ export function AddClaudeAccount({ environment }: { readonly environment: Settin
       ) : (
         <ListActionRow
           icon="plus"
-          label="Add Claude account"
+          label="add Claude account"
           description="Use a Claude config folder that is already signed in on this server."
           onPress={() => setAdding(true)}
         />
@@ -231,18 +231,18 @@ function ClaudeAccountForm({
       <Text textRole="footnote" className="text-foreground-muted">
         {`Point at a CLAUDE_CONFIG_DIR folder on ${environment.label} where Claude Code is already signed in. Sign in there with the Claude CLI first.`}
       </Text>
-      {field("name", "Account name", "Name, e.g. Work")}
-      {field("configDir", "Claude config folder", "Config folder, e.g. ~/.claude-work")}
+      {field("name", "account name", "name, e.g. Work")}
+      {field("configDir", "Claude config folder", "config folder, e.g. ~/.claude-work")}
       {error ? (
         <Text accessibilityRole="alert" className="text-danger-foreground">
           {error}
         </Text>
       ) : null}
       <View className="flex-row justify-end gap-2">
-        <ControlPill variant="pill" label="Cancel" disabled={pending} onPress={onDone} />
+        <ControlPill variant="pill" label="cancel" disabled={pending} onPress={onDone} />
         <ControlPill
           variant="primary"
-          label={instanceId === null ? "Add" : "Save"}
+          label={instanceId === null ? "add" : "Save"}
           disabled={pending}
           onPress={save}
         />

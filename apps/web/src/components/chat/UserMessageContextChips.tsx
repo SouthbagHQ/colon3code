@@ -74,7 +74,7 @@ function UserMessageMentionChip(props: {
           <ContextChip
             kind={documentChipKindForFileName(props.record.path) ?? "mention"}
             render={<button type="button" />}
-            aria-label={`Preview ${props.record.path}`}
+            aria-label={`preview ${props.record.path}`}
             data-markdown-copy={props.copyMarkdown}
             onClick={() => {
               if (ctx.threadRef)
@@ -377,7 +377,7 @@ const userMessageContextPresentationRegistry = createContextPresentationRegistry
         const disabled =
           attachment.downloadable === false && (!isVideo || attachment.previewUrl === undefined);
         const size =
-          attachment.downloadable === false ? "Sending…" : formatAttachmentSize(record.sizeBytes);
+          attachment.downloadable === false ? "sending…" : formatAttachmentSize(record.sizeBytes);
         return (
           <FileChip
             name={label}
@@ -426,7 +426,7 @@ const userMessageContextPresentationRegistry = createContextPresentationRegistry
         record.kind === "element" ? (
           <UserMessageContextPopover
             copyMarkdown={context.copyMarkdown}
-            accessibleLabel={`Browser element, ${record.label}`}
+            accessibleLabel={`browser element, ${record.label}`}
             kind="element"
             icon={<MousePointerClickIcon />}
             label={record.label}
@@ -493,7 +493,7 @@ const userMessageContextPresentationRegistry = createContextPresentationRegistry
         record.kind === "preview-annotation" ? (
           <UserMessageContextPopover
             copyMarkdown={context.copyMarkdown}
-            accessibleLabel={`Preview annotation, ${record.label}`}
+            accessibleLabel={`preview annotation, ${record.label}`}
             kind="preview-annotation"
             icon={<MousePointerClickIcon />}
             label={record.label}

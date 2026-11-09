@@ -119,11 +119,11 @@ export function FileMarkdownPreview(props: {
       (!props.captured && fileLink.kind === "file" && fileLink.line !== undefined)
     ) {
       const name =
-        preview?.source.name ?? (fileLink.kind === "file" ? fileLink.label : "Open file");
+        preview?.source.name ?? (fileLink.kind === "file" ? fileLink.label : "open file");
       return (
         <Text
           accessibilityRole="link"
-          accessibilityLabel={`Open ${name}`}
+          accessibilityLabel={`open ${name}`}
           onPress={() => openMedia(image.href, true)}
           style={{ color: styles.nativeTextStyle.linkColor }}
         >

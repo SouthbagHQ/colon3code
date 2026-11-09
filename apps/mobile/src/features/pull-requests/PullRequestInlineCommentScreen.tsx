@@ -84,13 +84,13 @@ export function PullRequestInlineCommentScreen({ route }: StaticScreenProps<Inli
   return (
     <PullRequestSheetContent
       busy={busy}
-      title={saved ? "Edit review comment" : "Review comment"}
+      title={saved ? "edit review comment" : "review comment"}
       subtitle={`#${params.number} · ${reviewPositionLabel(params.position)}`}
       footer={
         <Button
           fullWidth
           tone="contrast"
-          label={busy ? "Saving…" : "Save draft"}
+          label={busy ? "saving…" : "save draft"}
           loading={busy}
           disabled={
             !store.ready ||
@@ -118,8 +118,8 @@ export function PullRequestInlineCommentScreen({ route }: StaticScreenProps<Inli
         onBlur={completions.onBlur}
         editable={store.ready && !busy}
         autoFocus
-        accessibilityLabel="Inline review comment"
-        placeholder="Write feedback on this line…"
+        accessibilityLabel="inline review comment"
+        placeholder="write feedback on this line…"
         placeholderTextColorClassName="accent-foreground-muted"
         maxLength={65536}
         value={body}
@@ -140,12 +140,12 @@ export function PullRequestInlineCommentScreen({ route }: StaticScreenProps<Inli
       ) : null}
       {saved ? (
         <Button
-          label="Delete draft"
+          label="delete draft"
           onPress={() =>
-            Dialog.alert("Delete this draft?", "Your other review comments will be kept.", [
-              { text: "Cancel", style: "cancel" },
+            Dialog.alert("delete this draft?", "Your other review comments will be kept.", [
+              { text: "cancel", style: "cancel" },
               {
-                text: "Delete",
+                text: "delete",
                 style: "destructive",
                 onPress: () => {
                   store.update((draft) => ({

@@ -2,18 +2,18 @@ import type { ClientSettings } from "@t3tools/contracts";
 
 // Ids are stored in client settings, so never rename one.
 export const THREAD_DETAILS_ITEMS = [
-  { id: "environment", label: "Environment and worktree", defaultVisible: true },
-  { id: "openIn", label: "Open in editor", defaultVisible: true },
-  { id: "scripts", label: "Project scripts", defaultVisible: true },
-  { id: "branch", label: "Branch and pull request", defaultVisible: true },
+  { id: "environment", label: "environment and worktree", defaultVisible: true },
+  { id: "openIn", label: "open in editor", defaultVisible: true },
+  { id: "scripts", label: "project scripts", defaultVisible: true },
+  { id: "branch", label: "branch and pull request", defaultVisible: true },
   { id: "gitActions", label: "Git actions", defaultVisible: true },
-  { id: "changes", label: "Changes", defaultVisible: true },
-  { id: "servers", label: "Servers", defaultVisible: true },
-  { id: "automations", label: "Automations", defaultVisible: true },
+  { id: "changes", label: "changes", defaultVisible: true },
+  { id: "servers", label: "servers", defaultVisible: true },
+  { id: "automations", label: "automations", defaultVisible: true },
   { id: "lineage", label: "Lineage", defaultVisible: true },
-  { id: "sideChats", label: "Side chats", defaultVisible: true },
-  { id: "usage", label: "Usage limits", defaultVisible: false },
-  { id: "context", label: "Context window", defaultVisible: false },
+  { id: "sideChats", label: "side chats", defaultVisible: true },
+  { id: "usage", label: "usage limits", defaultVisible: false },
+  { id: "context", label: "context window", defaultVisible: false },
 ] as const;
 
 export type ThreadDetailsItemId = (typeof THREAD_DETAILS_ITEMS)[number]["id"];

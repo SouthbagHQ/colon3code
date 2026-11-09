@@ -98,7 +98,7 @@ export function ThreadHandoffRow(props: {
       endpoints={endpoints}
       iconColor={color}
       surfaceColor={props.surfaceColor}
-      label="Context handoff"
+      label="context handoff"
       failed={item.status === "failed"}
     />
   );
@@ -179,7 +179,7 @@ function HandoffEndpoint(props: {
     <Pressable
       accessibilityRole="button"
       accessibilityLabel={label}
-      accessibilityHint="Show provider account"
+      accessibilityHint="show provider account"
       className="min-h-6 max-w-full flex-row items-center justify-center gap-1.5"
       hitSlop={{ top: 8, bottom: 8 }}
       onPress={() =>

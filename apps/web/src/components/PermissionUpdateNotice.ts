@@ -42,13 +42,13 @@ function showPermissionNotice(
     toastManager.close(id);
   };
   const id = toastManager.add({
-    title: `Permissions have changed for ${label}`,
+    title: `permissions have changed for ${label}`,
     description:
       "This connection still uses the old permissions, so some actions may no longer be available. Pair again using a new link with the permissions you need.",
     timeout: 0,
     onClose: persistDismissal,
     actionProps: {
-      children: "Open Sharing & access",
+      children: "open sharing & access",
       onClick: () => {
         dismiss();
         void router.navigate({ to: "/settings/access" });
@@ -56,7 +56,7 @@ function showPermissionNotice(
     },
     data: {
       actionLayout: "stacked-end",
-      secondaryActionProps: { children: "Dismiss", onClick: dismiss },
+      secondaryActionProps: { children: "dismiss", onClick: dismiss },
       secondaryActionVariant: "ghost",
     },
   });

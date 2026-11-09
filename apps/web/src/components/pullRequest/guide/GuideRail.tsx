@@ -29,7 +29,7 @@ export function GuideRail({
           <>
             {stop.attention !== null ? (
               <Badge size="sm" variant="warning">
-                Look closely
+                look closely
               </Badge>
             ) : null}
             <span>{stopSubline(stop)}</span>
@@ -40,7 +40,7 @@ export function GuideRail({
   );
 
   return (
-    <nav aria-label="Review tour" className="flex min-h-0 flex-col gap-4">
+    <nav aria-label="review tour" className="flex min-h-0 flex-col gap-4">
       <p className="text-xs text-muted-foreground tabular-nums @max-[56rem]/guide:hidden">
         {reviewed} of {stops.length} read
       </p>
@@ -95,7 +95,7 @@ function StopBullet({ number, seen }: { number: number; seen: boolean }) {
         seen ? "border-success/40 text-success-foreground" : "border-border text-muted-foreground",
       )}
     >
-      {seen ? <CheckIcon aria-label={`Stop ${number}, read`} className="size-3" /> : number}
+      {seen ? <CheckIcon aria-label={`stop ${number}, read`} className="size-3" /> : number}
     </span>
   );
 }

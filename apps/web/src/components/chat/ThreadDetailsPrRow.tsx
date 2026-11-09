@@ -322,41 +322,41 @@ export function ThreadDetailsPrRow({
     rowAction === "resolve"
       ? {
           label: "Resolve",
-          pendingLabel: "Preparing...",
+          pendingLabel: "preparing…",
           pending: handoff === "conflicts",
           destructive: true,
           suffix: <ArrowUpRightIcon aria-hidden className="size-3 shrink-0" />,
-          tooltip: "Check the branch out and resolve the conflicts in a new thread",
+          tooltip: "check the branch out and resolve the conflicts in a new thread",
           onClick: startResolveConflicts,
         }
       : rowAction === "ready"
         ? {
-            label: "Ready",
-            pendingLabel: "Marking...",
+            label: "ready",
+            pendingLabel: "marking…",
             pending: actionPending,
             destructive: false,
             suffix: null,
-            tooltip: `Mark this ${terminology.singular} as ready for review`,
+            tooltip: `mark this ${terminology.singular} as ready for review`,
             onClick: () => void perform("ready"),
           }
         : rowAction === "fix"
           ? {
               label: "Fix",
-              pendingLabel: "Preparing...",
+              pendingLabel: "preparing…",
               pending: handoff === "findings",
               destructive: true,
               suffix: <ArrowUpRightIcon aria-hidden className="size-3 shrink-0" />,
-              tooltip: "Fix the failing checks in a new thread",
+              tooltip: "fix the failing checks in a new thread",
               onClick: startFixChecks,
             }
           : rowAction === "merge"
             ? {
-                label: "Merge",
-                pendingLabel: "Merging...",
+                label: "merge",
+                pendingLabel: "merging…",
                 pending: actionPending,
                 destructive: false,
                 suffix: null,
-                tooltip: `Merge this ${terminology.singular} (${selectedMergeMethod})`,
+                tooltip: `merge this ${terminology.singular} (${selectedMergeMethod})`,
                 onClick: () => setConfirmingMerge(true),
               }
             : null;
@@ -374,7 +374,7 @@ export function ThreadDetailsPrRow({
               size="sm"
               part={part}
               className="group/watch"
-              aria-label={`Stop watching #${number}`}
+              aria-label={`stop watching #${number}`}
               onClick={onStopWatching}
             />
           }
@@ -393,7 +393,7 @@ export function ThreadDetailsPrRow({
         </TooltipTrigger>
         <TooltipPopup side="top">
           Watching: the agent wakes when checks finish, someone comments, or the branch conflicts.
-          Click to stop.
+          click to stop.
         </TooltipPopup>
       </Tooltip>
     ) : null;
@@ -494,7 +494,7 @@ export function ThreadDetailsPrRow({
             </AlertDialogHeader>
             <AlertDialogFooter>
               <AlertDialogClose render={<Button variant="outline" size="sm" />}>
-                Cancel
+                cancel
               </AlertDialogClose>
               <Button
                 size="sm"
@@ -504,7 +504,7 @@ export function ThreadDetailsPrRow({
                   void perform("merge", selectedMergeMethod);
                 }}
               >
-                Merge
+                merge
               </Button>
             </AlertDialogFooter>
           </AlertDialogPopup>

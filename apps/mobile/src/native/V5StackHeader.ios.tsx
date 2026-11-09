@@ -232,7 +232,7 @@ export function V5StackHeader(props: {
     const compose: HeaderItem = {
       type: "item",
       id: "workspace-compose",
-      title: "New task",
+      title: "new task",
       icon: { type: "sfSymbol", name: "square.and.pencil" },
       onPress: props.onCompose,
     };
@@ -253,7 +253,7 @@ export function V5StackHeader(props: {
       {
         type: "item",
         id: "dismiss-keyboard",
-        title: "Dismiss keyboard",
+        title: "dismiss keyboard",
         icon: { type: "sfSymbol", name: "keyboard.chevron.compact.down" },
         onPress: () => void KeyboardController.dismiss(),
         // The folded bar is short; keep this out of the overflow menu.

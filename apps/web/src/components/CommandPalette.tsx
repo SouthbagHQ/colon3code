@@ -1071,7 +1071,7 @@ function OpenCommandPaletteDialog(props: {
                     openSourceControlSettings();
                   }}
                 >
-                  Setup Required
+                  setup required
                 </Button>
               }
             />
@@ -1835,7 +1835,7 @@ function OpenCommandPaletteDialog(props: {
         void updateProject({
           environmentId: existing.environmentId,
           input: { projectId: existing.id, archived: false },
-        }).then((result) => reportProjectFailure("Failed to unarchive project", result));
+        }).then((result) => reportProjectFailure("couldn't unarchive the project", result));
       }
       const latestThread = getLatestThreadForProject(
         threads.filter((thread) => thread.environmentId === existing.environmentId),
@@ -2826,7 +2826,7 @@ function OpenCommandPaletteDialog(props: {
   ) : isThreadSearchPending && !isLinkedThreadSearch && !isBrowsing ? (
     // In the footer, so the list keeps its height while message results may
     // still arrive below it.
-    <span className="text-muted-foreground text-xs">Searching messages…</span>
+    <span className="text-muted-foreground text-xs">searching messages…</span>
   ) : null;
 
   return (
@@ -2907,7 +2907,7 @@ function OpenCommandPaletteDialog(props: {
         </div>
       ) : isBrowsePending && browseResult === null ? (
         <div role="status" className="px-4 py-3 text-sm text-muted-foreground">
-          Loading folders...
+          loading folders…
         </div>
       ) : null}
       <CommandPaletteVirtualizedResults

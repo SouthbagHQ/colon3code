@@ -103,7 +103,7 @@ function EnvironmentSecretProviders({
           !readOnly ? (
             <Button size="xs" variant="outline" onClick={() => setDialog({ mode: "add" })}>
               <PlusIcon className="size-3" aria-hidden />
-              Add provider
+              add provider
             </Button>
           ) : null
         }
@@ -115,8 +115,8 @@ function EnvironmentSecretProviders({
         ) : null}
         {entries.length === 0 ? (
           <SettingsRow
-            title="No secret providers configured."
-            description="Add a 1Password account, then pick it as the source of a provider variable."
+            title="no secret providers configured yet :3"
+            description="add a 1Password account, then pick it as the source of a provider variable."
           />
         ) : (
           entries.map(([id, config]) => {
@@ -142,14 +142,14 @@ function EnvironmentSecretProviders({
                       <span className="shrink-0">{kind.name} ·</span>
                       <RedactedSensitiveText
                         value={classified.account}
-                        ariaLabel="Toggle account visibility"
-                        revealTooltip="Click to reveal account"
-                        hideTooltip="Click to hide account"
+                        ariaLabel="toggle account visibility"
+                        revealTooltip="click to reveal account"
+                        hideTooltip="click to hide account"
                         className="max-w-full truncate"
                       />
                     </span>
                   ) : (
-                    `Unsupported provider (${config.kind})`
+                    `unsupported provider (${config.kind})`
                   )
                 }
                 control={
@@ -161,7 +161,7 @@ function EnvironmentSecretProviders({
                           variant="ghost"
                           onClick={() => setDialog({ mode: "edit", id })}
                         >
-                          Edit
+                          edit
                         </Button>
                       ) : null}
                       <RemoveSecretProviderButton
@@ -206,16 +206,16 @@ function RemoveSecretProviderButton({
   return (
     <>
       <Button size="xs" variant="ghost" onClick={() => setOpen(true)}>
-        Remove
+        remove
       </Button>
       <AlertDialog open={open} onOpenChange={setOpen}>
         <AlertDialogPopup>
           <AlertDialogHeader>
-            <AlertDialogTitle>Remove {label}?</AlertDialogTitle>
+            <AlertDialogTitle>remove {label}?</AlertDialogTitle>
             <SecretProviderUses environmentId={environmentId} id={id} label={label} />
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogClose render={<Button variant="outline" />}>Cancel</AlertDialogClose>
+            <AlertDialogClose render={<Button variant="outline" />}>cancel</AlertDialogClose>
             <Button
               variant="destructive"
               onClick={() => {
@@ -223,7 +223,7 @@ function RemoveSecretProviderButton({
                 onConfirm();
               }}
             >
-              Remove provider
+              remove provider
             </Button>
           </AlertDialogFooter>
         </AlertDialogPopup>

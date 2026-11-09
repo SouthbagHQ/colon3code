@@ -19,7 +19,7 @@ describe("secretRequestDisplay", () => {
   it("never offers the form for a request inherited from another thread", () => {
     expect(secretRequestDisplay({ secretStatus: "pending" }, "inherited")).toEqual({
       kind: "pending-elsewhere",
-      label: "Waiting for an answer in the original thread",
+      label: "waiting for an answer in the original thread",
     });
     expect(secretRequestDisplay({ secretStatus: "saved" }, "inherited")).toMatchObject({
       outcome: "saved",

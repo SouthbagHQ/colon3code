@@ -64,10 +64,10 @@ function threadInput(threadId: string, branch: string) {
 type ThreadInput = ReturnType<typeof threadInput>;
 
 it.each([
-  { remote: false, approval: false, link: "Open question" },
-  { remote: true, approval: false, link: "Open question" },
+  { remote: false, approval: false, link: "open question" },
+  { remote: true, approval: false, link: "open question" },
   { remote: true, approval: false, link: "Child" },
-  { remote: true, approval: true, link: "Open approval" },
+  { remote: true, approval: true, link: "open approval" },
 ])("opens the child in its environment ($remote, $link)", async ({ remote, approval, link }) => {
   setup();
   const parent = threadInput("parent", "main");
@@ -144,7 +144,7 @@ function RestoreBranchHarness(props: {
         disabled={lifecycle.isRestoringThreadBranch}
         onClick={lifecycle.handleSwitchCheckoutToThreadStable}
       >
-        {lifecycle.isRestoringThreadBranch ? "Restoring..." : "Restore branch"}
+        {lifecycle.isRestoringThreadBranch ? "Restoring..." : "restore branch"}
       </button>
     </>
   );
@@ -178,14 +178,14 @@ it.each(["a", "b", "navigation"] as const)(
       return 0;
     });
 
-    await page.getByRole("button", { name: "Restore branch" }).click();
+    await page.getByRole("button", { name: "restore branch" }).click();
     await expect.element(page.getByRole("button", { name: "Restoring..." })).toBeDisabled();
 
     // ChatView stays mounted across server threads, so the hook sees thread B in place.
     currentRouteThreadKeyRef.current = threadB.routeThreadKey;
     await screen.rerender(harness(threadB));
-    await expect.element(page.getByRole("button", { name: "Restore branch" })).toBeEnabled();
-    await page.getByRole("button", { name: "Restore branch" }).click();
+    await expect.element(page.getByRole("button", { name: "restore branch" })).toBeEnabled();
+    await page.getByRole("button", { name: "restore branch" }).click();
     expect(switchRef).toHaveBeenLastCalledWith(
       expect.objectContaining({ input: { cwd: "/repo", refName: "feature-b" } }),
     );
@@ -214,7 +214,7 @@ it.each(["a", "b", "navigation"] as const)(
       _tag: "Success",
       value: { refName: pending.localCheckoutBranchMismatch.threadBranch },
     });
-    await expect.element(page.getByRole("button", { name: "Restore branch" })).toBeEnabled();
+    await expect.element(page.getByRole("button", { name: "restore branch" })).toBeEnabled();
     expect(refreshGitStatus).toHaveBeenCalledTimes(2);
     expect(focusComposer).not.toHaveBeenCalled();
     expect(focusFrames).toHaveLength(1);
@@ -245,24 +245,24 @@ it.each(["Success", "Failure"] as const)(
       />
     );
     await using screen = await render(harness(threadA));
-    await page.getByRole("button", { name: "Stop", exact: true }).click();
-    await expect.element(page.getByRole("button", { name: "Stopping..." })).toBeDisabled();
+    await page.getByRole("button", { name: "stop", exact: true }).click();
+    await expect.element(page.getByRole("button", { name: "stopping…" })).toBeDisabled();
     await screen.rerender(harness(threadB));
-    await page.getByRole("button", { name: "Stop", exact: true }).click();
+    await page.getByRole("button", { name: "stop", exact: true }).click();
     await screen.rerender(harness(threadA));
-    await expect.element(page.getByRole("button", { name: "Stopping..." })).toBeDisabled();
+    await expect.element(page.getByRole("button", { name: "stopping…" })).toBeDisabled();
     completions[0]!(
       outcome === "Success"
         ? { _tag: "Success", value: undefined }
         : { _tag: "Failure", cause: Cause.fail(new Error("stop failed")) },
     );
     if (outcome === "Success") {
-      await expect.element(page.getByRole("button", { name: "Stopping..." })).toBeDisabled();
+      await expect.element(page.getByRole("button", { name: "stopping…" })).toBeDisabled();
     } else {
-      await expect.element(page.getByRole("button", { name: "Stop", exact: true })).toBeEnabled();
+      await expect.element(page.getByRole("button", { name: "stop", exact: true })).toBeEnabled();
     }
     await screen.rerender(harness(threadB));
-    await expect.element(page.getByRole("button", { name: "Stopping..." })).toBeDisabled();
+    await expect.element(page.getByRole("button", { name: "stopping…" })).toBeDisabled();
     expect(state.switchRef).toHaveBeenCalledTimes(2);
     completions[1]!({ _tag: "Success", value: undefined });
   },

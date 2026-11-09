@@ -90,14 +90,14 @@ export function modelFallbackBannerItem({
     id: "fallback-model",
     variant: "info",
     icon: <GaugeIcon />,
-    title: `Using ${fallbackModelName}`,
+    title: `using ${fallbackModelName}`,
     description: `${defaultProviderName} is out of usage${resetsAt ? ` · resets ${formatUpcomingTimestamp(resetsAt, timestampFormat)}` : ""}`,
     actions: (
       <Button size="xs" variant="ghost" onClick={onUseDefault}>
         Use {defaultModelName}
       </Button>
     ),
-    dismissLabel: "Dismiss fallback model notice",
+    dismissLabel: "dismiss fallback model notice",
     onDismiss,
   };
 }

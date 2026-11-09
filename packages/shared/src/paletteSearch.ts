@@ -938,9 +938,9 @@ function matchHint(
       label: "PR",
       text: `#${pullRequest.number}${pullRequest.title ? ` ${pullRequest.title}` : ""}`,
     })),
-    { label: "Branch", text: searchableBranch(thread.branch) },
-    { label: "Project", text: thread.projectTitle },
-    { label: "Environment", text: thread.environmentLabel },
+    { label: "branch", text: searchableBranch(thread.branch) },
+    { label: "project", text: thread.projectTitle },
+    { label: "environment", text: thread.environmentLabel },
   ];
   const holds = (text: string, query: string) =>
     matchSearchFields(query, [{ value: text, weight: 1 }], { typos })?.primaryRanges;

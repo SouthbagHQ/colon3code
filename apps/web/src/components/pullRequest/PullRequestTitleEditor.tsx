@@ -54,7 +54,7 @@ export function PullRequestTitleEditor({
     if (result._tag === "Failure") {
       toastManager.add({
         type: "error",
-        title: "The title could not be saved",
+        title: "aw, the title didn't save 3:",
         description: readableFailure(
           squashAtomCommandFailure(result),
           "The host refused the new title.",
@@ -81,7 +81,7 @@ export function PullRequestTitleEditor({
         </Tooltip>
         {canEditPullRequestChangeRequest(detail) ? (
           <PullRequestEditButton
-            aria-label="Edit title"
+            aria-label="edit title"
             onClick={() => setTitleScope({ pullRequestKey, text: detail.title })}
           />
         ) : null}
@@ -115,7 +115,7 @@ export function PullRequestTitleEditor({
           disabled={titleSaving}
           onClick={() => setTitleScope(null)}
         >
-          Cancel
+          cancel
         </Button>
         <Button
           size="xs"
@@ -123,7 +123,7 @@ export function PullRequestTitleEditor({
           disabled={!canWriteSourceControl || titleSaving || titleDraft.trim().length === 0}
           onClick={() => void saveTitle(titleDraft)}
         >
-          {titleSaving ? "Saving..." : "Save"}
+          {titleSaving ? "saving…" : "save"}
         </Button>
       </div>
     </div>

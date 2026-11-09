@@ -41,10 +41,10 @@ export function ThreadCommandOutput(props: {
     const message = error
       ? `Couldn't load output: ${error}`
       : data === null
-        ? "Loading output…"
+        ? "loading output…"
         : data.running
           ? null
-          : "No output.";
+          : "no output.";
     return message === null ? null : (
       <Text className="pt-1.5 font-mono text-2xs leading-normal text-foreground-muted">
         {message}
@@ -54,7 +54,7 @@ export function ThreadCommandOutput(props: {
   return (
     <View className="pt-1.5">
       {data?.output.truncated ? (
-        <Text className="pb-0.5 text-3xs text-foreground-subtle">Earlier output not shown</Text>
+        <Text className="pb-0.5 text-3xs text-foreground-subtle">earlier output not shown</Text>
       ) : null}
       <ScrollView
         ref={scrollRef}

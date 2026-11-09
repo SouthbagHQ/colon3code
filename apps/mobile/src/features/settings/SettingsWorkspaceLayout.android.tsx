@@ -47,9 +47,9 @@ export function SettingsWorkspaceLayout(props: { readonly children: ReactNode })
         {emptyDetail ? (
           <View className="absolute inset-0">
             <NavigationRouteContext value={route}>
-              <SettingsScreen title="Settings" workspaceRoot>
+              <SettingsScreen title="settings" workspaceRoot>
                 <View className="flex-1 items-center justify-center p-6">
-                  <AppText className="text-foreground-muted">Select a setting</AppText>
+                  <AppText className="text-foreground-muted">select a setting</AppText>
                 </View>
               </SettingsScreen>
             </NavigationRouteContext>

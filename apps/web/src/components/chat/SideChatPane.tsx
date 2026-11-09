@@ -75,14 +75,14 @@ export default function SideChatPane(props: {
     if (result._tag === "Success") {
       toastManager.add({
         type: "success",
-        title: "Brought back",
+        title: "brought back :3",
         description: "The main thread gets this side chat with your next message there.",
       });
     } else if (!isAtomCommandInterrupted(result)) {
       const error = squashAtomCommandFailure(result);
       toastManager.add({
         type: "error",
-        title: "Could not bring back the side chat",
+        title: "aw, couldn't bring back the side chat 3:",
         ...(error instanceof Error ? { description: error.message } : {}),
       });
     }
@@ -116,7 +116,7 @@ export default function SideChatPane(props: {
       const error = squashAtomCommandFailure(result);
       toastManager.add({
         type: "error",
-        title: "Could not delete the side chat",
+        title: "aw, couldn't delete the side chat 3:",
         ...(error instanceof Error ? { description: error.message } : {}),
       });
     }
@@ -126,7 +126,7 @@ export default function SideChatPane(props: {
     <div data-side-chat-pane className="flex h-full min-h-0 flex-col">
       <div className="flex h-9 shrink-0 items-center gap-1 border-b border-border pr-1 pl-3">
         <span className="min-w-0 flex-1 truncate text-xs font-medium">
-          {shell?.title ?? "Side chat"}
+          {shell?.title ?? "side chat"}
         </span>
         <Tooltip>
           <TooltipTrigger
@@ -137,7 +137,7 @@ export default function SideChatPane(props: {
                 aria-disabled={bringBackBlockedReason !== null || bringingBack || undefined}
                 onClick={() => void bringBack()}
               >
-                Bring back
+                bring back
               </Button>
             }
           />
@@ -148,19 +148,19 @@ export default function SideChatPane(props: {
         <Button
           variant="ghost"
           size="icon-xs"
-          aria-label="Delete side chat"
+          aria-label="delete side chat"
           disabled={!canOperate || shell === null || deleting}
           onClick={() => void deleteSideChat()}
         >
           <Trash2Icon />
         </Button>
-        <Button variant="ghost" size="icon-xs" aria-label="Close side chat" onClick={props.onClose}>
+        <Button variant="ghost" size="icon-xs" aria-label="close side chat" onClick={props.onClose}>
           <XIcon />
         </Button>
       </div>
       {shell === null ? (
         snapshotLoaded ? (
-          <p className="p-3 text-xs text-muted-foreground">This side chat was deleted.</p>
+          <p className="p-3 text-xs text-muted-foreground">this side chat was deleted.</p>
         ) : null
       ) : (
         <BackgroundThreadContext value>

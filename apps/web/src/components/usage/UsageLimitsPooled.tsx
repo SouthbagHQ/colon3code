@@ -191,7 +191,7 @@ function SegmentPopover({
             {resetsIn ? ` · ${resetsIn.replace("resets in ", "in ")}` : ""}
           </Row>
         ) : null}
-        {timeLeft !== null ? <Row label="Even pace">{timeLeft}% left by now</Row> : null}
+        {timeLeft !== null ? <Row label="even pace">{timeLeft}% left by now</Row> : null}
         {reset && reset.restoresPercent > 0 ? (
           <Row label="restores">+{reset.restoresPercent}% of pool</Row>
         ) : null}
@@ -317,7 +317,7 @@ function RedeemableSegment({
       {redeem.busy || redeem.status ? (
         <span role="status" className="col-span-full text-xs text-muted-foreground">
           <AccountName account={props.account} className="font-medium text-foreground" />{" "}
-          {redeem.busy ? "Using reset credit…" : redeem.status}
+          {redeem.busy ? "using reset credit…" : redeem.status}
         </span>
       ) : null}
     </>

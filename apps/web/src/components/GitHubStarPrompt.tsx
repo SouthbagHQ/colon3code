@@ -36,13 +36,13 @@ function showStarPrompt(environmentId: EnvironmentId) {
       .catch(() => undefined);
   };
   const starInPlace = async () => {
-    toastManager.update(id, { actionProps: { children: "Starring…", disabled: true } });
+    toastManager.update(id, { actionProps: { children: "starring…", disabled: true } });
     if (await starRepository(environmentId)) {
       // Thank them in place: a closing and opening toast would slide under the confetti.
       dismiss();
       toastManager.update(id, {
         type: "success",
-        title: "Thanks for the star!",
+        title: "thanks for the star! :3",
         description: "It really helps :3 Code grow.",
         timeout: 5_000,
         actionProps: undefined,
@@ -54,18 +54,18 @@ function showStarPrompt(environmentId: EnvironmentId) {
     // Browsers block new tabs once the click's activation expires; desktop opens through its bridge.
     if (window.desktopBridge || navigator.userActivation?.isActive !== false)
       return openInBrowser();
-    toastManager.update(id, { actionProps: { children: "Open GitHub", onClick: openInBrowser } });
+    toastManager.update(id, { actionProps: { children: "open GitHub", onClick: openInBrowser } });
   };
   const id = toastManager.add({
-    title: "Enjoying :3 Code?",
+    title: "enjoying :3 Code?",
     description: "Give us a star on GitHub to let us know!",
     timeout: 0,
     onClose: dismiss,
-    actionProps: { children: "Star on GitHub", onClick: () => void starInPlace() },
+    actionProps: { children: "star on GitHub", onClick: () => void starInPlace() },
     data: {
       actionLayout: "stacked-end",
       leadingIcon: <StarIcon aria-hidden className="size-4 text-warning-foreground" />,
-      secondaryActionProps: { children: "Dismiss", onClick: close },
+      secondaryActionProps: { children: "dismiss", onClick: close },
       secondaryActionVariant: "ghost",
     },
   });

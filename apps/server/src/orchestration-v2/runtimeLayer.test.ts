@@ -2843,9 +2843,9 @@ it.layer(layerTest)("OrchestrationV2LayerLive lifecycle", (it) => {
         },
         branchPullRequest: {
           projectId,
-          repository: "SouthbagHQ/colon3code",
+          repository: "southbaghq/colon3code",
           number: 1,
-          url: "https://github.com/SouthbagHQ/colon3code/pull/1",
+          url: "https://github.com/southbaghq/colon3code/pull/1",
         },
       });
       for (const [index, number] of [2, 2, 1, 3].entries()) {
@@ -2854,9 +2854,9 @@ it.layer(layerTest)("OrchestrationV2LayerLive lifecycle", (it) => {
           commandId: CommandId.make(`branch-pr-link-${index}`),
           threadId,
           host: "GitHub.com",
-          repository: "SouthbagHQ/colon3code",
+          repository: "southbaghq/colon3code",
           number,
-          url: `https://github.com/SouthbagHQ/colon3code/pull/${number}`,
+          url: `https://github.com/southbaghq/colon3code/pull/${number}`,
           source: "manual",
         });
         assert.deepEqual(
@@ -2869,7 +2869,7 @@ it.layer(layerTest)("OrchestrationV2LayerLive lifecycle", (it) => {
         commandId: CommandId.make("branch-pr-unlink"),
         threadId,
         host: "github.com",
-        repository: "SouthbagHQ/colon3code",
+        repository: "southbaghq/colon3code",
         number: 1,
       });
       yield* orchestrator.dispatch({
@@ -2877,9 +2877,9 @@ it.layer(layerTest)("OrchestrationV2LayerLive lifecycle", (it) => {
         commandId: CommandId.make("branch-pr-link-after-unlink"),
         threadId,
         host: "github.com",
-        repository: "SouthbagHQ/colon3code",
+        repository: "southbaghq/colon3code",
         number: 4,
-        url: "https://github.com/SouthbagHQ/colon3code/pull/4",
+        url: "https://github.com/southbaghq/colon3code/pull/4",
         source: "manual",
       });
       assert.isTrue((yield* maintenance.rebuild).valid);
@@ -2893,9 +2893,9 @@ it.layer(layerTest)("OrchestrationV2LayerLive lifecycle", (it) => {
           commandId: CommandId.make(`gitcafe-pr-link-${index}`),
           threadId,
           host: "git.cafe",
-          repository: "SouthbagHQ/colon3code",
+          repository: "southbaghq/colon3code",
           number: 21353 + index,
-          url: `https://git.cafe/SouthbagHQ/colon3code/${route}/${21353 + index}`,
+          url: `https://git.cafe/southbaghq/colon3code/${route}/${21353 + index}`,
           source: "manual",
         });
       }
@@ -2904,7 +2904,7 @@ it.layer(layerTest)("OrchestrationV2LayerLive lifecycle", (it) => {
         (yield* orchestrator.getThreadShell(threadId))?.pullRequests
           ?.filter((link) => link.host === "git.cafe")
           .map((link) => link.url),
-        [21353, 21354].map((number) => `https://git.cafe/SouthbagHQ/colon3code/pulls/${number}`),
+        [21353, 21354].map((number) => `https://git.cafe/southbaghq/colon3code/pulls/${number}`),
       );
     }),
   );
@@ -2928,7 +2928,7 @@ it.layer(layerTest)("OrchestrationV2LayerLive lifecycle", (it) => {
         branch: null,
         worktreePath: null,
       });
-      const key = { host: "GitHub.com", repository: "SouthbagHQ/colon3code" };
+      const key = { host: "GitHub.com", repository: "southbaghq/colon3code" };
       for (const number of [1, 2]) {
         yield* orchestrator.dispatch({
           type: "thread.pull-request.link",
@@ -2936,7 +2936,7 @@ it.layer(layerTest)("OrchestrationV2LayerLive lifecycle", (it) => {
           threadId,
           ...key,
           number,
-          url: `https://github.com/SouthbagHQ/colon3code/pull/${number}`,
+          url: `https://github.com/southbaghq/colon3code/pull/${number}`,
           source: number === 1 ? "manual" : "stack",
         });
       }
@@ -2945,7 +2945,7 @@ it.layer(layerTest)("OrchestrationV2LayerLive lifecycle", (it) => {
         linked?.pullRequests?.map(({ host, repository, number }) => ({ host, repository, number })),
         [1, 2].map((number) => ({
           host: "github.com",
-          repository: "SouthbagHQ/colon3code",
+          repository: "southbaghq/colon3code",
           number,
         })),
       );
@@ -2976,7 +2976,7 @@ it.layer(layerTest)("OrchestrationV2LayerLive lifecycle", (it) => {
         threadId,
         ...key,
         number: 2,
-        url: "https://github.com/SouthbagHQ/colon3code/pull/2",
+        url: "https://github.com/southbaghq/colon3code/pull/2",
         source: "stack",
       });
       assert.equal(
@@ -2994,7 +2994,7 @@ it.layer(layerTest)("OrchestrationV2LayerLive lifecycle", (it) => {
         threadId,
         ...key,
         number: 2,
-        url: "https://github.com/SouthbagHQ/colon3code/pull/2",
+        url: "https://github.com/southbaghq/colon3code/pull/2",
         source: "manual",
       });
       assert.equal(

@@ -90,10 +90,10 @@ async function sendFilesToPage(chooser: PreviewStreamFileChooser, pick: boolean)
 }
 
 function offerDownload(download: PreviewStreamDownload) {
-  Dialog.alert(`Downloaded ${download.fileName}`, undefined, [
-    { text: "Not now", style: "cancel" },
+  Dialog.alert(`downloaded ${download.fileName}`, undefined, [
+    { text: "not now", style: "cancel" },
     {
-      text: "Save or share",
+      text: "save or share",
       onPress: () =>
         void downloadAndShareAttachment({
           url: download.url,
@@ -101,7 +101,7 @@ function offerDownload(download: PreviewStreamDownload) {
           signal: new AbortController().signal,
         }).catch((cause: unknown) =>
           Dialog.alert(
-            "Could not save the download",
+            "could not save the download",
             cause instanceof Error ? cause.message : undefined,
           ),
         ),
@@ -146,11 +146,11 @@ export function PreviewStreamWebView(
               error ? "text-center text-sm text-foreground-muted" : "text-sm text-foreground-muted"
             }
           >
-            {error || "Connecting to browser..."}
+            {error || "connecting to browser…"}
           </AppText>
           {error && (
             <View className="items-center">
-              <Button label="Retry" tone="secondary" onPress={refresh} />
+              <Button label="retry" tone="secondary" onPress={refresh} />
             </View>
           )}
         </>
@@ -251,7 +251,7 @@ function PreviewStreamDocumentView({
     setFileChooser(null);
     void sendFilesToPage(chooser, pick).catch((cause: unknown) =>
       Dialog.alert(
-        "Could not send the files to the page",
+        "could not send the files to the page",
         cause instanceof Error ? cause.message : undefined,
       ),
     );
@@ -267,7 +267,7 @@ function PreviewStreamDocumentView({
       (text) => {
         if (text) command({ type: "text", text });
       },
-      () => Dialog.alert("Could not read the clipboard"),
+      () => Dialog.alert("could not read the clipboard"),
     );
   const clearBootstrapTimer = () => {
     if (bootstrapTimer.current === null) return;
@@ -330,7 +330,7 @@ function PreviewStreamDocumentView({
           </AppText>
           {control?.canOperate ? (
             <Button
-              label={control.controller === "you" ? "Release control" : "Take control"}
+              label={control.controller === "you" ? "release control" : "take control"}
               tone="secondary"
               disabled={control.controller === "another-viewer"}
               onPress={() =>
@@ -434,7 +434,7 @@ function PreviewStreamDocumentView({
             The page asks for {fileChooser.multiple ? "files" : "a file"}.
           </AppText>
           <View className="flex-row justify-end gap-3">
-            <Button label="Cancel" tone="text" onPress={() => answerFileChooser(false)} />
+            <Button label="cancel" tone="text" onPress={() => answerFileChooser(false)} />
             <Button
               label={`Choose ${fileChooser.multiple ? "files" : "file"}`}
               tone="secondary"
@@ -450,7 +450,7 @@ function PreviewStreamDocumentView({
             <>
               {control.dialog.type === "prompt" ? (
                 <TextInput
-                  accessibilityLabel="Dialog response"
+                  accessibilityLabel="dialog response"
                   className="rounded-lg border border-input-border bg-input px-3 py-2 text-foreground"
                   placeholderTextColorClassName="accent-placeholder"
                   selectionColorClassName="accent-focus/32"
@@ -460,12 +460,12 @@ function PreviewStreamDocumentView({
               ) : null}
               <View className="flex-row justify-end gap-3">
                 <Button
-                  label="Dismiss"
+                  label="dismiss"
                   tone="text"
                   onPress={() => command({ type: "dialog", accept: false })}
                 />
                 <Button
-                  label="Accept"
+                  label="accept"
                   tone="secondary"
                   onPress={() =>
                     command({
@@ -493,13 +493,13 @@ function PreviewStreamDocumentView({
               accessibilityLiveRegion="polite"
               className="text-center text-sm text-foreground-muted"
             >
-              {status === "error" ? error : "Connecting to browser..."}
+              {status === "error" ? error : "connecting to browser…"}
             </AppText>
           )}
           {status === "error" && hostSetup && !compact ? (
             <Pressable
               accessibilityRole="button"
-              accessibilityLabel={`Copy ${hostSetup.command}`}
+              accessibilityLabel={`copy ${hostSetup.command}`}
               className="w-full flex-row items-center gap-2 rounded-xl border border-secondary-border bg-secondary px-4 py-3"
               onPress={() => {
                 void Clipboard.setStringAsync(hostSetup.command).catch(() => undefined);
@@ -508,13 +508,13 @@ function PreviewStreamDocumentView({
               <AppText selectable className="flex-1 font-mono text-sm text-secondary-foreground">
                 {hostSetup.command}
               </AppText>
-              <AppText className="text-xs text-foreground-muted">Copy</AppText>
+              <AppText className="text-xs text-foreground-muted">copy</AppText>
             </Pressable>
           ) : null}
           {status === "error" && !gone && !compact ? (
             <View className="items-center">
               <Button
-                label={hostSetup ? "Try again" : "Reconnect"}
+                label={hostSetup ? "try again" : "Reconnect"}
                 tone="secondary"
                 onPress={onRetry}
               />

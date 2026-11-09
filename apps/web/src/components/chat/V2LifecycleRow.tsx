@@ -78,7 +78,7 @@ export function V2LifecycleRow(props: {
   if (item.type === "run_interrupt_result") {
     return (
       <TimelineSystemDivider
-        label="Run interrupted"
+        label="run interrupted"
         detail={item.message}
         icon={CircleStopIcon}
         wrapDetail
@@ -98,9 +98,9 @@ export function V2LifecycleRow(props: {
     const relatedThreadId = item.source.type === "run" ? item.source.threadId : item.targetThreadId;
     return (
       <TimelineSystemDivider
-        label={item.source.type === "run" ? "Forked from conversation" : "Conversation fork"}
+        label={item.source.type === "run" ? "forked from conversation" : "conversation fork"}
         icon={GitForkIcon}
-        actionLabel={item.source.type === "run" ? "Open source conversation" : "Open fork"}
+        actionLabel={item.source.type === "run" ? "open source conversation" : "open fork"}
         onAction={() => props.onOpenThread(relatedThreadId)}
       />
     );
@@ -116,7 +116,7 @@ export function V2LifecycleRow(props: {
             <MessageSquareIcon className="size-4 text-secondary-label" aria-hidden />
           </span>
           <span className="min-w-0 flex-1 truncate text-sm font-medium">
-            {item.title ?? "Created thread"}
+            {item.title ?? "created thread"}
           </span>
           <Button
             size="xs"
@@ -124,7 +124,7 @@ export function V2LifecycleRow(props: {
             aria-label={`Open ${item.title ?? "created thread"}`}
             onClick={() => props.onOpenThread(item.targetThreadId)}
           >
-            Open chat
+            open chat
           </Button>
         </div>
       );
@@ -139,7 +139,7 @@ export function V2LifecycleRow(props: {
             aria-label={`Open ${item.title ?? "created thread"}`}
             onClick={() => props.onOpenThread(item.targetThreadId)}
           >
-            Open chat
+            open chat
           </InlineButton>
         }
       />
@@ -172,12 +172,12 @@ const STATUS_VISUALS: Record<
   OrchestrationV2TurnItem["status"],
   { dotClass: string; label: string }
 > = {
-  pending: { dotClass: "bg-info", label: "Queued" },
-  running: { dotClass: "bg-info", label: "Running" },
-  waiting: { dotClass: "bg-info", label: "Waiting" },
-  idle: { dotClass: "bg-muted-foreground/50", label: "Idle · resumable" },
+  pending: { dotClass: "bg-info", label: "queued" },
+  running: { dotClass: "bg-info", label: "running" },
+  waiting: { dotClass: "bg-info", label: "waiting" },
+  idle: { dotClass: "bg-muted-foreground/50", label: "idle · resumable" },
   completed: { dotClass: "bg-success", label: "completed" },
-  failed: { dotClass: "bg-destructive", label: "Failed" },
+  failed: { dotClass: "bg-destructive", label: "failed" },
   cancelled: { dotClass: "bg-muted-foreground/60", label: "stopped" },
   interrupted: { dotClass: "bg-muted-foreground/60", label: "stopped" },
 };
@@ -516,7 +516,7 @@ function SubagentTimelineLink(props: {
             <button
               type="button"
               data-v2-item-type="subagent"
-              aria-label={`Open ${props.title}`}
+              aria-label={`open ${props.title}`}
               aria-description={statusLabel}
               onClick={open}
               className={cn(
@@ -600,7 +600,7 @@ function EnvironmentHandoffRow({
 
 /** Marks where `/clear` or an automation started a new provider session in this thread. */
 export function FreshSessionRow() {
-  return <TimelineSystemDivider label="New session" icon={EraserIcon} />;
+  return <TimelineSystemDivider label="new session" icon={EraserIcon} />;
 }
 
 /** A same-harness model or effort change. Shows only what changed. */
@@ -640,7 +640,7 @@ export function HandoffRow(props: {
   const entries = settings ? applyProviderInstanceSettings(derived, settings, null) : derived;
   return (
     <TimelineSystemDivider
-      label={props.pending ? "Context handoff pending" : "Context handoff"}
+      label={props.pending ? "context handoff pending" : "context handoff"}
       icon={ArrowRightLeftIcon}
       showDetailSeparator={false}
       tone={props.failed ? "danger" : "neutral"}

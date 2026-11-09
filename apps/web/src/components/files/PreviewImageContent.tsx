@@ -41,11 +41,11 @@ export default function PreviewImageContent(props: {
         <span className="tabular-nums">
           {natural.width
             ? `${natural.width.toLocaleString()} × ${natural.height.toLocaleString()}`
-            : "Loading image…"}
+            : "loading image…"}
         </span>
         <div className="flex items-center gap-1">
           <FileSurfaceAction
-            label="Zoom out"
+            label="zoom out"
             disabled={!natural.width || scale <= 0.05}
             onPress={() => changeZoom(1 / 1.25)}
           >
@@ -53,21 +53,21 @@ export default function PreviewImageContent(props: {
           </FileSurfaceAction>
           <span className="min-w-10 text-center tabular-nums">{Math.round(scale * 100)}%</span>
           <FileSurfaceAction
-            label="Zoom in"
+            label="zoom in"
             disabled={!natural.width || scale >= 8}
             onPress={() => changeZoom(1.25)}
           >
             <PlusIcon className="size-3.5" />
           </FileSurfaceAction>
           <FileSurfaceAction
-            label="Fit image"
+            label="fit image"
             pressed={zoom === null}
             onPress={() => setZoom(null)}
           >
             <ScanIcon className="size-3.5" />
           </FileSurfaceAction>
           <FileSurfaceAction
-            label="Actual image size"
+            label="actual image size"
             pressed={zoom === 1}
             onPress={() => setZoom(1)}
           >
@@ -85,7 +85,7 @@ export default function PreviewImageContent(props: {
         >
           <button
             type="button"
-            aria-label={`Zoom ${props.name}`}
+            aria-label={`zoom ${props.name}`}
             className="shrink-0 cursor-zoom-in"
             onClick={() => setExpanded(true)}
           >

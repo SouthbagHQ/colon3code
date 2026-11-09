@@ -178,7 +178,7 @@ function ProjectOverviewContent(props: {
     setIsOrganizing(true);
     for (const member of allMembers) {
       if (!readEnvironmentScope(member.environmentId, AuthOrchestrationOperateScope)) {
-        Dialog.alert("Failed to update project", "This connection can no longer change it.");
+        Dialog.alert("failed to update project", "This connection can no longer change it.");
         break;
       }
       const result = await organizeProject({
@@ -210,7 +210,7 @@ function ProjectOverviewContent(props: {
       (entry) => entry.environmentId === denied.environmentId,
     );
     Dialog.alert(
-      "Failed to remove project",
+      "failed to remove project",
       `This connection cannot change projects in ${environment?.label ?? "this environment"}.`,
     );
     return false;
@@ -233,9 +233,9 @@ function ProjectOverviewContent(props: {
       unloadedThreadCount: readUnloadedThreadCount(members, threads),
     });
     Dialog.confirm({
-      title: plan.targetKind === "checkout" ? "Remove checkout" : "Remove project",
+      title: plan.targetKind === "checkout" ? "remove checkout" : "remove project",
       message: plan.confirmationMessage,
-      confirmText: plan.targetKind === "checkout" ? "Remove checkout" : "Remove project",
+      confirmText: plan.targetKind === "checkout" ? "remove checkout" : "remove project",
       destructive: true,
       onCancel: finishRemoval,
       onConfirm: () => {
@@ -410,15 +410,15 @@ function ProjectOverviewContent(props: {
           );
         })}
       </SettingsSection>
-      <SettingsSection title="Danger">
+      <SettingsSection title="danger">
         <SettingsActionRow
           icon="trash"
           label={
             props.hasOtherMembers
-              ? "Remove checkout"
+              ? "remove checkout"
               : props.members.length > 1
-                ? "Remove this project everywhere"
-                : "Remove project"
+                ? "remove this project everywhere"
+                : "remove project"
           }
           description={
             props.hasOtherMembers
@@ -446,12 +446,12 @@ function RemoveCheckoutAction(props: {
   return (
     <Pressable
       accessibilityRole="button"
-      accessibilityLabel={`Remove checkout ${props.member.workspaceRoot}`}
+      accessibilityLabel={`remove checkout ${props.member.workspaceRoot}`}
       disabled={props.disabled || !canRemove}
       onPress={props.onPress}
       className="self-start rounded-full border border-border bg-card px-3 py-1.5 disabled:opacity-40"
     >
-      <Text className="font-t3-medium text-xs text-danger-foreground">Remove checkout</Text>
+      <Text className="font-t3-medium text-xs text-danger-foreground">remove checkout</Text>
     </Pressable>
   );
 }

@@ -382,7 +382,7 @@ export interface ThreadFeedProps {
 }
 
 const USER_MESSAGE_COPY_MENU_ACTIONS = [
-  { id: "copy-prompt-link", title: "Copy prompt link", image: "link" },
+  { id: "copy-prompt-link", title: "copy prompt link", image: "link" },
 ];
 
 function UserMessageCopyButton(props: {
@@ -442,7 +442,7 @@ function AssistantForkButton(props: {
   return (
     <Pressable
       accessibilityRole="button"
-      accessibilityLabel="Fork from this response"
+      accessibilityLabel="fork from this response"
       disabled={busy}
       onPress={() => {
         const targetThreadId = ThreadId.make(uuidv4());
@@ -465,7 +465,7 @@ function AssistantForkButton(props: {
             );
             if (!targetThreadReady) {
               Dialog.alert(
-                "Fork created",
+                "fork created",
                 "Its thread data did not reach this client. Reconnect and try opening it from the thread list.",
               );
               return;
@@ -835,7 +835,7 @@ function MessageAttachmentFile(props: {
         {props.standaloneFile ? (
           <Pressable
             accessibilityRole="button"
-            accessibilityLabel={`Download ${attachment.name}`}
+            accessibilityLabel={`download ${attachment.name}`}
             accessibilityState={{ disabled, busy: opening }}
             disabled={disabled}
             className="mr-1 min-h-11 w-11 items-center justify-center rounded-lg active:bg-subtle disabled:opacity-40"
@@ -994,7 +994,7 @@ function PendingMessageMedia(props: {
     return (
       <Pressable
         accessibilityRole="imagebutton"
-        accessibilityLabel={`Open ${attachment.name}`}
+        accessibilityLabel={`open ${attachment.name}`}
         onPress={() => {
           const source = composerImageGallery([attachment])[0];
           if (source) props.onPressPreview(withGallery(source));
@@ -1385,7 +1385,7 @@ function AgentMessageFoldHeader(props: {
     <Pressable
       accessibilityRole="button"
       accessibilityLabel={`${label}: ${props.summary}`}
-      accessibilityHint={`Double tap to ${props.expanded ? "hide" : "show"} the message.`}
+      accessibilityHint={`double tap to ${props.expanded ? "hide" : "show"} the message.`}
       accessibilityState={{ expanded: props.expanded }}
       hitSlop={4}
       className="min-h-10 flex-row items-center gap-1.5 px-3.5 py-2"
@@ -1436,7 +1436,7 @@ function OpenSenderThreadButton(props: {
         })
       }
     >
-      <Text className="font-t3-medium text-xs text-foreground-secondary">Open thread</Text>
+      <Text className="font-t3-medium text-xs text-foreground-secondary">open thread</Text>
     </Pressable>
   );
 }
@@ -1481,8 +1481,8 @@ function ThreadAutomationMessageRow(props: {
       >
         <Pressable
           accessibilityRole="button"
-          accessibilityLabel={`Automation: ${summary}`}
-          accessibilityHint={`Double tap to ${props.expanded ? "hide" : "show"} the prompt.`}
+          accessibilityLabel={`automation: ${summary}`}
+          accessibilityHint={`double tap to ${props.expanded ? "hide" : "show"} the prompt.`}
           accessibilityState={{ expanded: props.expanded }}
           hitSlop={4}
           className="min-h-10 flex-row items-center gap-1.5 px-3.5 py-2"
@@ -1537,7 +1537,7 @@ function ThreadAutomationMessageRow(props: {
               onPress={() => openSettings(navigation, "SettingsScheduledTasks")}
             >
               <Text className="font-t3-medium text-xs text-foreground-secondary">
-                Open automation
+                open automation
               </Text>
             </Pressable>
           ) : null}
@@ -2089,7 +2089,7 @@ function renderFeedEntry(
                       <Pressable
                         key={attachment.id}
                         accessibilityRole="imagebutton"
-                        accessibilityLabel={`Open ${attachment.name}`}
+                        accessibilityLabel={`open ${attachment.name}`}
                         onPress={() => {
                           const source = composerImageGallery([attachment])[0];
                           if (source)
@@ -2342,7 +2342,7 @@ function TurnDiffStat(props: {
   return (
     <Pressable
       accessibilityRole="button"
-      accessibilityLabel={`Review ${fileCountLabel}, ${additions} additions, ${deletions} deletions`}
+      accessibilityLabel={`review ${fileCountLabel}, ${additions} additions, ${deletions} deletions`}
       onPress={() => props.onOpenTurnDiff(props.checkpoint)}
       className="min-h-11 shrink-0 flex-row items-center gap-2 px-2 active:bg-subtle"
     >
@@ -2425,10 +2425,10 @@ function UserMessageContent(props: UserMessageContentProps) {
               (item) => item.contextId === reference.contextId,
             );
             return {
-              title: record?.label ?? "Context unavailable",
+              title: record?.label ?? "context unavailable",
               actions: [
-                { id: "open-context", title: "Open context" },
-                { id: "copy-context", title: "Copy context", disabled: !record },
+                { id: "open-context", title: "open context" },
+                { id: "copy-context", title: "copy context", disabled: !record },
               ],
             };
           },
@@ -2453,7 +2453,7 @@ function UserMessageContent(props: UserMessageContentProps) {
               )
                 .then(() => Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success))
                 .catch(() => {
-                  Dialog.alert("Could not copy context", "Try copying this context again.");
+                  Dialog.alert("could not copy context 3:", "Try copying this context again.");
                 });
             }
           },
@@ -3029,10 +3029,10 @@ export const ThreadFeed = memo(function ThreadFeed({
           actions: [
             {
               id: "open-skill",
-              title: "View instructions",
+              title: "view instructions",
               disabled: !enrichedSkillInstructionsPath(skill),
             },
-            { id: "copy-skill", title: "Copy skill" },
+            { id: "copy-skill", title: "copy skill" },
           ],
         };
       }
@@ -3042,8 +3042,8 @@ export const ThreadFeed = memo(function ThreadFeed({
           title:
             appAtomRegistry.get(environmentThreadShells.threadShellAtom(thread))?.title ?? "Thread",
           actions: [
-            { id: "open-thread", title: "Open thread" },
-            { id: "copy-thread-link", title: "Copy link" },
+            { id: "open-thread", title: "open thread" },
+            { id: "copy-thread-link", title: "copy link" },
           ],
         };
       }
@@ -3113,11 +3113,11 @@ export const ThreadFeed = memo(function ThreadFeed({
       (media && (media.kind === "pdf" || media.kind === "document" || media.kind === "file")) ||
       (fileLink.kind === "file" && fileLink.line !== undefined)
     ) {
-      const name = media?.source.name ?? (fileLink.kind === "file" ? fileLink.label : "Open file");
+      const name = media?.source.name ?? (fileLink.kind === "file" ? fileLink.label : "open file");
       return (
         <Text
           accessibilityRole="link"
-          accessibilityLabel={`Open ${name}`}
+          accessibilityLabel={`open ${name}`}
           onPress={() => onMarkdownLinkPress(image.href, true)}
           style={{
             color: markdownStyles.assistant.nativeTextStyle.linkColor,
@@ -3738,7 +3738,7 @@ export const ThreadFeed = memo(function ThreadFeed({
           info.item.message.projectedItem?.item.type === "user_message" &&
           info.item.message.projectedItem.item.freshContext ? (
             <ThreadContextDivider
-              label="New session"
+              label="new session"
               icon="arrow.clockwise"
               iconColor={iconSubtleColor}
             />
@@ -3954,7 +3954,7 @@ export const ThreadFeed = memo(function ThreadFeed({
                   endpoints={props.pendingHandoff}
                   iconColor={iconSubtleColor}
                   surfaceColor={screenColor}
-                  label="Context handoff pending"
+                  label="context handoff pending"
                 />
               ) : null
             }

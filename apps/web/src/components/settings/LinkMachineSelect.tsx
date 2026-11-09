@@ -13,14 +13,14 @@ export function LinkMachineBadge({ machine }: { readonly machine: LinkableMachin
   if (machine.linked) {
     return (
       <Badge variant="success" size="sm">
-        Linked
+        linked
       </Badge>
     );
   }
   if (machine.connected) return null;
   return (
     <Badge variant="outline" size="sm">
-      {machine.connectOnly ? "T3 Connect" : "Not connected"}
+      {machine.connectOnly ? "T3 Connect" : "not connected"}
     </Badge>
   );
 }
@@ -50,7 +50,7 @@ export function LinkMachineSelect({
   return (
     <div className="space-y-1.5">
       <span id={labelId} className="block text-xs font-medium text-foreground">
-        Machine
+        machine
       </span>
       <Select
         value={value}
@@ -62,9 +62,9 @@ export function LinkMachineSelect({
         <SelectTrigger aria-labelledby={labelId}>
           <SelectValue>
             {(selected: string | null) => {
-              if (selected === ANOTHER_ADDRESS) return "Another address…";
+              if (selected === ANOTHER_ADDRESS) return "another address…";
               const machine = machines.find((candidate) => candidate.environmentId === selected);
-              return machine === undefined ? "Choose a machine" : <MachineName machine={machine} />;
+              return machine === undefined ? "choose a machine" : <MachineName machine={machine} />;
             }}
           </SelectValue>
         </SelectTrigger>
@@ -78,7 +78,7 @@ export function LinkMachineSelect({
             </SelectItem>
           ))}
           <SelectItem value={ANOTHER_ADDRESS} hideIndicator>
-            Another address…
+            another address…
           </SelectItem>
         </SelectPopup>
       </Select>

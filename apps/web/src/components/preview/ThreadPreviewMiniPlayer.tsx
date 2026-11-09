@@ -346,7 +346,7 @@ function BrowserMiniPlayer({ threadRef, tabId, miniPlayer }: Props & { readonly 
             />
             {!desktopOverlay?.hasWebContents ? (
               <div className="pointer-events-none absolute inset-0 z-[49] flex items-center justify-center rounded-[inherit] bg-muted text-xs text-muted-foreground">
-                Reconnecting preview…
+                reconnecting preview…
               </div>
             ) : null}
           </>

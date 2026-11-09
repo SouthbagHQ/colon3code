@@ -713,7 +713,7 @@ export default function ChatView(props: ChatViewProps) {
   ] = useState<Record<string, boolean>>({});
   const legendListRef = useRef<LegendListRef | null>(null);
   const conversationArea = workspaceAreaProps("conversation", 1, "Conversation");
-  const composerArea = workspaceAreaProps("composer", 2, "Message input");
+  const composerArea = workspaceAreaProps("composer", 2, "message input");
   const [composerOverlayElement, setComposerOverlayElement] = useState<HTMLDivElement | null>(null);
   const [composerTimelineInset, setComposerTimelineInset] = useState(0);
   const composerTimelineInsetRef = useRef(0);
@@ -872,7 +872,7 @@ export default function ChatView(props: ChatViewProps) {
   const sideChatParent = useQuietThreadShell(sideChatParentRef);
   const parentThreadLink = (() => {
     if (sideChatParentRef !== null) {
-      const title = sideChatParent?.title ?? "Parent thread";
+      const title = sideChatParent?.title ?? "parent thread";
       // Embedded, the parent is the view around it.
       if (embedded) return { title, sideChat: true };
       return {
@@ -888,7 +888,7 @@ export default function ChatView(props: ChatViewProps) {
     }
     if (parentSubagentThreadRef !== null) {
       return {
-        title: parentSubagentThread?.title ?? "Parent thread",
+        title: parentSubagentThread?.title ?? "parent thread",
         open: (): void => {
           void navigate({
             to: "/$environmentId/$threadId",
@@ -921,7 +921,7 @@ export default function ChatView(props: ChatViewProps) {
       ? null
       : {
           threadId: parentSubagentThreadRef.threadId,
-          title: parentSubagentThread?.title ?? "Parent thread",
+          title: parentSubagentThread?.title ?? "parent thread",
         };
   const threadError = isServerThread
     ? (localServerError ?? serverRuntime?.lastError ?? null)
@@ -1497,7 +1497,7 @@ export default function ChatView(props: ChatViewProps) {
     } catch (error) {
       toastManager.add({
         type: "error",
-        title: "Could not download " + attachment.name,
+        title: "couldn't download " + attachment.name,
         description: error instanceof Error ? error.message : "The attachment is unavailable.",
       });
     }
@@ -3659,7 +3659,7 @@ export default function ChatView(props: ChatViewProps) {
                                   !canOperateThread
                                     ? "This connection cannot change threads."
                                     : isEnvironmentChanging
-                                      ? "Preparing machine"
+                                      ? "preparing machine"
                                       : isRevertingCheckpoint
                                         ? "rewinding conversation"
                                         : feedbackUploading

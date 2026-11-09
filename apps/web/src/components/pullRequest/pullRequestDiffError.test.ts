@@ -29,7 +29,7 @@ describe("describePullRequestDiffError", () => {
       "pull request",
     );
 
-    expect(result.title).toBe("Couldn't load the changes");
+    expect(result.title).toBe("couldn't load the changes 3:");
     expect(result.description).toContain("Try again");
     expect(result.description).not.toContain("localhost");
     expect(result.description).not.toContain("limit");

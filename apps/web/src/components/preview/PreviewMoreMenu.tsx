@@ -103,7 +103,7 @@ export function PreviewMoreMenu({
           {deviceToolbarVisible ? "hide device toolbar" : "show device toolbar"}
         </MenuItem>
         <MenuSub>
-          <MenuSubTrigger disabled={disabled}>Appearance</MenuSubTrigger>
+          <MenuSubTrigger disabled={disabled}>appearance</MenuSubTrigger>
           <MenuSubPopup>
             <MenuRadioGroup
               value={colorScheme}

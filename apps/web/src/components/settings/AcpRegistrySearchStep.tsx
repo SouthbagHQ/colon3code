@@ -158,7 +158,7 @@ export function AcpRegistrySearchStep({
   return (
     <section className="grid gap-3" aria-labelledby="acp-registry-search-heading">
       <h3 className="sr-only" id="acp-registry-search-heading">
-        Choose an agent
+        choose an agent
       </h3>
 
       <form className="flex flex-wrap items-center gap-2" onSubmit={handleSearch}>
@@ -167,10 +167,10 @@ export function AcpRegistrySearchStep({
             <SearchIcon />
           </InputGroupAddon>
           <InputGroupInput
-            aria-label="Search ACP Registry"
+            aria-label="search ACP Registry"
             disabled={preparingId !== null}
             onChange={(event) => registry.type(event.currentTarget.value)}
-            placeholder="Search agents…"
+            placeholder="search agents…"
             size="sm"
             type="search"
             value={query}
@@ -183,7 +183,7 @@ export function AcpRegistrySearchStep({
           type="button"
           variant="ghost-muted"
         >
-          Enter manually
+          enter manually
         </Button>
         {onLocalConfiguration ? (
           <Button
@@ -200,9 +200,9 @@ export function AcpRegistrySearchStep({
 
       <div className="sr-only" role="status">
         {isInitialSearch
-          ? "Searching the ACP Registry."
+          ? "searching the ACP Registry…"
           : isRefreshing
-            ? "Refreshing ACP Registry results."
+            ? "refreshing ACP Registry results…"
             : results
               ? `${resultCount} compatible ${resultCount === 1 ? "agent" : "agents"} found.`
               : ""}
@@ -216,14 +216,14 @@ export function AcpRegistrySearchStep({
 
       {isInitialSearch ? (
         <div className="flex min-h-20 items-center justify-center text-sm text-muted-foreground">
-          Searching the registry...
+          searching the registry…
         </div>
       ) : null}
 
       {results ? (
         results.length === 0 ? (
           <div className="flex min-h-28 flex-col items-center justify-center rounded-2xl border border-dashed px-4 text-center">
-            <p className="text-sm font-medium">No compatible agents found</p>
+            <p className="text-sm font-medium">no compatible agents found 3:</p>
             <p className="mt-1 text-xs text-muted-foreground">Try a broader search.</p>
           </div>
         ) : (
@@ -260,7 +260,7 @@ function AcpRegistryAgentRow({
   readonly isPreparing: boolean;
   readonly onAdd: (agent: AcpRegistrySearchAgent) => void;
 }) {
-  const progressLabel = agent.distribution === "binary" ? "Downloading" : "Preparing";
+  const progressLabel = agent.distribution === "binary" ? "downloading" : "preparing";
   const aboutUrl = agent.website || agent.repository;
   return (
     <article className="min-w-0 py-2.5">
@@ -290,24 +290,24 @@ function AcpRegistryAgentRow({
                   <Button
                     size="icon-xs"
                     variant="ghost-muted"
-                    aria-label={`About ${agent.name}`}
+                    aria-label={`about ${agent.name}`}
                     render={<a href={aboutUrl} target="_blank" rel="noreferrer" />}
                   >
                     <ExternalLinkIcon />
                   </Button>
                 }
               />
-              <TooltipPopup>About {agent.name}</TooltipPopup>
+              <TooltipPopup>about {agent.name}</TooltipPopup>
             </Tooltip>
           ) : null}
           <Button
-            aria-label={`${alreadyAdded ? "Already added" : isPreparing ? progressLabel : "Add"} ${agent.name}`}
+            aria-label={`${alreadyAdded ? "already added" : isPreparing ? progressLabel : "add"} ${agent.name}`}
             disabled={!canAdd || alreadyAdded}
             onClick={() => onAdd(agent)}
             size="xs"
             variant={isPreparing ? "secondary" : "outline"}
           >
-            {alreadyAdded ? "Added" : isPreparing ? progressLabel : "Add"}
+            {alreadyAdded ? "added" : isPreparing ? progressLabel : "add"}
           </Button>
         </div>
       </div>

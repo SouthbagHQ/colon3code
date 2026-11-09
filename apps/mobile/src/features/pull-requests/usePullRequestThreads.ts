@@ -169,7 +169,10 @@ export function usePullRequestThreads(
     setBusy(false);
     if (AsyncResult.isFailure(result)) {
       const cause = squashAtomCommandFailure(result);
-      Dialog.alert("Couldn't open a thread", cause instanceof Error ? cause.message : "Try again.");
+      Dialog.alert(
+        "couldn't open a thread 3:",
+        cause instanceof Error ? cause.message : "Try again.",
+      );
     }
   };
   return {

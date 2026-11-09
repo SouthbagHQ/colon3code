@@ -178,7 +178,7 @@ function resolveThreadPullRequestBadgePresentation({
     return {
       Icon: PullRequestGlyph.stack,
       toneClassName: aggregate.toneClassName,
-      label: `Stack of ${badge.layers} ${terminology.plural}, ${aggregate.label.toLowerCase()}`,
+      label: `stack of ${badge.layers} ${terminology.plural}, ${aggregate.label.toLowerCase()}`,
       text: badge.layers,
     };
   }

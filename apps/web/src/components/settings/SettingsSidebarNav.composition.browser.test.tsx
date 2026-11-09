@@ -18,7 +18,7 @@ it("ignores composing keys in the search", async () => {
     </SidebarProvider>,
     { router: "/settings/general" },
   );
-  const search = page.getByRole("combobox", { name: "Search settings" });
+  const search = page.getByRole("combobox", { name: "search settings" });
   await search.fill("theme");
   await expect.element(page.getByRole("option", { name: /Theme/ })).toBeVisible();
 

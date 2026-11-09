@@ -308,7 +308,7 @@ function GitOverviewSheetContent(props: GitOverviewSheetProps) {
         {linkedPrActions.canLink ? (
           <ListRow
             icon="link"
-            label={`Link ${linkedPrActions.terminology.singular}`}
+            label={`link ${linkedPrActions.terminology.singular}`}
             description={`Attach a ${linkedPrActions.terminology.singular} by URL or number`}
             onPress={linkedPrActions.promptLink}
           />

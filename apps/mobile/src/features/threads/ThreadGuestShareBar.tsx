@@ -84,9 +84,9 @@ export function ThreadGuestShareBar(props: {
   const disabled = busy || !props.canOperateThread;
   const stopSharing = () =>
     Dialog.confirm({
-      title: "Stop sharing?",
+      title: "stop sharing?",
       message: "The guest loses access and the link stops working.",
-      confirmText: "Stop sharing",
+      confirmText: "stop sharing",
       destructive: true,
       onConfirm: () => {
         if (disabled) return;
@@ -96,7 +96,7 @@ export function ThreadGuestShareBar(props: {
           input: { threadId: threadRef.threadId },
         }).then((result) => {
           setBusy(false);
-          alertOnFailure("Could not stop sharing", result);
+          alertOnFailure("could not stop sharing 3:", result);
         });
       },
     });
@@ -106,12 +106,12 @@ export function ThreadGuestShareBar(props: {
       <SymbolView name="person.2" size={12} tintColorClassName="accent-foreground-muted" />
       <Text className="min-w-0 flex-1 text-xs text-foreground-muted" numberOfLines={1}>
         {expiredAt === share.expiresAt
-          ? "Guest link expired"
+          ? "guest link expired"
           : share.guestName === null
-            ? "Guest link active"
+            ? "guest link active"
             : `${share.guestName} is a guest`}
       </Text>
-      <Button label="Stop sharing" tone="text" disabled={disabled} onPress={stopSharing} />
+      <Button label="stop sharing" tone="text" disabled={disabled} onPress={stopSharing} />
     </View>
   );
 }
@@ -151,7 +151,9 @@ export function ThreadGuestPendingMessage(props: {
     });
     setBusy(false);
     alertOnFailure(
-      decision === "send" ? "Could not send guest message" : "Could not dismiss guest message",
+      decision === "send"
+        ? "could not send guest message 3:"
+        : "could not dismiss guest message 3:",
       result,
     );
   };
@@ -170,16 +172,16 @@ export function ThreadGuestPendingMessage(props: {
       {canOperate ? (
         <View className="mt-1.5 flex-row gap-2">
           <Button
-            label="Dismiss"
+            label="dismiss"
             tone="secondary"
-            accessibilityLabel={`Dismiss message from ${guestName}`}
+            accessibilityLabel={`dismiss message from ${guestName}`}
             disabled={busy}
             onPress={() => void resolve("dismiss")}
           />
           <Button
-            label="Send"
+            label="send"
             tone="primary"
-            accessibilityLabel={`Send message from ${guestName}`}
+            accessibilityLabel={`send message from ${guestName}`}
             disabled={busy}
             onPress={() => void resolve("send")}
           />

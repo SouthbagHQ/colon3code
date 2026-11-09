@@ -194,7 +194,7 @@ function PullRequestIdentity(props: {
       <View className="flex-row items-center gap-2">
         <PullRequestAvatar actor={pr.author ?? null} size={20} />
         <Text className="min-w-0 flex-1 text-xs font-t3-medium" numberOfLines={1}>
-          {pr.author?.login ?? "Unknown author"}
+          {pr.author?.login ?? "unknown author"}
         </Text>
         <Text className="shrink text-right text-2xs text-foreground-muted" numberOfLines={1}>
           Updated <RelativeTime timestamp={pr.updatedAt} /> ago
@@ -203,7 +203,7 @@ function PullRequestIdentity(props: {
       <View className="flex-row items-start gap-1.5">
         <Pressable
           accessibilityRole="button"
-          accessibilityLabel={`Copy base branch ${pr.baseBranch}`}
+          accessibilityLabel={`copy base branch ${pr.baseBranch}`}
           onPress={() => void Clipboard.setStringAsync(pr.baseBranch)}
           className="min-w-0 shrink active:opacity-70"
           hitSlop={8}
@@ -215,7 +215,7 @@ function PullRequestIdentity(props: {
         </View>
         <Pressable
           accessibilityRole="button"
-          accessibilityLabel={`Copy head branch ${pr.headBranch}`}
+          accessibilityLabel={`copy head branch ${pr.headBranch}`}
           onPress={() => void Clipboard.setStringAsync(pr.headBranch)}
           className="min-w-0 shrink active:opacity-70"
           hitSlop={8}
@@ -264,10 +264,10 @@ function PullRequestLabels(props: {
       })}
       {editable ? (
         <Chip
-          label={props.pr.labels.length ? "Edit" : "Add labels"}
+          label={props.pr.labels.length ? "edit" : "add labels"}
           icon="tag"
           size="small"
-          accessibilityLabel="Edit labels"
+          accessibilityLabel="edit labels"
           onPress={() => navigation.navigate("PullRequestLabels", props.params)}
         />
       ) : null}
@@ -474,7 +474,7 @@ export function PullRequestRouteScreen({ route }: StaticScreenProps<PullRequestP
                   ? [
                       {
                         id: "submit-review",
-                        title: "Submit review",
+                        title: "submit review",
                         icon: "text.bubble",
                         onPress: () =>
                           navigation.navigate("PullRequestReview", { ...params, mode: "review" }),
@@ -485,7 +485,7 @@ export function PullRequestRouteScreen({ route }: StaticScreenProps<PullRequestP
                   ? [
                       {
                         id: "add-comment",
-                        title: "Add comment",
+                        title: "add comment",
                         icon: "plus.bubble",
                         onPress: () =>
                           navigation.navigate("PullRequestReview", { ...params, mode: "comment" }),
@@ -496,17 +496,17 @@ export function PullRequestRouteScreen({ route }: StaticScreenProps<PullRequestP
                   ? [
                       {
                         id: "edit-title",
-                        title: "Edit title",
+                        title: "edit title",
                         icon: "pencil",
                         onPress: () =>
                           navigation.navigate("PullRequestEdit", { ...params, field: "title" }),
                       },
                       {
                         id: "edit-description",
-                        title: "Edit description",
+                        title: "edit description",
                         icon: "doc.text",
                         disabled: description.pending,
-                        subtitle: description.pending ? "Saving…" : undefined,
+                        subtitle: description.pending ? "saving…" : undefined,
                         onPress: () =>
                           navigation.navigate("PullRequestEdit", { ...params, field: "body" }),
                       },
@@ -516,7 +516,7 @@ export function PullRequestRouteScreen({ route }: StaticScreenProps<PullRequestP
                   ? [
                       {
                         id: "maintainer-edits",
-                        title: "Allow edits from maintainers",
+                        title: "allow edits from maintainers",
                         icon: "pencil",
                         selected: maintainerEdits.value,
                         disabled: maintainerEdits.saving,
@@ -535,13 +535,13 @@ export function PullRequestRouteScreen({ route }: StaticScreenProps<PullRequestP
                       },
                       {
                         id: "copy-link",
-                        title: "Copy link",
+                        title: "copy link",
                         icon: "link",
                         onPress: () => copyPullRequestLink(identity),
                       },
                       {
                         id: "share",
-                        title: "Share…",
+                        title: "share…",
                         icon: "square.and.arrow.up",
                         onPress: () => sharePullRequestLink(identity),
                       },
@@ -567,7 +567,7 @@ export function PullRequestRouteScreen({ route }: StaticScreenProps<PullRequestP
                         destructive: true,
                         disabled: !action.available("delete-branch"),
                         subtitle: action.busy
-                          ? "Deleting…"
+                          ? "deleting…"
                           : connected
                             ? pr.headBranch
                             : "Reconnect to delete this branch.",
@@ -776,11 +776,11 @@ export function PullRequestRouteScreen({ route }: StaticScreenProps<PullRequestP
                           {Platform.OS !== "ios" || section === tab ? (
                             <SegmentedControl
                               options={[
-                                { value: "overview", label: "Overview" },
+                                { value: "overview", label: "overview" },
                                 ...(guidesEnabled
-                                  ? [{ value: "guide" as const, label: "Guide" }]
+                                  ? [{ value: "guide" as const, label: "guide" }]
                                   : []),
-                                { value: "activity", label: "Activity" },
+                                { value: "activity", label: "activity" },
                               ]}
                               selected={section}
                               onSelect={selectSection}
@@ -823,12 +823,12 @@ export function PullRequestFileRouteScreen(props: PullRequestFileRouteProps) {
     useNavigation<NativeStackNavigationProp<ReactNavigation.RootParamList, "PullRequestFile">>();
   const ready = usePullRequestDiffEntry(navigation);
   if (ready) return <PullRequestFileRouteContent {...props} />;
-  const title = props.route.params.commit ? "Commit changes" : "Changes";
+  const title = props.route.params.commit ? "commit changes" : "Changes";
   return (
     <View className="flex-1 bg-screen">
       <AppBar title={title} onBack={() => navigation.goBack()} />
       <View className="flex-1 items-center justify-center">
-        <AppActivityIndicator accessibilityLabel="Loading changes" />
+        <AppActivityIndicator accessibilityLabel="loading changes" />
       </View>
     </View>
   );
@@ -1009,7 +1009,7 @@ function PullRequestFileRouteContent({ route }: PullRequestFileRouteProps) {
     setSelectedRowId(null);
     filter.toggle();
   };
-  const title = commit ? "Commit changes" : "Changes";
+  const title = commit ? "commit changes" : "Changes";
   const seekingFile = !targetFile && result.nextCursor !== null;
   const loadingDiff = (result.isPending && !data.rows.length) || (seekingFile && !result.error);
   return (
@@ -1020,14 +1020,14 @@ function PullRequestFileRouteContent({ route }: PullRequestFileRouteProps) {
         onBack={() => navigation.goBack()}
         menus={[
           {
-            title: "Diff options",
+            title: "diff options",
             icon: "ellipsis",
             items: [
               ...(permissions.verdicts.length
                 ? [
                     {
                       id: "submit-review",
-                      title: "Submit review",
+                      title: "submit review",
                       icon: "text.bubble",
                       onPress: () =>
                         navigation.navigate("PullRequestReview", {
@@ -1041,7 +1041,7 @@ function PullRequestFileRouteContent({ route }: PullRequestFileRouteProps) {
                 ? [
                     {
                       id: "comment-on-pr",
-                      title: "Add comment",
+                      title: "add comment",
                       icon: "plus.bubble",
                       onPress: () =>
                         navigation.navigate("PullRequestReview", {
@@ -1053,14 +1053,14 @@ function PullRequestFileRouteContent({ route }: PullRequestFileRouteProps) {
                 : []),
               {
                 id: "word-wrap",
-                title: "Word wrap",
+                title: "word wrap",
                 icon: "text.alignleft",
                 selected: appearance.codeWordBreak,
                 onPress: () => setCodeWordBreak(!appearance.codeWordBreak),
               },
               {
                 id: "hide-tests",
-                title: "Hide test files",
+                title: "hide test files",
                 icon: "line.3.horizontal.decrease",
                 selected: filter.hideTestFiles,
                 onPress: toggleTestFiles,
@@ -1070,8 +1070,8 @@ function PullRequestFileRouteContent({ route }: PullRequestFileRouteProps) {
                     {
                       id: "comment",
                       title: route.params.replacingDraftId
-                        ? "Move draft to this line"
-                        : "Add review comment",
+                        ? "move draft to this line"
+                        : "add review comment",
                       icon: "bubble.left",
                       onPress: () => commentOnLine(),
                     },
@@ -1081,7 +1081,7 @@ function PullRequestFileRouteContent({ route }: PullRequestFileRouteProps) {
                 ? [
                     {
                       id: "copy",
-                      title: "Copy line",
+                      title: "copy line",
                       icon: "document.on.document",
                       onPress: () => void Clipboard.setStringAsync(selectedRow.content ?? ""),
                     },
@@ -1108,7 +1108,7 @@ function PullRequestFileRouteContent({ route }: PullRequestFileRouteProps) {
             The branch changed. Reload before adding line comments.
           </Text>
           <Button
-            label="Reload changes"
+            label="reload changes"
             onPress={() => {
               result.refresh();
               setDiffHead({ scopeKey, sha: detail.data?.headSha ?? null });
@@ -1210,15 +1210,15 @@ function PullRequestFileRouteContent({ route }: PullRequestFileRouteProps) {
             !seekingFile ? (
             <View style={{ paddingTop: contentTopInset }}>
               <EmptyState
-                title="Only test files changed"
+                title="only test files changed"
                 detail="Test files are hidden from this review."
-                action={<Button label="Show test files" tone="contrast" onPress={filter.showAll} />}
+                action={<Button label="show test files" tone="contrast" onPress={filter.showAll} />}
                 variant="plain"
               />
             </View>
           ) : !result.isPending && !result.error && !seekingFile ? (
             <EmptyState
-              title="Diff unavailable"
+              title="diff unavailable"
               detail={`Open this ${terminology.singular} on its provider to view the changes.`}
               variant="plain"
             />
@@ -1226,12 +1226,12 @@ function PullRequestFileRouteContent({ route }: PullRequestFileRouteProps) {
           {result.nextCursor && result.isPending && data.rows.length && !seekingFile ? (
             <View className="flex-row items-center justify-center gap-2 py-2">
               <AppActivityIndicator size="small" />
-              <Text className="text-xs text-foreground-muted">Loading more files…</Text>
+              <Text className="text-xs text-foreground-muted">loading more files…</Text>
             </View>
           ) : null}
           {result.error && result.nextCursor ? (
             <View className="self-center">
-              <Button label="Retry loading remaining files" tone="text" onPress={result.refresh} />
+              <Button label="retry loading remaining files" tone="text" onPress={result.refresh} />
             </View>
           ) : null}
           {parsed.kind === "files" && parsed.notice ? (

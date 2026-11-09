@@ -487,7 +487,7 @@ export function useThreadLifecycle(input: ThreadLifecycleInput) {
     }
     const shell = readThreadShell(threadRef);
     if (shell === null ? !shellOmitsChildren && isEnvironmentLive() : shell.deletedAt != null) {
-      toastManager.add({ type: "info", title: "This thread is no longer available" });
+      toastManager.add({ type: "info", title: "this thread is no longer available" });
       return;
     }
     if (activeThreadRef && openSideChatTab(activeThreadRef, shell)) return;
@@ -616,7 +616,7 @@ export function useThreadLifecycle(input: ThreadLifecycleInput) {
     limitRecoveryHoldsSnooze ? null : (
       <ThreadStatusLine
         icon={<AlarmClockIcon />}
-        label={snoozeWake && snoozeWake !== "now" ? `Snoozed, ${snoozeWake} left` : "Snoozed"}
+        label={snoozeWake && snoozeWake !== "now" ? `snoozed, ${snoozeWake} left` : "snoozed"}
         clockMinute={nowMinute}
         actionLabel={isUnsnoozing ? "waking…" : "wake now"}
         actionDisabled={!canOperateThread || isUnsnoozing}
@@ -626,7 +626,7 @@ export function useThreadLifecycle(input: ThreadLifecycleInput) {
   ) : activeThreadSettled ? (
     <ThreadStatusLine
       icon={<CheckCircle2Icon />}
-      label={settledAt ? `Settled ${formatRelativeTimeLabel(settledAt)}` : "Settled"}
+      label={settledAt ? `settled ${formatRelativeTimeLabel(settledAt)}` : "settled"}
       clockMinute={nowMinute}
       actionLabel={isUnsettling ? "un-settling…" : "un-settle"}
       actionDisabled={!canOperateThread || isUnsettling}
@@ -635,8 +635,8 @@ export function useThreadLifecycle(input: ThreadLifecycleInput) {
   ) : activeThreadWokeVisible ? (
     <ThreadStatusLine
       icon={<AlarmClockIcon />}
-      label="Woke from snooze"
-      actionLabel="Dismiss"
+      label="woke from snooze"
+      actionLabel="dismiss"
       onAction={acknowledgeActiveThreadWokeStable}
     />
   ) : null;
@@ -679,7 +679,7 @@ export function useThreadLifecycle(input: ThreadLifecycleInput) {
         activeThreadPinned ? confirmAndUnpinThread(activeThreadRef) : pinThread(activeThreadRef)
       ).then(
         toastThreadActionFailure(
-          activeThreadPinned ? "Failed to unpin thread" : "Failed to pin thread",
+          activeThreadPinned ? "couldn't unpin that thread" : "couldn't pin that thread",
         ),
       );
     },

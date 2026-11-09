@@ -25,9 +25,9 @@ import { formatContextWindowCompactionMessage } from "./ContextWindowMeter.logic
 import { ThreadDetailsSection } from "./ThreadDetailsSection";
 
 const PACE_LABEL: Record<LimitPace, string> = {
-  ahead: "Ahead of pace",
-  on: "On pace",
-  under: "Under pace",
+  ahead: "ahead of pace",
+  on: "on pace",
+  under: "under pace",
 };
 
 export interface ThreadDetailsUsageInput {
@@ -62,7 +62,7 @@ export function ThreadDetailsUsage({
   return (
     <ThreadDetailsSection
       headingId="thread-details-usage-heading"
-      title="Usage limits"
+      title="usage limits"
       showHeading={false}
     >
       <div className="grid grid-cols-[auto_minmax(3rem,1fr)_auto] gap-x-3 text-xs">
@@ -98,12 +98,12 @@ export function ThreadDetailsContext({ usage }: { readonly usage: ContextWindowS
   return (
     <ThreadDetailsSection
       headingId="thread-details-context-heading"
-      title="Context window"
+      title="context window"
       showHeading={false}
     >
       <div className="grid grid-cols-[auto_minmax(3rem,1fr)_auto] gap-x-3 text-xs">
         <UsageRow
-          label="Context"
+          label="context"
           fill={used}
           tone={used === null ? null : used >= 90 ? "error" : used >= 80 ? "warning" : null}
           tick={tick}
@@ -117,7 +117,7 @@ export function ThreadDetailsContext({ usage }: { readonly usage: ContextWindowS
           tooltip={
             <>
               <span className="text-foreground">
-                {used !== null ? `Context: ${used}% used` : `Context: ${usedTokens} tokens used`}
+                {used !== null ? `context: ${used}% used` : `context: ${usedTokens} tokens used`}
               </span>
               {maxTokens !== null ? (
                 <span className="text-muted-foreground">

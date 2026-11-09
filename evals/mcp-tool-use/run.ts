@@ -407,7 +407,7 @@ const CODEX_NAMES: Readonly<Record<string, string>> = {
 export const normalizeToolName = (name: string) => {
   const bare = name.slice(name.lastIndexOf(".") + 1);
   return isT3Name(bare)
-    ? bare.slice(T3_PREFIX.length)
+    ? bare.slice((bare.startsWith(T3_PREFIX) ? T3_PREFIX : "mcp__t3_code__").length)
     : (CODEX_NAMES[bare] ?? bare.slice(bare.lastIndexOf("_") + 1));
 };
 export const normalizeToolInput = (name: string, input: unknown) => {

@@ -14,7 +14,7 @@ import { useScheduledTaskEditor } from "./scheduled-task-editor";
 
 function MissingTaskDraft() {
   return (
-    <SettingsScreen title="Scheduled task">
+    <SettingsScreen title="scheduled task">
       <Text className="p-5 text-base text-foreground-muted">Open a scheduled task form first.</Text>
     </SettingsScreen>
   );
@@ -128,7 +128,7 @@ export function ScheduledTaskBranchPickerRouteScreen() {
 
   return (
     <BranchPickerScreen
-      title="Base branch"
+      title="base branch"
       project={project}
       branches={visibleBranches}
       selectedBranchName={editor.draft.baseRef}

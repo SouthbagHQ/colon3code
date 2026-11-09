@@ -558,8 +558,8 @@ export function PullRequestDetailPanel({
   const mergeBlockedReason = canMergeSinglePullRequest
     ? null
     : nativeStackQuery.error
-      ? "Couldn't check stack membership"
-      : "Checking stack membership…";
+      ? "couldn't check stack membership"
+      : "checking stack membership…";
   const activityPending = activityQuery.isPending && activity === null;
   const activityError = activity === null ? activityQuery.error : null;
   const refreshDetail = () => {
@@ -689,10 +689,10 @@ export function PullRequestDetailPanel({
       return false;
     }
     if (action === "revert") {
-      toastManager.add({ type: "success", title: `Revert ${terminology.singular} opened` });
+      toastManager.add({ type: "success", title: `revert ${terminology.singular} opened :3` });
     }
     if (action === "delete-branch") {
-      toastManager.add({ type: "success", title: "Branch deleted" });
+      toastManager.add({ type: "success", title: "branch deleted" });
     }
     if (pullRequestActionNeedsHostRefresh(action)) {
       void refreshFromHost();
@@ -1052,7 +1052,7 @@ export function PullRequestDetailPanel({
     // The active editor may be answering a provider question rather than editing this draft.
     if (!hasReference) store.addReviewComment(attachTarget, reference, { insertAtCaret: false });
     store.addReviewComment(attachTarget, comment, { insertAtCaret: false });
-    toastManager.add({ type: "success", title: "Added to the composer" });
+    toastManager.add({ type: "success", title: "added to the composer :3" });
   };
 
   const startCheckout = (mode: "worktree" | "local") => {
@@ -1202,7 +1202,7 @@ export function PullRequestDetailPanel({
     if (detail === null) return;
     const confirmed = await readLocalApi()?.dialogs.confirm(
       [
-        `Delete branch ${detail.headBranch}?`,
+        `delete branch ${detail.headBranch}?`,
         `This deletes ${detail.headBranch} from ${detail.headRepositoryNameWithOwner ?? detail.repository}. Local branches and worktrees are not changed.`,
       ].join("\n"),
       { variant: "destructive" },
@@ -1562,8 +1562,8 @@ export function PullRequestDetailPanel({
                     key={detail.headBranch}
                     value={detail.headBranch}
                     target="branch name"
-                    copyLabel={`Copy ${terminology.singular} branch`}
-                    copiedLabel="Branch name copied"
+                    copyLabel={`copy ${terminology.singular} branch`}
+                    copiedLabel="branch name copied"
                   />
                 }
                 files={`${detail.changedFiles.toLocaleString()} ${detail.changedFiles === 1 ? "file" : "files"}`}

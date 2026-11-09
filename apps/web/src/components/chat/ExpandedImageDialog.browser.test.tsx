@@ -67,7 +67,7 @@ describe("ExpandedImageDialog", () => {
       { router: false },
     );
 
-    await userEvent.click(screen.getByRole("button", { name: "No accessibility data" }));
+    await userEvent.click(screen.getByRole("button", { name: "no accessibility data" }));
     await expect.element(screen.getByText("Accessibility data")).toBeVisible();
 
     await userEvent.keyboard("{Escape}");
@@ -75,7 +75,7 @@ describe("ExpandedImageDialog", () => {
     expect(onClose).not.toHaveBeenCalled();
 
     // Focus returns to the popup's trigger and opens its tooltip; leave it for a plain control.
-    (screen.getByRole("button", { name: "Close image preview" }).element() as HTMLElement).focus();
+    (screen.getByRole("button", { name: "close image preview" }).element() as HTMLElement).focus();
     await userEvent.keyboard("{Escape}");
     await vi.waitFor(() => expect(onClose).toHaveBeenCalledOnce());
   });

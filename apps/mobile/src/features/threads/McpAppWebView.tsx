@@ -81,7 +81,7 @@ const confirm = (title: string, message: string, action: string) =>
       title,
       message,
       [
-        { text: "Cancel", style: "cancel", onPress: () => resolve(false) },
+        { text: "cancel", style: "cancel", onPress: () => resolve(false) },
         { text: action, onPress: () => resolve(true) },
       ],
       // Android dismisses earlier alerts when showing another; decline dismissed requests to release their slots.
@@ -506,7 +506,7 @@ export function ThreadMcpApp(props: {
         <Text className="text-sm text-foreground-muted">The {app.server} app was closed</Text>
         <View className="items-center">
           <Button
-            label="Show app"
+            label="show app"
             tone="secondary"
             onPress={() => {
               reopenDocument();

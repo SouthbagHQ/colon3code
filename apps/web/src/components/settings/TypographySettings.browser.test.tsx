@@ -37,7 +37,7 @@ describe("TypographySection", () => {
     using _storage = setup("terminal-font");
     await using screen = await render(<TypographySection />);
 
-    await expect.element(screen.getByRole("heading", { name: "Terminal font" })).toBeVisible();
+    await expect.element(screen.getByRole("heading", { name: "terminal font" })).toBeVisible();
     expect(getLocalStorageItem(TYPOGRAPHY_ADVANCED_STORAGE_KEY, Schema.Boolean)).toBe(true);
   });
 });

@@ -153,7 +153,7 @@ function DiffFileCollapseToggle({
             size="icon-micro"
             variant="ghost"
             className="-ms-0.5"
-            aria-label={collapsed ? `Expand ${filePath}` : `Collapse ${filePath}`}
+            aria-label={collapsed ? `expand ${filePath}` : `collapse ${filePath}`}
             aria-expanded={!collapsed}
             ref={(node) => {
               if (!node || !load) return;
@@ -177,7 +177,7 @@ function DiffFileCollapseToggle({
           icon={collapsed ? ChevronRight : ChevronDown}
         />
       </TooltipTrigger>
-      <TooltipPopup side="top">{collapsed ? "Expand diff" : "Collapse diff"}</TooltipPopup>
+      <TooltipPopup side="top">{collapsed ? "expand diff" : "collapse diff"}</TooltipPopup>
     </Tooltip>
   );
 }
@@ -431,21 +431,21 @@ export default function DiffPanel({
       : undefined;
   const selectedGitScopeLabel =
     selectedCommitSha !== null
-      ? (selectedCommitSubject ?? `Commit ${selectedCommitSha.slice(0, 7)}`)
+      ? (selectedCommitSubject ?? `commit ${selectedCommitSha.slice(0, 7)}`)
       : selectedGitScope === "unstaged"
         ? "Uncommitted"
-        : "Changes";
+        : "changes";
   const selectedScopeLabel = toolCallSelection
-    ? "Tool call"
+    ? "tool call"
     : selectedRunId === null
       ? selectedCommitSha !== null
-        ? (selectedCommitSubject ?? "Commit")
+        ? (selectedCommitSubject ?? "commit")
         : selectedGitScopeLabel
       : selectedTurn?.runId === latestTurn?.runId
-        ? "Latest turn"
+        ? "latest turn"
         : `Turn ${selectedCheckpointTurnCount ?? "?"}`;
   const reviewSectionTitle = toolCallSelection
-    ? "Tool call"
+    ? "tool call"
     : selectedTurn
       ? `Turn ${selectedCheckpointTurnCount ?? "?"}`
       : selectedGitScopeLabel;
@@ -854,7 +854,7 @@ export default function DiffPanel({
           <DropdownMenuContent align="start">
             <DropdownMenuRadioGroup value={selectedScopeValue} onValueChange={selectScopeValue}>
               <DropdownMenuRadioItem value="branch" closeOnClick>
-                <span>Changes</span>
+                <span>changes</span>
               </DropdownMenuRadioItem>
               <DropdownMenuRadioItem value="unstaged" closeOnClick>
                 <span>Uncommitted</span>
@@ -943,7 +943,7 @@ export default function DiffPanel({
                                 href={commitUrl}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                aria-label={`Open commit ${commit.sha.slice(0, 7)}`}
+                                aria-label={`open commit ${commit.sha.slice(0, 7)}`}
                               />
                             }
                             onClick={(event) => openCommitUrl(event, commitUrl)}
@@ -966,16 +966,16 @@ export default function DiffPanel({
                 ) : !canReadFiles ? (
                   <DropdownMenuItem disabled>
                     {fileAccess.isPending
-                      ? "Checking file access..."
+                      ? "checking file access…"
                       : (fileAccess.error ?? "This connection cannot read local diffs.")}
                   </DropdownMenuItem>
                 ) : branchCommits === null ? (
-                  <DropdownMenuItem disabled>Loading commits...</DropdownMenuItem>
+                  <DropdownMenuItem disabled>loading commits…</DropdownMenuItem>
                 ) : branchCommits.commits.length === 0 ? (
-                  <DropdownMenuItem disabled>No commits on this branch.</DropdownMenuItem>
+                  <DropdownMenuItem disabled>no commits on this branch.</DropdownMenuItem>
                 ) : branchCommits.truncated ? (
                   <DropdownMenuItem disabled>
-                    {`Showing latest ${branchCommits.commits.length} commits`}
+                    {`showing latest ${branchCommits.commits.length} commits`}
                   </DropdownMenuItem>
                 ) : null}
               </DropdownMenuSubContent>
@@ -1027,7 +1027,7 @@ export default function DiffPanel({
               <ComboboxTrigger
                 render={<Button variant="ghost-muted" size="xs" />}
                 className="min-w-9 max-w-48 shrink-0"
-                aria-label={`Change comparison target. Currently ${comparisonBaseRef}`}
+                aria-label={`change comparison target, currently ${comparisonBaseRef}`}
               >
                 <span className="min-w-0 truncate">{comparisonBaseRef}</span>
                 <ChevronDownIcon className="size-3.5 shrink-0 opacity-70" />
@@ -1235,7 +1235,7 @@ export default function DiffPanel({
             <TooltipTrigger
               render={
                 <Toggle
-                  aria-label="Hide test files"
+                  aria-label="hide test files"
                   variant="ghost"
                   size="sm"
                   pressed={hideTestFiles}
@@ -1248,7 +1248,7 @@ export default function DiffPanel({
             <TooltipPopup side="top">
               {hideTestFiles
                 ? `Show ${testFileCount} hidden test ${testFileCount === 1 ? "file" : "files"}`
-                : "Hide test files"}
+                : "hide test files"}
             </TooltipPopup>
           </Tooltip>
         )}
@@ -1295,7 +1295,7 @@ export default function DiffPanel({
         </div>
       ) : isGitSelection && !canReadFiles ? (
         fileAccess.isPending ? (
-          <DiffPanelLoadingState label="Checking file access..." />
+          <DiffPanelLoadingState label="checking file access…" />
         ) : (
           <div className="flex flex-1 items-center justify-center px-5 text-center text-xs text-muted-foreground/70">
             {fileAccess.error ?? "This connection cannot read local diffs."}
@@ -1308,7 +1308,7 @@ export default function DiffPanel({
               <p className="shrink-0 border-b border-border/70 bg-muted/40 px-3 py-1.5 text-2xs text-muted-foreground">
                 {selectedPatchError
                   ? "Showing tracked changes. Untracked changes could not be loaded. Refresh to retry."
-                  : "Showing tracked changes. Checking untracked files..."}
+                  : "Showing tracked changes. Checking untracked files…"}
               </p>
             )}
             {isSelectedPatchTruncated && !lazySource && (
@@ -1344,7 +1344,7 @@ export default function DiffPanel({
                         wordWrap && "whitespace-pre-wrap wrap-break-word",
                       )}
                     >
-                      {text === "" ? "Empty content." : text}
+                      {text === "" ? "empty content." : text}
                     </pre>
                   </div>
                 ))}
@@ -1502,7 +1502,7 @@ export default function DiffPanel({
                     resizable
                     storageKey="colon3code:diff-file-tree-width"
                     defaultWidthFraction={0.4}
-                    resizeLabel="Resize Changes files"
+                    resizeLabel="resize changes files"
                   >
                     <DiffFileTree
                       ariaLabel={`${reviewSectionTitle} files`}

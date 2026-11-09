@@ -16,7 +16,6 @@ import type {
 } from "@t3tools/contracts";
 import { useRef, useState } from "react";
 import {
-  capitalizeTerm,
   sourceControlClients,
   type ChangeRequestTerminology,
 } from "@t3tools/client-runtime/source-control-clients";
@@ -77,31 +76,31 @@ export function usePullRequestDefaultMergeMethodResolver(
 }
 
 const actionSuccessLabels = (term: string): Record<PullRequestAction, string> => ({
-  merge: "Merge requested",
-  ready: "Marked ready for review",
-  draft: "Converted to draft",
-  close: `${capitalizeTerm(term)} closed`,
-  reopen: `${capitalizeTerm(term)} reopened`,
-  "update-branch": "Branch updated with the base branch",
-  "enable-auto-merge": "Auto-merge enabled",
-  "disable-auto-merge": "Auto-merge disabled",
-  revert: `Revert ${term} opened`,
-  "delete-branch": "Branch deleted",
-  "approve-workflows": "Workflows approved",
+  merge: "merge requested",
+  ready: "marked ready for review",
+  draft: "converted to draft",
+  close: `${term} closed`,
+  reopen: `${term} reopened`,
+  "update-branch": "branch updated with the base branch",
+  "enable-auto-merge": "auto-merge enabled",
+  "disable-auto-merge": "auto-merge disabled",
+  revert: `revert ${term} opened`,
+  "delete-branch": "branch deleted",
+  "approve-workflows": "workflows approved",
 });
 
 const actionFailureLabels = (term: string): Record<PullRequestAction, string> => ({
-  merge: `Could not merge this ${term}`,
-  ready: "Could not mark this ready for review",
-  draft: "Could not convert this to a draft",
-  close: `Could not close this ${term}`,
-  reopen: `Could not reopen this ${term}`,
-  "update-branch": "Could not update this branch",
-  "enable-auto-merge": "Could not enable auto-merge",
-  "disable-auto-merge": "Could not disable auto-merge",
-  revert: `Could not open a revert ${term}`,
-  "delete-branch": "Could not delete this branch",
-  "approve-workflows": "Could not approve workflows",
+  merge: `couldn't merge this ${term} 3:`,
+  ready: "couldn't mark this ready for review 3:",
+  draft: "couldn't convert this to a draft 3:",
+  close: `couldn't close this ${term} 3:`,
+  reopen: `couldn't reopen this ${term} 3:`,
+  "update-branch": "couldn't update this branch 3:",
+  "enable-auto-merge": "couldn't enable auto-merge 3:",
+  "disable-auto-merge": "couldn't disable auto-merge 3:",
+  revert: `couldn't open a revert ${term} 3:`,
+  "delete-branch": "couldn't delete this branch 3:",
+  "approve-workflows": "couldn't approve workflows 3:",
 });
 
 const actionFailureHints = (term: string): Record<PullRequestAction, string> => ({
@@ -231,8 +230,8 @@ export function usePullRequestCloseBatch(
       type: failures.length > 0 ? "error" : "success",
       title:
         failures.length > 0
-          ? `Closed ${closed} of ${batch.length} pull requests`
-          : `Closed ${closed} pull request${closed === 1 ? "" : "s"}`,
+          ? `closed ${closed} of ${batch.length} pull requests`
+          : `closed ${closed} pull request${closed === 1 ? "" : "s"}`,
       ...(failures.length > 0 ? { description: failures.slice(0, 3).join("\n") } : {}),
     });
   };
@@ -310,14 +309,14 @@ export function usePullRequestHandoffs({
     if (opened === null) {
       toastManager.add({
         type: "error",
-        title: "Could not open a thread",
+        title: "hmm, couldn't open a thread 3:",
         description: "Try again from the project, or open a thread first.",
       });
       return;
     }
     toastManager.add({
       type: "success",
-      title: "Asked in a thread",
+      title: "asked in a thread, purr :3",
       description:
         task.prompt.length > 0
           ? "The question is in the composer. Read it over, then send."
@@ -335,7 +334,7 @@ export function usePullRequestHandoffs({
     // Explicit timeouts survive toast updates and would pin the result after loading.
     const toastId = toastManager.add({
       type: "loading",
-      title: `Preparing the ${terminology.singular} checkout...`,
+      title: `preparing the ${terminology.singular} checkout…`,
     });
     const projectRef = scopeProjectRef(environmentId, detail.projectId);
     // Checkout setup requires the thread to exist first.
@@ -347,7 +346,7 @@ export function usePullRequestHandoffs({
       setHandoff(null);
       toastManager.update(toastId, {
         type: "error",
-        title: "Could not open a thread for the checkout",
+        title: "hmm, couldn't open a thread for the checkout 3:",
         description: "Try again from the project, or open a thread first.",
       });
       return;
@@ -361,7 +360,7 @@ export function usePullRequestHandoffs({
       setHandoff(null);
       toastManager.update(toastId, {
         type: "error",
-        title: `Could not prepare the ${terminology.singular} checkout`,
+        title: `aw, couldn't prepare the ${terminology.singular} checkout 3:`,
         description: checkoutFailureDescription(
           isAtomCommandInterrupted(prepared) ? undefined : squashAtomCommandFailure(prepared),
         ),
@@ -380,7 +379,7 @@ export function usePullRequestHandoffs({
       setHandoff(null);
       toastManager.update(toastId, {
         type: "error",
-        title: "Checked out, but the thread stayed where it was",
+        title: "checked out, but the thread stayed put 3:",
         description: `The checkout is ready on \`${prepared.value.branch}\`. Point a thread at it from the branch picker, then ask again.`,
       });
       return;
@@ -392,7 +391,7 @@ export function usePullRequestHandoffs({
         prepared.value.isOnPullRequestHead
           ? {
               type: "success",
-              title: mode === "local" ? "Checked out here" : "Checked out",
+              title: mode === "local" ? "checked out here" : "checked out",
               description:
                 mode === "local"
                   ? `This repository is on the ${terminology.singular}'s branch, with a thread open on it.`
@@ -408,7 +407,7 @@ export function usePullRequestHandoffs({
       prepared.value.isOnPullRequestHead
         ? {
             type: "success",
-            title: "Checkout ready",
+            title: "checkout ready, nya :3",
             description: "The task is in the composer. Read it over, then send.",
           }
         : offHeadPullRequestCheckoutToast(terminology),

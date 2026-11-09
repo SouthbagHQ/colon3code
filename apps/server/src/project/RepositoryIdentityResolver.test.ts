@@ -45,7 +45,7 @@ it.layer(NodeServices.layer)("RepositoryIdentityResolverLive", (it) => {
       expect(normalizeResolvedPath(resolvedIdentityRoot)).toBe(normalizeResolvedPath(resolvedCwd));
       expect(identity?.displayName).toBe("SouthbagHQ/colon3code");
       expect(identity?.provider).toBe("github");
-      expect(identity?.owner).toBe("T3Tools");
+      expect(identity?.owner).toBe("SouthbagHQ");
       expect(identity?.name).toBe("colon3code");
       expect(yield* resolver.resolve(path.join(cwd, ".git"))).toBeNull();
     }).pipe(Effect.provide(RepositoryIdentityResolver.layer)),

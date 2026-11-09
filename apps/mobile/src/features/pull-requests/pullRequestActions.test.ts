@@ -66,9 +66,9 @@ describe("mobile pull request actions", () => {
   });
 
   it("names the change request with its host's term", () => {
-    expect(pullRequestActionLabel("close", GITHUB)).toBe("Close pull request");
-    expect(pullRequestActionLabel("close", GITLAB)).toBe("Close merge request");
-    expect(pullRequestActionLabel("revert", GITLAB)).toBe("Create revert merge request");
+    expect(pullRequestActionLabel("close", GITHUB)).toBe("close pull request");
+    expect(pullRequestActionLabel("close", GITLAB)).toBe("close merge request");
+    expect(pullRequestActionLabel("revert", GITLAB)).toBe("create revert merge request");
     expect(mergeUnavailableReason(detail({ state: "merged" }), true, GITLAB)).toBe(
       "This merge request has been merged.",
     );

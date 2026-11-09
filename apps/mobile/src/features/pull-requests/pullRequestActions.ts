@@ -27,12 +27,12 @@ type ActionDetail = Pick<
 };
 
 export const MERGE_METHODS = {
-  squash: { title: "Squash and merge", description: "Combine the commits into one commit." },
+  squash: { title: "squash and merge", description: "Combine the commits into one commit." },
   merge: {
-    title: "Create a merge commit",
+    title: "create a merge commit",
     description: "Keep the commits and add a merge commit.",
   },
-  rebase: { title: "Rebase and merge", description: "Add the commits without a merge commit." },
+  rebase: { title: "rebase and merge", description: "Add the commits without a merge commit." },
 } as const satisfies Record<PullRequestMergeMethod, { title: string; description: string }>;
 
 export function pullRequestActionLabel(
@@ -41,27 +41,27 @@ export function pullRequestActionLabel(
 ): string {
   switch (action) {
     case "merge":
-      return `Merge ${terminology.singular}`;
+      return `merge ${terminology.singular}`;
     case "ready":
-      return "Mark ready for review";
+      return "mark ready for review";
     case "draft":
-      return "Convert to draft";
+      return "convert to draft";
     case "close":
-      return `Close ${terminology.singular}`;
+      return `close ${terminology.singular}`;
     case "reopen":
-      return `Reopen ${terminology.singular}`;
+      return `reopen ${terminology.singular}`;
     case "update-branch":
-      return "Update branch";
+      return "update branch";
     case "enable-auto-merge":
-      return "Enable auto-merge";
+      return "enable auto-merge";
     case "disable-auto-merge":
-      return "Disable auto-merge";
+      return "disable auto-merge";
     case "revert":
-      return `Create revert ${terminology.singular}`;
+      return `create revert ${terminology.singular}`;
     case "delete-branch":
-      return "Delete branch";
+      return "delete branch";
     case "approve-workflows":
-      return "Approve workflows";
+      return "approve workflows";
   }
 }
 
@@ -136,4 +136,4 @@ export function mergeUnavailableReason(
 }
 
 export const openOnProviderLabel = (provider: SourceControlProviderKind) =>
-  `Open on ${sourceControlClients.get(provider).label}`;
+  `open on ${sourceControlClients.get(provider).label}`;

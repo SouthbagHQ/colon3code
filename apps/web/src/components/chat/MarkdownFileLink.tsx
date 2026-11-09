@@ -87,7 +87,7 @@ export const MarkdownFileLink = memo(function MarkdownFileLink({
         toastManager.add(
           stackedThreadToast({
             type: "error",
-            title: "Unable to open file",
+            title: "hmm, couldn't open that file 3:",
             description: error instanceof Error ? error.message : "An error occurred.",
           }),
         );
@@ -99,7 +99,7 @@ export const MarkdownFileLink = memo(function MarkdownFileLink({
         toastManager.add(
           stackedThreadToast({
             type: "error",
-            title: "Unable to open file",
+            title: "hmm, couldn't open that file 3:",
             description: cause instanceof Error ? cause.message : "An error occurred.",
           }),
         );
@@ -137,7 +137,7 @@ export const MarkdownFileLink = memo(function MarkdownFileLink({
         toastManager.add(
           stackedThreadToast({
             type: "error",
-            title: "Unable to open file in browser",
+            title: "couldn't open the file in the browser",
             description: error instanceof Error ? error.message : "An error occurred.",
           }),
         );
@@ -149,7 +149,7 @@ export const MarkdownFileLink = memo(function MarkdownFileLink({
         toastManager.add(
           stackedThreadToast({
             type: "error",
-            title: "Unable to open file in browser",
+            title: "couldn't open the file in the browser",
             description: cause instanceof Error ? cause.message : "An error occurred.",
           }),
         );
@@ -175,7 +175,7 @@ export const MarkdownFileLink = memo(function MarkdownFileLink({
         toastManager.add(
           stackedThreadToast({
             type: "error",
-            title: "Unable to reveal file",
+            title: "couldn't reveal that file",
             description: error instanceof Error ? error.message : "An error occurred.",
           }),
         );
@@ -187,7 +187,7 @@ export const MarkdownFileLink = memo(function MarkdownFileLink({
         toastManager.add(
           stackedThreadToast({
             type: "error",
-            title: "Unable to reveal file",
+            title: "couldn't reveal that file",
             description: cause instanceof Error ? cause.message : "An error occurred.",
           }),
         );
@@ -200,7 +200,7 @@ export const MarkdownFileLink = memo(function MarkdownFileLink({
       toastManager.add(
         stackedThreadToast({
           type: "error",
-          title: `Failed to copy ${title.toLowerCase()}`,
+          title: `couldn't copy the ${title.toLowerCase()}`,
           description: "Clipboard API unavailable.",
         }),
       );
@@ -233,7 +233,7 @@ export const MarkdownFileLink = memo(function MarkdownFileLink({
         toastManager.add(
           stackedThreadToast({
             type: "error",
-            title: `Failed to copy ${title.toLowerCase()}`,
+            title: `couldn't copy the ${title.toLowerCase()}`,
             description: error instanceof Error ? error.message : "An error occurred.",
           }),
         );
@@ -249,10 +249,10 @@ export const MarkdownFileLink = memo(function MarkdownFileLink({
       const copyItems = markdownFileCopyMenuItems({ targetPath, workspaceRelativePath });
       const clicked = await api.contextMenu.show(
         [
-          ...(onOpenMedia ? ([{ id: "preview-media", label: "Preview media" }] as const) : []),
+          ...(onOpenMedia ? ([{ id: "preview-media", label: "preview media" }] as const) : []),
           ...(onOpen ? ([{ id: "open", label: openInEditorMenuLabel }] as const) : []),
           ...(onOpenInBrowser
-            ? ([{ id: "open-in-browser", label: "Open in integrated browser" }] as const)
+            ? ([{ id: "open-in-browser", label: "open in integrated browser" }] as const)
             : []),
           ...(onReveal && revealLabel ? ([{ id: "reveal", label: revealLabel }] as const) : []),
           ...copyItems.map(({ id, label }) => ({ id, label })),
@@ -282,7 +282,7 @@ export const MarkdownFileLink = memo(function MarkdownFileLink({
             resolveCopyPaths().then((paths) =>
               clicked === "copy-relative" ? paths.relativePath : paths.fullPath,
             ),
-          clicked === "copy-relative" ? "Relative path" : "Full path",
+          clicked === "copy-relative" ? "relative path" : "full path",
         );
       }
     } catch (cause) {
@@ -361,7 +361,7 @@ export const MarkdownFileLink = memo(function MarkdownFileLink({
               kind={chipKind}
               dir="ltr"
               render={<button type="button" />}
-              aria-label={`File options for ${label}`}
+              aria-label={`file options for ${label}`}
               aria-haspopup="menu"
               className={cn(MARKDOWN_FILE_LINK_CLASS_NAME, "select-text")}
               data-markdown-copy={copyMarkdown}

@@ -95,7 +95,7 @@ export function PullRequestGuideTab({
     canWrite ? (
       <Button size={size} variant="outline" disabled={running} onClick={() => void write()}>
         {running ? <Spinner /> : <SparklesIcon aria-hidden className="size-3.5" />}
-        {running ? "Reading the change..." : label}
+        {running ? "reading the change…" : label}
       </Button>
     ) : null;
 
@@ -111,10 +111,10 @@ export function PullRequestGuideTab({
       <div className="scrollbar-gutter-both flex h-full flex-col items-center justify-center-safe gap-2 overflow-y-auto px-4 py-10 text-center">
         <p className="text-sm font-medium text-foreground">
           {running
-            ? "Writing a review guide"
+            ? "writing a review guide"
             : failure === null
-              ? "No review guide yet"
-              : "Could not write a review guide"}
+              ? "no review guide yet"
+              : "couldn't write a review guide 3:"}
         </p>
         <p className="max-w-md text-xs text-muted-foreground">
           {running
@@ -124,7 +124,7 @@ export function PullRequestGuideTab({
                 "A guide is a tour of the change: stops through the code in reading order, with the calls only a maintainer can make.")
               : FAILURE_HINT}
         </p>
-        {writeButton(failure === null ? "Write guide" : "Try again", "sm")}
+        {writeButton(failure === null ? "write guide" : "try again", "sm")}
         {failure === null || running ? null : <FailureDetails detail={failure} />}
       </div>
     );
@@ -146,7 +146,7 @@ export function PullRequestGuideTab({
             </>
           )}
         </AlertDescription>
-        {!running && canWrite ? <AlertAction>{writeButton("Rewrite", "xs")}</AlertAction> : null}
+        {!running && canWrite ? <AlertAction>{writeButton("rewrite", "xs")}</AlertAction> : null}
       </Alert>
     ) : null;
 
@@ -174,13 +174,13 @@ export function PullRequestGuideTab({
   );
 }
 
-const FAILURE_HINT = "Check the review guide model in Settings → Source control.";
+const FAILURE_HINT = "Check the review guide model in settings → source control.";
 
 function FailureDetails({ detail }: { detail: string }) {
   return (
     <details className="w-full max-w-lg text-xs text-muted-foreground">
       <summary className="cursor-pointer rounded-sm -outline-offset-2 hover:text-foreground focus-visible:outline-2 focus-visible:outline-ring">
-        Technical details
+        technical details
       </summary>
       <pre className="scrollbar-gutter-both mt-2 max-h-40 overflow-auto whitespace-pre-wrap break-words rounded-lg border border-border bg-muted/40 p-3 text-left font-mono text-xs">
         {detail}

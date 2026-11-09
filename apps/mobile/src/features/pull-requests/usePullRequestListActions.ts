@@ -142,7 +142,7 @@ export function usePullRequestListActions(
       sourceControlClients.get(entry.provider).changeRequest,
     );
     Dialog.alert(`${label}?`, `#${entry.number} · ${entry.title}`, [
-      { text: "Cancel", style: "cancel" },
+      { text: "cancel", style: "cancel" },
       {
         text: label,
         style: supported === "close" ? "destructive" : "default",
@@ -155,19 +155,19 @@ export function usePullRequestListActions(
     return [
       {
         id: "open",
-        title: `Open ${terminology.singular}`,
+        title: `open ${terminology.singular}`,
         image: Platform.OS === "ios" ? "arrow.up.right" : "open_in_new",
       },
       ...(writableEnvironments.has(entry.environmentId) && entry.state === "open"
         ? [
             {
               id: "request-review",
-              title: "Request review",
+              title: "request review",
               image: Platform.OS === "ios" ? "person.badge.plus" : "person_add",
             },
             {
               id: entry.isDraft ? "ready" : "draft",
-              title: entry.isDraft ? "Mark ready for review" : "Convert to draft",
+              title: entry.isDraft ? "mark ready for review" : "convert to draft",
               image: Platform.OS === "ios" ? "pencil" : "edit",
             },
             {
@@ -188,10 +188,10 @@ export function usePullRequestListActions(
           : []),
       {
         id: "share",
-        title: "Share…",
+        title: "share…",
         image: Platform.OS === "ios" ? "square.and.arrow.up" : "share",
       },
-      { id: "copy", title: "Copy link", image: Platform.OS === "ios" ? "link" : "link" },
+      { id: "copy", title: "copy link", image: Platform.OS === "ios" ? "link" : "link" },
       {
         id: "provider",
         title: openOnProviderLabel(entry.provider),

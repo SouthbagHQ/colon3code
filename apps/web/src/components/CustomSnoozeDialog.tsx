@@ -242,7 +242,7 @@ function CustomSnoozeDialog() {
               }}
             >
               <Settings2Icon />
-              Edit snooze options
+              edit snooze options
             </Button>
             <Button type="button" variant="outline" onClick={() => finish(null)}>
               cancel

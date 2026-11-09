@@ -64,8 +64,8 @@ export function childInputNowItem(input: {
     ),
     title: childThreadInputsTitle(childThreadInputs),
     waitingLabel: childThreadInputs.every((child) => child.lineage.sideChat === true)
-      ? "Side chat waiting"
-      : "Subagent waiting",
+      ? "side chat waiting"
+      : "subagent waiting",
     description: childThreadInputs.map((child, index) => (
       <Fragment key={child.id}>
         {index > 0 ? " " : null}
@@ -79,7 +79,7 @@ export function childInputNowItem(input: {
     )),
     actions: (
       <InlineButton onClick={() => onOpenThread(first.id, first.environmentId)}>
-        {first.hasPendingApprovals ? "Open approval" : "Open question"}
+        {first.hasPendingApprovals ? "open approval" : "open question"}
       </InlineButton>
     ),
   };
@@ -110,7 +110,7 @@ export function goalNowItem(input: {
             <InlineButton
               onClick={() => void onSendCommand("/goal resume", "Failed to resume goal.")}
             >
-              Resume
+              resume
             </InlineButton>
             <span aria-hidden>·</span>
           </>
@@ -119,7 +119,7 @@ export function goalNowItem(input: {
           tone="muted"
           onClick={() => void onSendCommand("/goal clear", "Failed to clear goal.")}
         >
-          Clear
+          clear
         </InlineButton>
       </>
     ),
@@ -143,7 +143,7 @@ export function runStopNowItem(input: {
     ) : (
       <CircleStopIcon />
     ),
-    title: unresponsive ? "Agent not responding to Stop" : "Stopping",
+    title: unresponsive ? "agent not responding to stop" : "stopping",
     description: unresponsive
       ? "It may be short on memory. Force stop kills its processes."
       : undefined,
@@ -158,7 +158,7 @@ export function runStopNowItem(input: {
         />
         {unresponsive && input.canForceStop ? (
           <InlineButton disabled={input.forceStopping} onClick={input.onForceStop}>
-            {input.forceStopping ? "Force stopping..." : "Force stop"}
+            {input.forceStopping ? "force stopping…" : "force stop"}
           </InlineButton>
         ) : null}
       </>
@@ -216,7 +216,7 @@ export function backgroundWorkNowItem(input: {
     title:
       only && typeof only.label !== "string" && only.task.label !== only.task.kind ? (
         <>
-          {presentation.waiting ? "Waiting" : "Running"} · {only.label}
+          {presentation.waiting ? "waiting" : "running"} · {only.label}
         </>
       ) : (
         presentation.title
@@ -248,11 +248,11 @@ export function backgroundWorkNowItem(input: {
         )}
         {onlyThreadId === undefined ? null : (
           <InlineButton tone="muted" onClick={() => onOpenThread(onlyThreadId)}>
-            Open
+            open
           </InlineButton>
         )}
         <InlineButton disabled={input.stopDisabled} onClick={() => void input.onStop()}>
-          {input.stopping ? "Stopping..." : "Stop"}
+          {input.stopping ? "stopping…" : "stop"}
         </InlineButton>
       </>
     ),
@@ -275,7 +275,7 @@ export function branchMismatchBannerItem(input: {
     icon: <GitBranchIcon />,
     title: (
       <span className="flex min-w-0 items-baseline gap-1.5">
-        <span className="shrink-0 font-normal text-muted-foreground">Branch changed from</span>
+        <span className="shrink-0 font-normal text-muted-foreground">branch changed from</span>
         <Tooltip>
           <TooltipTrigger
             render={

@@ -21,7 +21,7 @@ import { WORKSPACE_TOOLBAR, type WorkspaceTab } from "./workspace-tabs-state";
 import { PullRequestGlyph } from "../../pull-requests/pullRequestGlyphs";
 
 const TABS: ReadonlyArray<{ id: WorkspaceTab; label: string; icon: AppSymbolName }> = [
-  { id: "threads", label: "Threads", icon: "text.bubble" },
+  { id: "threads", label: "threads", icon: "text.bubble" },
   { id: "pullRequests", label: "PRs", icon: PullRequestGlyph.pullRequest },
 ];
 
@@ -113,7 +113,7 @@ export function WorkspaceToolbar(props: {
           <View className="flex-row items-center" style={{ gap }}>
             {!keyboardVisible && !expanded ? (
               <ToolbarButton
-                label={`Show tabs, ${activeTab.label} selected`}
+                label={`show tabs, ${activeTab.label} selected`}
                 icon={activeTab.icon}
                 size={48}
                 onPress={() => dispatch({ type: "expand" })}
@@ -130,7 +130,7 @@ export function WorkspaceToolbar(props: {
                 focusSearch();
               }}
             />
-            <ToolbarButton label="Cancel search" icon="xmark" size={48} onPress={cancelSearch} />
+            <ToolbarButton label="cancel search" icon="xmark" size={48} onPress={cancelSearch} />
           </View>
         ) : null}
         {showNavigation ? <WorkspaceDock onNewTask={props.onNewTask} /> : null}

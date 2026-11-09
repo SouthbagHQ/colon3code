@@ -467,29 +467,29 @@ export function pullRequestListReviewStatus(
 ) {
   if (entry.reviewDecision === "changes-requested")
     return {
-      label: "Changes",
-      accessibleLabel: "Changes requested",
+      label: "changes",
+      accessibleLabel: "changes requested",
       icon: "person.fill.xmark",
       tint: "accent-danger-foreground",
     } as const;
   if (entry.reviewDecision === "approved")
     return {
-      label: "Approved",
-      accessibleLabel: "Reviews approved",
+      label: "approved",
+      accessibleLabel: "reviews approved",
       icon: "person.fill.checkmark",
       tint: "accent-adaptive-emerald-600-400",
     } as const;
   if (entry.viewerReviewRequested)
     return {
-      label: "Your review",
-      accessibleLabel: "Your review requested",
+      label: "your review",
+      accessibleLabel: "your review requested",
       icon: "person.badge.clock",
       tint: "accent-warning-foreground",
     } as const;
   if (entry.reviewDecision === "review-required")
     return {
-      label: "Review",
-      accessibleLabel: "Review required",
+      label: "review",
+      accessibleLabel: "review required",
       icon: "person.badge.clock",
       tint: "accent-icon-muted",
     } as const;

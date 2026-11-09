@@ -32,7 +32,7 @@ function FileCardHeader(props: PreviewProps) {
   return (
     <Pressable
       accessibilityRole="button"
-      accessibilityLabel={`Open ${props.source.name}`}
+      accessibilityLabel={`open ${props.source.name}`}
       onPress={props.onOpen}
       onLongPress={props.onLongPress}
       className="h-[72px] flex-row items-center gap-3 p-3 active:bg-subtle"
@@ -188,7 +188,7 @@ function InlineAudio(props: PreviewProps & { readonly resolveUri: () => Promise<
         <Pressable
           accessibilityRole="button"
           accessibilityLabel={
-            playing ? "Pause audio" : error || status.error ? "Retry audio" : "Play audio"
+            playing ? "pause audio" : error || status.error ? "retry audio" : "play audio"
           }
           accessibilityState={{ busy }}
           onPress={toggle}

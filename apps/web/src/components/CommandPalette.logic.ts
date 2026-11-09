@@ -601,7 +601,7 @@ export function filterCommandPaletteGroups(input: {
     if (input.threadSearchItems.length > 0) {
       searchableGroups.push({
         value: "threads-search",
-        label: "Threads",
+        label: "threads",
         items: input.threadSearchItems,
       });
     }
@@ -657,7 +657,7 @@ export function filterCommandPaletteGroups(input: {
   const messageItems = (input.threadMessageItems ?? []).filter((item) => !listed.has(item.value));
   return messageItems.length === 0
     ? groups
-    : [...groups, { value: "threads-messages", label: "In messages", items: messageItems }];
+    : [...groups, { value: "threads-messages", label: "in messages", items: messageItems }];
 }
 
 /** Every option inside a submenu as one row, e.g. "New thread in colon3code" or "Change theme: Dracula". */
@@ -832,9 +832,9 @@ export function remoteProjectInputPlaceholder(flow: AddProjectCloneFlow | null):
   if (!flow) return null;
   if (flow.step === "confirm") return null;
   if (flow.source === "url") {
-    return "Enter Git clone URL";
+    return "enter Git clone URL";
   }
-  return `Enter ${addProjectRemoteSourceLabel(flow.source)} repository (${addProjectRemoteSourcePathHint(flow.source)})`;
+  return `enter ${addProjectRemoteSourceLabel(flow.source)} repository (${addProjectRemoteSourcePathHint(flow.source)})`;
 }
 
 export function buildPaletteRemoteSourceReadiness(

@@ -33,7 +33,7 @@ export function GuideNotice({ state }: { readonly state: ReturnType<typeof useRe
           tintColorClassName={failed ? "accent-danger-foreground" : "accent-icon-muted"}
         />
         <Text className="text-base font-t3-semibold">
-          {compact ? notice.title : "Review guide"}
+          {compact ? notice.title : "review guide"}
         </Text>
       </View>
       <View style={compact ? undefined : { minHeight: 100 }} className="pt-3 pb-4">

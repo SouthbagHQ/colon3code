@@ -241,7 +241,7 @@ export function AddProviderInstanceDialog({
       : "Select an ACP or configure one manually.";
   const wizardStepSummaries = isAcpRegistry
     ? ([
-        isLocalAcp ? "Local ACP command" : (selectedAcp?.name ?? (manualAgentId || null)),
+        isLocalAcp ? "local ACP command" : (selectedAcp?.name ?? (manualAgentId || null)),
         previewLabel,
         null,
       ] as const)

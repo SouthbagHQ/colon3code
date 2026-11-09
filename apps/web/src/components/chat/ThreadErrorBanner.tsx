@@ -19,10 +19,10 @@ export function copyAdminRequest() {
     () =>
       toastManager.add({
         type: "success",
-        title: "Request copied",
+        title: "copied the request :3",
         description: "Send it to your workspace admin.",
       }),
-    () => toastManager.add({ type: "error", title: "Could not copy the request" }),
+    () => toastManager.add({ type: "error", title: "aw, couldn't copy the request 3:" }),
   );
 }
 
@@ -112,7 +112,7 @@ export const ThreadErrorBanner = memo(function ThreadErrorBanner({
           <AlertAction>
             {workspaceLimit ? (
               <Button variant="default" size="sm" onClick={copyAdminRequest}>
-                Copy request for admin
+                copy request for admin
               </Button>
             ) : chatGptLimit ? (
               <ChatGptUsageButton variant="default" size="sm" />

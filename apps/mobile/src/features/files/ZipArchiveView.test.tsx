@@ -131,6 +131,7 @@ vi.mock("../../components/ui/useBarInset", () => ({ useContentTopInset: () => 0 
 vi.mock("../../components/ui/AppSymbol", () => ({ SymbolView: () => null }));
 vi.mock("../../components/ui/Progress", () => ({ Progress: () => null }));
 vi.mock("../../components/PierreEntryIcon", () => ({ PierreEntryIcon: () => null }));
+vi.mock("../../components/Colon3Wordmark", () => ({ Colon3Wordmark: () => null }));
 vi.mock("../../components/FilePreviewModal", () => ({ FilePreviewModal: () => null }));
 vi.mock("../../lib/copyTextWithHaptic", () => ({}));
 vi.mock("./SourceFileSurface", () => ({
@@ -244,7 +245,7 @@ it("opens a ZIP chat attachment as a browsable archive on the attachment file sc
     expect(screen.container.querySelector("pre")?.textContent).toBe("First archive contents"),
   );
   const add = Array.from(screen.container.querySelectorAll("button")).find(
-    (button) => button.textContent === "Add to chat",
+    (button) => button.textContent === "add to chat",
   );
   expect(add?.disabled).toBe(false);
 });
@@ -256,7 +257,7 @@ it("keeps the ZIP filter and archive open when native Back closes a selected ent
     expect(screen.container.querySelector('[aria-label="first.txt"]')).not.toBeNull(),
   );
   const filter = screen.container.querySelector<HTMLInputElement>(
-    '[aria-label="Filter files in ZIP"]',
+    '[aria-label="filter files in ZIP"]',
   )!;
   await act(async () => {
     Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, "value")!.set!.call(
@@ -278,7 +279,7 @@ it("keeps the ZIP filter and archive open when native Back closes a selected ent
   expect(screen.container.querySelector("pre")).toBeNull();
   expect(screen.container.querySelector('[aria-label="first.txt"]')).not.toBeNull();
   expect(
-    screen.container.querySelector<HTMLInputElement>('[aria-label="Filter files in ZIP"]')?.value,
+    screen.container.querySelector<HTMLInputElement>('[aria-label="filter files in ZIP"]')?.value,
   ).toBe("first");
 });
 

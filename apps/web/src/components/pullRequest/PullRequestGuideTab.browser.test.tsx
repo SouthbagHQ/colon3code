@@ -64,7 +64,7 @@ it("keeps Try again inside a short panel when a failed guide has long diagnostic
     { container: tab },
   );
 
-  const retry = screen.getByRole("button", { name: "Try again" });
+  const retry = screen.getByRole("button", { name: "try again" });
   await expect.element(retry).toBeVisible();
   const panelBox = panel.getBoundingClientRect();
   const retryBox = retry.element().getBoundingClientRect();

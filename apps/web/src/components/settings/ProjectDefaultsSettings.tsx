@@ -169,7 +169,7 @@ export function ProjectDefaultsSettings({ category }: { category: ProjectSetting
               modelOptionsByInstance={modelOptions}
               triggerClassName={SETTINGS_PICKER_TRIGGER_CLASSNAME}
               {...(mixedModel
-                ? { triggerLabel: automaticModel ? "Automatic (mixed)" : "Mixed" }
+                ? { triggerLabel: automaticModel ? "automatic (mixed)" : "mixed" }
                 : {})}
               getModelDisabledReason={modelDisabledReason}
               onOpenProviderSetup={(instanceId) => {
@@ -200,7 +200,7 @@ export function ProjectDefaultsSettings({ category }: { category: ProjectSetting
           </div>
         ) : (
           <span className="text-sm text-muted-foreground">
-            {mixedModel ? "Mixed" : "No providers available"}
+            {mixedModel ? "mixed" : "no providers available"}
           </span>
         )
       }
@@ -240,8 +240,8 @@ export function ProjectDefaultsSettings({ category }: { category: ProjectSetting
                 value === "local" || value === "worktree"
                   ? resolveEnvModeLabel(value)
                   : unavailable
-                    ? "Unavailable"
-                    : "Mixed"
+                    ? "unavailable"
+                    : "mixed"
               }
             </SelectValue>
           </SelectTrigger>
@@ -331,7 +331,7 @@ export function ProjectDefaultsSettings({ category }: { category: ProjectSetting
   return (
     <SettingsSection
       id={category === "source-control" ? "source-control-defaults" : "project-defaults"}
-      title={category === "source-control" ? "Repositories" : "New threads"}
+      title={category === "source-control" ? "repositories" : "new threads"}
     >
       {category === "project" ? (
         <>
@@ -458,14 +458,14 @@ export function ProjectDefaultsSettings({ category }: { category: ProjectSetting
               settings.removeAgentCreditsOnMerge ? (
                 <SettingResetButton
                   label="agent credit removal"
-                  tooltip="Keep agent credits"
+                  tooltip="keep agent credits"
                   onClick={() => updateSettings({ removeAgentCreditsOnMerge: false })}
                 />
               ) : null
             }
             control={
               <Switch
-                aria-label="Remove agent credits when merging"
+                aria-label="remove agent credits when merging"
                 mixed={mixedAgentCredits}
                 checked={mixedAgentCredits ? false : settings.removeAgentCreditsOnMerge}
                 onCheckedChange={(enabled) =>
@@ -565,14 +565,14 @@ export function WorktreeSubmodulesRow() {
             if (isWorktreeSubmodules(value)) updateSettings({ worktreeSubmodules: value });
           }}
         >
-          <SelectTrigger size="sm" aria-label="Worktree submodules">
+          <SelectTrigger size="sm" aria-label="worktree submodules">
             <SelectValue>
               {(value: string | null) =>
                 isWorktreeSubmodules(value)
                   ? WORKTREE_SUBMODULES_LABELS[value]
                   : unavailable
-                    ? "Unavailable"
-                    : "Mixed"
+                    ? "unavailable"
+                    : "mixed"
               }
             </SelectValue>
           </SelectTrigger>

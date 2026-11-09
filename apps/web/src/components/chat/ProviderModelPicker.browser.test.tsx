@@ -77,11 +77,11 @@ it("keeps each registry image when adding a model from another ACP agent", async
       (image) => image.naturalWidth,
     );
   await vi.waitFor(() => expect(imageWidths()).toEqual([11]));
-  await screen.getByRole("button", { name: "First model", exact: true }).click();
+  await screen.getByRole("button", { name: /^first model/ }).click();
   await page.getByRole("button", { name: "Second agent", exact: true }).click();
   await userEvent.keyboard("{Shift>}");
   try {
-    await page.getByRole("option", { name: /Second model/ }).click();
+    await page.getByRole("option", { name: /second model/ }).click();
   } finally {
     await userEvent.keyboard("{/Shift}");
   }
@@ -153,18 +153,18 @@ it("keeps a docked picker open after a pick and hands focus to that model's effo
 
   await using screen = await render(<Picker />);
   await screen.getByRole("button", { name: "Choose model" }).click();
-  const search = page.getByPlaceholder("Search models...");
+  const search = page.getByPlaceholder("search models...");
   await expect.element(search).toHaveFocus();
   await userEvent.keyboard("{ArrowRight}");
   await expect.element(page.getByRole("radio", { name: "High" })).toHaveFocus();
   await userEvent.keyboard("{ArrowLeft}");
   await expect.element(search).toHaveFocus();
 
-  await page.getByRole("option", { name: /Second model/ }).click();
+  await page.getByRole("option", { name: /second model/ }).click();
   await expect.element(page.getByRole("radio", { name: "Medium" })).toHaveFocus();
 
-  await page.getByRole("option", { name: /Plain model/ }).click();
-  await page.getByRole("option", { name: /Second model/ }).click();
+  await page.getByRole("option", { name: /plain model/ }).click();
+  await page.getByRole("option", { name: /second model/ }).click();
   await expect.element(page.getByRole("radio", { name: "Medium" })).toHaveFocus();
   await userEvent.keyboard("{Escape}");
   await expect.element(search).not.toBeInTheDocument();

@@ -90,7 +90,7 @@ const FileTreeRow = function FileTreeRow(props: {
         {node.name}
       </Text>
       {node.kind === "directory" && props.expanded && props.loading ? (
-        <AppActivityIndicator size="small" accessibilityLabel={`Loading ${node.name}`} />
+        <AppActivityIndicator size="small" accessibilityLabel={`loading ${node.name}`} />
       ) : null}
     </Pressable>
   );
@@ -259,7 +259,7 @@ export function FileTreeBrowser(props: {
               </Text>
               <View className="mt-3">
                 <Button
-                  label="Try again"
+                  label="try again"
                   tone="secondary"
                   onPress={props.onRefresh}
                   disabled={props.isPending}

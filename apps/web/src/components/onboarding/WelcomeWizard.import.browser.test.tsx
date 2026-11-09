@@ -251,7 +251,6 @@ async function mountImport(remote = false) {
       </RegistryContext.Provider>,
     ),
   );
-  await click("let's go :3");
   await click("continue");
   await click("continue");
   expect(pageText()).toContain("import your projects :3");
