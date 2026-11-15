@@ -12,6 +12,7 @@ import {
   Dialog,
   DialogClose,
   DialogDescription,
+  DialogAction,
   DialogFooter,
   DialogHeader,
   DialogPanel,
@@ -204,7 +205,7 @@ function QuitStep({
         <Button variant="outline" onClick={onCancel}>
           cancel
         </Button>
-        <Button onClick={onRechecked}>I&rsquo;ve quit it</Button>
+        <DialogAction onClick={onRechecked}>I&rsquo;ve quit it</DialogAction>
       </DialogFooter>
     </>
   );
@@ -578,7 +579,7 @@ function BlockedStep({
         <Button variant="outline" onClick={onClose}>
           close
         </Button>
-        {onRetry ? <Button onClick={onRetry}>try again</Button> : null}
+        {onRetry ? <DialogAction onClick={onRetry}>try again</DialogAction> : null}
       </DialogFooter>
     </>
   );

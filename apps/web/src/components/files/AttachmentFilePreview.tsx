@@ -10,14 +10,23 @@ import {
   officePreviewKind,
   FILE_TEXT_PREVIEW_MAX_BYTES,
 } from "@t3tools/shared/filePreview";
-import { ChevronRightIcon, DownloadIcon, TrashIcon, WrapTextIcon, XIcon } from "~/icons";
-import { Check, Code2, Copy, Eye, Table2 } from "lucide";
+import {
+  CheckIcon,
+  ChevronRightIcon,
+  Code2Icon,
+  CopyIcon,
+  DownloadIcon,
+  EyeIcon,
+  Table2Icon,
+  TrashIcon,
+  WrapTextIcon,
+  XIcon,
+} from "~/icons";
 import { lazy, Suspense, useEffect, useRef, useState } from "react";
 
 import { useAssetUrlRefresh } from "~/assets/assetUrls";
 import ChatMarkdown from "~/components/ChatMarkdown";
 import { maskMarkdownFrontmatter } from "@t3tools/shared/markdownFrontmatter";
-import { MorphIcon } from "~/components/MorphIcon";
 import { ScrollArea } from "~/components/ui/scroll-area";
 import { toastManager } from "~/components/ui/toast";
 import { useCopyToClipboard } from "~/hooks/useCopyToClipboard";
@@ -408,10 +417,13 @@ export function AttachmentFilePreview(props: {
             pressed={rendered}
             onPress={() => setRendered((value) => !value)}
           >
-            <MorphIcon
-              className="size-3.5"
-              icon={rendered ? Code2 : renderedMode === "table" ? Table2 : Eye}
-            />
+            {rendered ? (
+              <Code2Icon className="size-3.5" />
+            ) : renderedMode === "table" ? (
+              <Table2Icon className="size-3.5" />
+            ) : (
+              <EyeIcon className="size-3.5" />
+            )}
           </FileSurfaceAction>
         ) : null}
         {showsRawText ? (
@@ -451,7 +463,7 @@ export function AttachmentFilePreview(props: {
                 );
             }}
           >
-            <MorphIcon className="size-3.5" icon={isCopied ? Check : Copy} />
+            {isCopied ? <CheckIcon className="size-3.5" /> : <CopyIcon className="size-3.5" />}
           </FileSurfaceAction>
         ) : null}
         {url ? (

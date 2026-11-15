@@ -1,4 +1,5 @@
 import { type EnvironmentConnectionPhase } from "@t3tools/client-runtime/connection";
+import type { EnvironmentThreadStatus } from "@t3tools/client-runtime/state/threads";
 
 export type ThreadContentPresentation =
   | { readonly kind: "ready" }
@@ -44,4 +45,13 @@ export function projectThreadContentPresentation(input: {
     title: "messages not cached 3:",
     detail: "reconnect this environment to load the conversation.",
   };
+}
+
+export function threadSyncStatusLabel(
+  status: EnvironmentThreadStatus,
+  presentation: ThreadContentPresentation["kind"],
+): string | null {
+  if (status !== "empty" && status !== "cached" && status !== "synchronizing") return null;
+  if (presentation === "ready") return "syncing messages…";
+  return presentation === "loading" ? "loading messages…" : null;
 }

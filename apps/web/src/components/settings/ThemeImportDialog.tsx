@@ -2,6 +2,7 @@ import { DownloadIcon, PlusIcon } from "~/icons";
 import type { ChangeEvent, DragEvent, UIEvent } from "react";
 import { settlePromise } from "@t3tools/client-runtime/state/runtime";
 import { useRef, useState } from "react";
+import { formatBytes } from "../../lib/formatBytes";
 import { cn } from "../../lib/utils";
 import {
   getCustomThemes,
@@ -33,15 +34,9 @@ const MAX_THEME_FILE_BYTES = 256 * 1024;
 /** Highlighting rebuilds markup per keystroke; fall back to plain text for oversized pastes. */
 const MAX_HIGHLIGHTED_JSON_LENGTH = 20_000;
 
-function formatByteSize(bytes: number): string {
-  if (bytes >= 1024 * 1024) return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
-  if (bytes >= 1024) return `${Math.round(bytes / 1024)} KB`;
-  return `${bytes} bytes`;
-}
-
 function describeOversizedThemeFile(bytes: number): string | null {
   if (bytes <= MAX_THEME_FILE_BYTES) return null;
-  return `that file is ${formatByteSize(bytes)}. theme files are only a few KB, so this one wasn't read (limit ${formatByteSize(MAX_THEME_FILE_BYTES)}) ^w^`;
+  return `that file is ${formatBytes(bytes)}. theme files are only a few KB, so this one wasn't read (limit ${formatBytes(MAX_THEME_FILE_BYTES)}) ^w^`;
 }
 
 function escapeJsonHtml(value: string): string {

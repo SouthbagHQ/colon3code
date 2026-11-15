@@ -289,6 +289,64 @@ describe("buildProjectGroups", () => {
     expect(groups[1]?.label).toBe("julius/colon3code-fork");
   });
 
+  // regression: #15049 a rename to the repository name snapped back to the display path
+  it("labels a renamed group by its title even when it matches the repository name", () => {
+    const folderTitles = [
+      makeProject("colon3code", "/work/colon3code", { title: "colon3code" }),
+      makeProject("colon3code-2", "/work/colon3code-2", { title: "colon3code" }),
+    ];
+    const renamed = folderTitles.map((project) => ({ ...project, hasCustomTitle: true }));
+
+    const label = (projects: ReadonlyArray<EnvironmentProject>) =>
+      buildProjectGroups({ projects, settings: settings("repository") })[0]?.label;
+    expect(label(folderTitles)).toBe(":3 Code");
+    expect(label(renamed)).toBe("colon3code");
+  });
+
+  it("labels a group by its repository when clones disagree on its casing", () => {
+    // A subfolder project, its repository root, and a clone whose remote URL is
+    // lowercased: no shared title or display name, but one repository.
+    const subfolder = makeProject("design-study", "/work/NewCo/reference/design-study");
+    const root = makeProject("NewCo", "/work/NewCo");
+    const lowercasedClone = makeProject("NewCo", "/remote/NewCo", {
+      environmentId: EnvironmentId.make("remote"),
+      repositoryIdentity: { ...repositoryIdentity, name: "COLON3CODE", displayName: "t3 code" },
+    });
+
+    const groups = buildProjectGroups({
+      projects: [subfolder, root, lowercasedClone],
+      settings: settings("repository"),
+      preferredEnvironmentId: environmentId,
+    });
+    expect(groups).toHaveLength(1);
+    expect(groups[0]?.label).toBe(":3 Code");
+
+    // A subfolder group in repository_path mode keeps its own title.
+    const localIdentity = { ...repositoryIdentity, rootPath: "/work/colon3code" };
+    const pathGroups = buildProjectGroups({
+      projects: [
+        makeProject("design", "/work/colon3code/design", {
+          title: "Design docs",
+          hasCustomTitle: true,
+          repositoryIdentity: localIdentity,
+        }),
+        makeProject("design", "/remote/colon3code/design", {
+          environmentId: EnvironmentId.make("remote"),
+          repositoryIdentity: {
+            ...repositoryIdentity,
+            rootPath: "/remote/colon3code",
+            name: "COLON3CODE",
+            displayName: "t3 code",
+          },
+        }),
+        makeProject("colon3code", "/work/colon3code", { repositoryIdentity: localIdentity }),
+      ],
+      settings: settings("repository_path"),
+      preferredEnvironmentId: environmentId,
+    });
+    expect(pathGroups.map((group) => group.label)).toEqual(["Design docs", "colon3code"]);
+  });
+
   it("applies a physical-project override without dropping its siblings", () => {
     const first = makeProject("colon3code", "/work/colon3code");
     const second = makeProject("colon3code-2", "/work/colon3code-2");
@@ -416,8 +474,23 @@ describe("sortProjectsByGroupOrder", () => {
   it("tells the same project id on two environments apart", () => {
     const sorted = sortProjectsByGroupOrder(
       [project("shared"), project("shared", remote)],
-      [{ memberProjectRefs: [ref("shared", remote)] }, { memberProjectRefs: [ref("shared")] }],
+      [
+        { memberProjectRefs: [ref("shared", remote)], pinned: false, archived: false },
+        { memberProjectRefs: [ref("shared")], pinned: false, archived: false },
+      ],
     );
     expect(sorted.map((entry) => entry.environmentId)).toEqual([remote, environmentId]);
+  });
+
+  it("lists pinned projects first and archived ones last, like the sidebar's project menu", () => {
+    const sorted = sortProjectsByGroupOrder(
+      [project("archived"), project("recent"), project("pinned"), project("unlisted")],
+      [
+        { memberProjectRefs: [ref("archived")], pinned: false, archived: true },
+        { memberProjectRefs: [ref("recent")], pinned: false, archived: false },
+        { memberProjectRefs: [ref("pinned")], pinned: true, archived: false },
+      ],
+    );
+    expect(sorted.map((entry) => entry.id)).toEqual(["pinned", "recent", "archived", "unlisted"]);
   });
 });

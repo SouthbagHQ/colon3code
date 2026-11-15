@@ -4,7 +4,7 @@ import {
   type RuntimeMode,
 } from "@t3tools/contracts";
 import { RUNTIME_MODE_COPY } from "@t3tools/client-runtime/runtimeModeCopy";
-import { LockIcon, PenLineIcon, ShieldOffIcon, SparklesIcon, type IconComponent } from "~/icons";
+import { type IconComponent, LockIcon, PenLineIcon, ShieldCheckIcon, ShieldOffIcon } from "~/icons";
 
 export const runtimeModeConfig: Record<
   RuntimeMode,
@@ -12,7 +12,7 @@ export const runtimeModeConfig: Record<
 > = {
   "approval-required": { ...RUNTIME_MODE_COPY["approval-required"], icon: LockIcon },
   "auto-accept-edits": { ...RUNTIME_MODE_COPY["auto-accept-edits"], icon: PenLineIcon },
-  auto: { ...RUNTIME_MODE_COPY.auto, icon: SparklesIcon },
+  auto: { ...RUNTIME_MODE_COPY.auto, icon: ShieldCheckIcon },
   // An open lock reads like a closed one at small sizes; a crossed shield does not.
   "full-access": { ...RUNTIME_MODE_COPY["full-access"], icon: ShieldOffIcon },
 };

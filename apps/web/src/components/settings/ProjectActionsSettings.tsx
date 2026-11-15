@@ -174,8 +174,8 @@ export function ProjectActionsSettings() {
       />
       {mixed ? (
         <SettingsRow
-          title="different actions across environments"
-          description="pick one environment to edit its list. adding an action here adds it to every selected environment ^w^"
+          title="different actions across checkouts"
+          description="Narrow the selection above to one checkout to edit its list. Adding an action here adds it to every selected checkout ^w^"
         />
       ) : (
         <ProjectActionsList

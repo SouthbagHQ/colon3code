@@ -19,6 +19,8 @@ it.each([
   ["github.com:SouthbagHQ/colon3code.git", "SouthbagHQ/colon3code"],
   ["gitlab.com:T3Tools/platform/colon3code", "T3Tools/platform/colon3code"],
   ["https://github.com/SouthbagHQ/colon3code.git", "SouthbagHQ/colon3code"],
+  ["https://github.com/SouthbagHQ/colon3code.git?view=compact", "SouthbagHQ/colon3code"],
+  ["https://github.com/SouthbagHQ/colon3code.git#section", "SouthbagHQ/colon3code"],
   ["C:/repos/colon3code", null],
 ])("reads the repository path of %s", (remoteUrl, expected) => {
   assert.strictEqual(repositoryPathFromRemoteUrl(remoteUrl), expected);

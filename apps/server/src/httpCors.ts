@@ -11,3 +11,6 @@ export const browserApiCorsAllowedHeaders = [
 ] as const;
 
 export const DESKTOP_RENDERER_ORIGINS = ["colon3code://app", "colon3code-dev://app"] as const;
+
+/** MCP refuses every browser Origin with 403, so the browser CORS layer must not answer for it. */
+export const MCP_HTTP_PATH = "/mcp";

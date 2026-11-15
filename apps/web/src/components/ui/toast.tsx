@@ -282,12 +282,12 @@ function ToastDescriptionAndExpandable({
           {open ? (
             <ChevronUpIcon
               aria-hidden
-              className="mt-0.5 size-3.5 shrink-0 text-muted-foreground opacity-80"
+              className="size-3.5 h-lh shrink-0 text-muted-foreground opacity-80"
             />
           ) : (
             <ChevronDownIcon
               aria-hidden
-              className="mt-0.5 size-3.5 shrink-0 text-muted-foreground opacity-80"
+              className="size-3.5 h-lh shrink-0 text-muted-foreground opacity-80"
             />
           )}
         </TooltipTrigger>

@@ -1,30 +1,38 @@
 # :3 Code
 
-:3 Code is an "agent harness control surface" (＾• ω •＾) — it lets you pet, poke, and direct every agent on your machine from a best-in-class mobile app ([iOS](https://apps.apple.com/us/app/colon3-code-remote-claude-more/id6787819824), [Android](https://play.google.com/store/apps/details?id=com.t3tools.colon3code)), [web app](https://app.t3.codes) and [Electron-based desktop app](https://t3.codes).
+:3 Code is an "agent harness control surface" (＾• ω •＾). It lets you pet, poke, and direct every agent on your machine from a best-in-class mobile app ([iOS](https://apps.apple.com/us/app/colon3-code-remote-claude-more/id6787819824), [Android](https://play.google.com/store/apps/details?id=com.t3tools.colon3code)), [web app](https://app.t3.codes) and [Electron-based desktop app](https://t3.codes). Start a thread at your desk, then approve the next step from your phone.
 
-Works with your subscriptions on Claude Code, Codex, Cursor, Grok Build, OpenCode, Google Antigravity, fx, and Southbag Code. If they're set up on your computer, :3 Code can control them.
+Works with your subscriptions on Claude Code, Codex, Cursor, OpenCode, Grok Build, Google Antigravity, Kiro, Pi, Muse Code, fx, Southbag Code, and any [ACP](./docs/user/providers-acp.md) agent. If they're set up on your computer, :3 Code can control them.
 
-## "wait, what are you selling me?"
+## what you get
 
-Nothing! Not a thing. We built :3 Code because we wanted the best possible development experience with agents. We were inspired by existing solutions like the Codex desktop app, Conductor, Claude Desktop and Cursor Glass, but none met our bar.
-
-We wanted something performant, remote-ready, and truly open. If we ever go the wrong direction, we want you to have everything you need to fork and build the editor that you want. No hard feelings, we'll purr you off. (˃ᆺ˂)
+- **Your subscriptions.** :3 Code does not resell tokens. It drives the agents you are already signed in to.
+- **Every agent in one place.** Change models in the middle of a thread. Let Claude hand a task to Codex.
+- **Desktop, web, and phone.** One server, and every client shows the same threads. There are apps for iOS and Android.
+- **Remote ready.** Run agents on any machine. Connect over your local network, Tailscale, or [T3 Connect](./docs/user/remote-access.md).
+- **Git built in.** Each thread can work in its own worktree. Review the diff, then commit, push, and open a pull request with one button.
+- **Fast.** Performance is a feature here. We measure it, and we treat a dropped frame as a bug.
+- **Open.** MIT licensed. If you don't like something, fork it. =^.^=
 
 ## installation
 
-> [!WARNING]
-> :3 Code currently supports Codex, Claude, Cursor, Grok Build, OpenCode, Antigravity, fx, and Southbag Code. Install and authenticate at least one provider before use:
->
-> - Codex: install [Codex CLI](https://developers.openai.com/codex/cli) and run `codex login`
-> - Claude: install [Claude Code](https://claude.com/product/claude-code) and run `claude auth login`
-> - Cursor: install [Cursor CLI](https://cursor.com/cli) and run `agent login`
-> - Grok Build: install [Grok Build CLI](https://x.ai/cli) and run `grok login`
-> - OpenCode: install [OpenCode](https://opencode.ai) and run `opencode auth login`
-> - Antigravity: enable it in Settings, then use **Install Antigravity** and **Sign in with Google**. No CLI is required.
-> - fx: install [fx](https://fx.sh) and run `fx login` on the machine running the :3 Code server ([setup guide](./docs/user/providers-fx.md))
-> - Southbag Code: install [Southbag Code](https://github.com/SouthbagHQ/code) with `npm i -g @southbag/code`. When it is installed, it is the default provider for new threads.
+### desktop app
+
+Install the latest version of the desktop app from [GitHub Releases](https://github.com/SouthbagHQ/colon3code/releases), or from your favorite package registry:
+
+| Platform       | Command                                                                   |
+| -------------- | ------------------------------------------------------------------------- |
+| macOS          | `brew install --cask colon3-code`                                         |
+| Windows        | `winget install T3Tools.Colon3Code` or `scoop install extras/colon3code`  |
+| Arch Linux     | `yay -S colon3code-bin` (nightly: `yay -S colon3code-nightly-bin`)        |
+| Nix            | `nix profile add github:NixOS/nixpkgs/nixos-unstable#colon3code`          |
+| Debian, Ubuntu | `.deb` from [Releases](https://github.com/SouthbagHQ/colon3code/releases) |
+
+The AUR packaging is maintained in this repository under [`packaging/aur`](./packaging/aur).
 
 ### command line
+
+This installs the `t3` command.
 
 ```bash
 curl -fsSL https://t3.codes/install.sh | sh
@@ -40,51 +48,23 @@ Then run `t3` to start the server and open the local web app. `t3 service instal
 
 Just want one little taste without installing? Run `npx t3@latest` instead.
 
-### desktop app
+### phone
 
-Install the latest version of the desktop app from [GitHub Releases](https://github.com/SouthbagHQ/colon3code/releases), or from your favorite package registry:
+Get the app from the [App Store](https://apps.apple.com/us/app/colon3-code-remote-claude-more/id6787819824) or [Google Play](https://play.google.com/store/apps/details?id=com.t3tools.colon3code). Then follow [remote access](./docs/user/remote-access.md) to connect it to your computer.
 
-#### Windows (`winget`)
+### sign in to an agent
 
-```bash
-winget install T3Tools.Colon3Code
-```
+:3 Code needs one agent that is installed and signed in. For example, install [Claude Code](https://claude.com/product/claude-code) and run `claude auth login`, or install [Codex CLI](https://developers.openai.com/codex/cli) and run `codex login`.
 
-#### Windows (`scoop`)
+For Southbag Code, install [Southbag Code](https://github.com/SouthbagHQ/code) with `npm i -g @southbag/code`. When it is installed, it is the default provider for new threads.
 
-```bash
-scoop install extras/colon3code
-```
+[Provider setup](./docs/user/install.md#providers) has the steps for each agent. [Install :3 Code](./docs/user/install.md) covers nightly builds, AppImage, WSL, and NixOS.
 
-#### macOS (Homebrew)
+## "wait, what are you selling me?"
 
-```bash
-brew install --cask colon3-code
-```
+Nothing! Not a thing. We built :3 Code because we wanted the best possible development experience with agents. We were inspired by existing solutions like the Codex desktop app, Conductor, Claude Desktop and Cursor Glass, but none met our bar.
 
-#### Debian, Ubuntu (`.deb`)
-
-Download the `.deb` from [GitHub Releases](https://github.com/SouthbagHQ/colon3code/releases), then:
-
-```bash
-sudo apt install ./Colon3-Code-*.deb
-```
-
-#### Arch Linux (AUR)
-
-Stable:
-
-```bash
-yay -S colon3code-bin
-```
-
-Nightly:
-
-```bash
-yay -S colon3code-nightly-bin
-```
-
-The AUR packaging is maintained in this repository under [`packaging/aur`](./packaging/aur).
+We wanted something performant, remote-ready, and truly open. If we ever go the wrong direction, we want you to have everything you need to fork and build the editor that you want. No hard feelings, we'll purr you off. (˃ᆺ˂)
 
 ## some notes (｡•́︿•̀｡)
 
@@ -94,51 +74,24 @@ We are (mostly) not accepting contributions yet. Small fixes may be considered. 
 
 ## documentation
 
-Full docs live in [docs/](./docs). There's no docs site yet.
-
-- [FAQ](./docs/user/faq.md)
 - [Install and first run](./docs/user/install.md)
-- [Permission modes](./docs/user/permission-modes.md)
-- [Keyboard shortcuts](./docs/user/keybindings.md)
-- [Project settings](./docs/user/project-settings.md)
-- [Appearance preferences](./docs/user/appearance.md)
 - [Remote access from a phone or another machine](./docs/user/remote-access.md)
-- [Connect Claude Code, Codex, ChatGPT and other agents over MCP](./docs/user/outside-agents.md)
-- [Keeping app and server in sync](./docs/user/updating.md)
-- [Source control integrations](./docs/user/source-control.md)
-- Multiple accounts: [Codex](./docs/user/providers-codex.md) · [Claude](./docs/user/providers-claude.md)
+- [Permission modes](./docs/user/permission-modes.md)
+- [Source control](./docs/user/source-control.md)
+- [Connect outside agents over MCP](./docs/user/outside-agents.md)
 - [Run :3 Code as a background service](./docs/user/background-service.md)
+- [FAQ](./docs/user/faq.md)
 
-Building from source? Start at [docs/internals/overview.md](./docs/internals/overview.md).
+[All docs](./docs/README.md) has the full list.
 
 ## if you REALLY want to contribute still.... read this first (=^･ω･^=)
 
-### install `vp`
-
-:3 Code uses Vite+ so you'll need to install the global `vp` command-line tool.
-
-#### macOS / Linux
-
-```bash
-curl -fsSL https://vite.plus | bash
-```
-
-#### Windows
-
-```bash
-irm https://vite.plus/ps1 | iex
-```
-
-Checkout their getting started guide for more information: https://viteplus.dev/guide/
-
-### install dependencies
-
-```bash
-vp i
-```
-
-Read [CONTRIBUTING.md](./CONTRIBUTING.md) before reporting a bug or opening a PR.
-
-Have a feature request? Start an [Ideas discussion](https://github.com/SouthbagHQ/colon3code/discussions/categories/ideas).
+- Read [CONTRIBUTING.md](./CONTRIBUTING.md) before you report a bug or open a pull request.
+- Put feature requests in [Ideas](https://github.com/SouthbagHQ/colon3code/discussions/categories/ideas).
+- Build from source with the [development runbook](./docs/operations/development.md#first-checkout). The [architecture overview](./docs/internals/overview.md) explains how it works.
 
 Need support? Come hang out in the [Discord](https://discord.gg/jn4EGJjrvv). ♡
+
+## license
+
+[MIT](./LICENSE)

@@ -44,8 +44,9 @@ conflicts=('colon3code')
 options=('!debug' '!strip')
 
 _appimage="Colon3-Code-${pkgver}-x86_64.AppImage"
+_asset="$_appimage"
 source=(
-  "$_appimage::https://github.com/SouthbagHQ/colon3code/releases/download/v${pkgver}/$_appimage"
+  "$_appimage::https://github.com/SouthbagHQ/colon3code/releases/download/v${pkgver}/$_asset"
   "${pkgname}-${pkgver}-LICENSE::https://raw.githubusercontent.com/SouthbagHQ/colon3code/v${pkgver}/LICENSE"
 )
 sha256sums=(
@@ -73,7 +74,9 @@ package() {
 
   install -Dm755 /dev/stdin "$pkgdir/usr/bin/colon3code" <<'EOF'
 #!/bin/sh
-exec /opt/colon3code-bin/AppRun "$@"
+# AppRun computes APPDIR but doesn't export it. The server's AppImage env scrub needs it
+# to keep /opt/colon3code-bin/usr/lib etc. out of terminal and agent shells (#28993).
+exec env APPDIR=/opt/colon3code-bin /opt/colon3code-bin/AppRun "$@"
 EOF
   ln -s colon3code "$pkgdir/usr/bin/colon3-code-desktop"
 
@@ -94,7 +97,7 @@ TryExec=colon3code
 Terminal=false
 Type=Application
 Icon=colon3code
-StartupWMClass=colon3code
+StartupWMClass=com.t3tools.Colon3Code
 Categories=Development;
 MimeType=x-scheme-handler/colon3code;
 EOF

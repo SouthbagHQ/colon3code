@@ -202,6 +202,7 @@ export function ServerUpdatesAction({
         const confirmed =
           (await requestConfirmDialog(
             `update the :3 Code desktop apps on ${desktopTargets.map((target) => target.serverLabel).join(", ")}? they'll close and pop back up on those machines ;3`,
+            { initialFocus: "confirm" },
           )) ?? true;
         if (!confirmed) return;
       }
@@ -275,19 +276,19 @@ export function ServerUpdateAction({
   const canUpdate = useAtomValue(sessionStateAtom, canUpdateServer);
   const updatesDenial = managedUpdatesDenial(useManagedPolicy(environmentId));
   const update = useServerUpdate();
+  const updatesInstall =
+    installation?.kind === "npm-global" || installation?.kind === "t3-launcher";
   const { copyToClipboard } = useCopyToClipboard<{ command: string }>({
-    target: installation?.kind === "npm-global" ? "update command" : "relaunch command",
+    target: updatesInstall ? "update command" : "relaunch command",
     onCopy: ({ command }) => {
       toastManager.add({
         type: "success",
-        title:
-          installation?.kind === "npm-global"
-            ? "copied the update command for you :3"
-            : "copied the relaunch command for you :3",
-        description:
-          installation?.kind === "npm-global"
-            ? `Run \`${command}\` on ${serverLabel}, then restart t3 with your usual options.`
-            : `Stop t3 on ${serverLabel}, then relaunch with \`${command}\` using the same subcommand and options. This does not update an installed t3 command.`,
+        title: updatesInstall
+          ? "copied the update command for you :3"
+          : "copied the relaunch command for you :3",
+        description: updatesInstall
+          ? `Run \`${command}\` on ${serverLabel}, then restart t3 with your usual options.`
+          : `Stop t3 on ${serverLabel}, then relaunch with \`${command}\` using the same subcommand and options. This does not update an installed t3 command.`,
       });
     },
     onError: (error) => {
@@ -310,6 +311,7 @@ export function ServerUpdateAction({
       const confirmed =
         (await requestConfirmDialog(
           `update the :3 Code desktop app that runs the ${serverLabel}? it'll close and pop back up on that machine :3`,
+          { initialFocus: "confirm" },
         )) ?? true;
       if (!confirmed) {
         return;
@@ -353,7 +355,7 @@ export function ServerUpdateAction({
     selfUpdate === null ? manualServerUpdateCommand(targetVersion, installation) : null;
   const actionLabel =
     manualCommand !== null
-      ? installation?.kind === "npm-global"
+      ? updatesInstall
         ? "copy update command"
         : "copy relaunch command"
       : label;

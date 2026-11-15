@@ -10,6 +10,7 @@ import {
 } from "@t3tools/client-runtime/source-control-clients";
 import { DEFAULT_KEYBINDINGS } from "@t3tools/shared/keybindings";
 import * as Schema from "effect/Schema";
+import { msg } from "gt-react";
 import { TYPOGRAPHY_ADVANCED_STORAGE_KEY } from "../../appearanceFonts";
 import { writeLocalStorageValue } from "../../hooks/useLocalStorage";
 import { commandLabel } from "./KeybindingsSettings.logic";
@@ -65,9 +66,12 @@ export interface SettingsSearchItem {
   readonly providerSettingsOnly?: boolean;
   readonly localBackendManagementOnly?: boolean;
   readonly localEnvironmentOnly?: boolean;
+  readonly primaryEnvironmentOnly?: boolean;
   readonly wslAvailableOnly?: boolean;
   readonly managedTunnelOnly?: boolean;
   readonly peerLinksOnly?: boolean;
+  readonly fastWorktreeCheckoutOnly?: boolean;
+  readonly textGeneratorsOnly?: boolean;
   readonly secondary?: boolean;
   readonly requiresThreadAutoSettlement?: boolean;
 }
@@ -82,41 +86,47 @@ export interface SettingsSearchAvailability {
   readonly hasThreadAutoSettlement: boolean;
   readonly managedTunnelActive?: boolean;
   readonly hasPeerLinkHost?: boolean;
+  readonly hasFastWorktreeCheckoutEnvironment?: boolean;
+  /** An environment without a provider allow-list, which hides text generators. */
+  readonly hasTextGeneratorsEnvironment?: boolean;
+  readonly hasPrimaryEnvironment?: boolean;
 }
 
 export const SETTINGS_SECTION_LABELS: Readonly<Record<SettingsPath, string>> = {
-  "/settings/diagnostics": "diagnostics",
-  "/settings/projects": "projects",
-  "/settings/general": "general",
-  "/settings/appearance": "appearance",
-  "/settings/chat": "chat",
-  "/settings/diffs": "diffs & pull requests",
-  "/settings/keybindings": "keybindings",
-  "/settings/snap-shot": "snapShots",
-  "/settings/providers": "providers",
-  "/settings/threads": "threads",
-  "/settings/browser": "browser",
-  "/settings/devices": "devices",
-  "/settings/scheduled-tasks": "scheduled tasks",
-  "/settings/source-control": "source control",
-  "/settings/worktrees": "worktrees",
-  "/settings/connections": "environments",
-  "/settings/access": "sharing & access",
-  "/settings/secrets": "secrets",
-  "/settings/maintenance": "maintenance",
-  "/settings/labs": "labs",
-  "/settings/about": "about",
-  "/settings/voice": "voice",
-  "/settings/archived": "archive",
+  "/settings/diagnostics": msg("diagnostics"),
+  "/settings/projects": msg("projects"),
+  "/settings/general": msg("general"),
+  "/settings/appearance": msg("appearance"),
+  "/settings/chat": msg("chat"),
+  "/settings/diffs": msg("diffs & pull requests"),
+  "/settings/keybindings": msg("keybindings"),
+  "/settings/snap-shot": msg("snapShots"),
+  "/settings/providers": msg("providers"),
+  "/settings/threads": msg("threads"),
+  "/settings/browser": msg("browser"),
+  "/settings/devices": msg("devices"),
+  "/settings/scheduled-tasks": msg("scheduled tasks"),
+  "/settings/source-control": msg("source control"),
+  "/settings/worktrees": msg("worktrees"),
+  "/settings/connections": msg("environments"),
+  "/settings/access": msg("sharing & access"),
+  "/settings/secrets": msg("secrets"),
+  "/settings/maintenance": msg("maintenance"),
+  "/settings/labs": msg("labs"),
+  "/settings/about": msg("about"),
+  "/settings/voice": msg("voice"),
+  "/settings/archived": msg("archive"),
 };
 
-/** Sidebar order. A group without a heading is set apart by space alone. */
+/** Sidebar order. A group with a hidden heading is set apart on screen by space alone. */
 export const SETTINGS_NAV_GROUPS: ReadonlyArray<{
-  readonly heading: string | null;
+  readonly heading: string;
+  readonly headingHidden?: true;
   readonly paths: ReadonlyArray<SettingsPath>;
 }> = [
   {
-    heading: null,
+    heading: msg("preferences"),
+    headingHidden: true,
     paths: [
       "/settings/general",
       "/settings/appearance",
@@ -128,7 +138,7 @@ export const SETTINGS_NAV_GROUPS: ReadonlyArray<{
     ],
   },
   {
-    heading: "agents",
+    heading: msg("agents"),
     paths: [
       "/settings/providers",
       "/settings/threads",
@@ -138,11 +148,11 @@ export const SETTINGS_NAV_GROUPS: ReadonlyArray<{
     ],
   },
   {
-    heading: "code",
+    heading: msg("code"),
     paths: ["/settings/projects", "/settings/source-control", "/settings/worktrees"],
   },
   {
-    heading: "connections",
+    heading: msg("connections"),
     paths: [
       "/settings/connections",
       "/settings/access",
@@ -150,7 +160,8 @@ export const SETTINGS_NAV_GROUPS: ReadonlyArray<{
     ],
   },
   {
-    heading: null,
+    heading: msg("more"),
+    headingHidden: true,
     paths: ["/settings/maintenance", "/settings/labs", "/settings/about", "/settings/archived"],
   },
 ];
@@ -418,13 +429,13 @@ export const SETTINGS_SEARCH_ITEMS = [
   },
   {
     id: "project-grouping",
-    title: "project grouping",
+    title: msg("project grouping"),
     to: "/settings/general",
     searchTerms: ["combine matching repositories environments sidebar"],
   },
   {
     id: "project-order",
-    title: "project order",
+    title: msg("project order"),
     to: "/settings/general",
     searchTerms: ["sort projects sidebar manual created recent"],
   },
@@ -450,7 +461,7 @@ export const SETTINGS_SEARCH_ITEMS = [
   },
   {
     id: "working-shelf",
-    title: "working section",
+    title: msg("working section"),
     to: "/settings/general",
     searchTerms: ["hide fold running monitoring threads inbox sidebar shelf"],
   },
@@ -458,20 +469,38 @@ export const SETTINGS_SEARCH_ITEMS = [
     id: "boring-sidebar",
     title: "boring sidebar (group by project)",
     to: "/settings/labs",
-    searchTerms: ["beta folders project tree legacy old classic sidebar"],
+    searchTerms: ["beta folders project tree classic sidebar"],
   },
   {
     id: "boring-sidebar-multiline",
     title: "two-line folder rows",
     to: "/settings/labs",
+    // Shown inside the boring sidebar row only while it is on, so search lands on the parent.
+    targetId: "boring-sidebar",
     searchTerms: ["beta boring sidebar folder rows multiline branch pull request details"],
   },
   {
     id: "tool-call-visibility",
     title: "tool calls in chat",
-    to: "/settings/labs",
+    to: "/settings/chat",
     searchTerms: [
-      "beta hide tool calls commands edits searches work log activity quiet chat zen final answers only",
+      "hide tool calls commands edits searches work log activity quiet chat zen final answers only",
+    ],
+  },
+  {
+    id: "screen-reader-announcements",
+    title: "screen reader announcements",
+    to: "/settings/chat",
+    searchTerms: [
+      "accessibility a11y screen reader nvda jaws voiceover orca narrator speech announce read aloud messages activity steps",
+    ],
+  },
+  {
+    id: "screen-reader-window-title",
+    title: "screen reader window title",
+    to: "/settings/chat",
+    searchTerms: [
+      "accessibility a11y screen reader nvda jaws voiceover orca narrator window title tab title alt tab taskbar thread status order working approval",
     ],
   },
   {
@@ -489,11 +518,26 @@ export const SETTINGS_SEARCH_ITEMS = [
     searchTerms: ["beta link another machine vps peer agents work there delegate"],
   },
   {
+    id: "prompt-suggestions-beta",
+    title: "suggest next prompt",
+    to: "/settings/labs",
+    scope: "environment",
+    searchTerms: ["beta tab autocomplete predict next message claude codex ghost text"],
+  },
+  {
     id: "simlock-hosts",
     title: "Simlock device hosts (alpha)",
     to: "/settings/labs",
     scope: "environment",
     searchTerms: ["beta alpha simlock callstack simulator emulator ios android pool lease gateway"],
+  },
+  {
+    id: "worktree-fast-checkout",
+    title: "fast worktree checkout",
+    to: "/settings/labs",
+    scope: "environment",
+    fastWorktreeCheckoutOnly: true,
+    searchTerms: ["beta fast worktree checkout clone apfs copy-on-write cache macos speed"],
   },
   {
     id: "voice-transcription-destination",
@@ -507,7 +551,7 @@ export const SETTINGS_SEARCH_ITEMS = [
     id: "voice-microphone",
     title: "microphone",
     to: "/settings/voice",
-    searchTerms: ["mic input audio device"],
+    searchTerms: ["mic input audio device order priority preferred"],
   },
   {
     id: "dictation-shortcut-mode",
@@ -563,7 +607,7 @@ export const SETTINGS_SEARCH_ITEMS = [
   },
   {
     id: "speech-post-processing",
-    title: "clean up transcripts with a provider",
+    title: "clean up transcripts",
     to: "/settings/voice",
     searchTerms: ["speech transcription polish clean provider prompt post-processing"],
   },
@@ -642,13 +686,21 @@ export const SETTINGS_SEARCH_ITEMS = [
   },
   {
     id: "in-app-notifications",
-    title: "in-app notifications",
+    title: msg("in-app notifications"),
     to: "/settings/general",
     searchTerms: ["notification toast popup completion input approval failure"],
   },
   {
+    id: "language",
+    title: msg("language"),
+    to: "/settings/general",
+    searchTerms: [
+      "locale translation english deutsch german español spanish français french português portuguese brasil brazilian chinese 中文 japanese 日本語 korean 한국어 russian русский sprache idioma langue 语言 言語 언어 язык",
+    ],
+  },
+  {
     id: "time-format",
-    title: "time format",
+    title: msg("time format"),
     to: "/settings/general",
     searchTerms: ["timestamp clock locale system browser os 12 hour 24 hour"],
   },
@@ -726,6 +778,13 @@ export const SETTINGS_SEARCH_ITEMS = [
     ],
   },
   {
+    id: "keep-awake-while-agents-work",
+    title: "keep awake while agents work",
+    to: "/settings/maintenance",
+    scope: "environment-defaults",
+    searchTerms: ["caffeinate sleep prevent stay awake power laptop lid inhibit"],
+  },
+  {
     id: "background-activity",
     title: "background activity",
     to: "/settings/maintenance",
@@ -771,25 +830,25 @@ export const SETTINGS_SEARCH_ITEMS = [
   },
   {
     id: "unpin-confirmation",
-    title: "unpin confirmation",
+    title: msg("unpin confirmation"),
     to: "/settings/general",
     searchTerms: ["ask before thread pinned section"],
   },
   {
     id: "archive-confirmation",
-    title: "archive confirmation",
+    title: msg("archive confirmation"),
     to: "/settings/general",
     searchTerms: ["ask before thread second click inline action"],
   },
   {
     id: "delete-confirmation",
-    title: "delete confirmation",
+    title: msg("delete confirmation"),
     to: "/settings/general",
     searchTerms: ["ask before thread chat history"],
   },
   {
     id: "quit-confirmation",
-    title: "quit shortcut",
+    title: msg("quit shortcut"),
     to: "/settings/general",
     searchTerms: ["confirmation desktop app exit direct hold double click press twice"],
     desktopOnly: true,
@@ -835,6 +894,13 @@ export const SETTINGS_SEARCH_ITEMS = [
     searchTerms: ["phone tablet iPhone iPad iOS Android App Store Google Play QR"],
   },
   {
+    id: "welcome-page",
+    title: "welcome page",
+    to: "/settings/about",
+    primaryEnvironmentOnly: true,
+    searchTerms: ["onboarding setup first run getting started agents import projects"],
+  },
+  {
     id: "privacy-policy",
     title: "privacy policy",
     to: "/settings/about",
@@ -858,18 +924,6 @@ export const SETTINGS_SEARCH_ITEMS = [
     id: "open-source-licenses",
     title: "open source licenses",
     to: "/settings/about",
-  },
-  {
-    id: "legacy-plan-mode",
-    title: "plan mode (legacy)",
-    to: "/settings/labs",
-    searchTerms: ["build plan composer old"],
-  },
-  {
-    id: "legacy-context-window-indicator",
-    title: "context window indicator (legacy)",
-    to: "/settings/labs",
-    searchTerms: ["composer meter usage tokens circle old"],
   },
   {
     id: "keybindings",
@@ -935,11 +989,26 @@ export const SETTINGS_SEARCH_ITEMS = [
     providerSettingsOnly: true,
   },
   {
+    id: "text-generators",
+    title: "text generators",
+    to: "/settings/providers",
+    searchTerms: [
+      "model api api key openai openrouter anthropic ollama lm studio custom endpoint base url thread titles commit messages",
+    ],
+    providerSettingsOnly: true,
+    textGeneratorsOnly: true,
+  },
+  {
     id: "provider-health-check-interval",
     title: "health check interval",
     to: "/settings/providers",
     searchTerms: ["refresh availability versions auth state models background probes seconds off"],
     providerSettingsOnly: true,
+  },
+  {
+    id: "scheduled-tasks",
+    title: "scheduled tasks",
+    to: "/settings/scheduled-tasks",
   },
   {
     id: "agent-browser-access",
@@ -1104,18 +1173,18 @@ export const SETTINGS_SEARCH_ITEMS = [
   ...sourceControlHostSearchItems(sourceControlClients.definitions),
   {
     id: "source-control-writing-style",
-    title: "source control writing style",
+    title: "commit and pull request writing",
     to: "/settings/source-control",
     searchTerms: [
-      "repository conventions conventional commits custom instructions change descriptions request titles",
+      "repository conventions conventional commits custom instructions commit messages change pr pull request merge request titles descriptions body style prompt write my own",
     ],
     environmentOnly: true,
   },
   {
     id: "follow-change-request-templates",
-    title: "follow change request templates",
+    title: "follow pull request templates",
     to: "/settings/source-control",
-    searchTerms: ["repository pr pull request description structure"],
+    searchTerms: ["repository pr pull request merge request change request description structure"],
     environmentOnly: true,
   },
   {
@@ -1212,6 +1281,15 @@ export const SETTINGS_SEARCH_ITEMS = [
     searchTerms: ["managed tunnel cloud other devices remote tunnels limit t3 chat"],
     desktopOnly: true,
     cloudOnly: true,
+  },
+  {
+    id: "connect-device-approval",
+    title: "require approval for new devices",
+    to: "/settings/access",
+    targetId: "connections-environment",
+    searchTerms: ["t3 connect devices approve deny trust revoke pairing code security account"],
+    cloudOnly: true,
+    managedTunnelOnly: true,
   },
   {
     id: "hold-webhooks-while-offline",
@@ -1338,7 +1416,6 @@ const SPLIT_SETTINGS_PATHS: ReadonlySet<string> = new Set([
 // Section anchors that moved but are not search results themselves.
 const MOVED_SECTION_ANCHORS: Readonly<Record<string, SettingsPath>> = {
   "authorized-clients": "/settings/access",
-  "legacy-features": "/settings/labs",
   "text-generation": "/settings/threads",
   about: "/settings/about",
 };
@@ -1441,10 +1518,14 @@ export function filterAvailableSettingsSearchItems(
       (!item.providerSettingsOnly || availability.hasProviderSettingsEnvironment) &&
       (!item.localBackendManagementOnly || availability.canManageLocalBackend) &&
       (!item.localEnvironmentOnly || !availability.localEnvironmentDisabled) &&
+      (!item.primaryEnvironmentOnly || availability.hasPrimaryEnvironment === true) &&
       (!item.wslAvailableOnly || availability.isWslSettingsRowVisible) &&
       (!item.requiresThreadAutoSettlement || availability.hasThreadAutoSettlement) &&
       (!item.managedTunnelOnly || availability.managedTunnelActive === true) &&
-      (!item.peerLinksOnly || availability.hasPeerLinkHost === true),
+      (!item.peerLinksOnly || availability.hasPeerLinkHost === true) &&
+      (!item.fastWorktreeCheckoutOnly ||
+        availability.hasFastWorktreeCheckoutEnvironment === true) &&
+      (!item.textGeneratorsOnly || availability.hasTextGeneratorsEnvironment === true),
   );
 }
 
@@ -1466,6 +1547,7 @@ export function settingsForThisPlatform(
 export function searchSettings(
   query: string,
   items: ReadonlyArray<SettingsSearchItem> = SETTINGS_SEARCH_ITEMS,
+  translate: (message: string) => string = (message) => message,
 ): ReadonlyArray<SettingsSearchItem> {
   const normalizedQuery = normalizeSearchText(query);
   if (normalizedQuery.length === 0) return [];
@@ -1477,6 +1559,9 @@ export function searchSettings(
       const fields = [
         title,
         normalizeSearchText(SETTINGS_SECTION_LABELS[item.to]),
+        // The labels as displayed, so search also works in the active language.
+        normalizeSearchText(translate(item.title)),
+        normalizeSearchText(translate(SETTINGS_SECTION_LABELS[item.to])),
         ...(item.searchTerms ?? []).map(normalizeSearchText),
       ];
       if (!queryTokens.every((token) => fields.some((field) => field.includes(token)))) return [];

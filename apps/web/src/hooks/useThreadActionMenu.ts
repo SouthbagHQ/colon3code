@@ -21,6 +21,7 @@ import {
   threadActionRequiresOperate,
   type ThreadActionMenuId,
 } from "../components/threadActionMenu.logic";
+import { titleRegenerationToast } from "../components/threadTitleRegenerationToast";
 import { stackedThreadToast, toastManager } from "../components/ui/toast";
 import { copyThreadReference } from "../lib/copyThreadReference";
 import { threadChipCopyTarget } from "@t3tools/client-runtime/thread-reference";
@@ -88,7 +89,7 @@ export function useThreadActionMenu(input: {
     markThreadUnread,
     turnThreadIntoProject,
   } = useThreadActions();
-  const updateThreadMetadata = useOrchestrationCommand(threadEnvironment.updateMetadata, {
+  const regenerateThreadTitle = useOrchestrationCommand(threadEnvironment.regenerateTitle, {
     reportFailure: false,
   });
   const handleNewThread = useNewThreadHandler();
@@ -96,26 +97,13 @@ export function useThreadActionMenu(input: {
   const confirmThreadArchive = useClientSettings((s) => s.confirmThreadArchive);
   const timestampFormat = useClientSettings((s) => s.timestampFormat);
   const { copyToClipboard: copyPathToClipboard } = useCopyToClipboard<{ path: string }>({
-    onCopy: ({ path }) => {
-      toastManager.add({ type: "success", title: "path copied for you :3", description: path });
-    },
     onError: (error) => failureToast("aw, couldn't copy the path 3:", error),
   });
   const { copyToClipboard: copyBranchToClipboard } = useCopyToClipboard<{ branch: string }>({
     target: "branch name",
-    onCopy: ({ branch }) => {
-      toastManager.add({ type: "success", title: "branch copied for you :3", description: branch });
-    },
     onError: (error) => failureToast("aw, couldn't copy the branch 3:", error),
   });
   const { copyToClipboard: copyThreadIdToClipboard } = useCopyToClipboard<{ threadId: ThreadId }>({
-    onCopy: ({ threadId }) => {
-      toastManager.add({
-        type: "success",
-        title: "thread ID copied for you :3",
-        description: threadId,
-      });
-    },
     onError: (error) => failureToast("aw, couldn't copy the thread ID 3:", error),
   });
 
@@ -125,7 +113,10 @@ export function useThreadActionMenu(input: {
       const api = readLocalApi();
       if (!api) return;
       const thread = readThreadShell(threadRef);
-      if (!thread) return;
+      if (!thread) {
+        failureToast("Thread actions unavailable", new Error("This thread has not loaded yet."));
+        return;
+      }
       const now = new Date();
       const configLoaded = readEnvironmentServerConfigLoaded(threadRef.environmentId);
       const supports = {
@@ -255,15 +246,17 @@ export function useThreadActionMenu(input: {
         case "rename":
           onStartRename();
           return;
-        case "regenerate-title":
+        case "regenerate-title": {
           if (isRegeneratingTitle) return;
-          await reportFailure("hmm, couldn't regenerate the thread title 3:", () =>
-            updateThreadMetadata({
+          const toast = titleRegenerationToast([
+            await regenerateThreadTitle({
               environmentId: threadRef.environmentId,
-              input: { threadId: threadRef.threadId, regenerateTitle: true },
+              input: { threadId: threadRef.threadId },
             }),
-          );
+          ]);
+          if (toast) toastManager.add(toast);
           return;
+        }
         case "mark-unread":
           markThreadUnread(threadRef);
           return;

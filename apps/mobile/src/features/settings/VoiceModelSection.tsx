@@ -29,7 +29,6 @@ import {
   voiceSpeechModelsAtom,
   voiceSpeechStatusAtom,
 } from "../voice-input/voiceDestination";
-import { SettingsSection } from "./components/SettingsSection";
 
 const isDownloading = (model: EnvironmentSpeechModel) =>
   model.state === "downloading" || model.state === "verifying";
@@ -143,12 +142,15 @@ function ModelStats(props: { readonly model: EnvironmentSpeechModel; readonly la
           ],
         ] as const)
       : []),
-    ...(data && data.secondsPer30s !== null
+    ...(data && data.secondsPer30s.accelerated !== null
       ? ([
           [
             "speed",
             <>
-              <Text className="font-t3-medium text-foreground">{data.secondsPer30s} s</Text> / 30 s
+              <Text className="font-t3-medium text-foreground">
+                {data.secondsPer30s.accelerated} s
+              </Text>{" "}
+              / 30 s
             </>,
           ],
         ] as const)
@@ -269,51 +271,59 @@ export function VoiceModelRow(props: {
   );
 }
 
-export function VoiceModelSection(props: {
+/** The environment's local-model method: chosen by its mark, opens the model list. */
+export function LocalModelChoice(props: {
   readonly environmentId: EnvironmentId;
   readonly label: string;
+  readonly selected: boolean;
+  readonly onSelect: () => void;
 }) {
   const navigation = useNavigation();
   const voice = useVoiceModels(props.environmentId, props.label);
   const { status } = voice;
-  if (!voice.connection || !status) return null;
-  const title = `transcription model on ${props.label}`;
-  if (!status.supported) {
+  const open = () =>
+    navigation.navigate("SettingsVoiceModels", { environmentId: props.environmentId });
+  if (!voice.connection || !status || !status.supported)
     return (
-      <SettingsSection title={title} footer={status.reason}>
-        {null}
-      </SettingsSection>
+      <ListChoiceRow
+        label="local model"
+        description={
+          !voice.connection
+            ? "not available on this environment"
+            : status?.supported === false
+              ? status.reason
+              : "checking…"
+        }
+        selected={props.selected}
+        disabled
+        onPress={() => {}}
+      />
     );
-  }
 
   const active = status.state === "missing-model" ? null : status;
   const pending = voice.models.find(isDownloading);
   const progress =
     pending?.downloaded === undefined ? undefined : pending.downloaded / pending.size;
   return (
-    <SettingsSection
-      title={title}
-      footer={
-        voice.canManage
-          ? undefined
-          : `This connection can’t change settings on ${props.label}. Add a transcription model using :3 Code on that machine.`
+    <ListRow
+      label={active?.model ?? "local model"}
+      description={
+        pending
+          ? pending.state === "verifying"
+            ? `verifying ${pending.name}…`
+            : `downloading ${pending.name} · ${Math.round((progress ?? 0) * 100)}%`
+          : active
+            ? `local model · ${formatBytes(active.size)}`
+            : voice.canManage
+              ? "no model installed · choose one to download"
+              : `no model installed · add one using :3 Code on ${props.label}`
       }
-    >
-      <ListRow
-        label={active?.model ?? "no model selected"}
-        description={
-          pending
-            ? pending.state === "verifying"
-              ? `Verifying ${pending.name}…`
-              : `Downloading ${pending.name} · ${Math.round((progress ?? 0) * 100)}%`
-            : active
-              ? formatBytes(active.size)
-              : "Choose a transcription model to dictate on this environment."
-        }
-        onPress={() =>
-          navigation.navigate("SettingsVoiceModels", { environmentId: props.environmentId })
-        }
-      />
-    </SettingsSection>
+      selected={props.selected}
+      onPress={() => {
+        if (!props.selected) props.onSelect();
+        // Switching to an installed model needs no further step.
+        if (props.selected || !active) open();
+      }}
+    />
   );
 }

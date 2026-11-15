@@ -1,9 +1,5 @@
 import { type ServerLifecycleWelcomePayload } from "@t3tools/contracts";
-import {
-  scopedProjectKey,
-  scopedThreadKey,
-  scopeProjectRef,
-} from "@t3tools/client-runtime/environment";
+import { scopedProjectKey, scopeProjectRef } from "@t3tools/client-runtime/environment";
 import {
   Outlet,
   Link,
@@ -12,19 +8,18 @@ import {
   type ErrorComponentProps,
   useLocation,
   useNavigate,
-  useParams,
   useRouter,
 } from "@tanstack/react-router";
-import { Check, Copy } from "lucide";
+import { CheckIcon, CopyIcon } from "~/icons";
 import { useEffect, useEffectEvent, useRef, useState } from "react";
 
-import { APP_BASE_NAME, APP_DISPLAY_NAME, APP_STAGE_LABEL, APP_VERSION } from "../branding";
-import { resolveServerBackedAppDisplayName } from "../branding.logic";
+import { APP_DISPLAY_NAME, APP_VERSION } from "../branding";
 import { AppSidebarLayout } from "../components/AppSidebarLayout";
 import { CatFace } from "../components/CatFace";
 import { CommandPalette } from "../components/CommandPalette";
 import { CustomSnoozeDialogHost } from "../components/CustomSnoozeDialog";
 import { GuestShareDialogHost } from "../components/chat/GuestShareControls";
+import { UseInAnotherAppDialogHost } from "../components/mcp/UseInAnotherAppDialog";
 import { AddProjectToMachineDialogHost } from "../components/AddProjectToMachineDialog";
 import { ConfirmDialogHost } from "../components/ConfirmDialogHost";
 import { DevReplayHost } from "../components/DevReplayHost";
@@ -37,25 +32,21 @@ import { DesktopAppActivationCoordinator } from "../components/desktop/DesktopAp
 import { DesktopWebLinkCoordinator } from "../components/desktop/DesktopWebLinkCoordinator";
 import { RunningThreadKeepAlive } from "../components/desktop/RunningThreadKeepAlive";
 import { ReopenClosedViewShortcut } from "../components/ReopenClosedViewShortcut";
-import { resolveSidebarThreadStatus } from "../components/Sidebar.logic";
 import { ProjectCloneToastCoordinator } from "../components/ProjectCloneToastCoordinator";
+import { ConnectDeviceApprovalCoordinator } from "../components/ConnectDeviceApprovalCoordinator";
 import { ChatGptWelcomeCoordinator } from "../components/settings/ChatGptWelcomeCoordinator";
 import { ThemeEditorHost } from "../components/settings/ThemeEditorHost";
 import { useCopyToClipboard } from "../hooks/useCopyToClipboard";
 import { Button } from "../components/ui/button";
-import { MorphIcon } from "~/components/MorphIcon";
 import { StandalonePage, StandalonePageHeader } from "../components/ui/standalone-page";
 import { AnchoredToastProvider, ToastProvider } from "../components/ui/toast";
-import { resolveDocumentTitle } from "../documentTitle";
 import { isElectron } from "../env";
-import { cn } from "../lib/utils";
 import { useClientSettings } from "../hooks/useSettings";
 import {
   deriveLogicalProjectKeyFromSettings,
   derivePhysicalProjectKeyFromPath,
   selectProjectGroupingSettings,
 } from "@t3tools/client-runtime/state/project-grouping";
-import { resolveThreadRouteRef } from "../threadRoutes";
 import { useUiStateStore } from "../uiStateStore";
 import { configureClientTracing } from "../observability/clientTracing";
 import { resolveInitialServerAuthGateState } from "../environments/primary";
@@ -65,9 +56,10 @@ import { useHostedPromptLinkLanding } from "../components/promptLinks/HostedProm
 import { isLocalEnvironmentDisabled } from "../localEnvironment";
 import { useAtomValue } from "@effect/atom-react";
 import { primaryServerConfigAtom, primaryServerWelcomeAtom } from "../state/server";
-import { readProject, useThreadShell } from "../state/entities";
+import { readProject } from "../state/entities";
 
 import { getDesktopSnapShotBridge } from "../lib/desktopSnapShot";
+import { isChunkLoadError } from "../lib/chunkReloadGuard";
 import { shouldResumeSnapShotSetupOnStartup } from "../lib/snapShotSetupResume";
 
 export const Route = createRootRoute({
@@ -145,7 +137,6 @@ function RootRouteView() {
   return (
     <ToastProvider>
       <AnchoredToastProvider>
-        <DocumentTitleSync />
         <RootRouteBranch />
       </AnchoredToastProvider>
     </ToastProvider>
@@ -167,7 +158,12 @@ function RootRouteBranch() {
 
   if (pathname === GUEST_PAGE_PATH) return <Outlet />;
 
-  if (pathname === "/pair" || pathname === "/connect" || pathname === "/connect-agent") {
+  if (
+    pathname === "/pair" ||
+    pathname === "/connect" ||
+    pathname === "/connect-agent" ||
+    pathname === "/approve-agent"
+  ) {
     return <Outlet />;
   }
 
@@ -176,27 +172,39 @@ function RootRouteBranch() {
     return hostedPromptLinkLanding;
   }
 
-  if (pathname === "/welcome") {
-    return (
-      <>
-        <CustomSnoozeDialogHost />
-        <GuestShareDialogHost />
-        <CommandPalette>
-          <AppSidebarLayout>
-            <Outlet />
-          </AppSidebarLayout>
-        </CommandPalette>
-      </>
-    );
-  }
-
+  const isWelcome = pathname === "/welcome";
   if (authGateState.status !== "authenticated" && authGateState.status !== "hosted-static") {
     return <Outlet />;
   }
 
+  // Settings can reopen /welcome mid-session, so it mounts everything the app does except the
+  // first-run gate and the event router, whose first navigation would leave the page.
+  const appHosts = (
+    <>
+      {primaryEnvironmentAuthenticated ? <DesktopAppActivationCoordinator /> : null}
+      {primaryEnvironmentAuthenticated || localEnvironmentDisabled ? (
+        <DesktopWebLinkCoordinator />
+      ) : null}
+      {isElectron ? <RunningThreadKeepAlive /> : null}
+      <RelayClientInstallDialog />
+      <ConnectOnboardingDialog />
+      <SshPasswordPromptDialog />
+      <SnapShotCoordinator />
+      <ReopenClosedViewShortcut />
+      <ConfirmDialogHost />
+      <CustomSnoozeDialogHost />
+      <GuestShareDialogHost />
+      <ProjectCloneToastCoordinator />
+      <ConnectDeviceApprovalCoordinator />
+      <AddProjectToMachineDialogHost />
+      <UseInAnotherAppDialogHost />
+      {import.meta.env.DEV && primaryEnvironmentAuthenticated ? <DevReplayHost /> : null}
+    </>
+  );
   const appShell = (
     <CommandPalette>
-      <AppSidebarLayout>
+      {/* Setup starts with an empty workspace, so the Welcome page has no thread list. */}
+      <AppSidebarLayout showSidebar={!isWelcome}>
         <Outlet />
       </AppSidebarLayout>
     </CommandPalette>
@@ -205,95 +213,27 @@ function RootRouteBranch() {
   return (
     <>
       <ChatGptWelcomeCoordinator />
-      <FirstRunGate
-        enabled={primaryEnvironmentAuthenticated}
-        hostedStatic={authGateState.status === "hosted-static"}
-      >
-        {primaryEnvironmentAuthenticated ? <DesktopAppActivationCoordinator /> : null}
-        {primaryEnvironmentAuthenticated || localEnvironmentDisabled ? (
-          <DesktopWebLinkCoordinator />
-        ) : null}
-        {isElectron ? <RunningThreadKeepAlive /> : null}
-        <RelayClientInstallDialog />
-        <ConnectOnboardingDialog />
-        <SshPasswordPromptDialog />
-        <SnapShotCoordinator />
-        <ReopenClosedViewShortcut />
-        <ConfirmDialogHost />
-        <CustomSnoozeDialogHost />
-        <GuestShareDialogHost />
-        <ProjectCloneToastCoordinator />
-        <AddProjectToMachineDialogHost />
-        {import.meta.env.DEV && primaryEnvironmentAuthenticated ? <DevReplayHost /> : null}
-        {primaryEnvironmentAuthenticated ? (
-          <EventRouter skipInitialBootstrapNavigation={returningFromWelcome} />
-        ) : null}
-        {appShell}
-        {/* Keep the theme editor above the router so drafts survive navigation. */}
-        <ThemeEditorHost />
-      </FirstRunGate>
+      {isWelcome ? (
+        <>
+          {appHosts}
+          {appShell}
+        </>
+      ) : (
+        <FirstRunGate
+          enabled={primaryEnvironmentAuthenticated}
+          hostedStatic={authGateState.status === "hosted-static"}
+        >
+          {appHosts}
+          {primaryEnvironmentAuthenticated ? (
+            <EventRouter skipInitialBootstrapNavigation={returningFromWelcome} />
+          ) : null}
+          {appShell}
+        </FirstRunGate>
+      )}
+      {/* Above both shells and the router, so drafts survive navigation, including to /welcome. */}
+      <ThemeEditorHost />
     </>
   );
-}
-
-function DocumentTitleSync() {
-  const primaryServerVersion =
-    useAtomValue(primaryServerConfigAtom)?.environment.serverVersion ?? null;
-  const appName = resolveServerBackedAppDisplayName({
-    baseName: APP_BASE_NAME,
-    fallbackDisplayName: APP_DISPLAY_NAME,
-    fallbackStageLabel: APP_STAGE_LABEL,
-    primaryServerVersion,
-  });
-  const threadRef = useParams({ strict: false, select: resolveThreadRouteRef });
-  const threadKey = threadRef === null ? null : scopedThreadKey(threadRef);
-  const thread = useThreadShell(threadRef);
-  let status = thread === null ? null : resolveSidebarThreadStatus(thread);
-  if (status === "ready" && thread?.latestRun?.status === "failed") status = "failed";
-  const turnState = thread?.latestRun?.status ?? null;
-  // "done" only after this tab watched the turn run and the user was away
-  // when it finished, so a thread opened while already idle stays plain and
-  // a completion you saw land is not announced. Held in a ref: the title is
-  // written imperatively, and clearing it on focus should not re-render.
-  const watched = useRef<{ threadKey: string; done: boolean } | null>(null);
-  // The guest page names its own tab after the shared view.
-  const onGuestPage = useLocation({ select: (location) => location.pathname === GUEST_PAGE_PATH });
-
-  // oxlint-disable-next-line colon3code/no-unreasoned-state-sync -- writes the tab title (outside React) from the active thread's status
-  useEffect(() => {
-    if (onGuestPage) return;
-    if (watched.current?.threadKey !== threadKey) watched.current = null;
-    if (status === "working" && threadKey !== null) {
-      watched.current = { threadKey, done: false };
-    } else if (status === "ready" && turnState === "completed" && watched.current) {
-      const away = document.visibilityState !== "visible" || !document.hasFocus();
-      watched.current = { ...watched.current, done: away };
-    }
-    document.title = resolveDocumentTitle({
-      appName,
-      status,
-      recentlyCompleted: watched.current?.done ?? false,
-    });
-  }, [appName, onGuestPage, status, threadKey, turnState]);
-
-  const clearRecentlyCompleted = useEffectEvent(() => {
-    if (onGuestPage || !watched.current?.done || document.visibilityState !== "visible") return;
-    watched.current = null;
-    document.title = resolveDocumentTitle({ appName, status, recentlyCompleted: false });
-  });
-
-  // oxlint-disable-next-line colon3code/no-unreasoned-state-sync -- window focus/visibility listeners that clear the "done" tab title
-  useEffect(() => {
-    const onReturn = () => clearRecentlyCompleted();
-    window.addEventListener("focus", onReturn);
-    document.addEventListener("visibilitychange", onReturn);
-    return () => {
-      window.removeEventListener("focus", onReturn);
-      document.removeEventListener("visibilitychange", onReturn);
-    };
-  }, []);
-
-  return null;
 }
 
 function RootRouteErrorView({ error }: ErrorComponentProps) {
@@ -308,7 +248,12 @@ function RootRouteErrorView({ error }: ErrorComponentProps) {
       <StandalonePageHeader title="oops, something went wrong 3:" description={message} />
 
       <div className="mt-5 flex flex-wrap gap-2">
-        <Button size="sm" onClick={() => void router.invalidate()}>
+        <Button
+          size="sm"
+          onClick={() =>
+            isChunkLoadError(error) ? window.location.reload() : void router.invalidate()
+          }
+        >
           try again
         </Button>
         <Button size="sm" variant="outline" onClick={() => window.location.reload()}>
@@ -332,7 +277,7 @@ function CopyErrorButton({ report }: { report: string }) {
 
   return (
     <Button size="sm" variant="outline" onClick={() => copyToClipboard(report)}>
-      <MorphIcon className={cn(isCopied && "text-success")} icon={isCopied ? Check : Copy} />
+      {isCopied ? <CheckIcon className="text-success" /> : <CopyIcon />}
       {isCopied ? "copied" : "copy error"}
     </Button>
   );

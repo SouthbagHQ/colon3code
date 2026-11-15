@@ -1,8 +1,4 @@
-import {
-  CAT_FACE_GLYPHS,
-  catFaceGlyph,
-  type CatFaceExpression,
-} from "@t3tools/client-runtime/catFace";
+import { CAT_FACE_GLYPHS, type CatFaceExpression } from "@t3tools/client-runtime/catFace";
 import type { ComponentProps } from "react";
 
 import { Colon3Wordmark } from "./Colon3Wordmark";
@@ -14,7 +10,6 @@ import { cn } from "~/lib/utils";
  * Static by design: swap the expression to react to state, never animate it.
  */
 export type { CatFaceExpression };
-export { catFaceGlyph };
 
 export function CatFace({
   expression,

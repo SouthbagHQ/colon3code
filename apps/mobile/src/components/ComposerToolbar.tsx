@@ -33,7 +33,9 @@ export function ComposerInlineControl(props: {
   readonly icon?: ComponentProps<typeof SymbolView>["name"];
   readonly renderIcon?: (size: number) => ReactNode;
   readonly label: string;
+  readonly labelEllipsizeMode?: ComponentProps<typeof Text>["ellipsizeMode"];
   readonly suffix?: ReactNode;
+  readonly suffixWidth?: number;
   /** Show only the icon and chevron; the label still names the control for accessibility. */
   readonly iconOnly?: boolean;
   readonly maxWidth?: ViewStyle["maxWidth"];
@@ -95,13 +97,19 @@ export function ComposerInlineControl(props: {
                 props.emphasized || props.selected ? "text-foreground" : "text-foreground-muted",
               )}
               numberOfLines={1}
+              ellipsizeMode={props.labelEllipsizeMode}
             >
               {props.label}
             </Text>
           </Animated.View>
         )}
         {!props.iconOnly && props.suffix ? (
-          <View className="min-w-0 shrink">{props.suffix}</View>
+          <View
+            className={cn("min-w-0", props.suffixWidth === undefined ? "shrink" : "shrink-0")}
+            style={{ width: props.suffixWidth }}
+          >
+            {props.suffix}
+          </View>
         ) : null}
         {props.showChevron === false ? null : (
           <SymbolView
@@ -280,11 +288,12 @@ export function ComposerActionButton(props: {
 }) {
   const { scale, smallIconSize } = useAndroidControlSizing();
   const circleSize = Math.round((props.size === "large" ? 44 : 30) * scale);
+  const fadeIcon = props.disabled === true && props.variant !== "danger";
   const tint =
     props.variant === "danger"
       ? "accent-danger-foreground"
       : props.disabled
-        ? "accent-foreground/38"
+        ? "accent-foreground"
         : "accent-primary-foreground";
   return (
     <Pressable
@@ -312,20 +321,27 @@ export function ComposerActionButton(props: {
               : "bg-primary",
         )}
       >
-        {props.icon === ":3" ? (
-          <Colon3Wordmark
-            height={props.size === "large" ? Math.round(17 * scale) : 13}
-            colorClassName={tint}
-          />
-        ) : (
-          <SymbolView
-            name={props.icon}
-            size={props.size === "large" ? Math.round(20 * scale) : smallIconSize}
-            weight="semibold"
-            tintColorClassName={tint}
-            type="monochrome"
-          />
-        )}
+        {/* Fade the icon as one layer: a translucent tint, or opacity on a Tabler icon (which
+            copies it onto every path), stacks where the SVG strokes overlap. */}
+        <View
+          className={fadeIcon ? "opacity-38" : undefined}
+          needsOffscreenAlphaCompositing={fadeIcon}
+        >
+          {props.icon === ":3" ? (
+            <Colon3Wordmark
+              height={props.size === "large" ? Math.round(17 * scale) : 13}
+              colorClassName={tint}
+            />
+          ) : (
+            <SymbolView
+              name={props.icon}
+              size={props.size === "large" ? Math.round(20 * scale) : smallIconSize}
+              weight="semibold"
+              tintColorClassName={tint}
+              type="monochrome"
+            />
+          )}
+        </View>
       </View>
     </Pressable>
   );

@@ -173,10 +173,6 @@ export function MediaActions({
         const clipboardText =
           reference?.kind === "file" ? formatFilePathForClipboard(text, reference.path) : text;
         await writeTextToClipboard(clipboardText, reference?.kind === "file" ? "file path" : "URL");
-        toastManager.add({
-          type: "success",
-          title: action === "copy-url" ? "URL copied for you :3" : "path copied for you :3",
-        });
       } else if (action === "open-file") {
         assertCanReadMedia();
         source.onOpenFile?.();
@@ -186,10 +182,7 @@ export function MediaActions({
           title: action === "save" ? `preparing ${noun} download…` : "copying image…",
         });
         await (action === "save" ? save() : copyImage());
-        toastManager.update(progressToast, {
-          type: "success",
-          title: action === "save" ? "download started, yay :3" : "image copied for you :3",
-        });
+        toastManager.close(progressToast);
       }
     });
     if (AsyncResult.isFailure(result)) {
