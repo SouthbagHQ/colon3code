@@ -51,7 +51,7 @@ for e in entries:
     hdr = cat.stdout.readline().split()
     data = cat.stdout.read(int(hdr[2])); cat.stdout.read(1)
     new_data = data
-    if b"\0" not in data[:8000] and re.search(rb"t3code|T3CODE|T3Code|T3 Code|t3-code|T3-Code|t3\\[-_", data):
+    if b"\0" not in data[:8000] and re.search(rb"t3code|T3CODE|T3Code|T3 Code|t3-code|T3-Code|t3\\\[-_", data):
         try:
             new_data = tx(data.decode("utf-8")).encode("utf-8")
         except UnicodeDecodeError:
