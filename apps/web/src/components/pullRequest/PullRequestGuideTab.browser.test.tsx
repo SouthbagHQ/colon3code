@@ -174,7 +174,7 @@ it("steps with J and K beside a chat, also after a stop button or while the chat
   await userEvent.click(screen.getByText("Prose for the second stop."));
   await userEvent.keyboard("k");
   await expect.element(screen.getByText("Prose for the first stop.")).toBeVisible();
-  await userEvent.click(screen.getByRole("button", { name: "Next stop" }));
+  await userEvent.click(screen.getByRole("button", { name: "next stop" }));
   await userEvent.keyboard("j");
   await expect.element(screen.getByText("Prose for the third stop.")).toBeVisible();
   await userEvent.keyboard("k");

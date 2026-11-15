@@ -65,11 +65,11 @@ describe("McpAppFrame", () => {
     using _timers = fakeTimers();
 
     (firstApp as Window).postMessage("close", "*");
-    await userEvent.click(screen.getByRole("button", { name: "Show app" }));
+    await userEvent.click(screen.getByRole("button", { name: "show app" }));
     await expect.element(screen.getByTitle("Demo app")).toBeInTheDocument();
 
     await act(() => vi.advanceTimersByTimeAsync(2_000));
-    expect(screen.getByRole("button", { name: "Show app" }).query()).toBeNull();
+    expect(screen.getByRole("button", { name: "show app" }).query()).toBeNull();
     await expect.element(screen.getByTitle("Demo app")).toBeInTheDocument();
   });
 });

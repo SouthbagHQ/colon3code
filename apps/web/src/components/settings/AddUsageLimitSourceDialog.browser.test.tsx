@@ -31,8 +31,8 @@ describe("AddUsageLimitSourceDialog", () => {
       />,
     );
 
-    await userEvent.type(page.getByLabelText("Hub URL"), "https://hub.example.ts.net:8318");
-    await userEvent.type(page.getByLabelText("Management key"), "secret-key{Enter}");
+    await userEvent.type(page.getByLabelText("hub URL"), "https://hub.example.ts.net:8318");
+    await userEvent.type(page.getByLabelText("management key"), "secret-key{Enter}");
 
     expect(updateSettings).toHaveBeenCalledOnce();
     expect(updateSettings).toHaveBeenCalledWith({

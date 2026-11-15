@@ -328,7 +328,7 @@ it.each([
       <ThreadDetailsThreadPrRows threadRef={threadRef} project={thread as never} />,
     );
   });
-  await clickButton(screen.container, "Merge");
+  await clickButton(screen.container, "merge");
   expect(document.querySelector('[role="alertdialog"]')!.textContent).toContain(
     `using ${expected}`,
   );

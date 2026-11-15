@@ -304,12 +304,12 @@ describe("EnvironmentProviderSettings routing", () => {
       );
       await using screen = await render(panel({ targetInstanceId: customId }));
       const rename = async (slug: string, name: string) => {
-        await userEvent.click(screen.getByRole("button", { name: `Edit ${slug}`, exact: true }));
+        await userEvent.click(screen.getByRole("button", { name: `edit ${slug}`, exact: true }));
         await userEvent.fill(
-          screen.getByRole("textbox", { name: "Display name", exact: true }),
+          screen.getByRole("textbox", { name: "display name", exact: true }),
           name,
         );
-        await userEvent.click(screen.getByRole("button", { name: "Save", exact: true }));
+        await userEvent.click(screen.getByRole("button", { name: "save", exact: true }));
       };
 
       await rename("model-a", "Entered A");
@@ -359,10 +359,10 @@ describe("EnvironmentProviderSettings routing", () => {
       .mockResolvedValueOnce(AsyncResult.failure(Cause.fail(new Error("Save failed"))))
       .mockResolvedValueOnce(AsyncResult.failure(Cause.fail(new Error("Still offline"))));
     await using screen = await render(panel({ targetInstanceId: customId }));
-    await screen.getByRole("button", { name: "Edit model-a", exact: true }).click();
-    const displayName = screen.getByRole("textbox", { name: "Display name", exact: true });
+    await screen.getByRole("button", { name: "edit model-a", exact: true }).click();
+    const displayName = screen.getByRole("textbox", { name: "display name", exact: true });
     await userEvent.fill(displayName, "Entered A");
-    const save = screen.getByRole("button", { name: "Save", exact: true });
+    const save = screen.getByRole("button", { name: "save", exact: true });
     await save.click();
     await expect.element(save).toBeEnabled();
     await expect.element(displayName).toHaveValue("Entered A");
@@ -372,8 +372,8 @@ describe("EnvironmentProviderSettings routing", () => {
       { ...first, name: "Entered A" },
       second,
     ]);
-    await screen.getByRole("button", { name: "Cancel", exact: true }).click();
-    await screen.getByRole("button", { name: "Edit model-b", exact: true }).click();
+    await screen.getByRole("button", { name: "cancel", exact: true }).click();
+    await screen.getByRole("button", { name: "edit model-b", exact: true }).click();
     await userEvent.fill(displayName, "Entered B");
     await save.click();
     await expect.element(displayName).not.toBeInTheDocument();
@@ -473,7 +473,7 @@ describe("EnvironmentProviderSettings provider list", () => {
     await setup();
     await setProviders([provider()]);
     await using _screen = await render(panel());
-    const select = page.getByRole("button", { name: "Select Claude" });
+    const select = page.getByRole("button", { name: "select clod ^w^" });
     await expect.element(select).toHaveAttribute("aria-pressed", "false");
     const row = page.elementLocator(select.element().closest('[data-slot="settings-row"]')!);
 

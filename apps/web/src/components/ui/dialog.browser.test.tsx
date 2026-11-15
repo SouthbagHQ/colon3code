@@ -17,14 +17,14 @@ import {
 
 describe("dialog initial focus", () => {
   it.each([
-    { label: "generic", options: undefined, focused: "Cancel", confirmed: false },
+    { label: "generic", options: undefined, focused: "cancel", confirmed: false },
     {
       label: "destructive opt-in",
       options: { variant: "destructive", initialFocus: "confirm" },
-      focused: "Cancel",
+      focused: "cancel",
       confirmed: false,
     },
-    { label: "opt-in", options: { initialFocus: "confirm" }, focused: "Confirm", confirmed: true },
+    { label: "opt-in", options: { initialFocus: "confirm" }, focused: "confirm", confirmed: true },
   ] as const)(
     "focuses $focused for a $label confirmation",
     async ({ options, focused, confirmed }) => {

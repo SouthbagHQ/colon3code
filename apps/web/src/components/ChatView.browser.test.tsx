@@ -145,8 +145,8 @@ it("a machine chip stashed in one thread restores with its machine in another", 
   // An answer carries no machines, so an open question refuses the restore and keeps the entry.
   await router.navigate({ to: `/${ENVIRONMENT_ID}/${asking.id}` });
   await expect.element(page.getByText("Which file should change?")).toBeVisible();
-  await userEvent.click(page.getByRole("button", { name: /^Stashed prompts/ }));
-  await userEvent.click(page.getByRole("button", { name: /^Restore stashed prompt/ }));
+  await userEvent.click(page.getByRole("button", { name: /^stashed prompts/ }));
+  await userEvent.click(page.getByRole("button", { name: /^restore stashed prompt/ }));
   await vi.waitFor(() =>
     expect(document.body.textContent).toContain("hmm, stashed machines can't go in an answer 3:"),
   );
@@ -204,8 +204,8 @@ it("a question that opens while a stashed file is checked keeps a machine stash"
     router: false,
   });
   await expect.element(page.getByText("Answer 0 for thread-stash-late-question.")).toBeVisible();
-  await userEvent.click(page.getByRole("button", { name: /^Stashed prompts/ }));
-  await userEvent.click(page.getByRole("button", { name: /^Restore stashed prompt/ }));
+  await userEvent.click(page.getByRole("button", { name: /^stashed prompts/ }));
+  await userEvent.click(page.getByRole("button", { name: /^restore stashed prompt/ }));
 
   // The question opens while the restore still waits on the server's file check.
   await vi.waitFor(() => expect(hasPendingAssetUrl()).toBe(true));
@@ -314,10 +314,10 @@ it("opens the thread actions menu for an older settled thread the shell leaves o
   });
   await expect.element(page.getByText("older-settled: question 0")).toBeVisible();
 
-  await page.getByRole("button", { name: `Thread actions for ${thread.title}` }).click();
+  await page.getByRole("button", { name: `thread actions for ${thread.title}` }).click();
   // Without a bound the poll runs to the test deadline and reports a bare timeout.
   await expect
-    .element(page.getByRole("menuitem", { name: "Rename thread" }), { timeout: 5_000 })
+    .element(page.getByRole("menuitem", { name: "rename thread" }), { timeout: 5_000 })
     .toBeVisible();
 });
 
@@ -368,7 +368,7 @@ it("retains each thread's diff selection when returning from another thread or S
   await act(() => useDiffPanelStore.getState().selectTurn(aRef, a.runs[0]!.id));
   await act(() => router.navigate({ to: "/settings/general" }));
   await expect
-    .element(page.getByRole("heading", { name: "Time format", exact: true }))
+    .element(page.getByRole("heading", { name: "time format", exact: true }))
     .toBeVisible();
   await act(() =>
     router.navigate({
@@ -472,7 +472,7 @@ it("Enter on an empty prompt resumes an interrupted thread", async () => {
     // AppRoot brings its own router.
     router: false,
   });
-  await expect.element(page.getByRole("button", { name: "Resume thread" })).toBeVisible();
+  await expect.element(page.getByRole("button", { name: "resume thread" })).toBeVisible();
 
   await userEvent.click(page.getByTestId("composer-editor"));
   await userEvent.keyboard("{Enter}");
@@ -605,13 +605,13 @@ it("a shortcut conditioned on rightPanelOpen sees the thread's open right panel"
     router: false,
   });
   const composer = page.getByTestId("composer-editor");
-  const toggle = page.getByRole("button", { name: "Toggle right panel", exact: true });
+  const toggle = page.getByRole("button", { name: "toggle right panel", exact: true });
   await expect.element(toggle).toHaveAttribute("aria-pressed", "false");
   await toggle.click();
-  await page.getByRole("button", { name: /^Files/ }).click();
+  await page.getByRole("button", { name: /^files/ }).click();
   await composer.click();
   await userEvent.keyboard("{Control>}t{/Control}");
-  await expect.element(page.getByRole("menuitem", { name: /Files/ })).toBeVisible();
+  await expect.element(page.getByRole("menuitem", { name: /files/ })).toBeVisible();
   await expect.element(toggle).toHaveAttribute("aria-pressed", "true");
 });
 
@@ -643,15 +643,15 @@ it("selecting a side-chat tab focuses that side chat's composer", async () => {
     router: false,
   });
   using _focus = { [Symbol.dispose]: startWorkspaceFocus(router) };
-  const mainEditor = screen.getByRole("textbox", { name: `Message ${parent.title}`, exact: true });
-  const sideEditor = screen.getByRole("textbox", { name: `Message ${side.title}`, exact: true });
+  const mainEditor = screen.getByRole("textbox", { name: `message ${parent.title}`, exact: true });
+  const sideEditor = screen.getByRole("textbox", { name: `message ${side.title}`, exact: true });
   await expect.element(sideEditor).toBeVisible();
   await userEvent.click(mainEditor);
   await userEvent.keyboard("main draft");
 
   await userEvent.click(screen.getByRole("button", { name: otherSide.title, exact: true }));
   const otherEditor = screen.getByRole("textbox", {
-    name: `Message ${otherSide.title}`,
+    name: `message ${otherSide.title}`,
     exact: true,
   });
   await expect.element(otherEditor).toHaveFocus();

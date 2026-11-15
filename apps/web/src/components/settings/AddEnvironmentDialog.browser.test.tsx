@@ -107,7 +107,7 @@ describe("AddEnvironmentDialog", () => {
     await openDialogOnSsh();
     await userEvent.type(page.getByPlaceholder("search hosts or type devbox"), "devbox");
     await userEvent.click(
-      page.getByRole("dialog").getByRole("button", { name: "Add environment" }),
+      page.getByRole("dialog").getByRole("button", { name: "add environment" }),
     );
     await expect.element(page.getByText(/connection refused/)).toBeInTheDocument();
 

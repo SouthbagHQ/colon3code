@@ -100,7 +100,7 @@ async function renderBesideSettings() {
     ),
   );
   // Settings moves focus in on a later frame; landing after the test focuses the editor, it steals it.
-  await expect.element(page.getByRole("button", { name: "Close" })).toHaveFocus();
+  await expect.element(page.getByRole("button", { name: "close" })).toHaveFocus();
   const screen = stack.move();
   return {
     onSettingsOpenChange,
@@ -202,11 +202,11 @@ describe("ThemeEditorPanel", () => {
 
   it("leaves inspection on Escape without closing the editor or Settings", async () => {
     await using view = await renderBesideSettings();
-    (await editorElement('[aria-label="Inspect app colors"]')).click();
-    await editorElement('[aria-label="Cancel inspecting app colors"]');
+    (await editorElement('[aria-label="inspect app colors"]')).click();
+    await editorElement('[aria-label="cancel inspecting app colors"]');
     await userEvent.keyboard("{Escape}");
 
-    await editorElement('[aria-label="Inspect app colors"]');
+    await editorElement('[aria-label="inspect app colors"]');
     expect(view.onEditorOpenChange).not.toHaveBeenCalled();
     expect(view.onSettingsOpenChange).not.toHaveBeenCalled();
   });

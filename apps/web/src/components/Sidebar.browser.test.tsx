@@ -248,7 +248,7 @@ describe("sidebar thread rename", () => {
       );
       await using screen = await render(tree());
       await userEvent.dblClick(screen.getByText("Fix the login redirect").first());
-      const input = screen.getByRole("textbox", { name: "Thread title" });
+      const input = screen.getByRole("textbox", { name: "thread title" });
       await expect.element(input).toHaveValue("Fix the login redirect");
 
       vi.mocked(useQuietThreadShells).mockReturnValue([shellTitled("Generated title")]);
@@ -332,7 +332,7 @@ describe("sidebar settled pagination", () => {
       '[data-sidebar-row="shelf:settled"]',
     )!;
     if (shelf.getAttribute("aria-expanded") === "false") await act(() => shelf.click());
-    const more = screen.getByRole("button", { name: "Show 25 more", exact: true });
+    const more = screen.getByRole("button", { name: "show 25 more", exact: true });
     await expect.element(more).toBeInTheDocument();
     const moreButton = more.element() as HTMLButtonElement;
     const viewport = moreButton.closest<HTMLElement>('[data-slot="scroll-area-viewport"]')!;
@@ -344,10 +344,10 @@ describe("sidebar settled pagination", () => {
     moreButton.focus({ preventScroll: true });
     await act(() => moreButton.click());
     await expect
-      .element(screen.getByRole("button", { name: "Loading", exact: true }))
+      .element(screen.getByRole("button", { name: "loading…", exact: true }))
       .toBeInTheDocument();
     await expect
-      .element(screen.getByRole("button", { name: "Loading", exact: true }))
+      .element(screen.getByRole("button", { name: "loading…", exact: true }))
       .toHaveFocus();
     expect(viewport.scrollTop).toBe(before);
     const loadedRows = screen.container.querySelectorAll("[data-thread-item]").length;

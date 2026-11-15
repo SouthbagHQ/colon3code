@@ -219,7 +219,7 @@ describe("FileBrowserPanel", () => {
       { path: "lib/generated-existing.ts", kind: "file" },
     ]);
     await using screen = await render(renderPanel());
-    const search = page.getByRole("searchbox", { name: "Search repo files" });
+    const search = page.getByRole("searchbox", { name: "search repo files" });
     await userEvent.fill(search, "generated-");
     await vi.waitFor(() => expect(findTreeRow("lib/generated-existing.ts")).not.toBeNull());
 
@@ -256,7 +256,7 @@ describe("FileBrowserPanel", () => {
     const modifier = isMacPlatform(navigator.platform) ? "Meta" : "Control";
     await userEvent.keyboard(`{${modifier}>}f{/${modifier}}`);
 
-    const search = page.getByRole("searchbox", { name: "Search repo files" });
+    const search = page.getByRole("searchbox", { name: "search repo files" });
     await expect.element(search).toHaveFocus();
 
     (search.element() as HTMLElement).blur();

@@ -32,7 +32,7 @@ it("lists a favorite the provider no longer reports so it can be unstarred", asy
   await using screen = await render(
     section({ favoriteModels: ["retired-model"], onToggleFavorite }),
   );
-  await screen.getByRole("button", { name: "Remove retired-model from favorites" }).click();
+  await screen.getByRole("button", { name: "remove retired-model from favorites" }).click();
   expect(onToggleFavorite).toHaveBeenCalledWith("retired-model");
 });
 
@@ -43,9 +43,9 @@ it("keeps custom model drafts until they save, so a failed save can be retried",
   await using screen = await render(
     section({ onChange, models: [{ ...kept, isCustom: true }], customModels: [kept] }),
   );
-  const addCustomModel = screen.getByRole("button", { name: "Add custom model" });
+  const addCustomModel = screen.getByRole("button", { name: "add custom model" });
   const input = screen.getByRole("textbox");
-  const add = screen.getByRole("button", { name: "Add", exact: true });
+  const add = screen.getByRole("button", { name: "add", exact: true });
 
   await userEvent.click(addCustomModel);
   await userEvent.type(input, "my-model{Enter}");
@@ -63,18 +63,18 @@ it("keeps custom model drafts until they save, so a failed save can be retried",
   // A save the user cancelled must not close the draft opened after it.
   await userEvent.click(addCustomModel);
   await userEvent.type(input, "other-model{Enter}");
-  await userEvent.click(screen.getByRole("button", { name: "Cancel" }));
+  await userEvent.click(screen.getByRole("button", { name: "cancel" }));
   await userEvent.click(addCustomModel);
   await act(() => saves[2]!(true));
   await expect.element(add).toBeEnabled();
 
-  await userEvent.click(screen.getByRole("button", { name: "Edit kept-model", exact: true }));
-  const displayName = screen.getByRole("textbox", { name: "Display name", exact: true });
+  await userEvent.click(screen.getByRole("button", { name: "edit kept-model", exact: true }));
+  const displayName = screen.getByRole("textbox", { name: "display name", exact: true });
   await userEvent.fill(displayName, "Renamed");
-  await userEvent.click(screen.getByRole("button", { name: "Save", exact: true }));
+  await userEvent.click(screen.getByRole("button", { name: "save", exact: true }));
   await act(() => saves[3]!(false));
   await expect.element(displayName).toHaveValue("Renamed");
-  await userEvent.click(screen.getByRole("button", { name: "Save", exact: true }));
+  await userEvent.click(screen.getByRole("button", { name: "save", exact: true }));
   await act(() => saves[4]!(true));
   await expect.element(displayName).not.toBeInTheDocument();
 });
@@ -86,9 +86,9 @@ it("keeps changes typed while an earlier save succeeds", async () => {
   await using screen = await render(
     section({ onChange, models: [{ ...kept, isCustom: true }], customModels: [kept] }),
   );
-  await screen.getByRole("button", { name: "Edit kept-model", exact: true }).click();
-  const displayName = screen.getByRole("textbox", { name: "Display name", exact: true });
-  const save = screen.getByRole("button", { name: "Save", exact: true });
+  await screen.getByRole("button", { name: "edit kept-model", exact: true }).click();
+  const displayName = screen.getByRole("textbox", { name: "display name", exact: true });
+  const save = screen.getByRole("button", { name: "save", exact: true });
   await userEvent.fill(displayName, "Submitted draft");
   await save.click();
   await userEvent.fill(displayName, "New draft");

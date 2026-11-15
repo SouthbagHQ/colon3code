@@ -273,10 +273,10 @@ describe("PreviewView", () => {
     mocks.idleDesktopTab = true;
     await using _screen = await render(view());
     await expect
-      .element(page.getByPlaceholder("Search or enter URL"))
+      .element(page.getByPlaceholder("search or type a URL :3"))
       .toHaveValue("http://example.com/");
-    await expect.element(page.getByText("No preview yet")).not.toBeInTheDocument();
-    await expect.element(page.getByRole("button", { name: "Annotate preview" })).toBeVisible();
+    await expect.element(page.getByText("no preview yet :3")).not.toBeInTheDocument();
+    await expect.element(page.getByRole("button", { name: "annotate preview" })).toBeVisible();
   });
 
   it("keeps the server navigation while the new desktop tab is still idle", async () => {
@@ -284,15 +284,15 @@ describe("PreviewView", () => {
     mocks.idleDesktopOverlay = true;
     await using _screen = await render(view());
     await expect
-      .element(page.getByPlaceholder("Search or enter URL"))
+      .element(page.getByPlaceholder("search or type a URL :3"))
       .toHaveValue("http://example.com/");
-    await expect.element(page.getByText("No preview yet")).not.toBeInTheDocument();
+    await expect.element(page.getByText("no preview yet :3")).not.toBeInTheDocument();
   });
 
   it("keeps the address in the bar when Enter commits an IME composition", async () => {
     setup();
     await using _screen = await render(view());
-    const input = page.getByPlaceholder("Search or enter URL");
+    const input = page.getByPlaceholder("search or type a URL :3");
     await input.fill("https://example.com/pinyin");
 
     const enter = new KeyboardEvent("keydown", {
@@ -399,8 +399,8 @@ describe("PreviewView", () => {
     await expect.element(surface).toBeInTheDocument();
     const rect = surface.element().getBoundingClientRect();
 
-    await userEvent.click(page.getByRole("button", { name: "Preview menu" }));
-    await userEvent.click(page.getByRole("menuitem", { name: "Show device toolbar" }));
+    await userEvent.click(page.getByRole("button", { name: "preview menu" }));
+    await userEvent.click(page.getByRole("menuitem", { name: "show device toolbar" }));
 
     expect(commitBrowserViewportChange).toHaveBeenCalledWith(expect.anything(), {
       _tag: "freeform",

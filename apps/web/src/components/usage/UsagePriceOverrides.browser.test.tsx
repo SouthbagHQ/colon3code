@@ -69,17 +69,17 @@ const renderPrices = (initialModel?: string) =>
 describe("UsagePriceOverrides", () => {
   it("waits for a price before flagging an unpriced model's new row", async () => {
     await using _screen = await renderPrices("glm-5.3");
-    const modelId = page.getByLabelText("New model ID");
+    const modelId = page.getByLabelText("new model ID");
     await expect.element(modelId).toHaveValue("glm-5.3");
 
     expect(page.getByRole("alert").elements()).toEqual([]);
     await expect.element(modelId).not.toHaveAttribute("aria-invalid");
-    await expect.element(page.getByRole("button", { name: "Save changes" })).toBeDisabled();
+    await expect.element(page.getByRole("button", { name: "save changes" })).toBeDisabled();
 
-    await userEvent.type(page.getByLabelText("Input price for glm-5.3"), "2");
+    await userEvent.type(page.getByLabelText("input price for glm-5.3"), "2");
     await expect
       .element(page.getByRole("alert"))
-      .toHaveTextContent("Output is required on workstation.");
-    await expect.element(page.getByRole("button", { name: "Save changes" })).toBeDisabled();
+      .toHaveTextContent("output is required on workstation.");
+    await expect.element(page.getByRole("button", { name: "save changes" })).toBeDisabled();
   });
 });

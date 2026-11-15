@@ -89,7 +89,7 @@ describe("CloudEnvironmentConnectRows", () => {
 
     await expect.element(screen.getByText("Laptop")).toBeInTheDocument();
     await expect.element(screen.getByText("Ubuntu (WSL)")).not.toBeInTheDocument();
-    await expect.element(screen.getByRole("button", { name: "Add route" })).toBeInTheDocument();
+    await expect.element(screen.getByRole("button", { name: "add route" })).toBeInTheDocument();
   });
 
   it("shows the empty state when the desktop's own WSL backend is the only saved environment", async () => {

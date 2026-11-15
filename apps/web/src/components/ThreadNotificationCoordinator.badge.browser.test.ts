@@ -274,7 +274,7 @@ it.each(["hasPendingApprovals", "hasPendingUserInput"] as const)(
     state.shells.set("one", waiting("turn-1", "request-1"));
     state.shells.set("one", waiting("turn-2", "request-1"));
     state.shells.set("one", waiting("turn-2", "request-2"));
-    const title = flag === "hasPendingApprovals" ? "Approval needed" : "Input needed";
+    const title = flag === "hasPendingApprovals" ? "can i? :3" : "psst, question for you :3";
     expect(TestNotification.sent.map(({ title }) => title)).toEqual([title, title]);
   },
 );
@@ -327,31 +327,31 @@ it.each([false, true])(
       "one",
       watching("turn", "completed", "2026-09-13T07:00:01.000Z", false, monitor),
     );
-    expect(titles()).toEqual(["Thread completed"]);
+    expect(titles()).toEqual(["thread completed, purr :3"]);
 
     state.shells.set("one", watching("wake", "running", null, true, monitor));
     state.shells.set(
       "one",
       watching("wake", "completed", "2026-09-13T07:00:09.000Z", true, monitor),
     );
-    expect(titles()).toEqual(["Thread completed"]);
+    expect(titles()).toEqual(["thread completed, purr :3"]);
 
     // The adapter drains the roster before the final wake starts.
     state.shells.set("one", watching("wake", "completed", "2026-09-13T07:00:09.000Z", true, []));
-    expect(titles()).toEqual(["Thread completed"]);
+    expect(titles()).toEqual(["thread completed, purr :3"]);
     if (disconnect) {
       state.shells.set("one", {
         ...watching("wake", "completed", "2026-09-13T07:00:09.000Z", true, []),
         status: "cached",
       });
       vi.advanceTimersByTime(RELEASED_COMPLETION_GRACE_MS);
-      expect(titles()).toEqual(["Thread completed"]);
+      expect(titles()).toEqual(["thread completed, purr :3"]);
     }
 
     state.shells.set("one", watching("final", "running", null, false, []));
     vi.advanceTimersByTime(RELEASED_COMPLETION_GRACE_MS);
     state.shells.set("one", watching("final", "completed", "2026-09-13T07:00:11.000Z", false, []));
-    expect(titles()).toEqual(["Thread completed", "Thread completed"]);
+    expect(titles()).toEqual(["thread completed, purr :3", "thread completed, purr :3"]);
     expect(state.sound).toHaveBeenCalledTimes(2);
   },
 );

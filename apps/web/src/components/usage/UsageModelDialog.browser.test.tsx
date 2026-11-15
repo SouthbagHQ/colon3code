@@ -43,10 +43,10 @@ describe("UsageModelDialog", () => {
 
     const dialog = page.getByRole("dialog");
     for (const [label, value] of [
-      ["Cost", "$2.00"],
-      ["Tokens", "1M"],
-      ["Per 1M tokens", "$2.00"],
-      ["Cache hit", "90.0%"],
+      ["cost", "$2.00"],
+      ["tokens", "1M"],
+      ["per 1M tokens", "$2.00"],
+      ["cache hit", "90.0%"],
     ] as const) {
       await expect
         .element(dialog.getByRole("term").getByText(label, { exact: true }))

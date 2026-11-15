@@ -61,8 +61,8 @@ it("keeps composition Enter in the repository path from publishing", async () =>
       offeredProviders={undefined}
     />,
   );
-  await page.getByRole("button", { name: "Next" }).click();
-  const path = page.getByRole("textbox", { name: "Repository" });
+  await page.getByRole("button", { name: "next" }).click();
+  const path = page.getByRole("textbox", { name: "repository" });
   await path.fill("octo/repo");
 
   for (const nativeEvent of [{ isComposing: true }, { keyCode: 229 }]) {

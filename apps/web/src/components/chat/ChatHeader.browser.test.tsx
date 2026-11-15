@@ -77,15 +77,15 @@ it("opens the thread menu on a desktop title click without waiting", async () =>
   openMenu.mockClear();
   using _bridge = stubGlobal("desktopBridge", {});
   await using screen = await render(header("New thread"));
-  await screen.getByRole("button", { name: "Thread actions for New thread" }).click();
+  await screen.getByRole("button", { name: "thread actions for New thread" }).click();
   expect(openMenu).toHaveBeenCalledOnce();
 });
 
 it("keeps the Escape that cancels a rename from also reaching window shortcuts", async () => {
   persisted.title = "New thread";
   await using screen = await render(header(persisted.title));
-  await screen.getByRole("button", { name: "Thread actions for New thread" }).dblClick();
-  const input = screen.getByRole("textbox", { name: "Thread title" });
+  await screen.getByRole("button", { name: "thread actions for New thread" }).dblClick();
+  const input = screen.getByRole("textbox", { name: "thread title" });
   await input.fill("Unsaved title");
 
   // The thread find bar closes from a window keydown listener that skips handled events.

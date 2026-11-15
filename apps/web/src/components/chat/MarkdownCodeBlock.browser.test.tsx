@@ -30,7 +30,7 @@ it("follows a changed word wrap default while mounted", async () => {
   expect(block()?.getAttribute("data-wrap")).toBe("false");
 
   await setWordWrap(true);
-  await expect.element(screen.getByRole("button", { name: "Disable line wrap" })).toBeVisible();
+  await expect.element(screen.getByRole("button", { name: "disable line wrap" })).toBeVisible();
   expect(block()?.getAttribute("data-wrap")).toBe("true");
 });
 
@@ -51,6 +51,6 @@ it("copies a fenced command without the fence's closing newline", async () => {
     { router: false }, // The code block reads no route state.
   );
   using write = vi.spyOn(navigator.clipboard, "writeText").mockResolvedValue(undefined);
-  await screen.getByRole("button", { name: "Copy code" }).click();
+  await screen.getByRole("button", { name: "copy code" }).click();
   await vi.waitFor(() => expect(write).toHaveBeenCalledWith("sudo pacman -S patchelf"));
 });

@@ -145,9 +145,9 @@ it("sizes an oversized theme file just under 1 MB as 1.00 MB", async () => {
   );
 
   await expect
-    .element(page.getByText(/^That file is/))
+    .element(page.getByText(/^that file is/))
     .toHaveTextContent(
-      "That file is 1.00 MB. Theme files are only a few KB, so this one was not read (limit 256 KB).",
+      "that file is 1.00 MB. theme files are only a few KB, so this one wasn't read (limit 256 KB) ^w^",
     );
 });
 

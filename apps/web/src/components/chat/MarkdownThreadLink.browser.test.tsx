@@ -76,11 +76,11 @@ it.each([
       </RegistryContext>,
     );
     await expect
-      .element(screen.getByRole("link", { name: "Thread, Thread", exact: true }))
+      .element(screen.getByRole("link", { name: "thread, Thread", exact: true }))
       .toBeVisible();
     await act(() => registry.set(reply, AsyncResult.failure(Cause.fail("offline"))));
     await expect
-      .element(screen.getByRole("link", { name: "Thread, Thread", exact: true }))
+      .element(screen.getByRole("link", { name: "thread, Thread", exact: true }))
       .toBeVisible();
     await act(() =>
       registry.set(
@@ -98,7 +98,7 @@ it.each([
         }),
       ),
     );
-    const link = screen.getByRole("link", { name: "Thread, Older essay" });
+    const link = screen.getByRole("link", { name: "thread, Older essay" });
     await expect.element(link).toBeVisible();
     await expect.element(screen.getByRole("img", { name: "Essays project icon" })).toBeVisible();
     await link.click();
@@ -116,7 +116,7 @@ it.each([
           }),
         ),
       );
-      const decoded = screen.getByRole("link", { name: "Thread, Decoded essay" });
+      const decoded = screen.getByRole("link", { name: "thread, Decoded essay" });
       await expect.element(decoded).toBeVisible();
       await decoded.click();
       await vi.waitFor(() =>
@@ -125,7 +125,7 @@ it.each([
     }
     await act(() => registry.set(reply, AsyncResult.success({})));
     if (legacy) {
-      const remote = screen.getByRole("link", { name: "Thread, Remote thread" });
+      const remote = screen.getByRole("link", { name: "thread, Remote thread" });
       await expect.element(remote).toBeVisible();
       await remote.click();
       await vi.waitFor(() =>

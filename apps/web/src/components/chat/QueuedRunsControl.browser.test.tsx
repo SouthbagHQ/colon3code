@@ -159,12 +159,12 @@ it.each([false, true])(
     }
     await using _screen = await renderUi(<QueueWithGallery />);
 
-    await page.getByRole("button", { name: "Preview second.png", exact: true }).click();
+    await page.getByRole("button", { name: "preview second.png", exact: true }).click();
     await expect.element(page.getByRole("dialog")).toBeVisible();
     await expect.element(page.getByText("second.png (2/2)", { exact: true })).toBeVisible();
-    await page.getByRole("button", { name: "Previous media", exact: true }).click();
+    await page.getByRole("button", { name: "previous media", exact: true }).click();
     await expect.element(page.getByText("first.png (1/2)", { exact: true })).toBeVisible();
-    await page.getByRole("button", { name: "Back, close image preview", exact: true }).click();
+    await page.getByRole("button", { name: "back, close image preview", exact: true }).click();
     await expect.element(page.getByRole("dialog")).not.toBeInTheDocument();
     await expect.element(page.getByText("Later", { exact: true })).toBeVisible();
   },
@@ -290,7 +290,7 @@ it("shows who sent a queued message and folds automation and agent prompts", asy
   const onOpenThread = vi.fn();
   await using _screen = await renderQueue({ onOpenThread });
   // Four rows collapse the queue.
-  await page.getByRole("button", { name: "Show all 4 queued" }).click();
+  await page.getByRole("button", { name: "show all 4 queued" }).click();
 
   const automation = page.getByRole("button", { name: /PR dispatcher/ });
   await expect.element(automation).toHaveAttribute("aria-expanded", "false");

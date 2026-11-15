@@ -159,11 +159,11 @@ it("jumps to the first hit while still counting and keeps later manual navigatio
       </div>,
     );
     await expect.element(screen.getByText("1 / 4 pages")).toBeVisible();
-    await screen.getByRole("searchbox", { name: "Find in PDF" }).fill("needle");
+    await screen.getByRole("searchbox", { name: "find in PDF" }).fill("needle");
     await expect.element(screen.getByText("2 / 4 pages")).toBeVisible();
-    await expect.element(screen.getByRole("status")).toHaveTextContent("Searching…");
+    await expect.element(screen.getByRole("status")).toHaveTextContent("searching…");
 
-    await screen.getByRole("button", { name: "Next page", exact: true }).click();
+    await screen.getByRole("button", { name: "next page", exact: true }).click();
     await expect.element(screen.getByText("3 / 4 pages")).toBeVisible();
     findGate.open();
     await expect.element(screen.getByRole("status")).toHaveTextContent("1/2");

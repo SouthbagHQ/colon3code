@@ -85,7 +85,7 @@ it.each(["resume", "draft", "question"] as const)(
         hasSendableContent: mode === "draft",
       }),
     );
-    const action = { resume: "Resume thread", draft: "Submit message", question: "Submit" }[mode];
+    const action = { resume: "resume thread", draft: "send message", question: "submit" }[mode];
     expect(screen.getByRole("button", { name: "stop generation" }).query()).toBeNull();
     expect(target()).toBe(screen.getByRole("button", { name: action, exact: true }).element());
     await act(() => {
@@ -176,7 +176,7 @@ it("swaps the collapsed composer's send button for Stop while a turn can be stop
       isEditingQueuedMessage={false}
       onInterrupt={onInterrupt}
     >
-      <button type="button">Send message</button>
+      <button type="button">send message</button>
     </CollapsedComposerStopAction>
   );
   await using screen = await render(collapsed({ hasSendableContent: true }));

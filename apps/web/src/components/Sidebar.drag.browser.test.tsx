@@ -60,7 +60,7 @@ it("shows the titled preview inside and outside search results from a collapsed 
   folder.element().focus();
   await userEvent.keyboard("{Enter}");
   await expect.element(secondRow).not.toBeInTheDocument();
-  await userEvent.fill(page.getByRole("combobox", { name: "Search threads" }), "search-target");
+  await userEvent.fill(page.getByRole("combobox", { name: "search threads" }), "search-target");
   const result = page.getByRole("option", { name: /Thread search-target/ });
   await expect.element(result).toBeVisible();
   const bounds = result.element().getBoundingClientRect();

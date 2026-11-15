@@ -223,10 +223,10 @@ it("keeps a revealed file open when its Viewed mark loads afterwards", async () 
   await expect.element(screen.getByText("three()", { exact: true })).toBeVisible();
 
   deliverViewedPaths(new Set(["a.ts"]));
-  await expect.element(screen.getByRole("checkbox", { name: "Viewed" })).toBeChecked();
+  await expect.element(screen.getByRole("checkbox", { name: "viewed" })).toBeChecked();
 
   await expect
-    .element(screen.getByRole("button", { name: "Collapse diff" }))
+    .element(screen.getByRole("button", { name: "collapse diff" }))
     .toHaveAttribute("aria-expanded", "true");
   await expect.element(screen.getByText("three()", { exact: true })).toBeVisible();
 });
@@ -272,7 +272,7 @@ it("pages forward to a file asked for that is not loaded yet, then scrolls to it
   const container = pagedContainer();
   await using screen = await render(tab(0), { container });
   await expect.element(screen.getByText("early-0.ts", { exact: true }).first()).toBeVisible();
-  await screen.getByRole("button", { name: "Hide test files" }).click();
+  await screen.getByRole("button", { name: "hide test files" }).click();
 
   const url = `${detail.url}/files#diff-${bytesToHex(sha256(new TextEncoder().encode("late.test.ts")))}R4-R5`;
   const settled = vi.fn();
@@ -417,29 +417,29 @@ it("hides a resolved conversation behind avatars on its line until they are clic
   await using screen = await render(withThread(true), { container });
   const marker = screen.getByRole("button", { name: "Resolved conversation", exact: true });
   const card = (state: string) => screen.getByRole("button", { name: `${state} · 1 comment` });
-  const reply = () => screen.getByRole("textbox", { name: "Reply to this conversation" });
+  const reply = () => screen.getByRole("textbox", { name: "reply to this conversation" });
 
   await expect.element(marker).toHaveAttribute("aria-expanded", "false");
-  await expect.element(card("Resolved")).not.toBeInTheDocument();
+  await expect.element(card("resolved")).not.toBeInTheDocument();
 
   await marker.click();
   await expect.element(marker).toHaveAttribute("aria-expanded", "true");
-  await expect.element(card("Resolved")).toHaveAttribute("aria-expanded", "true");
+  await expect.element(card("resolved")).toHaveAttribute("aria-expanded", "true");
   await screen.getByRole("button", { name: "Reply", exact: true }).click();
   await reply().fill("Unsent");
 
   // Hidden conversations stay mounted, so the unsent reply is still there.
   await marker.click();
-  await expect.element(card("Resolved")).not.toBeInTheDocument();
+  await expect.element(card("resolved")).not.toBeInTheDocument();
   await marker.click();
   await expect.element(reply()).toHaveValue("Unsent");
   await marker.click();
 
   // Seen open and then resolved, it stays until the avatars are clicked.
   await screen.rerender(withThread(false));
-  await expect.element(card("Open")).toBeVisible();
+  await expect.element(card("open")).toBeVisible();
   await screen.rerender(withThread(true));
-  await expect.element(card("Resolved")).toBeVisible();
+  await expect.element(card("resolved")).toBeVisible();
 
   // Stacked view draws a context row once, so both sides' conversations share the avatars.
   await screen.rerender(withThread(true, true));

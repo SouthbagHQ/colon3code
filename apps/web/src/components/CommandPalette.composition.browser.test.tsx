@@ -167,18 +167,18 @@ describe.each(["repository", "folder", "destination"] as const)("add-project %s"
 });
 
 it.each([
-  { step: "folder", source: "Local folder", keys: "", description: /^(?!.*(Ctrl|⌘)).*Add.*Enter/ },
+  { step: "folder", source: "local folder", keys: "", description: /^(?!.*(Ctrl|⌘)).*add.*Enter/ },
   {
     step: "highlighted folder",
-    source: "Local folder",
+    source: "local folder",
     keys: "{ArrowDown}",
-    description: /Add.*(Ctrl|⌘) Enter/,
+    description: /add.*(Ctrl|⌘) Enter/,
   },
-  { step: "repository", source: "Git URL", keys: "", description: /Continue.*Enter/ },
-  { step: "new project", source: "New project", keys: "", description: /Create.*Enter/ },
+  { step: "repository", source: "Git URL", keys: "", description: /continue.*Enter/ },
+  { step: "new project", source: "new project", keys: "", description: /create.*Enter/ },
   {
     step: "permission-blocked folder",
-    source: "Local folder",
+    source: "local folder",
     keys: "",
     deniedScope: AuthOrchestrationOperateScope,
     description: "This connection cannot add projects.",
@@ -221,9 +221,9 @@ it.each([
   {
     flow: "Git URL",
     value: "https://github.com/SouthbagHQ/colon3code.git",
-    submit: "Continue (Enter)",
+    submit: "continue (Enter)",
   },
-  { flow: "New project", value: "demo-tab-order", submit: /^Create \(/ },
+  { flow: "new project", value: "demo-tab-order", submit: /^create \(/ },
 ])("moves focus from the $flow input to its enabled submit button on Tab", async (step) => {
   await using _screen = await render(<CommandPalette>{null}</CommandPalette>);
   await act(() => openCommandPalette({ open: "add-project" }));
@@ -240,9 +240,9 @@ it("tells screen readers whether a new project will be published", async () => {
   setup(undefined, githubAvailable);
   await using _screen = await render(<CommandPalette>{null}</CommandPalette>);
   await act(() => openCommandPalette({ open: "add-project" }));
-  await page.getByText("New project", { exact: true }).click();
+  await page.getByText("new project", { exact: true }).click();
   await page.getByRole("combobox").fill("demo-project");
-  const option = page.getByRole("option", { name: /Create private repository/ });
+  const option = page.getByRole("option", { name: /create private repository/ });
   await expect.element(option).toHaveAttribute("aria-checked", "false");
   await option.click();
   await expect.element(option).toHaveAttribute("aria-checked", "true");

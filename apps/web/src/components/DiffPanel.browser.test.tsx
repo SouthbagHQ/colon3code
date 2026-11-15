@@ -379,7 +379,7 @@ it.each([
     </RegistryContext.Provider>,
   );
   await expect
-    .element(screen.getByRole("button", { name: `Collapse ${name}`, exact: true }))
+    .element(screen.getByRole("button", { name: `collapse ${name}`, exact: true }))
     .toHaveAttribute("aria-expanded", "true");
 });
 

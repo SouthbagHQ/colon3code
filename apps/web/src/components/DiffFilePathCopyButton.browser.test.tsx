@@ -39,7 +39,7 @@ it("copies a Windows workspace's file path with Windows separators", async () =>
   );
   using write = vi.spyOn(navigator.clipboard, "writeText").mockResolvedValue(undefined);
 
-  await screen.getByRole("button", { name: "Copy file path" }).click();
+  await screen.getByRole("button", { name: "copy file path" }).click();
 
   await vi.waitFor(() => expect(write).toHaveBeenCalledWith("apps\\web\\src\\index.ts"));
 });

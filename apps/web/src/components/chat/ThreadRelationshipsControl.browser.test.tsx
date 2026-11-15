@@ -438,7 +438,7 @@ it.each([1, 18])("continues scrolling the panel past a list of %i subagents", as
     await screen.getByRole("button", { name: "Show 12 more" }).click();
     await expect.element(screen.getByText("Subagent 17", { exact: true })).toBeInTheDocument();
   }
-  const list = screen.getByRole("list", { name: "Related threads" }).element();
+  const list = screen.getByRole("list", { name: "related threads" }).element();
   const viewport = screen
     .getByTestId("panel")
     .element()

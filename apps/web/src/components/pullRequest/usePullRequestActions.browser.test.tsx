@@ -123,9 +123,9 @@ it("stops a pull request handoff when its loading toast is dismissed", async () 
   );
 
   await userEvent.click(screen.getByRole("button", { name: "Fix" }));
-  const toast = screen.getByRole("dialog", { name: "Preparing the pull request checkout..." });
+  const toast = screen.getByRole("dialog", { name: "preparing the pull request checkout…" });
   await expect.element(toast).toBeVisible();
-  await userEvent.click(toast.getByRole("button", { name: "Dismiss notification" }));
+  await userEvent.click(toast.getByRole("button", { name: "dismiss notification" }));
   await expect.element(toast).not.toBeInTheDocument();
   await act(async () => {
     prepared.resolve({

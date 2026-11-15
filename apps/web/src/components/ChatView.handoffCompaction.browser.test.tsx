@@ -96,14 +96,16 @@ it("sends a Codex follow-up on a cold Claude thread without compacting first", a
     router: false,
   });
   await expect.element(page.getByText(`Answer 2 for ${thread.id}.`)).toBeVisible();
-  const compactAndSend = page.getByRole("button", { name: "Compact and send" });
+  const compactAndSend = page.getByRole("button", { name: "compact and send" });
   await expect.element(compactAndSend).toBeVisible();
 
-  await page.getByRole("button", { name: "Claude Opus 4.6", exact: true }).click();
+  await page.getByRole("button", { name: "clod opus 4.6 :3c", exact: true }).click();
   // The picker lists only the active provider's models until you search.
-  await userEvent.type(page.getByPlaceholder("Search models..."), "GPT-5.4");
-  await page.getByRole("option", { name: "GPT-5.4", exact: false }).click();
-  await expect.element(page.getByRole("button", { name: "GPT-5.4", exact: true })).toBeVisible();
+  await userEvent.type(page.getByPlaceholder("search models..."), "GPT-5.4");
+  await page.getByRole("option", { name: "gpt-5.4", exact: false }).click();
+  await expect
+    .element(page.getByRole("button", { name: "gpt-5.4 ^w^", exact: true }))
+    .toBeVisible();
   await expect.element(compactAndSend).not.toBeInTheDocument();
   // Picking a model leaves the composer's settings menu open.
   await userEvent.keyboard("{Escape}");

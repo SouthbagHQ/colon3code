@@ -267,7 +267,7 @@ describe("device tab rename", () => {
       </RightPanelTabs>,
     );
     await userEvent.dblClick(screen.getByRole("button", { name: "Phone", exact: true }));
-    const input = screen.getByRole("textbox", { name: "Device tab name" });
+    const input = screen.getByRole("textbox", { name: "device tab name" });
     await userEvent.fill(input, "にほん");
 
     for (const shape of [

@@ -250,7 +250,7 @@ describe("source file focus", () => {
     const editorHasFocus = () => expect(deepActiveElement()?.matches("[data-content]")).toBe(true);
     // The explorer measures its parent row; a wrapper without a box would cap it at the minimum.
     await expect
-      .element(screen.getByRole("separator", { name: "Resize file explorer" }))
+      .element(screen.getByRole("separator", { name: "resize file explorer" }))
       .toHaveAttribute("aria-valuemax", "560");
     const folderRow = screen.getByRole("treeitem", { name: "src" });
     const fileRow = screen.getByRole("treeitem", { name: "server.ts" });

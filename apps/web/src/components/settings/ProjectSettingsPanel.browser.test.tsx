@@ -596,7 +596,7 @@ describe("project identity reset", () => {
       expect(appAtomRegistry.get(iconUrl).value.relativeUrl).toBe("/restored-icon.svg"),
     );
     expect(state.toast).toHaveBeenCalledWith(
-      expect.objectContaining({ title: "Failed to update project icon on remote" }),
+      expect.objectContaining({ title: "couldn't update the project icon on remote" }),
     );
   });
 });

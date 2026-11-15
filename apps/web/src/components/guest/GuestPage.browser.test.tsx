@@ -348,8 +348,8 @@ describe("GuestPage", () => {
       status: "pending" as const,
       submittedAt: "2026-10-23T10:01:00.000Z",
     };
-    await userEvent.type(screen.getByRole("textbox", { name: "Message" }), waiting.text);
-    await userEvent.click(screen.getByRole("button", { name: "Send" }));
+    await userEvent.type(screen.getByRole("textbox", { name: "message" }), waiting.text);
+    await userEvent.click(screen.getByRole("button", { name: "send" }));
     send({ type: "view", view: { ...view, messages: [waiting] } });
     await expect.element(screen.getByText(waiting.text)).toBeInTheDocument();
     await expectAtEnd();

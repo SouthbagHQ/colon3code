@@ -61,9 +61,9 @@ describe("ProviderEnvironmentSection external settings writes", () => {
       <ProviderEnvironmentSection environment={[]} onChange={onChange} />,
     );
 
-    await userEvent.click(screen.getByRole("button", { name: "Add variable" }));
+    await userEvent.click(screen.getByRole("button", { name: "add variable" }));
     await userEvent.type(
-      screen.getByRole("textbox", { name: "Environment variable name 1" }),
+      screen.getByRole("textbox", { name: "environment variable name 1" }),
       "KEEP_ME_TYPED",
     );
     expect(onChange).not.toHaveBeenCalled();
@@ -77,7 +77,7 @@ describe("ProviderEnvironmentSection external settings writes", () => {
     );
 
     await expect
-      .element(screen.getByRole("textbox", { name: "Environment variable name 2" }))
+      .element(screen.getByRole("textbox", { name: "environment variable name 2" }))
       .toHaveValue("KEEP_ME_TYPED");
   });
 
@@ -87,20 +87,20 @@ describe("ProviderEnvironmentSection external settings writes", () => {
       <ProviderEnvironmentSection environment={[]} onChange={onChange} />,
     );
 
-    await userEvent.click(screen.getByRole("button", { name: "Add variable" }));
+    await userEvent.click(screen.getByRole("button", { name: "add variable" }));
     await userEvent.fill(
-      screen.getByRole("textbox", { name: "Environment variable name 1" }),
+      screen.getByRole("textbox", { name: "environment variable name 1" }),
       "STORE_ME",
     );
-    await userEvent.fill(screen.getByLabelText("Environment variable value 1"), "fake-secret");
+    await userEvent.fill(screen.getByLabelText("environment variable value 1"), "fake-secret");
     await userEvent.tab();
     expect(onChange).toHaveBeenLastCalledWith([
       { name: "STORE_ME", value: "fake-secret", sensitive: true, valueRedacted: false },
     ]);
 
-    await userEvent.click(screen.getByRole("button", { name: "Add variable" }));
+    await userEvent.click(screen.getByRole("button", { name: "add variable" }));
     await userEvent.type(
-      screen.getByRole("textbox", { name: "Environment variable name 2" }),
+      screen.getByRole("textbox", { name: "environment variable name 2" }),
       "UNPUBLISHED_ONE",
     );
 
@@ -113,10 +113,10 @@ describe("ProviderEnvironmentSection external settings writes", () => {
     );
 
     await expect
-      .element(screen.getByRole("textbox", { name: "Environment variable name 1" }))
+      .element(screen.getByRole("textbox", { name: "environment variable name 1" }))
       .toHaveValue("STORE_ME");
     await expect
-      .element(screen.getByRole("textbox", { name: "Environment variable name 2" }))
+      .element(screen.getByRole("textbox", { name: "environment variable name 2" }))
       .toHaveValue("UNPUBLISHED_ONE");
   });
 
@@ -126,9 +126,9 @@ describe("ProviderEnvironmentSection external settings writes", () => {
       <ProviderEnvironmentSection environment={[]} onChange={onChange} />,
     );
 
-    await userEvent.click(screen.getByRole("button", { name: "Add variable" }));
+    await userEvent.click(screen.getByRole("button", { name: "add variable" }));
     await userEvent.fill(
-      screen.getByRole("textbox", { name: "Environment variable name 1" }),
+      screen.getByRole("textbox", { name: "environment variable name 1" }),
       "KEEP-ME",
     );
     await userEvent.tab();
@@ -141,7 +141,7 @@ describe("ProviderEnvironmentSection external settings writes", () => {
       />,
     );
     await expect
-      .element(screen.getByRole("textbox", { name: "Environment variable name 2" }))
+      .element(screen.getByRole("textbox", { name: "environment variable name 2" }))
       .toHaveValue("KEEP-ME");
   });
 
@@ -151,9 +151,9 @@ describe("ProviderEnvironmentSection external settings writes", () => {
       <ProviderEnvironmentSection environment={[]} onChange={onChange} />,
     );
 
-    await userEvent.click(screen.getByRole("button", { name: "Add variable" }));
+    await userEvent.click(screen.getByRole("button", { name: "add variable" }));
     await userEvent.fill(
-      screen.getByRole("textbox", { name: "Environment variable name 1" }),
+      screen.getByRole("textbox", { name: "environment variable name 1" }),
       "PUBLISH_ME",
     );
     await userEvent.tab();
@@ -167,7 +167,7 @@ describe("ProviderEnvironmentSection external settings writes", () => {
       />,
     );
     expect(onChange).toHaveBeenCalledTimes(1);
-    const acknowledged = screen.getByRole("textbox", { name: "Environment variable name 1" });
+    const acknowledged = screen.getByRole("textbox", { name: "environment variable name 1" });
 
     // Another client deletes the variable. The row must not come back.
     await screen.rerender(<ProviderEnvironmentSection environment={[]} onChange={onChange} />);

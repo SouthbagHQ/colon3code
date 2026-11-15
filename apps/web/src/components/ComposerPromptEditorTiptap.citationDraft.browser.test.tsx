@@ -122,7 +122,7 @@ it("clears the sent prompt when an empty citation comment sends it", async () =>
       insertedSpaces: { before: false, after: true },
     }),
   );
-  const comment = page.getByLabelText("Comment on selected text");
+  const comment = page.getByLabelText("comment on selected text");
   await expect.element(comment).toHaveFocus();
   await userEvent.keyboard("{Control>}{Enter}{/Control}");
 
@@ -150,7 +150,7 @@ it.each(["blocked", "refusedLater"] as const)(
         insertedSpaces: { before: false, after: true },
       }),
     );
-    const comment = page.getByLabelText("Comment on selected text");
+    const comment = page.getByLabelText("comment on selected text");
     await expect.element(comment).toHaveFocus();
     await userEvent.keyboard("{Control>}{Enter}{/Control}");
     await expect.element(comment).not.toBeInTheDocument();
@@ -177,10 +177,10 @@ it("cancels a new citation while dictation makes the composer read-only", async 
       insertedSpaces: { before: false, after: true },
     }),
   );
-  await expect.element(page.getByLabelText("Comment on selected text")).toBeVisible();
+  await expect.element(page.getByLabelText("comment on selected text")).toBeVisible();
 
-  await page.getByRole("button", { name: "Cancel" }).click();
+  await page.getByRole("button", { name: "cancel" }).click();
 
-  await expect.element(page.getByLabelText("Comment on selected text")).not.toBeInTheDocument();
+  await expect.element(page.getByLabelText("comment on selected text")).not.toBeInTheDocument();
   expect(screen.container.querySelector("output")?.dataset.prompt).toBe("See ");
 });

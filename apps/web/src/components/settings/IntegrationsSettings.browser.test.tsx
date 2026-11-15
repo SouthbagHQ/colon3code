@@ -131,16 +131,16 @@ it.each([
     { router: "/settings/browser" },
   );
 
-  for (const name of ["Search engine", "Open links in"]) {
+  for (const name of ["search engine", "open links in"]) {
     expect(isInert(screen.getByRole("combobox", { name }).element())).toBe(true);
   }
-  expect(isInert(screen.getByRole("switch", { name: "Agent browser access" }).element())).toBe(
+  expect(isInert(screen.getByRole("switch", { name: "agent browser access" }).element())).toBe(
     false,
   );
   // Profiles save for this device in every scope, but the default profile is a device preference.
-  await expect.element(screen.getByRole("button", { name: "Add profile" })).toBeEnabled();
+  await expect.element(screen.getByRole("button", { name: "add profile" })).toBeEnabled();
   await userEvent.click(screen.getByRole("button", { name: "Work options" }));
   await expect
-    .element(page.getByRole("menuitem", { name: "Set as default" }))
+    .element(page.getByRole("menuitem", { name: "set as default" }))
     .toHaveAttribute("aria-disabled", "true");
 });

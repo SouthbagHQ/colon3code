@@ -565,10 +565,10 @@ describe("ChatMarkdown skill chips", () => {
     });
 
     await expect
-      .element(screen.getByRole("button", { name: "Model GPT-6.1. Show details" }))
+      .element(screen.getByRole("button", { name: "Model gpt-6.1 ^-^. Show details" }))
       .toBeVisible();
     expect(buttonsLabelled(screen.container, "Model gpt-4o. Show details")).toEqual([]);
-    expect(screen.container.textContent).toBe("Ask (GPT-6.1), not model:openai/gpt-4o.");
+    expect(screen.container.textContent).toBe("Ask (gpt-6.1 ^-^), not model:openai/gpt-4o.");
   });
 });
 
@@ -587,14 +587,14 @@ describe("ChatMarkdown headings", () => {
       />
     );
     await using screen = await render(message(text, true));
-    await expect.element(screen.getByRole("note")).toHaveTextContent("Insight A streaming note.");
+    await expect.element(screen.getByRole("note")).toHaveTextContent("insight A streaming note.");
     await screen.rerender(
       message(
         `${text}\n${rule}\n\n## Setup\n\nAfter [source][src].\n\n[src]:\n  https://example.com`,
         false,
       ),
     );
-    await expect.element(screen.getByRole("note")).toHaveTextContent("Insight A streaming note.");
+    await expect.element(screen.getByRole("note")).toHaveTextContent("insight A streaming note.");
     expect([...screen.container.querySelectorAll("h2")].map((heading) => heading.id)).toEqual([
       "user-content-setup",
       "user-content-setup-1",
@@ -699,7 +699,7 @@ describe("ChatMarkdown copy", () => {
     expect(select(labelText, bodyText, bodyText.textContent!.length)).toBe(
       "> [!WARNING]\n> Back up first.",
     );
-    expect(select(labelText, bodyText, "Back up".length)).toBe("Warning\n\nBack up");
+    expect(select(labelText, bodyText, "Back up".length)).toBe("warning\n\nBack up");
   });
 
   it("copies part of inline code without prose escapes", async () => {

@@ -19,14 +19,14 @@ it("expands every folder without asking the tree about all folders for each one"
       <DiffFileTree entries={entries} onSelectFile={() => {}} ariaLabel="Changed files" />
     </div>,
   );
-  const collapseAll = page.getByRole("button", { name: "Collapse all folders" });
+  const collapseAll = page.getByRole("button", { name: "collapse all folders" });
   await expect.element(collapseAll).toBeVisible();
   await userEvent.click(collapseAll);
-  const expandAll = page.getByRole("button", { name: "Expand all folders" });
+  const expandAll = page.getByRole("button", { name: "expand all folders" });
   await expect.element(expandAll).toBeVisible();
   getItem.mockClear();
   await userEvent.click(expandAll);
-  await expect.element(page.getByRole("button", { name: "Collapse all folders" })).toBeVisible();
+  await expect.element(page.getByRole("button", { name: "collapse all folders" })).toBeVisible();
   // Each of the expansions used to look up the folders again from the first one, so the lookups
   // grew with the square of the folder count (hundreds of thousands at 600 folders).
   expect(getItem.mock.calls.length).toBeLessThan(FOLDERS * 2 * 20);

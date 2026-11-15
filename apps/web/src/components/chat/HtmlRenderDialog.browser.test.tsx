@@ -60,14 +60,14 @@ it("zooms by reflowing the page to the card's width instead of overflowing it", 
   await reportHeight(frame, 300);
   const contentWidth = frame.getBoundingClientRect().width;
   for (let step = 0; step < 4; step += 1) {
-    await userEvent.click(page.getByRole("button", { name: "Zoom in" }));
+    await userEvent.click(page.getByRole("button", { name: "zoom in" }));
   }
   expect(frame.getBoundingClientRect().width).toBeCloseTo(contentWidth, 0);
   expect(frame.getBoundingClientRect().height).toBe(600);
   expect(card.scrollWidth).toBe(card.clientWidth);
-  await userEvent.click(page.getByRole("button", { name: "Reset zoom" }));
+  await userEvent.click(page.getByRole("button", { name: "reset zoom" }));
   for (let step = 0; step < 2; step += 1) {
-    await userEvent.click(page.getByRole("button", { name: "Zoom out" }));
+    await userEvent.click(page.getByRole("button", { name: "zoom out" }));
   }
   expect(frame.getBoundingClientRect().width).toBeCloseTo(contentWidth, 0);
   expect(frame.getBoundingClientRect().height).toBe(150);

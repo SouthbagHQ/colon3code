@@ -244,7 +244,7 @@ it("fixes an overview thread as its opening remark, since it has no line to atta
     />,
   );
 
-  await userEvent.click(screen.getByRole("button", { name: "Fix in a thread" }));
+  await userEvent.click(screen.getByRole("button", { name: "fix in a thread" }));
   expect(onFixFinding).toHaveBeenCalledWith({ kind: "comment", comment: remark });
 });
 

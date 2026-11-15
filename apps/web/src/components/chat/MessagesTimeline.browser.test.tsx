@@ -360,7 +360,7 @@ describe("MessagesTimeline work rows", () => {
     await using screen = await render(<MessagesTimeline {...props} timelineEntries={entries} />, {
       container,
     });
-    const heading = screen.getByRole("button", { name: /^Worked for/ });
+    const heading = screen.getByRole("button", { name: /^all done in/ });
     await expect.element(heading).toHaveStyle({ pointerEvents: "auto" });
     const viewport = props.listRef.current!.getScrollableNode()!;
     const distanceFromEnd = () =>
@@ -510,14 +510,14 @@ describe("MessagesTimeline messages", () => {
       message(lines(12), {}, "medium"),
       message(lines(60), {}, "long"),
     ]);
-    await vi.waitFor(() => expect(screen.buttons("Show full message")).toHaveLength(1));
+    await vi.waitFor(() => expect(screen.buttons("show full message")).toHaveLength(1));
     const [medium, long] = [
       ...screen.container.querySelectorAll<HTMLElement>("[data-user-message-body]"),
     ];
     expect(medium!.dataset.userMessageCollapsible).toBe("false");
     expect(medium!.textContent).toContain("Line 11");
     const foldedHeight = long!.offsetHeight;
-    await click(screen.button("Show full message"));
+    await click(screen.button("show full message"));
     expect(long!.offsetHeight).toBeGreaterThanOrEqual(foldedHeight * 2);
   });
 
@@ -624,13 +624,13 @@ describe("MessagesTimeline messages", () => {
           .slice(-2)
           .map((strip) => strip.dataset.inView),
       ).toEqual(["true", "true"]);
-      expect(screen.button("Previous turn")).not.toBeDisabled();
+      expect(screen.button("previous turn")).not.toBeDisabled();
     });
 
-    expect(screen.button("Next turn")).toBeDisabled();
+    expect(screen.button("next turn")).toBeDisabled();
 
     viewport.scrollTop -= 30;
-    await vi.waitFor(() => expect(screen.button("Next turn")).not.toBeDisabled());
+    await vi.waitFor(() => expect(screen.button("next turn")).not.toBeDisabled());
     // Legend keeps its initial end anchor until a scroll leaves the end, and re-pins on resize.
     viewport.scrollTop = 0;
     await vi.waitFor(() => expect(strips()[0]?.dataset.inView).toBe("true"));
@@ -640,18 +640,18 @@ describe("MessagesTimeline messages", () => {
       <MessagesTimeline {...props} timelineEntries={entries} liveFollowEnabled={false} />,
     );
     viewport.scrollTop = viewport.scrollHeight;
-    await vi.waitFor(() => expect(screen.button("Next turn")).toBeDisabled());
+    await vi.waitFor(() => expect(screen.button("next turn")).toBeDisabled());
     screen.container.style.height = "600px";
     await vi.waitFor(() => {
       expect(viewport.scrollHeight - viewport.clientHeight - viewport.scrollTop).toBeGreaterThan(
         500,
       );
-      expect(screen.button("Next turn")).not.toBeDisabled();
+      expect(screen.button("next turn")).not.toBeDisabled();
     });
 
     // So does a footer that grows below a detached bottom.
     viewport.scrollTop = viewport.scrollHeight;
-    await vi.waitFor(() => expect(screen.button("Next turn")).toBeDisabled());
+    await vi.waitFor(() => expect(screen.button("next turn")).toBeDisabled());
     await screen.rerender(
       <MessagesTimeline
         {...props}
@@ -664,7 +664,7 @@ describe("MessagesTimeline messages", () => {
       expect(viewport.scrollHeight - viewport.clientHeight - viewport.scrollTop).toBeGreaterThan(
         300,
       );
-      expect(screen.button("Next turn")).not.toBeDisabled();
+      expect(screen.button("next turn")).not.toBeDisabled();
     });
   });
 
@@ -688,7 +688,7 @@ describe("MessagesTimeline messages", () => {
     const viewport = base.listRef.current!.getScrollableNode()!;
     await vi.waitFor(() => {
       expect(viewport.scrollTop).toBeGreaterThan(0);
-      expect(screen.button("Next turn")).toBeDisabled();
+      expect(screen.button("next turn")).toBeDisabled();
     });
 
     await screen.rerender(
@@ -705,7 +705,7 @@ describe("MessagesTimeline messages", () => {
       expect(
         Math.abs(row!.getBoundingClientRect().top - viewport.getBoundingClientRect().top),
       ).toBeLessThanOrEqual(2);
-      expect(screen.button("Next turn")).not.toBeDisabled();
+      expect(screen.button("next turn")).not.toBeDisabled();
     });
   });
 
@@ -835,7 +835,7 @@ describe("MessagesTimeline messages", () => {
       for (const id of userIds.slice(1)) {
         const from = turnAtTop();
         await vi.waitFor(async () => {
-          if (turnAtTop() === from) await click(screen.button("Next turn"));
+          if (turnAtTop() === from) await click(screen.button("next turn"));
           expect(turnAtTop(), "turn at the top after Next turn").toBe(id);
         });
       }
@@ -1042,7 +1042,7 @@ describe("MessagesTimeline messages", () => {
         await click(
           screen.container.querySelector<HTMLElement>('[data-work-entry-id="tool-near-composer"]')!,
         );
-        await vi.waitFor(() => expect(screen.text()).toContain("Loading output"));
+        await vi.waitFor(() => expect(screen.text()).toContain("loading output"));
         await click(group());
       }
     }
@@ -1101,7 +1101,7 @@ describe("MessagesTimeline messages", () => {
       await vi.waitFor(() =>
         expect(header().getBoundingClientRect().bottom).toBeLessThanOrEqual(visibleBottom() + 1),
       );
-      await vi.waitFor(() => expect(screen.text()).toContain("Loading output"));
+      await vi.waitFor(() => expect(screen.text()).toContain("loading output"));
       environmentQuery.data = {
         output: { text: `${"output line\n".repeat(20)}TOOL_INPUT_END`, truncated: false },
         running: false,
@@ -1226,7 +1226,7 @@ describe("MessagesTimeline citations", () => {
     await expect.element(screen.getByText(text)).toHaveStyle({ pointerEvents: "auto" });
     await userEvent.tripleClick(screen.getByText(text));
     await expect
-      .element(page.getByRole("button", { name: "Cite selection in composer" }))
+      .element(page.getByRole("button", { name: "cite selection in composer" }))
       .toBeVisible();
   });
 
@@ -1726,7 +1726,7 @@ describe("MessagesTimeline attachments", () => {
         />
       </TimelineRowCtx>,
     );
-    await screen.getByRole("button", { name: "Preview second.png" }).click();
+    await screen.getByRole("button", { name: "preview second.png" }).click();
     expect(onImageExpand).toHaveBeenCalledExactlyOnceWith(
       expect.objectContaining({
         index: 1,
@@ -1757,7 +1757,7 @@ describe("MessagesTimeline attachments", () => {
       [read("first.png"), read("second.png"), read("third.png")],
       { onImageExpand, workspaceRoot: "/repo" },
     );
-    await click(screen.button(/^Read 3 files/));
+    await click(screen.button(/^sniffed 3 files/));
     await vi.waitFor(() => expect(screen.buttons("Read")).toHaveLength(3));
     await click(screen.buttons("Read")[1]!);
     const inRow = await vi.waitFor(() => {

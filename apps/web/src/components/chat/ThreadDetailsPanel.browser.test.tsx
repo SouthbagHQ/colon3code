@@ -187,7 +187,7 @@ it("offers no git controls in a No project thread, but shows its linked pull req
   await using _screen = await render(<Panel fixture={fixture} />);
   await expect.element(page.getByText("#27513")).toBeVisible();
   await expect
-    .element(page.getByRole("button", { name: "Initialize Git" }))
+    .element(page.getByRole("button", { name: "initialize Git" }))
     .not.toBeInTheDocument();
 });
 
@@ -200,7 +200,7 @@ it("shows a linked pull request in a folder that is not a git repository", async
   await using _screen = await render(<Panel fixture={fixture} />);
   await expect.element(page.getByRole("region", { name: "Workspace" })).toBeVisible();
   await expect.element(page.getByText("#27513")).toBeVisible();
-  await expect.element(page.getByRole("button", { name: "Initialize Git" })).toBeVisible();
+  await expect.element(page.getByRole("button", { name: "initialize Git" })).toBeVisible();
 });
 
 it("offers no Initialize Git before the server config says where No project lives", async () => {
@@ -212,6 +212,6 @@ it("offers no Initialize Git before the server config says where No project live
   await using _screen = await render(<Panel fixture={fixture} />);
   await expect.element(page.getByRole("region", { name: "Workspace" })).toBeVisible();
   await expect
-    .element(page.getByRole("button", { name: "Initialize Git" }))
+    .element(page.getByRole("button", { name: "initialize Git" }))
     .not.toBeInTheDocument();
 });

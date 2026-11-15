@@ -115,7 +115,7 @@ it("Esc in the keybindings search clears the query without closing Settings", as
       </DialogPopup>
     </Dialog>,
   );
-  const search = page.getByRole("searchbox", { name: "Search keybindings" });
+  const search = page.getByRole("searchbox", { name: "search keybindings" });
   await search.fill("sidebar");
 
   await userEvent.keyboard("{Escape}");

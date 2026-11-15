@@ -216,7 +216,7 @@ it("opens on the active provider when every favorite belongs to a disabled provi
     />,
   );
   await screen.getByRole("button", { name: "Choose model" }).click();
-  await expect.element(page.getByRole("option", { name: /Codex model/ })).toBeVisible();
+  await expect.element(page.getByRole("option", { name: /codex model/ })).toBeVisible();
 });
 
 it("keeps the touch keyboard down while choosing a provider", async () => {
@@ -267,11 +267,11 @@ it("keeps the touch keyboard down while choosing a provider", async () => {
     />,
   );
   await screen.getByRole("button", { name: "Choose model" }).click();
-  const search = page.getByPlaceholder("Search models...");
+  const search = page.getByPlaceholder("search models...");
   const popup = search.element().closest('[data-slot="popover-popup"]');
   await vi.waitFor(() => expect(document.activeElement).toBe(popup));
 
   await page.getByRole("button", { name: /^Claude/ }).click();
-  await expect.element(page.getByRole("option", { name: /Claude model/ })).toBeVisible();
+  await expect.element(page.getByRole("option", { name: /clod model/ })).toBeVisible();
   await expect.element(search).not.toHaveFocus();
 });
