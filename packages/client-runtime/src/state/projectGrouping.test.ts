@@ -79,14 +79,14 @@ describe("load balancing shared project machines", () => {
   });
 });
 const repositoryIdentity = {
-  canonicalKey: "github.com/SouthbagHQ/colon3code",
+  canonicalKey: "github.com/southbaghq/colon3code",
   locator: {
     source: "git-remote" as const,
     remoteName: "upstream",
     remoteUrl: "https://github.com/SouthbagHQ/colon3code.git",
   },
   provider: SourceControlProviderKind.make("github"),
-  owner: "t3tools",
+  owner: "SouthbagHQ",
   name: "colon3code",
   displayName: ":3 Code",
 };
@@ -310,7 +310,7 @@ describe("buildProjectGroups", () => {
     const root = makeProject("NewCo", "/work/NewCo");
     const lowercasedClone = makeProject("NewCo", "/remote/NewCo", {
       environmentId: EnvironmentId.make("remote"),
-      repositoryIdentity: { ...repositoryIdentity, name: "COLON3CODE", displayName: "t3 code" },
+      repositoryIdentity: { ...repositoryIdentity, name: "COLON3CODE", displayName: ":3 code" },
     });
 
     const groups = buildProjectGroups({
@@ -336,7 +336,7 @@ describe("buildProjectGroups", () => {
             ...repositoryIdentity,
             rootPath: "/remote/colon3code",
             name: "COLON3CODE",
-            displayName: "t3 code",
+            displayName: ":3 code",
           },
         }),
         makeProject("colon3code", "/work/colon3code", { repositoryIdentity: localIdentity }),

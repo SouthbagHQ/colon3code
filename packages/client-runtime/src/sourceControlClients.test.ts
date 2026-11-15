@@ -26,7 +26,7 @@ describe("sourceControlClients.parseChangeRequestUrl", () => {
       const url = `https://git.cafe/SouthbagHQ/colon3code/${path}/23897`;
       expect(parse(url), path).toEqual({
         host: "git.cafe",
-        repository: "SouthbagHQ/colon3code",
+        repository: "southbaghq/colon3code",
         number: 23897,
       });
       expect(kindOf(url), path).toBe("gitcafe");
@@ -190,7 +190,7 @@ describe("sourceControlClients.parseChangeRequestUrl", () => {
 });
 
 describe("sourceControlClients.isSameChangeRequest", () => {
-  const linked = "https://github.com/SouthbagHQ/colon3code/pull/42";
+  const linked = "https://github.com/southbaghq/colon3code/pull/42";
 
   it("matches the same pull request whatever its case or trailing path", () => {
     expect(

@@ -170,7 +170,7 @@ it("names the checked path when the server cannot find the file", async () => {
 
   expect(preview.onRequestClose).toHaveBeenCalledOnce();
   expect(harness.alert).toHaveBeenCalledWith(
-    "Could not open preview",
+    "could not open preview 3:",
     expect.stringContaining(checkedPath),
   );
   expect(harness.alert.mock.calls[0]?.[1]).not.toMatch(/reconnect/i);

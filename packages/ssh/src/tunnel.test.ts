@@ -226,7 +226,12 @@ describe("ssh tunnel scripts", () => {
       const fs = yield* FileSystem.FileSystem;
       const home = yield* fs.makeTempDirectoryScoped({ prefix: "t3-ssh-launch-log-" });
       const target = { alias: "devbox", hostname: "devbox", username: null, port: null };
-      const stateDir = NodePath.join(home, ".t3", "ssh-launch", yield* remoteStateKey(target));
+      const stateDir = NodePath.join(
+        home,
+        ".colon3code",
+        "ssh-launch",
+        yield* remoteStateKey(target),
+      );
       const bin = NodePath.join(home, "bin");
       yield* fs.makeDirectory(stateDir, { recursive: true });
       yield* fs.makeDirectory(bin);
@@ -1116,7 +1121,7 @@ describe("ssh tunnel scripts", () => {
         const serverScript = path.join(home, "fake-t3.cjs");
         yield* fs.writeFileString(serverScript, fakeT3Serve(publishDelayMs));
         // A launch that died holding the lock must not block or double-admit later ones.
-        const launchLock = path.join(home, ".t3", "ssh-launch", ".launch.lock");
+        const launchLock = path.join(home, ".colon3code", "ssh-launch", ".launch.lock");
         yield* fs.makeDirectory(path.dirname(launchLock), { recursive: true });
         yield* fs.writeFileString(launchLock, "999999999\n");
         const targets = [
@@ -1134,7 +1139,7 @@ describe("ssh tunnel scripts", () => {
         ).pipe(Effect.provide(localRemoteShellLayer(home)));
 
         const ownerPid = Number(
-          yield* fs.readFileString(path.join(home, ".t3", "userdata", "server.lock")),
+          yield* fs.readFileString(path.join(home, ".colon3code", "userdata", "server.lock")),
         );
         assert.sameMembers(
           launches.map((launch) => launch.remoteServerKind),
@@ -1148,7 +1153,7 @@ describe("ssh tunnel scripts", () => {
           if (launch.remoteServerKind !== "managed") continue;
           const stateKey = yield* remoteStateKey(targets[index]!);
           const recordedPid = yield* fs.readFileString(
-            path.join(home, ".t3", "ssh-launch", stateKey, "pid"),
+            path.join(home, ".colon3code", "ssh-launch", stateKey, "pid"),
           );
           assert.equal(
             Number(recordedPid.trim()),
@@ -1243,7 +1248,7 @@ server.listen(Number(flag("--port") ?? 0), "127.0.0.1", () => {
         holderPort,
         sshAsLocalShell,
         staleId: staleId === "an unrelated process" ? holder.pid : tid,
-        stateDir: `${home}/.t3/ssh-launch/${yield* remoteStateKey(target)}`,
+        stateDir: `${home}/.colon3code/ssh-launch/${yield* remoteStateKey(target)}`,
       };
     });
 
@@ -1277,7 +1282,7 @@ server.listen(Number(flag("--port") ?? 0), "127.0.0.1", () => {
       // Reboot: our server is gone and its recorded PID now names something that
       // answers on the recorded port.
       process.kill(firstPid, "SIGKILL");
-      yield* fs.remove(`${home}/.t3/userdata/server-runtime.json`);
+      yield* fs.remove(`${home}/.colon3code/userdata/server-runtime.json`);
       yield* fs.writeFileString(`${stateDir}/pid`, `${staleId}\n`);
       yield* fs.writeFileString(`${stateDir}/port`, `${holderPort}\n`);
 
@@ -1312,7 +1317,7 @@ server.listen(Number(flag("--port") ?? 0), "127.0.0.1", () => {
           launcherId,
         ).pipe(Effect.provideService(ChildProcessSpawner.ChildProcessSpawner, sshAsLocalShell));
       const runtimePid = fs
-        .readFileString(`${home}/.t3/userdata/server-runtime.json`)
+        .readFileString(`${home}/.colon3code/userdata/server-runtime.json`)
         .pipe(Effect.map((runtime) => Number(JSON.parse(runtime).pid)));
       const launchedPids: Array<number> = [];
       yield* Effect.addFinalizer(() =>

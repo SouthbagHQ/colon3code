@@ -72,7 +72,9 @@ function stepLabel(work: WorkLogEntry, workspaceRoot: string | undefined): strin
   if (status === "failed" || status === "declined" || status === "stopped") return null;
   const label = liveWorkEntryLabel(work, workspaceRoot, true).replace(/\s+/g, " ").trim();
   if (label === "") return null;
-  const spoken = withVerb(work, label);
+  // The timeline's labels are lowercase in the fork's voice; spoken steps start like a sentence.
+  const verbed = withVerb(work, label);
+  const spoken = `${verbed.charAt(0).toUpperCase()}${verbed.slice(1)}`;
   const cut = cutText(spoken, ACTIVITY_MAX_LENGTH);
   return cut === null ? spoken : `${cut}…`;
 }

@@ -497,8 +497,7 @@ describe("scoped settings writes", () => {
         clientPatch: {},
         hasClientWrite: false,
         serverWrites: [],
-        unavailableReason:
-          "This setting is environment-wide and cannot be overridden by a project.",
+        unavailableReason: "this setting is environment-wide, so a project can't override it 3:",
       });
       expect(
         planScopedSettingsPatch(

@@ -30,29 +30,29 @@ describe("findPromptLinkProjects", () => {
       {
         id: "fork",
         repositoryIdentity: identity(
-          "github.com/SouthbagHQ/colon3code",
+          "github.com/southbaghq/colon3code",
           "github.com/me/colon3code",
         ),
       },
       { id: "none", repositoryIdentity: null },
-      { id: "recent", repositoryIdentity: identity("github.com/SouthbagHQ/colon3code") },
-      { id: "older", repositoryIdentity: identity("github.com/SouthbagHQ/colon3code") },
+      { id: "recent", repositoryIdentity: identity("github.com/SouthbagHQ/Colon3Code") },
+      { id: "older", repositoryIdentity: identity("github.com/southbaghq/colon3code") },
     ];
     const ids = (owner: string, name: string) =>
       findPromptLinkProjects(projects, { owner, name }).map((project) => project.id);
-    expect(ids("pingdotgg", "colon3code")).toEqual(["recent", "older"]);
+    expect(ids("southbaghq", "colon3code")).toEqual(["recent", "older"]);
     expect(ids("me", "colon3code")).toEqual(["fork"]);
     expect(ids("gitlab", "x")).toEqual([]);
   });
 
   it("matches a checkout of the repository's GitCafe mirror", () => {
     const projects = [
-      { id: "gitcafe", repositoryIdentity: identity("git.cafe/SouthbagHQ/colon3code") },
-      { id: "staging", repositoryIdentity: identity("staging.git.cafe/SouthbagHQ/colon3code") },
-      { id: "gitlab", repositoryIdentity: identity("gitlab.com/SouthbagHQ/colon3code") },
+      { id: "gitcafe", repositoryIdentity: identity("git.cafe/southbaghq/colon3code") },
+      { id: "staging", repositoryIdentity: identity("staging.git.cafe/southbaghq/colon3code") },
+      { id: "gitlab", repositoryIdentity: identity("gitlab.com/southbaghq/colon3code") },
     ];
     expect(
-      findPromptLinkProjects(projects, { owner: "pingdotgg", name: "colon3code" }).map(
+      findPromptLinkProjects(projects, { owner: "southbaghq", name: "colon3code" }).map(
         (project) => project.id,
       ),
     ).toEqual(["gitcafe", "staging"]);

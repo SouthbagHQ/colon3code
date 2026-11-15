@@ -350,7 +350,7 @@ describe("getProviderUpdateRunToastView", () => {
       getProviderUpdateRunToastView([
         run("Linux", "opencode", AsyncResult.success({ providers: [restarted] })),
       ]),
-    ).toMatchObject({ description: "New sessions will use the updated provider." });
+    ).toMatchObject({ description: "new sessions will pick up the updated provider ^w^" });
   });
 
   it("lists every failed update and ignores interrupted ones", () => {

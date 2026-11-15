@@ -204,8 +204,8 @@ function button(label: string) {
 describe("scheduled task batched edits", () => {
   it("submits the selected interval when saved before React commits", async () => {
     await act(async () => {
-      button("Interval").click();
-      button("Save changes").click();
+      button("interval").click();
+      button("save changes").click();
     });
     expect(mocks.alert).not.toHaveBeenCalled();
     expect(mocks.upsert).toHaveBeenCalledExactlyOnceWith({
@@ -219,13 +219,13 @@ describe("scheduled task batched edits", () => {
   });
   it("retains the interval when enabled changes before React commits", async () => {
     act(() => {
-      button("Interval").click();
+      button("interval").click();
       button("Toggle enabled").click();
     });
     expect(appAtomRegistry.get(scheduledTaskEditorSessionAtom)?.current?.draft.schedule.mode).toBe(
       "interval",
     );
-    await act(async () => button("Save changes").click());
+    await act(async () => button("save changes").click());
     expect(mocks.alert).not.toHaveBeenCalled();
     expect(mocks.upsert).toHaveBeenCalledExactlyOnceWith({
       environmentId: "environment",
@@ -238,10 +238,10 @@ describe("scheduled task batched edits", () => {
     });
   });
   it("keeps every webhook filter added before React commits", () => {
-    act(() => button("On webhook").click());
+    act(() => button("on webhook").click());
     act(() => {
-      button("Add filter").click();
-      button("Add filter").click();
+      button("add filter").click();
+      button("add filter").click();
     });
     expect(
       appAtomRegistry.get(scheduledTaskEditorSessionAtom)?.current?.draft.schedule.filters,
@@ -253,7 +253,7 @@ describe("scheduled task batched edits", () => {
     act(() => startScheduledTaskEditor({ ...editor, draft: { ...editor.draft, task: null } }));
     act(() => {
       button("Select Target").click();
-      button("Interval").click();
+      button("interval").click();
       button("Select Project").click();
     });
     expect(appAtomRegistry.get(scheduledTaskEditorSessionAtom)?.current).toMatchObject({

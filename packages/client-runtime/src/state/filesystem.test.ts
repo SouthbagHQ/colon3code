@@ -173,8 +173,8 @@ describe("browse entry filtering", () => {
 
   it("matches substrings and subsequences, best match first", () => {
     expect(names("code")).toEqual(["colon3code", "Colon3Code-old", "my-colon3code"]);
-    expect(names("t3c")).toEqual(["colon3code", "Colon3Code-old", "my-colon3code"]);
-    expect(names("tcd")).toEqual(["colon3code", "Colon3Code-old", "my-colon3code"]);
+    expect(names("n3c")).toEqual(["colon3code", "Colon3Code-old", "my-colon3code"]);
+    expect(names("ncd")).toEqual(["colon3code", "Colon3Code-old", "my-colon3code"]);
     expect(names("xyz")).toEqual([]);
   });
 

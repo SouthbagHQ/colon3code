@@ -12,6 +12,7 @@ RULES = [
     (re.compile(r"git@github\.com:(?:T3Tools|pingdotgg)/t3code"), "git@github.com:SouthbagHQ/colon3code"),
     (re.compile(r"T3-Code-"), "Colon3-Code-"),
     (re.compile(r"/Applications/T3 Code"), "/Applications/꞉3 Code"),
+    (re.compile(r"T3%20Code"), "%3A3%20Code"),
     (re.compile(r"T3 Code"), ":3 Code"),
     (re.compile(r"T3CODE"), "COLON3CODE"),
     (re.compile(r"T3Code"), "Colon3Code"),
@@ -51,7 +52,7 @@ for e in entries:
     hdr = cat.stdout.readline().split()
     data = cat.stdout.read(int(hdr[2])); cat.stdout.read(1)
     new_data = data
-    if b"\0" not in data[:8000] and re.search(rb"t3code|T3CODE|T3Code|T3 Code|t3-code|T3-Code|t3\\\[-_", data):
+    if b"\0" not in data[:8000] and re.search(rb"t3code|T3CODE|T3Code|T3 Code|T3%20Code|t3-code|T3-Code|t3\\\[-_", data):
         try:
             new_data = tx(data.decode("utf-8")).encode("utf-8")
         except UnicodeDecodeError:
