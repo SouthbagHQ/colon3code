@@ -34,7 +34,7 @@ export const MERGE_METHODS = {
   },
   rebase: { title: "rebase and merge", description: "Add the commits without a merge commit." },
   "fast-forward": {
-    title: "Fast-forward merge",
+    title: "fast-forward merge",
     description: "Add the commits as they are. Needs the branch to contain the base.",
   },
 } as const satisfies Record<PullRequestMergeMethod, { title: string; description: string }>;

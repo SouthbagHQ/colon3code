@@ -246,7 +246,7 @@ function ModelCard(props: ModelCardProps) {
           ) : null}
           {model.linkedFrom ? (
             <p className="mt-0.5 break-all text-2xs text-muted-foreground">
-              Using your file at {model.linkedFrom}
+              using your file at {model.linkedFrom}
             </p>
           ) : null}
           <ModelBenchmarks
@@ -565,7 +565,7 @@ function CleanupModelRow() {
           <div className="flex min-w-0 flex-wrap items-center gap-2 @min-[32rem]/settings-row:justify-end">
             {dedicated && (!hasProvider || !instanceEntry) ? (
               <span className="text-sm text-muted-foreground">
-                No text generation providers available.
+                no text generation providers available.
               </span>
             ) : null}
             {dedicated && hasProvider && instanceEntry ? (

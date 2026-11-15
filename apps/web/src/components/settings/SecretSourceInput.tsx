@@ -157,13 +157,13 @@ function SecretCheckButton(props: {
 
   if (!supported) return null;
   const description = !canCheck
-    ? "You cannot check secrets on this environment"
+    ? "you cannot check secrets on this environment"
     : state === undefined
-      ? "Check that the secret resolves"
+      ? "check that the secret resolves"
       : state.status === "checking"
-        ? "Checking the secret"
+        ? "checking the secret"
         : state.status === "resolved"
-          ? "Secret resolved"
+          ? "secret resolved"
           : state.detail;
   return (
     <Tooltip>
@@ -303,7 +303,7 @@ export function SecretSourceInput({
             <SecretCheckButton
               environmentId={environmentId}
               secret={secret}
-              label={`Check ${label}`}
+              label={`check ${label}`}
               disabled={input.disabled}
             />
           ) : null}

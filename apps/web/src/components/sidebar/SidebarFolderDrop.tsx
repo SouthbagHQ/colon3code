@@ -37,8 +37,8 @@ export function SidebarFolderDrop(props: { children: ReactNode }) {
       toastManager.add(
         stackedThreadToast({
           type: "info",
-          title: "Dropping folders needs the desktop app",
-          description: "Browsers do not share folder paths. Use Add project to choose a folder.",
+          title: "dropping folders needs the desktop app",
+          description: "Browsers do not share folder paths. Use add project to choose a folder.",
         }),
       );
       return;
@@ -48,7 +48,7 @@ export function SidebarFolderDrop(props: { children: ReactNode }) {
       toastManager.add(
         stackedThreadToast({
           type: "error",
-          title: "This computer's server is not connected yet",
+          title: "this computer's server isn't connected yet",
           description: "Try again when it connects.",
         }),
       );
@@ -71,7 +71,7 @@ export function SidebarFolderDrop(props: { children: ReactNode }) {
       toastManager.add(
         stackedThreadToast({
           type: "error",
-          title: `Could not add "${folder.name}"`,
+          title: `aw, couldn't add "${folder.name}" 3:`,
           description: response?.message ?? ":3 Code could not read the folder's path.",
         }),
       );
@@ -110,7 +110,7 @@ export function SidebarFolderDrop(props: { children: ReactNode }) {
           toastManager.add(
             stackedThreadToast({
               type: "info",
-              title: "Only folders can be added as projects",
+              title: "only folders can be added as projects",
               description: "Drop files on a thread to attach them.",
             }),
           );
@@ -125,8 +125,8 @@ export function SidebarFolderDrop(props: { children: ReactNode }) {
         >
           <FolderPlusIcon className="size-5 text-sidebar-muted-foreground" />
           {bridge === undefined
-            ? "Dropping folders needs the desktop app"
-            : "Drop folders to add projects"}
+            ? "dropping folders needs the desktop app"
+            : "drop folders to add projects"}
         </div>
       ) : null}
     </div>

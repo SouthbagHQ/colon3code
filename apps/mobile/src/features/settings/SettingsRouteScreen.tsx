@@ -96,7 +96,7 @@ function TranslatedSettingsListScreen(props: {
     <SettingsSidebarContext value={props.sidebar ? { selected: props.selected } : null}>
       <View className="flex-1 bg-screen">
         <SettingsScreen
-          title={gt("Settings")}
+          title={gt("settings")}
           workspaceRoot={props.sidebar}
           menus={[environmentMenu]}
           search={
@@ -105,7 +105,7 @@ function TranslatedSettingsListScreen(props: {
                   value: workspace.state.tabs.settings.query,
                   onChangeText: (query) =>
                     workspace.dispatch({ type: "query", tab: "settings", query }),
-                  placeholder: gt("Search settings"),
+                  placeholder: gt("search settings"),
                 }
               : undefined
           }
@@ -131,10 +131,10 @@ function ConfiguredSettingsRouteScreen() {
   const { user } = useUser();
   const { savedConnectionsById } = useSavedRemoteConnections();
   const accountLabel = !isLoaded
-    ? gt("Checking")
+    ? gt("checking")
     : !isSignedIn
-      ? gt("Sign in")
-      : (user?.primaryEmailAddress?.emailAddress ?? gt("Signed in"));
+      ? gt("sign in")
+      : (user?.primaryEmailAddress?.emailAddress ?? gt("signed in"));
 
   return (
     <SettingsList
@@ -147,11 +147,11 @@ function ConfiguredSettingsRouteScreen() {
           disabled: !isLoaded,
           onPress: () => navigation.navigate("SettingsAuth"),
         },
-        environmentsRow(gt("Environments"), Object.keys(savedConnectionsById).length),
+        environmentsRow(gt("environments"), Object.keys(savedConnectionsById).length),
         {
           id: "SettingsNotifications",
           icon: "bell.badge",
-          label: gt("Notifications"),
+          label: gt("notifications"),
           target: "SettingsNotifications",
         },
       ]}
@@ -164,7 +164,7 @@ function LocalSettingsRouteScreen() {
   const { savedConnectionsById } = useSavedRemoteConnections();
   return (
     <SettingsList
-      connections={[environmentsRow(gt("Environments"), Object.keys(savedConnectionsById).length)]}
+      connections={[environmentsRow(gt("environments"), Object.keys(savedConnectionsById).length)]}
     />
   );
 }
@@ -196,7 +196,7 @@ function SettingsList(props: { readonly connections: readonly SettingsListRow[] 
   const sections = filterSettingsSections(
     [
       { rows: overflowRows },
-      { title: gt("Connections"), rows: props.connections },
+      { title: gt("connections"), rows: props.connections },
       ...indexSections,
     ],
     query,
@@ -230,8 +230,8 @@ function SettingsList(props: { readonly connections: readonly SettingsListRow[] 
         ) : (
           <EmptyState
             variant="plain"
-            title={gt("No results")}
-            detail={gt("No settings match “{query}”.", { query: query.trim() })}
+            title={gt("no results")}
+            detail={gt("no settings match “{query}”.", { query: query.trim() })}
           />
         )}
       </ScrollView>
@@ -258,7 +258,7 @@ function useSettingsIndexSections(): SettingsListSection[] {
           representative: scopedProjectMembers[0]!,
           members: scopedProjectMembers,
         })
-      : (selectedProject?.label ?? gt("Unavailable project"));
+      : (selectedProject?.label ?? gt("unavailable project"));
   const page = (
     target: SettingsPageTarget,
     icon: SettingsListRow["icon"],
@@ -271,52 +271,52 @@ function useSettingsIndexSections(): SettingsListSection[] {
   return [
     {
       rows: [
-        page("SettingsOrganization", "gearshape", gt("General")),
-        page("SettingsAppearance", "paintbrush", gt("Appearance")),
-        page("SettingsLanguage", "globe", gt("Language"), {
+        page("SettingsOrganization", "gearshape", gt("general")),
+        page("SettingsAppearance", "paintbrush", gt("appearance")),
+        page("SettingsLanguage", "globe", gt("language"), {
           value: SUPPORTED_LOCALES.includes(language)
             ? nativeLanguageName(language)
-            : gt("System default"),
+            : gt("system default"),
         }),
-        page("SettingsFollowUp", "bubble.left.and.bubble.right", gt("Chat")),
+        page("SettingsFollowUp", "bubble.left.and.bubble.right", gt("chat")),
         ...(navigationCustomizationAvailable()
-          ? [page("SettingsNavigation", "line.3.horizontal", gt("Navigation tabs"))]
+          ? [page("SettingsNavigation", "line.3.horizontal", gt("navigation tabs"))]
           : []),
-        page("SettingsKeyboard", "keyboard", gt("Keyboard")),
-        page("SettingsVoice", "mic", gt("Voice")),
+        page("SettingsKeyboard", "keyboard", gt("keyboard")),
+        page("SettingsVoice", "mic", gt("voice")),
       ],
     },
     {
-      title: gt("Agents"),
+      title: gt("agents"),
       rows: [
-        serverPage("SettingsProviderAccounts", "person.crop.circle", gt("Providers")),
-        serverPage("SettingsThreads", "text.bubble", gt("Threads")),
-        page("SettingsScheduledTasks", "clock", gt("Scheduled tasks")),
+        serverPage("SettingsProviderAccounts", "person.crop.circle", gt("providers")),
+        serverPage("SettingsThreads", "text.bubble", gt("threads")),
+        page("SettingsScheduledTasks", "clock", gt("scheduled tasks")),
       ],
     },
     {
-      title: gt("Code"),
+      title: gt("code"),
       rows: [
         page(
           "SettingsProjectOverview",
           "folder",
-          gt("Projects"),
+          gt("projects"),
           selectedProjectKey !== null ? { value: projectLabel } : undefined,
         ),
         serverPage(
           "SettingsEnvironmentSourceControl",
           "arrow.triangle.branch",
-          gt("Source control"),
+          gt("source control"),
         ),
-        serverPage("SettingsWorktrees", "square.on.square", gt("Worktrees")),
+        serverPage("SettingsWorktrees", "square.on.square", gt("worktrees")),
       ],
     },
     {
       rows: [
-        serverPage("SettingsEnvironmentMaintenance", "arrow.clockwise", gt("Maintenance")),
-        page("SettingsLabs", "flask", gt("Labs")),
-        page("SettingsAbout", "info.circle", gt("About")),
-        page("SettingsArchive", "archivebox", gt("Archive")),
+        serverPage("SettingsEnvironmentMaintenance", "arrow.clockwise", gt("maintenance")),
+        page("SettingsLabs", "flask", gt("labs")),
+        page("SettingsAbout", "info.circle", gt("about")),
+        page("SettingsArchive", "archivebox", gt("archive")),
       ],
     },
   ];

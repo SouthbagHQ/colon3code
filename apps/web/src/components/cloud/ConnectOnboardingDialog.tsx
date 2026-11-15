@@ -383,7 +383,7 @@ function PublishStep({
         />
         {requireDeviceApproval !== null ? (
           <OnboardingToggleRow
-            title="Require approval for new devices"
+            title="require approval for new devices"
             description="Devices that sign in to your T3 Connect account wait until someone already connected here approves them."
             checked={requireDeviceApproval}
             disabled={disabled || requireDeviceApprovalLocked}

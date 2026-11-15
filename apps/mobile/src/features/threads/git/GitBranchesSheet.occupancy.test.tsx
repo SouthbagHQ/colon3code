@@ -85,16 +85,16 @@ it("recognizes both the main checkout and a linked worktree as this thread's che
   try {
     checkout.worktreePath = null;
     expect(rows()).toEqual([
-      { name: "feature/available", subtitle: "Local branch", disabled: false },
-      { name: "feature/linked", subtitle: "Checked out in another worktree", disabled: true },
-      { name: "main", subtitle: "Checked out in this thread", disabled: false },
+      { name: "feature/available", subtitle: "local branch", disabled: false },
+      { name: "feature/linked", subtitle: "checked out in another worktree", disabled: true },
+      { name: "main", subtitle: "checked out in this thread", disabled: false },
     ]);
 
     checkout.worktreePath = linked;
     expect(rows()).toEqual([
-      { name: "feature/available", subtitle: "Local branch", disabled: false },
-      { name: "feature/linked", subtitle: "Checked out in this thread", disabled: false },
-      { name: "main", subtitle: "Checked out in another worktree", disabled: true },
+      { name: "feature/available", subtitle: "local branch", disabled: false },
+      { name: "feature/linked", subtitle: "checked out in this thread", disabled: false },
+      { name: "main", subtitle: "checked out in another worktree", disabled: true },
     ]);
   } finally {
     act(() => root.unmount());

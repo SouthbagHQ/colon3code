@@ -569,16 +569,16 @@ function ThreadNavigationSidebarPane(props: ThreadNavigationSidebarProps) {
         }
       >
         {catalogState.isLoadingConnections
-          ? "Loading threads…"
+          ? "loading threads…"
           : showAddEnvironment
-            ? "No environments connected"
+            ? "no environments connected"
             : props.searchQuery.trim().length > 0
               ? threadSearch.isPending
-                ? "Searching thread messages…"
-                : "No matching threads"
+                ? "searching thread messages…"
+                : "no matching threads"
               : selectedProjectScope !== null
-                ? `No threads in ${selectedProjectScope.title}`
-                : "No threads yet"}
+                ? `no threads in ${selectedProjectScope.title}`
+                : "no threads yet"}
       </Text>
       {showAddEnvironment ? (
         <View className={Platform.OS === "android" ? "self-center" : "px-2"}>
@@ -586,7 +586,7 @@ function ThreadNavigationSidebarPane(props: ThreadNavigationSidebarProps) {
             tone="primary"
             size="compact"
             icon="plus"
-            label="Add environment"
+            label="add environment"
             onPress={props.onOpenEnvironmentSettings}
           />
         </View>

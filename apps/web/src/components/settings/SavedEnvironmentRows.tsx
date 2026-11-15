@@ -87,7 +87,7 @@ function savedBackendStatus(environment: EnvironmentPresentation): {
       return { text: "connecting", tone: "muted" };
     case "reconnecting":
       if (connection.awaitingApproval) {
-        return { text: connection.error ?? "Waiting for approval", tone: "muted" };
+        return { text: connection.error ?? "waiting for approval", tone: "muted" };
       }
       return {
         text: connection.error ? `reconnecting: ${connection.error}` : "reconnecting",
@@ -745,7 +745,7 @@ function ConfiguredCloudLinkRow({
           managed={connectDenial}
           control={
             <CloudLinkSwitch
-              ariaLabel="Require approval for new T3 Connect devices"
+              ariaLabel="require approval for new T3 Connect devices"
               checked={connectDeviceApproval.required}
               disabled={!connectDeviceApproval.canManage}
               disabledReason={

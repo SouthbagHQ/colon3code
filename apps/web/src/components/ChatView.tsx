@@ -668,7 +668,7 @@ export default function ChatView(props: ChatViewProps) {
     if (!accepted) {
       toastManager.add({
         type: "warning",
-        title: "The composer is not ready",
+        title: "hmm, the composer isn't ready yet 3:",
         description: "Try replying after the connection or pending input is resolved.",
       });
     }
@@ -3548,7 +3548,7 @@ export default function ChatView(props: ChatViewProps) {
               {...workspaceAreaProps(
                 "composer",
                 2,
-                showProviderSubagentBar ? "Subagent" : undefined,
+                showProviderSubagentBar ? "subagent" : undefined,
               )}
               ref={(overlay: HTMLDivElement | null) => {
                 setComposerOverlayElement(overlay);

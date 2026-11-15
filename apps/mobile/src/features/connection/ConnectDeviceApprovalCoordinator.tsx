@@ -58,7 +58,7 @@ const approvalPrompts = createApprovalPromptQueue<QueuedApprovalPrompt>((prompt,
       }
       if (outcome === "gone") {
         return Dialog.alert(
-          "Request no longer waiting",
+          "request no longer waiting 3:",
           "It expired or was answered elsewhere.",
           [{ text: "OK", onPress: () => answer("done") }],
           { onDismiss: () => answer("done") },
@@ -78,8 +78,8 @@ const approvalPrompts = createApprovalPromptQueue<QueuedApprovalPrompt>((prompt,
     prompt.title,
     prompt.message,
     [
-      { text: "Deny", onPress: respond(prompt.deny, "Could not deny the device") },
-      { text: "Approve", onPress: respond(prompt.approve, "Could not approve the device") },
+      { text: "deny", onPress: respond(prompt.deny, "could not deny the device 3:") },
+      { text: "approve", onPress: respond(prompt.approve, "could not approve the device 3:") },
     ],
     // Another dialog took the screen; offer the request again on the next update.
     { cancelable: false, onDismiss: () => answer("later") },

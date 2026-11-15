@@ -75,7 +75,7 @@ export function useMediaActions(source: MediaActionsSource | undefined, onOpenFi
       .catch((error: unknown) => {
         if (!request.signal.aborted) {
           Dialog.alert(
-            kind === "share" ? "could not share file 3:" : "Could not save image",
+            kind === "share" ? "could not share file 3:" : "could not save image 3:",
             error instanceof Error ? error.message : "try again.",
           );
         }
@@ -197,7 +197,7 @@ export function useMediaActions(source: MediaActionsSource | undefined, onOpenFi
             ? [
                 {
                   id: "save-image" as const,
-                  title: busy === "save-image" ? "Saving image…" : "Save image",
+                  title: busy === "save-image" ? "saving image…" : "save image",
                   run: saveImage,
                   disabled: busy !== null || !canReadMedia,
                 },
@@ -209,7 +209,7 @@ export function useMediaActions(source: MediaActionsSource | undefined, onOpenFi
               busy === "share"
                 ? "opening share sheet…"
                 : canSaveImageToLibrary(source.mimeType)
-                  ? "Share"
+                  ? "share"
                   : "save or share",
             run: share,
             disabled: busy !== null || !canReadMedia,

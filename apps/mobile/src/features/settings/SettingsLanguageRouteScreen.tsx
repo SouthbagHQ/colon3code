@@ -27,12 +27,12 @@ function LanguageSettings() {
   const preferencesReady = AsyncResult.isSuccess(preferencesResult) && !preferencesResult.waiting;
   const language = useLanguagePreference();
   const options = [
-    { language: SYSTEM_LANGUAGE, label: gt("System default") },
+    { language: SYSTEM_LANGUAGE, label: gt("system default") },
     ...SUPPORTED_LOCALES.map((locale) => ({ language: locale, label: nativeLanguageName(locale) })),
   ];
 
   return (
-    <SettingsScreen title={gt("Language")}>
+    <SettingsScreen title={gt("language")}>
       <ScrollView
         contentInsetAdjustmentBehavior="automatic"
         showsVerticalScrollIndicator={false}

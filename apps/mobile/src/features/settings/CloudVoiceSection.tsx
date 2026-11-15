@@ -151,7 +151,7 @@ function ModelPicker({
       {matches.length === 0 ? (
         <Separated>
           <Text className="px-4 py-3 text-sm text-foreground-muted">
-            No transcription model matches.
+            no transcription model matches.
           </Text>
         </Separated>
       ) : matches.length > shown.length ? (

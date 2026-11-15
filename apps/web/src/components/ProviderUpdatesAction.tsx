@@ -50,7 +50,7 @@ export function useCheckProviderUpdates() {
     toastManager.add(
       stackedThreadToast({
         type: "error",
-        title: "Could not check provider updates",
+        title: "hmm, couldn't check provider updates 3:",
         description: <span className="whitespace-pre-line">{lines.join("\n")}</span>,
       }),
     );

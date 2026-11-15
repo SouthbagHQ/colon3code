@@ -364,7 +364,7 @@ export function useDraftEnvironmentRouting(input: DraftEnvironmentRoutingInput) 
         toastManager.add(
           stackedThreadToast({
             type: "error",
-            title: "Could not switch machine",
+            title: "aw, couldn't switch machines 3:",
             description: error instanceof Error ? error.message : "An error occurred.",
           }),
         );
@@ -376,7 +376,7 @@ export function useDraftEnvironmentRouting(input: DraftEnvironmentRoutingInput) 
       if (triagePrompt === null) return;
       const project =
         knownProject ??
-        (await openScratchProject(target.environmentId, "Could not switch machine"));
+        (await openScratchProject(target.environmentId, "aw, couldn't switch machines 3:"));
       if (project) retarget(project, triagePrompt);
     };
     setBusyEnvironmentChange(request);

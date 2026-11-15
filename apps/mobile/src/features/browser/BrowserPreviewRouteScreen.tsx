@@ -57,7 +57,7 @@ function BrowserUnavailableScreen({ onClose }: { readonly onClose: () => void })
       className="flex-1 bg-sheet"
       style={{ paddingTop: contentTopInset, paddingBottom: insets.bottom }}
     >
-      <SheetHeader title="Browser" onClose={onClose} accessibilityLabel="Close browser" />
+      <SheetHeader title="browser" onClose={onClose} accessibilityLabel="close browser" />
     </View>
   );
 }

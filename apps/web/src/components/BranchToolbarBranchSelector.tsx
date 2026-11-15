@@ -95,7 +95,7 @@ interface BranchToolbarBranchSelectorProps {
   onComposerFocusRequest?: () => void;
 }
 
-const WORKTREE_CHANGE_BLOCKED_MESSAGE = "Stop the current turn to switch worktrees.";
+const WORKTREE_CHANGE_BLOCKED_MESSAGE = "stop the current turn to switch worktrees";
 
 function toBranchActionErrorMessage(error: unknown): string {
   return error instanceof Error ? error.message : "oops, something went wrong 3:";
@@ -857,7 +857,7 @@ export function BranchToolbarBranchSelector({
             className="min-w-0 max-w-full active:scale-100"
             disabled={isInitialBranchesLoadPending || isBranchActionPending}
             // NVDA browse mode re-reads a combobox when its attributes change, not when its text does.
-            aria-label={`Branch: ${triggerLabel}`}
+            aria-label={`branch: ${triggerLabel}`}
           >
             <GitBranchIcon
               className={cn(

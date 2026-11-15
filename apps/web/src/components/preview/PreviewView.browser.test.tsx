@@ -471,7 +471,7 @@ describe("PreviewView", () => {
       <PreviewView threadRef={TEST_THREAD_REF} tabId={tabId} visible />
     );
     await using screen = await render(tabView("tab-1"));
-    const findBar = page.getByRole("search", { name: "Find in page" });
+    const findBar = page.getByRole("search", { name: "find in page" });
 
     act(() => dispatchPreviewAction("find"));
     await expect.element(findBar).toBeInTheDocument();

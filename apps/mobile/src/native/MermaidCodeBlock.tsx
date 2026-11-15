@@ -200,14 +200,14 @@ function MermaidBlock(props: MermaidCodeBlockProps & { readonly diagram: Diagram
           {svg ? (
             <CodeBlockHeaderButton
               icon={showCode ? "flowchart" : "chevron.left.forwardslash.chevron.right"}
-              label={showCode ? "Show diagram" : "Show code"}
+              label={showCode ? "show diagram" : "show code"}
               textStyle={textStyle}
               onPress={() => setShowCode((value) => !value)}
             />
           ) : null}
           <CodeBlockHeaderButton
             icon="doc.on.doc"
-            label="Copy code"
+            label="copy code"
             textStyle={textStyle}
             onPress={() => copyTextWithHaptic(code)}
           />
@@ -217,7 +217,7 @@ function MermaidBlock(props: MermaidCodeBlockProps & { readonly diagram: Diagram
       <View style={styles.content}>
         {diagram?.status === "error" ? (
           <Text style={[styles.error, { color: secondaryColor, fontSize: codeFontSize * 0.85 }]}>
-            Unable to render diagram: {diagram.message}
+            could not render diagram: {diagram.message}
           </Text>
         ) : null}
         {svg && diagram?.status === "ready" && !showCode ? (
@@ -227,7 +227,7 @@ function MermaidBlock(props: MermaidCodeBlockProps & { readonly diagram: Diagram
             <Pressable
               accessibilityRole="imagebutton"
               accessibilityLabel="Mermaid diagram"
-              accessibilityHint="Opens the diagram full screen"
+              accessibilityHint="opens the diagram full screen"
               onPress={() => {
                 if (expansion) return;
                 void Haptics.selectionAsync();

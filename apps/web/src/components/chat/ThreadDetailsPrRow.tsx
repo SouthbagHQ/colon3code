@@ -205,7 +205,7 @@ export function ThreadDetailsPrRow({
     writeHandoffToComposer(composerTarget, task);
     toastManager.add({
       type: "success",
-      title: "Added to the composer",
+      title: "popped it into the composer, nya :3",
       description: "The task is in the composer. Read it over, then send.",
     });
   };

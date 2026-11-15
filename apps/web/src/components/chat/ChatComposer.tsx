@@ -2500,8 +2500,8 @@ export const ChatComposer = memo(function ChatComposer(props: ChatComposerProps)
           variant: "default",
           icon: <ReplyIcon />,
           title: replyTo.subagents
-            ? `Replying to ${replyTo.subagents.map((subagent) => subagent.title).join(", ")}`
-            : "Replying to",
+            ? `replying to ${replyTo.subagents.map((subagent) => subagent.title).join(", ")}`
+            : "replying to",
           description: (
             <button
               type="button"
@@ -2517,7 +2517,7 @@ export const ChatComposer = memo(function ChatComposer(props: ChatComposerProps)
               {assistantCitationLabel(replyTo.citation)}
             </button>
           ),
-          dismissLabel: "Cancel reply",
+          dismissLabel: "cancel reply",
           onDismiss: () => setComposerDraftReplyTo(composerDraftTarget, null),
         },
       ]
@@ -3150,7 +3150,7 @@ export const ChatComposer = memo(function ChatComposer(props: ChatComposerProps)
         if (activePendingProgress) {
           toastManager.add({
             type: "info",
-            title: "Terminal output can't be added to a question answer.",
+            title: "hmm, terminal output can't go in a question answer 3:",
             description: "Answer or dismiss the question first, then add it to chat.",
           });
           return;

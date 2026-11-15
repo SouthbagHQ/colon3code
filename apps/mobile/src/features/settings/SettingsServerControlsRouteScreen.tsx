@@ -409,7 +409,7 @@ function ServerSettingsDetail(props: { readonly page: SettingsPage }) {
                   />
                 )}
                 {projectSelected ? null : (
-                  <SettingsSection title="Project sources">
+                  <SettingsSection title="project sources">
                     {sourceControlClients.definitions.map((definition) => {
                       const offered = displayTargets.map((target) =>
                         isSourceControlProviderOffered(
@@ -562,7 +562,7 @@ function ServerSettingsDetail(props: { readonly page: SettingsPage }) {
                     subtitle={managedSubtitle(
                       "enableProviderUpdateChecks",
                       projectSelected
-                        ? "Environment-wide setting. Select All projects to change it."
+                        ? "Environment-wide setting. Select all projects to change it."
                         : "Check installed provider CLIs for newer versions and fetch model catalog updates. When off, new models may not appear.",
                     )}
                     value={uniform("enableProviderUpdateChecks")}
@@ -585,11 +585,11 @@ function ServerSettingsDetail(props: { readonly page: SettingsPage }) {
                   <View className="border-t border-border-subtle">
                     <SettingsSwitchRow
                       icon="bolt.circle"
-                      label="Keep awake while agents work"
+                      label="keep awake while agents work"
                       subtitle={managedSubtitle(
                         "keepAwakeWhileAgentsWork",
                         projectSelected
-                          ? "Environment-wide setting. Select All projects to change it."
+                          ? "Environment-wide setting. Select all projects to change it."
                           : "Stop the computer from sleeping while agents work. Closing a laptop lid still sleeps it.",
                       )}
                       value={uniform("keepAwakeWhileAgentsWork")}

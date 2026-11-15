@@ -294,9 +294,9 @@ export const OpenInPicker = memo(function OpenInPicker({
 
   const unavailableReason =
     remote.mode === "remote-unavailable"
-      ? `No SSH route to ${environmentLabel}`
+      ? `no SSH route to ${environmentLabel}`
       : remote.mode === "remote-links" && options.length === 0
-        ? `Open from a computer to edit on ${environmentLabel}`
+        ? `open from a computer to edit on ${environmentLabel}`
         : null;
 
   const editorItems = (
@@ -385,7 +385,7 @@ export const OpenInPicker = memo(function OpenInPicker({
         if (!preferredEditor) return;
         const label = editorLabelForPlatform(preferredEditor, navigator.platform);
         void openInEditor(preferredEditor).then((opened) => {
-          if (opened) announce(`Opened in ${label}`);
+          if (opened) announce(`opened in ${label}`);
         });
       }}
     >
@@ -454,7 +454,7 @@ export const OpenInPicker = memo(function OpenInPicker({
               className={isPanel ? THREAD_DETAILS_PANEL_CHEVRON_CLASS : "size-4"}
             />
           </TooltipTrigger>
-          <TooltipPopup side="top">Choose editor</TooltipPopup>
+          <TooltipPopup side="top">choose editor</TooltipPopup>
         </Tooltip>
         <MenuPopup
           align="end"

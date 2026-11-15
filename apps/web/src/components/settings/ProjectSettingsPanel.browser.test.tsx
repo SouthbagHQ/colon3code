@@ -719,7 +719,7 @@ describe("project settings scope", () => {
     });
 
     await userEvent.click(page.getByRole("button", { name: "Checkout scope: clone-b" }));
-    await userEvent.click(page.getByRole("menuitemradio", { name: "All checkouts" }));
+    await userEvent.click(page.getByRole("menuitemradio", { name: "all checkouts" }));
 
     await vi.waitFor(() =>
       expect(screen.router.state.location.search).toEqual({ project: key, machine: primaryId }),

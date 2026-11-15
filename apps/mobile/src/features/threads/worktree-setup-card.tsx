@@ -166,7 +166,7 @@ export function WorktreePreparingHeader() {
   return (
     <View className="py-1">
       <View className="min-h-11 flex-row items-center border-b border-border px-1">
-        <HeaderLabel label="Setting up worktree…" active />
+        <HeaderLabel label="setting up worktree…" active />
       </View>
       <View className="pt-1 pb-2">
         {PREPARING_STAGES.map((stage) => (

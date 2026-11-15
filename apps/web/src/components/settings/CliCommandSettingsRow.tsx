@@ -12,9 +12,9 @@ import { SettingsRow } from "./settingsLayout";
 import { searchableSetting } from "./settingsSearch";
 
 const FAILURE_TITLES = {
-  install: "Could not install t3",
-  uninstall: "Could not remove t3",
-  addToPath: "Could not add t3 to PATH",
+  install: "aw, couldn't install t3 3:",
+  uninstall: "aw, couldn't remove t3 3:",
+  addToPath: "aw, couldn't add t3 to PATH 3:",
 } as const;
 
 /** The desktop `t3` command's state, and its actions with a toast on failure. */
@@ -70,7 +70,7 @@ export function CliCommandSettingsRow() {
         <div className="flex gap-2">
           {state.pathSetup && !state.pathSetup.added ? (
             <Button size="sm" variant="outline" disabled={busy} onClick={() => run("addToPath")}>
-              Add to PATH
+              add to PATH
             </Button>
           ) : null}
           <Button
@@ -79,7 +79,7 @@ export function CliCommandSettingsRow() {
             disabled={busy || (!installed && Boolean(state.shadowedBy))}
             onClick={() => run(installed ? "uninstall" : "install")}
           >
-            {installed ? "Remove" : "Install"}
+            {installed ? "remove" : "install"}
           </Button>
         </div>
       }

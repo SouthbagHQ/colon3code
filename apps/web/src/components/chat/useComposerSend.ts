@@ -452,7 +452,7 @@ export function useComposerSend(input: ComposerSendInput) {
         toastManager.add(
           stackedThreadToast({
             type: "info",
-            title: "Still sending your previous message.",
+            title: "just a sec, still sending your previous message :3",
             description: "Send again once it goes through or fails.",
           }),
         );
@@ -636,7 +636,7 @@ export function useComposerSend(input: ComposerSendInput) {
         toastManager.add(
           stackedThreadToast({
             type: "warning",
-            title: "Queued message not updated",
+            title: "queued message not updated",
             description:
               "A queued message can't move to a side chat. Remove /side or /btw to save it.",
           }),
@@ -1465,8 +1465,8 @@ export function useComposerSend(input: ComposerSendInput) {
           stackedThreadToast({
             type: "error",
             title: isAtomCommandInterrupted(failure)
-              ? "Message may not have been sent"
-              : "Message not sent",
+              ? "hmm, that message may not have sent 3:"
+              : "aw, that message didn't send 3:",
             description: hasText
               ? "Your new draft was kept. Copy the failed message to send it again."
               : "Your new draft was kept.",
@@ -1476,7 +1476,7 @@ export function useComposerSend(input: ComposerSendInput) {
             ...(hasText
               ? {
                   actionProps: {
-                    children: "Copy message",
+                    children: "copy message",
                     onClick: () => {
                       void writeTextToClipboard(failedText, "failed message").catch(
                         () => undefined,

@@ -288,11 +288,11 @@ function DiscoveryItemRow({
                       checked={offered.checked}
                       disabled={offered.disabled}
                       onCheckedChange={offered.onChange}
-                      aria-label={`Offer ${item.label} when adding or publishing a project`}
+                      aria-label={`offer ${item.label} when adding or publishing a project`}
                     />
                   }
                 />
-                <TooltipPopup side="top">Offer when adding or publishing a project</TooltipPopup>
+                <TooltipPopup side="top">offer when adding or publishing a project</TooltipPopup>
               </Tooltip>
             ) : !isVcsNotReady(item) ? (
               <Switch

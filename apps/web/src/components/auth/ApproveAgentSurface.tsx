@@ -105,7 +105,7 @@ export function ApproveAgentSurface() {
   if (environmentId === null || transport === null) {
     return (
       <Message
-        title="This sign-in link is incomplete"
+        title="this sign-in link is incomplete"
         description="Close this page and start the sign-in again from your agent."
       />
     );
@@ -114,7 +114,7 @@ export function ApproveAgentSurface() {
   if (framed) {
     return (
       <Message
-        title="Open this page in its own window"
+        title="open this page in its own window"
         description="For your safety, agent sign-ins cannot be approved inside another site."
       />
     );
@@ -123,12 +123,12 @@ export function ApproveAgentSurface() {
   if (loadFailed) {
     return (
       <Message
-        title="Could not load sign-in"
+        title="couldn't load the sign-in"
         description="T3 Connect sign-in did not load. Check your connection, then try again."
       >
         <div className="mt-6">
           <Button type="button" onClick={retryClerkLoad}>
-            Retry sign-in
+            retry sign-in
           </Button>
         </div>
       </Message>
@@ -139,8 +139,8 @@ export function ApproveAgentSurface() {
     return (
       <StandalonePage>
         <StandalonePageHeader
-          context="Agent sign-in"
-          title="Connecting to T3 Connect"
+          context="agent sign-in"
+          title="connecting to T3 Connect"
           description="One moment while your account loads."
         />
         <Spinner className="mt-6" size="lg" tone="muted" />
@@ -151,12 +151,12 @@ export function ApproveAgentSurface() {
   if (!isSignedIn) {
     return (
       <Message
-        title="Sign in to approve"
+        title="sign in to approve"
         description="Sign in to T3 Connect with the account this environment is linked to."
       >
         <div className="mt-6">
           <Button type="button" onClick={openSignIn}>
-            Sign in
+            sign in
           </Button>
         </div>
       </Message>
@@ -181,7 +181,7 @@ export function ApproveAgentSurface() {
                 <a href={`${new URL("/connect-agent", environment.url).toString()}?${search}`} />
               }
             >
-              Use a sign-in code instead
+              use a sign-in code instead
             </Button>
           ) : null}
           <Button
@@ -190,7 +190,7 @@ export function ApproveAgentSurface() {
             onClick={() => void clerk.signOut({ redirectUrl: window.location.href })}
             type="button"
           >
-            Use another account
+            use another account
           </Button>
         </div>
       }
@@ -209,7 +209,7 @@ function Message({
 }) {
   return (
     <StandalonePage>
-      <StandalonePageHeader context="Agent sign-in" title={title} description={description} />
+      <StandalonePageHeader context="agent sign-in" title={title} description={description} />
       {children}
     </StandalonePage>
   );

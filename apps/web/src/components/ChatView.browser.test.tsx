@@ -148,7 +148,7 @@ it("a machine chip stashed in one thread restores with its machine in another", 
   await userEvent.click(page.getByRole("button", { name: /^Stashed prompts/ }));
   await userEvent.click(page.getByRole("button", { name: /^Restore stashed prompt/ }));
   await vi.waitFor(() =>
-    expect(document.body.textContent).toContain("Stashed machines can't go in an answer"),
+    expect(document.body.textContent).toContain("hmm, stashed machines can't go in an answer 3:"),
   );
   expect(usePromptStashStore.getState().entries).toHaveLength(1);
 
@@ -215,7 +215,7 @@ it("a question that opens while a stashed file is checked keeps a machine stash"
   await answerAssetUrls();
 
   await vi.waitFor(() =>
-    expect(document.body.textContent).toContain("Stashed machines can't go in an answer"),
+    expect(document.body.textContent).toContain("hmm, stashed machines can't go in an answer 3:"),
   );
   expect(usePromptStashStore.getState().entries).toHaveLength(1);
   usePromptStashStore.getState().takeEntry("stash-late-question");
@@ -290,10 +290,10 @@ it("an interrupted image-only first send of a new thread says it may not have be
   await expect.element(editor).toHaveTextContent("next draft");
   launch.release();
 
-  await expect.element(page.getByText("Message may not have been sent")).toBeVisible();
+  await expect.element(page.getByText("hmm, that message may not have sent 3:")).toBeVisible();
   await expect.element(editor).toHaveTextContent("next draft");
   // With no text there is nothing to copy.
-  expect(page.getByText("Copy message", { exact: true }).query()).toBeNull();
+  expect(page.getByText("copy message", { exact: true }).query()).toBeNull();
 });
 
 it("opens the thread actions menu for an older settled thread the shell leaves out", async () => {

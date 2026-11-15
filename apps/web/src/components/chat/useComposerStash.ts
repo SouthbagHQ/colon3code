@@ -173,7 +173,7 @@ export function useComposerStash(input: {
     ) {
       toastManager.add({
         type: "error",
-        title: "Stashed machines can't go in an answer",
+        title: "hmm, stashed machines can't go in an answer 3:",
         description: "Restore this prompt after the agent's question is answered.",
       });
       return true;
@@ -525,7 +525,7 @@ export function useComposerStash(input: {
     if (countPreparingComposerImages(attachmentTargetKey) > 0) {
       toastManager.add({
         type: "info",
-        title: "Still compressing a pasted image.",
+        title: "just a sec, still squishing a pasted image :3",
         description: "Stash again once it finishes compressing.",
       });
       return;

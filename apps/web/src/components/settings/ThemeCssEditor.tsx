@@ -77,7 +77,7 @@ export function ThemeCssEditor({
     <div className="space-y-2">
       <div className="overflow-hidden rounded-lg border border-input bg-code text-foreground focus-within:border-ring focus-within:ring-3 focus-within:ring-inset focus-within:ring-ring/24">
         <textarea
-          aria-label="Custom CSS"
+          aria-label="custom CSS"
           aria-describedby={hintId}
           autoCapitalize="off"
           autoComplete="off"
@@ -97,7 +97,7 @@ export function ThemeCssEditor({
         <div className="flex items-center justify-between border-t border-input px-3 py-1 font-mono text-xs">
           <span>CSS</span>
           <span>
-            Ln {position.line}, Col {position.column}
+            ln {position.line}, col {position.column}
           </span>
         </div>
       </div>
@@ -116,7 +116,7 @@ export function ThemeCssEditor({
             setPosition({ line: 1, column: 1 });
           }}
         >
-          Clear CSS
+          clear CSS
         </Button>
       </div>
     </div>

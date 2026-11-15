@@ -183,7 +183,7 @@ function EnvironmentMethodSection({
     environment.serverConfig?.environment.capabilities.cloudVoiceTranscription === true ||
     destination?.kind === "cloud";
   return (
-    <SettingsSection title={`Method on ${environment.label}`}>
+    <SettingsSection title={`method on ${environment.label}`}>
       <LocalModelChoice
         environmentId={id}
         label={environment.label}

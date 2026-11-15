@@ -46,7 +46,7 @@ export function PullRequestResolveThreadButton({
     });
     setPending(false);
     if (result._tag === "Failure") {
-      toastManager.add({ type: "error", title: "The conversation could not be updated" });
+      toastManager.add({ type: "error", title: "aw, couldn't update the conversation 3:" });
       return;
     }
     onRefresh();
@@ -60,7 +60,7 @@ export function PullRequestResolveThreadButton({
       disabled={pending}
       onClick={() => void toggle()}
     >
-      {thread.isResolved ? "Unresolve" : "Resolve"}
+      {thread.isResolved ? "unresolve" : "resolve"}
     </Button>
   );
 }

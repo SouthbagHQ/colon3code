@@ -23,7 +23,7 @@ export async function listAudioInputs(): Promise<BrowserMicrophone[]> {
 export async function listBrowserMicrophones(): Promise<BrowserMicrophone[]> {
   return (await listAudioInputs()).map(({ deviceId, label }, index) => ({
     deviceId,
-    label: label || `Microphone ${index + 1}`,
+    label: label || `microphone ${index + 1}`,
   }));
 }
 

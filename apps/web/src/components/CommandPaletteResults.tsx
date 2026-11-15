@@ -259,7 +259,7 @@ function CommandPaletteResultRow(props: {
             event.nativeEvent,
             props.item.threadRef,
             props.item.searchTitle ??
-              (typeof props.item.title === "string" ? props.item.title : "Thread"),
+              (typeof props.item.title === "string" ? props.item.title : "thread"),
           );
         }
       }}

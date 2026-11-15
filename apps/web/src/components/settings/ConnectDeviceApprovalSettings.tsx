@@ -67,7 +67,7 @@ export function ConnectDeviceApprovalSettings({
             <div className={ITEM_ROW_INNER_CLASSNAME}>
               <div className="min-w-0 flex-1 space-y-1">
                 <p className="text-sm font-medium text-foreground">
-                  Waiting for approval ·{" "}
+                  waiting for approval ·{" "}
                   <span className="font-mono tabular-nums">{connectRequest.verificationCode}</span>
                 </p>
                 <p className="text-xs text-muted-foreground">
@@ -83,13 +83,13 @@ export function ConnectDeviceApprovalSettings({
                   onClick={() =>
                     void run(request.id, async () =>
                       reportFailure(
-                        "Could not deny the device",
+                        "aw, couldn't deny the device 3:",
                         await deny({ environmentId, input: { id: request.id } }),
                       ),
                     )
                   }
                 >
-                  Deny
+                  deny
                 </Button>
                 <Button
                   size="xs"
@@ -97,13 +97,13 @@ export function ConnectDeviceApprovalSettings({
                   onClick={() =>
                     void run(request.id, async () =>
                       reportFailure(
-                        "Could not approve the device",
+                        "aw, couldn't approve the device 3:",
                         await approve({ environmentId, input: { pairingLinkId: request.id } }),
                       ),
                     )
                   }
                 >
-                  {busy ? "Saving…" : "Approve"}
+                  {busy ? "saving…" : "approve"}
                 </Button>
               </div>
             </div>
@@ -122,7 +122,7 @@ export function ConnectDeviceApprovalSettings({
                 <p className="text-xs text-muted-foreground">
                   <span className="font-mono tabular-nums">{device.verificationCode}</span>
                   <span aria-hidden> · </span>
-                  Trusted since {formatAccessTimestamp(DateTime.formatIso(device.approvedAt))}
+                  trusted since {formatAccessTimestamp(DateTime.formatIso(device.approvedAt))}
                 </p>
               </div>
               <div className="flex w-full shrink-0 items-center gap-2 sm:w-auto sm:justify-end">
@@ -131,10 +131,10 @@ export function ConnectDeviceApprovalSettings({
                   variant="destructive-outline"
                   disabled={!canWrite || busy}
                   onClick={() =>
-                    requestRevoke(`Revoke ${connectDeviceName(device)}?`, () =>
+                    requestRevoke(`revoke ${connectDeviceName(device)}?`, () =>
                       run(device.proofKeyThumbprint, async () =>
                         reportFailure(
-                          "Could not revoke the device",
+                          "aw, couldn't revoke the device 3:",
                           await revoke({
                             environmentId,
                             input: { proofKeyThumbprint: device.proofKeyThumbprint },
@@ -144,7 +144,7 @@ export function ConnectDeviceApprovalSettings({
                     )
                   }
                 >
-                  {busy ? "Revoking…" : "Revoke"}
+                  {busy ? "revoking…" : "revoke"}
                 </Button>
               </div>
             </div>
@@ -154,7 +154,7 @@ export function ConnectDeviceApprovalSettings({
       {devices.length === 0 && requests.length === 0 ? (
         <div className={ITEM_ROW_CLASSNAME}>
           <p className="text-xs text-muted-foreground/60">
-            No device has connected through T3 Connect yet.
+            no device has connected through T3 Connect yet.
           </p>
         </div>
       ) : null}

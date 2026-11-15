@@ -174,7 +174,7 @@ it("provider updates and checks exclude connections without a confirmed manageme
     await check();
   });
   expect(toast).toHaveBeenCalledWith(
-    expect.objectContaining({ title: "Could not check provider updates" }),
+    expect.objectContaining({ title: "hmm, couldn't check provider updates 3:" }),
   );
 
   await act(() => {

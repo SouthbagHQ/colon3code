@@ -90,7 +90,7 @@ export function GitBranchesSheet(_props: GitBranchesSheetProps) {
 
       <FormSection title="new worktree">
         <FormField
-          label="Base branch"
+          label="base branch"
           value={worktreeBaseBranch}
           onChangeText={setWorktreeBaseBranchOverride}
           placeholder="main"
@@ -142,11 +142,11 @@ export function GitBranchesSheet(_props: GitBranchesSheetProps) {
           const disabled = disabledExistingBranches.has(branch.name);
           const subtitle = branch.worktreePath
             ? branch.worktreePath === currentWorktreePath
-              ? "Checked out in this thread"
-              : "Checked out in another worktree"
+              ? "checked out in this thread"
+              : "checked out in another worktree"
             : branch.isDefault
-              ? "Default branch"
-              : "Local branch";
+              ? "default branch"
+              : "local branch";
 
           return (
             <ListChoiceRow

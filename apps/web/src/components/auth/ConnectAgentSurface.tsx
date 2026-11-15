@@ -250,7 +250,7 @@ export function McpConsent({
     pending === null &&
     access !== null &&
     resolveApprovalDecision({ code: pairingCode, access, details }) !== null;
-  // A code from "Use :3 Code in another app" names its level, so the page does not ask again.
+  // A code from "use :3 Code in another app" names its level, so the page does not ask again.
   const codeAccess = parseMcpApprovalCode(pairingCode)?.access;
   const approveLevel = codeAccess ?? access;
 
@@ -269,11 +269,11 @@ export function McpConsent({
         }
       />
       <dl className="mt-4 grid grid-cols-[auto_minmax(0,1fr)] gap-x-4 gap-y-1 text-sm">
-        <dt className="text-muted-foreground">App</dt>
+        <dt className="text-muted-foreground">app</dt>
         <dd className="min-w-0 break-words">
           {details.clientName} <span className="text-muted-foreground">· name set by the app</span>
         </dd>
-        <dt className="text-muted-foreground">Access goes to</dt>
+        <dt className="text-muted-foreground">access goes to</dt>
         <dd className="min-w-0 break-words font-medium">
           {details.redirectHost}
           {redirectsToThisComputer(details.redirectHost) ? (
@@ -316,7 +316,7 @@ export function McpConsent({
               value={pairingCode}
             />
             <p className="text-xs text-muted-foreground">
-              Get one from Use :3 Code in another app (MCP), Settings → Sharing & access, or{" "}
+              Get one from use :3 Code in another app (MCP), settings → sharing & access, or{" "}
               <code>t3 auth pairing create</code> on this machine.
             </p>
           </div>
@@ -324,7 +324,7 @@ export function McpConsent({
 
         {codeAccess ? (
           <p className="text-sm">
-            <span className="text-muted-foreground">Access</span>{" "}
+            <span className="text-muted-foreground">access</span>{" "}
             <span className="font-medium">{accessConfig[codeAccess].label}</span>
           </p>
         ) : (

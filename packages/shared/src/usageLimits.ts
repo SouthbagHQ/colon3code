@@ -789,8 +789,8 @@ export function resetCreditChoices(
       return {
         key: option.creditId,
         summary: `${option.label} · ${option.availableCount} left${expires ? ` · expires in ${expires}` : ""}`,
-        actionLabel: "Use",
-        confirmDescription: `${option.label}: ${option.description} This cannot be undone.`,
+        actionLabel: "use",
+        confirmDescription: `${option.label}: ${option.description} there's no undo for this one 3:`,
         availableCount: option.availableCount,
         input: { ...input, creditId: option.creditId },
       };
@@ -803,13 +803,13 @@ export function resetCreditChoices(
       key: "next",
       summary:
         count === 0
-          ? "No reset credits banked"
+          ? "no reset credits tucked away ;3"
           : compact
             ? `${count} banked${expires ? ` · expires in ${expires}` : ""}`
             : `${count} ${count === 1 ? "reset credit" : "reset credits"} banked${expires ? ` · next expires in ${expires}` : ""}`,
-      actionLabel: "Use reset",
+      actionLabel: "use reset",
       confirmDescription:
-        "This redeems one credit on your account and clears the current rate-limit windows. It cannot be undone.",
+        "this spends one credit on your account and clears the current rate-limit windows. there's no undo for this one 3:",
       availableCount: count,
       input,
     },

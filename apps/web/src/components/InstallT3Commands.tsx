@@ -19,7 +19,7 @@ export function InstallT3Commands({
       <CommandBlock command="curl -fsSL https://t3.codes/install.sh | sh" />
       <p className="text-xs text-muted-foreground">Windows (PowerShell)</p>
       <CommandBlock command="irm https://t3.codes/install.ps1 | iex" />
-      <p className="text-xs text-muted-foreground">Then</p>
+      <p className="text-xs text-muted-foreground">then</p>
       <CommandBlock command={command} />
       <p className="text-xs text-muted-foreground">
         Skip the install if you already have <code className="font-mono">t3</code>. If{" "}

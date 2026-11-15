@@ -115,16 +115,16 @@ function ConnectDeviceRequestToasts({
       };
       const options = stackedThreadToast({
         type: "info",
-        title: `A device wants to connect to ${environmentLabel}`,
+        title: `a device wants to connect to ${environmentLabel}`,
         description: `${device}. Approve only if it shows code ${request.verificationCode}.`,
         timeout: remainingMs,
         actionProps: {
-          children: "Approve",
+          children: "approve",
           onClick: () => {
             close();
             void settle(
               id,
-              reportFailure("Could not approve the device", () =>
+              reportFailure("aw, couldn't approve the device 3:", () =>
                 approve({ environmentId, input: { pairingLinkId: id } }),
               ),
             );
@@ -133,12 +133,12 @@ function ConnectDeviceRequestToasts({
         data: {
           hideCopyButton: true,
           secondaryActionProps: {
-            children: "Deny",
+            children: "deny",
             onClick: () => {
               close();
               void settle(
                 id,
-                reportFailure("Could not deny the device", () =>
+                reportFailure("aw, couldn't deny the device 3:", () =>
                   deny({ environmentId, input: { id } }),
                 ),
               );
@@ -148,7 +148,7 @@ function ConnectDeviceRequestToasts({
             {
               id: "review",
               props: {
-                children: "Review",
+                children: "review",
                 onClick: () =>
                   void navigate({ to: "/settings/access", search: { machine: environmentId } }),
               },

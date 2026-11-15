@@ -7,7 +7,7 @@ export function connectionTone(
 ): StatusTone {
   if (state === "reconnecting" && awaitingApproval) {
     return {
-      label: "Waiting for approval",
+      label: "waiting for approval",
       pillClassName: "bg-update",
       textClassName: "text-update-foreground",
     };

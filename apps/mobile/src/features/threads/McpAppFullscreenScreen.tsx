@@ -62,9 +62,9 @@ export function McpAppFullscreenScreen({ route }: McpAppFullscreenScreenProps) {
     return (
       <View className="flex-1 bg-screen">
         <AppBar
-          title="App"
+          title="app"
           onClose={() => navigation.goBack()}
-          closeAccessibilityLabel="Exit full screen"
+          closeAccessibilityLabel="exit full screen"
         />
         <Text className="m-6 text-sm text-foreground-muted">This app cannot be shown.</Text>
       </View>
@@ -143,7 +143,7 @@ function McpAppFullscreen({
       <AppBar
         title={app?.server ?? "App"}
         onClose={onClose}
-        closeAccessibilityLabel="Exit full screen"
+        closeAccessibilityLabel="exit full screen"
       />
       <View
         className="flex-1"

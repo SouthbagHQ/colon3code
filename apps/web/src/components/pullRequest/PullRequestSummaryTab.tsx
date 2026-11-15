@@ -603,7 +603,7 @@ export function PullRequestSummaryTab({
     let target: HTMLElement | null | undefined;
     if (location?.kind === "checks") {
       target = root.querySelector<HTMLElement>(
-        '[data-pull-request-summary-section][aria-label="Checks"]',
+        '[data-pull-request-summary-section][aria-label="checks"]',
       );
     } else if (location?.kind === "summary") {
       if (location.anchor === "top") {

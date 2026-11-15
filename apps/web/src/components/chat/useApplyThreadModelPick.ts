@@ -39,7 +39,7 @@ export function useApplyThreadModelPick() {
       toastManager.add(
         stackedThreadToast({
           type: "error",
-          title: "Could not apply model selection",
+          title: "aw, couldn't apply that model pick 3:",
           description: `This model pick was not saved. ${error instanceof Error ? error.message : "Try again."}`,
         }),
       );

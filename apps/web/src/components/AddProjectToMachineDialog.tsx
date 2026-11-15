@@ -366,7 +366,7 @@ function AddProjectToMachineDialog({ request }: { request: AddProjectToMachineRe
                         {selectedBytes > 0 ? ` · ${formatBytes(selectedBytes)}` : ""}
                       </span>
                       <Button type="button" variant="ghost" size="xs" onClick={toggleShownFiles}>
-                        {allCopyableSelected ? "None" : "All"}
+                        {allCopyableSelected ? "none" : "all"}
                       </Button>
                     </>
                   ) : null}
@@ -375,8 +375,8 @@ function AddProjectToMachineDialog({ request }: { request: AddProjectToMachineRe
                   <Input
                     size="sm"
                     type="search"
-                    aria-label="Search ignored files"
-                    placeholder="Search ignored files"
+                    aria-label="search ignored files"
+                    placeholder="search ignored files"
                     value={fileQuery}
                     maxLength={256}
                     onChange={(event) => setFileQuery(event.target.value)}

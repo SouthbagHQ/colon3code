@@ -144,7 +144,7 @@ function ReclaimRow({
     if (result._tag === "Success") {
       toastManager.add({
         type: "success",
-        title: `Reclaiming ${amount} on ${label}`,
+        title: `reclaiming ${amount} on ${label}`,
         description: `:3 Code there restarts and is back in about ${minutes} min.`,
       });
       return;
@@ -154,7 +154,7 @@ function ReclaimRow({
     const error = squashAtomCommandFailure(result);
     toastManager.add({
       type: "error",
-      title: `Could not reclaim space on ${label}`,
+      title: `aw, couldn't reclaim space on ${label} 3:`,
       description: error instanceof Error ? error.message : "An error occurred.",
     });
   };
@@ -174,14 +174,14 @@ function ReclaimRow({
             disabled={restarting}
             onClick={() => setConfirming(true)}
           >
-            {restarting ? "Restarting…" : "Reclaim"}
+            {restarting ? "restarting…" : "reclaim"}
           </Button>
           {dismiss}
           <AlertDialog open={confirming} onOpenChange={setConfirming}>
             <AlertDialogPopup>
               <AlertDialogHeader>
                 <AlertDialogTitle>
-                  Reclaim {amount} on {label}?
+                  reclaim {amount} on {label}?
                 </AlertDialogTitle>
                 <AlertDialogDescription>
                   :3 Code on {label} stops, rebuilds its database, and starts again. It will be
@@ -189,8 +189,8 @@ function ReclaimRow({
                 </AlertDialogDescription>
               </AlertDialogHeader>
               <AlertDialogFooter>
-                <AlertDialogClose render={<Button variant="outline" />}>Cancel</AlertDialogClose>
-                <Button onClick={() => void start()}>Restart and reclaim</Button>
+                <AlertDialogClose render={<Button variant="outline" />}>cancel</AlertDialogClose>
+                <Button onClick={() => void start()}>restart and reclaim</Button>
               </AlertDialogFooter>
             </AlertDialogPopup>
           </AlertDialog>

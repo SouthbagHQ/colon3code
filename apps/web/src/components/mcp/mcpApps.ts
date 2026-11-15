@@ -33,7 +33,7 @@ export interface McpApp {
   readonly name: string;
   readonly logo: string;
   readonly handoff: McpAppHandoff;
-  /** "Set up another way", next to the URL. */
+  /** "set up another way", next to the URL. */
   readonly steps: readonly string[];
   /** One line under the primary action. */
   readonly note?: string;
@@ -177,7 +177,7 @@ export const MCP_APPS: readonly McpApp[] = [
   },
 ];
 
-/** The "Something else…" choice: the URL and general steps only. */
+/** The "something else…" choice: the URL and general steps only. */
 export const OTHER_MCP_APP_STEPS = ["Add a remote MCP server with OAuth."] as const;
 
 /**
@@ -189,14 +189,14 @@ export function mcpHandoffAction(app: McpApp, mcpUrl: string) {
   switch (handoff.kind) {
     case "open":
       return {
-        label: `Open in ${app.name}`,
+        label: `open in ${app.name}`,
         link: handoff.link(mcpUrl),
         appLink: null,
         copy: null,
       };
     case "copy-url":
       return {
-        label: `Copy URL and open ${app.name}`,
+        label: `copy URL and open ${app.name}`,
         link: handoff.link,
         appLink: null,
         copy: { text: mcpUrl, title: "URL copied" },
@@ -204,10 +204,10 @@ export function mcpHandoffAction(app: McpApp, mcpUrl: string) {
     case "copy-message": {
       const message = handoff.message(mcpUrl);
       return {
-        label: `Copy message and open ${app.name}`,
+        label: `copy message and open ${app.name}`,
         link: handoff.link,
         appLink: handoff.appLink?.(message) ?? null,
-        copy: { text: message, title: "Message copied" },
+        copy: { text: message, title: "message copied" },
       };
     }
     case "commands":

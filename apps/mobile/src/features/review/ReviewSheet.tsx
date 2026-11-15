@@ -700,10 +700,10 @@ export function ReviewSheet(props: ReviewSheetProps) {
                   />
                 )
               ) : selectedSection.isLoading && selectedSection.diff === null ? (
-                <ContentStatus loading detail="Loading diff…" />
+                <ContentStatus loading detail="loading diff…" />
               ) : parsedDiff.kind === "empty" ? (
                 <ContentStatus
-                  title="No changes"
+                  title="no changes"
                   detail={selectedSection.subtitle ?? "This diff is empty."}
                 />
               ) : parsedDiff.kind === "raw" ? (

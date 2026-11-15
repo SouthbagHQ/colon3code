@@ -212,10 +212,10 @@ describe("remote editor links", () => {
 
     expect(primaryButton().disabled).toBe(true);
     expect((await pressOpenFavorite()).defaultPrevented).toBe(false);
-    await click(byLabel("Choose editor"));
+    await click(byLabel("choose editor"));
     await vi.waitFor(() =>
       expect(menuItems().map((item) => item.textContent)).toEqual([
-        "Open from a computer to edit on Test host",
+        "open from a computer to edit on Test host",
       ]),
     );
     expect(menuItems()[0]!.getAttribute("aria-disabled")).toBe("true");
@@ -244,7 +244,7 @@ describe("open in editor announcement", () => {
     await pressOpenFavorite();
     expect(await spoken()).toBe("");
     await pressOpenFavorite();
-    expect(await spoken()).toBe("Opened in VS Code");
+    expect(await spoken()).toBe("opened in VS Code");
 
     for (const region of regions()) region.textContent = "";
     await act(async () => screen.rerender(<FavoriteEditorFallback />));
@@ -252,6 +252,6 @@ describe("open in editor announcement", () => {
     await pressOpenFavorite();
     expect(await spoken()).toBe("");
     await pressOpenFavorite();
-    expect(await spoken()).toBe("Opened in VS Code");
+    expect(await spoken()).toBe("opened in VS Code");
   });
 });

@@ -66,7 +66,7 @@ export function connectionFloatingStatus(input: {
     return {
       kind: "connection",
       tone: "reconnecting",
-      label: `Waiting for ${environmentLabel} to approve this device`,
+      label: `waiting for ${environmentLabel} to approve this device`,
       onPress: input.onReconnect,
     };
   }

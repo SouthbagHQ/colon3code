@@ -34,8 +34,8 @@ export function titleRegenerationToast(results: ReadonlyArray<TitleRegenerationR
       type: "error",
       title:
         results.length === 1
-          ? "Failed to regenerate thread title"
-          : `Failed to regenerate ${failures.length} of ${results.length} thread titles`,
+          ? "aw, couldn't regenerate the title 3:"
+          : `aw, couldn't regenerate ${failures.length} of ${results.length} titles 3:`,
       description: failures[0],
     });
   }
@@ -44,13 +44,13 @@ export function titleRegenerationToast(results: ReadonlyArray<TitleRegenerationR
   if (results.length === 1) {
     return stackedThreadToast({
       type: "info",
-      title: "Title kept",
+      title: "title kept",
       description: "The current title already fits this thread.",
     });
   }
   return stackedThreadToast({
     type: "info",
-    title: kept === results.length ? "Titles kept" : `Kept ${kept} of ${results.length} titles`,
+    title: kept === results.length ? "titles kept" : `kept ${kept} of ${results.length} titles`,
     description:
       kept === results.length
         ? "The current titles already fit these threads."

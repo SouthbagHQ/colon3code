@@ -64,7 +64,7 @@ function ComposerImageFallback() {
   return (
     <span
       role="img"
-      aria-label="Image attachment"
+      aria-label="image attachment"
       className="flex size-full items-center justify-center p-3 text-secondary-label"
     >
       <ImageIcon aria-hidden="true" className="size-4" />
@@ -283,7 +283,7 @@ export function ComposerAttachmentMediaRow({
                   {upload?.status === "uploading" ? (
                     <ComposerAttachmentUploadProgress id={image.id} upload={upload} />
                   ) : (
-                    "Preparing"
+                    "preparing"
                   )}
                 </span>
               )}

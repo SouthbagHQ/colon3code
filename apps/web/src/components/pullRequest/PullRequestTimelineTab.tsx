@@ -905,7 +905,7 @@ export function PullRequestTimelineTab({
       ListHeaderComponent={
         anchor !== null && targetIndex < 0 && revealUrl === undefined ? (
           <p role="status" className="py-4 text-xs text-muted-foreground">
-            The linked item is not in the loaded activity.
+            the linked item isn't in the loaded activity
           </p>
         ) : (
           <div className="h-5" />

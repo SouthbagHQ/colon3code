@@ -749,7 +749,7 @@ function ConnectionsSettingsContent({
   const requestRevokeClientSession = (sessionId: ServerClientSessionRecord["sessionId"]) => {
     const session = desktopClientSessions.find((candidate) => candidate.sessionId === sessionId);
     if (session?.subject === CLOUD_CONNECT_SESSION_SUBJECT) {
-      requestConnectRevoke(`Revoke ${connectDeviceName(session)}?`, () =>
+      requestConnectRevoke(`revoke ${connectDeviceName(session)}?`, () =>
         handleRevokeDesktopClientSession(sessionId),
       );
     } else {
@@ -763,7 +763,7 @@ function ConnectionsSettingsContent({
         (session) => !session.current && session.subject === CLOUD_CONNECT_SESSION_SUBJECT,
       );
     if (revokesConnectDevices) {
-      requestConnectRevoke("Revoke all other clients?", handleRevokeOtherDesktopClients);
+      requestConnectRevoke("revoke all other clients?", handleRevokeOtherDesktopClients);
     } else {
       void handleRevokeOtherDesktopClients();
     }

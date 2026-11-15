@@ -648,27 +648,27 @@ it("records from the first connected microphone in the saved order", async () =>
       <VoiceSettingsPanel />
     </SettingsScopeProvider>,
   );
-  const list = screen.getByRole("list", { name: "Microphones, preferred first" });
+  const list = screen.getByRole("list", { name: "microphones, preferred first" });
   await expect.poll(saved).toEqual(["Blue Yeti", "System default", "AirPods Pro"]);
   const row = (index: number) => list.getByRole("listitem").nth(index);
-  await expect.element(row(0)).toHaveTextContent("1Blue YetiIn use");
+  await expect.element(row(0)).toHaveTextContent("1Blue Yetiin use");
   expect(await chooseRecordingMicrophone()).toBe("yeti");
 
   devices.mockResolvedValue([airpods]);
   await userEvent.click(screen.getByRole("button", { name: "refresh microphones" }));
-  await expect.element(row(0)).toHaveTextContent("1Blue YetiNot connected");
-  await expect.element(row(1)).toHaveTextContent("2System defaultIn use");
+  await expect.element(row(0)).toHaveTextContent("1Blue Yetinot connected");
+  await expect.element(row(1)).toHaveTextContent("2system defaultin use");
   expect(await chooseRecordingMicrophone()).toBe("");
 
-  await userEvent.click(screen.getByRole("button", { name: "Move AirPods Pro up" }));
-  await userEvent.click(screen.getByRole("button", { name: "Move AirPods Pro up" }));
+  await userEvent.click(screen.getByRole("button", { name: "move AirPods Pro up" }));
+  await userEvent.click(screen.getByRole("button", { name: "move AirPods Pro up" }));
   expect(saved()).toEqual(["AirPods Pro", "Blue Yeti", "System default"]);
-  await expect.element(screen.getByRole("button", { name: "Move AirPods Pro up" })).toBeDisabled();
+  await expect.element(screen.getByRole("button", { name: "move AirPods Pro up" })).toBeDisabled();
   expect(await chooseRecordingMicrophone()).toBe("airpods");
 
-  await userEvent.click(screen.getByRole("button", { name: "Forget Blue Yeti" }));
+  await userEvent.click(screen.getByRole("button", { name: "forget Blue Yeti" }));
   expect(saved()).toEqual(["AirPods Pro", "System default"]);
   await expect
-    .element(screen.getByRole("button", { name: "Forget System default" }))
+    .element(screen.getByRole("button", { name: "forget system default" }))
     .not.toBeInTheDocument();
 });

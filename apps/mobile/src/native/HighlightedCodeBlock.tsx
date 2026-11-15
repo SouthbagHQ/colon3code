@@ -30,8 +30,8 @@ const FENCE_DISPLAY_NAMES: Readonly<Record<string, string>> = {
 
 // The native block's long-press menu, with its labels and iOS symbols.
 const CODE_MENU_ACTIONS = [
-  { id: "copy-code", title: "Copy", image: "doc.on.doc" },
-  { id: "copy-markdown", title: "Copy as Markdown", image: "doc.text" },
+  { id: "copy-code", title: "copy", image: "doc.on.doc" },
+  { id: "copy-markdown", title: "copy as Markdown", image: "doc.text" },
 ];
 
 /** A fence in a language enriched-markdown cannot colour, drawn like its native block. */
@@ -106,14 +106,14 @@ export function HighlightedCodeBlock(props: {
         <>
           <CodeBlockHeaderButton
             icon="text.alignleft"
-            label={wrapped ? "Disable line wrap" : "Wrap lines"}
+            label={wrapped ? "disable line wrap" : "wrap lines"}
             textStyle={textStyle}
             active={wrapped}
             onPress={() => setWrapped((value) => !value)}
           />
           <CodeBlockHeaderButton
             icon="doc.on.doc"
-            label="Copy code"
+            label="copy code"
             textStyle={textStyle}
             onPress={() => copyTextWithHaptic(code)}
           />

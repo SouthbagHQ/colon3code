@@ -519,7 +519,7 @@ it("gives projects a later scan finds the default, unless the main box was unche
       ]),
     );
 
-  await click("Review all 2");
+  await click("review all 2");
   await click("select none");
   await findProject("/projects/third");
   await vi.waitFor(() => expect(button("import 1 project and start").disabled).toBe(false));
@@ -585,7 +585,7 @@ it("leaves projects already in :3 Code out of the default import, unless the box
   ]);
   {
     await using _screen = await mountWelcome();
-    await vi.waitFor(() => expect(pageText()).toContain("Import 1 project and their threads"));
+    await vi.waitFor(() => expect(pageText()).toContain("import 1 project and their threads"));
   }
 
   // With every project already in :3 Code, checking the box still picks them.
@@ -593,7 +593,7 @@ it("leaves projects already in :3 Code out of the default import, unless the box
   await using _screen = await mountWelcome();
   const importProjects = document.querySelector<HTMLElement>('[role="checkbox"]');
   await act(async () => importProjects?.click());
-  await vi.waitFor(() => expect(pageText()).toContain("Import 2 projects and their threads"));
+  await vi.waitFor(() => expect(pageText()).toContain("import 2 projects and their threads"));
   expect(button("import threads and start").disabled).toBe(false);
 });
 
@@ -615,7 +615,7 @@ it("keeps the started projects checked when the page opens again after a quit", 
     candidate("/projects/second"),
   ]);
   await using _second = await mountWelcome();
-  await vi.waitFor(() => expect(pageText()).toContain("Import 2 projects and their threads"));
+  await vi.waitFor(() => expect(pageText()).toContain("import 2 projects and their threads"));
 });
 
 it("keeps the project controls when a later scan fails", async () => {
@@ -627,7 +627,7 @@ it("keeps the project controls when a later scan fails", async () => {
   );
   await vi.waitFor(() => expect(pageText()).toContain("hmm, couldn’t check projects again 3:"));
   expect(button("import 2 projects and start").disabled).toBe(false);
-  expect(button("Retry").disabled).toBe(false);
+  expect(button("retry").disabled).toBe(false);
 });
 
 it("keeps saved picks when Start comes before the project list loads", async () => {
@@ -659,7 +659,7 @@ it("offers Update for a signed-in agent whose version is broken, and keeps Start
   await using _screen = await mountWelcome();
   await vi.waitFor(() => expect(pageText()).toContain("Update Claude Code to 2.0 or later."));
   const update = [...document.querySelectorAll("a")].find(
-    (element) => element.textContent?.trim() === "Update",
+    (element) => element.textContent?.trim() === "update",
   );
   expect(update?.getAttribute("href")).toContain("/settings/providers");
   expect(button("import 2 projects and start").disabled).toBe(true);
@@ -729,7 +729,7 @@ it("opens the list of agents to add once the checks find none, even after a wron
   );
   const fold = () =>
     [...document.querySelectorAll("button")].find((element) =>
-      element.textContent?.startsWith("Set up an agent"),
+      element.textContent?.startsWith("set up an agent"),
     );
   await vi.waitFor(() => expect(fold()?.getAttribute("aria-expanded")).toBe("true"));
 
@@ -746,7 +746,7 @@ it("starts without importing when this connection cannot import projects", async
   using _now = setup();
   setGrant(primaryId, false);
   await using _screen = await mountWelcome();
-  expect(pageText()).not.toContain("Review all");
+  expect(pageText()).not.toContain("review all");
 
   await click("start");
   await vi.waitFor(() => expect(state.onDone).toHaveBeenCalledOnce());
@@ -765,10 +765,10 @@ it("says the phone is set up only once this computer is shared with the signed-i
   );
   state.linkError = "Could not read T3 Connect link state.";
   await using _screen = await mountWelcome();
-  await click("Set up");
+  await click("set up");
   // A failed read says so instead of asking to share the computer again.
-  await vi.waitFor(() => expect(pageText()).toContain("Could not check T3 Connect."));
-  expect(pageText()).not.toContain("Set up T3 Connect");
+  await vi.waitFor(() => expect(pageText()).toContain("hmm, couldn’t check T3 Connect 3:"));
+  expect(pageText()).not.toContain("set up T3 Connect");
 
   state.linkError = null;
   await act(async () =>
@@ -781,7 +781,7 @@ it("says the phone is set up only once this computer is shared with the signed-i
     }),
   );
   // Signed in, but "Not now" on the share step left this computer unreachable.
-  await vi.waitFor(() => expect(pageText()).toContain("Set up T3 Connect"));
+  await vi.waitFor(() => expect(pageText()).toContain("set up T3 Connect"));
 
   const share = (reachability: EnvironmentCloudLinkStateResult["reachability"]) =>
     act(async () =>
@@ -807,10 +807,10 @@ it("says the phone is set up only once this computer is shared with the signed-i
     hint: null,
     fix: "Turn T3 Connect off and on.",
   });
-  await vi.waitFor(() => expect(pageText()).toContain("Check T3 Connect"));
+  await vi.waitFor(() => expect(pageText()).toContain("check T3 Connect"));
   expect(pageText()).not.toContain("Your phone can reach this computer.");
 
   await share({ status: "reachable", checkedAt, readyConnections: 4, protocol: "quic" });
   await vi.waitFor(() => expect(pageText()).toContain("Your phone can reach this computer."));
-  expect(pageText()).not.toContain("Check T3 Connect");
+  expect(pageText()).not.toContain("check T3 Connect");
 });

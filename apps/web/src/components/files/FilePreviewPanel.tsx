@@ -459,7 +459,7 @@ function WorkspaceDocumentPreview(props: {
       mimeType="application/octet-stream"
       sizeBytes={0}
       asset={{ environmentId: props.environmentId, resource }}
-      origin="File"
+      origin="file"
     />
   );
 }
@@ -1538,7 +1538,7 @@ export default function FilePreviewPanel({
               tabIndex={-1}
               data-workspace-focus-default
               data-file-content-focus
-              aria-label="File contents"
+              aria-label="file contents"
               className="sr-only"
               onFocus={() => queueMicrotask(focusEditorFromContent)}
             />

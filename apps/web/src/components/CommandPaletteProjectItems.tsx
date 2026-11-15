@@ -110,7 +110,7 @@ function ProjectLocationDescription(props: {
     <span className="flex min-w-0 items-center gap-1">
       {props.current ? (
         <>
-          <span className="shrink-0">Current</span>
+          <span className="shrink-0">current</span>
           <CommandPaletteMetaDot />
         </>
       ) : null}
